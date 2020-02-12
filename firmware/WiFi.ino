@@ -2,6 +2,9 @@
 void connectToWifi() {
 
   WiFi.mode(WIFI_STA); // Force to station mode because if device was switched off while in access point mode it will start up next time in access point mode.
+
+  // Disable WiFi power save (huge latency improvements)
+  esp_wifi_set_ps(WIFI_PS_NONE);
   
   if (WiFi.status() != WL_CONNECTED) {
     Serial.println("\nThe T-Stick will try to connect to the saved network now...");

@@ -61,9 +61,6 @@
 
 #include <FS.h>
 
-#define ESP32; // define ESP8266 or ESP32 according to your microcontroller.
-//#define ESP8266;
-
 #if defined(ESP32)
 #include "platforms/ESP32.h"
 #elif defined(ESP8266)
@@ -126,6 +123,7 @@ Tstick Tstick;
 
 struct DataStruct {
   byte touch[2];
+  int touch16[16];
   float fsr;
   float piezo;
   float accl[3];
@@ -134,9 +132,12 @@ struct DataStruct {
   float raw[9];
   float quat[4];
   float ypr[3];
+  float magAccl;
+  float magGyro;
+  float magMagn;
 };
 
-DataStruct Data = {{0,0},0,0,{0,0,0},{0,0,0},{0,0,0},{0,0,0,0,0,0,0,0,0},{0,0,0,0},{0,0,0}};
+DataStruct Data;
 
 IPAddress osc_IP; // used to send OSC messages
 char APpasswdTemp[15]; // used to check before save new T-Stick passwd
@@ -202,6 +203,7 @@ MIMUFusionFilter filter{};
 ///////////
 
 void setup() {
+  memset(&Data, 0, sizeof(Data));
 
   Serial.begin(115200);
 
@@ -247,6 +249,9 @@ void setup() {
   // Starting Capsense
   initCapsense();
 
+  // Starting libmapper
+  initLibmapper();
+
   Serial.println("\nT-Stick setup complete.\n");
   
 }
@@ -273,12 +278,15 @@ void loop() {
   // send data (OSC)
   sendOSC();
 
+  // Update libmapper
+  updateLibmapper();
+
   // receiving OSC
   receiveOSC();
 
   // printing sensor data (serial port)
-  //printData();
-
+  // printData();
+  
   // LED modes:
   // ON = Setup mode
   // long blink = not connected to network

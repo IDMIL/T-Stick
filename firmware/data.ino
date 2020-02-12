@@ -39,6 +39,10 @@ void readData() {
       Data.magn[i] = mapfloat(Data.magn[i], -32767, 32767, -1, 1);
       }
 
+    Data.magAccl = sqrt(Data.accl[0] * Data.accl[0] + Data.accl[1] * Data.accl[1] + Data.accl[2] * Data.accl[2]);
+    Data.magGyro = sqrt(Data.gyro[0] * Data.gyro[0] + Data.gyro[1] * Data.gyro[1] + Data.gyro[2] * Data.gyro[2]);
+    Data.magMagn = sqrt(Data.magn[0] * Data.magn[0] + Data.magn[1] * Data.magn[1] + Data.magn[2] * Data.magn[2]);
+
     //calculateEulerAnglesQuat(Data.quat[0],Data.quat[1],Data.quat[2],Data.quat[3]);
     calculateEulerAngles(Data.accl[0],Data.accl[1],Data.accl[2],Data.magn[0],Data.magn[1],Data.magn[2]);
   } 
@@ -63,8 +67,12 @@ boolean readTouch(){
     if (temp[t] != Data.touch[t]){
       changed = 1;
       Data.touch[t] = temp[t];
+      for (int j = 0; j < 8; ++j) {
+        Data.touch16[j + t * 8] = (temp[t] & (1 << (j % 8))) > 0;
+      }
     }
   }
+
   return changed;
 }
 
@@ -88,8 +96,12 @@ void printData() {
       serialLastRead = millis(); 
       Serial.println("\nPrinting sensor data: ");
       Serial.print("Data.touch: ");
-        for( int i = 0 ; i < (sizeof(Data.touch)/sizeof(Data.touch[0])) ; ++i ){
-          Serial.print(Data.touch[i], 10);
+        // for( int i = 0 ; i < (sizeof(Data.touch)/sizeof(Data.touch[0])) ; ++i ){
+        //   Serial.print(Data.touch[i], 10);
+        //   Serial.print(" ");
+        // }
+        for (int i = 0; i < (sizeof(Data.touch16)/sizeof(Data.touch16[0])); ++i) {
+          Serial.print(Data.touch16[i], 10);
           Serial.print(" ");
         }
     Serial.print("\nData.fsr: "); Serial.println(Data.fsr);
