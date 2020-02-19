@@ -1,7 +1,7 @@
 
 void mountFS() {
 
-  SPIFFS.begin (true);
+  SPIFFS.begin(true);
   
   if (SPIFFS.begin()) {
     Serial.println("\nFile system mounted!");

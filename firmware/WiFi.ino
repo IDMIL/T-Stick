@@ -1,16 +1,17 @@
+#include "esp_wifi.h"
 
 void connectToWifi() {
 
   WiFi.mode(WIFI_STA); // Force to station mode because if device was switched off while in access point mode it will start up next time in access point mode.
-
-  // Disable WiFi power save (huge latency improvements)
-  esp_wifi_set_ps(WIFI_PS_NONE);
   
   if (WiFi.status() != WL_CONNECTED) {
     Serial.println("\nThe T-Stick will try to connect to the saved network now...");
     WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
     WiFi.setHostname(tstickSSID);
     WiFi.begin(Tstick.lastConnectedNetwork, Tstick.lastStoredPsk);
+    // Disable WiFi power save (huge latency improvements)
+    esp_wifi_set_ps(WIFI_PS_NONE);
+    
     time_now = millis();
     while ( (WiFi.status() != WL_CONNECTED) && (millis() < time_now + waitForConnection) ) {
       Serial.print(".");
@@ -91,7 +92,7 @@ void Wifimanager_portal(char *portal_name, char *portal_password) {
   strcpy(Tstick.type, wifimanager_type.getValue());
   strcpy(Tstick.author, wifimanager_author.getValue());
   strcpy(Tstick.color, wifimanager_color.getValue());  
-  if (wifimanager_APpasswd.getValue()[0] != NULL) {
+  if (wifimanager_APpasswd.getValue()[0]) {
     if (strcmp(wifimanager_APpasswd.getValue(), wifimanager_APpasswdValidate.getValue()) == 0 ) {  
       strcpy(Tstick.APpasswd, wifimanager_APpasswd.getValue());
       Serial.println("T-Stick AP password changed");

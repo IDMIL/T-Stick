@@ -122,19 +122,22 @@ struct Tstick {
 Tstick Tstick;
 
 struct DataStruct {
-  byte touch[2];
-  int touch16[16];
-  float fsr;
-  float piezo;
-  float accl[3];
-  float gyro[3];
-  float magn[3];
-  float raw[9];
-  float quat[4];
-  float ypr[3];
-  float magAccl;
-  float magGyro;
-  float magMagn;
+  byte touch[2] = { 0 };
+  int touch16[16] = { 0 };
+  float fsr = 0;
+  float piezo = 0;
+  float accl[3] = { 0 };
+  float gyro[3] = { 0 };
+  float magn[3] = { 0 };
+  float raw[9] = { 0 };
+  float quat[4] = { 0 };
+  float ypr[3] = { 0 };
+  float magAccl = 0;
+  float magGyro = 0;
+  float magMagn = 0;
+  bool buttonState = 0;
+  bool singleClick = 0;
+  bool doubleClick = 0;
 };
 
 DataStruct Data;
@@ -159,7 +162,6 @@ const unsigned int portLocal = 8888; // local port to listen for OSC packets (no
 int piezoPin = 32;
 int fsrPin = 33;
 const int buttonPin = 15;
-int buttonState = 0; // variable for reading the pushbutton status
 int waitForConnection = 8000; // set waiting time for connecting to a WiFi network
 byte touchInterval = 15; // interval between capsense readings
 unsigned long touchLastRead = 0; // track capsense last sensor read
@@ -203,8 +205,6 @@ MIMUFusionFilter filter{};
 ///////////
 
 void setup() {
-  memset(&Data, 0, sizeof(Data));
-
   Serial.begin(115200);
 
   Serial.println("\n");
@@ -264,16 +264,14 @@ void setup() {
 //////////
 
 void loop() {
-
-  // Calling WiFiManager configuration portal on demand:
-  buttonState = digitalRead(buttonPin);
-  if ( buttonState == LOW ) {
-    digitalWrite(ledPin, 0);
-    Wifimanager_portal(tstickSSID, Tstick.APpasswd);
-    }
-
   // reading sensor data
   readData();
+
+  // Calling WiFiManager configuration portal on demand:
+  if (Data.buttonState && Data.singleClick) {
+    digitalWrite(ledPin, 0);
+    Wifimanager_portal(tstickSSID, Tstick.APpasswd);
+  }
 
   // send data (OSC)
   sendOSC();

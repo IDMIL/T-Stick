@@ -50,7 +50,7 @@ void sendOSC() {
   bundle.empty(); 
 }
 
-byte receiveOSC() {
+void receiveOSC() {
 
   OSCErrorCode error;
   OSCMessage msgReceive;
@@ -81,13 +81,13 @@ void saveIMUcalib(OSCMessage &msg) {
   // message order: avector[3], amatrix[9], mvector[3], mmatrix[9], gvector[3], gmatrix[9]
   for (byte i = 0; i < 3; i++) {
     Tstick.abias[i] = msg.getFloat(i);
-    Tstick.mbias[i+12] = msg.getFloat(i+12);
-    Tstick.gbias[i+24] = msg.getFloat(i+24);
+    Tstick.mbias[i] = msg.getFloat(i+12);
+    Tstick.gbias[i] = msg.getFloat(i+24);
   }
   for (byte i = 0; i < 9; i++) {
-    Tstick.acclcalibration[i+3] = msg.getFloat(i+3);
-    Tstick.magncalibration[i+15] = msg.getFloat(i+15);
-    Tstick.gyrocalibration[i+27] = msg.getFloat(i+27);
+    Tstick.acclcalibration[i] = msg.getFloat(i+3);
+    Tstick.magncalibration[i] = msg.getFloat(i+15);
+    Tstick.gyrocalibration[i] = msg.getFloat(i+27);
   }
   saveJSON();  
 }
