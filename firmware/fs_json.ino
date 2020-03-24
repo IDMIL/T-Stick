@@ -37,14 +37,21 @@ void printVariables() {
   Serial.print("Tstick.APpasswd: "); Serial.println(Tstick.APpasswd);
   Serial.print("Tstick.lastConnectedNetwork: "); Serial.println(Tstick.lastConnectedNetwork);
   Serial.print("Tstick.lastStoredPsk: "); Serial.println(Tstick.lastStoredPsk);
-  
   Serial.print("Tstick.firmware: "); Serial.println(Tstick.firmware);
-  Serial.print("Tstick.oscIP: "); Serial.println(Tstick.oscIP);
-  Serial.print("Tstick.oscPORT: "); Serial.println(Tstick.oscPORT);
-  Serial.print("Tstick.FSRoffset: "); Serial.println(Tstick.FSRoffset);
+  Serial.print("Tstick.osc: "); Serial.println(Tstick.osc);
+  Serial.print("Tstick.oscIP #1: "); Serial.println(Tstick.oscIP[0]);
+  Serial.print("Tstick.oscIP #2: "); Serial.println(Tstick.oscIP[1]);
+  Serial.print("Tstick.oscPORT #1: "); Serial.println(Tstick.oscPORT[0]);
+  Serial.print("Tstick.oscPORT #2: "); Serial.println(Tstick.oscPORT[1]);
+  Serial.print("Tstick.libmapper: "); Serial.println(Tstick.libmapper);
+
+  Serial.print("Tstick.FSRoffset: "); Serial.print(Tstick.FSRoffset);
+  Serial.print(" (normalized: "); Serial.print(float(Tstick.FSRoffset)/4095, 4); ; Serial.println(")");
   Serial.print("\nTstick.touchMask: ");
       for( int i = 0 ; i < (sizeof(Tstick.touchMask)/sizeof(Tstick.touchMask[0])) ; ++i ){
-        Serial.print(Tstick.touchMask[i]);
+        Serial.print(Tstick.touchMask[i][0]);
+        Serial.print(" ");
+        Serial.print(Tstick.touchMask[i][1]);
         Serial.print(" ");
       }
   Serial.print("\nTstick.abias: ");
@@ -85,7 +92,7 @@ void parseJSON() {
   // Allocate a temporary JsonDocument
   // Don't forget to change the capacity to match your requirements.
   // Use https://arduinojson.org/v6/assistant/ to compute the capacity.
-  const size_t capacity = 2*JSON_ARRAY_SIZE(2) + 3*JSON_ARRAY_SIZE(3) + 3*JSON_ARRAY_SIZE(9) + JSON_OBJECT_SIZE(19) + 310;
+  const size_t capacity = 5*JSON_ARRAY_SIZE(2) + 3*JSON_ARRAY_SIZE(3) + 3*JSON_ARRAY_SIZE(9) + JSON_OBJECT_SIZE(26) + 360;
   DynamicJsonDocument doc(capacity);
 
   if (SPIFFS.exists("/config.json")) { // file exists, reading and loading
@@ -105,13 +112,25 @@ void parseJSON() {
         strlcpy(Tstick.APpasswd, doc["APpasswd"], sizeof(Tstick.APpasswd));
         strlcpy(Tstick.lastConnectedNetwork, doc["lastConnectedNetwork"], sizeof(Tstick.lastConnectedNetwork));
         strlcpy(Tstick.lastStoredPsk, doc["lastStoredPsk"], sizeof(Tstick.lastStoredPsk));
-        Tstick.firmware = doc["firmware"];
-        strlcpy(Tstick.oscIP, doc["oscIP"], sizeof(Tstick.oscIP));
-        Tstick.oscPORT = doc["oscPORT"];
+        //Tstick.firmware = doc["firmware"];
+        strlcpy(Tstick.oscIP[0], doc["oscIP1"], sizeof(Tstick.oscIP[0]));
+        strlcpy(Tstick.oscIP[1], doc["oscIP2"], sizeof(Tstick.oscIP[1]));
+        Tstick.oscPORT[0] = doc["oscPORT1"];
+        Tstick.oscPORT[1] = doc["oscPORT2"];
+        Tstick.libmapper = doc["libmapper"];
+        Tstick.osc = doc["osc"];
         Tstick.FSRoffset = doc["FSRoffset"];
         
-        Tstick.touchMask[0] = doc["touchMask"][0];
-        Tstick.touchMask[1] = doc["touchMask"][1];
+        Tstick.touchMask[0][0] = doc["touchMask0"][0];
+        Tstick.touchMask[0][1] = doc["touchMask0"][1];
+        Tstick.touchMask[1][0] = doc["touchMask1"][0];
+        Tstick.touchMask[1][1] = doc["touchMask1"][1];
+        Tstick.touchMask[2][0] = doc["touchMask2"][0];
+        Tstick.touchMask[2][1] = doc["touchMask2"][1];
+        Tstick.touchMask[3][0] = doc["touchMask3"][0];
+        Tstick.touchMask[3][1] = doc["touchMask3"][1];
+        Tstick.touchMask[4][0] = doc["touchMask4"][0];
+        Tstick.touchMask[4][1] = doc["touchMask4"][1];
         
         JsonArray abias = doc["abias"];
         Tstick.abias[0] = abias[0];
@@ -164,8 +183,6 @@ void parseJSON() {
         configFile.close();
 
         createTstickSSID();
-
-        osc_IP.fromString(Tstick.oscIP);
         
         Serial.println("T-Stick configuration file loaded.\n");
         }
@@ -184,7 +201,7 @@ void saveJSON() {
   // Allocate a temporary JsonDocument
   // Don't forget to change the capacity to match your requirements.
   // Use https://arduinojson.org/v6/assistant/ to compute the capacity.
-  const size_t capacity = 2*JSON_ARRAY_SIZE(2) + 3*JSON_ARRAY_SIZE(3) + 3*JSON_ARRAY_SIZE(9) + JSON_OBJECT_SIZE(19);
+  const size_t capacity = 5*JSON_ARRAY_SIZE(2) + 3*JSON_ARRAY_SIZE(3) + 3*JSON_ARRAY_SIZE(9) + JSON_OBJECT_SIZE(26) + 360;
   DynamicJsonDocument doc(capacity);
 
   // Copy values from Config to the JsonDocument
@@ -196,13 +213,33 @@ void saveJSON() {
   doc["lastConnectedNetwork"] = Tstick.lastConnectedNetwork;
   doc["lastStoredPsk"] = Tstick.lastStoredPsk;
   doc["firmware"] = Tstick.firmware;
-  doc["oscIP"] = Tstick.oscIP;
-  doc["oscPORT"] = Tstick.oscPORT;
+  doc["oscIP1"] = Tstick.oscIP[0];
+  doc["oscPORT1"] = Tstick.oscPORT[0];
+  doc["oscIP2"] = Tstick.oscIP[1];
+  doc["oscPORT2"] = Tstick.oscPORT[1];
+  doc["libmapper"] = Tstick.libmapper;
+  doc["osc"] = Tstick.osc;
   doc["FSRoffset"] = Tstick.FSRoffset;
   
-  JsonArray touchMask = doc.createNestedArray("touchMask");
-  touchMask.add(Tstick.touchMask[0]);
-  touchMask.add(Tstick.touchMask[1]);
+  JsonArray touchMask0 = doc.createNestedArray("touchMask0");
+  touchMask0.add(Tstick.touchMask[0][0]);
+  touchMask0.add(Tstick.touchMask[0][1]);
+
+  JsonArray touchMask1 = doc.createNestedArray("touchMask1");
+  touchMask1.add(Tstick.touchMask[1][0]);
+  touchMask1.add(Tstick.touchMask[1][1]);
+
+  JsonArray touchMask2 = doc.createNestedArray("touchMask2");
+  touchMask2.add(Tstick.touchMask[2][0]);
+  touchMask2.add(Tstick.touchMask[2][1]);
+
+  JsonArray touchMask3 = doc.createNestedArray("touchMask3");
+  touchMask3.add(Tstick.touchMask[3][0]);
+  touchMask3.add(Tstick.touchMask[3][1]);
+
+  JsonArray touchMask4 = doc.createNestedArray("touchMask4");
+  touchMask4.add(Tstick.touchMask[4][0]);
+  touchMask4.add(Tstick.touchMask[4][1]);
   
   JsonArray abias = doc.createNestedArray("abias");
   abias.add(Tstick.abias[0]);

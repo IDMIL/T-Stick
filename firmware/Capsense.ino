@@ -5,270 +5,121 @@
 
 // CY8CMBR3116
 
-#define SENSOR_EN 0x00
-#define FSS_EN 0x02
-#define SENSITIVITY0 0x08
-#define SENSITIVITY1 0x09
-#define SENSITIVITY2 0x0A
-#define SENSITIVITY3 0x0B
-#define DEVICE_ID 0x90    // Should return 0xA05 (returns 2 bytes)
-#define FAMILY_ID 0x8F
-#define SYSTEM_STATUS 0x8A
-#define I2C_ADDR 0x37     // Should return 0x37
-#define REFRESH_CTRL 0x52
-#define SENSOR_EN 0x00    // We should set it to 0xFF for 16 sensors
-#define BUTTON_STAT 0xAA  // Here we red the status of the sensors (2 bytes)
-#define CTRL_CMD 0x86     // To configure the Capsense
-#define CTRL_CMD_STATUS 0x88
-#define CTRL_CMD_ERROR 0x89
-#define BUTTON_LBR 0x1F
-#define SPO_CFG 0x4C      //CS15 configuration address
-#define GPO_CFG 0x40
-#define CALC_CRC 0x94
-#define CONFIG_CRC 0x7E
+#define BUTTON_STAT 0xAA  // Address to read the status of the sensors (2 bytes)
 
-void initCapsense() {
+byte capsense_addresses[5];
+byte nCapsenses = 0;
+byte touch[5][2]; // up to 5 capsenses (2 bytes per capsense)
 
-  Serial.println("\nChecking Capsense board:");
+Capsense capsenseRequest(uint8_t address,uint8_t request, uint8_t answer_size) {
+
+    byte SYSTEM_STATUS = 0x8A;
+    byte answer1, answer2;
+
+    // This first requisition doesn't work,
+    // it always return 0xFF (255) for some reason.
+      Wire.beginTransmission(address);
+      Wire.write(SYSTEM_STATUS);
+      Wire.endTransmission();
+      Wire.requestFrom(address, 1);
+      answer1 = Wire.read();
+      Wire.endTransmission();
+    
+    // Send the proper request to Capsense
+      Wire.beginTransmission(address);
+      Wire.write(request);
+      Wire.endTransmission();   
+    // Getting the answers
+      Wire.requestFrom(address, answer_size);
+      answer1 = Wire.read();
+      if (answer_size == 2) {
+         answer2 = Wire.read();
+      }
+      Wire.endTransmission();
+    return {answer1, answer2};
+}
+
+void initCapsense(byte I2C_ADDR) {
+  byte SYSTEM_STATUS = 0x8A;
+  byte I2C_ADDR_STORE = 0x51;
+  byte FAMILY_ID = 0x8F; // Must be 154
+  byte DEVICE_ID = 0x90; // Should return 0xA05 (returns 2 bytes)
+
+  Serial.print("\nChecking capsense config (0x"); Serial.print(I2C_ADDR, HEX); Serial.println("):");
+  // Asking for Capsense System Status
+    Serial.print("- Send a request: Begin Transmission to address 0x"); Serial.print(I2C_ADDR, HEX); 
+    Serial.print(" ("); Serial.print(I2C_ADDR); Serial.println(")");
+    Serial.println("  Asking for the SYSTEM_STATUS..."); 
+    Capsense capsense = capsenseRequest(I2C_ADDR, SYSTEM_STATUS, 1);
+    if (capsense.answer1 == 0) {
+        Serial.println("  A configuration other than the factory default configuration is loaded");
+    } else if (capsense.answer1 == 1){
+        Serial.println("  The factory default configuration is loaded");
+    } else {
+        Serial.print("  Unknown error (weird capsense response): SYSTEM_STATUS: "); Serial.println(capsense.answer1);
+    }
+
+    // Asking for Capsense I2C Address
+    Serial.print("- Send a request: Begin Transmission to address 0x"); Serial.print(I2C_ADDR, HEX); 
+    Serial.print(" ("); Serial.print(I2C_ADDR); Serial.println(")");
+    Serial.println("  Asking for the stored I2C_ADDR..."); 
+     capsense = capsenseRequest(I2C_ADDR, I2C_ADDR_STORE, 1);
+    Serial.print("  Current I2C_ADDR is 0x");
+    Serial.print(capsense.answer1, HEX);
+    Serial.print(" (");
+    Serial.print(capsense.answer1);
+    Serial.println(")");
+    
+    // Asking for Capsense Family ID
+    Serial.print("- Send a request: Begin Transmission to address 0x"); Serial.print(I2C_ADDR, HEX); 
+    Serial.print(" ("); Serial.print(I2C_ADDR); Serial.println(")");
+    Serial.println("  Asking for the FAMILY_ID..."); 
+     capsense = capsenseRequest(I2C_ADDR, FAMILY_ID, 1);
+    if (capsense.answer1 == 154) {
+        Serial.print("  Correct FAMILY_ID found: ");
+    } else {
+        Serial.print("  INCORRECT FAMILY_ID found: ");
+    }
+    Serial.println(capsense.answer1);
+
+    // Asking for Capsense Device ID
+    Serial.print("- Send a request: Begin Transmission to address 0x"); Serial.print(I2C_ADDR, HEX); 
+    Serial.print(" ("); Serial.print(I2C_ADDR); Serial.println(")");
+    Serial.println("  Asking for the DEVICE_ID..."); 
+     capsense = capsenseRequest(I2C_ADDR, DEVICE_ID, 2);
+    if (capsense.answer1 == 5 && capsense.answer2 == 10) {
+        Serial.print("  Correct DEVICE_ID found: ");
+    } else {
+        Serial.print("  INCORRECT DEVICE_ID found: ");
+    }
+    Serial.print(capsense.answer1); Serial.print(" "); Serial.println(capsense.answer2);
+
+}
+
+void capsense_scan() {
+  byte I2C_ADDR;
+  byte FAMILY_ID = 0x8F; // Must be 154
+  byte address[8];
   
-  //Wire.begin();
-  Wire.setClock(400000);
+  Serial.println("Scanning for CY8CMBR3116 Capsense boards...");
 
-  Wire.beginTransmission(I2C_ADDR);
-  Wire.write(SYSTEM_STATUS);
-  Wire.endTransmission();
-
-  // This should be 0 since a configuration other than the factory is loaded.
-  Wire.requestFrom(I2C_ADDR, 1);
-  Serial.print("Wire.available First: "); Serial.println(Wire.available());
-
-  Serial.print("SYSTEM_STATUS: ");
-  if (Wire.read() == 0) {Serial.print ("OK (");} else {Serial.print("Fail (");}
-  Serial.print(Wire.read()); Serial.println(")");
-  Wire.endTransmission();
-
-  Wire.beginTransmission(I2C_ADDR);
-  Wire.write(FAMILY_ID);
-  Wire.endTransmission();
-
-  Wire.requestFrom(I2C_ADDR, 1);
-  Serial.print("Wire.available SECOND: "); Serial.println(Wire.available());
-
-  Serial.print("FAMILY_ID: ");
-  if (Wire.read() == 154) {Serial.print("OK (");} else {Serial.print("Fail (");}
-  Serial.print(Wire.read()); Serial.println(")");
-  Wire.endTransmission();
-
-
-  //  Wire.beginTransmission(I2C_ADDR);
-  //  Wire.write(DEVICE_ID);
-  //  Wire.endTransmission();
-  //  //delay(100);
-  //
-  //  Wire.requestFrom(I2C_ADDR,2);
-  //  Serial.print("Wire.available THIRD: ");
-  //  Serial.println(Wire.available());
-  //  while (Wire.available()) {
-  //    byte c = Wire.read();
-  //    Serial.println(c);
-  //  }
-  //delay(100);
-  //  Wire.beginTransmission(I2C_ADDR);
-  //  Wire.write(REFRESH_CTRL);
-  //  Wire.endTransmission();
-  //  //delay(100);
-  //
-  //  Wire.requestFrom(I2C_ADDR,1);
-  //  Serial.print("Wire.available sixth: ");
-  //  Serial.println(Wire.available());
-  //  infoboard = Wire.read();
-  //  Serial.print("REFRESH_CTRL VALUE: ");
-  //  Serial.println(infoboard);
-  //  Wire.endTransmission();
-  //delay(100);
-
-
-  //**********************************
-  // Capsense pins configuration
-  //
-  // Array to enable each of the 16 capsense sensors
-  byte sensors[2] = {0xFFu, 0xFFu};
-
-  // Originally the come as 0x00, 0xFF
-  Wire.beginTransmission(I2C_ADDR);
-  Wire.write(SENSOR_EN);
-  Wire.write(sensors, 2);
-  Wire.endTransmission();
-
-  // Not actually necessary I think.
-  Wire.beginTransmission(I2C_ADDR);
-  Wire.write(FSS_EN);
-  //Wire.write(sensors,2);
-  Wire.write(0x00);
-  Wire.write(0x00);
-  Wire.endTransmission();
-
-  //  // Sensitivity
-  //  Wire.beginTransmission(I2C_ADDR);
-  //  Wire.write(SENSITIVITY0);
-  //  Wire.write(B10101010);
-  //  Wire.endTransmission();
-  //
-  //  Wire.beginTransmission(I2C_ADDR);
-  //  Wire.write(SENSITIVITY1);
-  //  Wire.write(B10101010);
-  //  Wire.endTransmission();
-  //
-  //  Wire.beginTransmission(I2C_ADDR);
-  //  Wire.write(SENSITIVITY2);
-  //  Wire.write(B10101010);
-  //  Wire.endTransmission();
-  //
-  //  Wire.beginTransmission(I2C_ADDR);
-  //  Wire.write(SENSITIVITY3);
-  //  Wire.write(B10101010);
-  //  Wire.endTransmission();
-
-  // Special Purpose Output pin configuration
-  Wire.beginTransmission(I2C_ADDR);
-  Wire.write(SPO_CFG);
-  Wire.write(B00010101);
-  Wire.endTransmission();
-  //
-  //  Wire.beginTransmission(I2C_ADDR);
-  //  Wire.write(SPO_CFG);
-  //  Wire.endTransmission();
-  //  //delay(100);
-  //
-  //  Wire.requestFrom(I2C_ADDR,1);
-  //  Serial.print("Wire.available SPO_CFG: ");
-  //  Serial.println(Wire.available());
-  //  infoboard = Wire.read();
-  //  Serial.print("SPO_CFG: ");
-  //  Serial.println(infoboard,BIN);
-  //  Wire.endTransmission();
-
-  // Let's read again the SENSOR_EN just to confirm that nothing has been written yet. To be Deleted
-  Wire.beginTransmission(I2C_ADDR);
-  Wire.write(SENSOR_EN);
-  Wire.endTransmission();
-
-  Wire.requestFrom(I2C_ADDR, 2);
-  Serial.print("Wire.available FOURTH: "); Serial.print(Wire.available());
-  Serial.print(" ( ");
-  while (Wire.available()) { // slave may send less than requested
-    byte c = Wire.read(); // receive a byte as character
-    Serial.print(c); Serial.print(" "); // print the character
-  }
-  Serial.println(")");  
-
-  /*
-      WRITING SETTINGS IN CAPSENSE
-      - Write via I2C all the commands necessary to configure Capsense. I think the idea here is to have a conditional configuration option in the firmware and only enter this step if newer configuration needs to be loaded. All values are stored in internal flash memory so this could be bypassed in final firmware.
-      - Write ‘3’ to CTRL_CMD in order to generate CRC that is written automatically by the chip to CALC_CRC
-      - After 220ms or more read CRC from CALC_CRC
-      - Write it to CONFIG_CRC
-      - Write ‘2’ to CTRL_CMD to compare current CRC and stored one in CALC_CRC (they are the same) and write in internal flash.
-      - Wait 220ms or more for command to finish.
-
-  */
-
-
-  // Send 0x03 to calculate de CRC from the changed configuration.
-  Wire.beginTransmission(I2C_ADDR);
-  Wire.write(CTRL_CMD);
-  Wire.write(0x03);
-  Wire.endTransmission();
-
-  // This delay is important
-  delay(300);
-
-  // Read CRC calculated from the 0x03 command sent
-  byte crc[2] = {0, 0};
-  int i = 0;
-  Wire.beginTransmission(I2C_ADDR);
-  Wire.write(CALC_CRC);
-  Wire.endTransmission();
-
-  Wire.requestFrom(I2C_ADDR, 2);
-  Serial.print("Testing Wire.read: "); 
-  while (Wire.available()) { // slave may send less than requested
-    byte c = Wire.read();
-    Serial.print(c); Serial.print(" "); // print the character
-    crc[i] = c; // receive a byte as character
-    i++;
-  }
-  Serial.println();
-  Wire.endTransmission();
-
-  // Write CRC to CONFIG_CRC
-  Wire.beginTransmission(I2C_ADDR);
-  Wire.write(CONFIG_CRC);
-  Wire.write(crc, 2);
-  Wire.endTransmission();
-
-  // Send 0x02 to calculate de CRC from the changed configuration.
-  Wire.beginTransmission(I2C_ADDR);
-  Wire.write(CTRL_CMD);
-  Wire.write(0x02);
-  Wire.endTransmission();
-  delay(300);
-
-  int result = 2;
-
-  while (result != 0) {
-    Wire.beginTransmission(I2C_ADDR);
-    Wire.write(CTRL_CMD_STATUS);
-    Wire.endTransmission();
-
-    Wire.requestFrom(I2C_ADDR, 1);
-    result = Wire.read();
-    Serial.print("result CTRL_CMD_STATUS 1: ");
-    Serial.println(result);
- 
-    if (result == 1) {
-      Wire.beginTransmission(I2C_ADDR);
-      Wire.write(CTRL_CMD_ERROR);
-      Wire.endTransmission();
-
-      Wire.requestFrom(I2C_ADDR, 1);
-      result = Wire.read();
-      Serial.print("result CTRL_CMD_ERROR 1: ");
-      Serial.println(result);
-      Wire.endTransmission();
+  for(I2C_ADDR = 1; I2C_ADDR < 127; I2C_ADDR++ ) {
+    // This scanner requests the device falily ID
+    // The CY8CMBR3116 chip should return 154
+    Capsense capsense = capsenseRequest(I2C_ADDR, FAMILY_ID, 1);
+    if (capsense.answer1 == 154) {
+      Serial.print("I2C device found at address 0x");
+      if (I2C_ADDR<16) {Serial.print("0");}
+      Serial.print(I2C_ADDR,HEX);
+      Serial.println("  !");
+      capsense_addresses[nCapsenses] = I2C_ADDR;
+      nCapsenses++;
     }
-    Wire.endTransmission();
   }
-
-  Wire.beginTransmission(I2C_ADDR);
-  Wire.write(CTRL_CMD);
-  Wire.write(0xFF);
-  Wire.endTransmission();
-  delay(300);
-
-  result = 2;
-
-  while (result != 0) {
-    Wire.beginTransmission(I2C_ADDR);
-    Wire.write(CTRL_CMD_STATUS);
-    Wire.endTransmission();
-
-    Wire.requestFrom(I2C_ADDR, 1);
-    result = Wire.read();
-    Serial.print("result CTRL_CMD_STATUS 2: ");
-    Serial.println(result);
-    if (result == 1) {
-      Wire.beginTransmission(I2C_ADDR);
-      Wire.write(CTRL_CMD_ERROR);
-      Wire.endTransmission();
-
-      Wire.requestFrom(I2C_ADDR, 1);
-      result = Wire.read();
-      Serial.print("result CTRL_CMD_ERROR 2: ");
-      Serial.println(result);
-      Wire.endTransmission();
-    }
-    Wire.endTransmission();
+  if (nCapsenses == 0) {
+    Serial.println("\n\nOops ... unable to initialize IDMIL's Capsense. Check your wiring/board!\n\n");
   }
-  delay(500);
+  else {
+    Serial.println("Capsense OK\n");
+  }
 }

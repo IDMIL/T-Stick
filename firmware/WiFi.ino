@@ -1,4 +1,3 @@
-#include "esp_wifi.h"
 
 void connectToWifi() {
 
@@ -9,9 +8,6 @@ void connectToWifi() {
     WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
     WiFi.setHostname(tstickSSID);
     WiFi.begin(Tstick.lastConnectedNetwork, Tstick.lastStoredPsk);
-    // Disable WiFi power save (huge latency improvements)
-    esp_wifi_set_ps(WIFI_PS_NONE);
-    
     time_now = millis();
     while ( (WiFi.status() != WL_CONNECTED) && (millis() < time_now + waitForConnection) ) {
       Serial.print(".");
@@ -29,6 +25,9 @@ void connectToWifi() {
     Serial.print("IP address: "); Serial.println(WiFi.localIP());
     }
 
+  // Disable WiFi power save (huge latency improvements)
+  esp_wifi_set_ps(WIFI_PS_NONE);
+
   oscEndpoint.begin(portLocal);
   Serial.println("Starting UDP (listening to OSC messages)");
   Serial.print("Local port: ");
@@ -45,6 +44,12 @@ void Wifimanager_portal(char *portal_name, char *portal_password) {
   //WiFiManager
   WiFiManager wifiManager;
 
+  char wifimanagerbuf[50];
+  char* copybuf;
+
+  char libmapperCheck[24] = "type=\"checkbox\"";
+  char OSCCheck[24] = "type=\"checkbox\"";
+
   // The extra parameters to be configured (can be either global or just in the setup)
   // After connecting, parameter.getValue() will get you the configured value
   // id/name placeholder/prompt default length
@@ -52,26 +57,47 @@ void Wifimanager_portal(char *portal_name, char *portal_password) {
   WiFiManagerParameter wifimanager_APpasswd("APpasswd", "T-Stick password", APpasswdTemp, 15);
   WiFiManagerParameter wifimanager_APpasswdValidate("APpasswdValidate", "Type T-Stick password again", APpasswdValidate, 15);
   WiFiManagerParameter wifimanager_hint("<small>*Hint: if you want to reuse the currently active WiFi credentials, leave Password fields empty</small>");  
-  WiFiManagerParameter wifimanager_oscIP("server", "IP to send OSC messages", Tstick.oscIP, 17);
-  WiFiManagerParameter wifimanager_oscPORT("port", "port to send OSC messages", itoa(Tstick.oscPORT,wifimanagerbuf,10), 7);
-  WiFiManagerParameter wifimanager_FSRoffset("FSRoffset", "FSR offset value (default = 0)", itoa(Tstick.FSRoffset,wifimanagerbuf,10), 6);
-  WiFiManagerParameter wifimanager_touchMask0("touchMask0", "Touch Mask capacitive sensing value (1/2)", itoa(Tstick.touchMask[0],wifimanagerbuf,10), 6);
-  WiFiManagerParameter wifimanager_touchMask1("touchMask1", "Touch Mask capacitive sensing value (2/2)", itoa(Tstick.touchMask[1],wifimanagerbuf,10), 6);
+  
+  snprintf(wifimanagerbuf,(sizeof(wifimanagerbuf)-1),"%s,%s",Tstick.oscIP[0],Tstick.oscIP[1]);
+  WiFiManagerParameter wifimanager_oscIP("server", "IP to send OSC messages", wifimanagerbuf, 40);
+
+  snprintf(wifimanagerbuf,(sizeof(wifimanagerbuf)-1),"%i,%i",Tstick.oscPORT[0],Tstick.oscPORT[1]);
+  WiFiManagerParameter wifimanager_oscPORT("port", "port to send OSC messages", wifimanagerbuf, 16);
+
+  if (Tstick.libmapper == 1) { strcat(libmapperCheck, " checked"); }
+    WiFiManagerParameter wifimanager_libmapper("libmapper", "Libmapper ON/OFF (WiFiManager exit required)", "T", 2, libmapperCheck, WFM_LABEL_AFTER);
+
+  if (Tstick.osc == 1) { strcat(OSCCheck, " checked"); }
+    WiFiManagerParameter wifimanager_osc("OSC", "OSC messages ON/OFF (WiFiManager exit required)", "T", 2, OSCCheck, WFM_LABEL_AFTER);
+    
+  fsrbuf = float(Tstick.FSRoffset) / 4095;
+  WiFiManagerParameter wifimanager_FSRoffset("FSRoffset", "FSR offset value (default = 0)", dtostrf(fsrbuf,2,3,wifimanagerbuf), 6);
+
+  snprintf(wifimanagerbuf,(sizeof(wifimanagerbuf)-1),"%i,%i,%i,%i,%i,%i,%i,%i,%i,%i",
+      Tstick.touchMask[0][0],Tstick.touchMask[0][1],
+      Tstick.touchMask[1][0],Tstick.touchMask[1][1],
+      Tstick.touchMask[2][0],Tstick.touchMask[2][1],
+      Tstick.touchMask[3][0],Tstick.touchMask[3][1],
+      Tstick.touchMask[4][0],Tstick.touchMask[4][1]);
+      
+  WiFiManagerParameter wifimanager_touchMask("touchMask", "Touch Mask capacitive sensing values", wifimanagerbuf, 40);  
+  
   WiFiManagerParameter wifimanager_id("id", "T-Stick serial number", itoa(Tstick.id,wifimanagerbuf,10), 6, "readonly");
   WiFiManagerParameter wifimanager_type("type", "T-Stick size (type)", Tstick.type, 4, "readonly");
   WiFiManagerParameter wifimanager_author("author", "T-Stick firmware revision", Tstick.author, 20, "readonly");
   WiFiManagerParameter wifimanager_color("color", "T-Stick color", Tstick.color, 10, "readonly");
-  WiFiManagerParameter wifimanager_firmware("firmware", "T-Stick firmware revision", itoa(Tstick.firmware,wifimanagerbuf,10), 6, "readonly");
+  WiFiManagerParameter wifimanager_firmware("firmware", "T-Stick firmware revision", itoa(Tstick.firmware,wifimanagerbuf,10), 10, "readonly");
 
   //add all your parameters here
   wifiManager.addParameter(&wifimanager_APpasswd);
   wifiManager.addParameter(&wifimanager_APpasswdValidate);
   wifiManager.addParameter(&wifimanager_hint);
+  wifiManager.addParameter(&wifimanager_osc);
   wifiManager.addParameter(&wifimanager_oscIP);
   wifiManager.addParameter(&wifimanager_oscPORT);
+  wifiManager.addParameter(&wifimanager_libmapper);
   wifiManager.addParameter(&wifimanager_FSRoffset);
-  wifiManager.addParameter(&wifimanager_touchMask0);
-  wifiManager.addParameter(&wifimanager_touchMask1);
+  wifiManager.addParameter(&wifimanager_touchMask);
   wifiManager.addParameter(&wifimanager_id);
   wifiManager.addParameter(&wifimanager_type);
   wifiManager.addParameter(&wifimanager_author);
@@ -88,11 +114,7 @@ void Wifimanager_portal(char *portal_name, char *portal_password) {
   Serial.println("The T-Stick is connected to the chosen network");
 
   //read updated T-Stick parameters
-  Tstick.id = atoi(wifimanager_id.getValue());
-  strcpy(Tstick.type, wifimanager_type.getValue());
-  strcpy(Tstick.author, wifimanager_author.getValue());
-  strcpy(Tstick.color, wifimanager_color.getValue());  
-  if (wifimanager_APpasswd.getValue()[0]) {
+  if (wifimanager_APpasswd.getValue()[0] != NULL) {
     if (strcmp(wifimanager_APpasswd.getValue(), wifimanager_APpasswdValidate.getValue()) == 0 ) {  
       strcpy(Tstick.APpasswd, wifimanager_APpasswd.getValue());
       Serial.println("T-Stick AP password changed");
@@ -104,13 +126,65 @@ void Wifimanager_portal(char *portal_name, char *portal_password) {
     }
   WiFi.SSID().toCharArray(Tstick.lastConnectedNetwork,sizeof(Tstick.lastConnectedNetwork));
   WiFi.psk().toCharArray(Tstick.lastStoredPsk,sizeof(Tstick.lastStoredPsk));
-  Tstick.firmware = atoi(wifimanager_firmware.getValue());
-  strcpy(Tstick.oscIP, wifimanager_oscIP.getValue());
-  osc_IP.fromString(Tstick.oscIP);
-  Tstick.oscPORT = atoi(wifimanager_oscPORT.getValue());
-  Tstick.FSRoffset = atoi(wifimanager_FSRoffset.getValue());
-  Tstick.touchMask[0] = atoi(wifimanager_touchMask0.getValue());
-  Tstick.touchMask[1] = atoi(wifimanager_touchMask1.getValue());
+  
+  strcpy(wifimanagerbuf,wifimanager_oscIP.getValue());
+  copybuf = strtok(wifimanagerbuf,",");
+  if (copybuf != NULL) {
+    strcpy(Tstick.oscIP[0],copybuf);
+  }
+  copybuf = strtok(NULL,",");
+  if (copybuf == NULL) {
+    strcpy(Tstick.oscIP[1],"0.0.0.0");
+  }
+  else {
+    strcpy(Tstick.oscIP[1],copybuf);
+  }  
+
+  strcpy(wifimanagerbuf,wifimanager_oscPORT.getValue());
+  copybuf = strtok(wifimanagerbuf,",");
+  if (copybuf != NULL) {
+    Tstick.oscPORT[0] = atoi(copybuf);
+  }
+  copybuf = strtok(NULL,",");
+  if (copybuf != NULL) {
+    Tstick.oscPORT[1] = atoi(copybuf);
+  }
+  
+  if (strncmp(wifimanager_libmapper.getValue(), "T", 1) == 0) {
+    Tstick.libmapper = 1;
+  } 
+  else {
+    Tstick.libmapper = 0;
+  }
+
+  if (strncmp(wifimanager_osc.getValue(), "T", 1) == 0) {
+    Tstick.osc = 1;
+  } 
+  else {
+    Tstick.osc = 0;
+  }
+  
+  fsrbuf = atof(wifimanager_FSRoffset.getValue());
+  fsrbuf *= 4095;
+  Tstick.FSRoffset = fsrbuf;
+  
+  strcpy(wifimanagerbuf,wifimanager_touchMask.getValue());
+  copybuf = strtok(wifimanagerbuf,",");
+  if (copybuf != NULL) {
+    Tstick.touchMask[0][0] = atoi(copybuf);
+    copybuf = strtok(NULL,",");
+    if (copybuf != NULL) {
+      Tstick.touchMask[0][1] = atoi(copybuf);
+    }
+    for (byte i=1; i < (sizeof(Tstick.touchMask)/sizeof(Tstick.touchMask)[0]); ++i) {
+      copybuf = strtok(NULL,",");
+      if (copybuf == NULL) {break;}
+      Tstick.touchMask[i][0] = atoi(copybuf);
+      copybuf = strtok(NULL,",");
+      if (copybuf == NULL) {break;}
+      Tstick.touchMask[i][1] = atoi(copybuf);
+    }
+  }
 
   Serial.print("\nThe T-Stick is connected to "); Serial.print(WiFi.SSID()); Serial.println(" network");
   Serial.print("\nlocal ip: "); Serial.println(WiFi.localIP());
@@ -121,6 +195,9 @@ void Wifimanager_portal(char *portal_name, char *portal_password) {
   createTstickSSID();
   
   digitalWrite(ledPin, ledStatus);
+
+  // Disable WiFi power save (huge latency improvements)
+  esp_wifi_set_ps(WIFI_PS_NONE);
 }
 
 

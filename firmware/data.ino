@@ -1,20 +1,80 @@
-const int DEBOUNCE_DELAY = 20;
-const int DOUBLE_TAP_TIME = 200;
 
 void readData() {
-  // read capsense
-  if (millis() - touchLastRead > touchInterval) {
-    touchLastRead = millis();
-    readTouch();
+
+  // Read capsense touch data
+  for (byte i=0; i < nCapsenses; ++i) {
+      capsense = capsenseRequest(capsense_addresses[i],BUTTON_STAT, 2);
+      RawData.touch[i][0] = capsense.answer1;
+      RawData.touch[i][1] = capsense.answer2;
   }
 
+  // Read button
+  buttonState = !digitalRead(buttonPin);
+  if (buttonState == 0 && buttonLongFlag == 0) { // Read button (long)
+    RawData.buttonLong = 0;
+    RawData.buttonShort = 0;
+  }
+  if (buttonState == 1 && buttonLongFlag == 0) { 
+    buttonTimer = millis(); 
+    buttonLongFlag = buttonShortFlag = 1;
+  }
+  if (millis() - buttonShortInterval > buttonTimer && buttonShortFlag == 1) {
+    RawData.buttonShort = 1;
+    buttonShortFlag = 0;
+  }
+  if (millis() - buttonLongInterval > buttonTimer && buttonLongFlag == 1) { 
+    RawData.buttonLong = 1;
+  }
+  if (buttonState == 0 && buttonLongFlag == 1) {
+     buttonLongFlag = 0;
+  }
+  if (buttonState == 1 && buttonDoubleFlag == 0) { // Read button (double)
+    buttonDoubleTimer = millis();
+    buttonDoubleFlag = 1;
+  }
+  if (millis() - buttonShortInterval > buttonDoubleTimer) { 
+    if (buttonState == 0) {
+      buttonDoubleFlag = 0;
+      RawData.buttonDouble = 0;
+    } 
+  } else {
+    if (buttonState == 0) {
+      buttonDoubleFlag = 2;
+    }
+    if (buttonState == 1 && buttonDoubleFlag == 2) {
+      RawData.buttonDouble = 1;
+      buttonShortFlag = 0;
+    }
+  }
+
+
   // read FSR
-  Data.fsr = analogRead(fsrPin);
-  Data.fsr = mapfloat(Data.fsr, Tstick.FSRoffset, 4095, 0, 1);
+  RawData.fsr = analogRead(fsrPin);
+  NormData.fsr = mapfloat(RawData.fsr, Tstick.FSRoffset, 4095, 0, 1);
 
   // read piezo
-  Data.piezo = analogRead(piezoPin);
-  Data.piezo = mapfloat(Data.piezo, 0, 1024, 0, 1);
+  RawData.piezo = analogRead(piezoPin);
+  NormData.piezo = mapfloat(RawData.piezo, 0, 1024, 0, 1);
+
+  // read battery level (https://www.youtube.com/watch?v=yZjpYmWVLh8&feature=youtu.be&t=88) 
+  if (millis() - batteryLastRead > batteryInterval) {
+      batteryCount += 1;
+      batteryLastRead = millis(); 
+      battery += (analogRead(batteryPin) / 4096.0 * 7.445) / 10;
+      if (batteryCount >= 10) {
+        if ( battery < 2.9 ) {
+          batteryPercentage = 5;
+        }
+        else if ( battery > 4.15 ) {
+          batteryPercentage = 100;
+        }
+        else {
+          batteryPercentage = mapfloat(battery, 2.9, 4.15, 5.0, 99.0);
+        }
+        battery = 0;
+        batteryCount = 0;
+        }
+      }
 
   // read IMU
   static MIMUReading reading = MIMUReading::Zero();
@@ -23,85 +83,40 @@ void readData() {
     calibrator.calibrate(reading);
     reading.updateBuffer();
     quat = filter.fuse(reading.gyro, reading.accl, reading.magn);
-
-    copyFloatArrayToVar(reading.accl.data(), reading.accl.size(), Data.accl);
-    copyFloatArrayToVar(reading.gyro.data(), reading.gyro.size(), Data.gyro);
-    copyFloatArrayToVar(reading.magn.data(), reading.magn.size(), Data.magn);
-    copyFloatArrayToVar(reading.data, reading.size, Data.raw);
-    copyFloatArrayToVar(quat.coeffs().data(), quat.coeffs().size(), Data.quat);
-
-    for (int i = 0; i < (sizeof(Data.accl) / sizeof(Data.accl[0])); i++) {
-      Data.accl[i] = mapfloat(Data.accl[i], -32767, 32767, -1, 1);
-    }
-    for (int i = 0; i < (sizeof(Data.gyro) / sizeof(Data.gyro[0])); i++) {
-      Data.gyro[i] = mapfloat(Data.gyro[i], -34.90659, 34.90659, -1, 1);
-    }
-    for (int i = 0; i < (sizeof(Data.magn) / sizeof(Data.magn[0])); i++) {
-      Data.magn[i] = mapfloat(Data.magn[i], -32767, 32767, -1, 1);
-    }
-
-    Data.magAccl =
-        sqrt(Data.accl[0] * Data.accl[0] + Data.accl[1] * Data.accl[1] +
-             Data.accl[2] * Data.accl[2]);
-    Data.magGyro =
-        sqrt(Data.gyro[0] * Data.gyro[0] + Data.gyro[1] * Data.gyro[1] +
-             Data.gyro[2] * Data.gyro[2]);
-    Data.magMagn =
-        sqrt(Data.magn[0] * Data.magn[0] + Data.magn[1] * Data.magn[1] +
-             Data.magn[2] * Data.magn[2]);
-
-    // calculateEulerAnglesQuat(Data.quat[0],Data.quat[1],Data.quat[2],Data.quat[3]);
-    calculateEulerAngles(Data.accl[0], Data.accl[1], Data.accl[2], Data.magn[0],
-                         Data.magn[1], Data.magn[2]);
-  }
-
-  // Button debouncing with double click detection
-  bool btnVal = !digitalRead(buttonPin);
-  static unsigned long lastDebounceTime;
-  static unsigned long lastPressedTime;
-  const unsigned long now = millis();
-  Data.doubleClick = false;
-  Data.singleClick = false;
-
-  if ((now - lastDebounceTime) > DEBOUNCE_DELAY) {
-    if (btnVal != Data.buttonState) {
-      if (!Data.buttonState && (now - lastPressedTime < DOUBLE_TAP_TIME)) {
-        Data.doubleClick = true;
-      } else {
-        Data.singleClick = true;
+    
+    copyFloatArrayToVar(reading.accl.data(), reading.accl.size(), RawData.accl);
+    copyFloatArrayToVar(reading.gyro.data(), reading.gyro.size(), RawData.gyro);
+    copyFloatArrayToVar(reading.magn.data(), reading.magn.size(), RawData.magn);
+    copyFloatArrayToVar(reading.data, reading.size, RawData.raw);
+    copyFloatArrayToVar(quat.coeffs().data(), quat.coeffs().size(), RawData.quat);
+    
+    for (int i = 0; i < (sizeof(RawData.accl)/sizeof(RawData.accl[0])); ++i) {
+      NormData.accl[i] = mapfloat(RawData.accl[i], -32767, 32767, -1, 1);
       }
-      Data.buttonState = btnVal;
-      lastPressedTime = now;
-    }
-  }
-}
-
-boolean readTouch() {
-  boolean changed = 0;
-  byte temp[2] = {0, 0};
-  int i = 0;
-  Wire.beginTransmission(I2C_ADDR);
-  Wire.write(BUTTON_STAT);
-  Wire.endTransmission();
-
-  Wire.requestFrom(I2C_ADDR, 2);
-  while (Wire.available()) {  // slave may send less than requested
-    temp[i] = Wire.read();    // receive a byte as character
-    i++;
-  }
-  Wire.endTransmission();
-
-  for (int t = 0; t < 2; t++) {
-    if (temp[t] != Data.touch[t]) {
-      changed = 1;
-      Data.touch[t] = temp[t];
-      for (int j = 0; j < 8; ++j) {
-        Data.touch16[j + t * 8] = (temp[t] & (1 << (j % 8))) > 0;
+    for (int i = 0; i < (sizeof(RawData.gyro)/sizeof(RawData.gyro[0])); ++i) {
+      NormData.gyro[i] = mapfloat(RawData.gyro[i], -41, 41, -1, 1);
       }
-    }
-  }
+    for (int i = 0; i < (sizeof(RawData.magn)/sizeof(RawData.magn[0])); ++i) {
+      NormData.magn[i] = mapfloat(RawData.magn[i], -32767, 32767, -1, 1);
+      }
 
-  return changed;
+    RawData.magAccl = sqrt(RawData.accl[0] * RawData.accl[0] + RawData.accl[1] * RawData.accl[1] + RawData.accl[2] * RawData.accl[2]);
+    RawData.magGyro = sqrt(RawData.gyro[0] * RawData.gyro[0] + RawData.gyro[1] * RawData.gyro[1] + RawData.gyro[2] * RawData.gyro[2]);
+    RawData.magMagn = sqrt(RawData.magn[0] * RawData.magn[0] + RawData.magn[1] * RawData.magn[1] + RawData.magn[2] * RawData.magn[2]);
+
+    taitBryanAngles(RawData.quat[0],RawData.quat[1],RawData.quat[2],RawData.quat[3]);
+
+    // Apply temporary Yaw offset
+    if (RawData.buttonDouble == 1 && millis() - 300 > offsetDebounce) {
+      offsetDebounce = millis();
+      offsetYaw = 0;
+      offsetFlag = 1;
+    }
+    if (offsetFlag == 1 && millis() - 200 > offsetDebounce) {
+      offsetYaw = RawData.ypr[0];
+      offsetFlag = 0;
+    }
+  } 
 }
 
 void copyFloatArrayToVar(const float source[], int size, float destination[]) {
@@ -110,109 +125,58 @@ void copyFloatArrayToVar(const float source[], int size, float destination[]) {
   }
 }
 
-float mapfloat(float x, float in_min, float in_max, float out_min,
-               float out_max) {
-  float result =
-      (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+
+float mapfloat(float x, float in_min, float in_max, float out_min, float out_max) {
+  float result = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   result = constrain(result, out_min, out_max);
   return result;
 }
 
+
 void printData() {
   if (millis() - serialLastRead > serialInterval) {
-    serialLastRead = millis();
-    Serial.println("\nPrinting sensor data: ");
-    Serial.print("Data.touch: ");
-    // for( int i = 0 ; i < (sizeof(Data.touch)/sizeof(Data.touch[0])) ; ++i ){
-    //   Serial.print(Data.touch[i], 10);
-    //   Serial.print(" ");
-    // }
-    for (int i = 0; i < (sizeof(Data.touch16) / sizeof(Data.touch16[0])); ++i) {
-      Serial.print(Data.touch16[i], 10);
-      Serial.print(" ");
-    }
-    Serial.print("\nData.fsr: ");
-    Serial.println(Data.fsr);
-    Serial.print("Data.piezo: ");
-    Serial.println(Data.piezo);
-    Serial.print("Data.accl: ");
-    for (int i = 0; i < (sizeof(Data.accl) / sizeof(Data.accl[0])); ++i) {
-      Serial.print(Data.accl[i], 10);
-      Serial.print(" ");
-    }
-    Serial.print("\nData.gyro: ");
-    for (int i = 0; i < (sizeof(Data.gyro) / sizeof(Data.gyro[0])); ++i) {
-      Serial.print(Data.gyro[i], 10);
-      Serial.print(" ");
-    }
-    Serial.print("\nData.magn: ");
-    for (int i = 0; i < (sizeof(Data.magn) / sizeof(Data.magn[0])); ++i) {
-      Serial.print(Data.magn[i], 10);
-      Serial.print(" ");
-    }
-    Serial.print("\nData.raw: ");
-    for (int i = 0; i < (sizeof(Data.raw) / sizeof(Data.raw[0])); ++i) {
-      Serial.print(Data.raw[i], 10);
-      Serial.print(" ");
-    }
-    Serial.print("\nData.quat: ");
-    for (int i = 0; i < (sizeof(Data.quat) / sizeof(Data.quat[0])); ++i) {
-      Serial.print(Data.quat[i], 10);
-      Serial.print(" ");
-    }
-    Serial.print("\nData.ypr: ");
-    for (int i = 0; i < (sizeof(Data.ypr) / sizeof(Data.ypr[0])); ++i) {
-      Serial.print(Data.ypr[i], 10);
-      Serial.print(" ");
-    }
-    Serial.println();
+      serialLastRead = millis(); 
+      Serial.println("\nPrinting sensor data: ");
+      Serial.print("RawData.touch: ");
+      printf("%i, %i, %i, %i, %i, %i, %i, %i, %i, %i",
+      RawData.touch[0][0],RawData.touch[0][1],
+      RawData.touch[1][0],RawData.touch[1][1],
+      RawData.touch[2][0],RawData.touch[2][1],
+      RawData.touch[3][0],RawData.touch[3][1],
+      RawData.touch[4][0],RawData.touch[4][1]);
+      Serial.println();
+      Serial.print("\nRawData.fsr: "); Serial.println(RawData.fsr);
+      Serial.print("RawData.piezo: "); Serial.println(RawData.piezo);
+      Serial.print("RawData.accl: ");
+          for( int i = 0 ; i < (sizeof(RawData.accl)/sizeof(RawData.accl[0])) ; ++i ){
+            Serial.print(RawData.accl[i], 10);
+            Serial.print(" ");
+          }
+      Serial.print("\nRawData.gyro: ");
+          for( int i = 0 ; i < (sizeof(RawData.gyro)/sizeof(RawData.gyro[0])) ; ++i ){
+            Serial.print(RawData.gyro[i], 10);
+            Serial.print(" ");
+          }
+      Serial.print("\nRawData.magn: ");
+          for( int i = 0 ; i < (sizeof(RawData.magn)/sizeof(RawData.magn[0])) ; ++i ){
+            Serial.print(RawData.magn[i], 10);
+            Serial.print(" ");
+          }
+      Serial.print("\nRawData.raw: ");
+          for( int i = 0 ; i < (sizeof(RawData.raw)/sizeof(RawData.raw[0])) ; ++i ){
+            Serial.print(RawData.raw[i], 10);
+            Serial.print(" ");
+          }
+      Serial.print("\nRawData.quat: ");
+          for( int i = 0 ; i < (sizeof(RawData.quat)/sizeof(RawData.quat[0])) ; ++i ){
+            Serial.print(RawData.quat[i], 10);
+            Serial.print(" ");
+          }
+      Serial.print("\nRawData.ypr: ");
+          for( int i = 0 ; i < (sizeof(RawData.ypr)/sizeof(RawData.ypr[0])) ; ++i ){
+            Serial.print(RawData.ypr[i], 10);
+            Serial.print(" ");
+          }
+      Serial.println();
   }
-}
-
-void calculateEulerAnglesQuat(float w, float x, float y, float z) {
-  // roll (x-axis rotation)
-  float sinr_cosp = 2 * (w * x + y * z);
-  float cosr_cosp = 1 - 2 * (x * x + y * y);
-  Data.ypr[2] = std::atan2(sinr_cosp, cosr_cosp);
-
-  // pitch (y-axis rotation)
-  float sinp = 2 * (w * y - z * x);
-  if (std::abs(sinp) >= 1)
-    Data.ypr[1] =
-        std::copysign(M_PI / 2, sinp);  // use 90 degrees if out of range
-  else
-    Data.ypr[1] = std::asin(sinp);
-
-  // yaw (z-axis rotation)
-  float siny_cosp = 2 * (w * z + x * y);
-  float cosy_cosp = 1 - 2 * (y * y + z * z);
-  Data.ypr[0] = std::atan2(siny_cosp, cosy_cosp);
-}
-
-void calculateEulerAngles(float ax, float ay, float az, float mx, float my,
-                          float mz) {
-  ax *= 16;
-  ay *= 16;
-  az *= 16;
-  mx *= 8;
-  my *= 8;
-  mz *= 8;
-  Data.ypr[2] = atan2(ay, az);
-  Data.ypr[1] = atan2(-ax, sqrt(ay * ay + az * az));
-  if (my == 0)
-    Data.ypr[0] = (mx < 0) ? PI : 0;
-  else
-    Data.ypr[0] = atan2(mx, my);
-
-  Data.ypr[0] -= -14.34 * PI / 180;  // Declination (degrees) in Montreal, QC.
-
-  if (Data.ypr[0] > PI)
-    Data.ypr[0] -= (2 * PI);
-  else if (Data.ypr[0] < -PI)
-    Data.ypr[0] += (2 * PI);
-
-  // Convert everything from radians to degrees:
-  Data.ypr[0] *= 180.0 / PI;
-  Data.ypr[1] *= 180.0 / PI;
-  Data.ypr[2] *= 180.0 / PI;
 }
