@@ -1,0 +1,5 @@
+#pragma once
+
+#define TOUCH_SIZE_ALL 16
+#define TOUCH_SIZE_EDGE 2
+#define TOUCH_VECTOR_SIZE TOUCH_SIZE_ALL / 8

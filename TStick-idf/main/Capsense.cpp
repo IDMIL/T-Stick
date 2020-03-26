@@ -1,11 +1,10 @@
+#include "TStick.h"
 
 //////////////////////////
 // Capsense Definitions //
 //////////////////////////
 
 // CY8CMBR3116
-
-#define BUTTON_STAT 0xAA  // Address to read the status of the sensors (2 bytes)
 
 byte capsense_addresses[5];
 byte nCapsenses = 0;
@@ -14,7 +13,7 @@ byte touch[5][2]; // up to 5 capsenses (2 bytes per capsense)
 Capsense capsenseRequest(uint8_t address,uint8_t request, uint8_t answer_size) {
 
     byte SYSTEM_STATUS = 0x8A;
-    byte answer1, answer2;
+    byte answer1 = 0, answer2 = 0;
 
     // This first requisition doesn't work,
     // it always return 0xFF (255) for some reason.

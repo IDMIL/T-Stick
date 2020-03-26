@@ -138,12 +138,23 @@ void printData() {
       serialLastRead = millis(); 
       Serial.println("\nPrinting sensor data: ");
       Serial.print("RawData.touch: ");
-      printf("%i, %i, %i, %i, %i, %i, %i, %i, %i, %i",
-      RawData.touch[0][0],RawData.touch[0][1],
-      RawData.touch[1][0],RawData.touch[1][1],
-      RawData.touch[2][0],RawData.touch[2][1],
-      RawData.touch[3][0],RawData.touch[3][1],
-      RawData.touch[4][0],RawData.touch[4][1]);
+      Serial.print(RawData.touch[0][0]); Serial.print(", ");
+      Serial.print(RawData.touch[0][1]); Serial.print(", ");
+      Serial.print(RawData.touch[1][0]); Serial.print(", ");
+      Serial.print(RawData.touch[1][1]); Serial.print(", ");
+      Serial.print(RawData.touch[2][0]); Serial.print(", ");
+      Serial.print(RawData.touch[2][1]); Serial.print(", ");
+      Serial.print(RawData.touch[3][0]); Serial.print(", ");
+      Serial.print(RawData.touch[3][1]); Serial.print(", ");
+      Serial.print(RawData.touch[4][0]); Serial.print(", ");
+      Serial.print(RawData.touch[4][1]); Serial.print(", ");
+      // Serial.print(RawData.touch[5][0]); Serial.print(", ");
+      // Serial.println(RawData.touch[5][1]);
+      // Serial.print("RawData.touch(libmapper): ");
+      //   for( int i = 0 ; i < touchtempSize ; ++i ){
+      //       Serial.print(touchtemp[i]);
+      //       Serial.print(" ");
+      //     }
       Serial.println();
       Serial.print("\nRawData.fsr: "); Serial.println(RawData.fsr);
       Serial.print("RawData.piezo: "); Serial.println(RawData.piezo);

@@ -58,44 +58,12 @@
 //  3-) MINU library complains if you keep any IMU-related files other than MIMU_LSM9DS1.h and MIMU_LSM9DS1.cpp
 //  4-) Board currently in use: LOLIN D32 PRO.
 
+#include "TStick.h"
 
-#include <FS.h>
-
-#define ESP32 // define ESP8266 or ESP32 according to your microcontroller.
-//#define TSTICK193; // define if flashing the T-Stick #193.
-
-#if defined(ESP32)
-#include "platforms/ESP32.h"
-#elif defined(ESP8266)
-#include "platforms/ESP8266.h"
-#else
-#error Missing platform.
-#endif
-
-#include <ArduinoJson.h>  // https://github.com/bblanchon/ArduinoJson
-
-#include <WiFi32Manager.h> // https://github.com/edumeneses/WiFi32Manager
-// already includes:
-// Wifi.h or ESP8266WiFi.h (https://github.com/esp8266/Arduino)
-// AND
-// WebServer.h or ESP8266WebServer.h
-// AND
-// DNSServer.h
-
-// https://github.com/CNMAT/OSC (v3.5.7)
-#include <WiFiUdp.h>
-#include <OSCMessage.h>
-#include <OSCBundle.h>
-
-#include <Wire.h>
-#include <SPI.h>
-#include <MIMU_LSM9DS1.h> // https://github.com/DocSunset/MIMU
-                          // requires SparkFunLSM9DS1 library - https://github.com/sparkfun/SparkFun_LSM9DS1_Arduino_Library
-#include <MIMUCalibrator.h>
-#include <MIMUFusion.h>
-
-#include <stdlib.h> //floats to string
-
+struct Tstick Tstick;
+RawDataStruct RawData;
+NormDataStruct NormData;
+Capsense capsense;
 
 //////////////////////////////////
 //////////////////////////////////
@@ -105,60 +73,7 @@
 
 const int32_t firmware = 200220;
 
-struct Tstick {
-  int id;
-  char type[4];
-  char author[20];
-  char color[20];
-  char APpasswd[15];
-  char lastConnectedNetwork[30];
-  char lastStoredPsk[30];
-  int32_t firmware;
-  byte osc;
-  char oscIP[2][17];
-  int32_t oscPORT[2];
-  byte libmapper;
-  int16_t FSRoffset;
-  byte touchMask[5][2];
-  float abias[3];
-  float mbias[3];
-  float gbias[3];
-  float acclcalibration[9];
-  float magncalibration[9];
-  float gyrocalibration[9];
-} Tstick;
-
-struct RawDataStruct {
-  byte touch[5][2]; // /raw/capsense, i..., 0--255, ... (1 int per 8 capacitive stripes -- 8 bits)
-  int fsr; // /raw/fsr, i, 0--4095
-  int piezo; // /raw/piezo, i, 0--1023
-  float accl[3]; // /raw/accl, iii, +/-32767 (integers)
-  float gyro[3]; // /raw/gyro, fff, +/-34.90659 (floats)
-  float magn[3]; // /raw/magn, fff, +/-32767 (integers)
-  float raw[10]; // /raw (IMU data to be send to callibration app)
-  float quat[4]; // /raw/quat, ffff, ?, ? ,? ,?
-  float ypr[3]; // /raw/ypr, fff, +/-180, +/-90 ,+/-180 (degrees)
-  float magAccl;
-  float magGyro;
-  float magMagn;
-  byte buttonShort; // /raw/button/short, i, 0 or 1
-  byte buttonLong; // /raw/button/long, i, 0 or 1
-  byte buttonDouble; // /raw/button/double, i, 0 or 1
-} RawData;
-
-struct NormDataStruct {
-  float fsr; // /norm/fsr, f, 0--1
-  float piezo; // /norm/piezo, f, 0--1
-  float accl[3]; // /norm/accl, fff, +/-1, +/-1, +/-1
-  float gyro[3]; // /norm/gyro, fff, +/-1, +/-1, +/-1
-  float magn[3]; // /norm/magn, fff, +/-1, +/-1, +/-1
-} NormData;
-
-struct Capsense { 
-  byte answer1, answer2;
-} capsense;
-
-// IPAddress oscIP; // used to send OSC messages
+IPAddress osc_IP; // used to send OSC messages
 char APpasswdTemp[15]; // used to check before save new T-Stick passwd
 char APpasswdValidate[15]; // used to check before save new T-Stick passwd
 char tstickSSID[30] = "T-Stick_";
@@ -240,7 +155,6 @@ void blinkLED(int ledInterval) {
 MIMU_LSM9DS1 mimu{}; // use default SDA and SCL as per board library macros
 MIMUCalibrator calibrator{};
 MIMUFusionFilter filter{};
-
 
 ///////////
 ///////////
@@ -352,7 +266,7 @@ void loop() {
   receiveOSC();
 
   // printing sensor data (serial port)
-  //printData();
+  // printData();
 
   // LED modes:
   // ON = Setup mode

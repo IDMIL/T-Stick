@@ -1,4 +1,4 @@
-#include "mapper.h"
+#include "TStick.h"
 
 mapper_device dev;
 mapper_signal sigRawCapsense;
@@ -13,10 +13,10 @@ mapper_signal sigRawMagnY;
 mapper_signal sigRawMagnZ;
 mapper_signal sigRawFSR;
 mapper_signal sigRawPiezo;
-mapper_signal sigOrientationQ1;
-mapper_signal sigOrientationQ2;
-mapper_signal sigOrientationQ3;
-mapper_signal sigOrientationQ4;
+mapper_signal sigQuarternion1;
+mapper_signal sigQuarternion2;
+mapper_signal sigQuarternion3;
+mapper_signal sigQuarternion4;
 mapper_signal sigYaw;
 mapper_signal sigPitch;
 mapper_signal sigRoll;
@@ -43,7 +43,7 @@ void initLibmapper() {
   int rawMagnMin[1] = { -32767 }, rawMagnMax[1] = { 32767 };
   int rawFSRMin[1] = { 0 }, rawFSRMax[1] = { 4095 };
   int rawPiezoMin[1] = { 0 }, rawPiezoMax[1] = { 1023 };
-  float orientationMin[1] = { -1.0f }, orientationMax[1] = { 1.0f };
+  float quarternionMin[1] = { -1.0f }, quarternionMax[1] = { 1.0f };
   float magMin[1] = { 0.0f }, magMax[1] = { 1.7320508f };  // sqrt(3)
   int buttonMin[1] = { 0 }, buttonMax[1] = { 1 };
   float yprMin[1] = { -180.0f }, yprMax[1] = { 180.0f };
@@ -60,13 +60,13 @@ void initLibmapper() {
   sigRawMagnZ = mapper_device_add_output_signal(dev, "raw/magn/Z", 1, 'i', NULL, rawMagnMin, rawMagnMax);
   sigRawFSR = mapper_device_add_output_signal(dev, "raw/fsr", 1, 'i', NULL, rawFSRMin, rawFSRMax);
   sigRawPiezo = mapper_device_add_output_signal(dev, "raw/piezo", 1, 'i', NULL, rawPiezoMin, rawPiezoMax);
-  sigOrientationQ1 = mapper_device_add_output_signal(dev, "orientation/q1", 1, 'f', NULL, orientationMin, orientationMax);
-  sigOrientationQ2 = mapper_device_add_output_signal(dev, "orientation/q2", 1, 'f', NULL, orientationMin, orientationMax);
-  sigOrientationQ3 = mapper_device_add_output_signal(dev, "orientation/q3", 1, 'f', NULL, orientationMin, orientationMax);
-  sigOrientationQ4 = mapper_device_add_output_signal(dev, "orientation/q4", 1, 'f', NULL, orientationMin, orientationMax);
-  sigYaw = mapper_device_add_output_signal(dev, "orientation/yaw", 1, 'f', NULL, yprMin, yprMax);
-  sigPitch = mapper_device_add_output_signal(dev, "orientation/pitch", 1, 'f', NULL, yprMin, yprMax);
-  sigRoll = mapper_device_add_output_signal(dev, "orientation/roll", 1, 'f', NULL, yprMin, yprMax);
+  sigQuarternion1 = mapper_device_add_output_signal(dev, "quarternion/1", 1, 'f', NULL, quarternionMin, quarternionMax);
+  sigQuarternion2 = mapper_device_add_output_signal(dev, "quarternion/2", 1, 'f', NULL, quarternionMin, quarternionMax);
+  sigQuarternion3 = mapper_device_add_output_signal(dev, "quarternion/3", 1, 'f', NULL, quarternionMin, quarternionMax);
+  sigQuarternion4 = mapper_device_add_output_signal(dev, "quarternion/4", 1, 'f', NULL, quarternionMin, quarternionMax);
+  sigYaw = mapper_device_add_output_signal(dev, "euler/yaw", 1, 'f', NULL, yprMin, yprMax);
+  sigPitch = mapper_device_add_output_signal(dev, "euler/pitch", 1, 'f', NULL, yprMin, yprMax);
+  sigRoll = mapper_device_add_output_signal(dev, "euler/roll", 1, 'f', NULL, yprMin, yprMax);
   sigMagGyro = mapper_device_add_output_signal(dev, "gyro/magnitude", 1, 'f', NULL, magMin, magMax);
   sigMagAccl = mapper_device_add_output_signal(dev, "accl/magnitude", 1, 'f', NULL, magMin, magMax);
   sigMagMagn = mapper_device_add_output_signal(dev, "magn/magnitude", 1, 'f', NULL, magMin, magMax);
@@ -106,10 +106,10 @@ void updateLibmapper() {
   mapper_signal_update_int(sigRawMagnX, RawData.magn[0]);
   mapper_signal_update_int(sigRawMagnY, RawData.magn[1]);
   mapper_signal_update_int(sigRawMagnZ, RawData.magn[2]);
-  mapper_signal_update_float(sigOrientationQ1, RawData.quat[0]);
-  mapper_signal_update_float(sigOrientationQ2, RawData.quat[1]);
-  mapper_signal_update_float(sigOrientationQ3, RawData.quat[2]);
-  mapper_signal_update_float(sigOrientationQ4, RawData.quat[3]);
+  mapper_signal_update_float(sigQuarternion1, RawData.quat[0]);
+  mapper_signal_update_float(sigQuarternion2, RawData.quat[1]);
+  mapper_signal_update_float(sigQuarternion3, RawData.quat[2]);
+  mapper_signal_update_float(sigQuarternion4, RawData.quat[3]);
   mapper_signal_update_float(sigMagGyro, RawData.magGyro);
   mapper_signal_update_float(sigMagAccl, RawData.magAccl);
   mapper_signal_update_float(sigMagMagn, RawData.magMagn);
