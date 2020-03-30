@@ -35,5 +35,5 @@
 	path = TStick-idf/components/arduino-libraries/SparkFun_LSM9DS1_Arduino_Library
 	url = https://github.com/sparkfun/SparkFun_LSM9DS1_Arduino_Library.git
 [submodule "TStick-idf/external/libmapper_idf"]
-	path = TStick-idf/external/libmapper_idf/
+	path = TStick-idf/external/libmapper_idf
 	url = https://github.com/mathiasbredholt/libmapper_idf.git
