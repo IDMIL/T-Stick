@@ -1,39 +1,39 @@
-[submodule "components/arduino-esp32"]
+[submodule "TStick-idf/components/arduino-esp32"]
 	path = TStick-idf/components/arduino-esp32
 	url = https://github.com/espressif/arduino-esp32.git
-[submodule "components/arduino-libraries/WiFi32Manager"]
+[submodule "TStick-idf/components/arduino-libraries/WiFi32Manager"]
 	path = TStick-idf/components/arduino-libraries/WiFi32Manager
 	url = https://github.com/mathiasbredholt/WiFi32Manager.git
-[submodule "components/arduino-libraries/Adafruit_LSM9DS1"]
+[submodule "TStick-idf/components/arduino-libraries/Adafruit_LSM9DS1"]
 	path = TStick-idf/components/arduino-libraries/Adafruit_LSM9DS1
 	url = https://github.com/adafruit/Adafruit_LSM9DS1.git
-[submodule "components/arduino-libraries/ArduinoJson"]
+[submodule "TStick-idf/components/arduino-libraries/ArduinoJson"]
 	path = TStick-idf/components/arduino-libraries/ArduinoJson
 	url = https://github.com/bblanchon/ArduinoJson
-[submodule "components/arduino-libraries/OSC"]
+[submodule "TStick-idf/components/arduino-libraries/OSC"]
 	path = TStick-idf/components/arduino-libraries/OSC
 	url = https://github.com/CNMAT/OSC
-[submodule "components/arduino-libraries/MIMU"]
+[submodule "TStick-idf/components/arduino-libraries/MIMU"]
 	path = TStick-idf/components/arduino-libraries/MIMU
 	url = https://github.com/DocSunset/MIMU
-[submodule "components/arduino-libraries/Eigen"]
+[submodule "TStick-idf/components/arduino-libraries/Eigen"]
 	path = TStick-idf/components/arduino-libraries/Eigen
 	url = https://github.com/bolderflight/Eigen
-[submodule "components/arduino-libraries/Adafruit_LIS3MDL"]
+[submodule "TStick-idf/components/arduino-libraries/Adafruit_LIS3MDL"]
 	path = TStick-idf/components/arduino-libraries/Adafruit_LIS3MDL
 	url = https://github.com/adafruit/Adafruit_LIS3MDL
-[submodule "components/arduino-libraries/Adafruit_Sensor"]
+[submodule "TStick-idf/components/arduino-libraries/Adafruit_Sensor"]
 	path = TStick-idf/components/arduino-libraries/Adafruit_Sensor
 	url = https://github.com/adafruit/Adafruit_Sensor.git
-[submodule "Adafruit_BusIO"]
+[submodule "TStick-idf/Adafruit_BusIO"]
 	path = Adafruit_BusIO
 	url = https://github.com/adafruit/Adafruit_BusIO.git
-[submodule "components/arduino-libraries/Adafruit_BusIO"]
+[submodule "TStick-idf/components/arduino-libraries/Adafruit_BusIO"]
 	path = TStick-idf/components/arduino-libraries/Adafruit_BusIO
 	url = https://github.com/adafruit/Adafruit_BusIO.git
-[submodule "components/arduino-libraries/SparkFun_LSM9DS1_Arduino_Library"]
+[submodule "TStick-idf/components/arduino-libraries/SparkFun_LSM9DS1_Arduino_Library"]
 	path = TStick-idf/components/arduino-libraries/SparkFun_LSM9DS1_Arduino_Library
 	url = https://github.com/sparkfun/SparkFun_LSM9DS1_Arduino_Library.git
-[submodule "components/libmapper_idf"]
-	path = TStick-idf/components/libmapper_idf
+[submodule "TStick-idf/external/libmapper_idf"]
+	path = TStick-idf/external/libmapper_idf/
 	url = https://github.com/mathiasbredholt/libmapper_idf.git
