@@ -33,7 +33,7 @@
 
 #include <stdlib.h> //floats to string
 
-#include <mapper/mapper.h>
+#include <mpr/mpr.h>
 
 #define BUTTON_STAT 0xAA  // Address to read the status of the sensors (2 bytes)
 
@@ -167,6 +167,8 @@ extern float offsetYaw;
 extern unsigned long offsetDebounce;
 extern byte offsetFlag;
 
+extern mpr_dev libmapper_dev;
+
 /////////////////////////
 // Function prototypes //
 /////////////////////////
@@ -203,3 +205,6 @@ void sendOSC(char* ip,int32_t port);
 void updateLibmapper();
 void receiveOSC();
 void printData();
+
+void setup();
+void loop();

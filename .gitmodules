@@ -37,3 +37,6 @@
 [submodule "TStick-idf/external/libmapper_idf"]
 	path = TStick-idf/external/libmapper_idf
 	url = https://github.com/mathiasbredholt/libmapper_idf.git
+[submodule "TStick-idf/external/GestureLooper"]
+	path = TStick-idf/external/GestureLooper
+	url = https://github.com/mathiasbredholt/GestureLooper.git
