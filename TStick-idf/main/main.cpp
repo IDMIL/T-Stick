@@ -63,10 +63,10 @@
 
 #include "GestureLooper/GestureLooper.hpp"
 #include "TStick.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
 #include "esp_task_wdt.h"
+#include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
+#include "freertos/task.h"
 
 struct Tstick Tstick;
 RawDataStruct RawData;
@@ -175,8 +175,6 @@ MIMUFusionFilter filter{};
 
 GestureLooper::GestureLooper* gestureLooper;
 
-SemaphoreHandle_t setupSemphr = xSemaphoreCreateBinary();
-
 void setup() {
   Serial.begin(115200);
 
@@ -261,25 +259,20 @@ void setup() {
 
 void loop() {
   // Calling WiFiManager configuration portal on demand:
-//   if (RawData.buttonLong == 1) {
-// #ifdef TSTICK193
-//     digitalWrite(ledPin, 1);
-// #else
-//     digitalWrite(ledPin, 0);
-// #endif
-//     RawData.buttonLong = 0;
-//     buttonLongFlag = 0;
-//     Wifimanager_portal(tstickSSID, Tstick.APpasswd);
-//   }
+  //   if (RawData.buttonLong == 1) {
+  // #ifdef TSTICK193
+  //     digitalWrite(ledPin, 1);
+  // #else
+  //     digitalWrite(ledPin, 0);
+  // #endif
+  //     RawData.buttonLong = 0;
+  //     buttonLongFlag = 0;
+  //     Wifimanager_portal(tstickSSID, Tstick.APpasswd);
+  //   }
 
   // reading sensor data
-  // unsigned long now = millis();
-  // static unsigned long then;
-  // if (now - then > 10) {
-    // readData();
-    // updateLibmapper();
-    // then = now;
-  // }
+  readData();
+  updateLibmapper();
 
   // // send data (OSC)
   // if (Tstick.osc == 1) {
@@ -318,27 +311,23 @@ void loop() {
 }
 
 void gestureLooperTask(void* user_param) {
-  xSemaphoreTake(setupSemphr, portMAX_DELAY);
   gestureLooper = new GestureLooper::GestureLooper(&libmapper_dev);
   for (;;) {
     gestureLooper->update();
-    vTaskDelay(2);
+    vTaskDelay(1);
   }
 }
 
 void loopTask(void* user_param) {
   setup();
-  xSemaphoreGive(setupSemphr);
+  xTaskCreate(gestureLooperTask, "GestureLooper", 8192, NULL, 30, NULL);
   for (;;) {
-    // esp_task_wdt_reset();
     loop();
-    // if (serialEventRun) serialEventRun();
-    vTaskDelay(1);
+    portYIELD();
   }
 }
 
 extern "C" void app_main() {
   initArduino();
-  xTaskCreatePinnedToCore(loopTask, "Arduino", 16384, NULL, 1, NULL, 1);
-  xTaskCreatePinnedToCore(gestureLooperTask, "GestureLooper", 16384, NULL, 10, NULL, 1);
+  xTaskCreate(loopTask, "Arduino", 8192, NULL, 10, NULL);
 }

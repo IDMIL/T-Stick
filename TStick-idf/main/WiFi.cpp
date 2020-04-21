@@ -11,7 +11,7 @@ void connectToWifi() {
     // WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
     WiFi.setHostname(tstickSSID);
     // WiFi.begin(Tstick.lastConnectedNetwork, Tstick.lastStoredPsk);
-    WiFi.begin("dlink-FA68", "kittykitty93");
+    WiFi.begin("KittysCastle", "kittykitty93");
     time_now = millis();
     while ((WiFi.status() != WL_CONNECTED) &&
            (millis() < time_now + waitForConnection)) {

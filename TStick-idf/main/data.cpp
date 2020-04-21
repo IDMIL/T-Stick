@@ -1,20 +1,20 @@
 #include "TStick.h"
 
 void readData() {
-  // Read capsense touch data
-  for (byte i = 0; i < nCapsenses; ++i) {
-    capsense = capsenseRequest(capsense_addresses[i], BUTTON_STAT, 2);
-    RawData.touch[i][0] = capsense.answer1;
-    RawData.touch[i][1] = capsense.answer2;
-  }
+  // // Read capsense touch data
+  // for (byte i = 0; i < nCapsenses; ++i) {
+  //   capsense = capsenseRequest(capsense_addresses[i], BUTTON_STAT, 2);
+  //   RawData.touch[i][0] = capsense.answer1;
+  //   RawData.touch[i][1] = capsense.answer2;
+  // }
 
   // Read button
-  buttonState = !digitalRead(buttonPin);
-  if (buttonState == 0 && buttonLongFlag == 0) {  // Read button (long)
+  RawData.buttonState = !digitalRead(buttonPin);
+  if (RawData.buttonState == 0 && buttonLongFlag == 0) {  // Read button (long)
     RawData.buttonLong = 0;
     RawData.buttonShort = 0;
   }
-  if (buttonState == 1 && buttonLongFlag == 0) {
+  if (RawData.buttonState == 1 && buttonLongFlag == 0) {
     buttonTimer = millis();
     buttonLongFlag = buttonShortFlag = 1;
   }
@@ -25,23 +25,23 @@ void readData() {
   if (millis() - buttonLongInterval > buttonTimer && buttonLongFlag == 1) {
     RawData.buttonLong = 1;
   }
-  if (buttonState == 0 && buttonLongFlag == 1) {
+  if (RawData.buttonState == 0 && buttonLongFlag == 1) {
     buttonLongFlag = 0;
   }
-  if (buttonState == 1 && buttonDoubleFlag == 0) {  // Read button (double)
+  if (RawData.buttonState == 1 && buttonDoubleFlag == 0) {  // Read button (double)
     buttonDoubleTimer = millis();
     buttonDoubleFlag = 1;
   }
   if (millis() - buttonShortInterval > buttonDoubleTimer) {
-    if (buttonState == 0) {
+    if (RawData.buttonState == 0) {
       buttonDoubleFlag = 0;
       RawData.buttonDouble = 0;
     }
   } else {
-    if (buttonState == 0) {
+    if (RawData.buttonState == 0) {
       buttonDoubleFlag = 2;
     }
-    if (buttonState == 1 && buttonDoubleFlag == 2) {
+    if (RawData.buttonState == 1 && buttonDoubleFlag == 2) {
       RawData.buttonDouble = 1;
       buttonShortFlag = 0;
     }
@@ -76,18 +76,18 @@ void readData() {
 
   // read IMU
   static MIMUReading reading = MIMUReading::Zero();
-  static Quaternion quat = Quaternion::Identity();
+  // static Quaternion quat = Quaternion::Identity();
   if (mimu.readInto(reading)) {
     calibrator.calibrate(reading);
     reading.updateBuffer();
-    quat = filter.fuse(reading.gyro, reading.accl, reading.magn);
+    // quat = filter.fuse(reading.gyro, reading.accl, reading.magn);
 
     copyFloatArrayToVar(reading.accl.data(), reading.accl.size(), RawData.accl);
     copyFloatArrayToVar(reading.gyro.data(), reading.gyro.size(), RawData.gyro);
     copyFloatArrayToVar(reading.magn.data(), reading.magn.size(), RawData.magn);
     copyFloatArrayToVar(reading.data, reading.size, RawData.raw);
-    copyFloatArrayToVar(quat.coeffs().data(), quat.coeffs().size(),
-                        RawData.quat);
+    // copyFloatArrayToVar(quat.coeffs().data(), quat.coeffs().size(),
+    //                     RawData.quat);
 
     for (int i = 0; i < (sizeof(RawData.accl) / sizeof(RawData.accl[0])); ++i) {
       NormData.accl[i] = mapfloat(RawData.accl[i], -32767, 32767, -1, 1);
@@ -99,29 +99,29 @@ void readData() {
       NormData.magn[i] = mapfloat(RawData.magn[i], -32767, 32767, -1, 1);
     }
 
-    RawData.magAccl = sqrt(RawData.accl[0] * RawData.accl[0] +
-                           RawData.accl[1] * RawData.accl[1] +
-                           RawData.accl[2] * RawData.accl[2]);
-    RawData.magGyro = sqrt(RawData.gyro[0] * RawData.gyro[0] +
-                           RawData.gyro[1] * RawData.gyro[1] +
-                           RawData.gyro[2] * RawData.gyro[2]);
-    RawData.magMagn = sqrt(RawData.magn[0] * RawData.magn[0] +
-                           RawData.magn[1] * RawData.magn[1] +
-                           RawData.magn[2] * RawData.magn[2]);
+    // RawData.magAccl = sqrt(RawData.accl[0] * RawData.accl[0] +
+    //                        RawData.accl[1] * RawData.accl[1] +
+    //                        RawData.accl[2] * RawData.accl[2]);
+    // RawData.magGyro = sqrt(RawData.gyro[0] * RawData.gyro[0] +
+    //                        RawData.gyro[1] * RawData.gyro[1] +
+    //                        RawData.gyro[2] * RawData.gyro[2]);
+    // RawData.magMagn = sqrt(RawData.magn[0] * RawData.magn[0] +
+    //                        RawData.magn[1] * RawData.magn[1] +
+    //                        RawData.magn[2] * RawData.magn[2]);
 
-    taitBryanAngles(RawData.quat[0], RawData.quat[1], RawData.quat[2],
-                    RawData.quat[3]);
+    // taitBryanAngles(RawData.quat[0], RawData.quat[1], RawData.quat[2],
+    //                 RawData.quat[3]);
 
-    // Apply temporary Yaw offset
-    if (RawData.buttonDouble == 1 && millis() - 300 > offsetDebounce) {
-      offsetDebounce = millis();
-      offsetYaw = 0;
-      offsetFlag = 1;
-    }
-    if (offsetFlag == 1 && millis() - 200 > offsetDebounce) {
-      offsetYaw = RawData.ypr[0];
-      offsetFlag = 0;
-    }
+    // // Apply temporary Yaw offset
+    // if (RawData.buttonDouble == 1 && millis() - 300 > offsetDebounce) {
+    //   offsetDebounce = millis();
+    //   offsetYaw = 0;
+    //   offsetFlag = 1;
+    // }
+    // if (offsetFlag == 1 && millis() - 200 > offsetDebounce) {
+    //   offsetYaw = RawData.ypr[0];
+    //   offsetFlag = 0;
+    // }
   }
 }
 

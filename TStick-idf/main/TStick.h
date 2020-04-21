@@ -76,6 +76,7 @@ struct RawDataStruct {
   byte buttonShort; // /raw/button/short, i, 0 or 1
   byte buttonLong; // /raw/button/long, i, 0 or 1
   byte buttonDouble; // /raw/button/double, i, 0 or 1
+  byte buttonState;
 };
 
 struct NormDataStruct {
