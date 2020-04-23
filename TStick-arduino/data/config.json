@@ -6,7 +6,7 @@
     "APpasswd": "mappings",
     "lastConnectedNetwork": "tstick_network",
     "lastStoredPsk": "mappings",
-    "firmware": 200320,
+    "firmware": 200422,
     "osc": 1,
     "oscIP1": "192.168.1.100",
     "oscPORT1": 8000,
@@ -27,10 +27,6 @@
         255
     ],
     "touchMask3": [
-        255,
-        255
-    ],
-    "touchMask4": [
         255,
         255
     ],
