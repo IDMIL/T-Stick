@@ -139,7 +139,7 @@ struct RawDataStruct {
   float gyro[3]; // /raw/gyro, fff, +/-34.90659 (floats)
   float magn[3]; // /raw/magn, fff, +/-32767 (integers)
   float raw[10]; // /raw (IMU data to be send to callibration app)
-  float quat[4]; // /orientation, ffff, ?, ? ,? ,?
+  float quat[4]; // /raw/quat, ffff, ?, ? ,? ,?
   float magAccl;
   float magGyro;
   float magMagn;
