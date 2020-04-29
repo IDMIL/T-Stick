@@ -86,6 +86,28 @@ struct NormDataStruct {
   float magn[3]; // /norm/magn, fff, +/-1, +/-1, +/-1
 };
 
+struct LastStateDataStruct {
+  int blobPos[4];
+  int gyroArrayCounter;
+  float gyroXArray[5];
+  float gyroYArray[5];
+  float gyroZArray[5];
+};
+
+struct InstrumentDataStruct {
+  float touchAll; // /instrument/touch/all, f, 0--1
+  float touchTop; // /instrument/touch/top, f, 0--1
+  float touchMiddle; // /instrument/touch/middle, f, 0--1
+  float touchBottom; // /instrument/touch/bottom, f, 0--1
+  float brush; // /instrument/touch/brush, f, 0--? (~cm/s)
+  float multiBrush[4]; // /instrument/touch/brush/multibrush, ffff, 0--? (~cm/s)
+  float rub; // /instrument/touch/rub, f, 0--? (~cm/s)
+  float multiRub[4]; // /instrument/touch/rub/multirub, ffff, 0--? (~cm/s)
+  float ypr[3]; // /instrument/ypr, fff, +/-180, +/-90 ,+/-180 (degrees)
+  float shakeXYZ[3]; // /instrument/shakexyz, fff, 0--?
+  float jabXYZ[3]; // /instrument/jabxyz, fff, 0--?
+};
+
 struct Capsense { 
   byte answer1, answer2;
 };
@@ -94,6 +116,8 @@ struct Capsense {
 extern Tstick Tstick;
 extern RawDataStruct RawData;
 extern NormDataStruct NormData;
+extern LastStateDataStruct LastStateData;
+extern InstrumentDataStruct InstrumentData;
 extern Capsense capsense;
 
 //////////////////////////////////
@@ -140,7 +164,7 @@ extern MIMU_LSM9DS1 mimu; // use default SDA and SCL as per board library macros
 extern MIMUCalibrator calibrator;
 extern MIMUFusionFilter filter;
 
-extern byte capsense_addresses[5];
+extern byte capsense_addresses[4];
 extern byte nCapsenses;
 extern byte touch[5][2]; // up to 5 capsenses (2 bytes per capsense)
 

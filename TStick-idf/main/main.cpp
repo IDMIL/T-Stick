@@ -63,6 +63,8 @@
 struct Tstick Tstick;
 RawDataStruct RawData;
 NormDataStruct NormData;
+LastStateDataStruct LastStateData;
+InstrumentDataStruct InstrumentData;
 Capsense capsense;
 
 //////////////////////////////////

@@ -1,6 +1,6 @@
 [submodule "TStick-idf/components/arduino-esp32"]
 	path = TStick-idf/components/arduino-esp32
-	url = https://github.com/espressif/arduino-esp32.git
+	url = https://github.com/mathiasbredholt/arduino-esp32.git
 	branch = idf-release/v4.0
 [submodule "TStick-idf/components/arduino-libraries/WiFi32Manager"]
 	path = TStick-idf/components/arduino-libraries/WiFi32Manager
