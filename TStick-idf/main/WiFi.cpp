@@ -6,7 +6,7 @@ void connectToWifi() {
   
   if (WiFi.status() != WL_CONNECTED) {
     Serial.println("\nThe T-Stick will try to connect to the saved network now...");
-    WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
+    // WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
     WiFi.setHostname(tstickSSID);
     WiFi.begin(Tstick.lastConnectedNetwork, Tstick.lastStoredPsk);
     time_now = millis();

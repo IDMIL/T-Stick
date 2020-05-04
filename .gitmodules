@@ -19,7 +19,7 @@
 	url = https://github.com/DocSunset/MIMU
 [submodule "TStick-idf/components/arduino-libraries/Eigen"]
 	path = TStick-idf/components/arduino-libraries/Eigen
-	url = https://github.com/bolderflight/Eigen
+	url = https://github.com/mathiasbredholt/Eigen
 [submodule "TStick-idf/components/arduino-libraries/Adafruit_LIS3MDL"]
 	path = TStick-idf/components/arduino-libraries/Adafruit_LIS3MDL
 	url = https://github.com/adafruit/Adafruit_LIS3MDL

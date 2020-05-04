@@ -40,8 +40,8 @@ void initLibmapper() {
     rawCapsenseMax[i] = 1;
   }
   float rawGyroMin[1] = {-34.90659f}, rawGyroMax[1] = {34.90659f};
-  int rawAcclMin[1] = {-32767}, rawAcclMax[1] = {32767};
-  int rawMagnMin[1] = {-32767}, rawMagnMax[1] = {32767};
+  float rawAcclMin[1] = {-32767.0f}, rawAcclMax[1] = {32767.0f};
+  float rawMagnMin[1] = {-32767.0f}, rawMagnMax[1] = {32767.0f};
   int rawFSRMin[1] = {0}, rawFSRMax[1] = {4095};
   int rawPiezoMin[1] = {0}, rawPiezoMax[1] = {1023};
   float quarternionMin[1] = {-1.0f}, quarternionMax[1] = {1.0f};
@@ -59,17 +59,17 @@ void initLibmapper() {
   sigRawGyroZ = mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "raw/gyro/Z", 1,
                             MPR_FLT, 0, rawGyroMin, rawGyroMax, 0, 0, 0);
   sigRawAcclX = mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "raw/accl/X", 1,
-                            MPR_INT32, 0, rawAcclMin, rawAcclMax, 0, 0, 0);
+                            MPR_FLT, 0, rawAcclMin, rawAcclMax, 0, 0, 0);
   sigRawAcclY = mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "raw/accl/Y", 1,
-                            MPR_INT32, 0, rawAcclMin, rawAcclMax, 0, 0, 0);
+                            MPR_FLT, 0, rawAcclMin, rawAcclMax, 0, 0, 0);
   sigRawAcclZ = mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "raw/accl/Z", 1,
-                            MPR_INT32, 0, rawAcclMin, rawAcclMax, 0, 0, 0);
+                            MPR_FLT, 0, rawAcclMin, rawAcclMax, 0, 0, 0);
   sigRawMagnX = mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "raw/magn/X", 1,
-                            MPR_INT32, 0, rawMagnMin, rawMagnMax, 0, 0, 0);
+                            MPR_FLT, 0, rawMagnMin, rawMagnMax, 0, 0, 0);
   sigRawMagnY = mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "raw/magn/Y", 1,
-                            MPR_INT32, 0, rawMagnMin, rawMagnMax, 0, 0, 0);
+                            MPR_FLT, 0, rawMagnMin, rawMagnMax, 0, 0, 0);
   sigRawMagnZ = mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "raw/magn/Z", 1,
-                            MPR_INT32, 0, rawMagnMin, rawMagnMax, 0, 0, 0);
+                            MPR_FLT, 0, rawMagnMin, rawMagnMax, 0, 0, 0);
   sigRawFSR = mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "raw/fsr", 1, MPR_INT32,
                           0, rawFSRMin, rawFSRMax, 0, 0, 0);
   sigRawPiezo = mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "raw/piezo", 1,
@@ -107,7 +107,9 @@ void initLibmapper() {
 }
 
 void updateLibmapper() {
-  mpr_dev_poll(libmapper_dev, 0);
+  for (int i = 0; i < 10; ++i) {
+    mpr_dev_poll(libmapper_dev, 0);
+  }
 
   int touchtemp[(nCapsenses * 16)];
   byte counter = 0;
