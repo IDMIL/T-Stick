@@ -128,7 +128,7 @@ void updateLibmapper() {
 
   mpr_sig_set_value(sigRawCapsense, 0, sizeof(touchtemp), MPR_INT32, touchtemp,
                     MPR_NOW);
-  mpr_sig_set_value(sigRawFSR, 0, 1, MPR_FLT, &RawData.fsr, MPR_NOW);
+  mpr_sig_set_value(sigRawFSR, 0, 1, MPR_INT32, &RawData.fsr, MPR_NOW);
   mpr_sig_set_value(sigRawPiezo, 0, 1, MPR_FLT, &RawData.piezo, MPR_NOW);
   mpr_sig_set_value(sigRawAcclX, 0, 1, MPR_FLT, &RawData.accl[0], MPR_NOW);
   mpr_sig_set_value(sigRawAcclY, 0, 1, MPR_FLT, &RawData.accl[1], MPR_NOW);
