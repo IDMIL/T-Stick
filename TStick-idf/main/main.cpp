@@ -63,9 +63,10 @@
 struct Tstick Tstick;
 RawDataStruct RawData;
 NormDataStruct NormData;
-LastStateDataStruct LastStateData;
+LastStateDataStruct LastState;
 InstrumentDataStruct InstrumentData;
 Capsense capsense;
+blob BlobDetection;
 
 //////////////////////////////////
 //////////////////////////////////

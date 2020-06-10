@@ -3,16 +3,16 @@
 
 void readData() {
   
-  // // Read capsense touch data
-  // for (byte i=0; i < nCapsenses; ++i) {
-  //     capsense = capsenseRequest(capsense_addresses[i],BUTTON_STAT, 2);
-  //     RawData.touch[i*2] = capsense.answer1;
-  //     RawData.touch[(i*2)+1] = capsense.answer2;
-  // }
-  // for (byte i=0; i < touchStripsSize; ++i) {
-  //     RawData.touchStrips[i] = bitRead(RawData.touch[i/8],7-(i%8));
-  // }
-  // reorderCapsense (RawData.touchStrips, touchStripsSize);
+  // Read capsense touch data
+  for (byte i=0; i < nCapsenses; ++i) {
+      capsense = capsenseRequest(capsense_addresses[i],BUTTON_STAT, 2);
+      RawData.touch[i*2] = capsense.answer1;
+      RawData.touch[(i*2)+1] = capsense.answer2;
+  }
+  for (byte i=0; i < touchStripsSize; ++i) {
+      RawData.touchStrips[i] = bitRead(RawData.touch[i/8],7-(i%8));
+  }
+  reorderCapsense (RawData.touchStrips, touchStripsSize);
 
   // Read button
   buttonState = !digitalRead(buttonPin);
@@ -96,15 +96,15 @@ void readData() {
     copyFloatArrayToVar(reading.data, reading.size, RawData.raw);
     copyFloatArrayToVar(quat.coeffs().data(), quat.coeffs().size(), RawData.quat);
 
-    // LastState.gyroXArray[LastState.gyroArrayCounter] = RawData.gyro[0];
-    // LastState.gyroYArray[LastState.gyroArrayCounter] = RawData.gyro[1];
-    // LastState.gyroZArray[LastState.gyroArrayCounter] = RawData.gyro[2];
-    // if (LastState.gyroArrayCounter < 5) {
-    //   LastState.gyroArrayCounter++;
-    // }
-    // else {
-    //   LastState.gyroArrayCounter = 0;
-    // }
+    LastState.gyroXArray[LastState.gyroArrayCounter] = RawData.gyro[0];
+    LastState.gyroYArray[LastState.gyroArrayCounter] = RawData.gyro[1];
+    LastState.gyroZArray[LastState.gyroArrayCounter] = RawData.gyro[2];
+    if (LastState.gyroArrayCounter < 5) {
+      LastState.gyroArrayCounter++;
+    }
+    else {
+      LastState.gyroArrayCounter = 0;
+    }
     
     for (int i = 0; i < (sizeof(RawData.accl)/sizeof(RawData.accl[0])); ++i) {
       NormData.accl[i] = mapfloat(RawData.accl[i], -32767, 32767, -1, 1);

@@ -51,7 +51,7 @@ struct Tstick {
   int32_t oscPORT[2];
   byte libmapper;
   int16_t FSRoffset;
-  byte touchMask[5][2];
+  byte touchMask[8];
   float abias[3];
   float mbias[3];
   float gbias[3];
@@ -61,7 +61,8 @@ struct Tstick {
 };
 
 struct RawDataStruct {
-  byte touch[5][2]; // /raw/capsense, i..., 0--255, ... (1 int per 8 capacitive stripes -- 8 bits)
+  byte touch[8]; // /raw/capsense, i..., 0--255, ... (1 int per 8 capacitive stripes -- 8 bits)
+  byte touchStrips[64];
   int fsr; // /raw/fsr, i, 0--4095
   int piezo; // /raw/piezo, i, 0--1023
   float accl[3]; // /raw/accl, iii, +/-32767 (integers)
@@ -69,7 +70,6 @@ struct RawDataStruct {
   float magn[3]; // /raw/magn, fff, +/-32767 (integers)
   float raw[10]; // /raw (IMU data to be send to callibration app)
   float quat[4]; // /raw/quat, ffff, ?, ? ,? ,?
-  float ypr[3]; // /raw/ypr, fff, +/-180, +/-90 ,+/-180 (degrees)
   float magAccl;
   float magGyro;
   float magMagn;
@@ -112,13 +112,21 @@ struct Capsense {
   byte answer1, answer2;
 };
 
+struct blob { 
+  byte blobArray[8]; // shows the "center" of each array
+  int blobPos[4];  // position (index) of each blob
+  float blobSize[4]; // "size" of each blob
+};
+
 
 extern Tstick Tstick;
 extern RawDataStruct RawData;
 extern NormDataStruct NormData;
-extern LastStateDataStruct LastStateData;
+extern LastStateDataStruct LastState;
 extern InstrumentDataStruct InstrumentData;
 extern Capsense capsense;
+extern byte touchStripsSize;
+extern blob BlobDetection;
 
 //////////////////////////////////
 //////////////////////////////////
@@ -229,6 +237,22 @@ void sendOSC(char* ip,int32_t port);
 void updateLibmapper();
 void receiveOSC();
 void printData();
+void reorderCapsense (byte *origArray, byte arraySize);
+
+
+// instrument.cpp
+void updateInstrument();
+float touchAverage (byte * touchArrayStrips, byte firstStrip, byte lastStrip);
+float arrayAverage (float * Array, byte ArraySize);
+float arrayAverageZero (float * Array, byte ArraySize);
+blob blobDetection1D (byte * touchArray, byte arraySize);
+void printBinary (byte number);
+void bitShiftArrayL (byte * origArray, byte * shiftedArray, byte arraySize, byte shift);
+void bitShiftArrayR (byte * origArray, byte * shiftedArray, byte arraySize, byte shift);
+float arrayMin (float *inputArray, byte arraySize);
+float arrayMax (float *inputArray, byte arraySize);
+float leakyIntegrator (float reading, float old_value, float leak, int frequency, unsigned long& timer);
+
 
 void setup();
 void loop();

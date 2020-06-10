@@ -26,6 +26,16 @@ mpr_sig sigMagMagn;
 mpr_sig sigButton;
 mpr_sig sigLongButton;
 mpr_sig sigDoubleButton;
+mpr_sig sigtouchAll;
+mpr_sig sigtouchTop;
+mpr_sig sigtouchMiddle;
+mpr_sig sigtouchBottom;
+mpr_sig sigBrush;
+mpr_sig sigRub;
+mpr_sig sigMultiBrush;
+mpr_sig sigMultiRub;
+mpr_sig sigShakeXYZ;
+mpr_sig sigJabXYZ;
 
 void initLibmapper() {
   Serial.println("Starting libmpr...");
@@ -48,6 +58,7 @@ void initLibmapper() {
   float magMin[1] = {0.0f}, magMax[1] = {1.7320508f};  // sqrt(3)
   int buttonMin[1] = {0}, buttonMax[1] = {1};
   float yprMin[1] = {-180.0f}, yprMax[1] = {180.0f};
+  float genericMin[1] = {0.0f}, genericMax[1] = {100.0f};
 
   sigRawCapsense =
       mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "raw/capsense", (nCapsenses * 16),
@@ -104,30 +115,26 @@ void initLibmapper() {
                               MPR_INT32, 0, buttonMin, buttonMax, 0, 0, 0);
   sigDoubleButton = mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "button/double", 1,
                                 MPR_INT32, 0, buttonMin, buttonMax, 0, 0, 0);
+  sigBrush = mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "instrument/brush", 1,
+                         MPR_FLT, 0, genericMin, genericMax, 0, 0, 0);
+  sigRub = mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "instrument/rub", 1, MPR_FLT,
+                       0, genericMin, genericMax, 0, 0, 0);
+  sigMultiBrush =
+      mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "instrument/multibrush", 4,
+                  MPR_FLT, 0, genericMin, genericMax, 0, 0, 0);
+  sigMultiRub = mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "instrument/multirub",
+                            3, MPR_FLT, 0, genericMin, genericMax, 0, 0, 0);
+  sigShakeXYZ = mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "instrument/shakexyz",
+                            3, MPR_FLT, 0, genericMin, genericMax, 0, 0, 0);
+  sigJabXYZ = mpr_sig_new(libmapper_dev, MPR_DIR_OUT, "instrument/jabxyz", 3,
+                          MPR_FLT, 0, genericMin, genericMax, 0, 0, 0);
 }
 
 void updateLibmapper() {
-  for (int i = 0; i < 10; ++i) {
-    mpr_dev_poll(libmapper_dev, 0);
-  }
+  mpr_dev_poll(libmapper_dev, 0);
 
-  int touchtemp[(nCapsenses * 16)];
-  byte counter = 0;
-  byte indexStrip = 0;
-  for (byte i = 0; i < (nCapsenses * 8); ++i) {
-    touchtemp[i] = bitRead(RawData.touch[i / 16][indexStrip], (7 - (i % 8)));
-    if (++counter >= 8) {
-      if (indexStrip == 0) {
-        indexStrip = 1;
-      } else {
-        indexStrip = 0;
-      }
-      counter = 0;
-    }
-  }
-
-  mpr_sig_set_value(sigRawCapsense, 0, sizeof(touchtemp), MPR_INT32, touchtemp,
-                    MPR_NOW);
+  mpr_sig_set_value(sigRawCapsense, 0, sizeof(RawData.touchStrips), MPR_INT32,
+                    RawData.touchStrips, MPR_NOW);
   mpr_sig_set_value(sigRawFSR, 0, 1, MPR_FLT, &RawData.fsr, MPR_NOW);
   mpr_sig_set_value(sigRawPiezo, 0, 1, MPR_FLT, &RawData.piezo, MPR_NOW);
   mpr_sig_set_value(sigRawAcclX, 0, 1, MPR_FLT, &RawData.accl[0], MPR_NOW);
@@ -151,7 +158,21 @@ void updateLibmapper() {
                     MPR_NOW);
   mpr_sig_set_value(sigDoubleButton, 0, 1, MPR_INT32, &RawData.buttonDouble,
                     MPR_NOW);
-  mpr_sig_set_value(sigYaw, 0, 1, MPR_FLT, &RawData.ypr[0], MPR_NOW);
-  mpr_sig_set_value(sigPitch, 0, 1, MPR_FLT, &RawData.ypr[1], MPR_NOW);
-  mpr_sig_set_value(sigRoll, 0, 1, MPR_FLT, &RawData.ypr[2], MPR_NOW);
+  mpr_sig_set_value(sigYaw, 0, 1, MPR_FLT, &InstrumentData.ypr[0], MPR_NOW);
+  mpr_sig_set_value(sigPitch, 0, 1, MPR_FLT, &InstrumentData.ypr[1], MPR_NOW);
+  mpr_sig_set_value(sigRoll, 0, 1, MPR_FLT, &InstrumentData.ypr[2], MPR_NOW);
+  mpr_sig_set_value(sigtouchAll, 0, 1, MPR_FLT, &InstrumentData.touchAll,
+                    MPR_NOW);
+  mpr_sig_set_value(sigtouchTop, 0, 1, MPR_FLT, &InstrumentData.touchTop,
+                    MPR_NOW);
+  mpr_sig_set_value(sigtouchMiddle, 0, 1, MPR_FLT, &InstrumentData.touchMiddle,
+                    MPR_NOW);
+  mpr_sig_set_value(sigtouchBottom, 0, 1, MPR_FLT, &InstrumentData.touchBottom,
+                    MPR_NOW);
+  mpr_sig_set_value(sigBrush, 0, 1, MPR_FLT, &InstrumentData.brush, MPR_NOW);
+  mpr_sig_set_value(sigRub, 0, 1, MPR_FLT, &InstrumentData.rub, MPR_NOW);
+  mpr_sig_set_value(sigMultiBrush, 0, 4, MPR_FLT, RawData.touchStrips, MPR_NOW);
+  mpr_sig_set_value(sigMultiRub, 0, 3, MPR_FLT, RawData.touchStrips, MPR_NOW);
+  mpr_sig_set_value(sigShakeXYZ, 0, 3, MPR_FLT, RawData.touchStrips, MPR_NOW);
+  mpr_sig_set_value(sigJabXYZ, 0, 3, MPR_FLT, RawData.touchStrips, MPR_NOW);
 }

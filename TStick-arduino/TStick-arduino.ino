@@ -106,6 +106,7 @@
 //////////////////////////////////
 
 const int32_t firmware = 200330;
+typedef uint8_t byte;
 
 struct Tstick {
   int id;
