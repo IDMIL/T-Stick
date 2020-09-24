@@ -382,24 +382,24 @@ void loop() {
   // updating high-level gestural descriptors
   updateInstrument();
 
-  // send data (OSC)
-  if (Tstick.osc == 1) {
-    sendOSC(Tstick.oscIP[0], Tstick.oscPORT[0]);
-    if (strcmp(Tstick.oscIP[1],"0.0.0.0") != 0 ) {
-        if (strcmp(Tstick.oscIP[1],Tstick.oscIP[0]) == 0) {
-          if (Tstick.oscPORT[0] != Tstick.oscPORT[1]) {
-            sendOSC(Tstick.oscIP[1], Tstick.oscPORT[1]);
-          }
-        } else {
-          sendOSC(Tstick.oscIP[1], Tstick.oscPORT[1]);
-        }
-    }
-  }
+//  // send data (OSC)
+//  if (Tstick.osc == 1) {
+//    sendOSC(Tstick.oscIP[0], Tstick.oscPORT[0]);
+//    if (strcmp(Tstick.oscIP[1],"0.0.0.0") != 0 ) {
+//        if (strcmp(Tstick.oscIP[1],Tstick.oscIP[0]) == 0) {
+//          if (Tstick.oscPORT[0] != Tstick.oscPORT[1]) {
+//            sendOSC(Tstick.oscIP[1], Tstick.oscPORT[1]);
+//          }
+//        } else {
+//          sendOSC(Tstick.oscIP[1], Tstick.oscPORT[1]);
+//        }
+//    }
+//  }
 
   // Update libmapper
-  if (Tstick.libmapper == 1) {
+//  if (Tstick.libmapper == 1) {
     updateLibmapper();
-  }
+//  }
   
   // receiving OSC
   receiveOSC();

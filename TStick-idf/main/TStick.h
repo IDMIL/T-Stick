@@ -33,7 +33,7 @@
 
 #include <stdlib.h> //floats to string
 
-#include <mpr/mpr.h>
+#include <mapper/mapper.h>
 
 #define BUTTON_STAT 0xAA  // Address to read the status of the sensors (2 bytes)
 
@@ -61,29 +61,29 @@ struct Tstick {
 };
 
 struct RawDataStruct {
-  byte touch[8]; // /raw/capsense, i..., 0--255, ... (1 int per 8 capacitive stripes -- 8 bits)
+  byte touch[8];  // /raw/capsense, i..., 0--255, ... (1 int per 8 capacitive stripes -- 8 bits)
   byte touchStrips[64];
-  int fsr; // /raw/fsr, i, 0--4095
-  int piezo; // /raw/piezo, i, 0--1023
-  float accl[3]; // /raw/accl, iii, +/-32767 (integers)
-  float gyro[3]; // /raw/gyro, fff, +/-34.90659 (floats)
-  float magn[3]; // /raw/magn, fff, +/-32767 (integers)
-  float raw[10]; // /raw (IMU data to be send to callibration app)
-  float quat[4]; // /raw/quat, ffff, ?, ? ,? ,?
+  int fsr;  // /raw/fsr, i, 0--4095
+  int piezo;  // /raw/piezo, i, 0--1023
+  float accl[3];  // /raw/accl, iii, +/-32767 (integers)
+  float gyro[3];  // /raw/gyro, fff, +/-34.90659 (floats)
+  float magn[3];  // /raw/magn, fff, +/-32767 (integers)
+  float raw[10];  // /raw (IMU data to be send to callibration app)
+  float quat[4];  // /raw/quat, ffff, ?, ? ,? ,?
   float magAccl;
   float magGyro;
   float magMagn;
-  byte buttonShort; // /raw/button/short, i, 0 or 1
-  byte buttonLong; // /raw/button/long, i, 0 or 1
-  byte buttonDouble; // /raw/button/double, i, 0 or 1
+  byte buttonShort;  // /raw/button/short, i, 0 or 1
+  byte buttonLong;  // /raw/button/long, i, 0 or 1
+  byte buttonDouble;  // /raw/button/double, i, 0 or 1
 };
 
 struct NormDataStruct {
-  float fsr; // /norm/fsr, f, 0--1
-  float piezo; // /norm/piezo, f, 0--1
-  float accl[3]; // /norm/accl, fff, +/-1, +/-1, +/-1
-  float gyro[3]; // /norm/gyro, fff, +/-1, +/-1, +/-1
-  float magn[3]; // /norm/magn, fff, +/-1, +/-1, +/-1
+  float fsr;  // /norm/fsr, f, 0--1
+  float piezo;  // /norm/piezo, f, 0--1
+  float accl[3];  // /norm/accl, fff, +/-1, +/-1, +/-1
+  float gyro[3];  // /norm/gyro, fff, +/-1, +/-1, +/-1
+  float magn[3];  // /norm/magn, fff, +/-1, +/-1, +/-1
 };
 
 struct LastStateDataStruct {
@@ -95,17 +95,17 @@ struct LastStateDataStruct {
 };
 
 struct InstrumentDataStruct {
-  float touchAll; // /instrument/touch/all, f, 0--1
-  float touchTop; // /instrument/touch/top, f, 0--1
-  float touchMiddle; // /instrument/touch/middle, f, 0--1
-  float touchBottom; // /instrument/touch/bottom, f, 0--1
-  float brush; // /instrument/touch/brush, f, 0--? (~cm/s)
-  float multiBrush[4]; // /instrument/touch/brush/multibrush, ffff, 0--? (~cm/s)
-  float rub; // /instrument/touch/rub, f, 0--? (~cm/s)
-  float multiRub[4]; // /instrument/touch/rub/multirub, ffff, 0--? (~cm/s)
-  float ypr[3]; // /instrument/ypr, fff, +/-180, +/-90 ,+/-180 (degrees)
-  float shakeXYZ[3]; // /instrument/shakexyz, fff, 0--?
-  float jabXYZ[3]; // /instrument/jabxyz, fff, 0--?
+  float touchAll;  // /instrument/touch/all, f, 0--1
+  float touchTop;  // /instrument/touch/top, f, 0--1
+  float touchMiddle;  // /instrument/touch/middle, f, 0--1
+  float touchBottom;  // /instrument/touch/bottom, f, 0--1
+  float brush;  // /instrument/touch/brush, f, 0--? (~cm/s)
+  float multiBrush[4];  // /instrument/touch/brush/multibrush, ffff, 0--? (~cm/s)
+  float rub;  // /instrument/touch/rub, f, 0--? (~cm/s)
+  float multiRub[4];  // /instrument/touch/rub/multirub, ffff, 0--? (~cm/s)
+  float ypr[3];  // /instrument/ypr, fff, +/-180, +/-90 ,+/-180 (degrees)
+  float shakeXYZ[3];  // /instrument/shakexyz, fff, 0--?
+  float jabXYZ[3];  // /instrument/jabxyz, fff, 0--?
 };
 
 struct Capsense { 
@@ -113,9 +113,9 @@ struct Capsense {
 };
 
 struct blob { 
-  byte blobArray[8]; // shows the "center" of each array
+  byte blobArray[8];  // shows the "center" of each array
   int blobPos[4];  // position (index) of each blob
-  float blobSize[4]; // "size" of each blob
+  float blobSize[4];  // "size" of each blob
 };
 
 
@@ -134,9 +134,9 @@ extern blob BlobDetection;
 //////////////////////////////////
 //////////////////////////////////
 
-extern IPAddress osc_IP; // used to send OSC messages
-extern char APpasswdTemp[15]; // used to check before save new T-Stick passwd
-extern char APpasswdValidate[15]; // used to check before save new T-Stick passwd
+extern IPAddress osc_IP;  // used to send OSC messages
+extern char APpasswdTemp[15];  // used to check before save new T-Stick passwd
+extern char APpasswdValidate[15];  // used to check before save new T-Stick passwd
 extern char tstickSSID[30];
 extern char tstickID[5];
 extern float battery;
@@ -146,12 +146,32 @@ extern unsigned long  batteryLastRead;
 extern unsigned long  batteryLastSend;
 extern byte batteryCount;
 
+///////////////////////////////////
+// Variables for Instrument Data //
+///////////////////////////////////
+
+extern byte touchSizeEdge; // amount of T-Stick stripes for top and bottom portions of the T-Stick (arbitrary)
+
+
 //////////////////////
 // WiFi Definitions //
 //////////////////////
 
-extern WiFiUDP oscEndpoint; // A UDP instance to let us send and receive packets over UDP
-extern const unsigned int portLocal; // local port to listen for OSC packets (not used for sending)
+extern WiFiUDP oscEndpoint;  // A UDP instance to let us send and receive packets over UDP
+extern const unsigned int portLocal;  // local port to listen for OSC packets (not used for sending)
+
+////////////////////////////////
+// Leaky integrator variables //
+////////////////////////////////
+
+const int leakyBrushFreq = 100; // leaking frequency (Hz)
+const int leakyRubFreq = 100;
+const int leakyShakeFreq = 10;
+
+extern unsigned long leakyBrushTimer;
+extern unsigned long leakyRubTimer;
+extern byte brushCounter[4];
+extern unsigned long leakyShakeTimer[3];
 
 ///////////////
 // blink LED //
@@ -168,13 +188,13 @@ extern int long_blink;
 extern int short_blink;
 extern int flickering;
 
-extern MIMU_LSM9DS1 mimu; // use default SDA and SCL as per board library macros
+extern MIMU_LSM9DS1 mimu;  // use default SDA and SCL as per board library macros
 extern MIMUCalibrator calibrator;
 extern MIMUFusionFilter filter;
 
 extern byte capsense_addresses[4];
 extern byte nCapsenses;
-extern byte touch[5][2]; // up to 5 capsenses (2 bytes per capsense)
+extern byte touch[5][2];  // up to 5 capsenses (2 bytes per capsense)
 
 extern byte piezoPin;
 extern byte fsrPin;

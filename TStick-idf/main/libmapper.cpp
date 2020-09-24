@@ -38,7 +38,7 @@ mpr_sig sigShakeXYZ;
 mpr_sig sigJabXYZ;
 
 void initLibmapper() {
-  Serial.println("Starting libmpr...");
+  Serial.println("Starting libmapper...");
   char namespaceBuffer[30];
   snprintf(namespaceBuffer, (sizeof(namespaceBuffer) - 1), "TStick_%i",
            Tstick.id);
@@ -133,46 +133,41 @@ void initLibmapper() {
 void updateLibmapper() {
   mpr_dev_poll(libmapper_dev, 0);
 
-  mpr_sig_set_value(sigRawCapsense, 0, sizeof(RawData.touchStrips), MPR_INT32,
-                    RawData.touchStrips, MPR_NOW);
-  mpr_sig_set_value(sigRawFSR, 0, 1, MPR_FLT, &RawData.fsr, MPR_NOW);
-  mpr_sig_set_value(sigRawPiezo, 0, 1, MPR_FLT, &RawData.piezo, MPR_NOW);
-  mpr_sig_set_value(sigRawAcclX, 0, 1, MPR_FLT, &RawData.accl[0], MPR_NOW);
-  mpr_sig_set_value(sigRawAcclY, 0, 1, MPR_FLT, &RawData.accl[1], MPR_NOW);
-  mpr_sig_set_value(sigRawAcclZ, 0, 1, MPR_FLT, &RawData.accl[2], MPR_NOW);
-  mpr_sig_set_value(sigRawGyroX, 0, 1, MPR_FLT, &RawData.gyro[0], MPR_NOW);
-  mpr_sig_set_value(sigRawGyroY, 0, 1, MPR_FLT, &RawData.gyro[1], MPR_NOW);
-  mpr_sig_set_value(sigRawGyroZ, 0, 1, MPR_FLT, &RawData.gyro[2], MPR_NOW);
-  mpr_sig_set_value(sigRawMagnX, 0, 1, MPR_FLT, &RawData.magn[0], MPR_NOW);
-  mpr_sig_set_value(sigRawMagnY, 0, 1, MPR_FLT, &RawData.magn[1], MPR_NOW);
-  mpr_sig_set_value(sigRawMagnZ, 0, 1, MPR_FLT, &RawData.magn[2], MPR_NOW);
-  mpr_sig_set_value(sigQuarternion1, 0, 1, MPR_FLT, &RawData.quat[0], MPR_NOW);
-  mpr_sig_set_value(sigQuarternion2, 0, 1, MPR_FLT, &RawData.quat[1], MPR_NOW);
-  mpr_sig_set_value(sigQuarternion3, 0, 1, MPR_FLT, &RawData.quat[2], MPR_NOW);
-  mpr_sig_set_value(sigQuarternion4, 0, 1, MPR_FLT, &RawData.quat[3], MPR_NOW);
-  mpr_sig_set_value(sigMagGyro, 0, 1, MPR_FLT, &RawData.magGyro, MPR_NOW);
-  mpr_sig_set_value(sigMagAccl, 0, 1, MPR_FLT, &RawData.magAccl, MPR_NOW);
-  mpr_sig_set_value(sigMagMagn, 0, 1, MPR_FLT, &RawData.magMagn, MPR_NOW);
-  mpr_sig_set_value(sigButton, 0, 1, MPR_INT32, &RawData.buttonShort, MPR_NOW);
-  mpr_sig_set_value(sigLongButton, 0, 1, MPR_INT32, &RawData.buttonLong,
-                    MPR_NOW);
-  mpr_sig_set_value(sigDoubleButton, 0, 1, MPR_INT32, &RawData.buttonDouble,
-                    MPR_NOW);
-  mpr_sig_set_value(sigYaw, 0, 1, MPR_FLT, &InstrumentData.ypr[0], MPR_NOW);
-  mpr_sig_set_value(sigPitch, 0, 1, MPR_FLT, &InstrumentData.ypr[1], MPR_NOW);
-  mpr_sig_set_value(sigRoll, 0, 1, MPR_FLT, &InstrumentData.ypr[2], MPR_NOW);
-  mpr_sig_set_value(sigtouchAll, 0, 1, MPR_FLT, &InstrumentData.touchAll,
-                    MPR_NOW);
-  mpr_sig_set_value(sigtouchTop, 0, 1, MPR_FLT, &InstrumentData.touchTop,
-                    MPR_NOW);
-  mpr_sig_set_value(sigtouchMiddle, 0, 1, MPR_FLT, &InstrumentData.touchMiddle,
-                    MPR_NOW);
-  mpr_sig_set_value(sigtouchBottom, 0, 1, MPR_FLT, &InstrumentData.touchBottom,
-                    MPR_NOW);
-  mpr_sig_set_value(sigBrush, 0, 1, MPR_FLT, &InstrumentData.brush, MPR_NOW);
-  mpr_sig_set_value(sigRub, 0, 1, MPR_FLT, &InstrumentData.rub, MPR_NOW);
-  mpr_sig_set_value(sigMultiBrush, 0, 4, MPR_FLT, RawData.touchStrips, MPR_NOW);
-  mpr_sig_set_value(sigMultiRub, 0, 3, MPR_FLT, RawData.touchStrips, MPR_NOW);
-  mpr_sig_set_value(sigShakeXYZ, 0, 3, MPR_FLT, RawData.touchStrips, MPR_NOW);
-  mpr_sig_set_value(sigJabXYZ, 0, 3, MPR_FLT, RawData.touchStrips, MPR_NOW);
+  // mpr_sig_set_value(sigRawCapsense, 0, sizeof(RawData.touchStrips),
+  // MPR_INT32,
+  //                   RawData.touchStrips);
+  mpr_sig_set_value(sigRawFSR, 0, 1, MPR_FLT, &RawData.fsr);
+  mpr_sig_set_value(sigRawPiezo, 0, 1, MPR_FLT, &RawData.piezo);
+  mpr_sig_set_value(sigRawAcclX, 0, 1, MPR_FLT, &RawData.accl[0]);
+  mpr_sig_set_value(sigRawAcclY, 0, 1, MPR_FLT, &RawData.accl[1]);
+  mpr_sig_set_value(sigRawAcclZ, 0, 1, MPR_FLT, &RawData.accl[2]);
+  mpr_sig_set_value(sigRawGyroX, 0, 1, MPR_FLT, &RawData.gyro[0]);
+  mpr_sig_set_value(sigRawGyroY, 0, 1, MPR_FLT, &RawData.gyro[1]);
+  mpr_sig_set_value(sigRawGyroZ, 0, 1, MPR_FLT, &RawData.gyro[2]);
+  mpr_sig_set_value(sigRawMagnX, 0, 1, MPR_FLT, &RawData.magn[0]);
+  mpr_sig_set_value(sigRawMagnY, 0, 1, MPR_FLT, &RawData.magn[1]);
+  mpr_sig_set_value(sigRawMagnZ, 0, 1, MPR_FLT, &RawData.magn[2]);
+  mpr_sig_set_value(sigQuarternion1, 0, 1, MPR_FLT, &RawData.quat[0]);
+  mpr_sig_set_value(sigQuarternion2, 0, 1, MPR_FLT, &RawData.quat[1]);
+  mpr_sig_set_value(sigQuarternion3, 0, 1, MPR_FLT, &RawData.quat[2]);
+  mpr_sig_set_value(sigQuarternion4, 0, 1, MPR_FLT, &RawData.quat[3]);
+  mpr_sig_set_value(sigMagGyro, 0, 1, MPR_FLT, &RawData.magGyro);
+  mpr_sig_set_value(sigMagAccl, 0, 1, MPR_FLT, &RawData.magAccl);
+  mpr_sig_set_value(sigMagMagn, 0, 1, MPR_FLT, &RawData.magMagn);
+  mpr_sig_set_value(sigButton, 0, 1, MPR_INT32, &RawData.buttonShort);
+  mpr_sig_set_value(sigLongButton, 0, 1, MPR_INT32, &RawData.buttonLong);
+  mpr_sig_set_value(sigDoubleButton, 0, 1, MPR_INT32, &RawData.buttonDouble);
+  mpr_sig_set_value(sigYaw, 0, 1, MPR_FLT, &InstrumentData.ypr[0]);
+  mpr_sig_set_value(sigPitch, 0, 1, MPR_FLT, &InstrumentData.ypr[1]);
+  mpr_sig_set_value(sigRoll, 0, 1, MPR_FLT, &InstrumentData.ypr[2]);
+  mpr_sig_set_value(sigtouchAll, 0, 1, MPR_FLT, &InstrumentData.touchAll);
+  mpr_sig_set_value(sigtouchTop, 0, 1, MPR_FLT, &InstrumentData.touchTop);
+  mpr_sig_set_value(sigtouchMiddle, 0, 1, MPR_FLT, &InstrumentData.touchMiddle);
+  mpr_sig_set_value(sigtouchBottom, 0, 1, MPR_FLT, &InstrumentData.touchBottom);
+  mpr_sig_set_value(sigBrush, 0, 1, MPR_FLT, &InstrumentData.brush);
+  mpr_sig_set_value(sigRub, 0, 1, MPR_FLT, &InstrumentData.rub);
+  mpr_sig_set_value(sigMultiBrush, 0, 4, MPR_FLT, RawData.touchStrips);
+  mpr_sig_set_value(sigMultiRub, 0, 3, MPR_FLT, RawData.touchStrips);
+  mpr_sig_set_value(sigShakeXYZ, 0, 3, MPR_FLT, RawData.touchStrips);
+  mpr_sig_set_value(sigJabXYZ, 0, 3, MPR_FLT, RawData.touchStrips);
 }

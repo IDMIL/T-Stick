@@ -88,6 +88,13 @@ unsigned long  batteryLastRead = 0;
 unsigned long  batteryLastSend = 0;
 byte batteryCount = 0;
 
+///////////////////////////////////
+// Variables for Instrument Data //
+///////////////////////////////////
+
+byte touchSizeEdge = 4; // amount of T-Stick stripes for top and bottom portions of the T-Stick (arbitrary)
+
+
 //////////////////////
 // WiFi Definitions //
 //////////////////////
@@ -126,6 +133,13 @@ float fsrbuf;
       const int pwm1Pin = 14;
       const int pwm2Pin = 15;
 #endif
+
+////////////////////////////////
+// Leaky integrator variables //
+////////////////////////////////
+
+unsigned long leakyBrushTimer = 0;
+unsigned long leakyRubTimer = 0;
 
 
 ///////////////
@@ -266,7 +280,7 @@ void loop() {
   }
   
   // receiving OSC
-  receiveOSC();
+  // receiveOSC();
 
   // printing sensor data (serial port)
   // printData();
