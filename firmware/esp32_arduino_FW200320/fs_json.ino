@@ -38,12 +38,15 @@ void printVariables() {
   Serial.print("Tstick.lastConnectedNetwork: "); Serial.println(Tstick.lastConnectedNetwork);
   Serial.print("Tstick.lastStoredPsk: "); Serial.println(Tstick.lastStoredPsk);
   Serial.print("Tstick.firmware: "); Serial.println(Tstick.firmware);
+  Serial.print("Tstick.osc: "); Serial.println(Tstick.osc);
   Serial.print("Tstick.oscIP #1: "); Serial.println(Tstick.oscIP[0]);
   Serial.print("Tstick.oscIP #2: "); Serial.println(Tstick.oscIP[1]);
   Serial.print("Tstick.oscPORT #1: "); Serial.println(Tstick.oscPORT[0]);
   Serial.print("Tstick.oscPORT #2: "); Serial.println(Tstick.oscPORT[1]);
   Serial.print("Tstick.libmapper: "); Serial.println(Tstick.libmapper);
-  Serial.print("Tstick.FSRoffset: "); Serial.println(Tstick.FSRoffset/4095);
+
+  Serial.print("Tstick.FSRoffset: "); Serial.print(Tstick.FSRoffset);
+  Serial.print(" (normalized: "); Serial.print(float(Tstick.FSRoffset)/4095, 4); ; Serial.println(")");
   Serial.print("\nTstick.touchMask: ");
       for( int i = 0 ; i < (sizeof(Tstick.touchMask)/sizeof(Tstick.touchMask[0])) ; ++i ){
         Serial.print(Tstick.touchMask[i][0]);
@@ -89,7 +92,7 @@ void parseJSON() {
   // Allocate a temporary JsonDocument
   // Don't forget to change the capacity to match your requirements.
   // Use https://arduinojson.org/v6/assistant/ to compute the capacity.
-  const size_t capacity = 5*JSON_ARRAY_SIZE(2) + 3*JSON_ARRAY_SIZE(3) + 3*JSON_ARRAY_SIZE(9) + JSON_OBJECT_SIZE(25) + 323;
+  const size_t capacity = 5*JSON_ARRAY_SIZE(2) + 3*JSON_ARRAY_SIZE(3) + 3*JSON_ARRAY_SIZE(9) + JSON_OBJECT_SIZE(26) + 360;
   DynamicJsonDocument doc(capacity);
 
   if (SPIFFS.exists("/config.json")) { // file exists, reading and loading
@@ -115,6 +118,7 @@ void parseJSON() {
         Tstick.oscPORT[0] = doc["oscPORT1"];
         Tstick.oscPORT[1] = doc["oscPORT2"];
         Tstick.libmapper = doc["libmapper"];
+        Tstick.osc = doc["osc"];
         Tstick.FSRoffset = doc["FSRoffset"];
         
         Tstick.touchMask[0][0] = doc["touchMask0"][0];
@@ -197,7 +201,7 @@ void saveJSON() {
   // Allocate a temporary JsonDocument
   // Don't forget to change the capacity to match your requirements.
   // Use https://arduinojson.org/v6/assistant/ to compute the capacity.
-  const size_t capacity = 2*JSON_ARRAY_SIZE(2) + 3*JSON_ARRAY_SIZE(3) + 3*JSON_ARRAY_SIZE(9) + JSON_OBJECT_SIZE(19);
+  const size_t capacity = 5*JSON_ARRAY_SIZE(2) + 3*JSON_ARRAY_SIZE(3) + 3*JSON_ARRAY_SIZE(9) + JSON_OBJECT_SIZE(26) + 360;
   DynamicJsonDocument doc(capacity);
 
   // Copy values from Config to the JsonDocument
@@ -214,6 +218,7 @@ void saveJSON() {
   doc["oscIP2"] = Tstick.oscIP[1];
   doc["oscPORT2"] = Tstick.oscPORT[1];
   doc["libmapper"] = Tstick.libmapper;
+  doc["osc"] = Tstick.osc;
   doc["FSRoffset"] = Tstick.FSRoffset;
   
   JsonArray touchMask0 = doc.createNestedArray("touchMask0");

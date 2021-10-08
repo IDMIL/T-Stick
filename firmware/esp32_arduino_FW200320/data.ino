@@ -8,6 +8,46 @@ void readData() {
       RawData.touch[i][1] = capsense.answer2;
   }
 
+  // Read button
+  buttonState = !digitalRead(buttonPin);
+  if (buttonState == 0 && buttonLongFlag == 0) { // Read button (long)
+    RawData.buttonLong = 0;
+    RawData.buttonShort = 0;
+  }
+  if (buttonState == 1 && buttonLongFlag == 0) { 
+    buttonTimer = millis(); 
+    buttonLongFlag = buttonShortFlag = 1;
+  }
+  if (millis() - buttonShortInterval > buttonTimer && buttonShortFlag == 1) {
+    RawData.buttonShort = 1;
+    buttonShortFlag = 0;
+  }
+  if (millis() - buttonLongInterval > buttonTimer && buttonLongFlag == 1) { 
+    RawData.buttonLong = 1;
+  }
+  if (buttonState == 0 && buttonLongFlag == 1) {
+     buttonLongFlag = 0;
+  }
+  if (buttonState == 1 && buttonDoubleFlag == 0) { // Read button (double)
+    buttonDoubleTimer = millis();
+    buttonDoubleFlag = 1;
+  }
+  if (millis() - buttonShortInterval > buttonDoubleTimer) { 
+    if (buttonState == 0) {
+      buttonDoubleFlag = 0;
+      RawData.buttonDouble = 0;
+    } 
+  } else {
+    if (buttonState == 0) {
+      buttonDoubleFlag = 2;
+    }
+    if (buttonState == 1 && buttonDoubleFlag == 2) {
+      RawData.buttonDouble = 1;
+      buttonShortFlag = 0;
+    }
+  }
+
+
   // read FSR
   RawData.fsr = analogRead(fsrPin);
   NormData.fsr = mapfloat(RawData.fsr, Tstick.FSRoffset, 4095, 0, 1);
@@ -17,8 +57,24 @@ void readData() {
   NormData.piezo = mapfloat(RawData.piezo, 0, 1024, 0, 1);
 
   // read battery level (https://www.youtube.com/watch?v=yZjpYmWVLh8&feature=youtu.be&t=88) 
-  battery = analogRead(batteryPin);
-  battery =  battery / 4096.0 * 7.445;
+  if (millis() - batteryLastRead > batteryInterval) {
+      batteryCount += 1;
+      batteryLastRead = millis(); 
+      battery += (analogRead(batteryPin) / 4096.0 * 7.445) / 10;
+      if (batteryCount >= 10) {
+        if ( battery < 2.9 ) {
+          batteryPercentage = 5;
+        }
+        else if ( battery > 4.15 ) {
+          batteryPercentage = 100;
+        }
+        else {
+          batteryPercentage = mapfloat(battery, 2.9, 4.15, 5.0, 99.0);
+        }
+        battery = 0;
+        batteryCount = 0;
+        }
+      }
 
   // read IMU
   static MIMUReading reading = MIMUReading::Zero();
@@ -48,8 +104,18 @@ void readData() {
     RawData.magGyro = sqrt(RawData.gyro[0] * RawData.gyro[0] + RawData.gyro[1] * RawData.gyro[1] + RawData.gyro[2] * RawData.gyro[2]);
     RawData.magMagn = sqrt(RawData.magn[0] * RawData.magn[0] + RawData.magn[1] * RawData.magn[1] + RawData.magn[2] * RawData.magn[2]);
 
-    //calculateEulerAnglesQuat(RawData.quat[0],RawData.quat[1],RawData.quat[2],RawData.quat[3]);
-    calculateEulerAngles(RawData.accl[0],RawData.accl[1],RawData.accl[2],RawData.magn[0],RawData.magn[1],RawData.magn[2]);
+    taitBryanAngles(RawData.quat[0],RawData.quat[1],RawData.quat[2],RawData.quat[3]);
+
+    // Apply temporary Yaw offset
+    if (RawData.buttonDouble == 1 && millis() - 300 > offsetDebounce) {
+      offsetDebounce = millis();
+      offsetYaw = 0;
+      offsetFlag = 1;
+    }
+    if (offsetFlag == 1 && millis() - 200 > offsetDebounce) {
+      offsetYaw = RawData.ypr[0];
+      offsetFlag = 0;
+    }
   } 
 }
 
@@ -113,47 +179,4 @@ void printData() {
           }
       Serial.println();
   }
-}
-
-
-void calculateEulerAnglesQuat(float w, float x, float y, float z) {
-
-    // roll (x-axis rotation)
-    float sinr_cosp = 2 * (w * x + y * z);
-    float cosr_cosp = 1 - 2 * (x * x + y * y);
-    RawData.ypr[2] = std::atan2(sinr_cosp, cosr_cosp);
-
-    // pitch (y-axis rotation)
-    float sinp = 2 * (w * y - z * x);
-    if (std::abs(sinp) >= 1)
-        RawData.ypr[1] = std::copysign(M_PI / 2, sinp); // use 90 degrees if out of range
-    else
-        RawData.ypr[1] = std::asin(sinp);
-
-    // yaw (z-axis rotation)
-    float siny_cosp = 2 * (w * z + x * y);
-    float cosy_cosp = 1 - 2 * (y * y + z * z);
-    RawData.ypr[0] = std::atan2(siny_cosp, cosy_cosp);
-}
-
-
-void calculateEulerAngles(float ax, float ay, float az, float mx, float my, float mz) {
-  ax *= 16; ay *= 16; az *= 16;
-  mx *= 8; my *= 8; mz *= 8;
-  RawData.ypr[2] = std::atan2(ay, az);
-  RawData.ypr[1] = std::atan2(-ax, sqrt(ay * ay + az * az));
-  if (my == 0)
-    RawData.ypr[0] = (mx < 0) ? PI : 0;
-  else
-    RawData.ypr[0] = std::atan2(mx, my);
-
-  RawData.ypr[0] -= -14.34 * PI / 180; // Declination (degrees) in Montreal, QC.
-
-  if (RawData.ypr[0] > PI) RawData.ypr[0] -= (2 * PI);
-  else if (RawData.ypr[0] < -PI) RawData.ypr[0] += (2 * PI);
-
-  // Convert everything from radians to degrees:
-  RawData.ypr[0] *= 180.0 / PI;
-  RawData.ypr[1] *= 180.0 / PI;
-  RawData.ypr[2]  *= 180.0 / PI;
 }

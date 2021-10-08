@@ -17,10 +17,15 @@ mapper_signal sigOrientationQ1;
 mapper_signal sigOrientationQ2;
 mapper_signal sigOrientationQ3;
 mapper_signal sigOrientationQ4;
+mapper_signal sigYaw;
+mapper_signal sigPitch;
+mapper_signal sigRoll;
 mapper_signal sigMagGyro;
 mapper_signal sigMagAccl;
 mapper_signal sigMagMagn;
 mapper_signal sigButton;
+mapper_signal sigLongButton;
+mapper_signal sigDoubleButton;
 
 void initLibmapper() {
 
@@ -41,6 +46,7 @@ void initLibmapper() {
   float orientationMin[1] = { -1.0f }, orientationMax[1] = { 1.0f };
   float magMin[1] = { 0.0f }, magMax[1] = { 1.7320508f };  // sqrt(3)
   int buttonMin[1] = { 0 }, buttonMax[1] = { 1 };
+  float yprMin[1] = { -180.0f }, yprMax[1] = { 180.0f };
 
   sigRawCapsense = mapper_device_add_output_signal(dev, "raw/capsense", (nCapsenses*16), 'i', NULL, rawCapsenseMin, rawCapsenseMax);
   sigRawGyroX = mapper_device_add_output_signal(dev, "raw/gyro/X", 1, 'f', NULL, rawGyroMin, rawGyroMax);
@@ -58,10 +64,15 @@ void initLibmapper() {
   sigOrientationQ2 = mapper_device_add_output_signal(dev, "orientation/q2", 1, 'f', NULL, orientationMin, orientationMax);
   sigOrientationQ3 = mapper_device_add_output_signal(dev, "orientation/q3", 1, 'f', NULL, orientationMin, orientationMax);
   sigOrientationQ4 = mapper_device_add_output_signal(dev, "orientation/q4", 1, 'f', NULL, orientationMin, orientationMax);
+  sigYaw = mapper_device_add_output_signal(dev, "orientation/yaw", 1, 'f', NULL, yprMin, yprMax);
+  sigPitch = mapper_device_add_output_signal(dev, "orientation/pitch", 1, 'f', NULL, yprMin, yprMax);
+  sigRoll = mapper_device_add_output_signal(dev, "orientation/roll", 1, 'f', NULL, yprMin, yprMax);
   sigMagGyro = mapper_device_add_output_signal(dev, "gyro/magnitude", 1, 'f', NULL, magMin, magMax);
   sigMagAccl = mapper_device_add_output_signal(dev, "accl/magnitude", 1, 'f', NULL, magMin, magMax);
   sigMagMagn = mapper_device_add_output_signal(dev, "magn/magnitude", 1, 'f', NULL, magMin, magMax);
-  sigButton = mapper_device_add_output_signal(dev, "button", 1, 'i', NULL, buttonMin, buttonMax);
+  sigButton = mapper_device_add_output_signal(dev, "button/short", 1, 'i', NULL, buttonMin, buttonMax);
+  sigLongButton = mapper_device_add_output_signal(dev, "button/long", 1, 'i', NULL, buttonMin, buttonMax);
+  sigDoubleButton = mapper_device_add_output_signal(dev, "button/double", 1, 'i', NULL, buttonMin, buttonMax);
 }
 
 void updateLibmapper() {
@@ -102,8 +113,10 @@ void updateLibmapper() {
   mapper_signal_update_float(sigMagGyro, RawData.magGyro);
   mapper_signal_update_float(sigMagAccl, RawData.magAccl);
   mapper_signal_update_float(sigMagMagn, RawData.magMagn);
-
-  mapper_signal_update_int(sigButton, !buttonState);
-
-  // Missing ypr
+  mapper_signal_update_int(sigButton, RawData.buttonShort);
+  mapper_signal_update_int(sigLongButton, RawData.buttonLong);
+  mapper_signal_update_int(sigDoubleButton, RawData.buttonDouble);
+  mapper_signal_update_float(sigYaw, RawData.ypr[0]);
+  mapper_signal_update_float(sigPitch, RawData.ypr[1]);
+  mapper_signal_update_float(sigRoll, RawData.ypr[2]);
 }

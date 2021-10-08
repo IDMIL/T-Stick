@@ -61,7 +61,7 @@
 
 #include <FS.h>
 
-#define ESP32; // define ESP8266 or ESP32 according to your microcontroller.
+#define ESP32 // define ESP8266 or ESP32 according to your microcontroller.
 //#define TSTICK193; // define if flashing the T-Stick #193.
 
 #if defined(ESP32)
@@ -114,6 +114,7 @@ struct Tstick {
   char lastConnectedNetwork[30];
   char lastStoredPsk[30];
   int32_t firmware;
+  byte osc;
   char oscIP[2][17];
   int32_t oscPORT[2];
   byte libmapper;
@@ -134,12 +135,15 @@ struct RawDataStruct {
   float accl[3]; // /raw/accl, iii, +/-32767 (integers)
   float gyro[3]; // /raw/gyro, fff, +/-34.90659 (floats)
   float magn[3]; // /raw/magn, fff, +/-32767 (integers)
-  float raw[9]; // /raw (IMU data to be send to callibration app)
+  float raw[10]; // /raw (IMU data to be send to callibration app)
   float quat[4]; // /raw/quat, ffff, ?, ? ,? ,?
-  float ypr[3]; // /raw/ypr, fff, ?, ? ,?
+  float ypr[3]; // /raw/ypr, fff, +/-180, +/-90 ,+/-180 (degrees)
   float magAccl;
   float magGyro;
   float magMagn;
+  byte buttonShort; // /raw/button/short, i, 0 or 1
+  byte buttonLong; // /raw/button/long, i, 0 or 1
+  byte buttonDouble; // /raw/button/double, i, 0 or 1
 } RawData;
 
 struct NormDataStruct {
@@ -159,7 +163,12 @@ char APpasswdTemp[15]; // used to check before save new T-Stick passwd
 char APpasswdValidate[15]; // used to check before save new T-Stick passwd
 char tstickSSID[30] = "T-Stick_";
 char tstickID[5];
-float battery; 
+float battery;
+byte batteryPercentage;
+int batteryInterval = 1000;
+unsigned long  batteryLastRead = 0;
+unsigned long  batteryLastSend = 0;
+byte batteryCount = 0;
 
 //////////////////////
 // WiFi Definitions //
@@ -172,17 +181,22 @@ const unsigned int portLocal = 8888; // local port to listen for OSC packets (no
 // defaults //
 //////////////
 
-int piezoPin = 32;
-int fsrPin = 33;
-int batteryPin = 35;
+byte piezoPin = 32;
+byte fsrPin = 33;
+byte batteryPin = 35;
 const int buttonPin = 15;
-int buttonState = 0; // variable for reading the pushbutton status
+byte buttonState = 0; // variable for reading the pushbutton status
+const int buttonShortInterval = 300;
+const int buttonLongInterval = 2000;
+unsigned long buttonTimer;
+byte buttonShortFlag = 0;
+byte buttonLongFlag = 0;
+unsigned long buttonDoubleTimer;
+byte buttonDoubleFlag = 0;
 int waitForConnection = 8000; // set waiting time for connecting to a WiFi network
-byte touchInterval = 15; // interval between capsense readings
-unsigned long touchLastRead = 0; // track capsense last sensor read
 int serialInterval = 1000; // interval between serial prints for sensor data
 unsigned long serialLastRead = 0; // track capsense last sensor read
-unsigned long time_now = millis(); // variable used for LED, serial print, and WiFi connection 
+unsigned long time_now = millis(); // variable used for LED, serial print, battery reading, and WiFi connection 
                                    // (updated by blinkLED() every loop)
 float fsrbuf;
 
@@ -302,13 +316,13 @@ void setup() {
 void loop() {
 
   // Calling WiFiManager configuration portal on demand:
-  buttonState = digitalRead(buttonPin);
-  if ( buttonState == LOW ) {
+  if ( RawData.buttonLong == 1 ) {
     #ifdef TSTICK193
       digitalWrite(ledPin, 1);
     #else
       digitalWrite(ledPin, 0);
     #endif
+    RawData.buttonLong = 0; buttonLongFlag = 0;
     Wifimanager_portal(tstickSSID, Tstick.APpasswd);
     }
 
@@ -316,19 +330,19 @@ void loop() {
   readData();
 
   // send data (OSC)
-  sendOSC(Tstick.oscIP[0], Tstick.oscPORT[0]);
-  if (strcmp(Tstick.oscIP[1],"0.0.0.0") != 0 ) {
-      if (strcmp(Tstick.oscIP[1],Tstick.oscIP[0]) == 0) {
-        if (Tstick.oscPORT[0] != Tstick.oscPORT[1]) {
+  if (Tstick.osc == 1) {
+    sendOSC(Tstick.oscIP[0], Tstick.oscPORT[0]);
+    if (strcmp(Tstick.oscIP[1],"0.0.0.0") != 0 ) {
+        if (strcmp(Tstick.oscIP[1],Tstick.oscIP[0]) == 0) {
+          if (Tstick.oscPORT[0] != Tstick.oscPORT[1]) {
+            sendOSC(Tstick.oscIP[1], Tstick.oscPORT[1]);
+          }
+        } else {
           sendOSC(Tstick.oscIP[1], Tstick.oscPORT[1]);
         }
-      } else {
-        sendOSC(Tstick.oscIP[1], Tstick.oscPORT[1]);
-      }
+    }
   }
     
-
-
   // Update libmapper
   if (Tstick.libmapper == 1) {
     updateLibmapper();

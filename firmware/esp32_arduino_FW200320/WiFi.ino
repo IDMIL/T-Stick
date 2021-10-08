@@ -48,6 +48,7 @@ void Wifimanager_portal(char *portal_name, char *portal_password) {
   char* copybuf;
 
   char libmapperCheck[24] = "type=\"checkbox\"";
+  char OSCCheck[24] = "type=\"checkbox\"";
 
   // The extra parameters to be configured (can be either global or just in the setup)
   // After connecting, parameter.getValue() will get you the configured value
@@ -65,6 +66,9 @@ void Wifimanager_portal(char *portal_name, char *portal_password) {
 
   if (Tstick.libmapper == 1) { strcat(libmapperCheck, " checked"); }
     WiFiManagerParameter wifimanager_libmapper("libmapper", "Libmapper ON/OFF (WiFiManager exit required)", "T", 2, libmapperCheck, WFM_LABEL_AFTER);
+
+  if (Tstick.osc == 1) { strcat(OSCCheck, " checked"); }
+    WiFiManagerParameter wifimanager_osc("OSC", "OSC messages ON/OFF (WiFiManager exit required)", "T", 2, OSCCheck, WFM_LABEL_AFTER);
     
   fsrbuf = float(Tstick.FSRoffset) / 4095;
   WiFiManagerParameter wifimanager_FSRoffset("FSRoffset", "FSR offset value (default = 0)", dtostrf(fsrbuf,2,3,wifimanagerbuf), 6);
@@ -88,6 +92,7 @@ void Wifimanager_portal(char *portal_name, char *portal_password) {
   wifiManager.addParameter(&wifimanager_APpasswd);
   wifiManager.addParameter(&wifimanager_APpasswdValidate);
   wifiManager.addParameter(&wifimanager_hint);
+  wifiManager.addParameter(&wifimanager_osc);
   wifiManager.addParameter(&wifimanager_oscIP);
   wifiManager.addParameter(&wifimanager_oscPORT);
   wifiManager.addParameter(&wifimanager_libmapper);
@@ -150,6 +155,13 @@ void Wifimanager_portal(char *portal_name, char *portal_password) {
   } 
   else {
     Tstick.libmapper = 0;
+  }
+
+  if (strncmp(wifimanager_osc.getValue(), "T", 1) == 0) {
+    Tstick.osc = 1;
+  } 
+  else {
+    Tstick.osc = 0;
   }
   
   fsrbuf = atof(wifimanager_FSRoffset.getValue());

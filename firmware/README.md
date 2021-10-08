@@ -1,4 +1,4 @@
-# T-Stick 2GW (Firmware version: 200207)
+# T-Stick 2GW (Firmware version: 200220)
 
 - [First time firmware upload instructions](#first-time-firmware-upload-instructions)
 	* [Option 1: using .bin files and esptool.py](#option-1-using-bin-files-and-esptoolpy)

@@ -8,7 +8,7 @@ void sendOSC(char* ip,int32_t port) {
   IPAddress oscIP;
 
   if (oscIP.fromString(ip) != false) {
-      char namespaceBuffer[30];
+      char namespaceBuffer[31];
       static OSCBundle bundle;
     
       snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/TStick_%i/raw/capsense",Tstick.id);
@@ -18,6 +18,21 @@ void sendOSC(char* ip,int32_t port) {
           msgCapsense.add(RawData.touch[i][1] & Tstick.touchMask[i][1]);
         }
         bundle.add(msgCapsense);
+
+      snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/TStick_%i/raw/button/short",Tstick.id);
+      OSCMessage msgBtnS(namespaceBuffer);
+        msgBtnS.add(RawData.buttonShort);
+        bundle.add(msgBtnS);
+
+      snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/TStick_%i/raw/button/long",Tstick.id);
+      OSCMessage msgBtnL(namespaceBuffer);
+        msgBtnL.add(RawData.buttonLong);
+        bundle.add(msgBtnL);
+
+      snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/TStick_%i/raw/button/double",Tstick.id);
+      OSCMessage msgBtnD(namespaceBuffer);
+        msgBtnD.add(RawData.buttonDouble);
+        bundle.add(msgBtnD);
     
       snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/TStick_%i/raw/fsr",Tstick.id);
       OSCMessage msgFsrR(namespaceBuffer);
@@ -69,8 +84,7 @@ void sendOSC(char* ip,int32_t port) {
         addFloatArrayToMessage(NormData.magn, sizeof(NormData.magn)/sizeof(NormData.magn[0]), msgMagnN);
         bundle.add(msgMagnN);
     
-      snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/TStick_%i/raw",Tstick.id);
-      OSCMessage msgRaw(namespaceBuffer);
+      OSCMessage msgRaw("/raw");
         addFloatArrayToMessage(RawData.raw, sizeof(RawData.raw)/sizeof(RawData.raw[0]), msgRaw);
         bundle.add(msgRaw);
         
@@ -84,10 +98,13 @@ void sendOSC(char* ip,int32_t port) {
         addFloatArrayToMessage(RawData.ypr, sizeof(RawData.ypr)/sizeof(RawData.ypr[0]), msgYpr);
         bundle.add(msgYpr);
 
-      snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/TStick_%i/battery",Tstick.id);
-      OSCMessage msgBattery(namespaceBuffer);
-        msgBattery.add(battery);
-        bundle.add(msgBattery);
+      if (millis() - batteryLastSend > batteryInterval) {
+        batteryLastSend = millis(); 
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/TStick_%i/battery",Tstick.id);
+        OSCMessage msgBattery(namespaceBuffer);
+          msgBattery.add(batteryPercentage);
+          bundle.add(msgBattery);
+      }
     
       oscEndpoint.beginPacket(oscIP,port);
       bundle.send(oscEndpoint);
@@ -96,7 +113,7 @@ void sendOSC(char* ip,int32_t port) {
     }
 }
 
-byte receiveOSC() {
+void receiveOSC() {
 
   OSCErrorCode error;
   OSCMessage msgReceive;
@@ -110,12 +127,17 @@ byte receiveOSC() {
     }
     if (!msgReceive.hasError()) {
       Serial.println("Routing OSC message...");
-      msgReceive.dispatch("/state/calibrate", saveIMUcalib); // receive IMU cal values and save to JSON
       msgReceive.dispatch("/state/touchMask", receiveTouchMask); // receive touchMask values (doesn't save to JSON)
       msgReceive.dispatch("/state/info", sendInfo); // send back T-Stick current config
       msgReceive.dispatch("/state/json", processJson); // Json file related commands
       msgReceive.dispatch("/state/FSRoffset", receiveFSRoffset); // receive FSRoffset (doesn't save to JSON)
       msgReceive.dispatch("/state/setup", openPortalOSC); // open portal
+      msgReceive.dispatch("/calibration/accl/vector", saveIMUaVector); // receive IMU cal values and save to JSON
+      msgReceive.dispatch("/calibration/accl/matrix", saveIMUaMatrix);
+      msgReceive.dispatch("/calibration/magn/vector", saveIMUmVector);
+      msgReceive.dispatch("/calibration/magn/matrix", saveIMUmMatrix);
+      msgReceive.dispatch("/calibration/gyro/vector", saveIMUgVector);
+      msgReceive.dispatch("/calibration/gyro/matrix", saveIMUgMatrix);
     } else {
       error = msgReceive.getError();
       Serial.print("\nOSC receive error: "); Serial.println(error);
@@ -129,21 +151,53 @@ void openPortalOSC(OSCMessage &msg) {
   }
 }
 
-void saveIMUcalib(OSCMessage &msg) {
-  // message order: avector[3], amatrix[9], mvector[3], mmatrix[9], gvector[3], gmatrix[9]
+void saveIMUaVector(OSCMessage &msg) {
+  // message order: vector[3]
   for (byte i = 0; i < 3; ++i) {
     Tstick.abias[i] = msg.getFloat(i);
-    Tstick.mbias[i+12] = msg.getFloat(i+12);
-    Tstick.gbias[i+24] = msg.getFloat(i+24);
-  }
-  for (byte i = 0; i < 9; ++i) {
-    Tstick.acclcalibration[i+3] = msg.getFloat(i+3);
-    Tstick.magncalibration[i+15] = msg.getFloat(i+15);
-    Tstick.gyrocalibration[i+27] = msg.getFloat(i+27);
   }
   saveJSON();  
 }
 
+void saveIMUgVector(OSCMessage &msg) {
+  // message order: vector[3]
+  for (byte i = 0; i < 3; ++i) {
+    Tstick.gbias[i] = msg.getFloat(i);
+  }
+  saveJSON();  
+}
+
+void saveIMUmVector(OSCMessage &msg) {
+  // message order: vector[3]
+  for (byte i = 0; i < 3; ++i) {
+    Tstick.mbias[i] = msg.getFloat(i);
+  }
+  saveJSON();  
+}
+
+void saveIMUaMatrix(OSCMessage &msg) {
+  // message order: vector[9]
+  for (byte i = 0; i < 9; ++i) {
+    Tstick.acclcalibration[i] = msg.getFloat(i);
+  }
+  saveJSON();  
+}
+
+void saveIMUmMatrix(OSCMessage &msg) {
+  // message order: vector[9]
+  for (byte i = 0; i < 9; ++i) {
+    Tstick.magncalibration[i] = msg.getFloat(i);
+  }
+  saveJSON();  
+}
+
+void saveIMUgMatrix(OSCMessage &msg) {
+  // message order: vector[9]
+  for (byte i = 0; i < 9; ++i) {
+    Tstick.gyrocalibration[i] = msg.getFloat(i);
+  }
+  saveJSON();  
+}
 
 void receiveTouchMask(OSCMessage &msg) {
   // message order: Tstick.touchMask[0][0], [0][1], [1][0], [1][1], ...
