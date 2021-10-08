@@ -49,9 +49,7 @@ void printVariables() {
   Serial.print(" (normalized: "); Serial.print(float(Tstick.FSRoffset)/4095, 4); ; Serial.println(")");
   Serial.print("\nTstick.touchMask: ");
       for( int i = 0 ; i < (sizeof(Tstick.touchMask)/sizeof(Tstick.touchMask[0])) ; ++i ){
-        Serial.print(Tstick.touchMask[i][0]);
-        Serial.print(" ");
-        Serial.print(Tstick.touchMask[i][1]);
+        Serial.print(Tstick.touchMask[i], 10);
         Serial.print(" ");
       }
   Serial.print("\nTstick.abias: ");
@@ -92,7 +90,7 @@ void parseJSON() {
   // Allocate a temporary JsonDocument
   // Don't forget to change the capacity to match your requirements.
   // Use https://arduinojson.org/v6/assistant/ to compute the capacity.
-  const size_t capacity = 5*JSON_ARRAY_SIZE(2) + 3*JSON_ARRAY_SIZE(3) + 3*JSON_ARRAY_SIZE(9) + JSON_OBJECT_SIZE(26) + 360;
+  const size_t capacity = 4*JSON_ARRAY_SIZE(2) + 3*JSON_ARRAY_SIZE(3) + 3*JSON_ARRAY_SIZE(9) + JSON_OBJECT_SIZE(25) + 350;
   DynamicJsonDocument doc(capacity);
 
   if (SPIFFS.exists("/config.json")) { // file exists, reading and loading
@@ -121,16 +119,14 @@ void parseJSON() {
         Tstick.osc = doc["osc"];
         Tstick.FSRoffset = doc["FSRoffset"];
         
-        Tstick.touchMask[0][0] = doc["touchMask0"][0];
-        Tstick.touchMask[0][1] = doc["touchMask0"][1];
-        Tstick.touchMask[1][0] = doc["touchMask1"][0];
-        Tstick.touchMask[1][1] = doc["touchMask1"][1];
-        Tstick.touchMask[2][0] = doc["touchMask2"][0];
-        Tstick.touchMask[2][1] = doc["touchMask2"][1];
-        Tstick.touchMask[3][0] = doc["touchMask3"][0];
-        Tstick.touchMask[3][1] = doc["touchMask3"][1];
-        Tstick.touchMask[4][0] = doc["touchMask4"][0];
-        Tstick.touchMask[4][1] = doc["touchMask4"][1];
+        Tstick.touchMask[0] = doc["touchMask0"][0];
+        Tstick.touchMask[1] = doc["touchMask0"][1];
+        Tstick.touchMask[2] = doc["touchMask1"][0];
+        Tstick.touchMask[3] = doc["touchMask1"][1];
+        Tstick.touchMask[4] = doc["touchMask2"][0];
+        Tstick.touchMask[5] = doc["touchMask2"][1];
+        Tstick.touchMask[6] = doc["touchMask3"][0];
+        Tstick.touchMask[7] = doc["touchMask3"][1];
         
         JsonArray abias = doc["abias"];
         Tstick.abias[0] = abias[0];
@@ -201,7 +197,7 @@ void saveJSON() {
   // Allocate a temporary JsonDocument
   // Don't forget to change the capacity to match your requirements.
   // Use https://arduinojson.org/v6/assistant/ to compute the capacity.
-  const size_t capacity = 5*JSON_ARRAY_SIZE(2) + 3*JSON_ARRAY_SIZE(3) + 3*JSON_ARRAY_SIZE(9) + JSON_OBJECT_SIZE(26) + 360;
+  const size_t capacity = 4*JSON_ARRAY_SIZE(2) + 3*JSON_ARRAY_SIZE(3) + 3*JSON_ARRAY_SIZE(9) + JSON_OBJECT_SIZE(25);
   DynamicJsonDocument doc(capacity);
 
   // Copy values from Config to the JsonDocument
@@ -222,24 +218,20 @@ void saveJSON() {
   doc["FSRoffset"] = Tstick.FSRoffset;
   
   JsonArray touchMask0 = doc.createNestedArray("touchMask0");
-  touchMask0.add(Tstick.touchMask[0][0]);
-  touchMask0.add(Tstick.touchMask[0][1]);
+  touchMask0.add(Tstick.touchMask[0]);
+  touchMask0.add(Tstick.touchMask[1]);
 
   JsonArray touchMask1 = doc.createNestedArray("touchMask1");
-  touchMask1.add(Tstick.touchMask[1][0]);
-  touchMask1.add(Tstick.touchMask[1][1]);
+  touchMask1.add(Tstick.touchMask[2]);
+  touchMask1.add(Tstick.touchMask[3]);
 
   JsonArray touchMask2 = doc.createNestedArray("touchMask2");
-  touchMask2.add(Tstick.touchMask[2][0]);
-  touchMask2.add(Tstick.touchMask[2][1]);
+  touchMask2.add(Tstick.touchMask[4]);
+  touchMask2.add(Tstick.touchMask[5]);
 
   JsonArray touchMask3 = doc.createNestedArray("touchMask3");
-  touchMask3.add(Tstick.touchMask[3][0]);
-  touchMask3.add(Tstick.touchMask[3][1]);
-
-  JsonArray touchMask4 = doc.createNestedArray("touchMask4");
-  touchMask4.add(Tstick.touchMask[4][0]);
-  touchMask4.add(Tstick.touchMask[4][1]);
+  touchMask3.add(Tstick.touchMask[6]);
+  touchMask3.add(Tstick.touchMask[7]);
   
   JsonArray abias = doc.createNestedArray("abias");
   abias.add(Tstick.abias[0]);

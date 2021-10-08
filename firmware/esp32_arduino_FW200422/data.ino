@@ -1,12 +1,18 @@
 
-void readData() {
 
+
+void readData() {
+  
   // Read capsense touch data
   for (byte i=0; i < nCapsenses; ++i) {
       capsense = capsenseRequest(capsense_addresses[i],BUTTON_STAT, 2);
-      RawData.touch[i][0] = capsense.answer1;
-      RawData.touch[i][1] = capsense.answer2;
+      RawData.touch[i*2] = capsense.answer1;
+      RawData.touch[(i*2)+1] = capsense.answer2;
   }
+  for (byte i=0; i < touchStripsSize; ++i) {
+      RawData.touchStrips[i] = bitRead(RawData.touch[i/8],7-(i%8));
+  }
+  reorderCapsense (RawData.touchStrips, touchStripsSize);
 
   // Read button
   buttonState = !digitalRead(buttonPin);
@@ -89,6 +95,16 @@ void readData() {
     copyFloatArrayToVar(reading.magn.data(), reading.magn.size(), RawData.magn);
     copyFloatArrayToVar(reading.data, reading.size, RawData.raw);
     copyFloatArrayToVar(quat.coeffs().data(), quat.coeffs().size(), RawData.quat);
+
+    LastState.gyroXArray[LastState.gyroArrayCounter] = RawData.gyro[0];
+    LastState.gyroYArray[LastState.gyroArrayCounter] = RawData.gyro[1];
+    LastState.gyroZArray[LastState.gyroArrayCounter] = RawData.gyro[2];
+    if (LastState.gyroArrayCounter < 5) {
+      LastState.gyroArrayCounter++;
+    }
+    else {
+      LastState.gyroArrayCounter = 0;
+    }
     
     for (int i = 0; i < (sizeof(RawData.accl)/sizeof(RawData.accl[0])); ++i) {
       NormData.accl[i] = mapfloat(RawData.accl[i], -32767, 32767, -1, 1);
@@ -113,7 +129,7 @@ void readData() {
       offsetFlag = 1;
     }
     if (offsetFlag == 1 && millis() - 200 > offsetDebounce) {
-      offsetYaw = RawData.ypr[0];
+      offsetYaw = InstrumentData.ypr[0];
       offsetFlag = 0;
     }
   } 
@@ -133,18 +149,35 @@ float mapfloat(float x, float in_min, float in_max, float out_min, float out_max
 }
 
 
+void reorderCapsense (byte *origArray, byte arraySize) {
+  byte tempArray[arraySize];
+  byte order[64] = {
+    8,9,10,11,12,13,14,15,0,1,2,3,4,5,6,7,
+    24,25,26,27,28,29,30,31,16,17,18,19,20,21,22,23,
+    40,41,42,43,44,45,46,47,32,33,34,35,36,37,38,39,
+    56,57,58,59,60,61,62,63,48,49,50,51,52,53,54,55
+  };
+  for (byte i=0; i < sizeof(tempArray)/sizeof(tempArray[0]); ++i) {
+    tempArray[i] = origArray[order[i]];
+  }
+  memcpy(origArray, tempArray, sizeof(tempArray));
+}
+
+
 void printData() {
   if (millis() - serialLastRead > serialInterval) {
       serialLastRead = millis(); 
-      Serial.println("\nPrinting sensor data: ");
+      Serial.println("\nPrinting sensor data: \n");
       Serial.print("RawData.touch: ");
-      printf("%i, %i, %i, %i, %i, %i, %i, %i, %i, %i",
-      RawData.touch[0][0],RawData.touch[0][1],
-      RawData.touch[1][0],RawData.touch[1][1],
-      RawData.touch[2][0],RawData.touch[2][1],
-      RawData.touch[3][0],RawData.touch[3][1],
-      RawData.touch[4][0],RawData.touch[4][1]);
+      for (byte i=0; i < sizeof(RawData.touch); ++i) { //for (byte i=0; i < nCapsenses*2; ++i) {
+        Serial.print(RawData.touch[i]); Serial.print(" ");
+      }
       Serial.println();
+      Serial.print("RawData.touch(libmapper): ");
+        for( int i = 0 ; i < touchStripsSize ; ++i ){
+            Serial.print(RawData.touchStrips[i]);
+            Serial.print(" ");
+          }
       Serial.print("\nRawData.fsr: "); Serial.println(RawData.fsr);
       Serial.print("RawData.piezo: "); Serial.println(RawData.piezo);
       Serial.print("RawData.accl: ");
@@ -172,11 +205,41 @@ void printData() {
             Serial.print(RawData.quat[i], 10);
             Serial.print(" ");
           }
-      Serial.print("\nRawData.ypr: ");
-          for( int i = 0 ; i < (sizeof(RawData.ypr)/sizeof(RawData.ypr[0])) ; ++i ){
-            Serial.print(RawData.ypr[i], 10);
+      Serial.print("\nInstrumentData.ypr: ");
+          for( int i = 0 ; i < (sizeof(InstrumentData.ypr)/sizeof(InstrumentData.ypr[0])) ; ++i ){
+            Serial.print(InstrumentData.ypr[i], 10);
             Serial.print(" ");
           }
+      Serial.println();
+      
+      Serial.println("\nPrinting Instrument data: ");
+      Serial.print("\nInstrumentData.touchAll: "); Serial.println(InstrumentData.touchAll);
+      Serial.print("InstrumentData.touchTop: "); Serial.println(InstrumentData.touchTop);
+      Serial.print("InstrumentData.touchMiddle: "); Serial.println(InstrumentData.touchMiddle);
+      Serial.print("InstrumentData.touchBottom: "); Serial.println(InstrumentData.touchBottom);
+
+      Serial.print("\nBlobDetection.blobArray: ");
+          for( int i = 0 ; i < (sizeof(BlobDetection.blobArray)/sizeof(BlobDetection.blobArray[0])) ; ++i ){
+            Serial.print(BlobDetection.blobArray[i]);
+            Serial.print(" ");
+          }
+      Serial.println();
+      Serial.print("\nBlobDetection.blobPos: ");
+          for( int i = 0 ; i < (sizeof(BlobDetection.blobPos)/sizeof(BlobDetection.blobPos[0])) ; ++i ){
+            Serial.print(BlobDetection.blobPos[i]);
+            Serial.print(" ");
+          }
+      Serial.println();
+      Serial.print("\nBlobDetection.blobSize: ");
+          for( int i = 0 ; i < (sizeof(BlobDetection.blobSize)/sizeof(BlobDetection.blobSize[0])) ; ++i ){
+            Serial.print(BlobDetection.blobSize[i], 4);
+            Serial.print(" ");
+          }
+      Serial.println();
+
+      Serial.print("InstrumentData.brush: "); Serial.println(InstrumentData.brush);
+
+      
       Serial.println();
   }
 }

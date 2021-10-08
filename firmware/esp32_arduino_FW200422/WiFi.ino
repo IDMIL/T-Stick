@@ -73,12 +73,11 @@ void Wifimanager_portal(char *portal_name, char *portal_password) {
   fsrbuf = float(Tstick.FSRoffset) / 4095;
   WiFiManagerParameter wifimanager_FSRoffset("FSRoffset", "FSR offset value (default = 0)", dtostrf(fsrbuf,2,3,wifimanagerbuf), 6);
 
-  snprintf(wifimanagerbuf,(sizeof(wifimanagerbuf)-1),"%i,%i,%i,%i,%i,%i,%i,%i,%i,%i",
-      Tstick.touchMask[0][0],Tstick.touchMask[0][1],
-      Tstick.touchMask[1][0],Tstick.touchMask[1][1],
-      Tstick.touchMask[2][0],Tstick.touchMask[2][1],
-      Tstick.touchMask[3][0],Tstick.touchMask[3][1],
-      Tstick.touchMask[4][0],Tstick.touchMask[4][1]);
+  snprintf(wifimanagerbuf,(sizeof(wifimanagerbuf)-1),"%i,%i,%i,%i,%i,%i,%i,%i",
+      Tstick.touchMask[0],Tstick.touchMask[1],
+      Tstick.touchMask[2],Tstick.touchMask[3],
+      Tstick.touchMask[4],Tstick.touchMask[5],
+      Tstick.touchMask[6],Tstick.touchMask[7]);
       
   WiFiManagerParameter wifimanager_touchMask("touchMask", "Touch Mask capacitive sensing values", wifimanagerbuf, 40);  
   
@@ -171,18 +170,13 @@ void Wifimanager_portal(char *portal_name, char *portal_password) {
   strcpy(wifimanagerbuf,wifimanager_touchMask.getValue());
   copybuf = strtok(wifimanagerbuf,",");
   if (copybuf != NULL) {
-    Tstick.touchMask[0][0] = atoi(copybuf);
+    Tstick.touchMask[0] = atoi(copybuf);
     copybuf = strtok(NULL,",");
-    if (copybuf != NULL) {
-      Tstick.touchMask[0][1] = atoi(copybuf);
-    }
     for (byte i=1; i < (sizeof(Tstick.touchMask)/sizeof(Tstick.touchMask)[0]); ++i) {
       copybuf = strtok(NULL,",");
       if (copybuf == NULL) {break;}
-      Tstick.touchMask[i][0] = atoi(copybuf);
+      Tstick.touchMask[i] = atoi(copybuf);
       copybuf = strtok(NULL,",");
-      if (copybuf == NULL) {break;}
-      Tstick.touchMask[i][1] = atoi(copybuf);
     }
   }
 

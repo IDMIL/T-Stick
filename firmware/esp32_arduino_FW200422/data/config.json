@@ -1,14 +1,14 @@
 {
-    "id": 100,
+    "id": 206,
     "type": "SN", 
     "author": "IDMIL",
-    "color": "Color",
+    "color": "Blue",
     "APpasswd": "mappings",
-    "lastConnectedNetwork": "tstick_network",
-    "lastStoredPsk": "mappings",
-    "firmware": 200320,
+    "lastConnectedNetwork": "noisebox",
+    "lastStoredPsk": "noisebox",
+    "firmware": 200422,
     "osc": 1,
-    "oscIP1": "192.168.1.100",
+    "oscIP1": "192.168.1.112",
     "oscPORT1": 8000,
     "oscIP2": "0.0.0.0",
     "oscPORT2": 8000,
@@ -27,10 +27,6 @@
         255
     ],
     "touchMask3": [
-        255,
-        255
-    ],
-    "touchMask4": [
         255,
         255
     ],

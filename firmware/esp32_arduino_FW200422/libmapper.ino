@@ -26,6 +26,20 @@ mapper_signal sigMagMagn;
 mapper_signal sigButton;
 mapper_signal sigLongButton;
 mapper_signal sigDoubleButton;
+mapper_signal sigtouchAll;
+mapper_signal sigtouchTop;
+mapper_signal sigtouchMiddle;
+mapper_signal sigtouchBottom;
+mapper_signal sigBrush;
+mapper_signal sigRub;
+mapper_signal sigMultiBrush;
+mapper_signal sigMultiRub;
+mapper_signal sigShakeXYZ;
+mapper_signal sigJabXYZ;
+
+
+
+// TODO: touchAll, touchTop, touchMiddle, touchBottom, brush, rub, multibrush, multirub, shakeXYZ
 
 void initLibmapper() {
 
@@ -33,9 +47,9 @@ void initLibmapper() {
   snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"TStick_%i",Tstick.id);
   dev = mapper_device_new(namespaceBuffer, 0, 0);
 
-  int rawCapsenseMin[(nCapsenses*16)] = { 0 };
-  int rawCapsenseMax[(nCapsenses*16)];
-    for (int i=0; i<(nCapsenses*16); ++i) {
+  int rawCapsenseMin[(touchStripsSize)] = { 0 };
+  int rawCapsenseMax[(touchStripsSize)];
+    for (int i=0; i<(touchStripsSize); ++i) {
       rawCapsenseMax[i] = 1;
     }
   float rawGyroMin[1] = { -34.90659f }, rawGyroMax[1] = { 34.90659f };
@@ -47,8 +61,11 @@ void initLibmapper() {
   float magMin[1] = { 0.0f }, magMax[1] = { 1.7320508f };  // sqrt(3)
   int buttonMin[1] = { 0 }, buttonMax[1] = { 1 };
   float yprMin[1] = { -180.0f }, yprMax[1] = { 180.0f };
+  float instTouchMin[1] = { 0.0f }, instTouchMax[1] = { 1.0f };
+  float genericMin[1] = { 0.0f }, genericMax[1] = { 100.0f };
 
-  sigRawCapsense = mapper_device_add_output_signal(dev, "raw/capsense", (nCapsenses*16), 'i', NULL, rawCapsenseMin, rawCapsenseMax);
+
+  sigRawCapsense = mapper_device_add_output_signal(dev, "raw/capsense", touchStripsSize, 'i', NULL, rawCapsenseMin, rawCapsenseMax);
   sigRawGyroX = mapper_device_add_output_signal(dev, "raw/gyro/X", 1, 'f', NULL, rawGyroMin, rawGyroMax);
   sigRawGyroY = mapper_device_add_output_signal(dev, "raw/gyro/Y", 1, 'f', NULL, rawGyroMin, rawGyroMax);
   sigRawGyroZ = mapper_device_add_output_signal(dev, "raw/gyro/Z", 1, 'f', NULL, rawGyroMin, rawGyroMax);
@@ -73,28 +90,22 @@ void initLibmapper() {
   sigButton = mapper_device_add_output_signal(dev, "button/short", 1, 'i', NULL, buttonMin, buttonMax);
   sigLongButton = mapper_device_add_output_signal(dev, "button/long", 1, 'i', NULL, buttonMin, buttonMax);
   sigDoubleButton = mapper_device_add_output_signal(dev, "button/double", 1, 'i', NULL, buttonMin, buttonMax);
+  sigtouchAll = mapper_device_add_output_signal(dev, "instrument/touchall", 1, 'f', NULL, instTouchMin, instTouchMax);
+  sigtouchTop = mapper_device_add_output_signal(dev, "instrument/touchtop", 1, 'f', NULL, instTouchMin, instTouchMax);
+  sigtouchMiddle = mapper_device_add_output_signal(dev, "instrument/touchmiddle", 1, 'f', NULL, instTouchMin, instTouchMax);
+  sigtouchBottom = mapper_device_add_output_signal(dev, "instrument/touchbottom", 1, 'f', NULL, instTouchMin, instTouchMax);
+  sigBrush = mapper_device_add_output_signal(dev, "instrument/brush", 1, 'f', NULL, genericMin, genericMax);
+  sigRub = mapper_device_add_output_signal(dev, "instrument/rub", 1, 'f', NULL, genericMin, genericMax);
+  sigMultiBrush = mapper_device_add_output_signal(dev, "instrument/multibrush", 4, 'f', NULL, genericMin, genericMax);
+  sigMultiRub = mapper_device_add_output_signal(dev, "instrument/multirub", 4, 'f', NULL, genericMin, genericMax);
+  sigShakeXYZ = mapper_device_add_output_signal(dev, "instrument/shakexyz", 3, 'f', NULL, genericMin, genericMax);
+  sigJabXYZ = mapper_device_add_output_signal(dev, "instrument/jabxyz", 3, 'f', NULL, genericMin, genericMax);
 }
 
 void updateLibmapper() {
   mapper_device_poll(dev, 0);
 
-  int touchtemp[(nCapsenses*16)];
-  byte counter = 0;
-  byte indexStrip = 0;
-  for (byte i=0; i < (nCapsenses*8); ++i) {
-    touchtemp[i] = bitRead(RawData.touch[i/16][indexStrip],(7-(i%8)));
-    if (++counter >= 8) {
-      if (indexStrip==0){
-        indexStrip=1;
-        }
-      else {
-        indexStrip=0;
-        }
-      counter = 0;
-    }
-  }
-
-  mapper_signal_update(sigRawCapsense, touchtemp, sizeof(touchtemp), MAPPER_NOW);
+  mapper_signal_update(sigRawCapsense, RawData.touchStrips, sizeof(RawData.touchStrips), MAPPER_NOW);
   mapper_signal_update_int(sigRawFSR, RawData.fsr);
   mapper_signal_update_int(sigRawPiezo, RawData.piezo);
   mapper_signal_update_int(sigRawAcclX, RawData.accl[0]);
@@ -116,7 +127,17 @@ void updateLibmapper() {
   mapper_signal_update_int(sigButton, RawData.buttonShort);
   mapper_signal_update_int(sigLongButton, RawData.buttonLong);
   mapper_signal_update_int(sigDoubleButton, RawData.buttonDouble);
-  mapper_signal_update_float(sigYaw, RawData.ypr[0]);
-  mapper_signal_update_float(sigPitch, RawData.ypr[1]);
-  mapper_signal_update_float(sigRoll, RawData.ypr[2]);
+  mapper_signal_update_float(sigYaw, InstrumentData.ypr[0]);
+  mapper_signal_update_float(sigPitch, InstrumentData.ypr[1]);
+  mapper_signal_update_float(sigRoll, InstrumentData.ypr[2]);
+  mapper_signal_update_float(sigtouchAll, InstrumentData.touchAll);
+  mapper_signal_update_float(sigtouchTop, InstrumentData.touchTop);
+  mapper_signal_update_float(sigtouchMiddle, InstrumentData.touchMiddle);
+  mapper_signal_update_float(sigtouchBottom, InstrumentData.touchBottom);
+  mapper_signal_update_float(sigBrush, InstrumentData.brush);
+  mapper_signal_update_float(sigRub, InstrumentData.rub);
+  mapper_signal_update(sigMultiBrush, RawData.touchStrips, sizeof(InstrumentData.multiBrush)/sizeof(InstrumentData.multiBrush[0]), MAPPER_NOW);
+  mapper_signal_update(sigMultiRub, RawData.touchStrips, sizeof(InstrumentData.multiRub)/sizeof(InstrumentData.multiRub[0]), MAPPER_NOW);
+  mapper_signal_update(sigShakeXYZ, RawData.touchStrips, sizeof(InstrumentData.shakeXYZ)/sizeof(InstrumentData.shakeXYZ[0]), MAPPER_NOW);
+  mapper_signal_update(sigJabXYZ, RawData.touchStrips, sizeof(InstrumentData.jabXYZ)/sizeof(InstrumentData.jabXYZ[0]), MAPPER_NOW);
 }

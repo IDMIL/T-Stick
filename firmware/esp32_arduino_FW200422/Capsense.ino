@@ -3,13 +3,18 @@
 // Capsense Definitions //
 //////////////////////////
 
+// This firmware works with up to 4 IDMIL capsenses using I2C. It you want to use more
+// capsenses, either change the code to use SPI or change the related array sizes to
+// accomodate more readings: 
+// capsense_addresses, RawData.touch, LastState.brushUp, LastState.brushDown, Tstick.touchMask
+
 // CY8CMBR3116
 
 #define BUTTON_STAT 0xAA  // Address to read the status of the sensors (2 bytes)
 
-byte capsense_addresses[5];
+byte capsense_addresses[4]; // max 4 capsenses
 byte nCapsenses = 0;
-byte touch[5][2]; // up to 5 capsenses (2 bytes per capsense)
+byte touchStripsSize;
 
 Capsense capsenseRequest(uint8_t address,uint8_t request, uint8_t answer_size) {
 
@@ -104,7 +109,7 @@ void capsense_scan() {
   Serial.println("Scanning for CY8CMBR3116 Capsense boards...");
 
   for(I2C_ADDR = 1; I2C_ADDR < 127; I2C_ADDR++ ) {
-    // This scanner requests the device falily ID
+    // This scanner requests the device's ID (I2C address)
     // The CY8CMBR3116 chip should return 154
     Capsense capsense = capsenseRequest(I2C_ADDR, FAMILY_ID, 1);
     if (capsense.answer1 == 154) {
@@ -122,4 +127,5 @@ void capsense_scan() {
   else {
     Serial.println("Capsense OK\n");
   }
+  touchStripsSize = nCapsenses*16;
 }

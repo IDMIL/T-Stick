@@ -2,7 +2,7 @@
 //  Sopranino T-Stick 2GW - LOLIN D32 PRO - USB -WiFi                             //
 //  Input Devices and Music Interaction Laboratory (IDMIL)                        //
 //  Created:  February 2018 by Alex Nieva                                         //
-//            October 2019 by Edu Meneses - firmware version 200214 (2020/Feb/20) //
+//            March 2020 by Edu Meneses - firmware version 200330 (2020/Mar/30)   //
 //  Notes   : Based on test program for reading CY8C201xx using I2C               //
 //            by Joseph Malloch 2011                                              //
 //                                                                                //
@@ -41,6 +41,8 @@
 
 // IMPORTANT: You need to upload a file (data/config.json) into ESP32 filesystem. 
 // Follow the instructions at https://github.com/me-no-dev/arduino-esp32fs-plugin
+
+// Tested on Wemos Lolin D32 Pro
 
 // DEPENDENCIES:
 // esp32 board library (add url to preferences; install via board manager)
@@ -103,7 +105,7 @@
 //////////////////////////////////
 //////////////////////////////////
 
-const int32_t firmware = 200220;
+const int32_t firmware = 200330;
 
 struct Tstick {
   int id;
@@ -119,7 +121,7 @@ struct Tstick {
   int32_t oscPORT[2];
   byte libmapper;
   int16_t FSRoffset;
-  byte touchMask[5][2];
+  byte touchMask[8];
   float abias[3];
   float mbias[3];
   float gbias[3];
@@ -129,7 +131,8 @@ struct Tstick {
 } Tstick;
 
 struct RawDataStruct {
-  byte touch[5][2]; // /raw/capsense, i..., 0--255, ... (1 int per 8 capacitive stripes -- 8 bits)
+  byte touch[8]; // /raw/capsense, i..., 0--255, ... (1 int per 8 capacitive stripes -- 8 bits)
+  byte touchStrips[64];
   int fsr; // /raw/fsr, i, 0--4095
   int piezo; // /raw/piezo, i, 0--1023
   float accl[3]; // /raw/accl, iii, +/-32767 (integers)
@@ -137,7 +140,6 @@ struct RawDataStruct {
   float magn[3]; // /raw/magn, fff, +/-32767 (integers)
   float raw[10]; // /raw (IMU data to be send to callibration app)
   float quat[4]; // /raw/quat, ffff, ?, ? ,? ,?
-  float ypr[3]; // /raw/ypr, fff, +/-180, +/-90 ,+/-180 (degrees)
   float magAccl;
   float magGyro;
   float magMagn;
@@ -154,9 +156,38 @@ struct NormDataStruct {
   float magn[3]; // /norm/magn, fff, +/-1, +/-1, +/-1
 } NormData;
 
+struct LastStateDataStruct {
+  int blobPos[4];
+  int gyroArrayCounter;
+  float gyroXArray[5];
+  float gyroYArray[5];
+  float gyroZArray[5];
+} LastState;
+
+struct InstrumentDataStruct {
+  float touchAll; // /instrument/touch/all, f, 0--1
+  float touchTop; // /instrument/touch/top, f, 0--1
+  float touchMiddle; // /instrument/touch/middle, f, 0--1
+  float touchBottom; // /instrument/touch/bottom, f, 0--1
+  float brush; // /instrument/touch/brush, f, 0--? (~cm/s)
+  float multiBrush[4]; // /instrument/touch/brush/multibrush, ffff, 0--? (~cm/s)
+  float rub; // /instrument/touch/rub, f, 0--? (~cm/s)
+  float multiRub[4]; // /instrument/touch/rub/multirub, ffff, 0--? (~cm/s)
+  float ypr[3]; // /instrument/ypr, fff, +/-180, +/-90 ,+/-180 (degrees)
+  float shakeXYZ[3]; // /instrument/shakexyz, fff, 0--?
+  float jabXYZ[3]; // /instrument/jabxyz, fff, 0--?
+} InstrumentData;
+
 struct Capsense { 
   byte answer1, answer2;
 } capsense;
+
+struct blob { 
+  byte blobArray[8]; // shows the "center" of each array
+  int blobPos[4];  // position (index) of each blob
+  float blobSize[4]; // "size" of each blob
+} BlobDetection;
+
 
 // IPAddress oscIP; // used to send OSC messages
 char APpasswdTemp[15]; // used to check before save new T-Stick passwd
@@ -170,6 +201,13 @@ unsigned long  batteryLastRead = 0;
 unsigned long  batteryLastSend = 0;
 byte batteryCount = 0;
 
+///////////////////////////////////
+// Variables for Instrument Data //
+///////////////////////////////////
+
+byte touchSizeEdge = 4; // amount of T-Stick stripes for top and bottom portions of the T-Stick (arbitrary)
+
+
 //////////////////////
 // WiFi Definitions //
 //////////////////////
@@ -181,8 +219,8 @@ const unsigned int portLocal = 8888; // local port to listen for OSC packets (no
 // defaults //
 //////////////
 
-byte piezoPin = 32;
-byte fsrPin = 33;
+byte piezoPin = 33;
+byte fsrPin = 32;
 byte batteryPin = 35;
 const int buttonPin = 15;
 byte buttonState = 0; // variable for reading the pushbutton status
@@ -209,6 +247,17 @@ float fsrbuf;
       const int pwm2Pin = 15;
 #endif
 
+////////////////////////////////
+// Leaky integrator variables //
+////////////////////////////////
+
+const int leakyBrushFreq = 100; // leaking frequency (Hz)
+unsigned long leakyBrushTimer = 0;
+const int leakyRubFreq = 100;
+unsigned long leakyRubTimer = 0;
+byte brushCounter[4];
+const int leakyShakeFreq = 10;
+unsigned long leakyShakeTimer[3];
 
 ///////////////
 // blink LED //
@@ -301,7 +350,7 @@ void setup() {
   if (Tstick.libmapper == 1) {
     initLibmapper();
   }
-
+  
   Serial.println("\nT-Stick setup complete.\n");
   
 }
@@ -329,6 +378,9 @@ void loop() {
   // reading sensor data
   readData();
 
+  // updating high-level gestural descriptors
+  updateInstrument();
+
   // send data (OSC)
   if (Tstick.osc == 1) {
     sendOSC(Tstick.oscIP[0], Tstick.oscPORT[0]);
@@ -342,7 +394,7 @@ void loop() {
         }
     }
   }
-    
+
   // Update libmapper
   if (Tstick.libmapper == 1) {
     updateLibmapper();
