@@ -1,0 +1,107 @@
+Theme Name: Collective Child
+Theme URI:  http://collective.stonedthemes.com/
+Description: A child theme of Collective Theme
+Author: StonedThemes
+Author URI: http://stonedthemes.com/
+Version: 1.0
+Template: collective
+*/
+@import url("../collective/style.css");
+
+.stoned-container{
+	/*padding: 0 30px;*/
+	padding: 0 100px !important;
+}
+
+/*.main.stoned-container{
+	max-width: 1004px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}*/
+
+/*body {
+	min-height: 100%;
+	position: relative !important;
+}
+
+.container {
+	padding-bottom: 300px;
+}
+
+footer {
+	 position: absolute;
+     bottom:0px;
+     left:0px;
+     right:0px;
+     width:100%;
+     height: 300px;
+}*/
+
+
+.col-md-offset-2 {
+    margin-left: 0px !important;
+}
+
+/* Removes featured image and blog meta content from single pods pages */
+.single-people .single-blog-post-media, .single-blog-details {
+	display: none !important;
+}
+.single-project .single-blog-post-media, .single-blog-details {
+	display: none !important;
+}
+.single-publication .single-blog-post-media, .single-blog-details {
+	display: none !important;
+}
+
+/* indent list of publications */
+.publication-single a {
+    padding-left: 25px; 
+    display: inline-block;
+}
+
+
+.header-v1 .menu > li > a {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+#about p a {
+	text-decoration: underline;
+	color: #607070 !important;
+	font-weight: 700;
+}
+
+.pad-bottom {
+	padding-bottom: 30px;
+}
+
+/* get rid of 'loading' animation that sometimes gets stuck */
+#loading-container { 
+    display: none;
+}
+
+
+.page .page-title  {
+    display: none; 
+}
+
+
+/* ====BREAKPOINTS FOR DIFFERENT SCREENS==== */
+
+@media (min-width: 1200px) { /* desktop displays, laptops */
+    /* Increase font size of main menu */
+    #menu-menu.menu ul {
+	font-size: 16px;
+    }
+}
+
+@media (min-width: 992px) {
+    
+    .post-featured-image img {
+   	max-width: 50%; 
+    }
+}
+
+@media (min-width: 768px)

@@ -1,0 +1,37 @@
+EEPROM starting at address 0
+
+unsigned int info[2]							(4 bytes)		i
+	[0] serial number
+	[1] firmware revision
+
+byte useI2C										(1 byte)		d
+
+byte accelxPin									(1 byte)		P
+byte accelyPin									(1 byte)
+byte accelzPin									(1 byte)
+byte pressurePin								(1 byte)
+byte piezoPin									(1 byte)
+byte sensorInvert								(1 byte)		I
+byte interval									(1 byte)		p
+
+byte jabInterval								(1 bytes)		j
+unsigned int jabThresh							(2 bytes)		J
+
+byte touchInterval								(1 bytes)		t
+byte touchMask[6]								(6 bytes)		T
+	
+unsigned int calibrationData[10]				(20 bytes)		c
+	[0]	accelx_min
+	[1]	accelx_max
+	[2]	accely_min
+	[3]	accely_max
+	[4]	accelz_min
+	[5]	accelz_max
+	[6]	pressure_min
+	[7]	pressure_max
+	[8]	piezo_min
+	[9]	piezo_max
+	
+	
+	
+total:											(42 bytes)

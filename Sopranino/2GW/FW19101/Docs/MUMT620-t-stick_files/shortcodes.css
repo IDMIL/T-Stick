@@ -1,0 +1,372 @@
+/*---------------------------------------shortcodes style---------------------------------------*/
+
+/*==================== pricing table shortcode style ====================*/
+/*.pricing-tables{
+	margin-bottom: 20px;
+	font-size: 0px;
+}
+
+.pricing-col-header{
+	border: 1px solid #eaeaea;
+	border-bottom: 0;
+	padding: 30px;
+}
+
+.pricing-col-header h3{
+	text-transform: uppercase;
+}
+
+.pricing-col-header p{
+	line-height: normal;
+	color: #000;
+}
+
+li.pricing-col{
+	vertical-align: top;
+	min-width: 25%;
+	padding: 0;
+	font-size: 13px;
+	margin-bottom: 30px;
+	margin-left: -1px;
+}
+
+.pricing-col > ul > li > i.brand-color{
+	color: #EB2227; 
+}
+
+.pricing-col ul li{
+	padding: 20px;
+	border: 1px solid #eaeaea;
+	text-align: left;
+	border-bottom: 0;
+}
+
+.pricing-col ul li:last-child{
+	border-bottom:1px solid #eaeaea;
+}
+
+.pricing-col ul li:nth-child(even){
+	background: rgba(0, 0, 0, 0.05);
+}
+
+.pricing-col ul li p{
+	margin: 0;
+}
+
+.important{
+	background: #EB2227;
+	border: 0;
+	padding-bottom: 31px;
+}
+
+.pricing-col-header.important h3,
+.pricing-col-header.important p{
+	color: #fff;
+}*/
+
+
+
+/*==================== slider shortcode style ====================*/
+/*.slider-shortcode-container{
+	margin-bottom: 20px;
+	position: relative;
+}
+
+.slider-shortcode.owl-theme .owl-dots .owl-dot span{
+	background-color: rgba(0,0,0,0);
+	border: 2px solid #EB2227;
+	opacity: 1;
+}
+
+.slider-shortcode.owl-theme .owl-dots .owl-dot.active span{
+	background-color: #EB2227;
+}
+
+
+
+/*==================== bootstrap accordion shortcode style ====================*/
+/*#accordion{
+	margin-bottom: 20px;
+}
+
+.panel.accordion-item{
+	margin: 0;
+	background: rgba(0,0,0,0);
+	border-radius: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border: none;
+	margin-top: -1px;
+}
+
+.accordion-title p{
+	font-size: 14px;
+	margin: 0;
+	border-top: 1px solid #d4d4d4;
+	border-bottom: 1px solid #d4d4d4;
+}
+
+.accordion-title a{
+	display: block;
+	padding: 10px 0;
+}
+
+.accordion-body{
+	padding: 20px 0;
+	line-height: 27px;
+}
+
+.accordion-title a:after{
+	content: "\f068";
+	font-family: FontAwesome;
+	float: right;
+}
+
+.accordion-title a.collapsed:after{
+	content: "\f067";
+	font-family: FontAwesome;
+	float: right;
+}
+
+.accordion-title a.collapsed{
+	color: #656565;
+}
+
+.tab-content{
+	border-bottom: 1px solid #D4D4D4;
+	margin-bottom: 20px;
+}
+
+.tab-pane{
+	padding: 30px 0;
+}
+
+.nav.nav-tabs{
+	position: static;
+	margin: 0;
+}
+
+.nav-tabs > li > a{
+	border: 1px solid #d4d4d4;
+	border-radius: 0;
+	margin: 0;
+	border-right: 0;
+	color: #656565;
+	font-size: 14px;
+}
+
+.nav-tabs > li > a i{
+	margin-left: 10px;
+}
+
+.nav-tabs > li:last-child > a{
+	border-right: 1px solid #d4d4d4;
+}
+
+.nav-tabs > li.active{
+	margin-right: -1px;
+}
+
+.nav-tabs > li > a:hover{
+	border-color: #d4d4d4 #d4d4d4 #d4d4d4;
+	color: #EB2227; 
+}
+
+.nav > li > a:hover, .nav > li > a:focus{
+	background-color: initial;
+}
+
+.nav-tabs > li.active > a{
+	color: #151515;
+}
+
+.nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+	color: #EB2227;
+}*/
+
+
+
+/*==================== buttons shortcode style ====================*/
+.button{
+	padding: 5px 13px;
+	text-align: center;
+	display: inline-block;
+	color: #aaa;
+	border: 2px solid;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+	font-size: 12px;
+}
+
+.button.filled{
+	border: 0;
+}
+
+.button.grey{
+	color: #aaaaaa;
+}
+
+.button.grey.filled{
+	background: #aaaaaa;
+	color: #fff;
+}
+
+.button.yellow{
+	color: #ffc000;
+}
+
+.button.yellow.filled{
+	background: #ffc000;
+	color: #fff;
+}
+
+.button.black{
+	color: #151515;
+}
+
+.button.black.filled{
+	background: #151515;
+	color: #fff;
+}
+
+.button.red{
+	color: #f23838;
+}
+
+.button.red.filled{
+	background: #f23838;
+	color: #fff;
+}
+
+.button.orange{
+	color: #ff8949;
+}
+
+.button.orange.filled{
+	background: #ff8949;
+	color: #fff;
+}
+
+.button.green{
+	color: #5be8c2;
+}
+
+.button.green.filled{
+	background: #5be8c2;
+	color: #fff;
+}
+
+.button.blue{
+	color: #304393;
+}
+
+.button.blue.filled{
+	background: #304393;
+	color: #fff;
+}
+
+.button.purple{
+	color: #b588ca;
+}
+
+.button.purple.filled{
+	background: #b588ca;
+	color: #fff;
+}
+
+.button.white{
+	color: #ffffff;
+}
+
+.button.white.filled{
+	background: #ffffff;
+	color: #151515;
+}
+
+.demo-btns a{
+	margin:10px;
+}
+
+.demo-btns a:first-of-type{
+	margin-left: 0px;
+}
+
+/*==================== testmonial shortcode style ====================*/
+/*.testmonial {
+	margin-bottom: 30px;
+}
+
+.testmonial .img-circle{
+	overflow: hidden;
+}
+
+.testmonial:hover .overlay{
+	background-color: rgba(235, 34, 39, 0.8);
+}
+
+.testmonial:hover .overlay{
+	opacity: 1;
+}
+
+.testmonial .testmonial-image{
+	width: 20%;
+	margin: 0 auto;
+	display: block;
+	margin-bottom: 20px;
+}
+
+h4.testmonial-author{
+	margin: 0;
+	margin-bottom: 20px;
+}
+
+.testmonial.horizontal .testmonial-image, .testmonial.horizontal .testmonial-text{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.testmonial.horizontal .testmonial-image{
+	margin-bottom: 0;
+}
+
+.testmonial.horizontal .testmonial-text{
+	width: 80%;
+	margin-left: -4px;
+	padding-left: 30px;
+}*/
+
+
+
+/*==================== blockquote shortcode style ====================*/
+/*.blockquote, .blockquote2{
+	background: #ebebeb;
+	margin-bottom: 30px;
+	padding: 20px;
+}
+
+.blockquote .quote{
+	padding: 30px;
+}
+
+.blockquote2 .quote{
+	display: inline-block;
+	vertical-align: middle;
+	width: 10%;
+	padding: 0;
+}
+
+.blockquote2 .text{
+	display: inline-block;
+	vertical-align: middle;
+	width: 90%;
+	margin-left: -4px;
+	padding: 0 20px;
+}
+
+.blockquote .text, .blockquote2 .text{
+	line-height: 24px;
+}
+
+.text .author{
+	color: #151515;
+}*/

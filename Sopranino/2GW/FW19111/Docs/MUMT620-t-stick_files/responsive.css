@@ -1,0 +1,365 @@
+/*------------------------------------------------------------------
+[. responsive]
+*/
+@media(max-width: 1200px){
+	.royal-slider-slide .overlay, .royal-slider .animation-block{
+		z-index: 0;
+	}
+
+	.about-me-slider .royal-slider .right .about-me-content .rsABlock{
+	    right: 100px;
+	}
+
+	.about-me-slider .royal-slider .left .about-me-content .rsABlock{
+	    left: 100px;
+	}
+
+	.about-member .about-member-info{
+		position: relative;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: auto;
+		padding: 20px;
+		background-color: #eeeeee;
+	}
+
+	.about-member .about-member-info h4{
+		color: inherit;
+	}
+
+	.circle-shares li a{
+		border-color: #999999;
+	}
+
+	.map-contact-info{
+		padding: 30px;
+	}
+
+	footer{
+		padding: 30px 0;
+	}
+}
+
+@media(max-width: 991px){
+	footer{
+		padding: 30px 0;
+	}
+
+	.royal-slider .animation-block.left-middle{
+		margin-left: 90px;
+	}
+
+	.royal-slider .animation-block.right-middle{
+		margin-right: 90px;
+	}
+
+	.portfolio-filter-v1 ul li{
+		padding: 0 7px;
+	}
+
+	.portfolio-filter-v2{
+		width: 30%;
+	}
+
+	.portfolio-filter-v2 ~ .row{
+		width: 70%;
+	}
+
+	.single-blog-details{
+		padding-right: 15px;
+		text-align: left;
+	}
+
+	.single-blog-details .collective-title.title-right:after{
+		margin-left: 0;
+	}
+
+	.single-blog-details ~ .col-md-8{
+		padding-left: 15px;
+	}
+
+	.single-portfolio-container{
+		margin-top: 60px;
+		margin-bottom: 60px;
+	}
+
+	#left-side > .container > .col-md-4{
+		padding-right: 15px;
+	}
+
+	#left-side > .container > .col-md-8{
+		padding-left: 15px;
+	}
+
+	#right-side > .container > .col-md-8{
+		padding-right: 15px;
+		margin-bottom: 50px;
+	}
+
+	#right-side > .container > .col-md-4{
+		padding-left: 15px;
+	}
+
+	.projects-nav .prev-project, .projects-nav .next-project{
+		width: 45%;
+	}
+
+	.projects-nav .all-projects{
+		width: 10%;
+	}
+
+	.left .animation-block > div:last-of-type{
+	    display: none;
+	}
+
+	.left .animation-block > div:first-of-type .rsABlock{
+		top: 50px !important;
+		left: 100px !important;
+		right: 100px !important;
+		bottom: 50px !important;
+	}
+
+	.right .animation-block > div:first-of-type{
+	    display: none;
+	}
+
+	.right .animation-block > div:last-of-type .rsABlock{
+		top: 50px !important;
+		left: 100px !important;
+		right: 100px !important;
+		bottom: 50px !important;
+	}
+
+	.about-member-info .circle-shares.pull-right{
+		float: none !important;
+		margin-bottom: 15px;
+	}
+
+	.about-member-info .margin-top-lg{
+		margin-top: 15px;
+	}
+
+	.vertical-project .text h1{
+		font-size: 16px;
+	}
+
+	.vertical-project .text h2{
+		font-size: 50px;
+	}
+
+	.royal-slider .animation-block .rsABlock{
+		max-height: 600px;
+		overflow-y: auto;
+	}
+
+	.widget-about-me .about-me-img{
+		max-width: 200px;
+	}
+
+	.post-shares{
+		margin-bottom: 30px;
+	}
+}
+
+@media(max-width: 767px){
+	footer{
+		padding: 15px 0;
+	}
+
+	footer .widget{
+		margin-bottom: 30px;
+	}
+
+	.collective-title:after, h2.wpb_heading:after{
+		padding-top: 10px;
+		margin-bottom: 15px;
+	}
+
+	.stoned-container {
+    	padding: 0 15px;
+	}
+
+	.royal-slider-container nav {
+	    position: absolute;
+	    bottom: 30px;
+	    text-align: center;
+	    left: 0 !important;
+	    right: 0 !important;
+	}
+
+	.royal-slider-container nav.side div {
+	    margin: 0;
+	    position: static !important;
+	}
+
+	.royal-slider-container.vertical-slider nav.side div.prev, .royal-slider-container.vertical-slider nav.side div.next {
+		margin: 0;
+	}
+
+	.vertical-projects .vertical-project{
+		width: 100% !important;
+		padding-bottom: 56.25%;
+		height: 0;
+	}
+
+	.variable-sized-gallery .owl-item > div[style="width: 400px;"]{
+		background-color: red;
+	}
+
+	.variable-sized-gallery .landscape-image{
+		width: 140px;
+		height: 280px;
+	}
+
+	.variable-sized-gallery .portrait-image{
+		width: 280px;
+		height: 280px;
+	}
+
+	.royal-slider .animation-block{
+		margin: 0 !important;
+		padding: 0 15px !important;
+	}
+
+	.royal-slider-container.bordered .animation-block{
+    	margin: 15px !important;
+    }
+
+	.royal-slider .animation-block .rsABlock{
+		position: static !important;
+	}
+
+	.royal-slider-container:not(.fit-to-screen){
+		max-height: 500px;
+	}
+
+	.portfolio-filter-v1 ul{
+		padding: 15px 10px;
+	}
+
+	.portfolio-filter-v1 ul li{
+		line-height: 35px;
+	}
+
+	.portfolio-filter-v2{
+		width: 100%;
+		margin-top: 15px;
+	}
+
+	.portfolio-filter-v2 ul{
+		margin-bottom: 0;
+	}
+
+	.portfolio-filter-v2 ~ .row{
+		width: 100%;
+		margin-top: 0;
+		margin-left: 0;
+	}
+
+	.portfolio-filter-v2 ~ .row.load-more-container{
+		margin-right: 0;
+	}
+
+	.portfolio-filter-v2 li{
+		padding: 5px 25px;
+	}
+
+	.row.mosaic .portfolio-item-container {
+    	max-width: 100%;
+	}
+
+	.projects-nav{
+		padding: 0 15px;
+	}
+
+	.projects-nav .prev-project, .projects-nav .next-project{
+		width: 40%;
+		border: 0;
+	}
+
+	.projects-nav .all-projects{
+		width: 20%;
+	}
+
+	#sth-lightbox .slider-number, #sth-lightbox .close-modal{
+		width: 15%;
+	}
+
+	#sth-lightbox .slide-title{
+		width: 70%;
+	}
+
+	#sth-lightbox .slide-title h4{
+		font-size: 12px;
+	}
+
+	.service-height > div{
+		height: auto;
+		padding: initial !important;
+	}
+
+	.owl-container.blog-main-slider nav {
+	    top: 15px;
+	    bottom: auto;
+	    right: 5px;
+	}
+
+	body.single-post{
+		position: static;
+	}
+
+	.single-format-quote .container-16-9{
+		padding: 0;
+		height: auto;
+	}
+
+	.single-format-quote .container-16-9 .content{
+		position: static;
+	}
+
+	.single-format-quote .container-16-9 .vertical-center2-content.padding-lg {
+	    padding: 10% 10% 0;
+	}
+
+	.fit-to-screen{
+		min-height: 500px;
+	}
+
+	.map-contact-info{
+		width: 100%;
+		position: static;
+		height: auto;
+	}
+
+	.map-canvas{
+		height: 350px;
+	}
+
+	.map-contact-container{
+		height: auto !important;
+	}
+
+	.map-contact-info.map-overlay-gradient{
+		background: rgb(221,221,221);
+	}
+
+	.owl-container nav.style-1 div i, .royal-slider-container nav.style-1 div i{
+		line-height: 36px;
+	}
+
+	.rsThumbs {
+		display: none;
+	}
+}
+
+@media(max-height: 768px){
+	.royal-slider .animation-block .rsABlock{
+		max-height: 390px;
+		overflow-y: auto;
+	}
+
+	.about-me-slider .royal-slider .animation-block .rsABlock{
+		max-height: none;
+	}
+}
