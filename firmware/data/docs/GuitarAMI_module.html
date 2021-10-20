@@ -1,0 +1,166 @@
+<h1 id="guitarami-module-user-guide">GuitarAMI Module user guide</h1>
+<figure>
+<img src="./images_module/modules.jpg" title="Modules" alt="" /><figcaption>Modules</figcaption>
+</figure>
+<ul>
+<li><a href="#usage-instructions">Usage instructions</a>
+<ul>
+<li><a href="#operation-modes">Operation modes</a></li>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#led-indicator">LED indicator</a></li>
+<li><a href="#charging-your-module">Charging your module</a></li>
+</ul></li>
+<li><a href="#osc-namespaces">OSC namespaces</a></li>
+<li><a href="#midi-messages">MIDI messages</a></li>
+<li><a href="#pure-data-test-patch">Pure Data test patch</a></li>
+<li><a href="#updating-module-firmware">Updating module firmware</a></li>
+<li><a href="#other-documentation">Other Documentation</a></li>
+<li><a href="#information">Information</a></li>
+</ul>
+<h2 id="usage-instructions">Usage instructions</h2>
+<h3 id="operation-modes">Operation modes</h3>
+<p>The module can operate in 3 different modes:</p>
+<ul>
+<li>OSC-STA mode: The module becomes a WiFi client (station mode) and will send OSC messages to the addresses/ports configured on the setup page. Both the module and recipient must be connected to the same network.</li>
+<li>OSC-AP mode: The module creates it’s own WiFi network (access point) and will send OSC messages to the addresses/ports configured on the setup. The AP created uses credentials configured on the setup page and recipient must be connected to the module’s network. The AP’s name is created using the instrument’s name, e.g, <em>GuitarAMI_module_XXX</em>. The default password is <code>mappings</code>.</li>
+<li>MIDI mode: The module behaves as a BLE MIDI device, and can be used as a wireless midi controller.</li>
+</ul>
+<h3 id="setup">Setup</h3>
+<p>The module also has a special setup mode. To access the mode, hold the capacitive touch for 5 seconds. The module will reboot and enter the setup mode. You can access the setup page using 2 different methods:</p>
+<ul>
+<li>Using the module’s AP:
+<ul>
+<li>Access the AP (created using the instrument’s name, e.g, <em>GuitarAMI_module_XXX</em> and previously stored password)</li>
+<li>In a new browser window, type either <a href="http://GuitarAMI_module_XXX.local/">http://GuitarAMI_module_XXX.local/</a> (replace the XXX by your module’s ID) or the IP address (if known), e.g., <em>192.168.0.100</em></li>
+</ul></li>
+<li>Using the current network (STA):
+<ul>
+<li>In a new browser window, type either <a href="http://GuitarAMI_module_XXX.local/">http://GuitarAMI_module_XXX.local/</a> (replace the XXX by your module’s ID) or the IP address (if known), e.g., <em>192.168.0.100</em></li>
+</ul></li>
+</ul>
+<p>The setup options include:</p>
+<ul>
+<li>Network:
+<ul>
+<li>SSID: network SSID for STA mode (will auto-fill with current SSID)</li>
+<li>SSID Password: password for STA mode network (will auto-fill with current password)</li>
+</ul></li>
+<li>GuitarAMI module password:
+<ul>
+<li>New password: type password for AP and setup modes (leve it blank if you want keep the same password)</li>
+<li>Retype new password: retype password for AP and setup modes (leve it blank if you want keep the same password)</li>
+</ul></li>
+<li>Operation mode:
+<ul>
+<li>STA (station), AP (access point), MIDI</li>
+</ul></li>
+<li>OSC send settings:
+<ul>
+<li>Primary IP: first IP address to send OSC messages (STA and AP modes)</li>
+<li>Primary port: first port to send OSC messages (STA and AP modes)</li>
+<li>Secondary IP: second IP address to send OSC messages (STA and AP modes)</li>
+<li>Secondary port: second port to send OSC messages (STA and AP modes)</li>
+</ul></li>
+<li>Scan for networks: open a secondary page with the scanned networks in the area. This list may not be complete and it’s necessary to fill the SSID (for STA mode) manually on the setup page (you can copy/paste the SSID from the scan page)</li>
+<li>SAVE button: click to save the surrent configuration</li>
+</ul>
+<p>The setup page also contains extra information about the module: Current SSID, Current IP address (STA), Access Point IP, Station (STA) MAC address, Access Point MAC address, module ID (serial #), module author, Institution, and Firmware version.</p>
+<p>To exit the setup mode, click on <code>Close and Reboot</code>. The module will reboot into the chosen operation mode.</p>
+<h3 id="led-indicator">LED indicator</h3>
+<p>The GuitarAMI module has a built-in LED to indicate status and battery level.</p>
+<ul>
+<li>For the modules using the TinyPICO (with RGB LED):
+<ul>
+<li>Low battery indicator: fast blink (flickering) in Red</li>
+<li>Mode indicator (color):
+<ul>
+<li>STA: Dodger Blue</li>
+<li>AP: Lime</li>
+<li>MIDI: Magenta</li>
+<li>Setup: Dark Orange</li>
+</ul></li>
+<li>Connection indicator: the LED will blink slowly when connected, while it will cycle-fade when disconnected</li>
+<li>Battery Charge: Orange (on secondary LED close to USB port)</li>
+<li>USB Power connection: Red (on secondary LED close to USB port)</li>
+<li>Error: if everything goes wrong it cycles through all colors (rainbow panic)</li>
+</ul></li>
+<li>For the older modules using the Wemos D32 Pro (with blue LED next to the USB port):
+<ul>
+<li>Low battery indicator: fast blink (flickering)</li>
+<li>Setup mode: the LED will be always ON</li>
+<li>Connection indicator: the LED will blink slowly when connected, while it will cycle-fade when disconnected</li>
+</ul></li>
+</ul>
+<h3 id="charging-your-module">Charging your module</h3>
+<p>To charge the module, connect any 5V USB power supply to the micro-USB port. A red light will indicate that the module is charging.</p>
+<p>IMPORTANT: The module needs to be turned ON to charge! {: .alert .alert-warning}</p>
+<h2 id="osc-namespaces">OSC namespaces</h2>
+<ul>
+<li>continuous:
+<ul>
+<li>/GuitarAMI_module_XXX/ult [int] (in mm)</li>
+<li>/GuitarAMI_module_XXX/accl [float] [float] [float] (in m/s^2)</li>
+<li>/GuitarAMI_module_XXX/gyro [float] [float] [float] (in radians per second)</li>
+<li>/GuitarAMI_module_XXX/magn [float] [float] [float] (in uTesla)</li>
+<li>/GuitarAMI_module_XXX/quat [float] [float] [float]</li>
+</ul></li>
+<li>discrete:
+<ul>
+<li>/GuitarAMI_module_XXX/tap [0 or 1]</li>
+<li>/GuitarAMI_module_XXX/dtap [0 or 1]</li>
+<li>/GuitarAMI_module_XXX/ttap [0 or 1]</li>
+<li>/GuitarAMI_module_XXX/battery [int] (percentage)</li>
+</ul></li>
+<li>Instrument:
+<ul>
+<li>/GuitarAMI_module_XXX/ypr [float] [float] [float] (in degrees)</li>
+<li>/GuitarAMI_module_XXX/jab [float] [float] [float]</li>
+<li>/GuitarAMI_module_XXX/shake [float] [float] [float]</li>
+<li>/GuitarAMI_module_XXX/count [int]</li>
+<li>/GuitarAMI_module_XXX/ultTrig [int] [0 or 1]</li>
+</ul></li>
+</ul>
+<h2 id="midi-messages">MIDI messages</h2>
+<ul>
+<li>continuous:
+<ul>
+<li>CC 20: ultrasonic sensor scaled from 0 to 300 mm</li>
+<li>CC 21: absolute X-axis acceleration, scaled from 0 to 50 m/s^2 (~5.1 gs)</li>
+<li>CC 22: absolute Y-axis acceleration, scaled from 0 to 50 m/s^2 (~5.1 gs)</li>
+<li>CC 23: absolute Z-axis acceleration, scaled from 0 to 50 m/s^2 (~5.1 gs)</li>
+<li>CC 24: absolute X-axis angular velocity (gyroscope), scaled from 0 to 25 rad/s</li>
+<li>CC 25: absolute Y-axis angular velocity (gyroscope), scaled from 0 to 25 rad/s</li>
+<li>CC 26: absolute Z-axis angular velocity (gyroscope), scaled from 0 to 25 rad/s</li>
+<li>CC 27: yaw, scaled from -180 to 180 degrees</li>
+<li>CC 28: pitch, scaled from -180 to 180 degrees</li>
+<li>CC 29: roll, scaled from -180 to 180 degrees</li>
+<li>CC 85: shake X</li>
+<li>CC 86: shake Y</li>
+<li>CC 87: shake Z</li>
+<li>CC 102: jab X</li>
+<li>CC 103: jab Y</li>
+<li>CC 104: jab Z</li>
+</ul></li>
+<li>discrete:
+<ul>
+<li>CC 30: tap [0 or 127]</li>
+<li>CC 31: double tap [0 or 127]</li>
+<li>CC 14: triple tap [0 or 127]</li>
+<li>CC 15: touch count starting from 0</li>
+<li>CC 89: Ultrasonic trigger [0 or 127]</li>
+</ul></li>
+</ul>
+<h2 id="pure-data-test-patch">Pure Data test patch</h2>
+<p>There is an GuitarAMI module <a href="http://puredata.info/">Pure Data</a> test patch for OSC and MIDI that can be downloaded <a href="/GuitarAMI_module.pd">directly from the module</a> (<a href="/GuitarAMI_module.pd">GuitarAMI_module.pd</a>). Users can check if all data is reaching the destination and the interval between messages.</p>
+<h2 id="updating-module-firmware">Updating module firmware</h2>
+<p>To update your firmware, please follow the following steps:</p>
+<ul>
+<li>Download the new firmware or spiffs file (.bin) provided by the module’s author</li>
+<li>Enter the <a href="#setup">Setup mode</a></li>
+<li>In a new browser window, type either <a href="http://GuitarAMI_module_XXX.local/update">http://GuitarAMI_module_XXX.local/update</a> (replace the XXX by your module’s ID) or the IP address (if known), e.g., <a href="192.168.0.100/update">192.168.0.100/update</a></li>
+<li>Click on <code>choose file</code> and select the apropriate file. Check if the filename is correct (next to the button)</li>
+<li>Click on <code>Update Firmware</code> or <code>Update SPIFFS</code> according to the chosen file</li>
+<li><strong>DO NOT turn the module OFF during the process</strong>. Wait until the module reboot itself: the update page will be unavailable and the module will enter setup mode again. You can then access the <a href="#setup">setup page</a> and click on <code>Close and reboot</code></li>
+</ul>
+<h2 id="information">Information</h2>
+<p>GuitarAMI (classical guitar) Module - WiFi(OSC) + MIDI <a href="http://www.idmil.org/">Input Devices and Music Interaction Laboratory (IDMIL)</a> <a href="http://www.cirmmt.org/">Centre of Interdisciplinary Research In Music Media and Technology (CIRMMT)</a> February 2021 by <a href="http://www.edumeneses.com/">Edu Meneses</a></p>
