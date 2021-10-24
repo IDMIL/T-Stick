@@ -46,19 +46,19 @@ void Instrument_touch::updateInstrument(int *raw_touch) {
         touchBottom = touchAverage(normTouch, (touchSize-touchSizeEdge), touchSize);
 
         // Save last blob detection state before reading new data
-        for (byte i=0; i < (sizeof(BlobDetection.blobPos)/sizeof(BlobDetection.blobPos[0])); ++i) {
-            lastState_blobPos[i] = BlobDetection.blobPos[i];
+        for (byte i=0; i < (sizeof(blobPos)/sizeof(blobPos[0])); ++i) {
+            lastState_blobPos[i] = blobPos[i];
         }
 
         // 1D blob detection: used for brush
-        BlobDetection = blobDetection1D(touch, touchSize);
+        blobDetection1D();
 
         // brush: direction and intensity of capsense brush motion
         // rub: intensity of rub motion
         // in ~cm/s (distance between stripes = ~1.5cm)
-        for (byte i=0; i < (sizeof(BlobDetection.blobPos)/sizeof(BlobDetection.blobPos[0])); ++i) {        
-            float movement = BlobDetection.blobPos[i] - lastState_blobPos[i]; 
-            if ( BlobDetection.blobPos[i] == -1 ) {
+        for (byte i=0; i < (sizeof(blobPos)/sizeof(blobPos[0])); ++i) {        
+            float movement = blobPos[i] - lastState_blobPos[i]; 
+            if ( blobPos[i] == -1 ) {
                 multiBrush[i] = 0;
                 multiRub[i] = 0;
                 brushCounter[i] = 0;
@@ -94,55 +94,90 @@ float Instrument_touch::touchAverage (float * touchArrayStrips, int firstStrip, 
     return  ((float) sum) / (lastStrip - firstStrip);
 }
 
-Instrument_touch::blob Instrument_touch::blobDetection1D (byte * touchArray, byte arraySize) {
-
-    // creating local variables
-    blob blobDecect;
-    byte tempArray[8];
-    int beginBlob = -1; // -1 means it will not count stripes
-    byte blobCount = 0;
-    for (byte i=0; i < sizeof(blobDecect.blobPos)/sizeof(blobDecect.blobPos[0]); ++i) {
-      blobDecect.blobPos[i] = -1;
-      blobDecect.blobSize[i] = 0;
-    }
-    for (byte i=0; i < sizeof(blobDecect.blobArray)/sizeof(blobDecect.blobArray[0]); ++i) {
-      blobDecect.blobArray[i] = 0;
+void Instrument_touch::blobDetection1D () {
+    blobAmount = 0;
+    int sizeCounter = 0;
+    int stripe = 0;
+    for (int i=0; i<4; i++) {
+        blobCenter[i] = 0;
+        blobPos[i] = 0;
+        blobSize[i] = 0;
     }
 
-    // fixing capsense byte order
-    byte order[8] = {1,0,3,2,5,4,7,6};
-    for (byte i=0; i < arraySize; ++i) {
-      tempArray[i] = touchArray[order[i]];
-    }
-
-    // shifting and reading...
-    for (byte i=0; i < arraySize*8; ++i) {
-      bitShiftArrayL(tempArray, blobDecect.blobArray, arraySize, i);
-      if ((blobDecect.blobArray[0] & 128) == 128 && beginBlob == -1) {
-          beginBlob = i;
-      }
-      if ( ((blobDecect.blobArray[0] & 128) == 0 || i == (arraySize*8)-1) && beginBlob != -1) {
-          blobDecect.blobPos[blobCount] = (i + beginBlob) / 2;
-          blobDecect.blobSize[blobCount] = float(i - beginBlob) / (arraySize * 8);
-          beginBlob = -1;
-          blobCount++;
+    for ( ; stripe<touchSize; stripe++) {
+        if (blobAmount < maxBlobs) {
+            if (touch[stripe] == 1) { // check for beggining of blob...
+                sizeCounter = 1;
+                blobPos[blobAmount] = stripe;
+                while (touch[stripe+sizeCounter] == 1) { // then keep checking for end
+                    sizeCounter++;
+                }
+                blobSize[blobAmount] = sizeCounter;
+                blobCenter[blobAmount] = stripe + (sizeCounter / 2);
+                stripe += sizeCounter + 1; // skip stripes already read
+                blobAmount++;
+            }
         }
     }
-
-    for (byte i=0; i < sizeof(blobDecect.blobArray)/sizeof(blobDecect.blobArray[0]); ++i) {
-      blobDecect.blobArray[i] = 0;
-    }
-    for (byte i=0; i < sizeof(blobDecect.blobPos)/sizeof(blobDecect.blobPos[0]); ++i) {
-      if (blobDecect.blobPos[i] != -1) {
-        bitWrite(blobDecect.blobArray[blobDecect.blobPos[i]/8], (7-(blobDecect.blobPos[i]%8)), 1);        
-      }
-      else {
-        break;
-      }
-    }
-
-    return blobDecect; 
 }
+
+// void Instrument_touch::blobDetection1D (byte * touchArray, int arraySize) {
+
+//     // creating local variables
+//     byte temp_blobArray[8];  // shows the "center" of each array
+//     int temp_blobPos[4];     // position (index) of each blob
+//     float temp_blobSize[4];  // "size" of each blob
+//     byte tempArray[8];
+//     int beginBlob = -1; // -1 means it will not count stripes
+//     byte blobCount = 0;
+//     for (byte i=0; i < sizeof(temp_blobPos)/sizeof(temp_blobPos[0]); ++i) {
+//       temp_blobPos[i] = -1;
+//       temp_blobSize[i] = 0;
+//     }
+//     for (byte i=0; i < sizeof(temp_blobArray)/sizeof(temp_blobArray[0]); ++i) {
+//       temp_blobArray[i] = 0;
+//     }
+
+//     // fixing capsense byte order
+//     byte order[8] = {1,0,3,2,5,4,7,6};
+//     for (byte i=0; i < arraySize; ++i) {
+//       tempArray[i] = touchArray[order[i]];
+//     }
+
+//     // shifting and reading...
+//     for (byte i=0; i < arraySize*8; ++i) {
+//       bitShiftArrayL(tempArray, temp_blobArray, arraySize, i);
+//       if ((temp_blobArray[0] & 128) == 128 && beginBlob == -1) {
+//           beginBlob = i;
+//       }
+//       if ( ((temp_blobArray[0] & 128) == 0 || i == (arraySize*8)-1) && beginBlob != -1) {
+//           temp_blobPos[blobCount] = (i + beginBlob) / 2;
+//           temp_blobSize[blobCount] = float(i - beginBlob) / (arraySize * 8);
+//           beginBlob = -1;
+//           blobCount++;
+//         }
+//     }
+
+//     for (byte i=0; i < sizeof(temp_blobArray)/sizeof(temp_blobArray[0]); ++i) {
+//       temp_blobArray[i] = 0;
+//     }
+//     for (byte i=0; i < sizeof(temp_blobPos)/sizeof(temp_blobPos[0]); ++i) {
+//       if (temp_blobPos[i] != -1) {
+//         //bitWrite(temp_blobArray[temp_blobPos[i]/8], (7-(temp_blobPos[i]%8)), 1);        
+//       }
+//       else {
+//         break;
+//       }
+//     }
+
+//     for (byte n=0; n<8; n++) {
+//         blobArray[n] = temp_blobArray[n];
+//     }
+//     for (byte n=0; n<4; n++) {
+//         blobPos[n] = temp_blobPos[n];
+//         blobSize[n] = temp_blobSize[n];
+//     }
+// }
 
 // Simple leaky integrator implementation
 //

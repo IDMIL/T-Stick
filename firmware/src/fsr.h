@@ -15,6 +15,7 @@ class Fsr {
         byte initFsr(byte &fsr_pin, int &offsetValue);
         byte readFsr();
         float getValue();
+        float getNormValue();
         int getOffset();
         byte setOffset(int &offsetValue);
 };

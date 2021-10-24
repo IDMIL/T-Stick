@@ -18,6 +18,10 @@ float Fsr::getValue() {
     return Fsr::value;
 }
 
+float Fsr::getNormValue() {
+    return Fsr::normValue;
+}
+
 int Fsr::getOffset(){
     return Fsr::offset;
 }

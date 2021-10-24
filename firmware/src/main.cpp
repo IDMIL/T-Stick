@@ -235,7 +235,7 @@ void setup() {
     printVariables();
 
   // Define this module full name
-    snprintf(global.deviceName,(sizeof(global.deviceName)-1),"T-Stick_module_%03i",settings.id);
+    snprintf(global.deviceName,(sizeof(global.deviceName)-1),"T-Stick_%03i",settings.id);
 
     module.startWifi(global.deviceName, settings.mode, settings.APpasswd, settings.lastConnectedNetwork, settings.lastStoredPsk);
 
@@ -270,7 +270,7 @@ void setup() {
     }
 
   // Initializing FSR
-    Serial.print("    Initializing Touch struff...  ");
+    Serial.print("    Initializing Touch stuff...  ");
     if (touch.initTouch()) {
       Serial.println("done");
     } else {
@@ -301,9 +301,7 @@ void setup() {
 
 void loop() {
 
-  //Serial.println(touch.getValue());
-
-  if (settings.mode == 3) {
+  if (settings.mode == 2) {
     dnsServer.processNextRequest();
   }
 
@@ -338,38 +336,40 @@ void loop() {
             }
           // send discrete (button/battery) data (only when it changes) or != 0
             if (global.lastCount != button.getCount()) {
-              sendOSC(settings.oscIP[0], settings.oscPORT[0], "count", button.getCount());
-              sendOSC(settings.oscIP[1], settings.oscPORT[1], "count", button.getCount());
+              sendOSC(settings.oscIP[0], settings.oscPORT[0], "instrument/button/count", button.getCount());
+              sendOSC(settings.oscIP[1], settings.oscPORT[1], "instrument/button/count", button.getCount());
               global.lastCount = button.getCount();
             } 
             if (global.lastTap != button.getTap()) {
-              sendOSC(settings.oscIP[0], settings.oscPORT[0], "tap", button.getTap());
-              sendOSC(settings.oscIP[1], settings.oscPORT[1], "tap",  button.getTap());
+              sendOSC(settings.oscIP[0], settings.oscPORT[0], "instrument/button/tap", button.getTap());
+              sendOSC(settings.oscIP[1], settings.oscPORT[1], "instrument/button/tap",  button.getTap());
               global.lastTap = button.getTap();
             }
             if (global.lastDtap != button.getDTap()) {
-              sendOSC(settings.oscIP[0], settings.oscPORT[0], "dtap",  button.getDTap());
-              sendOSC(settings.oscIP[1], settings.oscPORT[1], "dtap",  button.getDTap());
+              sendOSC(settings.oscIP[0], settings.oscPORT[0], "instrument/button/dtap",  button.getDTap());
+              sendOSC(settings.oscIP[1], settings.oscPORT[1], "instrument/button/dtap",  button.getDTap());
               global.lastDtap = button.getDTap();
             }
             if (global.lastTtap != button.getTTap()) {
-              sendOSC(settings.oscIP[0], settings.oscPORT[0], "ttap",  button.getTTap());
-              sendOSC(settings.oscIP[1], settings.oscPORT[1], "ttap",  button.getTTap());
+              sendOSC(settings.oscIP[0], settings.oscPORT[0], "instrument/button/ttap",  button.getTTap());
+              sendOSC(settings.oscIP[1], settings.oscPORT[1], "instrument/button/ttap",  button.getTTap());
               global.lastTtap = button.getTTap();
             }
             if (global.lastFsr != fsr.getValue()) {
-              sendOSC(settings.oscIP[0], settings.oscPORT[0], "fsr",  fsr.getValue());
-              sendOSC(settings.oscIP[1], settings.oscPORT[1], "fsr",  fsr.getValue());
+              sendOSC(settings.oscIP[0], settings.oscPORT[0], "raw/fsr", fsr.getValue());
+              sendOSC(settings.oscIP[1], settings.oscPORT[1], "raw/fsr", fsr.getValue());
+              sendOSC(settings.oscIP[0], settings.oscPORT[0], "norm/fsr", fsr.getNormValue());
+              sendOSC(settings.oscIP[1], settings.oscPORT[1], "norm/fsr", fsr.getNormValue());
               global.lastFsr = fsr.getValue();
             }
             if (global.lastJab[0] != instrument.getJabX() || global.lastJab[1] != instrument.getJabY() || global.lastJab[2] != instrument.getJabZ()) {
-              sendTrioOSC(settings.oscIP[0], settings.oscPORT[0], "jab", instrument.getJabX(), instrument.getJabY(), instrument.getJabZ());
-              sendTrioOSC(settings.oscIP[1], settings.oscPORT[1], "jab", instrument.getJabX(), instrument.getJabY(), instrument.getJabZ());
+              sendTrioOSC(settings.oscIP[0], settings.oscPORT[0], "instrument/jabxyz", instrument.getJabX(), instrument.getJabY(), instrument.getJabZ());
+              sendTrioOSC(settings.oscIP[1], settings.oscPORT[1], "instrument/jabxyz", instrument.getJabX(), instrument.getJabY(), instrument.getJabZ());
               global.lastJab[0] = instrument.getJabX(); global.lastJab[1] = instrument.getJabY(); global.lastJab[2] = instrument.getJabZ();
             }
             if (global.lastShake[0] != instrument.getShakeX() || global.lastShake[1] != instrument.getShakeY() || global.lastShake[2] != instrument.getShakeZ()) {
-              sendTrioOSC(settings.oscIP[0], settings.oscPORT[0], "shake", instrument.getShakeX(), instrument.getShakeY(), instrument.getShakeZ());
-              sendTrioOSC(settings.oscIP[1], settings.oscPORT[1], "shake", instrument.getShakeX(), instrument.getShakeY(), instrument.getShakeZ());
+              sendTrioOSC(settings.oscIP[0], settings.oscPORT[0], "instrument/shakexyz", instrument.getShakeX(), instrument.getShakeY(), instrument.getShakeZ());
+              sendTrioOSC(settings.oscIP[1], settings.oscPORT[1], "instrument/shakexyz", instrument.getShakeX(), instrument.getShakeY(), instrument.getShakeZ());
               global.lastShake[0] = instrument.getShakeX(); global.lastShake[1] = instrument.getShakeY(); global.lastShake[2] = instrument.getShakeZ();
             }
             if (battery.lastPercentage != battery.percentage) {
@@ -403,7 +403,7 @@ void loop() {
     global.ledValue = led.blink(255, 50);
     ledcWrite(0, global.ledValue);
     } else {
-      if (settings.mode == 3) { // 0:STA, 1:AP, and 3:Setup(STA+AP+WebServer)
+      if (settings.mode == 2) { // 0:STA, 1:AP, and 3:Setup(STA+AP+WebServer)
         ledcWrite(0, 255); // stays always on in setup mode
       } else if (settings.mode == 0 || settings.mode == 1) { 
         if (WiFi.status() == WL_CONNECTED) { // blinks when connected, cycle when disconnected
@@ -1012,21 +1012,21 @@ void start_mdns_service() {
     static OSCBundle continuous;
 
     if (imu.dataAvailable()) {
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/accl",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/raw/accl",global.deviceName);
         OSCMessage msgAccl(namespaceBuffer);
           msgAccl.add(imu.getAccelX());
           msgAccl.add(imu.getAccelY());
           msgAccl.add(imu.getAccelZ());
           continuous.add(msgAccl);
       
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/gyro",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/raw/gyro",global.deviceName);
         OSCMessage msgGyro(namespaceBuffer);
           msgGyro.add(imu.getGyroX());
           msgGyro.add(imu.getGyroY());
           msgGyro.add(imu.getGyroZ());
           continuous.add(msgGyro);
       
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/magn",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/raw/magn",global.deviceName);
         OSCMessage msgMagn(namespaceBuffer);
           msgMagn.add(imu.getMagX());
           msgMagn.add(imu.getMagY());
@@ -1038,7 +1038,33 @@ void start_mdns_service() {
         oscEndpoint.endPacket();
         continuous.empty(); 
 
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/quat",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/norm/accl",global.deviceName);
+        OSCMessage msgnAccl(namespaceBuffer);
+          msgnAccl.add(imu.getNormAccelX());
+          msgnAccl.add(imu.getNormAccelY());
+          msgnAccl.add(imu.getNormAccelZ());
+          continuous.add(msgnAccl);
+      
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/norm/gyro",global.deviceName);
+        OSCMessage msgnGyro(namespaceBuffer);
+          msgnGyro.add(imu.getNormGyroX());
+          msgnGyro.add(imu.getNormGyroY());
+          msgnGyro.add(imu.getNormGyroZ());
+          continuous.add(msgnGyro);
+      
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/norm/magn",global.deviceName);
+        OSCMessage msgnMagn(namespaceBuffer);
+          msgnMagn.add(imu.getNormMagX());
+          msgnMagn.add(imu.getNormMagY());
+          msgnMagn.add(imu.getNormMagZ());
+          continuous.add(msgnMagn);
+
+        oscEndpoint.beginPacket(oscIP,port);
+        continuous.send(oscEndpoint);
+        oscEndpoint.endPacket();
+        continuous.empty(); 
+
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/orientation",global.deviceName);
         OSCMessage msgQuat(namespaceBuffer);
           msgQuat.add(imu.getQuatI());
           msgQuat.add(imu.getQuatJ());
@@ -1069,17 +1095,7 @@ void start_mdns_service() {
           oscEndpoint.endPacket();
           msgtouchtouch.empty(); 
 
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/touch/norm",global.deviceName);
-        OSCMessage msgtouchnormtouch(namespaceBuffer);
-          for (int i=0;i<30;i++) {
-            msgtouchnormtouch.add(instrument_touch.touch[i]);
-          }
-          oscEndpoint.beginPacket(oscIP,port);
-          msgtouchnormtouch.send(oscEndpoint);
-          oscEndpoint.endPacket();
-          msgtouchnormtouch.empty(); 
-
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/touch/all",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/touch/all",global.deviceName);
         OSCMessage msgtouchAll(namespaceBuffer);
           msgtouchAll.add(instrument_touch.touchAll);
           oscEndpoint.beginPacket(oscIP,port);
@@ -1087,7 +1103,7 @@ void start_mdns_service() {
           oscEndpoint.endPacket();
           msgtouchAll.empty(); 
 
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/touch/top",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/touch/top",global.deviceName);
         OSCMessage msgtouchTop(namespaceBuffer);
           msgtouchTop.add(instrument_touch.touchTop);
           oscEndpoint.beginPacket(oscIP,port);
@@ -1095,7 +1111,7 @@ void start_mdns_service() {
           oscEndpoint.endPacket();
           msgtouchTop.empty(); 
 
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/touch/middle",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/touch/middle",global.deviceName);
         OSCMessage msgtouchMiddle(namespaceBuffer);
           msgtouchMiddle.add(instrument_touch.touchMiddle);
           oscEndpoint.beginPacket(oscIP,port);
@@ -1103,7 +1119,7 @@ void start_mdns_service() {
           oscEndpoint.endPacket();
           msgtouchMiddle.empty(); 
 
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/touch/botton",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/touch/botton",global.deviceName);
         OSCMessage msgtouchBottom(namespaceBuffer);
           msgtouchBottom.add(instrument_touch.touchBottom);
           oscEndpoint.beginPacket(oscIP,port);
@@ -1111,7 +1127,7 @@ void start_mdns_service() {
           oscEndpoint.endPacket();
           msgtouchBottom.empty(); 
 
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/touch/brush",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/brush",global.deviceName);
         OSCMessage msgbrush(namespaceBuffer);
           msgbrush.add(instrument_touch.brush);
           oscEndpoint.beginPacket(oscIP,port);
@@ -1119,7 +1135,7 @@ void start_mdns_service() {
           oscEndpoint.endPacket();
           msgbrush.empty(); 
 
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/touch/rub",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/rub",global.deviceName);
         OSCMessage msgrub(namespaceBuffer);
           msgrub.add(instrument_touch.rub);
           oscEndpoint.beginPacket(oscIP,port);
@@ -1127,7 +1143,7 @@ void start_mdns_service() {
           oscEndpoint.endPacket();
           msgrub.empty(); 
 
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/touch/multiBrush",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/multiBrush",global.deviceName);
         OSCMessage msgmultiBrush(namespaceBuffer);
           for (int i=0;i<4;i++) {
             msgmultiBrush.add(instrument_touch.multiBrush[i]);
@@ -1137,7 +1153,7 @@ void start_mdns_service() {
           oscEndpoint.endPacket();
           msgmultiBrush.empty(); 
 
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/touch/multiRub",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/multiRub",global.deviceName);
         OSCMessage msgmultiRub(namespaceBuffer);
           for (int i=0;i<4;i++) {
             msgmultiRub.add(instrument_touch.multiRub[i]);
