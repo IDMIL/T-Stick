@@ -90,7 +90,7 @@ copper soldering | alternate view
 
 Connect long wires from the 5V and GND pins of the TinyPICO (for the battery), and run them through the poles to the other end. Mount the IMU and Trill boards to their beds, and insert the TinyPICO into its slot in the end cap with the button. Slide the entire frame with the button cap into the PVC, making sure the long power wires can be accessed from the open end. Attach the FSR to the outside of the PVC, cutting the end if it's too long. Use the end cap's slot for the FSR wires to come out of the frame.
 
-**Important Note:** In the design with the removable 3.7V battery, the switch is not present and the T-Stick will be powered on and off with the button. The battery container should be soldered to the GND and Bat pins of the TinyPICO.
+**Important Note:** In the design with the removable 3.7V battery, the switch is not present and the T-Stick will be powered on and off with the button. The battery container should be linked to the GND and Bat pins of the TinyPICO. The battery slot will be placed on the opposite end of the TinyPICO and should be pullable out of the opening of the cap for battery replacement.
 
 **IMU Mounting Note:**
 Please install the IMU so that this configuration is kept consistent with the design.
