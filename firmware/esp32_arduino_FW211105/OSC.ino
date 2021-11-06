@@ -11,14 +11,23 @@ void sendOSC(char* ip,int32_t port) {
       char namespaceBuffer[40];
       static OSCBundle bundleRaw;
       static OSCBundle bundleInstrument;
-    
+
+      #ifndef TRILL
       snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/TStick_%i/raw/capsense",Tstick.id);
       OSCMessage msgCapsense(namespaceBuffer);
         for (byte i=0; i < nCapsenses*2; ++i) {
           msgCapsense.add(RawData.touch[i] & Tstick.touchMask[i]);
         }
         bundleRaw.add(msgCapsense);
-
+      #else
+      snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/TStick_%i/raw/touchstrips",Tstick.id);
+      OSCMessage msgCapsense2(namespaceBuffer);
+        for (byte i=0; i < touchStripsSize; ++i) {
+          msgCapsense2.add(RawData.touchStrips[i]);
+        }
+        bundleRaw.add(msgCapsense2);
+      #endif
+      
       snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/TStick_%i/raw/button/short",Tstick.id);
       OSCMessage msgBtnS(namespaceBuffer);
         msgBtnS.add(RawData.buttonShort);

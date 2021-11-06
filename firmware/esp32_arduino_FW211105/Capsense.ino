@@ -1,3 +1,5 @@
+#ifndef TRILL
+
 
 //////////////////////////
 // Capsense Definitions //
@@ -129,3 +131,5 @@ void capsense_scan() {
   }
   touchStripsSize = nCapsenses*16;
 }
+
+#endif

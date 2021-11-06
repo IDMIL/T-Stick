@@ -23,7 +23,11 @@ void updateInstrument() {
   }
 
   // 1D blob detection: used for brush
-  BlobDetection = blobDetection1D(RawData.touch,(nCapsenses*2));
+  #ifndef TRILL
+    BlobDetection = blobDetection1D(RawData.touch,(nCapsenses*2));
+  #else
+    BlobDetection = blobDetection1DTrill(RawData.touchStrips,30);
+  #endif
 
   // InstrumentData.brush: direction and intensity of capsense brush motion
   // InstrumentData.rub: intensity of rub motion
@@ -181,6 +185,37 @@ blob blobDetection1D (byte * touchArray, byte arraySize) {
     }
 
     return blobDecect; 
+}
+
+blob blobDetection1DTrill (byte * touchArray, byte arraySize) {
+
+    blob blobDecect;
+    
+    byte blobAmount = 0;
+    int sizeCounter = 0;
+    int stripe = 0;
+    for (int i=0; i<4; i++) {
+        blobDecect.blobArray[i] = 0;
+        blobDecect.blobPos[i] = 0;
+        blobDecect.blobSize[i] = 0;
+    }
+
+    for ( ; stripe<30; stripe++) {
+        if (blobAmount < 4) {
+            if (touchArray[stripe] == 1) { // check for beggining of blob...
+                sizeCounter = 1;
+                blobDecect.blobPos[blobAmount] = stripe;
+                while (touchArray[stripe+sizeCounter] == 1) { // then keep checking for end
+                    sizeCounter++;
+                }
+                blobDecect.blobSize[blobAmount] = sizeCounter;
+                blobDecect.blobArray[blobAmount] = stripe + (sizeCounter / 2);
+                stripe += sizeCounter + 1; // skip stripes already read
+                blobAmount++;
+            }
+        }
+    }
+    return blobDecect;
 }
 
 

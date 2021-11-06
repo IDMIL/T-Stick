@@ -2,17 +2,33 @@
 
 
 void readData() {
-  
-  // Read capsense touch data
-  for (byte i=0; i < nCapsenses; ++i) {
-      capsense = capsenseRequest(capsense_addresses[i],BUTTON_STAT, 2);
-      RawData.touch[i*2] = capsense.answer1;
-      RawData.touch[(i*2)+1] = capsense.answer2;
-  }
-  for (byte i=0; i < touchStripsSize; ++i) {
-      RawData.touchStrips[i] = bitRead(RawData.touch[i/8],7-(i%8));
-  }
-  reorderCapsense (RawData.touchStrips, touchStripsSize);
+
+  #ifndef TRILL
+    // Read capsense touch data
+    for (byte i=0; i < nCapsenses; ++i) {
+        capsense = capsenseRequest(capsense_addresses[i],BUTTON_STAT, 2);
+        RawData.touch[i*2] = capsense.answer1;
+        RawData.touch[(i*2)+1] = capsense.answer2;
+    }
+    for (byte i=0; i < touchStripsSize; ++i) {
+        RawData.touchStrips[i] = bitRead(RawData.touch[i/8],7-(i%8));
+    }
+    reorderCapsense (RawData.touchStrips, touchStripsSize);
+  #else
+    trillSensor.requestRawData();
+    for (int i=0; i<touchStripsSize; i++) {
+       if (trillSensor.rawDataAvailable() > 0) {
+            RawData.touch_trill[i] = trillSensor.rawDataRead();
+       }
+    }
+    for (int i=0; i < touchStripsSize; i++) {
+            if (RawData.touch_trill[i] != 0) {
+                RawData.touchStrips[i] = 1;
+            } else {
+                RawData.touchStrips[i] = 0;
+            }
+        }
+  #endif
 
   // Read button
   buttonState = !digitalRead(buttonPin);

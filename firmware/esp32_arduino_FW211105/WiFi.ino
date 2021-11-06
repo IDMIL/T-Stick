@@ -31,7 +31,7 @@ void connectToWifi() {
   oscEndpoint.begin(portLocal);
   Serial.println("Starting UDP (listening to OSC messages)");
   Serial.print("Local port: ");
-  #ifdef ESP8266
+  #ifdef IDMILESP8266
       Serial.println(oscEndpoint.localPort());
   #else
       Serial.println(portLocal);

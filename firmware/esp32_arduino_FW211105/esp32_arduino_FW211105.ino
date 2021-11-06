@@ -1,12 +1,10 @@
 //********************************************************************************//
-//  Sopranino T-Stick 2GW - LOLIN D32 PRO - USB -WiFi                             //
+//  Sopranino T-Stick 2GW - LOLIN D32 PRO / TinyPico - USB - WiFi                 //
 //  Input Devices and Music Interaction Laboratory (IDMIL)                        //
 //  Created:  February 2018 by Alex Nieva                                         //
-//            March 2020 by Edu Meneses - firmware version 200330 (2020/Mar/30)   //
-//  Notes   : Based on test program for reading CY8C201xx using I2C               //
-//            by Joseph Malloch 2011                                              //
+//            March 2021 by Edu Meneses - firmware version 2011105 (2021/Nov/05)  //
 //                                                                                //
-//            Adapted to work with Arduino IDE 1.8.10 and T-Stick Sopranino 2GW   //
+//            Adapted to work with Arduino IDE 1.8.15 and T-Stick Sopranino 2GW   //
 //********************************************************************************//
 
 //**************************************************//
@@ -42,7 +40,7 @@
 // IMPORTANT: You need to upload a file (data/config.json) into ESP32 filesystem. 
 // Follow the instructions at https://github.com/me-no-dev/arduino-esp32fs-plugin
 
-// Tested on Wemos Lolin D32 Pro
+// Tested on Wemos Lolin D32 Pro and the TinyPico
 
 // DEPENDENCIES:
 // esp32 board library (add url to preferences; install via board manager)
@@ -53,6 +51,7 @@
 // OSC - https://github.com/CNMAT/OSC (v3.5.7)
 // MIMU - https://github.com/DocSunset/MIMU
 // Eigen - https://github.com/bolderflight/Eigen
+// Libmapper-arduino (https://github.com/mathiasbredholt/libmapper-arduino)
 
 //  OBS:
 //  1-) Use esp32 1.0.4 or newer (https://github.com/espressif/arduino-esp32/releases).
@@ -63,12 +62,16 @@
 
 #include <FS.h>
 
-#define ESP32 // define ESP8266 or ESP32 according to your microcontroller.
+#define IDMILESP32 // define IDMILESP8266 or IDMILESP32 according to your microcontroller.
 //#define TSTICK193; // define if flashing the T-Stick #193.
 
-#if defined(ESP32)
+#define TRILL // define this to disable the IDMIL's capsense and use the Bela Trill
+
+//#define LIBMAPPER // define this to enable libmapper code
+
+#if defined(IDMILESP32)
 #include "platforms/ESP32.h"
-#elif defined(ESP8266)
+#elif defined(IDMILESP8266)
 #include "platforms/ESP8266.h"
 #else
 #error Missing platform.
@@ -96,6 +99,12 @@
 #include <MIMUCalibrator.h>
 #include <MIMUFusion.h>
 
+#ifdef TRILL
+  #include <Trill.h>
+  Trill trillSensor; // for Trill Craft
+  byte touchStripsSize = 30; // number of stripes
+#endif
+
 #include<stdlib.h> //floats to string
 
 
@@ -105,7 +114,7 @@
 //////////////////////////////////
 //////////////////////////////////
 
-const int32_t firmware = 200330;
+const int32_t firmware = 211105;
 
 struct Tstick {
   int id;
@@ -132,6 +141,7 @@ struct Tstick {
 
 struct RawDataStruct {
   byte touch[8]; // /raw/capsense, i..., 0--255, ... (1 int per 8 capacitive stripes -- 8 bits)
+  int touch_trill[30];
   byte touchStrips[64];
   int fsr; // /raw/fsr, i, 0--4095
   int piezo; // /raw/piezo, i, 0--1023
@@ -304,13 +314,12 @@ void setup() {
   Serial.println("\n");
   Serial.println("*********************************************************************************");
   Serial.println("*  Sopranino T-Stick 2GW - LOLIN D32 PRO - USB -WiFi                            *");
+  Serial.println("*  Sopranino T-Stick 2GW - LOLIN D32 PRO / TinyPico - USB - WiFi                *");
   Serial.println("*  Input Devices and Music Interaction Laboratory (IDMIL)                       *");
-  Serial.println("*  Created: February 2018 by Alex Nieva                                         *");
-  Serial.println("*           February 2020 by Edu Meneses - firmware version 200207 (2020-02-20) *");
-  Serial.println("*  Notes:   Based on test program for reading CY8C201xx using I2C               *");
-  Serial.println("*           by Joseph Malloch 2011                                              *");
-  Serial.println("                                                                                *");
-  Serial.println("*  Adapted to work with Arduino IDE 1.8.10 and T-Stick Sopranino 2GW            *");
+  Serial.println("*  Created:  February 2018 by Alex Nieva                                        *");
+  Serial.println("*            March 2021 by Edu Meneses - firmware version 2011105 (2021/Nov/05) *");
+  Serial.println("*                                                                               *");
+  Serial.println("*            Adapted to work with Arduino IDE 1.8.15 and T-Stick Sopranino 2GW  *");
   Serial.println("*********************************************************************************");
   Serial.println("\n");
 
@@ -343,13 +352,19 @@ void setup() {
   initIMU();
 
   // Starting Capsense
-  capsense_scan(); // Look for Capsense boards and return their addresses
-                   // must run before initLibmapper to get # of capsense boards
-
+  #ifndef TRILL
+    capsense_scan(); // Look for Capsense boards and return their addresses
+                     // must run before initLibmapper to get # of capsense boards
+  #else
+    trillSensor.setup(Trill::TRILL_CRAFT);
+  #endif
+  
   // Starting libmapper
-  if (Tstick.libmapper == 1) {
-    initLibmapper();
-  }
+  #ifdef LIBMAPPER
+    if (Tstick.libmapper == 1) {
+      initLibmapper();
+    }
+  #endif
   
   Serial.println("\nT-Stick setup complete.\n");
   
@@ -396,9 +411,11 @@ void loop() {
   }
 
   // Update libmapper
-  if (Tstick.libmapper == 1) {
-    updateLibmapper();
-  }
+  #ifdef LIBMAPPER
+    if (Tstick.libmapper == 1) {
+      updateLibmapper();
+    }
+  #endif
   
   // receiving OSC
   receiveOSC();
