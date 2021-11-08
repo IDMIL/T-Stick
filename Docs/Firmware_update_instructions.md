@@ -15,25 +15,12 @@ This method is easier/faster. It uses [esptool.py](https://github.com/espressif/
 
 #### Download the [bin files](./bin)
 
-- Download the .bin files located at the bin [folder](./bin)
+- Download the .bin files located at the [bin folder](../firmware/bin)
 
 #### Download [esptool.py](https://github.com/espressif/esptool)
 
 - Download the _esptool.py_ from [https://github.com/espressif/esptool](https://github.com/espressif/esptool). Use the `Download ZIP` option from Github
 - Unzip the _esptool-master.zip_ file
-
-#### Download [mkspiffs tool](https://github.com/igrr/mkspiffs)
-
-- Download the mkspiffs tool. Download the latest version for the ESP32 according to your OS at the [release page](https://github.com/igrr/mkspiffs/releases)
-- Extract the file
-- Copy the [data](./esp32_arduino_19X_19111/data) folder to the _mkspiffs_ folder
-- Edit the `/data/config.json` file for the information to match yout T-Stick (serial number, firmware version, color, etc.)
-
-#### Create the .spiffs.bin file (T-Stick configuration file)
-
-- Open a _Terminal_ window (macOS/Linux) or the _Command Prompt_ (Windows)
-- Navigate to the _mkspiffs_ folder
-- Execute `./mkspiffs -c data -d 5 -b 4096 -p 256 -s 1507328 esp32_arduino_19X_19111.spiffs.bin` (macOS/Linux) or `mkspiffs.exe -c data -d 0 -b 4096 -p 256 -s 1507328 esp32_arduino_19X_19111.spiffs.bin` (Windows)
 
 #### Connect the T-Stick to the computer and check the USB port
 
@@ -49,14 +36,13 @@ This method is easier/faster. It uses [esptool.py](https://github.com/espressif/
 
 #### Flash the firmware (.bin files)
 
-- Use _Finder_, _Terminal_, or _File Explorer_ to copy the contents of the [bin](./bin/) folder (you should copy 4 .bin files) to the _esptool-master_ folder
-- Use _Finder_, _Terminal_, or _File Explorer_ to copy the `esp32_arduino_FW211105.bin` file from the _mkspiffs_ folder to the _esptool-master_ folder
+- Use _Finder_, _Terminal_, or _File Explorer_ to copy the contents of the [bin](./bin/) folder (you should copy 3 .bin files) to the _esptool-master_ folder
 - Navigate to the _esptool-master_ folder in _Terminal_ or _Command Prompt_
 - Run the command (__don't forget to replace the --port (/dev/cu.wchusbserial1410) option for your T-Stick port__): `esptool.py --chip esp32 --port /dev/cu.wchusbserial1410 --baud 115200 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 80m --flash_size detect 0xe000 boot_app0.bin 0x1000 bootloader_dio_80m.bin 0x10000 esp32_arduino_FW211105.bin 0x8000 esp32_arduino_FW211105.ino.partitions.bin 2686976 esp32_arduino_FW211105.spiffs.bin`. Wait for the process to be complete. Do not unplug or turn off your T-Stick during the process.
 
-To test if the data is being send correctly:
+To set the T-Stick info and test if the data is being send correctly:
 
-- Connect the T-Stick to a network (instructions [here](./Docs/T-Stick_2GW_Connecting_Guide(v1.2).md));
+- Connect the T-Stick to a network (instructions [here](./T-Stick_2GW_Connecting_Guide(v1.2).md));
 - Open the Pure Data (PD) or Max/MSP patch to receive T-Stick messages (they can be found [here](../Test_config/));
 - Start receive OSC messages according to the chosen patch.
 
@@ -155,21 +141,20 @@ Updating the firmware does not erase the T-Stick saved configuration and it is a
 
 #### Flash the firmware (.bin files)
 
-- Use _Finder_, _Terminal_, or _File Explorer_ to copy the contents of the [bin](./bin/) folder (you should copy 4 .bin files) to the _esptool-master_ folder
-- Use _Finder_, _Terminal_, or _File Explorer_ to copy the `esp32_arduino_FW211105.bin` file from the _mkspiffs_ folder to the _esptool-master_ folder
+- Use _Finder_, _Terminal_, or _File Explorer_ to copy the contents of the [bin](../firmware/bin/) folder (you should copy 3 .bin files) to the _esptool-master_ folder
 - Navigate to the _esptool-master_ folder in _Terminal_ or _Command Prompt_
 - Run the command (__don't forget to replace the --port (/dev/cu.wchusbserial1410) option for your T-Stick port, and the .bin names for the version you plan to upload__): `esptool.py --chip esp32 --port /dev/cu.wchusbserial1410 --baud 115200 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 80m --flash_size detect 0xe000 boot_app0.bin 0x1000 bootloader_dio_80m.bin 0x10000 esp32_arduino_FW211105.bin 0x8000 esp32_arduino_FW211105.ino.partitions.bin`. Wait for the process to be complete. Do not unplug or turn off your T-Stick during the process.
 
 ## Other Documentation
 
-[T-Stick connection guide – v1.2 for wireless T-Sticks](./Docs/T-Stick_2GW_Connecting_Guide(v1.2).md) (model 2GW-19X)
+[T-Stick connection guide – v1.2 for wireless T-Sticks](./T-Stick_2GW_Connecting_Guide(v1.2).md) (model 2GW-19X)
 
-[How to build a T-Stick Sopranino](./Docs/T-Stick_2GW_building_instructions.md)
+[How to build a T-Stick Sopranino](./T-Stick_2GW_building_instructions.md)
 
 ## Firmware information
 
 Sopranino T-Stick 3G - LOLIN D32 PRO and TinyPico - USB
-Input Devices and Music Interaction Laboratory (IDMIL)  
+Input Devices and Music Interaction Laboratory (IDMIL)
 April 2020 by Edu Meneses - firmware version 211105
 
 WiFi32Manager - For use with ESP8266 or ESP32
