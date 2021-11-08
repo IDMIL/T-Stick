@@ -365,6 +365,9 @@ void setup() {
       initLibmapper();
     }
   #endif
+
+  // Setting Deep sleep wake button
+  esp_sleep_enable_ext0_wakeup(GPIO_NUM_15,0); // 1 = High, 0 = Low
   
   Serial.println("\nT-Stick setup complete.\n");
   
@@ -392,6 +395,12 @@ void loop() {
 
   // reading sensor data
   readData();
+
+  // go to deep sleep if double press button
+  if (RawData.buttonDouble == 1){
+      RawData.buttonDouble = 0,
+      esp_deep_sleep_start();
+  }
 
   // updating high-level gestural descriptors
   updateInstrument();

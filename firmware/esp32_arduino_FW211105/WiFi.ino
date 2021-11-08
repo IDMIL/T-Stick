@@ -81,10 +81,14 @@ void Wifimanager_portal(char *portal_name, char *portal_password) {
       
   WiFiManagerParameter wifimanager_touchMask("touchMask", "Touch Mask capacitive sensing values", wifimanagerbuf, 40);  
   
-  WiFiManagerParameter wifimanager_id("id", "T-Stick serial number", itoa(Tstick.id,wifimanagerbuf,10), 6, "readonly");
-  WiFiManagerParameter wifimanager_type("type", "T-Stick size (type)", Tstick.type, 4, "readonly");
-  WiFiManagerParameter wifimanager_author("author", "T-Stick firmware revision", Tstick.author, 20, "readonly");
-  WiFiManagerParameter wifimanager_color("color", "T-Stick color", Tstick.color, 10, "readonly");
+//  WiFiManagerParameter wifimanager_id("id", "T-Stick serial number", itoa(Tstick.id,wifimanagerbuf,10), 6, "readonly");
+//  WiFiManagerParameter wifimanager_type("type", "T-Stick size (type)", Tstick.type, 4, "readonly");
+//  WiFiManagerParameter wifimanager_author("author", "T-Stick firmware revision", Tstick.author, 20, "readonly");
+//  WiFiManagerParameter wifimanager_color("color", "T-Stick color", Tstick.color, 10, "readonly");
+  WiFiManagerParameter wifimanager_id("id", "T-Stick serial number", itoa(Tstick.id,wifimanagerbuf,10), 6);
+  WiFiManagerParameter wifimanager_type("type", "T-Stick size (type)", Tstick.type, 4);
+  WiFiManagerParameter wifimanager_author("author", "T-Stick firmware revision", Tstick.author, 20);
+  WiFiManagerParameter wifimanager_color("color", "T-Stick color", Tstick.color, 10);
   WiFiManagerParameter wifimanager_firmware("firmware", "T-Stick firmware revision", itoa(Tstick.firmware,wifimanagerbuf,10), 10, "readonly");
 
   //add all your parameters here
@@ -166,6 +170,11 @@ void Wifimanager_portal(char *portal_name, char *portal_password) {
   fsrbuf = atof(wifimanager_FSRoffset.getValue());
   fsrbuf *= 4095;
   Tstick.FSRoffset = fsrbuf;
+
+  Tstick.id = atoi(wifimanager_id.getValue());
+  strcpy(Tstick.type, wifimanager_type.getValue());
+  strcpy(Tstick.color, wifimanager_color.getValue());
+  strcpy(Tstick.author, wifimanager_author.getValue());
   
   strcpy(wifimanagerbuf,wifimanager_touchMask.getValue());
   copybuf = strtok(wifimanagerbuf,",");
