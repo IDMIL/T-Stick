@@ -147,9 +147,11 @@ Updating the firmware does not erase the T-Stick saved configuration and it is a
 
 ## Other Documentation
 
-[T-Stick connection guide – v1.2 for wireless T-Sticks](./T-Stick_2GW_Connecting_Guide(v1.2).md) (model 2GW-19X)
+[T-Stick connection guide – v1.2 for wireless T-Sticks](./T-Stick_2GW_Connecting_Guide(v1.2).md)
 
-[How to build a T-Stick Sopranino](./T-Stick_2GW_building_instructions(trill).md)
+[How to build a T-Stick Sopranino](./T-Stick_2GW_building_instructions.md)
+
+[How to build a T-Stick Sopranino using the Trill sensor](./T-Stick_2GW_building_instructions(trill).md)
 
 ## Firmware information
 

@@ -79,9 +79,9 @@ You will see the main portal screen through the web browser. Enter “Configurat
 
 ## Guide info:
 
-Version 1.: (2020/03/20) Edu Meneses - eduardo.meneses@mail.mcgill.ca\
+Version 1.2: (2020/03/20) Edu Meneses - eduardo.meneses@mail.mcgill.ca
 Version 1.11: (2019/11/27) Edu Meneses
-Version 1.1: (2019/10/27) Edu Meneses 
+Version 1.1: (2019/10/27) Edu Meneses
 Version 1.0: (2019/08/28) Edu Meneses
 
 __Input Devices and Music Interaction Laboratory__\
