@@ -1,4 +1,4 @@
-# Building a Sopranino T-Stick (v1.1)
+# Building a Sopranino T-Stick (v1.2)
 
 ## Bill of Materials:
 
@@ -120,6 +120,7 @@ Nightly builds and beta firmwares can be downloaded at https://github.com/edumen
 
 ## More info:
 
+Version 1.2: Brady Boettcher
 Version 1.1: Edu Meneses - eduardo.meneses@mail.mcgill.ca\
 Version 1.0: Created by: Alex Nieva - alex.nieva@mail.mcgill.ca
 
