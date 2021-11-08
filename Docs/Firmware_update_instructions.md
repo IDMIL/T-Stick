@@ -13,7 +13,7 @@
 
 This method is easier/faster. It uses [esptool.py](https://github.com/espressif/esptool).
 
-#### Download the [bin files](./bin)
+#### Download the [bin files](../firmware/bin)
 
 - Download the .bin files located at the [bin folder](../firmware/bin)
 
@@ -36,7 +36,7 @@ This method is easier/faster. It uses [esptool.py](https://github.com/espressif/
 
 #### Flash the firmware (.bin files)
 
-- Use _Finder_, _Terminal_, or _File Explorer_ to copy the contents of the [bin](./bin/) folder (you should copy 3 .bin files) to the _esptool-master_ folder
+- Use _Finder_, _Terminal_, or _File Explorer_ to copy the contents of the [bin](../firmware/bin/) folder (you should copy 3 .bin files) to the _esptool-master_ folder
 - Navigate to the _esptool-master_ folder in _Terminal_ or _Command Prompt_
 - Run the command (__don't forget to replace the --port (/dev/cu.wchusbserial1410) option for your T-Stick port__): `esptool.py --chip esp32 --port /dev/cu.wchusbserial1410 --baud 115200 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 80m --flash_size detect 0xe000 boot_app0.bin 0x1000 bootloader_dio_80m.bin 0x10000 esp32_arduino_FW211105.bin 0x8000 esp32_arduino_FW211105.ino.partitions.bin 2686976 esp32_arduino_FW211105.spiffs.bin`. Wait for the process to be complete. Do not unplug or turn off your T-Stick during the process.
 
@@ -110,7 +110,7 @@ You should see T-Stick booting process.
 
 To test if the data is being send correctly:
 
-- Connect the T-Stick to a network (instructions [here](./Docs/T-Stick_2GW_Connecting_Guide(v1.1).md))
+- Connect the T-Stick to a network (instructions [here](./Docs/T-Stick_2GW_Connecting_Guide(v1.2).md))
 - Open the Pure Data (PD) or Max/MSP patch to receive T-Stick messages (they can be found [here](./Configuration))
 - Start receive OSC messages according to the chosen patch
 
@@ -149,7 +149,7 @@ Updating the firmware does not erase the T-Stick saved configuration and it is a
 
 [T-Stick connection guide – v1.2 for wireless T-Sticks](./T-Stick_2GW_Connecting_Guide(v1.2).md) (model 2GW-19X)
 
-[How to build a T-Stick Sopranino](./T-Stick_2GW_building_instructions.md)
+[How to build a T-Stick Sopranino](./T-Stick_2GW_building_instructions(trill).md)
 
 ## Firmware information
 
