@@ -26,6 +26,7 @@ This method is easier/faster. It uses [esptool.py](https://github.com/espressif/
 
 - [Check the T-Stick (ESP32) port in your computer](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/establish-serial-connection.html):
   - For MacOS/Linux:
+    - install the [latest drivers from from the SiLabs website](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers).
     - Open a _Terminal_ window
     - Execute the command `ls /dev/cu.*`. The command will return a list of ports in your computer.
     - Plug the T-Stick (USB) and run the command `ls /dev/cu.*` one more time. You can now compare the lists and anotate the T-Stick USB port. Should be something similar to `/dev/cu.wchusbserial1410`, probably with a different number
