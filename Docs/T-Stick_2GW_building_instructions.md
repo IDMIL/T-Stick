@@ -40,7 +40,7 @@ All the building tools can be found in the Machine Shop at the McGill Music Tech
 
 ![Overview_wires](./images/construction/1_overview_wires.jpg "wiring overview")
 
-Let's start with the end cap where the TinyPICO will be inserted. Insert the button into the slot like the pictures below.
+Let's start with the end cap where the TinyPICO will be inserted. Insert the button into the slot like the pictures below. Note that it is possible to solder all future three wires to the button before inserting it in the slot, in order to make the soldering more accessible.
 
 button top view| button bottom view | soldering
 --- | --- | ---
@@ -52,7 +52,7 @@ connecting to TinyPICO | completed button circuit
 --- | ---
 ![](./images/construction/5_pico.jpg) | ![](./images/construction/6_pico.jpg)
 
-To prepare the resistor for its FSR connection, solder 2 wires to one end and 1 to the other like below. Use heat shrink to wrap the connection. Solder the single end wire to a GND pin on the button. Solder one of the double end wires to pin 33 on the TinyPICO.
+To prepare the resistor for its FSR connection, solder 2 wires to one end and 1 to the other like below. Use heat shrink to wrap the connection. Solder the single end wire to a GND pin on the button (shared pins on the provided button are opposite of each other, in doubt check the specifications in the bill of materials). Solder one of the double end wires to pin 33 on the TinyPICO. 
 
 soldering | heat shrinking | connecting to TinyPICO
 --- | --- | ---
@@ -76,13 +76,13 @@ twisting and soldering | connecting to TinyPICO | imu wiring
 --- | --- | ---
 ![](./images/construction/14_imu.jpg) | ![](./images/construction/15_imu.jpg) | ![](./images/construction/16_imu.jpg)
 
-At this stage, the IMU should have unconnected wires (1 of each) from SDA, SCL, GND and VCC. Run the 4 unconnected wires through the pole and solder to the corresponding labeled pins on the Trill.
+At this stage, the IMU should have unconnected wires (1 of each) from SDA, SCL, GND and VCC. Run the 4 unconnected wires through the pole and solder to the corresponding labeled pins on the Trill (with the VCC pin of the IMU connected to the +V pin of the Trill).
 
 trill connections | alternate view
 --- | ---
 ![](./images/construction/17_trill.jpg) | ![](./images/construction/18_trill.jpg)
 
-Now for the fun part ;). Solder wires onto each of the 15 copper strips, running them through the poles to the Trill board when necessary. When cutting wires for this part, allow enough length to get to the Trill, but not too long to clutter the internals. Solder the other ends of the wires **in order** from pico towards the end cap to pins 0-15 on the Trill board.
+Now for the fun part ;). Solder wires onto each of the 15 copper strips, running them through the poles to the Trill board when necessary. When cutting wires for this part, allow enough length to get to the Trill, but not too long to clutter the internals. Solder the other ends of the wires **in order** from pico towards the end cap to pins 0-14 on the Trill board. On the Sopranino design, leave the strip at the extremity on the side of the TinyPICO unconnected, and connect the 15 other strips.
 
 copper soldering | alternate view
 --- | ---
@@ -90,8 +90,10 @@ copper soldering | alternate view
 
 Connect long wires from the 5V and GND pins of the TinyPICO (for the battery), and run them through the poles to the other end. Mount the IMU and Trill boards to their beds, and insert the TinyPICO into its slot in the end cap with the button. Slide the entire frame with the button cap into the PVC, making sure the long power wires can be accessed from the open end. Attach the FSR to the outside of the PVC, cutting the end if it's too long. Use the end cap's slot for the FSR wires to come out of the frame.
 
+**Important Note:** In the design with the removable 3.7V battery, the switch is not present and the T-Stick will be powered on and off with the button. The battery container should be linked to the GND and Bat pins of the TinyPICO. The battery slot will be placed on the opposite end of the TinyPICO and should be pullable out of the opening of the cap for battery replacement.
+
 **IMU Mounting Note:**
-Please install the IMU so that this configuration is kept consistent will the design.
+Please install the IMU so that this configuration is kept consistent with the design.
 ![T-Stick Sopranino orientation](./images/T-Stick-Orientation.png "T-Stick Sopranino orientation")
 
 
