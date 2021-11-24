@@ -39,7 +39,7 @@ This method is easier/faster. It uses [esptool.py](https://github.com/espressif/
 
 - Use _Finder_, _Terminal_, or _File Explorer_ to copy the contents of the [bin](../firmware/bin/) folder (you should copy 3 .bin files) to the _esptool-master_ folder
 - Navigate to the _esptool-master_ folder in _Terminal_ or _Command Prompt_
-- Run the command (__don't forget to replace the --port (/dev/cu.wchusbserial1410) option for your T-Stick port__): `esptool.py --chip esp32 --port /dev/cu.wchusbserial1410 --baud 115200 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 80m --flash_size detect 0xe000 boot_app0.bin 0x1000 bootloader_dio_80m.bin 0x10000 esp32_arduino_FW211105.bin 0x8000 esp32_arduino_FW211105.ino.partitions.bin 2686976 esp32_arduino_FW211105.spiffs.bin`. Wait for the process to be complete. Do not unplug or turn off your T-Stick during the process.
+- Run the command (__don't forget to replace the --port (/dev/cu.wchusbserial1410) option for your T-Stick port__): `esptool.py --chip esp32 --port /dev/cu.wchusbserial1410 --baud 115200 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 80m --flash_size detect 0xe000 boot_app0.bin 0x1000 bootloader_dio_80m.bin 0x10000 esp32_arduino_FW211124.bin 0x8000 esp32_arduino_FW211124.ino.partitions.bin 2686976 esp32_arduino_FW211124.spiffs.bin`. Wait for the process to be complete. Do not unplug or turn off your T-Stick during the process.
 
 To set the T-Stick info and test if the data is being send correctly:
 
@@ -119,16 +119,16 @@ To test if the data is being send correctly:
 
 Updating the firmware does not erase the T-Stick saved configuration and it is a relatively simple process:
 
-#### Download the [bin files](../firmware/bin)
+### Download the [bin files](../firmware/bin)
 
 - Download the .bin files located at the bin [folder](../firmware/bin)
 
-#### Download [esptool.py](https://github.com/espressif/esptool)
+### Download [esptool.py](https://github.com/espressif/esptool)
 
 - Download the _esptool.py_ from [https://github.com/espressif/esptool](https://github.com/espressif/esptool). Use the `Download ZIP` option from Github
 - Unzip the _esptool-master.zip_ file
 
-#### Connect the T-Stick to the computer and check the USB port
+### Connect the T-Stick to the computer and check the USB port
 
 - [Check the T-Stick (ESP32) port in your computer](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/establish-serial-connection.html):
   - For MacOS/Linux:
@@ -140,11 +140,11 @@ Updating the firmware does not erase the T-Stick saved configuration and it is a
     - Check the list of identified COM ports in the [Windows Device Manager](https://support.microsoft.com/en-ca/help/4026149/windows-open-device-manager)
     - Plug the T-Stick (USB) and check the list of identified COM ports in the [Windows Device Manager](https://support.microsoft.com/en-ca/help/4026149/windows-open-device-manager) again. The T-Stick port should appear on the list. Anotate the T-Stick USB port, it should be something similar to `COM3` or `COM16`
 
-#### Flash the firmware (.bin files)
+### Flash the firmware (.bin files)
 
 - Use _Finder_, _Terminal_, or _File Explorer_ to copy the contents of the [bin](../firmware/bin/) folder (you should copy 3 .bin files) to the _esptool-master_ folder
 - Navigate to the _esptool-master_ folder in _Terminal_ or _Command Prompt_
-- Run the command (__don't forget to replace the --port (/dev/cu.wchusbserial1410) option for your T-Stick port, and the .bin names for the version you plan to upload__): `esptool.py --chip esp32 --port /dev/cu.wchusbserial1410 --baud 115200 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 80m --flash_size detect 0xe000 boot_app0.bin 0x1000 bootloader_dio_80m.bin 0x10000 esp32_arduino_FW211105.bin 0x8000 esp32_arduino_FW211105.ino.partitions.bin`. Wait for the process to be complete. Do not unplug or turn off your T-Stick during the process.
+- Run the command (__don't forget to replace the --port (/dev/cu.wchusbserial1410) option for your T-Stick port, and the .bin names for the version you plan to upload__): `esptool.py --chip esp32 --port /dev/cu.wchusbserial1410 --baud 115200 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 80m --flash_size detect 0xe000 boot_app0.bin 0x1000 bootloader_dio_80m.bin 0x10000 esp32_arduino_FW211124.bin 0x8000 esp32_arduino_FW211124.ino.partitions.bin`. Wait for the process to be complete. Do not unplug or turn off your T-Stick during the process.
 
 ## Other Documentation
 
