@@ -2,6 +2,8 @@
 
 #include <mapper_cpp.h>
 #include <string>
+#include <algorithm>
+#include<vector>
 
 mapper::Device* dev;
 
@@ -63,60 +65,98 @@ void initLibmapper() {
       dev = new mapper::Device(lm_name);
   }
 
-  // Signal creation:
-  //      mpr_sig_new(
-  //          mpr_dev parent, 
-  //          mpr_dir dir, 
-  //          const char *name, 
-  //          int length,
-  //          mpr_type type, 
-  //          const char *unit, 
-  //          void *Min, &
-  //          void *max,
-  //          int *num_inst, 
-  //          mpr_sig_handler *h, 
-  //          int events,
-  //          0, 0, 0);
-                    
-lm.sigRawCapsense = mpr_sig_new(dev, MPR_DIR_OUT, "raw/capsense", touchStripsSize, MPR_INT32, NULL, &lm.rawCapsenseMin, &lm.rawCapsenseMax, 0, 0, 0);
-lm.sigRawGyroX = mpr_sig_new(dev, MPR_DIR_OUT, "raw/gyro/X", 1, MPR_FLT, NULL, &lm.rawGyroMin, &lm.rawGyroMax, 0, 0, 0);
-lm.sigRawGyroY = mpr_sig_new(dev, MPR_DIR_OUT, "raw/gyro/Y", 1, MPR_FLT, NULL, &lm.rawGyroMin, &lm.rawGyroMax, 0, 0, 0);
-lm.sigRawGyroZ = mpr_sig_new(dev, MPR_DIR_OUT, "raw/gyro/Z", 1, MPR_FLT, NULL, &lm.rawGyroMin, &lm.rawGyroMax, 0, 0, 0);
-lm.sigRawAcclX = mpr_sig_new(dev, MPR_DIR_OUT, "raw/accl/X", 1, MPR_INT32, NULL, &lm.rawAcclMin, &lm.rawAcclMax, 0, 0, 0);
-lm.sigRawAcclY = mpr_sig_new(dev, MPR_DIR_OUT, "raw/accl/Y", 1, MPR_INT32, NULL, &lm.rawAcclMin, &lm.rawAcclMax, 0, 0, 0);
-lm.sigRawAcclZ = mpr_sig_new(dev, MPR_DIR_OUT, "raw/accl/Z", 1, MPR_INT32, NULL, &lm.rawAcclMin, &lm.rawAcclMax, 0, 0, 0);
-lm.sigRawMagnX = mpr_sig_new(dev, MPR_DIR_OUT, "raw/magn/X", 1, MPR_INT32, NULL, &lm.rawMagnMin, &lm.rawMagnMax, 0, 0, 0);
-lm.sigRawMagnY = mpr_sig_new(dev, MPR_DIR_OUT, "raw/magn/Y", 1, MPR_INT32, NULL, &lm.rawMagnMin, &lm.rawMagnMax, 0, 0, 0);
-lm.sigRawMagnZ = mpr_sig_new(dev, MPR_DIR_OUT, "raw/magn/Z", 1, MPR_INT32, NULL, &lm.rawMagnMin, &lm.rawMagnMax, 0, 0, 0);
-lm.sigRawFSR = mpr_sig_new(dev, MPR_DIR_OUT, "raw/fsr", 1, MPR_INT32, NULL, &lm.rawFSRMin, &lm.rawFSRMax, 0, 0, 0);
-lm.sigRawPiezo = mpr_sig_new(dev, MPR_DIR_OUT, "raw/piezo", 1, MPR_INT32, NULL, &lm.rawPiezoMin, &lm.rawPiezoMax, 0, 0, 0);
-lm.sigOrientationQ1 = mpr_sig_new(dev, MPR_DIR_OUT, "orientation/q1", 1, MPR_FLT, NULL, &lm.orientationMin, &lm.orientationMax, 0, 0, 0);
-lm.sigOrientationQ2 = mpr_sig_new(dev, MPR_DIR_OUT, "orientation/q2", 1, MPR_FLT, NULL, &lm.orientationMin, &lm.orientationMax, 0, 0, 0);
-lm.sigOrientationQ3 = mpr_sig_new(dev, MPR_DIR_OUT, "orientation/q3", 1, MPR_FLT, NULL, &lm.orientationMin, &lm.orientationMax, 0, 0, 0);
-lm.sigOrientationQ4 = mpr_sig_new(dev, MPR_DIR_OUT, "orientation/q4", 1, MPR_FLT, NULL, &lm.orientationMin, &lm.orientationMax, 0, 0, 0);
-lm.sigYaw = mpr_sig_new(dev, MPR_DIR_OUT, "orientation/yaw", 1, MPR_FLT, NULL, &lm.yprMin, &lm.yprMax, 0, 0, 0);
-lm.sigPitch = mpr_sig_new(dev, MPR_DIR_OUT, "orientation/pitch", 1, MPR_FLT, NULL, &lm.yprMin, &lm.yprMax, 0, 0, 0);
-lm.sigRoll = mpr_sig_new(dev, MPR_DIR_OUT, "orientation/roll", 1, MPR_FLT, NULL, &lm.yprMin, &lm.yprMax, 0, 0, 0);
-lm.sigMagGyro = mpr_sig_new(dev, MPR_DIR_OUT, "gyro/magnitude", 1, MPR_FLT, NULL, &lm.magMin, &lm.magMax, 0, 0, 0);
-lm.sigMagAccl = mpr_sig_new(dev, MPR_DIR_OUT, "accl/magnitude", 1, MPR_FLT, NULL, &lm.magMin, &lm.magMax, 0, 0, 0);
-lm.sigMagMagn = mpr_sig_new(dev, MPR_DIR_OUT, "magn/magnitude", 1, MPR_FLT, NULL, &lm.magMin, &lm.magMax, 0, 0, 0);
-lm.sigButton = mpr_sig_new(dev, MPR_DIR_OUT, "button/short", 1, MPR_INT32, NULL, &lm.buttonMin, &lm.buttonMax, 0, 0, 0);
-lm.sigLongButton = mpr_sig_new(dev, MPR_DIR_OUT, "button/long", 1, MPR_INT32, NULL, &lm.buttonMin, &lm.buttonMax, 0, 0, 0);
-lm.sigDoubleButton = mpr_sig_new(dev, MPR_DIR_OUT, "button/double", 1, MPR_INT32, NULL, &lm.buttonMin, &lm.buttonMax, 0, 0, 0);
-lm.sigtouchAll = mpr_sig_new(dev, MPR_DIR_OUT, "instrument/touchall", 1, MPR_FLT, NULL, &lm.instTouchMin, &lm.instTouchMax, 0, 0, 0);
-lm.sigtouchTop = mpr_sig_new(dev, MPR_DIR_OUT, "instrument/touchtop", 1, MPR_FLT, NULL, &lm.instTouchMin, &lm.instTouchMax, 0, 0, 0);
-lm.sigtouchMiddle = mpr_sig_new(dev, MPR_DIR_OUT, "instrument/touchmiddle", 1, MPR_FLT, NULL, &lm.instTouchMin, &lm.instTouchMax, 0, 0, 0);
-lm.sigtouchBottom = mpr_sig_new(dev, MPR_DIR_OUT, "instrument/touchbottom", 1, MPR_FLT, NULL, &lm.instTouchMin, &lm.instTouchMax, 0, 0, 0);
-lm.sigBrush = mpr_sig_new(dev, MPR_DIR_OUT, "instrument/brush", 1, MPR_FLT, NULL, &lm.genericMin, &lm.genericMax, 0, 0, 0);
-lm.sigRub = mpr_sig_new(dev, MPR_DIR_OUT, "instrument/rub", 1, MPR_FLT, NULL, &lm.genericMin, &lm.genericMax, 0, 0, 0);
-lm.sigMultiBrush = mpr_sig_new(dev, MPR_DIR_OUT, "instrument/multibrush", 4, MPR_FLT, NULL, &lm.genericMin, &lm.genericMax, 0, 0, 0);
-lm.sigMultiRub = mpr_sig_new(dev, MPR_DIR_OUT, "instrument/multirub", 4, MPR_FLT, NULL, &lm.genericMin, &lm.genericMax, 0, 0, 0);
-lm.sigShakeXYZ = mpr_sig_new(dev, MPR_DIR_OUT, "instrument/shakexyz", 3, MPR_FLT, NULL, &lm.genericMin, &lm.genericMax, 0, 0, 0);
-lm.sigJabXYZ = mpr_sig_new(dev, MPR_DIR_OUT, "instrument/jabxyz", 3, MPR_FLT, NULL, &lm.genericMin, &lm.genericMax, 0, 0, 0);
+  // output = dev->add_signal(
+  //              Direction::OUTGOING, 
+  //              "my_output", // a unique name for the signal
+  //              4,           // signal's vector length
+  //              Type::INT32, // the signal's data type, one of Type::INT32, Type::FLOAT, or Type::DOUBLE
+  //              "m/s",       // the signal's unit (optional). Use 0 (without quotes) if not specified
+  //              min,         // the signal's minimum value (optional)
+  //              max);        // the signal's maximum value (optional)
+
+  int touchlmSize = touchStripsSize*trillamount;
+  lm.sigRawCapsense = dev->add_signal(mapper::Direction::OUTGOING, "raw/capsense", touchlmSize, mapper::Type::INT32, 0, &lm.rawCapsenseMin, &lm.rawCapsenseMax);
+  lm.sigRawGyroX = dev->add_signal(mapper::Direction::OUTGOING, "raw/gyro/X", 1, mapper::Type::FLOAT, 0, &lm.rawGyroMin, &lm.rawGyroMax);
+  lm.sigRawGyroY = dev->add_signal(mapper::Direction::OUTGOING, "raw/gyro/Y", 1, mapper::Type::FLOAT, 0, &lm.rawGyroMin, &lm.rawGyroMax);
+  lm.sigRawGyroZ = dev->add_signal(mapper::Direction::OUTGOING, "raw/gyro/Z", 1, mapper::Type::FLOAT, 0, &lm.rawGyroMin, &lm.rawGyroMax);
+  lm.sigRawAcclX = dev->add_signal(mapper::Direction::OUTGOING, "raw/accl/X", 1, mapper::Type::INT32, 0, &lm.rawAcclMin, &lm.rawAcclMax);
+  lm.sigRawAcclY = dev->add_signal(mapper::Direction::OUTGOING, "raw/accl/Y", 1, mapper::Type::INT32, 0, &lm.rawAcclMin, &lm.rawAcclMax);
+  lm.sigRawAcclZ = dev->add_signal(mapper::Direction::OUTGOING, "raw/accl/Z", 1, mapper::Type::INT32, 0, &lm.rawAcclMin, &lm.rawAcclMax);
+  lm.sigRawMagnX = dev->add_signal(mapper::Direction::OUTGOING, "raw/magn/X", 1, mapper::Type::INT32, 0, &lm.rawMagnMin, &lm.rawMagnMax);
+  lm.sigRawMagnY = dev->add_signal(mapper::Direction::OUTGOING, "raw/magn/Y", 1, mapper::Type::INT32, 0, &lm.rawMagnMin, &lm.rawMagnMax);
+  lm.sigRawMagnZ = dev->add_signal(mapper::Direction::OUTGOING, "raw/magn/Z", 1, mapper::Type::INT32, 0, &lm.rawMagnMin, &lm.rawMagnMax);
+  lm.sigRawFSR = dev->add_signal(mapper::Direction::OUTGOING, "raw/fsr", 1, mapper::Type::INT32, 0, &lm.rawFSRMin, &lm.rawFSRMax);
+  lm.sigRawPiezo = dev->add_signal(mapper::Direction::OUTGOING, "raw/piezo", 1, mapper::Type::INT32, 0, &lm.rawPiezoMin, &lm.rawPiezoMax);
+  lm.sigOrientationQ1 = dev->add_signal(mapper::Direction::OUTGOING, "orientation/q1", 1, mapper::Type::FLOAT, 0, &lm.orientationMin, &lm.orientationMax);
+  lm.sigOrientationQ2 = dev->add_signal(mapper::Direction::OUTGOING, "orientation/q2", 1, mapper::Type::FLOAT, 0, &lm.orientationMin, &lm.orientationMax);
+  lm.sigOrientationQ3 = dev->add_signal(mapper::Direction::OUTGOING, "orientation/q3", 1, mapper::Type::FLOAT, 0, &lm.orientationMin, &lm.orientationMax);
+  lm.sigOrientationQ4 = dev->add_signal(mapper::Direction::OUTGOING, "orientation/q4", 1, mapper::Type::FLOAT, 0, &lm.orientationMin, &lm.orientationMax);
+  lm.sigYaw = dev->add_signal(mapper::Direction::OUTGOING, "orientation/yaw", 1, mapper::Type::FLOAT, 0, &lm.yprMin, &lm.yprMax);
+  lm.sigPitch = dev->add_signal(mapper::Direction::OUTGOING, "orientation/pitch", 1, mapper::Type::FLOAT, 0, &lm.yprMin, &lm.yprMax);
+  lm.sigRoll = dev->add_signal(mapper::Direction::OUTGOING, "orientation/roll", 1, mapper::Type::FLOAT, 0, &lm.yprMin, &lm.yprMax);
+  lm.sigMagGyro = dev->add_signal(mapper::Direction::OUTGOING, "gyro/magnitude", 1, mapper::Type::FLOAT, 0, &lm.magMin, &lm.magMax);
+  lm.sigMagAccl = dev->add_signal(mapper::Direction::OUTGOING, "accl/magnitude", 1, mapper::Type::FLOAT, 0, &lm.magMin, &lm.magMax);
+  lm.sigMagMagn = dev->add_signal(mapper::Direction::OUTGOING, "magn/magnitude", 1, mapper::Type::FLOAT, 0, &lm.magMin, &lm.magMax);
+  lm.sigButton = dev->add_signal(mapper::Direction::OUTGOING, "button/short", 1, mapper::Type::INT32, 0, &lm.buttonMin, &lm.buttonMax);
+  lm.sigLongButton = dev->add_signal(mapper::Direction::OUTGOING, "button/long", 1, mapper::Type::INT32, 0, &lm.buttonMin, &lm.buttonMax);
+  lm.sigDoubleButton = dev->add_signal(mapper::Direction::OUTGOING, "button/double", 1, mapper::Type::INT32, 0, &lm.buttonMin, &lm.buttonMax);
+  lm.sigtouchAll = dev->add_signal(mapper::Direction::OUTGOING, "instrument/touchall", 1, mapper::Type::FLOAT, 0, &lm.instTouchMin, &lm.instTouchMax);
+  lm.sigtouchTop = dev->add_signal(mapper::Direction::OUTGOING, "instrument/touchtop", 1, mapper::Type::FLOAT, 0, &lm.instTouchMin, &lm.instTouchMax);
+  lm.sigtouchMiddle = dev->add_signal(mapper::Direction::OUTGOING, "instrument/touchmiddle", 1, mapper::Type::FLOAT, 0, &lm.instTouchMin, &lm.instTouchMax);
+  lm.sigtouchBottom = dev->add_signal(mapper::Direction::OUTGOING, "instrument/touchbottom", 1, mapper::Type::FLOAT, 0, &lm.instTouchMin, &lm.instTouchMax);
+  lm.sigBrush = dev->add_signal(mapper::Direction::OUTGOING, "instrument/brush", 1, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
+  lm.sigRub = dev->add_signal(mapper::Direction::OUTGOING, "instrument/rub", 1, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
+  lm.sigMultiBrush = dev->add_signal(mapper::Direction::OUTGOING, "instrument/multibrush", 4, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
+  lm.sigMultiRub = dev->add_signal(mapper::Direction::OUTGOING, "instrument/multirub", 4, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
+  lm.sigShakeXYZ = dev->add_signal(mapper::Direction::OUTGOING, "instrument/shakexyz", 3, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
+  lm.sigJabXYZ = dev->add_signal(mapper::Direction::OUTGOING, "instrument/jabxyz", 3, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
 }
 
 void updateLibmapper() {
   mpr_dev_poll(dev, 0);
+
+  std::vector<int> touchStripsVector(RawData.touchStrips, RawData.touchStrips + sizeof(RawData.touchStrips) / sizeof(int));
+  std::vector<float> mBrushVector(InstrumentData.multiBrush, InstrumentData.multiBrush + sizeof(InstrumentData.multiBrush) / sizeof(float));
+  std::vector<float> mRubVector(InstrumentData.multiRub, InstrumentData.multiRub + sizeof(InstrumentData.multiRub) / sizeof(float));
+  std::vector<float> shakeVector(InstrumentData.shakeXYZ, InstrumentData.shakeXYZ + sizeof(InstrumentData.shakeXYZ) / sizeof(float));
+  std::vector<float> jabVector(InstrumentData.jabXYZ, InstrumentData.jabXYZ + sizeof(InstrumentData.jabXYZ) / sizeof(float));
+  // TODO: incorporate vector into all firmware's logic (stop using int array)
+  
+  lm.sigRawCapsense.set_value(touchStripsVector);
+  lm.sigRawFSR.set_value(RawData.fsr);
+  lm.sigRawPiezo.set_value(RawData.piezo);
+  lm.sigRawAcclX.set_value(RawData.accl[0]);
+  lm.sigRawAcclY.set_value(RawData.accl[1]);
+  lm.sigRawAcclZ.set_value(RawData.accl[2]);
+  lm.sigRawGyroX.set_value(RawData.gyro[0]);
+  lm.sigRawGyroY.set_value(RawData.gyro[1]);
+  lm.sigRawGyroZ.set_value(RawData.gyro[2]);
+  lm.sigRawMagnX.set_value(RawData.magn[0]);
+  lm.sigRawMagnY.set_value(RawData.magn[1]);
+  lm.sigRawMagnZ.set_value(RawData.magn[2]);
+  lm.sigOrientationQ1.set_value(RawData.quat[0]);
+  lm.sigOrientationQ2.set_value(RawData.quat[1]);
+  lm.sigOrientationQ3.set_value(RawData.quat[2]);
+  lm.sigOrientationQ4.set_value(RawData.quat[3]);
+  lm.sigMagGyro.set_value(RawData.magGyro);
+  lm.sigMagAccl.set_value(RawData.magAccl);
+  lm.sigMagMagn.set_value(RawData.magMagn);
+  lm.sigButton.set_value(RawData.buttonShort);
+  lm.sigLongButton.set_value(RawData.buttonLong);
+  lm.sigDoubleButton.set_value(RawData.buttonDouble);
+  lm.sigYaw.set_value(InstrumentData.ypr[0]);
+  lm.sigPitch.set_value(InstrumentData.ypr[1]);
+  lm.sigRoll.set_value(InstrumentData.ypr[2]);
+  lm.sigtouchAll.set_value(InstrumentData.touchAll);
+  lm.sigtouchTop.set_value(InstrumentData.touchTop);
+  lm.sigtouchMiddle.set_value(InstrumentData.touchMiddle);
+  lm.sigtouchBottom.set_value(InstrumentData.touchBottom);
+  lm.sigBrush.set_value(InstrumentData.brush);
+  lm.sigRub.set_value(InstrumentData.rub);
+  lm.sigMultiBrush.set_value(mBrushVector);
+  lm.sigMultiRub.set_value(mRubVector);
+  lm.sigShakeXYZ.set_value(shakeVector);
+  lm.sigJabXYZ.set_value(jabVector);
 
   // mpr_sig_set_value(
   //     mpr_sig sig, 
@@ -128,41 +168,41 @@ void updateLibmapper() {
   
   // mpr_sig_set_value(outputSignal, 0, 1, MPR_FLT, &&seqNumber);
   
-  mpr_sig_set_value(lm.sigRawCapsense, 0, sizeof(RawData.touchStrips), MPR_INT32, &RawData.touchStrips);
-mpr_sig_set_value(lm.sigRawFSR, 0, 1, MPR_FLT, &RawData.fsr);
-mpr_sig_set_value(lm.sigRawPiezo, 0, 1, MPR_INT32, &RawData.piezo);
-mpr_sig_set_value(lm.sigRawAcclX, 0, 1, MPR_INT32, &RawData.accl[0]);
-mpr_sig_set_value(lm.sigRawAcclY, 0, 1, MPR_INT32, &RawData.accl[1]);
-mpr_sig_set_value(lm.sigRawAcclZ, 0, 1, MPR_INT32, &RawData.accl[2]);
-mpr_sig_set_value(lm.sigRawGyroX, 0, 1, MPR_FLT, &RawData.gyro[0]);
-mpr_sig_set_value(lm.sigRawGyroY, 0, 1, MPR_FLT, &RawData.gyro[1]);
-mpr_sig_set_value(lm.sigRawGyroZ, 0, 1, MPR_FLT, &RawData.gyro[2]);
-mpr_sig_set_value(lm.sigRawMagnX, 0, 1, MPR_INT32, &RawData.magn[0]);
-mpr_sig_set_value(lm.sigRawMagnY, 0, 1, MPR_INT32, &RawData.magn[1]);
-mpr_sig_set_value(lm.sigRawMagnZ, 0, 1, MPR_INT32, &RawData.magn[2]);
-mpr_sig_set_value(lm.sigOrientationQ1, 0, 1, MPR_FLT, &RawData.quat[0]);
-mpr_sig_set_value(lm.sigOrientationQ2, 0, 1, MPR_FLT, &RawData.quat[1]);
-mpr_sig_set_value(lm.sigOrientationQ3, 0, 1, MPR_FLT, &RawData.quat[2]);
-mpr_sig_set_value(lm.sigOrientationQ4, 0, 1, MPR_FLT, &RawData.quat[3]);
-mpr_sig_set_value(lm.sigMagGyro, 0, 1, MPR_FLT, &RawData.magGyro);
-mpr_sig_set_value(lm.sigMagAccl, 0, 1, MPR_FLT, &RawData.magAccl);
-mpr_sig_set_value(lm.sigMagMagn, 0, 1, MPR_FLT, &RawData.magMagn);
-mpr_sig_set_value(lm.sigButton, 0, 1, MPR_INT32, &RawData.buttonShort);
-mpr_sig_set_value(lm.sigLongButton, 0, 1, MPR_INT32, &RawData.buttonLong);
-mpr_sig_set_value(lm.sigDoubleButton, 0, 1, MPR_INT32, &RawData.buttonDouble);
-mpr_sig_set_value(lm.sigYaw, 0, 1, MPR_FLT, &InstrumentData.ypr[0]);
-mpr_sig_set_value(lm.sigPitch, 0, 1, MPR_FLT, &InstrumentData.ypr[1]);
-mpr_sig_set_value(lm.sigRoll, 0, 1, MPR_FLT, &InstrumentData.ypr[2]);
-mpr_sig_set_value(lm.sigtouchAll, 0, 1, MPR_FLT, &InstrumentData.touchAll);
-mpr_sig_set_value(lm.sigtouchTop, 0, 1, MPR_FLT, &InstrumentData.touchTop);
-mpr_sig_set_value(lm.sigtouchMiddle, 0, 1, MPR_FLT, &InstrumentData.touchMiddle);
-mpr_sig_set_value(lm.sigtouchBottom, 0, 1, MPR_FLT, &InstrumentData.touchBottom);
-mpr_sig_set_value(lm.sigBrush, 0, 1, MPR_FLT, &InstrumentData.brush);
-mpr_sig_set_value(lm.sigRub, 0, 1, MPR_FLT, &InstrumentData.rub);
-mpr_sig_set_value(lm.sigMultiBrush, 0, sizeof(InstrumentData.multiBrush)/sizeof(InstrumentData.multiBrush[0]), MPR_FLT, &RawData.touchStrips);
-mpr_sig_set_value(lm.sigMultiRub, 0, sizeof(InstrumentData.multiRub)/sizeof(InstrumentData.multiRub[0]), MPR_FLT, &RawData.touchStrips);
-mpr_sig_set_value(lm.sigShakeXYZ, 0, sizeof(InstrumentData.shakeXYZ)/sizeof(InstrumentData.shakeXYZ[0]), MPR_FLT, &RawData.touchStrips);
-mpr_sig_set_value(lm.sigJabXYZ, 0, sizeof(InstrumentData.jabXYZ)/sizeof(InstrumentData.jabXYZ[0]), MPR_FLT, &RawData.touchStrips);
+//mpr_sig_set_value(lm.sigRawCapsense, 0, sizeof(RawData.touchStrips), MPR_INT32, &RawData.touchStrips);
+//mpr_sig_set_value(lm.sigRawFSR, 0, 1, MPR_FLT, &RawData.fsr);
+//mpr_sig_set_value(lm.sigRawPiezo, 0, 1, MPR_INT32, &RawData.piezo);
+//mpr_sig_set_value(lm.sigRawAcclX, 0, 1, MPR_INT32, &RawData.accl[0]);
+//mpr_sig_set_value(lm.sigRawAcclY, 0, 1, MPR_INT32, &RawData.accl[1]);
+//mpr_sig_set_value(lm.sigRawAcclZ, 0, 1, MPR_INT32, &RawData.accl[2]);
+//mpr_sig_set_value(lm.sigRawGyroX, 0, 1, MPR_FLT, &RawData.gyro[0]);
+//mpr_sig_set_value(lm.sigRawGyroY, 0, 1, MPR_FLT, &RawData.gyro[1]);
+//mpr_sig_set_value(lm.sigRawGyroZ, 0, 1, MPR_FLT, &RawData.gyro[2]);
+//mpr_sig_set_value(lm.sigRawMagnX, 0, 1, MPR_INT32, &RawData.magn[0]);
+//mpr_sig_set_value(lm.sigRawMagnY, 0, 1, MPR_INT32, &RawData.magn[1]);
+//mpr_sig_set_value(lm.sigRawMagnZ, 0, 1, MPR_INT32, &RawData.magn[2]);
+//mpr_sig_set_value(lm.sigOrientationQ1, 0, 1, MPR_FLT, &RawData.quat[0]);
+//mpr_sig_set_value(lm.sigOrientationQ2, 0, 1, MPR_FLT, &RawData.quat[1]);
+//mpr_sig_set_value(lm.sigOrientationQ3, 0, 1, MPR_FLT, &RawData.quat[2]);
+//mpr_sig_set_value(lm.sigOrientationQ4, 0, 1, MPR_FLT, &RawData.quat[3]);
+//mpr_sig_set_value(lm.sigMagGyro, 0, 1, MPR_FLT, &RawData.magGyro);
+//mpr_sig_set_value(lm.sigMagAccl, 0, 1, MPR_FLT, &RawData.magAccl);
+//mpr_sig_set_value(lm.sigMagMagn, 0, 1, MPR_FLT, &RawData.magMagn);
+//mpr_sig_set_value(lm.sigButton, 0, 1, MPR_INT32, &RawData.buttonShort);
+//mpr_sig_set_value(lm.sigLongButton, 0, 1, MPR_INT32, &RawData.buttonLong);
+//mpr_sig_set_value(lm.sigDoubleButton, 0, 1, MPR_INT32, &RawData.buttonDouble);
+//mpr_sig_set_value(lm.sigYaw, 0, 1, MPR_FLT, &InstrumentData.ypr[0]);
+//mpr_sig_set_value(lm.sigPitch, 0, 1, MPR_FLT, &InstrumentData.ypr[1]);
+//mpr_sig_set_value(lm.sigRoll, 0, 1, MPR_FLT, &InstrumentData.ypr[2]);
+//mpr_sig_set_value(lm.sigtouchAll, 0, 1, MPR_FLT, &InstrumentData.touchAll);
+//mpr_sig_set_value(lm.sigtouchTop, 0, 1, MPR_FLT, &InstrumentData.touchTop);
+//mpr_sig_set_value(lm.sigtouchMiddle, 0, 1, MPR_FLT, &InstrumentData.touchMiddle);
+//mpr_sig_set_value(lm.sigtouchBottom, 0, 1, MPR_FLT, &InstrumentData.touchBottom);
+//mpr_sig_set_value(lm.sigBrush, 0, 1, MPR_FLT, &InstrumentData.brush);
+//mpr_sig_set_value(lm.sigRub, 0, 1, MPR_FLT, &InstrumentData.rub);
+//mpr_sig_set_value(lm.sigMultiBrush, 0, sizeof(InstrumentData.multiBrush)/sizeof(InstrumentData.multiBrush[0]), MPR_FLT, &RawData.touchStrips);
+//mpr_sig_set_value(lm.sigMultiRub, 0, sizeof(InstrumentData.multiRub)/sizeof(InstrumentData.multiRub[0]), MPR_FLT, &RawData.touchStrips);
+//mpr_sig_set_value(lm.sigShakeXYZ, 0, sizeof(InstrumentData.shakeXYZ)/sizeof(InstrumentData.shakeXYZ[0]), MPR_FLT, &RawData.touchStrips);
+//mpr_sig_set_value(lm.sigJabXYZ, 0, sizeof(InstrumentData.jabXYZ)/sizeof(InstrumentData.jabXYZ[0]), MPR_FLT, &RawData.touchStrips);
 }
 
 #endif

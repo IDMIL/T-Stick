@@ -102,7 +102,7 @@ void updateInstrument() {
 }
 
 
-float touchAverage (byte * touchArrayStrips, byte firstStrip, byte lastStrip) {
+float touchAverage (int * touchArrayStrips, byte firstStrip, byte lastStrip) {
     int sum = 0;
     for (int i = firstStrip; i < lastStrip; ++i)
       sum += touchArrayStrips[i];
@@ -137,7 +137,7 @@ float arrayAverageZero (float * Array, byte ArraySize) {
 }
 
 
-blob blobDetection1D (byte * touchArray, byte arraySize) {
+blob blobDetection1D (int * touchArray, byte arraySize) {
 
     // creating local variables
     blob blobDecect;
@@ -187,7 +187,7 @@ blob blobDetection1D (byte * touchArray, byte arraySize) {
     return blobDecect; 
 }
 
-blob blobDetection1DTrill (byte * touchArray, byte arraySize) {
+blob blobDetection1DTrill (int * touchArray, byte arraySize) {
 
     blob blobDecect;
     

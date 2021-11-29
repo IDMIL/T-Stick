@@ -191,7 +191,7 @@ float mapfloat(float x, float in_min, float in_max, float out_min, float out_max
 }
 
 
-void reorderCapsense (byte *origArray, byte arraySize) {
+void reorderCapsense (int *origArray, byte arraySize) {
   byte tempArray[arraySize];
   byte order[64] = {
     8,9,10,11,12,13,14,15,0,1,2,3,4,5,6,7,

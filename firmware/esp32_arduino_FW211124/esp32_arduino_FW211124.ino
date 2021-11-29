@@ -1,8 +1,8 @@
 //********************************************************************************//
 //  Sopranino T-Stick 2GW - LOLIN D32 PRO / TinyPico - USB - WiFi                 //
 //  Input Devices and Music Interaction Laboratory (IDMIL)                        //
-//  Created:  February 2018 by Alex Nieva                                         //
-//            March 2021 by Edu Meneses - firmware version 2011105 (2021/Nov/05)  //
+//  Created: February 2018 by Alex Nieva                                          //
+//           November 2021 by Edu Meneses - firmware version 2011124 (2021/Nov/24)//
 //                                                                                //
 //            Adapted to work with Arduino IDE 1.8.15 and T-Stick Sopranino 2GW   //
 //********************************************************************************//
@@ -72,9 +72,9 @@
 
 //#define TSTICK193; // define if flashing the T-Stick #193.
 
-#define TRILL // define this to disable the IDMIL's capsense and use the Bela Trill
+//#define TRILL // define this to disable the IDMIL's capsense and use the Bela Trill
 
-#define LIBMAPPER // define this to enable libmapper code
+//#define LIBMAPPER // define this to enable libmapper code
 
 
 #include <FS.h>
@@ -120,8 +120,8 @@
   Trill trillSensor; // for Trill Craft
   Trill trillSensor2; // for Trill Craft
   byte touchStripsSize = 30; // number of stripes
-  byte trillamount = 1;
 #endif
+byte trillamount = 1;
 
 #include<stdlib.h> //floats to string
 
@@ -132,7 +132,7 @@
 //////////////////////////////////
 //////////////////////////////////
 
-const int32_t firmware = 211105;
+const int32_t firmware = 211124;
 
 struct Tstick {
   int id;
@@ -163,10 +163,10 @@ char al[3] = "AL";
 char tn[3] = "TN";
 
 struct RawDataStruct {
-  byte touch[8]; // /raw/capsense, i..., 0--255, ... (1 int per 8 capacitive stripes -- 8 bits)
+  int touch[8]; // /raw/capsense, i..., 0--255, ... (1 int per 8 capacitive stripes -- 8 bits)
   int touch_trill[30];
   int touch_trill2[30];
-  byte touchStrips[60];
+  int touchStrips[60];
   int fsr; // /raw/fsr, i, 0--4095
   int piezo; // /raw/piezo, i, 0--1023
   float accl[3]; // /raw/accl, iii, +/-32767 (integers)
@@ -177,9 +177,9 @@ struct RawDataStruct {
   float magAccl;
   float magGyro;
   float magMagn;
-  byte buttonShort; // /raw/button/short, i, 0 or 1
-  byte buttonLong; // /raw/button/long, i, 0 or 1
-  byte buttonDouble; // /raw/button/double, i, 0 or 1
+  int buttonShort; // /raw/button/short, i, 0 or 1
+  int buttonLong; // /raw/button/long, i, 0 or 1
+  int buttonDouble; // /raw/button/double, i, 0 or 1
 } RawData;
 
 struct NormDataStruct {
@@ -346,7 +346,7 @@ void setup() {
   Serial.println("*  Sopranino T-Stick 2GW - LOLIN D32 PRO / TinyPico - USB - WiFi                *");
   Serial.println("*  Input Devices and Music Interaction Laboratory (IDMIL)                       *");
   Serial.println("*  Created:  February 2018 by Alex Nieva                                        *");
-  Serial.println("*            March 2021 by Edu Meneses - firmware version 2011105 (2021/Nov/05) *");
+  Serial.println("*            March 2021 by Edu Meneses - firmware version 2011124 (2021/Nov/24) *");
   Serial.println("*                                                                               *");
   Serial.println("*            Adapted to work with Arduino IDE 1.8.15 and T-Stick Sopranino 2GW  *");
   Serial.println("*********************************************************************************");
@@ -387,17 +387,21 @@ void setup() {
     capsense_scan(); // Look for Capsense boards and return their addresses
                      // must run before initLibmapper to get # of capsense boards
   #else
+    Serial.println("\nConfiguring Trill sensor...");
     trillSensor.setup(Trill::TRILL_CRAFT, 48);
     if (strcmp(Tstick.type,al) == 0 || strcmp(Tstick.type,tn) == 0) {
       trillSensor2.setup(Trill::TRILL_CRAFT, 49);
       trillamount = 2;
     }
+    Serial.println("Done!\n");
   #endif
   
   // Starting libmapper
   #ifdef LIBMAPPER
     if (Tstick.libmapper == 1) {
+      Serial.println("\nStarting libmapper...");
       initLibmapper();
+      Serial.println("Done\n");
     }
   #endif
 
@@ -433,7 +437,9 @@ void loop() {
 
   // go to deep sleep if double press button
   if (RawData.buttonDouble == 1){
-      RawData.buttonDouble = 0,
+      RawData.buttonDouble = 0;
+      Serial.println("\nEntering deep sleep.\n\nGoodbye!\n");
+      delay(1000);
       esp_deep_sleep_start();
   }
 
