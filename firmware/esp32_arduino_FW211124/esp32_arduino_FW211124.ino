@@ -67,14 +67,14 @@
 
 // define IDMIL_ESP8266, IDMIL_LOLIN, or IDMIL_TINYPICO according to your microcontroller.
 //#define IDMIL_ESP8266
-//#define IDMIL_LOLIN 
-#define IDMIL_TINYPICO
+#define IDMIL_LOLIN 
+//#define IDMIL_TINYPICO
 
 //#define TSTICK193; // define if flashing the T-Stick #193.
 
 //#define TRILL // define this to disable the IDMIL's capsense and use the Bela Trill
 
-//#define LIBMAPPER // define this to enable libmapper code
+#define LIBMAPPER // define this to enable libmapper code
 
 
 #include <FS.h>

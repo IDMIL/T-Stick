@@ -62,8 +62,7 @@ void initLibmapper() {
   // Create device for libmapper
   if (WiFi.status() == WL_CONNECTED) {
       std::string lm_name = tstickSSID;
-      dev = new mapper::Device(lm_name);
-  }
+      dev = new mapper::Device(tstickSSID);
 
   // output = dev->add_signal(
   //              Direction::OUTGOING, 
@@ -73,43 +72,69 @@ void initLibmapper() {
   //              "m/s",       // the signal's unit (optional). Use 0 (without quotes) if not specified
   //              min,         // the signal's minimum value (optional)
   //              max);        // the signal's maximum value (optional)
-
+    
   int touchlmSize = touchStripsSize*trillamount;
-  lm.sigRawCapsense = dev->add_signal(mapper::Direction::OUTGOING, "raw/capsense", touchlmSize, mapper::Type::INT32, 0, &lm.rawCapsenseMin, &lm.rawCapsenseMax);
-  lm.sigRawGyroX = dev->add_signal(mapper::Direction::OUTGOING, "raw/gyro/X", 1, mapper::Type::FLOAT, 0, &lm.rawGyroMin, &lm.rawGyroMax);
-  lm.sigRawGyroY = dev->add_signal(mapper::Direction::OUTGOING, "raw/gyro/Y", 1, mapper::Type::FLOAT, 0, &lm.rawGyroMin, &lm.rawGyroMax);
-  lm.sigRawGyroZ = dev->add_signal(mapper::Direction::OUTGOING, "raw/gyro/Z", 1, mapper::Type::FLOAT, 0, &lm.rawGyroMin, &lm.rawGyroMax);
-  lm.sigRawAcclX = dev->add_signal(mapper::Direction::OUTGOING, "raw/accl/X", 1, mapper::Type::INT32, 0, &lm.rawAcclMin, &lm.rawAcclMax);
-  lm.sigRawAcclY = dev->add_signal(mapper::Direction::OUTGOING, "raw/accl/Y", 1, mapper::Type::INT32, 0, &lm.rawAcclMin, &lm.rawAcclMax);
-  lm.sigRawAcclZ = dev->add_signal(mapper::Direction::OUTGOING, "raw/accl/Z", 1, mapper::Type::INT32, 0, &lm.rawAcclMin, &lm.rawAcclMax);
-  lm.sigRawMagnX = dev->add_signal(mapper::Direction::OUTGOING, "raw/magn/X", 1, mapper::Type::INT32, 0, &lm.rawMagnMin, &lm.rawMagnMax);
-  lm.sigRawMagnY = dev->add_signal(mapper::Direction::OUTGOING, "raw/magn/Y", 1, mapper::Type::INT32, 0, &lm.rawMagnMin, &lm.rawMagnMax);
-  lm.sigRawMagnZ = dev->add_signal(mapper::Direction::OUTGOING, "raw/magn/Z", 1, mapper::Type::INT32, 0, &lm.rawMagnMin, &lm.rawMagnMax);
-  lm.sigRawFSR = dev->add_signal(mapper::Direction::OUTGOING, "raw/fsr", 1, mapper::Type::INT32, 0, &lm.rawFSRMin, &lm.rawFSRMax);
-  lm.sigRawPiezo = dev->add_signal(mapper::Direction::OUTGOING, "raw/piezo", 1, mapper::Type::INT32, 0, &lm.rawPiezoMin, &lm.rawPiezoMax);
-  lm.sigOrientationQ1 = dev->add_signal(mapper::Direction::OUTGOING, "orientation/q1", 1, mapper::Type::FLOAT, 0, &lm.orientationMin, &lm.orientationMax);
-  lm.sigOrientationQ2 = dev->add_signal(mapper::Direction::OUTGOING, "orientation/q2", 1, mapper::Type::FLOAT, 0, &lm.orientationMin, &lm.orientationMax);
-  lm.sigOrientationQ3 = dev->add_signal(mapper::Direction::OUTGOING, "orientation/q3", 1, mapper::Type::FLOAT, 0, &lm.orientationMin, &lm.orientationMax);
-  lm.sigOrientationQ4 = dev->add_signal(mapper::Direction::OUTGOING, "orientation/q4", 1, mapper::Type::FLOAT, 0, &lm.orientationMin, &lm.orientationMax);
-  lm.sigYaw = dev->add_signal(mapper::Direction::OUTGOING, "orientation/yaw", 1, mapper::Type::FLOAT, 0, &lm.yprMin, &lm.yprMax);
-  lm.sigPitch = dev->add_signal(mapper::Direction::OUTGOING, "orientation/pitch", 1, mapper::Type::FLOAT, 0, &lm.yprMin, &lm.yprMax);
-  lm.sigRoll = dev->add_signal(mapper::Direction::OUTGOING, "orientation/roll", 1, mapper::Type::FLOAT, 0, &lm.yprMin, &lm.yprMax);
-  lm.sigMagGyro = dev->add_signal(mapper::Direction::OUTGOING, "gyro/magnitude", 1, mapper::Type::FLOAT, 0, &lm.magMin, &lm.magMax);
-  lm.sigMagAccl = dev->add_signal(mapper::Direction::OUTGOING, "accl/magnitude", 1, mapper::Type::FLOAT, 0, &lm.magMin, &lm.magMax);
-  lm.sigMagMagn = dev->add_signal(mapper::Direction::OUTGOING, "magn/magnitude", 1, mapper::Type::FLOAT, 0, &lm.magMin, &lm.magMax);
-  lm.sigButton = dev->add_signal(mapper::Direction::OUTGOING, "button/short", 1, mapper::Type::INT32, 0, &lm.buttonMin, &lm.buttonMax);
-  lm.sigLongButton = dev->add_signal(mapper::Direction::OUTGOING, "button/long", 1, mapper::Type::INT32, 0, &lm.buttonMin, &lm.buttonMax);
-  lm.sigDoubleButton = dev->add_signal(mapper::Direction::OUTGOING, "button/double", 1, mapper::Type::INT32, 0, &lm.buttonMin, &lm.buttonMax);
-  lm.sigtouchAll = dev->add_signal(mapper::Direction::OUTGOING, "instrument/touchall", 1, mapper::Type::FLOAT, 0, &lm.instTouchMin, &lm.instTouchMax);
-  lm.sigtouchTop = dev->add_signal(mapper::Direction::OUTGOING, "instrument/touchtop", 1, mapper::Type::FLOAT, 0, &lm.instTouchMin, &lm.instTouchMax);
-  lm.sigtouchMiddle = dev->add_signal(mapper::Direction::OUTGOING, "instrument/touchmiddle", 1, mapper::Type::FLOAT, 0, &lm.instTouchMin, &lm.instTouchMax);
-  lm.sigtouchBottom = dev->add_signal(mapper::Direction::OUTGOING, "instrument/touchbottom", 1, mapper::Type::FLOAT, 0, &lm.instTouchMin, &lm.instTouchMax);
-  lm.sigBrush = dev->add_signal(mapper::Direction::OUTGOING, "instrument/brush", 1, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
-  lm.sigRub = dev->add_signal(mapper::Direction::OUTGOING, "instrument/rub", 1, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
-  lm.sigMultiBrush = dev->add_signal(mapper::Direction::OUTGOING, "instrument/multibrush", 4, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
-  lm.sigMultiRub = dev->add_signal(mapper::Direction::OUTGOING, "instrument/multirub", 4, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
-  lm.sigShakeXYZ = dev->add_signal(mapper::Direction::OUTGOING, "instrument/shakexyz", 3, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
-  lm.sigJabXYZ = dev->add_signal(mapper::Direction::OUTGOING, "instrument/jabxyz", 3, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
+  std::string sigRawCapsense_name = "raw/capsense";
+  lm.sigRawCapsense = dev->add_signal(mapper::Direction::OUTGOING, sigRawCapsense_name, touchlmSize, mapper::Type::INT32, 0, &lm.rawCapsenseMin, &lm.rawCapsenseMax);
+  std::string sigRawGyroX_name = "raw/gyro/X";
+  lm.sigRawGyroX = dev->add_signal(mapper::Direction::OUTGOING, sigRawGyroX_name, 1, mapper::Type::FLOAT, 0, &lm.rawGyroMin, &lm.rawGyroMax);
+  std::string sigRawGyroY_name = "raw/gyro/Y";
+  lm.sigRawGyroY = dev->add_signal(mapper::Direction::OUTGOING, sigRawGyroY_name, 1, mapper::Type::FLOAT, 0, &lm.rawGyroMin, &lm.rawGyroMax);
+  std::string sigRawGyroZ_name = "raw/gyro/Z";
+  lm.sigRawGyroZ = dev->add_signal(mapper::Direction::OUTGOING, sigRawGyroZ_name, 1, mapper::Type::FLOAT, 0, &lm.rawGyroMin, &lm.rawGyroMax);
+  std::string sigRawAcclX_name = "raw/accl/X";
+  lm.sigRawAcclX = dev->add_signal(mapper::Direction::OUTGOING, sigRawAcclX_name, 1, mapper::Type::INT32, 0, &lm.rawAcclMin, &lm.rawAcclMax);
+  std::string sigRawAcclY_name = "raw/accl/Y";
+  lm.sigRawAcclY = dev->add_signal(mapper::Direction::OUTGOING, sigRawAcclY_name, 1, mapper::Type::INT32, 0, &lm.rawAcclMin, &lm.rawAcclMax);
+  std::string sigRawAcclZ_name = "raw/accl/Z";
+  lm.sigRawAcclZ = dev->add_signal(mapper::Direction::OUTGOING, sigRawAcclZ_name, 1, mapper::Type::INT32, 0, &lm.rawAcclMin, &lm.rawAcclMax);
+  std::string sigRawMagnX_name = "raw/magn/X";
+  lm.sigRawMagnX = dev->add_signal(mapper::Direction::OUTGOING, sigRawMagnX_name, 1, mapper::Type::INT32, 0, &lm.rawMagnMin, &lm.rawMagnMax);
+  std::string sigRawMagnY_name = "raw/magn/Y";
+  lm.sigRawMagnY = dev->add_signal(mapper::Direction::OUTGOING, sigRawMagnY_name, 1, mapper::Type::INT32, 0, &lm.rawMagnMin, &lm.rawMagnMax);
+  std::string sigRawMagnZ_name = "raw/magn/Z";
+  lm.sigRawMagnZ = dev->add_signal(mapper::Direction::OUTGOING, sigRawMagnZ_name, 1, mapper::Type::INT32, 0, &lm.rawMagnMin, &lm.rawMagnMax);
+  std::string sigRawFSR_name = "raw/fsr";
+  lm.sigRawFSR = dev->add_signal(mapper::Direction::OUTGOING, sigRawFSR_name, 1, mapper::Type::INT32, 0, &lm.rawFSRMin, &lm.rawFSRMax);
+  std::string sigYaw_name = "orientation/yaw";
+  lm.sigYaw = dev->add_signal(mapper::Direction::OUTGOING, sigYaw_name, 1, mapper::Type::FLOAT, 0, &lm.yprMin, &lm.yprMax);
+  std::string sigPitch_name = "orientation/pitch";
+  lm.sigPitch = dev->add_signal(mapper::Direction::OUTGOING, sigPitch_name, 1, mapper::Type::FLOAT, 0, &lm.yprMin, &lm.yprMax);
+  std::string sigRoll_name = "orientation/roll";
+  lm.sigRoll = dev->add_signal(mapper::Direction::OUTGOING, sigRoll_name, 1, mapper::Type::FLOAT, 0, &lm.yprMin, &lm.yprMax);
+  std::string sigMagGyro_name = "gyro/magnitude";
+  lm.sigMagGyro = dev->add_signal(mapper::Direction::OUTGOING, sigMagGyro_name, 1, mapper::Type::FLOAT, 0, &lm.magMin, &lm.magMax);
+  std::string sigMagAccl_name = "accl/magnitude";
+  lm.sigMagAccl = dev->add_signal(mapper::Direction::OUTGOING, sigMagAccl_name, 1, mapper::Type::FLOAT, 0, &lm.magMin, &lm.magMax);
+  std::string sigMagMagn_name = "magn/magnitude";
+  lm.sigMagMagn = dev->add_signal(mapper::Direction::OUTGOING, sigMagMagn_name, 1, mapper::Type::FLOAT, 0, &lm.magMin, &lm.magMax);
+  std::string sigButton_name = "button/short";
+  lm.sigButton = dev->add_signal(mapper::Direction::OUTGOING, sigButton_name, 1, mapper::Type::INT32, 0, &lm.buttonMin, &lm.buttonMax);
+  std::string sigLongButton_name = "button/long";
+  lm.sigLongButton = dev->add_signal(mapper::Direction::OUTGOING, sigLongButton_name, 1, mapper::Type::INT32, 0, &lm.buttonMin, &lm.buttonMax);
+  std::string sigDoubleButton_name = "button/double";
+  lm.sigDoubleButton = dev->add_signal(mapper::Direction::OUTGOING, sigDoubleButton_name, 1, mapper::Type::INT32, 0, &lm.buttonMin, &lm.buttonMax);
+  std::string sigtouchAll_name = "instrument/touchall";
+  lm.sigtouchAll = dev->add_signal(mapper::Direction::OUTGOING, sigtouchAll_name, 1, mapper::Type::FLOAT, 0, &lm.instTouchMin, &lm.instTouchMax);
+  std::string sigtouchTop_name = "instrument/touchtop";
+  lm.sigtouchTop = dev->add_signal(mapper::Direction::OUTGOING, sigtouchTop_name, 1, mapper::Type::FLOAT, 0, &lm.instTouchMin, &lm.instTouchMax);
+  std::string sigtouchMiddle_name = "instrument/touchmiddle";
+  lm.sigtouchMiddle = dev->add_signal(mapper::Direction::OUTGOING, sigtouchMiddle_name, 1, mapper::Type::FLOAT, 0, &lm.instTouchMin, &lm.instTouchMax);
+  std::string sigtouchBottom_name = "instrument/touchbottom";
+  lm.sigtouchBottom = dev->add_signal(mapper::Direction::OUTGOING, sigtouchBottom_name, 1, mapper::Type::FLOAT, 0, &lm.instTouchMin, &lm.instTouchMax);
+  std::string sigBrush_name = "instrument/brush";
+  lm.sigBrush = dev->add_signal(mapper::Direction::OUTGOING, sigBrush_name, 1, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
+  std::string sigRub_name = "instrument/rub";
+  lm.sigRub = dev->add_signal(mapper::Direction::OUTGOING, sigRub_name, 1, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
+  std::string sigMultiBrush_name = "instrument/multibrush";
+  lm.sigMultiBrush = dev->add_signal(mapper::Direction::OUTGOING, sigMultiBrush_name, 4, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
+  std::string sigMultiRub_name = "instrument/multirub";
+  lm.sigMultiRub = dev->add_signal(mapper::Direction::OUTGOING, sigMultiRub_name, 4, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
+  std::string sigShakeXYZ_name = "instrument/shakexyz";
+  lm.sigShakeXYZ = dev->add_signal(mapper::Direction::OUTGOING, sigShakeXYZ_name, 3, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
+  std::string sigJabXYZ_name = "instrument/jabxyz";
+  lm.sigJabXYZ = dev->add_signal(mapper::Direction::OUTGOING, sigJabXYZ_name, 3, mapper::Type::FLOAT, 0, &lm.genericMin, &lm.genericMax);
+  }
 }
 
 void updateLibmapper() {
@@ -124,7 +149,6 @@ void updateLibmapper() {
   
   lm.sigRawCapsense.set_value(touchStripsVector);
   lm.sigRawFSR.set_value(RawData.fsr);
-  lm.sigRawPiezo.set_value(RawData.piezo);
   lm.sigRawAcclX.set_value(RawData.accl[0]);
   lm.sigRawAcclY.set_value(RawData.accl[1]);
   lm.sigRawAcclZ.set_value(RawData.accl[2]);
@@ -134,10 +158,6 @@ void updateLibmapper() {
   lm.sigRawMagnX.set_value(RawData.magn[0]);
   lm.sigRawMagnY.set_value(RawData.magn[1]);
   lm.sigRawMagnZ.set_value(RawData.magn[2]);
-  lm.sigOrientationQ1.set_value(RawData.quat[0]);
-  lm.sigOrientationQ2.set_value(RawData.quat[1]);
-  lm.sigOrientationQ3.set_value(RawData.quat[2]);
-  lm.sigOrientationQ4.set_value(RawData.quat[3]);
   lm.sigMagGyro.set_value(RawData.magGyro);
   lm.sigMagAccl.set_value(RawData.magAccl);
   lm.sigMagMagn.set_value(RawData.magMagn);
