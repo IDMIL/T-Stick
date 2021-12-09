@@ -62,7 +62,7 @@ void initLibmapper() {
   // Create device for libmapper
   if (WiFi.status() == WL_CONNECTED) {
       std::string lm_name = tstickSSID;
-      dev = new mapper::Device(tstickSSID);
+      dev = new mapper::Device(lm_name);
 
   // output = dev->add_signal(
   //              Direction::OUTGOING, 
@@ -138,7 +138,7 @@ void initLibmapper() {
 }
 
 void updateLibmapper() {
-  mpr_dev_poll(dev, 0);
+  dev->poll();
 
   std::vector<int> touchStripsVector(RawData.touchStrips, RawData.touchStrips + sizeof(RawData.touchStrips) / sizeof(int));
   std::vector<float> mBrushVector(InstrumentData.multiBrush, InstrumentData.multiBrush + sizeof(InstrumentData.multiBrush) / sizeof(float));
