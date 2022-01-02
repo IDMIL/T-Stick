@@ -14,9 +14,9 @@
 
 #define BUTTON_STAT 0xAA  // Address to read the status of the sensors (2 bytes)
 
-byte capsense_addresses[4]; // max 4 capsenses
-byte nCapsenses = 0;
-byte touchStripsSize;
+//byte capsense_addresses[4]; // max 4 capsenses
+//byte nCapsenses = 0;
+//byte touchStripsSize;
 
 Capsense capsenseRequest(uint8_t address,uint8_t request, uint8_t answer_size) {
 

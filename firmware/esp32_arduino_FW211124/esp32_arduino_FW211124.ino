@@ -74,7 +74,7 @@
 
 //#define TRILL // define this to disable the IDMIL's capsense and use the Bela Trill
 
-#define LIBMAPPER // define this to enable libmapper code
+//#define LIBMAPPER // define this to enable libmapper code
 
 
 #include <FS.h>
@@ -110,10 +110,16 @@
 
 #include <Wire.h>
 #include <SPI.h>
-#include <MIMU_LSM9DS1.h> // https://github.com/DocSunset/MIMU
+//#include <MIMU_LSM9DS1.h> // https://github.com/DocSunset/MIMU
                           // requires SparkFunLSM9DS1 library - https://github.com/sparkfun/SparkFun_LSM9DS1_Arduino_Library
-#include <MIMUCalibrator.h>
-#include <MIMUFusion.h>
+//#include <MIMUCalibrator.h>
+//#include <MIMUFusion.h>
+
+#include <SparkFunLSM9DS1.h>
+
+LSM9DS1 imu;
+
+#define DECLINATION 14 // Declination (degrees) in Montreal
 
 #ifdef TRILL
   #include <Trill.h>
@@ -325,9 +331,13 @@ void blinkLED(int ledInterval) {
 // MIMU Library Init //
 ///////////////////////
 
-MIMU_LSM9DS1 mimu{}; // use default SDA and SCL as per board library macros
-MIMUCalibrator calibrator{};
-MIMUFusionFilter filter{};
+//MIMU_LSM9DS1 mimu{}; // use default SDA and SCL as per board library macros
+//MIMUCalibrator calibrator{};
+//MIMUFusionFilter filter{};
+
+byte capsense_addresses[4]; // max 4 capsenses
+byte nCapsenses = 0;
+byte touchStripsSize;
 
 
 ///////////
@@ -380,12 +390,15 @@ void setup() {
   connectToWifi();
 
   // Starting IMU
-  initIMU();
+   Wire.begin();
+  imu.begin();
+  //initIMU();
 
   // Starting Capsense
   #ifndef TRILL
-    capsense_scan(); // Look for Capsense boards and return their addresses
+    //capsense_scan(); // Look for Capsense boards and return their addresses
                      // must run before initLibmapper to get # of capsense boards
+    
   #else
     Serial.println("\nConfiguring Trill sensor...");
     trillSensor.setup(Trill::TRILL_CRAFT, 48);

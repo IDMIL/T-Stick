@@ -125,18 +125,49 @@ void readData() {
       }
 
   // read IMU
-  static MIMUReading reading = MIMUReading::Zero();
-  static Quaternion quat = Quaternion::Identity();
-  if (mimu.readInto(reading)) {
-    calibrator.calibrate(reading);
-    reading.updateBuffer();
-    quat = filter.fuse(reading.gyro, reading.accl, reading.magn);
-    
-    copyFloatArrayToVar(reading.accl.data(), reading.accl.size(), RawData.accl);
-    copyFloatArrayToVar(reading.gyro.data(), reading.gyro.size(), RawData.gyro);
-    copyFloatArrayToVar(reading.magn.data(), reading.magn.size(), RawData.magn);
-    copyFloatArrayToVar(reading.data, reading.size, RawData.raw);
-    copyFloatArrayToVar(quat.coeffs().data(), quat.coeffs().size(), RawData.quat);
+//  static MIMUReading reading = MIMUReading::Zero();
+//  static Quaternion quat = Quaternion::Identity();
+//  if (mimu.readInto(reading)) {
+//    calibrator.calibrate(reading);
+//    reading.updateBuffer();
+//    quat = filter.fuse(reading.gyro, reading.accl, reading.magn);
+//    
+//    copyFloatArrayToVar(reading.accl.data(), reading.accl.size(), RawData.accl);
+//    copyFloatArrayToVar(reading.gyro.data(), reading.gyro.size(), RawData.gyro);
+//    copyFloatArrayToVar(reading.magn.data(), reading.magn.size(), RawData.magn);
+//    copyFloatArrayToVar(reading.data, reading.size, RawData.raw);
+//    copyFloatArrayToVar(quat.coeffs().data(), quat.coeffs().size(), RawData.quat);
+
+      if ( imu.gyroAvailable() )
+    {
+      // To read from the gyroscope,  first call the
+      // readGyro() function. When it exits, it'll update the
+      // gx, gy, and gz variables with the most current data.
+      imu.readGyro();
+      RawData.gyro[0] = imu.gx;
+      RawData.gyro[1] = imu.gy;
+      RawData.gyro[2] = imu.gz;
+    }
+    if ( imu.accelAvailable() )
+    {
+      // To read from the accelerometer, first call the
+      // readAccel() function. When it exits, it'll update the
+      // ax, ay, and az variables with the most current data.
+      imu.readAccel();
+      RawData.accl[0] = imu.ax;
+      RawData.accl[1] = imu.ay;
+      RawData.accl[2] = imu.az;
+    }
+    if ( imu.magAvailable() )
+    {
+      // To read from the magnetometer, first call the
+      // readMag() function. When it exits, it'll update the
+      // mx, my, and mz variables with the most current data.
+      imu.readMag();
+      RawData.magn[0] = imu.mx;
+      RawData.magn[1] = imu.my;
+      RawData.magn[2] = imu.mz;
+    }
 
     LastState.gyroXArray[LastState.gyroArrayCounter] = RawData.gyro[0];
     LastState.gyroYArray[LastState.gyroArrayCounter] = RawData.gyro[1];
@@ -174,7 +205,7 @@ void readData() {
       offsetYaw = InstrumentData.ypr[0];
       offsetFlag = 0;
     }
-  } 
+   
 }
 
 void copyFloatArrayToVar(const float source[], int size, float destination[]) {
