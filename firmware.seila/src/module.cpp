@@ -1,4 +1,4 @@
-// GuitarAMI Module - WiFi and file system functions
+// T-Stick - WiFi and file system functions
 // Edu Meneses
 // IDMIL - McGill University (2020)
 
@@ -72,7 +72,7 @@ void Module::scanWiFi(char *deviceName, int mode, char *apPSK, char *wifiSSID, c
 
 
 void Module::startWifi(char *deviceName, int mode, char *apPSK, char *wifiSSID, char *wifiPSK) {
-  // Modes: 0:STA, 1:Setup(STA+AP+WebServer)
+  // Modes: 0:STA, 1:AP, 2:MIDI, 3:Setup(STA+AP+WebServer)
 
   if (mode == 0) {
     WiFi.mode(WIFI_STA);
@@ -97,7 +97,21 @@ void Module::startWifi(char *deviceName, int mode, char *apPSK, char *wifiSSID, 
     }
   }
 
-  if (mode == 1) { // setup mode (STA + AP)
+  if (mode == 1) {
+    WiFi.mode(WIFI_AP);
+    //WiFi.softAPConfig(AP_local_IP, AP_gateway, AP_subnet);
+    Serial.print("The "); Serial.print(deviceName); Serial.println(" WiFi is set to AP mode");
+    WiFi.softAP(deviceName, apPSK);
+    Serial.println(" Starting AP...");
+    IPAddress myIP = WiFi.softAPIP();
+    Serial.print("AP IP: "); Serial.println(myIP);
+  }
+
+  if (mode == 2) {
+    Serial.print("The "); Serial.print(deviceName); Serial.println(" WiFi is set to OFF (MIDI mode)");
+  }
+
+  if (mode == 3) { // setup mode (STA + AP)
     WiFi.mode(WIFI_AP_STA);
     Serial.print("The "); Serial.print(deviceName); Serial.println(" WiFi is set to station+softAP (setup) mode");
     WiFi.softAP(deviceName, apPSK);

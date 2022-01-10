@@ -4,97 +4,90 @@
 
 #include "instrument_touch.h"
 
-void Instrument_touch::updateInstrument(int *raw_touch) {
 
-    // Get max value, but also use it to check if any touch is pressed
-    int instant_maxTouchValue = *std::max_element(raw_touch, raw_touch+touchSize);
+void Instrument_touch::updateInstrument(int *discrete_touch, int touchSize) { // raw_touch
+    
+    // touchAll: get the "amount of touch" for the entire touch sensor
+    // normalized between 0 and 1
+    touchAll = touchAverage(discrete_touch, 0, touchSize);
 
-    // Touching the T-Stick or not?
-    if (instant_maxTouchValue == 0) {
-        touchStatus = 0;
-    } else {
-        touchStatus = 1;
+    // touchTop: get the "amount of touch" for the top part of the capsense
+    // normalized between 0 and 1
+    touchTop = touchAverage(discrete_touch, 0, touchSizeEdge);
+
+    // touchMiddle: get the "amount of touch" for the central part of the capsense
+    // normalized between 0 and 1
+    touchMiddle = touchAverage(discrete_touch, (0+touchSizeEdge), (touchSize - touchSizeEdge));
+
+    // touchBottom: get the "amount of touch" for the botton part of the capsense
+    // normalized between 0 and 1
+    touchBottom = touchAverage(discrete_touch, (touchSize - touchSizeEdge), touchSize);
+
+    // Save last blob detection state before reading new data
+    for (byte i=0; i < (sizeof(blobPos)/sizeof(blobPos[0])); ++i) {
+        lastState_blobPos[i] = blobPos[i];
     }
 
-    // Update everything else if user is touching
-    if (touchStatus) {
-        // We need updated maxTouchValue to normalize touch
-        maxTouchValue = std::max(maxTouchValue,instant_maxTouchValue);
+    // 1D blob detection: used for brush
+    blobDetection1D(discrete_touch,touchSize);
 
-        // Touch discretize and normalize
-        for (int i=0; i < touchSize; i++) {
-            if (raw_touch[i] != 0) {
-                touch[i] = 1;
-                normTouch[i] = constrain(raw_touch[i] / maxTouchValue, 0, 1);
-            }
-        }
-
-        // touchAll: get the "amount of touch" for the entire touch sensor
-        // normalized between 0 and 1
-        touchAll = touchAverage(normTouch, 0, touchSize);
-
-        // touchTop: get the "amount of touch" for the top part of the capsense
-        // normalized between 0 and 1
-        touchTop = touchAverage(normTouch, 0, touchSizeEdge);
-
-        // touchMiddle: get the "amount of touch" for the central part of the capsense
-        // normalized between 0 and 1
-        touchMiddle = touchAverage(normTouch, (0+touchSizeEdge), (touchSize - touchSizeEdge));
-
-        // touchBottom: get the "amount of touch" for the botton part of the capsense
-        // normalized between 0 and 1
-        touchBottom = touchAverage(normTouch, (touchSize-touchSizeEdge), touchSize);
-
-        // Save last blob detection state before reading new data
-        for (byte i=0; i < (sizeof(blobPos)/sizeof(blobPos[0])); ++i) {
-            lastState_blobPos[i] = blobPos[i];
-        }
-
-        // 1D blob detection: used for brush
-        blobDetection1D();
-
-        // brush: direction and intensity of capsense brush motion
-        // rub: intensity of rub motion
-        // in ~cm/s (distance between stripes = ~1.5cm)
-        for (byte i=0; i < (sizeof(blobPos)/sizeof(blobPos[0])); ++i) {        
-            float movement = blobPos[i] - lastState_blobPos[i]; 
-            if ( blobPos[i] == -1 ) {
+    // brush: direction and intensity of capsense brush motion
+    // rub: intensity of rub motion
+    // in ~cm/s (distance between stripes = ~1.5cm)
+    for (byte i=0; i < (sizeof(blobPos)/sizeof(blobPos[0])); ++i) { 
+        float movement = blobPos[i] - lastState_blobPos[i]; 
+        if ( blobPos[i] == -1 ) {
+            multiBrush[i] = 0;
+            multiRub[i] = 0;
+            brushCounter[i] = 0;
+        } else if (movement == 0) {
+            if (brushCounter[i] < 10) {
+                brushCounter[i]++;
+                // wait some time before dropping the rub/brush values
+            } else if (multiBrush[i] < 0.001) {
                 multiBrush[i] = 0;
                 multiRub[i] = 0;
-                brushCounter[i] = 0;
-            } else if (movement == 0) {
-                if (brushCounter[i] < 10) {
-                    brushCounter[i]++;
-                    // wait some time before dropping the rub/brush values
-                } else if (multiBrush[i] < 0.001) {
-                    multiBrush[i] = 0;
-                    multiRub[i] = 0;
-                } else {
-                    multiBrush[i] = leakyIntegrator(movement*0.15, multiBrush[i], 0.7, leakyBrushFreq, leakyBrushTimer);
-                    multiRub[i] = leakyIntegrator(abs(movement*0.15), multiRub[i], 0.7, leakyRubFreq, leakyRubTimer);
-                }
-            } else if ( abs(movement) > 1 ) {
-                multiBrush[i] = leakyIntegrator(0, multiBrush[i], 0.6, leakyBrushFreq, leakyBrushTimer);
             } else {
-                multiBrush[i] = leakyIntegrator(movement*0.15, multiBrush[i], 0.8, leakyBrushFreq, leakyBrushTimer);
-                multiRub[i] = leakyIntegrator(abs(movement*0.15), multiRub[i], 0.99, leakyRubFreq, leakyRubTimer);
-                brushCounter[i] = 0;
+                multiBrush[i] = leakyIntegrator(movement*0.15, multiBrush[i], 0.7, leakyBrushFreq, leakyBrushTimer);
+                multiRub[i] = leakyIntegrator(abs(movement*0.15), multiRub[i], 0.7, leakyRubFreq, leakyRubTimer);
             }
+        } else if ( abs(movement) > 1 ) {
+            multiBrush[i] = leakyIntegrator(0, multiBrush[i], 0.6, leakyBrushFreq, leakyBrushTimer);
+        } else {
+            multiBrush[i] = leakyIntegrator(movement*0.15, multiBrush[i], 0.8, leakyBrushFreq, leakyBrushTimer);
+            multiRub[i] = leakyIntegrator(abs(movement*0.15), multiRub[i], 0.99, leakyRubFreq, leakyRubTimer);
+            brushCounter[i] = 0;
         }
-        brush =  arrayAverageZero(multiBrush,4);
-        rub = arrayAverageZero(multiRub,4);
     }
+    brush =  arrayAverageZero(multiBrush,4);
+    rub = arrayAverageZero(multiRub,4);
 }
 
 float Instrument_touch::touchAverage (float * touchArrayStrips, int firstStrip, int lastStrip) {
     int sum = 0;
-    for (int i = firstStrip; i < lastStrip; ++i)
+    for (int i = firstStrip; i < lastStrip-1; ++i)
       sum += touchArrayStrips[i];
       
     return  ((float) sum) / (lastStrip - firstStrip);
 }
 
-void Instrument_touch::blobDetection1D () {
+float Instrument_touch::touchAverage (byte * touchArrayStrips, int firstStrip, int lastStrip) {
+    int sum = 0;
+    for (int i = firstStrip; i < lastStrip-1; ++i)
+      sum += (float)touchArrayStrips[i];
+      
+    return  ((float) sum) / (lastStrip - firstStrip);
+}
+
+float Instrument_touch::touchAverage (int * touchArrayStrips, int firstStrip, int lastStrip) {
+    int sum = 0;
+    for (int i = firstStrip; i < lastStrip-1; ++i)
+      sum += (float)touchArrayStrips[i];
+      
+    return  ((float) sum) / (lastStrip - firstStrip);
+}
+
+void Instrument_touch::blobDetection1D (int *discrete_touch, int touchSize) {
     blobAmount = 0;
     int sizeCounter = 0;
     int stripe = 0;
@@ -106,10 +99,10 @@ void Instrument_touch::blobDetection1D () {
 
     for ( ; stripe<touchSize; stripe++) {
         if (blobAmount < maxBlobs) {
-            if (touch[stripe] == 1) { // check for beggining of blob...
+            if (discrete_touch[stripe] == 1) { // check for beggining of blob...
                 sizeCounter = 1;
                 blobPos[blobAmount] = stripe;
-                while (touch[stripe+sizeCounter] == 1) { // then keep checking for end
+                while (discrete_touch[stripe+sizeCounter] == 1) { // then keep checking for end
                     sizeCounter++;
                 }
                 blobSize[blobAmount] = sizeCounter;

@@ -1,41 +1,41 @@
-
-//****************************************************************************//
-// T-Stick                                                                    //
-// Input Devices and Music Interaction Laboratory (IDMIL), McGill University  //
-// Edu Meneses (2022) - https://www.edumeneses.com                            //
-//****************************************************************************//
-
-//
-// ╺┳┓┏━╸┏━┓┏━┓
-//  ┃┃┣╸ ┣━ ┗━┓
-// ╺┻┛┗━╸╹  ┗━┛
-//
-
-const unsigned int firmware_version = 220109;
-
-/* 
-  Choose proper microcontroller:
-  - TinyPICO (3GW) 
-  - Wemos D32 Pro
-*/
-#define board_TINYPICO
-// #define board_WEMOS
+// T-Stick firmware - Main file
+// Edu Meneses
+// IDMIL - McGill University (2022)
 
 /*
-  Choose the capacitive sensing board
-  - Trill
-  - IDMIL Capsense board 
+OBS: if you face a fatal error related to the file  ../../../lwip/src/include/lwip/inet.h,
+     edit the inet.h file from 
+        #include "../../../lwip/src/include/lwip/inet.h"
+     to
+        #include "lwip/inet.h"
+
+ For more info: https://github.com/mathiasbredholt/libmapper-arduino/issues/3
 */
-#define touch_TRILL
-#define touch_CAPSENSE
 
+const unsigned int firmware_version = 220102;
 
-//////////////
-// Includes //
-//////////////
+// The T-Stick usually has the  uses the LSM9DS1
+  //#define imu_BNO080
+  #define imu_LSM9DS1
+
+// If using TinyPICO (current HW) version or Wemos D32 Pro
+  #define board_TINYPICO
+  //#define board_WEMOS
+
+// Turn everything related to libmapper off
+//#define DISABLE_LIBMAPPER
+
+// Turn everything related to MIDI off
+#define DISABLE_MIDI
 
 #include <Arduino.h>
 #include <Update.h>       // For OTA over web server (manual .bin upload)
+
+#ifndef DISABLE_LIBMAPPER
+  //#include <string>
+  #include <mapper_cpp.h> // libmapper
+  //using namespace mapper;
+#endif
 
 #include <deque>
 #include <cmath>          // std::abs
@@ -46,22 +46,25 @@ const unsigned int firmware_version = 220109;
 #include <OSCMessage.h>   // https://github.com/CNMAT/OSC
 #include <OSCBundle.h>
 
-#ifdef board_TINYPICO
-    #include <TinyPICO.h>
-    TinyPICO tinypico = TinyPICO();
-#endif
-
 /////////////////////
 // Pin definitions //
 /////////////////////
 
   struct Pin {
-        byte led = 5;      // Built In LED pin
-        byte battery = 35; // To check battery level (voltage)
-        byte fsr = 32;
-        byte button = 15;
-    } pin;
+      int led;    // Built In LED pin
+      int touch;  // Capacitive touch pin
+      int battery;// To check battery level (voltage)
+      int ultTrig;// connects to the trigger pin on the distance sensor
+      int ultEcho;// connects to the echo pin on the distance sensor
+    };
 
+  #ifdef board_WEMOS
+    Pin pin{ 5, 15, 35, 32, 33 };
+  #elif defined(board_TINYPICO)
+    Pin pin{ 5, 4, 35, 32, 33 };
+    #include <TinyPICO.h>
+    TinyPICO tinypico = TinyPICO();
+  #endif
 
 ///////////////////////////////
 // Firmware global variables //
@@ -71,8 +74,10 @@ const unsigned int firmware_version = 220109;
     char deviceName[25];
     char APpasswd[15];
     bool rebootFlag = false;
+    bool midiFlag = false;
     unsigned long rebootTimer;
     unsigned int oscDelay = 10; // 10ms ~= 100Hz
+    unsigned int midiDelay = 20; // 20ms ~= 50Hz
     unsigned long messageTimer = 0;
     unsigned int lastCount = 1;
     unsigned int lastTap = 1;
@@ -80,7 +85,6 @@ const unsigned int firmware_version = 220109;
     unsigned int lastTtap = 1;
     unsigned int lastTrig = 1;
     unsigned int lastDistance = 1;
-    float lastFsr = 1;
     float lastShake[3] = {0.1, 0.1, 0.1};
     float lastJab[3] = {0.1, 0.1, 0.1};
     int ledValue = 0;
@@ -105,8 +109,9 @@ const unsigned int firmware_version = 220109;
     int32_t localPORT = 8000;
     bool libmapper = false;
     bool osc = false;
-    int mode = 0; // 0:STA, 1:Setup(STA+AP+WebServer)
-    int fsrOffset;
+    int mode = 0; // 0:STA, 1:AP, 2:MIDI, 3:Setup(STA+AP+WebServer)
+    int oldMode = 0; // saves stored mode before enter setup
+    int touchSensitivity = 0;
   } settings;
   
 
@@ -126,7 +131,85 @@ const unsigned int firmware_version = 220109;
   void sendContinuousOSC(char* ip, int32_t port);
   void sendInfo(OSCMessage &msg);
   void receiveOSC();
+  
+////////////////////////////////////////////////////////
+// Libmapper stuff with specific forward declarations //
+////////////////////////////////////////////////////////
 
+#ifndef DISABLE_LIBMAPPER
+  mapper::Device* dev;
+  //char nome[] = "teste";
+  //mapper::Device dev("test");
+
+  struct lm {
+    mapper::Signal ult;
+    int ultMax = 500;
+    int ultMin = 0;
+    mapper::Signal accel;
+    float accelMax = 50;
+    float accelMin = -50;
+    mapper::Signal gyro;
+    float gyroMax = 25;
+    float gyroMin = -25;
+    mapper::Signal mag;
+    float magMax = 25;
+    float magMin = -25;
+    mapper::Signal quat;
+    float quatMax = 1;
+    float quatMin = -1;
+    mapper::Signal euler;
+    float eulerMax = 180;
+    float eulerMin = -180;
+    mapper::Signal shake;
+    float shakeMax =  50;
+    float shakeMin = -50;
+    mapper::Signal jab;
+    float jabMax = 50;
+    float jabMin = -50;
+    mapper::Signal count;
+    int countMax = 100;
+    int countMin = 0;
+    mapper::Signal tap;
+    mapper::Signal ttap;
+    mapper::Signal dtap;
+    int tapMax = 1;
+    int tapMin = 0;
+    mapper::Signal bat;
+    int batMax = 100;
+    int batMin = 0;
+  } lm;
+
+  void initLibmapper();
+  void updateLibmapper();
+
+#endif
+
+////////////////////////////////////////
+// Include Ultrassonic function files //
+////////////////////////////////////////
+
+  #include "ult.h"
+  
+  struct UltData {
+    unsigned int distance;
+    unsigned int tempDistance;
+    unsigned int lastDistance;
+    unsigned int ultMaxDistance = 20; // Maximum distance we want to ping for (in centimeters). Maximum sensor distance is rated at 400-500cm.
+    unsigned int ultMinDistance = 20; // Maximum distance considered (IN MILLIMETERS)
+    int trigger;
+    unsigned long timer = 0;
+    unsigned long trigTimer = 0;
+    int interval = 20; // in ms (1/f)
+    int trigInterval = 200; // in ms (1/f)
+    int queueAmount = 10; // # of values stored
+    std::deque<int> filterArray; // store last values
+  } ultData;
+
+  NewPing ult(pin.ultTrig, pin.ultEcho, ultData.ultMaxDistance); // NewPing setup of pins and maximum distance.
+
+  void ultFilter();
+  void readUlt();
+  void readUltTrigger();
 
 ///////////////////
 // Battery stuff //
@@ -149,25 +232,54 @@ const unsigned int firmware_version = 220109;
 // Include Touch function files //
 //////////////////////////////////
 
-  #include "button.h"
+  #include "touch.h"
 
-  Button button;
+  Touch touch;
 
 ////////////////////////////////
 // Include IMU function files //
 ////////////////////////////////
 
-  #include "lsm9ds1.h"
+  //Choose the file to include according to the IMU used
+  
+  #ifdef imu_BNO080
+     #include "bno080.h" 
+        Imu_BNO080 imu;
+  #endif
+  #ifdef imu_LSM9DS1
+    #include "lsm9ds1.h"
+        Imu_LSM9DS1 imu;
+  #endif
 
-  Imu_LSM9DS1 imu;
+//////////////////////////////////////////
+// Include MIDI libraries and functions //
+//////////////////////////////////////////
 
-////////////////////////////////
-// Include FSR function files //
-////////////////////////////////
+  #ifndef DISABLE_MIDI
 
-  #include "fsr.h"
+  #include "midi.h"
 
-  Fsr fsr;
+  Midi midi;
+
+  struct MidiReady {
+    unsigned int AccelX; // CC 021 (0b00010101) (for X-axis accelerometer)
+    unsigned int AccelZ; // CC 023 (0b00010111) (for Z-axis accelerometer)
+    unsigned int AccelY; // CC 022 (0b00010110) (for Y-axis accelerometer)
+    unsigned int GyroX;  // CC 024 (0b00011000) (for X-axis gyroscope)
+    unsigned int GyroY;  // CC 025 (0b00011001) (for Y-axis gyroscope)
+    unsigned int GyroZ;  // CC 026 (0b00011010) (for Z-axis gyroscope)
+    unsigned int Yaw;    // CC 027 (0b00011011) (for yaw)
+    unsigned int Pitch;  // CC 028 (0b00011100) (for pitch)
+    unsigned int Roll;   // CC 029 (0b00011101) (for roll)
+    unsigned int ShakeX;
+    unsigned int ShakeY;
+    unsigned int ShakeZ;
+    unsigned int JabX;
+    unsigned int JabY;
+    unsigned int JabZ;
+  } midiReady;
+
+  #endif
 
 /////////////////////////////////////////
 // Include LED libraries and functions //
@@ -188,23 +300,6 @@ const unsigned int firmware_version = 220109;
 
   Instrument instrument;
 
-//////////////////////////////////////////////
-// Include Touch stuff                      //
-//////////////////////////////////////////////
-
-#ifdef touch_TRILL
-  #include "touch.h"
-  #include "instrument_touch.h"
-  Touch touch;
-#endif
-
-#ifdef touch_CAPSENSE
-  #include "capsense.h"
-  Capsense capsense;
-#endif
-
-Instrument_touch instrument_touch;
-
 //////////////////////////
 // Forward declarations //
 //////////////////////////
@@ -219,11 +314,12 @@ Instrument_touch instrument_touch;
   String factoryProcessor(const String& var);
   String updateProcessor(const String& var);
 
-//
-// ┏━┓┏━╸╺┳╸╻ ╻┏━┓
-// ┗━┓┣╸  ┃ ┃ ┃┣━┛
-// ┗━┛┗━╸ ╹ ┗━┛╹  
-// 
+
+/////////////
+/////////////
+/// SETUP ///
+/////////////
+/////////////
 
 void setup() {
   // put your setup code here, to run once:
@@ -241,9 +337,9 @@ void setup() {
   // Load Json file stored values
     parseJSON();
     settings.firmware = firmware_version;
-    if (settings.mode < 0 || settings.mode > 1 ){
-      settings.mode = 1;
-      printf("\nMode error: changing to setup mode for correction\n");
+    if (settings.mode < 0 || settings.mode > 3 ){
+      settings.mode = 3;
+      Serial.println("Mode error: changing to setup mode for correction");
       saveJSON();
     }
 
@@ -260,83 +356,99 @@ void setup() {
     printVariables();
 
   // Define this module full name
-    snprintf(global.deviceName,(sizeof(global.deviceName)-1),"T-Stick_%03i",settings.id);
+    snprintf(global.deviceName,(sizeof(global.deviceName)-1),"T-Stick_module_%03i",settings.id);
 
+  // Connect to WiFi and start dns server
+    #ifndef DISABLE_MIDI
+
+    if (settings.mode != 2) {
+      module.scanWiFi(global.deviceName, settings.mode, settings.APpasswd, settings.lastConnectedNetwork, settings.lastStoredPsk);
+      global.midiFlag = false;
+    }
+
+    #else
+
+    module.scanWiFi(global.deviceName, settings.mode, settings.APpasswd, settings.lastConnectedNetwork, settings.lastStoredPsk);
+    global.midiFlag = false;
+
+    #endif
+    
     module.startWifi(global.deviceName, settings.mode, settings.APpasswd, settings.lastConnectedNetwork, settings.lastStoredPsk);
 
   // Start listening for incoming OSC messages if WiFi is ON
-    oscEndpoint.begin(settings.localPORT);
-    printf("Starting UDP (listening to OSC messages)\n");
-    printf("Local port: %d\n", settings.localPORT);
+    if (settings.mode != 2) {
+      oscEndpoint.begin(settings.localPORT);
+      Serial.println("Starting UDP (listening to OSC messages)");
+      Serial.print("Local port: "); Serial.println(settings.localPORT);
+      global.midiFlag = false;
+    }
 
-
-  // Initializing button (set pin)
-    printf("    Initializing button configuration...  ");
-    if (button.initButton(pin.button)) {
-      printf("done\n");
+  // Initializing touch (set pin)
+    Serial.print("    Initializing Capacitive touch sensor...  ");
+    if (touch.initTouch()) {
+      touch.setSensitivity(settings.touchSensitivity);
+      Serial.println("done");
     } else {
-      printf("Button initialization failed!\n");
+      Serial.println("Capacitive touch sensor initialization failed!");
     }
 
   // Initializing IMU
-    printf("    Initializing IMU...  ");
+    Serial.print("    Initializing IMU...  ");
     if (imu.initIMU()) {
-      printf("done\n");
+      Serial.println("done");
     } else {
-      printf("IMU initialization failed!\n");
+      Serial.println("IMU initialization failed!");
     }
 
-  // Initializing FSR
-    printf("    Initializing FSR...  ");
-    if (fsr.initFsr(pin.fsr, settings.fsrOffset)) {
-      printf("done\n");
-    } else {
-      printf("FSR initialization failed!\n");
+  // No need to initialize the Ultrasonic sensor
+
+  // Initializing MIDI if in MIDI mode (settings.mode = 2)
+
+    #ifndef DISABLE_MIDI
+
+    if (settings.mode == 2) {
+      Serial.print("    Initializing BLE MIDI...  ");
+      midi.setDeviceName(global.deviceName);
+      if (midi.initMIDI()) {
+        Serial.print("MIDI mode: Connect to "); Serial.print(global.deviceName); Serial.println(" to start sending BLE MIDI");
+        Serial.print("    (channel "); Serial.print(midi.getChannel()); Serial.println(")");
+      } else {
+        Serial.println("BLE MIDI initialization failed!");
+      }
+      global.midiFlag = true;
     }
 
-  // Initializing capacitive sensing
-  #ifdef touch_TRILL
-    printf("    Initializing Touch stuff...  ");
-    if (touch.initTouch()) {
-      printf("done\n");
-    } else {
-      printf("Touch initialization failed!\n");
+    #endif
+
+  #ifndef DISABLE_LIBMAPPER
+  // Init libmapper if option is ON
+    if (settings.libmapper && !global.midiFlag) {
+      Serial.print("    Starting libmapper... ");
+      //mapper::Device dev("name");
+      initLibmapper();
+      Serial.println("done");
     }
   #endif
-
-  #ifdef touch_CAPSENSE
-    capsense.capsense_scan(); // Look for Capsense boards and return their addresses
-                              // must run before initLibmapper to get # of capsense boards
-  #endif
-
-  // LED set pin
-    led.setPin(pin.led);
 
   // Start dns and web Server if in setup mode
-    if (settings.mode == 1) {
-      printf("Starting DNS server\n");
-      dnsServer.start(53, "*", WiFi.softAPIP());
-      start_mdns_service();
-      initWebServer();
-    }
-
-  // Setting Deep sleep wake button
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_15,0); // 1 = High, 0 = Low
+  if (settings.mode == 3) {
+        Serial.println("Starting DNS server");
+        dnsServer.start(53, "*", WiFi.softAPIP());
+        start_mdns_service();
+        initWebServer();
+        global.midiFlag = false;
+      }
     
-  printf("\n\nBoot complete\n\n"
-          "This firmware accepts:\n"
-          "- 's' to start setup mode\n"
-          "- 'r' to reboot\n"
-          "- 'd' to enter deep sleep\n\n");
+  Serial.println("\n\nBoot complete\n\n");
 
 } // end Setup
 
 
-//
-// ╻  ┏━┓┏━┓┏━┓
-// ┃  ┃ ┃┃ ┃┣━┛
-// ┗━╸┗━┛┗━┛╹  
-//
+////////////
+////////////
+/// LOOP ///
+////////////
+////////////
 
 void loop() {
 
@@ -347,64 +459,22 @@ void loop() {
   if (Serial.available() > 0) {
     int incomingByte = 0;
     incomingByte = Serial.read();
-    switch(incomingByte) {
-      case 114: // r
-        printf("\nRebooting...\n");
-        global.rebootFlag = true;
-        break;
-      case 115: // s
-        printf("\nEntering setup mode\n");
-        settings.mode = 1;
-        saveJSON();
-        global.rebootFlag = true;
-        break;
-      case 100: // d
-        printf("\nEntering deep sleep.\n\nGoodbye!\n");
-        delay(1000);
-        esp_deep_sleep_start();
-        break;
-      case 10:
-        // ignore LF
-        break;
-      case 13:
-        // ignore CR
-        break;
-      default:
-        printf("\nI don't recognize this command\n"
-          "This firmware accepts:\n"
-            "'s' to start setup mode\n"
-            "'r' to reboot\n"
-            "'d' to enter deep sleep\n\n");
-    }
+
+    // say what you got:
+    Serial.print("I received: ");
+    Serial.println(incomingByte, DEC);
   }
 
-  // go to deep sleep if double press button
-  if (button.getDTap()){
-      printf("\nEntering deep sleep.\n\nGoodbye!\n");
-      delay(1000);
-      esp_deep_sleep_start();
-  }
-
-  if (settings.mode == 1) {
+  if (settings.mode == 3) {
     dnsServer.processNextRequest();
   }
 
-  // Read button
-    button.readButton();
+  // Read Ultrasonic sensor distance
+    //readUlt();
+    readUltTrigger();
 
-  // Read FSR
-    fsr.readFsr();
-
-  // Read Touch
-  #ifdef touch_TRILL
+  // Read capacitive button
     touch.readTouch();
-    touch.cookData();
-    instrument_touch.updateInstrument(touch.touch,touch.touchSize);
-  #endif
-  #ifdef touch_CAPSENSE
-    capsense.readCapsense();
-    instrument_touch.updateInstrument(capsense.data,capsense.touchStripsSize);
-  #endif
 
   // read battery
     if (millis() - battery.interval > battery.timer) {
@@ -414,53 +484,80 @@ void loop() {
     }
 
   // Get High-level descriptors (instrument data) - jab and shake for now
-    instrument.updateInstrumentIMU(imu.getGyroX(), imu.getGyroY(), imu.getGyroZ());
+    instrument.updateInstrument(imu.getGyroX(), imu.getGyroY(), imu.getGyroZ());
 
-  // send data via OSC
-    if (settings.osc) {
-      if (settings.mode==0 || WiFi.status() == WL_CONNECTED) { // Send data via OSC ...
+  // prepare MIDI data if needed
+
+    #ifndef DISABLE_MIDI
+
+    if (global.midiFlag) {
+      midiReady.AccelX = midi.mapMIDI(abs(imu.getAccelX()), 0, 50);
+      midiReady.AccelZ = midi.mapMIDI(abs(imu.getAccelY()), 0, 50);
+      midiReady.AccelY = midi.mapMIDI(abs(imu.getAccelZ()), 0, 50);
+      midiReady.GyroX = midi.mapMIDI(abs(imu.getGyroX()), 0, 25);
+      midiReady.GyroY = midi.mapMIDI(abs(imu.getGyroY()), 0, 25);
+      midiReady.GyroZ = midi.mapMIDI(abs(imu.getGyroZ()), 0, 25);
+      midiReady.Yaw  = midi.mapMIDI(imu.getYaw(), -180, 180);
+      midiReady.Pitch = midi.mapMIDI(imu.getPitch(), -180, 180);
+      midiReady.Roll  = midi.mapMIDI(imu.getRoll(), -180, 180);
+      midiReady.ShakeX = midi.mapMIDI(instrument.getShakeX(), 0, 50);
+      midiReady.ShakeY = midi.mapMIDI(instrument.getShakeY(), 0, 50);
+      midiReady.ShakeZ = midi.mapMIDI(instrument.getShakeZ(), 0, 50);
+      midiReady.JabX = midi.mapMIDI(instrument.getJabX(), 0, 50);
+      midiReady.JabY = midi.mapMIDI(instrument.getJabY(), 0, 50);
+      midiReady.JabZ = midi.mapMIDI(instrument.getJabZ(), 0, 50);
+    }
+
+    #endif
+
+  // send data via OSC or MIDI
+    if (!global.midiFlag && settings.osc) {
+      if (settings.mode==1 || WiFi.status() == WL_CONNECTED) { // Send data via OSC ...
           // sending continuous data
             if (millis() - global.oscDelay > global.messageTimer) { 
               global.messageTimer = millis();
               sendContinuousOSC(settings.oscIP[0], settings.oscPORT[0]);
               sendContinuousOSC(settings.oscIP[1], settings.oscPORT[1]);
             }
-          // send discrete (button/battery) data (only when it changes) or != 0
-            if (global.lastCount != button.getCount()) {
-              sendOSC(settings.oscIP[0], settings.oscPORT[0], "instrument/button/count", button.getCount());
-              sendOSC(settings.oscIP[1], settings.oscPORT[1], "instrument/button/count", button.getCount());
-              global.lastCount = button.getCount();
+          // send discrete (touch/battery) data (only when it changes) or != 0
+            if (global.lastCount != touch.getCount()) {
+              sendOSC(settings.oscIP[0], settings.oscPORT[0], "count", touch.getCount());
+              sendOSC(settings.oscIP[1], settings.oscPORT[1], "count", touch.getCount());
+              global.lastCount = touch.getCount();
             } 
-            if (global.lastTap != button.getTap()) {
-              sendOSC(settings.oscIP[0], settings.oscPORT[0], "instrument/button/tap", button.getTap());
-              sendOSC(settings.oscIP[1], settings.oscPORT[1], "instrument/button/tap",  button.getTap());
-              global.lastTap = button.getTap();
+            if (global.lastTap != touch.getTap()) {
+              sendOSC(settings.oscIP[0], settings.oscPORT[0], "tap", touch.getTap());
+              sendOSC(settings.oscIP[1], settings.oscPORT[1], "tap",  touch.getTap());
+              global.lastTap = touch.getTap();
             }
-            if (global.lastDtap != button.getDTap()) {
-              sendOSC(settings.oscIP[0], settings.oscPORT[0], "instrument/button/dtap",  button.getDTap());
-              sendOSC(settings.oscIP[1], settings.oscPORT[1], "instrument/button/dtap",  button.getDTap());
-              global.lastDtap = button.getDTap();
+            if (global.lastDtap != touch.getDTap()) {
+              sendOSC(settings.oscIP[0], settings.oscPORT[0], "dtap",  touch.getDTap());
+              sendOSC(settings.oscIP[1], settings.oscPORT[1], "dtap",  touch.getDTap());
+              global.lastDtap = touch.getDTap();
             }
-            if (global.lastTtap != button.getTTap()) {
-              sendOSC(settings.oscIP[0], settings.oscPORT[0], "instrument/button/ttap",  button.getTTap());
-              sendOSC(settings.oscIP[1], settings.oscPORT[1], "instrument/button/ttap",  button.getTTap());
-              global.lastTtap = button.getTTap();
+            if (global.lastTtap != touch.getTTap()) {
+              sendOSC(settings.oscIP[0], settings.oscPORT[0], "ttap",  touch.getTTap());
+              sendOSC(settings.oscIP[1], settings.oscPORT[1], "ttap",  touch.getTTap());
+              global.lastTtap = touch.getTTap();
             }
-            if (global.lastFsr != fsr.getValue()) {
-              sendOSC(settings.oscIP[0], settings.oscPORT[0], "raw/fsr", fsr.getValue());
-              sendOSC(settings.oscIP[1], settings.oscPORT[1], "raw/fsr", fsr.getValue());
-              sendOSC(settings.oscIP[0], settings.oscPORT[0], "norm/fsr", fsr.getNormValue());
-              sendOSC(settings.oscIP[1], settings.oscPORT[1], "norm/fsr", fsr.getNormValue());
-              global.lastFsr = fsr.getValue();
+            if (global.lastDistance != ultData.distance) {
+              sendOSC(settings.oscIP[0], settings.oscPORT[0], "ult", ultData.distance);
+              sendOSC(settings.oscIP[1], settings.oscPORT[1], "ult", ultData.distance);
+              global.lastDistance = ultData.distance;
+            }
+            if (global.lastTrig != ultData.trigger) {
+              sendOSC(settings.oscIP[0], settings.oscPORT[0], "ultTrig", ultData.trigger);
+              sendOSC(settings.oscIP[1], settings.oscPORT[1], "ultTrig", ultData.trigger);
+              global.lastTrig = ultData.trigger;
             }
             if (global.lastJab[0] != instrument.getJabX() || global.lastJab[1] != instrument.getJabY() || global.lastJab[2] != instrument.getJabZ()) {
-              sendTrioOSC(settings.oscIP[0], settings.oscPORT[0], "instrument/jabxyz", instrument.getJabX(), instrument.getJabY(), instrument.getJabZ());
-              sendTrioOSC(settings.oscIP[1], settings.oscPORT[1], "instrument/jabxyz", instrument.getJabX(), instrument.getJabY(), instrument.getJabZ());
+              sendTrioOSC(settings.oscIP[0], settings.oscPORT[0], "jab", instrument.getJabX(), instrument.getJabY(), instrument.getJabZ());
+              sendTrioOSC(settings.oscIP[1], settings.oscPORT[1], "jab", instrument.getJabX(), instrument.getJabY(), instrument.getJabZ());
               global.lastJab[0] = instrument.getJabX(); global.lastJab[1] = instrument.getJabY(); global.lastJab[2] = instrument.getJabZ();
             }
             if (global.lastShake[0] != instrument.getShakeX() || global.lastShake[1] != instrument.getShakeY() || global.lastShake[2] != instrument.getShakeZ()) {
-              sendTrioOSC(settings.oscIP[0], settings.oscPORT[0], "instrument/shakexyz", instrument.getShakeX(), instrument.getShakeY(), instrument.getShakeZ());
-              sendTrioOSC(settings.oscIP[1], settings.oscPORT[1], "instrument/shakexyz", instrument.getShakeX(), instrument.getShakeY(), instrument.getShakeZ());
+              sendTrioOSC(settings.oscIP[0], settings.oscPORT[0], "shake", instrument.getShakeX(), instrument.getShakeY(), instrument.getShakeZ());
+              sendTrioOSC(settings.oscIP[1], settings.oscPORT[1], "shake", instrument.getShakeX(), instrument.getShakeY(), instrument.getShakeZ());
               global.lastShake[0] = instrument.getShakeX(); global.lastShake[1] = instrument.getShakeY(); global.lastShake[2] = instrument.getShakeZ();
             }
             if (battery.lastPercentage != battery.percentage) {
@@ -468,16 +565,87 @@ void loop() {
               sendOSC(settings.oscIP[1], settings.oscPORT[1], "battery", battery.percentage);
               battery.lastPercentage = battery.percentage;
             }
+      }     
+    #ifndef DISABLE_MIDI
+    } else if (midi.status()) { // ... or MIDI
+      // sending continuous data
+      if (millis() - global.midiDelay > global.messageTimer) {
+        global.messageTimer = millis();
+        midi.CC (20, midi.mapMIDI(ultData.distance, 0, 300));   // CC 020 (0b00010100) (for the ultrasonic sensor)
+        if (imu.dataAvailable()) {
+          midi.CCbundle ( 21, midiReady.AccelX,// CC 021 (0b00010101) (for X-axis accelerometer)
+                          22, midiReady.AccelY,// CC 022 (0b00010110) (for Y-axis accelerometer)
+                          23, midiReady.AccelZ,// CC 023 (0b00010111) (for Z-axis accelerometer)
+                          24, midiReady.GyroX, // CC 024 (0b00011000) (for X-axis gyroscope)
+                          25, midiReady.GyroY, // CC 025 (0b00011001) (for Y-axis gyroscope)
+                          26, midiReady.GyroZ, // CC 026 (0b00011010) (for Z-axis gyroscope)
+                          27, midiReady.Yaw,   // CC 027 (0b00011011) (for yaw)
+                          28, midiReady.Pitch, // CC 028 (0b00011100) (for pitch)
+                          29, midiReady.Roll,  // CC 029 (0b00011101) (for roll)
+                          85, midiReady.ShakeX,
+                          86, midiReady.ShakeY,
+                          87, midiReady.ShakeZ,
+                          102, midiReady.JabX,
+                          103, midiReady.JabY,
+                          104, midiReady.JabZ);
+        }
       }
+      // send discrete (touch) data (only when it changes)
+        if (global.lastCount != touch.getCount()) { // CC 15 (0b00001111) (for touch count)
+          midi.CC (15, touch.getCount());   
+          global.lastCount = touch.getCount();
+        } 
+        if (global.lastTap != touch.getTap()) {  // CC 30 (0b00011110) (for tap [0 or 127])
+          if (touch.getTap() == 1) {
+            midi.CC (30, 127);   
+          } else {
+            midi.CC (30, 0);
+          }
+          global.lastTap = touch.getTap();
+        }
+        if (global.lastDtap != touch.getDTap()) { // CC 31 (0b00011111) (for dtap [0 or 127])
+          if (touch.getDTap() == 1) {
+            midi.CC (31, 127);   
+          } else {
+            midi.CC (31, 0);
+          }
+          global.lastDtap = touch.getDTap();
+        }
+        if (global.lastTtap != touch.getTTap()) { // CC 14 (0b00001110) (for ttap [0 or 127])
+          if (touch.getTTap() == 1) {
+            midi.CC (14, 127);   
+          } else {
+            midi.CC (14, 0);
+          }
+          global.lastTtap = touch.getTTap();
+        }
+        if (global.lastTrig != ultData.trigger) { // CC 14 (0b00001110) (for ttap [0 or 127])
+          if (ultData.trigger == 1) {
+            midi.CC (89, 127);   
+          } else {
+            midi.CC (89, 0);
+          }
+          global.lastTrig = ultData.trigger;
+        }  
+    #endif
     }
 
+  #ifndef DISABLE_LIBMAPPER
+  // Update libmapper
+    if (settings.libmapper && !global.midiFlag && WiFi.status() == WL_CONNECTED) {
+      updateLibmapper();
+    }
+  #endif
+
   // receiving OSC
+    if (!global.midiFlag) {
       receiveOSC();
+    }
 
   // Check if setup mode has been called
-    if (button.getHold()) {
-      printf("\nLong button press, entering setup mode\n");
-      settings.mode = 1;
+    if (touch.getHold()) {
+      settings.oldMode = settings.mode;
+      settings.mode = 3;
       saveJSON();
       global.rebootFlag = true;
     }
@@ -494,9 +662,9 @@ void loop() {
     global.ledValue = led.blink(255, 50);
     ledcWrite(0, global.ledValue);
     } else {
-      if (settings.mode == 1) { // 0:STA, 1:Setup(STA+AP+WebServer)
+      if (settings.mode == 3) { // 0:STA, 1:AP, and 3:Setup(STA+AP+WebServer)
         ledcWrite(0, 255); // stays always on in setup mode
-      } else { 
+      } else if (settings.mode == 0 || settings.mode == 1) { 
         if (WiFi.status() == WL_CONNECTED) { // blinks when connected, cycle when disconnected
           led.setInterval(1000);
           global.ledValue = led.blink(255, 40);
@@ -506,6 +674,16 @@ void loop() {
           global.ledValue = led.cycle(global.ledValue, 0, 255);
           ledcWrite(0, global.ledValue);
         } 
+      } else { // 2:MIDI
+        if (midi.status()) { // blinks when connected, cycle when disconnected
+          led.setInterval(1000);
+          global.ledValue = led.blink(255, 40);
+          ledcWrite(0, global.ledValue);
+        } else {
+          led.setInterval(4000);
+          global.ledValue = led.cycle(global.ledValue, 0, 255);
+          ledcWrite(0, global.ledValue);
+        }
       }
     }
   #elif defined(board_TINYPICO)
@@ -514,7 +692,7 @@ void loop() {
       global.color = led.blink(255, 20);
       tinypico.DotStar_SetPixelColor(global.color, 0, 0);
     } else {
-      switch (settings.mode) { // 0:STA, 1:Setup(STA+AP+WebServer)
+      switch (settings.mode) { // 0:STA, 1:AP, 2:MIDI, 3:Setup(STA+AP+WebServer)
         case 0: // RGB: 0, 128, 255 (Dodger Blue)
           if (WiFi.status() == WL_CONNECTED) { // blinks when connected, cycle when disconnected
             led.setInterval(1000);
@@ -526,10 +704,36 @@ void loop() {
             tinypico.DotStar_SetPixelColor(0, uint8_t(global.color/2), global.color);
           }
           break;
-        case 1: // RGB: 255, 0, 255 (magenta)
+        case 1: // RGB: 0, 255, 0 (Lime)
+          if (WiFi.status() == WL_CONNECTED) { // blinks when connected, cycle when disconnected
+            led.setInterval(1000);
+            global.color = led.blink(255,20);
+            tinypico.DotStar_SetPixelColor(0, global.color, 0);
+          } else {
+            led.setInterval(4000);
+            global.color = led.cycle(global.color, 0, 255);
+            tinypico.DotStar_SetPixelColor(0, global.color, 0);
+          }
+          break;
+        case 2: // RGB: 255, 0, 255 (magenta)
+          #ifndef DISABLE_MIDI
+          if (midi.status()) { // blinks when connected, cycle when disconnected
             led.setInterval(1000);
             global.color = led.blink(255,20);
             tinypico.DotStar_SetPixelColor(global.color, 0, global.color);
+          } else {
+          #endif
+            led.setInterval(4000);
+            global.color = led.cycle(global.color, 0, 255);
+            tinypico.DotStar_SetPixelColor(global.color, 0, global.color);
+          #ifndef DISABLE_MIDI
+          }
+          #endif
+          break;
+        case 3: // RGB: 255, 128, 0 (dark orange)
+            led.setInterval(1000);
+            global.color = led.blink(255,20);
+            tinypico.DotStar_SetPixelColor(global.color, uint8_t(global.color/2), 0);
           break;
         default: // if everything goes wrong it cycles through all colors (rainbow panic)
           tinypico.DotStar_CycleColor(25);
@@ -539,11 +743,10 @@ void loop() {
   #endif
 } // end loop
 
-//
-// ┏━┓╻ ╻┏┓╻┏━╸╺┳╸╻┏━┓┏┓╻┏━┓
-// ┣━ ┃ ┃┃┗┫┃   ┃ ┃┃ ┃┃┗┫┗━┓
-// ╹  ┗━┛╹ ╹┗━╸ ╹ ╹┗━┛╹ ╹┗━┛
-//
+
+///////////////
+// Functions //
+///////////////
 
 void printVariables() {
   Serial.println("Printing loaded values (settings):");
@@ -560,8 +763,9 @@ void printVariables() {
   Serial.print("OSC port #2: "); Serial.println(settings.oscPORT[1]);
   Serial.print("Local port: "); Serial.println(settings.localPORT);
   Serial.print("Libmapper mode: "); Serial.println(settings.libmapper);
-  if (settings.mode == 2) {Serial.println("Setup mode enabled");} 
+  if (settings.mode == 3) {Serial.println("Setup mode enabled");} 
   else {Serial.print("Data transmission mode: "); Serial.println(settings.mode);}
+  Serial.print("Stored mode: "); Serial.println(settings.oldMode);
   Serial.println();
 }
 
@@ -612,11 +816,12 @@ void parseJSON() {
         settings.libmapper = doc["libmapper"];
         settings.osc = doc["osc"];
         settings.mode = doc["mode"];
-        settings.fsrOffset = doc["fsrOffset"];
+        settings.oldMode = doc["oldMode"];
+        settings.touchSensitivity = doc["touchSensitivity"];
 
         configFile.close();
         
-        Serial.println("T-Stick module configuration file loaded.\n");
+        Serial.println("T-Stick configuration file loaded.\n");
       }
     } 
   else
@@ -654,7 +859,8 @@ void saveJSON() { // Serializing
     doc["libmapper"] = settings.libmapper;
     doc["osc"] = settings.osc;
     doc["mode"] = settings.mode;
-    doc["fsrOffset"] = settings.fsrOffset;
+    doc["oldMode"] = settings.oldMode;
+    doc["touchSensitivity"] = settings.touchSensitivity;
  
   File configFile = SPIFFS.open("/config.json", "w");
   if (!configFile) {Serial.println("Failed to open config file for writing!\n");}
@@ -667,6 +873,63 @@ void saveJSON() { // Serializing
   
   configFile.close();
 } //end save
+
+////////////////
+// Ultrasonic //
+////////////////
+
+
+void ultFilter() {
+  ultData.filterArray.push_back(ultData.distance);
+  if(ultData.filterArray.size() > ultData.queueAmount) {
+    ultData.filterArray.pop_front();
+  }
+  ultData.distance = 0;
+  for (int i=0; i<ultData.filterArray.size(); i++) {
+    ultData.distance += ultData.filterArray.at(i);
+  }
+  ultData.distance /= ultData.filterArray.size();
+}
+
+void readUltTrigger() {
+    if (millis() - ultData.interval > ultData.timer) {
+        ultData.lastDistance = ultData.tempDistance;
+        ultData.tempDistance = ult.ping_mm();
+        if (ultData.tempDistance < ultData.ultMinDistance) {
+            ultData.tempDistance = 0;
+        }
+        if (ultData.lastDistance == 0) {
+            ultData.trigTimer = millis();
+            if (ultData.tempDistance == 0) {
+                ultData.distance = 0;
+                ultData.trigger = 0;
+            } 
+        } else {
+            if (millis() - ultData.trigInterval > ultData.trigTimer) {
+                ultData.distance = ultData.tempDistance;
+                ultData.trigger = 0;
+            } else if (ultData.tempDistance == 0 && ultData.distance != 0) {
+                ultData.trigger = 1;
+            }
+        }
+        ultData.timer = millis();
+    }
+}
+
+
+void readUlt() {
+    if (millis() - ultData.interval > ultData.timer) {
+        ultData.tempDistance = ult.ping_mm();
+        if (ultData.tempDistance < ultData.ultMinDistance) {
+            ultData.distance = 0;
+        } else {
+            ultData.distance = ultData.tempDistance;
+        }
+        ultFilter();
+        ultData.timer = millis();
+    }
+}
+    
 
 /////////////
 // Battery //
@@ -722,14 +985,21 @@ String indexProcessor(const String& var) {
   if(var == "CURRENTPSK")
     return settings.lastStoredPsk;
   if(var == "MODE0") {
-    if(settings.mode == 0) {
+    if(settings.oldMode == 0) {
       return "selected";
     } else {
       return "";
     }
   }
   if(var == "MODE1") {
-    if(settings.mode == 1) {
+    if(settings.oldMode == 1) {
+      return "selected";
+    } else {
+      return "";
+    }
+  }
+  if(var == "MODE2") {
+    if(settings.oldMode == 2) {
       return "selected";
     } else {
       return "";
@@ -771,16 +1041,16 @@ String indexProcessor(const String& var) {
     snprintf(str, sizeof(str), "%d", settings.oscPORT[1]);
     return str;
   }
-  if(var == "GUITARAMIID") {
+  if(var == "TSTICKID") {
       char str[4];
       snprintf (str, sizeof(str), "%03d", settings.id);
       return str;
   }
-  if(var == "GUITARAMIAUTH")
+  if(var == "TSTICKAUTH")
       return settings.author;
-  if(var == "GUITARAMIINST")
+  if(var == "TSTICKINST")
       return settings.institution;
-  if(var == "GUITARAMIVER")
+  if(var == "TSTICKVER")
       return String(settings.firmware);
     
   return String();
@@ -800,15 +1070,15 @@ String factoryProcessor(const String& var) {
     return str;
     }
   }
-  if(var == "GUITARAMIID") {
+  if(var == "TSTICKID") {
       char str[4];
       snprintf (str, sizeof(str), "%03d", settings.id);
       return str;
   }
-  if(var == "GUITARAMIVER")
+  if(var == "TSTICKVER")
       return String(settings.firmware);
-  if(var == "FSR")
-      return String(settings.fsrOffset);
+  if(var == "TOUCH")
+      return String(settings.touchSensitivity);
 
   return String();
 }
@@ -839,7 +1109,8 @@ void initWebServer() {
       printf("\nSettings received! (HTTP_post):\n");
       if(request->hasParam("reboot", true)) {
           request->send(SPIFFS, "/reboot.html");
-          settings.mode = 0;
+          if (settings.mode == 3)
+            settings.mode = settings.oldMode;
           global.rebootFlag = true;
           global.rebootTimer = millis();
       } else {
@@ -869,6 +1140,7 @@ void initWebServer() {
         }
         if(request->hasParam("mode", true)) {
             settings.mode = atoi(request->getParam("mode", true)->value().c_str());
+            settings.oldMode = settings.mode;
             printf("T-Stick mode stored: %d\n", settings.mode);
         } else {
             printf("No mode received");
@@ -921,6 +1193,8 @@ void initWebServer() {
         request->send(SPIFFS, "/index.html", String(), false, indexProcessor);
         //request->send(200);
       }
+      if (settings.mode == 3)
+        settings.mode = settings.oldMode;
       saveJSON();
     });
 
@@ -937,7 +1211,7 @@ void initWebServer() {
         printf("\nFactory Settings received! (HTTP_post):\n");
         if(request->hasParam("reboot", true)) {
             request->send(SPIFFS, "/reboot.html");
-            settings.mode = 0;
+            settings.mode = 3;
             global.rebootFlag = true;
             global.rebootTimer = millis();
         } else {
@@ -953,15 +1227,18 @@ void initWebServer() {
           } else {
               printf("No Firmware # (factory) received\n");
           }
-          if(request->hasParam("fsr", true)) {
-            settings.fsrOffset = atoi(request->getParam("fsr", true)->value().c_str());
-              printf("FSR offset (factory) received: %d\n", settings.fsrOffset);
+          if(request->hasParam("touch", true)) {
+            settings.touchSensitivity = atoi(request->getParam("touch", true)->value().c_str());
+              touch.setSensitivity(settings.touchSensitivity);
+              printf("Touch sensitivity (factory) received: %d\n", touch.getThreshold());
           } else {
-              printf("No FSR offset (factory) received\n");
+              printf("No touch sensitivity (factory) received\n");
           }
           request->send(SPIFFS, "/factory.html", String(), false, factoryProcessor);
           //request->send(200);
         }
+        if (settings.mode == 3)
+          settings.mode = settings.oldMode;
         saveJSON();
       });
 
@@ -1073,22 +1350,31 @@ void start_mdns_service() {
 
     static OSCBundle continuous;
 
+    // snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/ult",global.deviceName);
+    // OSCMessage msgult(namespaceBuffer);
+    //   msgult.add(ultData.distance);
+    //   msgult.add(ultData.trigger);
+    //   oscEndpoint.beginPacket(oscIP,port);
+    //   msgult.send(oscEndpoint);
+    //   oscEndpoint.endPacket();
+    //   msgult.empty(); 
+
     if (imu.dataAvailable()) {
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/raw/accl",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/accl",global.deviceName);
         OSCMessage msgAccl(namespaceBuffer);
           msgAccl.add(imu.getAccelX());
           msgAccl.add(imu.getAccelY());
           msgAccl.add(imu.getAccelZ());
           continuous.add(msgAccl);
       
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/raw/gyro",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/gyro",global.deviceName);
         OSCMessage msgGyro(namespaceBuffer);
           msgGyro.add(imu.getGyroX());
           msgGyro.add(imu.getGyroY());
           msgGyro.add(imu.getGyroZ());
           continuous.add(msgGyro);
       
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/raw/magn",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/magn",global.deviceName);
         OSCMessage msgMagn(namespaceBuffer);
           msgMagn.add(imu.getMagX());
           msgMagn.add(imu.getMagY());
@@ -1100,33 +1386,7 @@ void start_mdns_service() {
         oscEndpoint.endPacket();
         continuous.empty(); 
 
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/norm/accl",global.deviceName);
-        OSCMessage msgnAccl(namespaceBuffer);
-          msgnAccl.add(imu.getNormAccelX());
-          msgnAccl.add(imu.getNormAccelY());
-          msgnAccl.add(imu.getNormAccelZ());
-          continuous.add(msgnAccl);
-      
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/norm/gyro",global.deviceName);
-        OSCMessage msgnGyro(namespaceBuffer);
-          msgnGyro.add(imu.getNormGyroX());
-          msgnGyro.add(imu.getNormGyroY());
-          msgnGyro.add(imu.getNormGyroZ());
-          continuous.add(msgnGyro);
-      
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/norm/magn",global.deviceName);
-        OSCMessage msgnMagn(namespaceBuffer);
-          msgnMagn.add(imu.getNormMagX());
-          msgnMagn.add(imu.getNormMagY());
-          msgnMagn.add(imu.getNormMagZ());
-          continuous.add(msgnMagn);
-
-        oscEndpoint.beginPacket(oscIP,port);
-        continuous.send(oscEndpoint);
-        oscEndpoint.endPacket();
-        continuous.empty(); 
-
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/orientation",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/quat",global.deviceName);
         OSCMessage msgQuat(namespaceBuffer);
           msgQuat.add(imu.getQuatI());
           msgQuat.add(imu.getQuatJ());
@@ -1137,7 +1397,7 @@ void start_mdns_service() {
           oscEndpoint.endPacket();
           msgQuat.empty(); 
 
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/ypr",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/ypr",global.deviceName);
         OSCMessage msgEuler(namespaceBuffer);
           msgEuler.add(imu.getYaw());
           msgEuler.add(imu.getPitch());
@@ -1146,91 +1406,6 @@ void start_mdns_service() {
           msgEuler.send(oscEndpoint);
           oscEndpoint.endPacket();
           msgEuler.empty(); 
-
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/raw/capsense",global.deviceName);
-        OSCMessage msgtouchtouch(namespaceBuffer);
-          #ifdef touch_TRILL
-            for (int i=0;i<touch.touchSize;i++) {
-              msgtouchtouch.add(touch.touch[i]);
-            }
-          #endif
-          #ifdef touch_CAPSENSE
-            for (int i=0;i<capsense.touchStripsSize;i++) {
-              msgtouchtouch.add(capsense.data[i]);
-            }
-          #endif
-          oscEndpoint.beginPacket(oscIP,port);
-          msgtouchtouch.send(oscEndpoint);
-          oscEndpoint.endPacket();
-          msgtouchtouch.empty(); 
-
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/touch/all",global.deviceName);
-        OSCMessage msgtouchAll(namespaceBuffer);
-          msgtouchAll.add(instrument_touch.touchAll);
-          oscEndpoint.beginPacket(oscIP,port);
-          msgtouchAll.send(oscEndpoint);
-          oscEndpoint.endPacket();
-          msgtouchAll.empty(); 
-
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/touch/top",global.deviceName);
-        OSCMessage msgtouchTop(namespaceBuffer);
-          msgtouchTop.add(instrument_touch.touchTop);
-          oscEndpoint.beginPacket(oscIP,port);
-          msgtouchTop.send(oscEndpoint);
-          oscEndpoint.endPacket();
-          msgtouchTop.empty(); 
-
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/touch/middle",global.deviceName);
-        OSCMessage msgtouchMiddle(namespaceBuffer);
-          msgtouchMiddle.add(instrument_touch.touchMiddle);
-          oscEndpoint.beginPacket(oscIP,port);
-          msgtouchMiddle.send(oscEndpoint);
-          oscEndpoint.endPacket();
-          msgtouchMiddle.empty(); 
-
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/touch/bottom",global.deviceName);
-        OSCMessage msgtouchBottom(namespaceBuffer);
-          msgtouchBottom.add(instrument_touch.touchBottom);
-          oscEndpoint.beginPacket(oscIP,port);
-          msgtouchBottom.send(oscEndpoint);
-          oscEndpoint.endPacket();
-          msgtouchBottom.empty(); 
-
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/brush",global.deviceName);
-        OSCMessage msgbrush(namespaceBuffer);
-          msgbrush.add(instrument_touch.brush);
-          oscEndpoint.beginPacket(oscIP,port);
-          msgbrush.send(oscEndpoint);
-          oscEndpoint.endPacket();
-          msgbrush.empty(); 
-
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/rub",global.deviceName);
-        OSCMessage msgrub(namespaceBuffer);
-          msgrub.add(instrument_touch.rub);
-          oscEndpoint.beginPacket(oscIP,port);
-          msgrub.send(oscEndpoint);
-          oscEndpoint.endPacket();
-          msgrub.empty(); 
-
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/multibrush",global.deviceName);
-        OSCMessage msgmultiBrush(namespaceBuffer);
-          for (int i=0;i<4;i++) {
-            msgmultiBrush.add(instrument_touch.multiBrush[i]);
-          }
-          oscEndpoint.beginPacket(oscIP,port);
-          msgmultiBrush.send(oscEndpoint);
-          oscEndpoint.endPacket();
-          msgmultiBrush.empty(); 
-
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/multirub",global.deviceName);
-        OSCMessage msgmultiRub(namespaceBuffer);
-          for (int i=0;i<4;i++) {
-            msgmultiRub.add(instrument_touch.multiRub[i]);
-          }
-          oscEndpoint.beginPacket(oscIP,port);
-          msgmultiRub.send(oscEndpoint);
-          oscEndpoint.endPacket();
-          msgmultiRub.empty(); 
 
         // snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/shake",global.deviceName);
         // OSCMessage msgShake(namespaceBuffer);
@@ -1252,9 +1427,9 @@ void start_mdns_service() {
         //   oscEndpoint.endPacket();
         //   msgJab.empty();
 
-        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/button",global.deviceName);
+        snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/touch",global.deviceName);
         OSCMessage msgTouch(namespaceBuffer);
-          msgTouch.add(button.getState());
+          msgTouch.add(touch.getValue());
           oscEndpoint.beginPacket(oscIP,port);
           msgTouch.send(oscEndpoint);
           oscEndpoint.endPacket();
@@ -1341,3 +1516,67 @@ void receiveOSC() {
     }
   }
 }
+
+///////////////
+// LIBMAPPER //
+///////////////
+
+#ifndef DISABLE_LIBMAPPER
+
+    void initLibmapper() {
+
+    dev = new mapper::Device(global.deviceName);
+    
+        //lm.ult = dev->add_signal(mapper::Direction::OUTGOING, "ult", 1, mapper::Type::INT32, "mm", &lm.ultMin, &lm.ultMax);
+        // lm.accel = dev.add_signal(mapper::Direction::OUTGOING, "accel", 3, mapper::Type::FLOAT, "m/s^2", &lm.accelMin, &lm.accelMax);
+        // lm.gyro = dev.add_signal(mapper::Direction::OUTGOING, "gyro", 3, mapper::Type::FLOAT, "rad/s", &lm.gyroMin, &lm.gyroMax);
+        // lm.mag = dev.add_signal(mapper::Direction::OUTGOING, "mag", 3, mapper::Type::FLOAT, "uTesla", &lm.magMin, &lm.magMax);
+        // lm.quat = dev.add_signal(mapper::Direction::OUTGOING, "quat", 4, mapper::Type::FLOAT, NULL, &lm.quatMin, &lm.quatMax);
+        // lm.euler = dev.add_signal(mapper::Direction::OUTGOING, "euler", 3, mapper::Type::FLOAT, "degrees", &lm.eulerMin, &lm.eulerMax);
+        // lm.shake = dev.add_signal(mapper::Direction::OUTGOING, "shake", 3, mapper::Type::FLOAT, NULL, &lm.shakeMin, &lm.shakeMax);
+        // lm.jab = dev.add_signal(mapper::Direction::OUTGOING, "jab", 3, mapper::Type::FLOAT, NULL, &lm.jabMin, &lm.jabMax);
+        // lm.count = dev.add_signal(mapper::Direction::OUTGOING, "count", 1, mapper::Type::INT32, NULL, &lm.countMin, &lm.countMax);
+        // lm.tap = dev.add_signal(mapper::Direction::OUTGOING, "tap", 1, mapper::Type::INT32, NULL, &lm.tapMin, &lm.tapMax);
+        // lm.dtap = dev.add_signal(mapper::Direction::OUTGOING, "dtap", 1, mapper::Type::INT32, NULL, &lm.tapMin, &lm.tapMax);
+        // lm.ttap = dev.add_signal(mapper::Direction::OUTGOING, "ttap", 1, mapper::Type::INT32, NULL, &lm.tapMin, &lm.tapMax);
+        // lm.bat = dev.add_signal(mapper::Direction::OUTGOING, "battery", 1, mapper::Type::INT32, NULL, &lm.batMin, &lm.batMax);
+    }
+
+    void updateLibmapper() {
+        
+        Serial.println(dev->ready());
+        Serial.println(dev->graph().iface().c_str());
+
+
+
+        dev->poll();
+
+        // int libUlt = ultData.distance;
+        // lm.ult.set_value(libUlt);
+        // float libAccel[3] = {imu.getAccelX(),imu.getAccelY(),imu.getAccelZ()};
+        // lm.accel.set_value(libAccel);
+        // float libGyro[3] = {imu.getGyroX(),imu.getGyroY(),imu.getGyroZ()};
+        // lm.gyro.set_value(libGyro);
+        // float libMag[3] = {imu.getMagX(),imu.getMagY(),imu.getMagZ()};
+        // lm.mag.set_value(libMag);
+        // float libQuat[4] = {imu.getQuatI(), imu.getQuatJ(), imu.getQuatK(), imu.getQuatReal()};
+        // lm.quat.set_value(libQuat);
+        // float libEuler[3] = {imu.getYaw(),imu.getPitch(), imu.getRoll()};
+        // lm.euler.set_value(libEuler);
+        // float libShake[3] = {instrument.getShakeX(), instrument.getShakeY(), instrument.getShakeZ()};
+        // lm.shake.set_value(libShake);
+        // float libJab[3] = {instrument.getJabX(), instrument.getJabY(), instrument.getJabZ()};
+        // lm.jab.set_value(libJab);
+        // int libCount = touch.getCount();
+        // lm.count.set_value(libCount);
+        // int libTap = touch.getTap();
+        // lm.tap.set_value(libTap);
+        // int libDTap = touch.getDTap();
+        // lm.dtap.set_value(libDTap);
+        // int libTTap = touch.getTTap();
+        // lm.ttap.set_value(libTTap);
+        // int libBat = battery.percentage;
+        // lm.bat.set_value(libBat);
+  }
+
+#endif

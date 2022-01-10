@@ -28,7 +28,7 @@ class Instrument {
         float jabX;
         float jabY;
         float jabZ;
-        int jabThreshold = 10;
+        float jabThreshold = 5;
     public:
         float leakyIntegrator (float reading, float old_value, float leak, int frequency, unsigned long& timer);
         void updateInstrumentIMU (float gyroX, float gyroY, float gyroZ);

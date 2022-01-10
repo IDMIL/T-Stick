@@ -6,7 +6,6 @@
 </head>
 
 <body>
-    <p><a href="/">Config</a> &nbsp;&nbsp; <a href="/scan">Scan</a> &nbsp;&nbsp; <a href="/update">Update</a> &nbsp;&nbsp; <a href="/factory">Factory Settings</a>
 
     <h1>%DEVICENAME%<h1>
             <p>%STATUS%</p>
@@ -38,7 +37,7 @@
                     </div>
 
                     <div class="row">
-                        <h3>GuitarAMI module password:</h3>
+                        <h3>T-Stick password:</h3>
                     </div>
 
                     <div class="row">
@@ -69,6 +68,7 @@
                         <select id="mode" name="mode">
                             <option value="0" %MODE0%>STA (station)</option>
                             <option value="1" %MODE1%>AP (access point)</option>
+                            <option value="2" %MODE2%>MIDI</option>
                         </select>
                     </div>
 
@@ -131,7 +131,7 @@
                     </div>
 
                     <div class="row">
-                        <input type="submit" onclick="alert('Sending settings to GuitarAMI module')" value="Save">
+                        <input type="submit" onclick="alert('Sending settings to T-Stick')" value="Save">
                     </div>
                 </form>
 
@@ -172,19 +172,19 @@
                 <table>
                     <tr>
                         <td>ID (serial #):</td>
-                        <td>%GUITARAMIID%</td>
+                        <td>%TSTICKID%</td>
                     </tr>
                     <tr>
-                        <td>GuitarAMI module author:</td>
-                        <td>%GUITARAMIAUTH%</td>
+                        <td>T-Stick author:</td>
+                        <td>%TSTICKAUTH%</td>
                     </tr>
                     <tr>
                         <td>Institution:</td>
-                        <td>%GUITARAMIINST%</td>
+                        <td>%TSTICKINST%</td>
                     </tr>
                     <tr>
                         <td>Firmware version: </td>
-                        <td>%GUITARAMIVER%</td>
+                        <td>%TSTICKVER%</td>
                     </tr>
                 </table>
             </div>
