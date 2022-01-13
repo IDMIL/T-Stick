@@ -18,15 +18,15 @@ const unsigned int firmware_version = 220109;
   - TinyPICO (3GW) 
   - Wemos D32 Pro
 */
-#define board_TINYPICO
-// #define board_WEMOS
+//#define board_TINYPICO
+#define board_WEMOS
 
 /*
   Choose the capacitive sensing board
   - Trill
   - IDMIL Capsense board 
 */
-#define touch_TRILL
+//#define touch_TRILL
 #define touch_CAPSENSE
 
 
@@ -200,6 +200,7 @@ const unsigned int firmware_version = 220109;
 
 #ifdef touch_CAPSENSE
   #include "capsense.h"
+  #include "instrument_touch.h"
   Capsense capsense;
 #endif
 
