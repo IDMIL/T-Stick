@@ -5,6 +5,12 @@
 // Edu Meneses (2022) - https://www.edumeneses.com                            //
 //****************************************************************************//
 
+/*
+OBS: There's an error with the ESP32 inet.h file. The file requires manual fixing. Check the issue at 
+https://github.com/mathiasbredholt/libmapper-arduino/issues/3 
+*/
+
+
 //
 // ╺┳┓┏━╸┏━┓┏━┓
 //  ┃┃┣╸ ┣━ ┗━┓
