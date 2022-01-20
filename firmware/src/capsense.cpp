@@ -129,9 +129,9 @@ void Capsense::readCapsense() {
         touch[(i*2)+1] = answer2;
     }
     for (int i=0; i < touchStripsSize; ++i) {
-        data[i] = bitReadRightToLeft(touch[i/8],7-(i%8));
+        data[i] = bitReadRightToLeft(touch[i/8],(i%8));
+        //data[i] = bitReadRightToLeft(touch[i/8],7-(i%8));
     }
-    reorderCapsense (data, touchStripsSize);
 }
 
 int Capsense::bitReadLeftToRight (int number, int position, int type_size) {

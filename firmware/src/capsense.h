@@ -20,13 +20,13 @@ class Capsense {
         void readCapsense();
         int getData(int data_index);
         int data[64];
+        int touch[8]; // /raw/capsense, i..., 0--255, ... (1 int per 8 capacitive stripes -- 8 bits) - originaly RawData.touch
         uint8_t touchStripsSize;
     private:
         void capsenseRequest(uint8_t address,uint8_t request, uint8_t answer_size);
         void reorderCapsense (int *origArray, uint8_t arraySize);
         int bitReadLeftToRight (int number, int position, int type_size = 8);
         int bitReadRightToLeft (int number, int position);
-        int touch[8]; // /raw/capsense, i..., 0--255, ... (1 int per 8 capacitive stripes -- 8 bits) - originaly RawData.touch
         uint8_t answer1;
         uint8_t answer2;
         uint8_t capsense_addresses[4]; // max 4 capsenses

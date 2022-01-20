@@ -5,7 +5,7 @@
     "APpasswd": "mappings",
     "lastConnectedNetwork": "SSID",
     "lastStoredPsk": "password",
-    "firmware": 220109,
+    "firmware": 220120,
     "oscIP1": "192.168.0.1",
     "oscPORT1": 8000,
     "oscIP2": "172.24.1.1",
@@ -14,5 +14,5 @@
     "libmapper": 0,
     "osc": 0,
     "mode": 0,
-    "fsrOffset": 4000
+    "fsrOffset": 0
 }

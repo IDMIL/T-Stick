@@ -17,7 +17,7 @@ https://github.com/mathiasbredholt/libmapper-arduino/issues/3
 // ╺┻┛┗━╸╹  ┗━┛
 //
 
-const unsigned int firmware_version = 220109;
+const unsigned int firmware_version = 220120;
 
 /* 
   Choose proper microcontroller:
@@ -64,7 +64,7 @@ const unsigned int firmware_version = 220109;
   struct Pin {
         byte led = 5;      // Built In LED pin
         byte battery = 35; // To check battery level (voltage)
-        byte fsr = 32;
+        byte fsr = 33;
         byte button = 15;
     } pin;
 
@@ -479,7 +479,7 @@ void loop() {
     }
 
   // receiving OSC
-      receiveOSC();
+      //receiveOSC();
 
   // Check if setup mode has been called
     if (button.getHold()) {
@@ -1087,6 +1087,7 @@ void start_mdns_service() {
           msgAccl.add(imu.getAccelY());
           msgAccl.add(imu.getAccelZ());
           continuous.add(msgAccl);
+          msgAccl.empty();
       
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/raw/gyro",global.deviceName);
         OSCMessage msgGyro(namespaceBuffer);
@@ -1094,6 +1095,7 @@ void start_mdns_service() {
           msgGyro.add(imu.getGyroY());
           msgGyro.add(imu.getGyroZ());
           continuous.add(msgGyro);
+          msgGyro.empty();
       
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/raw/magn",global.deviceName);
         OSCMessage msgMagn(namespaceBuffer);
@@ -1101,11 +1103,12 @@ void start_mdns_service() {
           msgMagn.add(imu.getMagY());
           msgMagn.add(imu.getMagZ());
           continuous.add(msgMagn);
+          msgGyro.empty();
 
-        oscEndpoint.beginPacket(oscIP,port);
-        continuous.send(oscEndpoint);
-        oscEndpoint.endPacket();
-        continuous.empty(); 
+        // oscEndpoint.beginPacket(oscIP,port);
+        // continuous.send(oscEndpoint);
+        // oscEndpoint.endPacket();
+        // continuous.empty();
 
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/norm/accl",global.deviceName);
         OSCMessage msgnAccl(namespaceBuffer);
@@ -1113,6 +1116,7 @@ void start_mdns_service() {
           msgnAccl.add(imu.getNormAccelY());
           msgnAccl.add(imu.getNormAccelZ());
           continuous.add(msgnAccl);
+          msgnAccl.empty();
       
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/norm/gyro",global.deviceName);
         OSCMessage msgnGyro(namespaceBuffer);
@@ -1120,18 +1124,20 @@ void start_mdns_service() {
           msgnGyro.add(imu.getNormGyroY());
           msgnGyro.add(imu.getNormGyroZ());
           continuous.add(msgnGyro);
-      
+          msgnGyro.empty();
+
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/norm/magn",global.deviceName);
         OSCMessage msgnMagn(namespaceBuffer);
           msgnMagn.add(imu.getNormMagX());
           msgnMagn.add(imu.getNormMagY());
           msgnMagn.add(imu.getNormMagZ());
           continuous.add(msgnMagn);
+          msgnMagn.empty();
 
-        oscEndpoint.beginPacket(oscIP,port);
-        continuous.send(oscEndpoint);
-        oscEndpoint.endPacket();
-        continuous.empty(); 
+        // oscEndpoint.beginPacket(oscIP,port);
+        // continuous.send(oscEndpoint);
+        // oscEndpoint.endPacket();
+        // continuous.empty(); 
 
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/orientation",global.deviceName);
         OSCMessage msgQuat(namespaceBuffer);
@@ -1139,9 +1145,7 @@ void start_mdns_service() {
           msgQuat.add(imu.getQuatJ());
           msgQuat.add(imu.getQuatK());
           msgQuat.add(imu.getQuatReal());
-          oscEndpoint.beginPacket(oscIP,port);
-          msgQuat.send(oscEndpoint);
-          oscEndpoint.endPacket();
+          continuous.add(msgQuat);
           msgQuat.empty(); 
 
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/ypr",global.deviceName);
@@ -1149,10 +1153,13 @@ void start_mdns_service() {
           msgEuler.add(imu.getYaw());
           msgEuler.add(imu.getPitch());
           msgEuler.add(imu.getRoll());
-          oscEndpoint.beginPacket(oscIP,port);
-          msgEuler.send(oscEndpoint);
-          oscEndpoint.endPacket();
+          continuous.add(msgEuler);
           msgEuler.empty(); 
+
+        // oscEndpoint.beginPacket(oscIP,port);
+        // continuous.send(oscEndpoint);
+        // oscEndpoint.endPacket();
+        // continuous.empty(); 
 
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/raw/capsense",global.deviceName);
         OSCMessage msgtouchtouch(namespaceBuffer);
@@ -1174,59 +1181,55 @@ void start_mdns_service() {
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/touch/all",global.deviceName);
         OSCMessage msgtouchAll(namespaceBuffer);
           msgtouchAll.add(instrument_touch.touchAll);
-          oscEndpoint.beginPacket(oscIP,port);
-          msgtouchAll.send(oscEndpoint);
-          oscEndpoint.endPacket();
+          continuous.add(msgtouchAll);
           msgtouchAll.empty(); 
 
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/touch/top",global.deviceName);
         OSCMessage msgtouchTop(namespaceBuffer);
           msgtouchTop.add(instrument_touch.touchTop);
-          oscEndpoint.beginPacket(oscIP,port);
-          msgtouchTop.send(oscEndpoint);
-          oscEndpoint.endPacket();
+          continuous.add(msgtouchTop);
           msgtouchTop.empty(); 
 
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/touch/middle",global.deviceName);
         OSCMessage msgtouchMiddle(namespaceBuffer);
           msgtouchMiddle.add(instrument_touch.touchMiddle);
-          oscEndpoint.beginPacket(oscIP,port);
-          msgtouchMiddle.send(oscEndpoint);
-          oscEndpoint.endPacket();
+          continuous.add(msgtouchMiddle);
           msgtouchMiddle.empty(); 
+
+        // oscEndpoint.beginPacket(oscIP,port);
+        // continuous.send(oscEndpoint);
+        // oscEndpoint.endPacket();
+        // continuous.empty(); 
 
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/touch/bottom",global.deviceName);
         OSCMessage msgtouchBottom(namespaceBuffer);
           msgtouchBottom.add(instrument_touch.touchBottom);
-          oscEndpoint.beginPacket(oscIP,port);
-          msgtouchBottom.send(oscEndpoint);
-          oscEndpoint.endPacket();
+          continuous.add(msgtouchBottom);
           msgtouchBottom.empty(); 
 
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/brush",global.deviceName);
         OSCMessage msgbrush(namespaceBuffer);
           msgbrush.add(instrument_touch.brush);
-          oscEndpoint.beginPacket(oscIP,port);
-          msgbrush.send(oscEndpoint);
-          oscEndpoint.endPacket();
+          continuous.add(msgbrush);
           msgbrush.empty(); 
 
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/rub",global.deviceName);
         OSCMessage msgrub(namespaceBuffer);
           msgrub.add(instrument_touch.rub);
-          oscEndpoint.beginPacket(oscIP,port);
-          msgrub.send(oscEndpoint);
-          oscEndpoint.endPacket();
+          continuous.add(msgrub);
           msgrub.empty(); 
+
+        // oscEndpoint.beginPacket(oscIP,port);
+        // continuous.send(oscEndpoint);
+        // oscEndpoint.endPacket();
+        // continuous.empty(); 
 
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/multibrush",global.deviceName);
         OSCMessage msgmultiBrush(namespaceBuffer);
           for (int i=0;i<4;i++) {
             msgmultiBrush.add(instrument_touch.multiBrush[i]);
           }
-          oscEndpoint.beginPacket(oscIP,port);
-          msgmultiBrush.send(oscEndpoint);
-          oscEndpoint.endPacket();
+          continuous.add(msgmultiBrush);
           msgmultiBrush.empty(); 
 
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/instrument/multirub",global.deviceName);
@@ -1234,38 +1237,19 @@ void start_mdns_service() {
           for (int i=0;i<4;i++) {
             msgmultiRub.add(instrument_touch.multiRub[i]);
           }
-          oscEndpoint.beginPacket(oscIP,port);
-          msgmultiRub.send(oscEndpoint);
-          oscEndpoint.endPacket();
+          continuous.add(msgmultiRub);
           msgmultiRub.empty(); 
-
-        // snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/shake",global.deviceName);
-        // OSCMessage msgShake(namespaceBuffer);
-        //   msgShake.add(instrument.getShakeX());
-        //   msgShake.add(instrument.getShakeY());
-        //   msgShake.add(instrument.getShakeZ());
-        //   oscEndpoint.beginPacket(oscIP,port);
-        //   msgShake.send(oscEndpoint);
-        //   oscEndpoint.endPacket();
-        //   msgShake.empty(); 
-
-        // snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/jab",global.deviceName);
-        // OSCMessage msgJab(namespaceBuffer);
-        //   msgJab.add(instrument.getJabX());
-        //   msgJab.add(instrument.getJabY());
-        //   msgJab.add(instrument.getJabZ());
-        //   oscEndpoint.beginPacket(oscIP,port);
-        //   msgJab.send(oscEndpoint);
-        //   oscEndpoint.endPacket();
-        //   msgJab.empty();
 
         snprintf(namespaceBuffer,(sizeof(namespaceBuffer)-1),"/%s/button",global.deviceName);
         OSCMessage msgTouch(namespaceBuffer);
           msgTouch.add(button.getState());
-          oscEndpoint.beginPacket(oscIP,port);
-          msgTouch.send(oscEndpoint);
-          oscEndpoint.endPacket();
+          continuous.add(msgTouch);
           msgTouch.empty();
+
+        oscEndpoint.beginPacket(oscIP,port);
+        continuous.send(oscEndpoint);
+        oscEndpoint.endPacket();
+        continuous.empty(); 
     }
   }
 }
