@@ -1,0 +1,487 @@
+#N canvas 2455 1278 1374 955 10;
+#X obj 357 25 cnv 15 464 210 empty empty T-Stick 20 12 0 20 #dcdcdc
+#404040 0;
+#X obj 127 488 vsl 45 135 -32767 32767 0 0 empty empty AccelX 0 -9
+0 10 #fcfcfc #000000 #000000 0 1;
+#X obj 177 488 vsl 45 135 -32767 32767 0 0 empty empty AccelY 0 -9
+0 10 #fcfcfc #000000 #000000 0 1;
+#X obj 227 488 vsl 45 135 -32767 32767 0 0 empty empty AccelZ 0 -9
+0 10 #fcfcfc #000000 #000000 0 1;
+#X obj 277 488 vsl 45 135 -41 41 0 0 empty empty GyroX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 327 488 vsl 45 135 -41 41 0 0 empty empty GyroY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 377 488 vsl 45 135 -41 41 0 0 empty empty GyroZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 577 488 vsl 45 135 0 4095 0 0 empty empty Pressure 0 -9 0 10
+#fcfcfc #000000 #000000 0 1;
+#X obj 627 488 vsl 45 135 0 1023 0 0 empty empty Piezo 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 427 488 vsl 45 135 -32767 32767 0 0 empty empty MagX 0 -9 0
+10 #fcfcfc #000000 #000000 0 1;
+#X obj 477 488 vsl 45 135 -32767 32767 0 0 empty empty MagY 0 -9 0
+10 #fcfcfc #000000 #000000 0 1;
+#X obj 527 488 vsl 45 135 -32767 32767 0 0 empty empty MagZ 0 -9 0
+10 #fcfcfc #000000 #000000 0 1;
+#X obj 1067 222 timer;
+#X floatatom 1067 246 8 0 0 0 - - -, f 8;
+#X obj 1067 197 t b b;
+#X obj 1067 172 r rawtimer;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array rawtime 100 float 1 black black;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0;
+#X coords 0 100 99 0 200 140 1;
+#X restore 861 169 graph;
+#N canvas 264 335 568 475 timegraph 0;
+#X obj 111 257 list store;
+#X obj 117 300 list split 100;
+#X msg 148 105 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0;
+#X obj 54 178 moses 0;
+#X obj 78 215 moses 101;
+#X obj 57 59 inlet;
+#X obj 173 53 loadbang;
+#X obj 123 353 outlet;
+#X connect 0 0 1 0;
+#X connect 1 0 0 1;
+#X connect 1 0 7 0;
+#X connect 2 0 0 1;
+#X connect 2 0 7 0;
+#X connect 3 1 4 0;
+#X connect 4 0 0 0;
+#X connect 5 0 3 0;
+#X connect 6 0 2 0;
+#X restore 1067 270 pd timegraph;
+#X obj 1067 294 array set rawtime;
+#X obj 310 18 inlet;
+#X floatatom 227 631 7 0 0 0 - - -, f 7;
+#X floatatom 277 631 7 0 0 0 - - -, f 7;
+#X floatatom 327 631 7 0 0 0 - - -, f 7;
+#X floatatom 377 631 7 0 0 0 - - -, f 7;
+#X floatatom 577 631 7 0 0 0 - - -, f 7;
+#X floatatom 627 631 7 0 0 0 - - -, f 7;
+#X floatatom 427 631 7 0 0 0 - - -, f 7;
+#X floatatom 477 631 7 0 0 0 - - -, f 7;
+#X floatatom 527 631 7 0 0 0 - - -, f 7;
+#X floatatom 177 631 7 0 0 0 - - -, f 7;
+#X floatatom 127 631 7 0 0 0 - - -, f 7;
+#X obj 257 266 netreceive -u -b;
+#X obj 257 287 oscparse;
+#X text 405 168 port to receive messages;
+#X msg 257 243 listen \$1;
+#X floatatom 366 169 6 0 0 0 - - -, f 6;
+#X obj 173 15 loadbang;
+#X obj 163 396 unpack f f f;
+#X obj 243 396 unpack f f f;
+#X obj 324 396 unpack f f f;
+#X obj 187 287 s rawtimer;
+#X symbolatom 366 87 20 0 0 2 T-Stick_IP toip ip, f 20;
+#X floatatom 496 87 5 0 0 2 port toport port, f 5;
+#X floatatom 594 160 10 0 1 1 FSR_offset(between_0_and_1) fsr fsr-send
+, f 10;
+#X obj 595 52 bng 15 250 50 0 write empty Write 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 647 52 bng 15 250 50 0 read empty Read 17 7 0 10 #fcfcfc #000000
+#000000;
+#X text 594 32 T-Stick memory;
+#X obj 157 102 unpack s f;
+#X obj 524 251 route list;
+#X msg 111 88 8000;
+#X obj 367 122 tgl 25 0 empty empty Receive_OSC_messages 30 14 0 14
+#fcfcfc #000000 #000000 1 1;
+#X obj 314 147 sel 1;
+#X msg 172 38 0;
+#X obj 118 48 t 1 b b;
+#X obj 45 88 delay 500;
+#X obj 591 337 unpack f f f f;
+#X floatatom 525 368 10 0 0 0 - - -, f 10;
+#X floatatom 591 368 10 0 0 0 - - -, f 10;
+#X floatatom 657 368 10 0 0 0 - - -, f 10;
+#X floatatom 723 368 10 0 0 0 - - -, f 10;
+#X text 570 318 Quaternions;
+#X obj 118 20 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array Touch 30 float 1 black black;
+#A 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 2 29 -1 140 140 1;
+#X restore 680 486 graph;
+#X obj 672 317 s info;
+#X obj 1072 31 r info;
+#X obj 972 102 s serial;
+#X obj 1027 102 s firmware;
+#X obj 366 55 tgl 15 0 empty empty Send_OSC_messages_to_T-Stick 17
+7 0 10 #fcfcfc #000000 #000000 0 1;
+#X obj 94 120 sel 1 0;
+#X obj 95 170 t b b;
+#X floatatom 594 106 7 0 0 3 Serial_number serial sserial, f 7;
+#X floatatom 694 106 7 0 0 3 Firmware_version firmware sfirmware,
+f 7;
+#X obj 595 86 bng 15 250 50 0 getinfo empty Get_T-Stick_info 17 7 0
+10 #fcfcfc #000000 #000000;
+#X obj 594 180 bng 15 250 50 0 send_FSR_offset empty send_FSR_offset
+17 7 0 10 #fcfcfc #000000 #000000;
+#X floatatom 1172 703 10 0 0 0 - - -, f 10;
+#X floatatom 1238 703 10 0 0 0 - - -, f 10;
+#X floatatom 1304 703 10 0 0 0 - - -, f 10;
+#X obj 1208 679 unpack f f f;
+#X obj 172 59 s touch;
+#X obj 113 148 s todisconect;
+#X obj 135 200 s toport;
+#X obj 162 181 s toip;
+#X obj 1094 134 s fsr;
+#X obj 97 777 vsl 45 135 -1 1 0 0 empty empty AccelX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 147 777 vsl 45 135 -1 1 0 0 empty empty AccelY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 197 777 vsl 45 135 -1 1 0 0 empty empty AccelZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 247 777 vsl 45 135 -1 1 0 0 empty empty GyroX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 297 777 vsl 45 135 -1 1 0 0 empty empty GyroY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 347 777 vsl 45 135 -1 1 0 0 empty empty GyroZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 547 777 vsl 45 135 0 1 0 0 empty empty Pressure 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 597 777 vsl 45 135 0 1 0 0 empty empty Piezo 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 397 777 vsl 45 135 -1 1 0 0 empty empty MagX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 447 777 vsl 45 135 -1 1 0 0 empty empty MagY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 497 777 vsl 45 135 -1 1 0 0 empty empty MagZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 197 920 7 0 0 0 - - -, f 7;
+#X floatatom 247 920 7 0 0 0 - - -, f 7;
+#X floatatom 297 920 7 0 0 0 - - -, f 7;
+#X floatatom 347 920 7 0 0 0 - - -, f 7;
+#X floatatom 547 920 7 0 0 0 - - -, f 7;
+#X floatatom 597 920 7 0 0 0 - - -, f 7;
+#X floatatom 397 920 7 0 0 0 - - -, f 7;
+#X floatatom 447 920 7 0 0 0 - - -, f 7;
+#X floatatom 497 920 7 0 0 0 - - -, f 7;
+#X floatatom 147 920 7 0 0 0 - - -, f 7;
+#X floatatom 97 920 7 0 0 0 - - -, f 7;
+#X obj 218 727 unpack f f f;
+#X obj 298 727 unpack f f f;
+#X obj 379 727 unpack f f f;
+#X obj 194 674 route capsense accl gyro magn fsr piezo, f 62;
+#X obj 718 317 s norm;
+#X obj 177 654 r norm;
+#X text 50 469 Raw (/raw);
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array Touch2 30 float 1 black black;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 2 29 -1 140 140 1;
+#X restore 823 486 graph;
+#X text 20 734 Normalized (/norm);
+#X text 391 272 Change T-Stick NAME!;
+#X obj 765 318 s battery;
+#X obj 843 83 r battery;
+#X floatatom 761 212 4 0 0 1 % - -, f 4;
+#X text 1230 660 YPR;
+#X obj 564 398 route short long double;
+#X obj 618 427 tgl 15 0 empty empty long -4 23 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 654 427 tgl 15 0 empty empty double -9 23 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 564 443 bng 15 250 50 0 empty empty short 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 564 420 sel 1;
+#X obj 1072 57 list split 3;
+#X obj 1024 78 unpack f f f;
+#X msg 1106 102 set \$1 \$2 \$3 \$4 \$5 \$6 \$7 \$8 \$9 \$10;
+#X text 608 210 Touch mask;
+#X text 752 192 Battery;
+#N canvas 174 432 831 421 sending_messages_to_T-Stick 0;
+#X msg 547 353 disconnect;
+#X obj 547 376 netsend -u -b;
+#X obj 673 320 pack s f;
+#X obj 703 300 i;
+#X obj 673 280 t b f;
+#X obj 298 148 oscformat state touchMask;
+#X obj 441 305 list prepend send;
+#X obj 441 329 list trim;
+#X obj 456 148 oscformat state json;
+#X msg 462 120 1;
+#X msg 521 119 2;
+#X obj 673 360 list trim;
+#X obj 673 340 list prepend connect;
+#X obj 227 292 oscformat state info;
+#X msg 227 273 1;
+#X obj 598 122 f;
+#X obj 56 80 spigot;
+#X obj 142 248 delay 1000;
+#X msg 296 216 0;
+#X msg 142 269 1;
+#X obj 169 210 t b b b;
+#X obj 462 93 r write;
+#X obj 521 94 r read;
+#X obj 673 260 r port;
+#X obj 547 331 r todisconect;
+#X obj 640 281 r ip;
+#X obj 613 99 r fsr-send;
+#X obj 598 146 oscformat state FSRoffset;
+#X obj 169 182 r getinfo;
+#X obj 598 78 r send_FSR_offset;
+#X obj 54 41 r touch_list;
+#X connect 0 0 1 0;
+#X connect 2 0 12 0;
+#X connect 3 0 2 1;
+#X connect 4 0 2 0;
+#X connect 4 1 3 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 1 0;
+#X connect 8 0 6 0;
+#X connect 9 0 8 0;
+#X connect 10 0 8 0;
+#X connect 11 0 1 0;
+#X connect 12 0 11 0;
+#X connect 13 0 6 0;
+#X connect 14 0 13 0;
+#X connect 15 0 27 0;
+#X connect 16 0 5 0;
+#X connect 17 0 19 0;
+#X connect 18 0 16 1;
+#X connect 19 0 16 1;
+#X connect 20 0 17 0;
+#X connect 20 1 14 0;
+#X connect 20 2 18 0;
+#X connect 21 0 9 0;
+#X connect 22 0 10 0;
+#X connect 23 0 4 0;
+#X connect 24 0 0 0;
+#X connect 25 0 2 0;
+#X connect 26 0 15 1;
+#X connect 27 0 6 0;
+#X connect 28 0 20 0;
+#X connect 29 0 15 0;
+#X connect 30 0 16 0;
+#X restore 1142 174 pd sending_messages_to_T-Stick;
+#X obj 363 245 s touch_list;
+#X text 698 417 button;
+#X msg 363 210 255 255 255 255 255 255 255 255 0 0;
+#X obj 524 293 route raw orientation ypr info norm battery instrument
+;
+#X obj 829 319 s instrument;
+#X obj 811 637 r instrument;
+#X obj 680 733 route all top middle bottom;
+#X obj 680 777 vsl 35 135 0 1 0 0 empty empty All 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 680 920 6 0 0 0 - - -, f 6;
+#X obj 722 777 vsl 35 135 0 1 0 0 empty empty Top 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 722 920 6 0 0 0 - - -, f 6;
+#X obj 765 777 vsl 35 135 0 1 0 0 empty empty Middle 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 765 920 6 0 0 0 - - -, f 6;
+#X obj 807 777 vsl 35 135 0 1 0 0 empty empty Bottom 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 807 920 6 0 0 0 - - -, f 6;
+#X obj 849 777 vsl 35 135 -1 1 0 0 empty empty Brush 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 849 920 6 0 0 0 - - -, f 6;
+#X text 677 648 Instrument;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array multibrush 4 float 3 black black;
+#A 0 0 0 0 0;
+#X coords 0 -1 4 1 60 140 1;
+#X restore 891 775 graph;
+#X obj 850 733 array set multibrush;
+#X obj 958 777 vsl 35 135 0 10 0 0 empty empty Rub 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 958 920 6 0 0 0 - - -, f 6;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array multirub 4 float 3 black black;
+#A 0 0 0 0 0;
+#X coords 0 10 4 -0.1 60 140 1;
+#X restore 1000 775 graph;
+#X obj 977 733 array set multirub;
+#X obj 1067 777 vsl 35 135 0 100 0 0 empty empty ShakeX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 1067 920 6 0 0 0 - - -, f 6;
+#X obj 1109 777 vsl 35 135 0 10 0 0 empty empty ShakeY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 1109 920 6 0 0 0 - - -, f 6;
+#X obj 1152 777 vsl 35 135 0 10 0 0 empty empty ShakeZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 1152 920 6 0 0 0 - - -, f 6;
+#X obj 1092 733 unpack f f f;
+#X obj 811 658 route touch brush multibrush rub multirub shakexyz jabxyz
+ypr, f 62;
+#X obj 1193 777 vsl 35 135 0 6 0 0 empty empty JabX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 1193 920 6 0 0 0 - - -, f 6;
+#X obj 1235 777 vsl 35 135 0 6 0 0 empty empty JabY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 1235 920 6 0 0 0 - - -, f 6;
+#X obj 1278 777 vsl 35 135 0 6 0 0 empty empty JabZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 1278 920 6 0 0 0 - - -, f 6;
+#X obj 1172 733 unpack f f f;
+#X text 833 20 T-Stick FW200422;
+#X text 833 37 Edu Meneses - IDMIL - April/2020;
+#X msg 157 81 192.168.1.1 8888;
+#X obj 71 345 route capsense accl gyro magn fsr piezo button touchstrips
+, f 62;
+#X obj 427 387 array set Touch;
+#X obj 26 419 array set Touch;
+#X obj 40 372 list split 30;
+#X obj 43 396 array set Touch2;
+#X obj 524 272 route T-Stick_306;
+#X connect 1 0 30 0;
+#X connect 2 0 29 0;
+#X connect 3 0 20 0;
+#X connect 4 0 21 0;
+#X connect 5 0 22 0;
+#X connect 6 0 23 0;
+#X connect 7 0 24 0;
+#X connect 8 0 25 0;
+#X connect 9 0 26 0;
+#X connect 10 0 27 0;
+#X connect 11 0 28 0;
+#X connect 12 0 13 0;
+#X connect 13 0 17 0;
+#X connect 14 0 12 0;
+#X connect 14 1 12 1;
+#X connect 15 0 14 0;
+#X connect 17 0 18 0;
+#X connect 19 0 50 0;
+#X connect 31 0 32 0;
+#X connect 31 0 40 0;
+#X connect 32 0 48 0;
+#X connect 34 0 31 0;
+#X connect 35 0 34 0;
+#X connect 36 0 52 0;
+#X connect 36 0 53 0;
+#X connect 37 0 1 0;
+#X connect 37 1 2 0;
+#X connect 37 2 3 0;
+#X connect 38 0 4 0;
+#X connect 38 1 5 0;
+#X connect 38 2 6 0;
+#X connect 39 0 9 0;
+#X connect 39 1 10 0;
+#X connect 39 2 11 0;
+#X connect 47 0 81 0;
+#X connect 47 1 80 0;
+#X connect 48 0 177 0;
+#X connect 49 0 35 0;
+#X connect 50 0 51 0;
+#X connect 51 0 35 0;
+#X connect 51 1 34 0;
+#X connect 52 0 78 0;
+#X connect 53 0 54 0;
+#X connect 53 1 49 0;
+#X connect 53 2 171 0;
+#X connect 54 0 50 0;
+#X connect 55 0 56 0;
+#X connect 55 1 57 0;
+#X connect 55 2 58 0;
+#X connect 55 3 59 0;
+#X connect 61 0 53 0;
+#X connect 64 0 124 0;
+#X connect 67 0 68 0;
+#X connect 68 0 69 0;
+#X connect 68 1 79 0;
+#X connect 69 0 80 0;
+#X connect 69 1 81 0;
+#X connect 77 0 74 0;
+#X connect 77 1 75 0;
+#X connect 77 2 76 0;
+#X connect 83 0 104 0;
+#X connect 84 0 103 0;
+#X connect 85 0 94 0;
+#X connect 86 0 95 0;
+#X connect 87 0 96 0;
+#X connect 88 0 97 0;
+#X connect 89 0 98 0;
+#X connect 90 0 99 0;
+#X connect 91 0 100 0;
+#X connect 92 0 101 0;
+#X connect 93 0 102 0;
+#X connect 105 0 83 0;
+#X connect 105 1 84 0;
+#X connect 105 2 85 0;
+#X connect 106 0 86 0;
+#X connect 106 1 87 0;
+#X connect 106 2 88 0;
+#X connect 107 0 91 0;
+#X connect 107 1 92 0;
+#X connect 107 2 93 0;
+#X connect 108 1 105 0;
+#X connect 108 2 106 0;
+#X connect 108 3 107 0;
+#X connect 108 4 89 0;
+#X connect 108 5 90 0;
+#X connect 110 0 108 0;
+#X connect 116 0 117 0;
+#X connect 119 0 123 0;
+#X connect 119 1 120 0;
+#X connect 119 2 121 0;
+#X connect 123 0 122 0;
+#X connect 124 0 125 0;
+#X connect 124 1 126 0;
+#X connect 125 0 65 0;
+#X connect 125 1 66 0;
+#X connect 125 2 82 0;
+#X connect 126 0 132 0;
+#X connect 132 0 130 0;
+#X connect 133 0 172 0;
+#X connect 133 1 55 0;
+#X connect 133 3 63 0;
+#X connect 133 4 109 0;
+#X connect 133 5 115 0;
+#X connect 133 6 134 0;
+#X connect 135 0 161 0;
+#X connect 136 0 137 0;
+#X connect 136 1 139 0;
+#X connect 136 2 141 0;
+#X connect 136 3 143 0;
+#X connect 137 0 138 0;
+#X connect 139 0 140 0;
+#X connect 141 0 142 0;
+#X connect 143 0 144 0;
+#X connect 145 0 146 0;
+#X connect 150 0 151 0;
+#X connect 154 0 155 0;
+#X connect 156 0 157 0;
+#X connect 158 0 159 0;
+#X connect 160 0 154 0;
+#X connect 160 1 156 0;
+#X connect 160 2 158 0;
+#X connect 161 0 136 0;
+#X connect 161 1 145 0;
+#X connect 161 2 149 0;
+#X connect 161 3 150 0;
+#X connect 161 4 153 0;
+#X connect 161 5 160 0;
+#X connect 161 6 168 0;
+#X connect 161 7 77 0;
+#X connect 162 0 163 0;
+#X connect 164 0 165 0;
+#X connect 166 0 167 0;
+#X connect 168 0 162 0;
+#X connect 168 1 164 0;
+#X connect 168 2 166 0;
+#X connect 171 0 47 0;
+#X connect 172 0 175 0;
+#X connect 172 1 37 0;
+#X connect 172 2 38 0;
+#X connect 172 3 39 0;
+#X connect 172 4 7 0;
+#X connect 172 5 8 0;
+#X connect 172 6 119 0;
+#X connect 172 7 173 0;
+#X connect 175 0 174 0;
+#X connect 175 1 176 0;
+#X connect 175 2 174 0;
+#X connect 177 0 133 0;
+#X coords 0 -1 1 1 470 216 1 354 22;
