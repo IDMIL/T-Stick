@@ -17,23 +17,23 @@ https://github.com/mathiasbredholt/libmapper-arduino/issues/3
 // ╺┻┛┗━╸╹  ┗━┛
 //
 
-const unsigned int firmware_version = 220120;
+const unsigned int firmware_version = 220222;
 
 /* 
   Choose proper microcontroller:
   - TinyPICO (3GW) 
   - Wemos D32 Pro
 */
-//#define board_TINYPICO
-#define board_WEMOS
+#define board_TINYPICO
+//#define board_WEMOS
 
 /*
   Choose the capacitive sensing board
   - Trill
   - IDMIL Capsense board 
 */
-//#define touch_TRILL
-#define touch_CAPSENSE
+#define touch_TRILL
+//#define touch_CAPSENSE
 
 
 //////////////
@@ -100,12 +100,12 @@ const unsigned int firmware_version = 220120;
 
   struct Settings {
     int id = 6;
-    char author[20] = {'E','d','u','_','M','e','n','e','s','e','s'};
-    char institution[20] = {'I','D','M','I','L'};
-    char APpasswd[15] = {'m','a','p','p','i','n','g','s'};
-    char lastConnectedNetwork[30] = {'I','D','M','I','L'};
-    char lastStoredPsk[30] = {'m','a','p','p','i','n','g','s'};
-    int32_t firmware = 0;
+    char author[20];
+    char institution[20];
+    char APpasswd[15];
+    char lastConnectedNetwork[30];
+    char lastStoredPsk[30];
+    int32_t firmware;
     char oscIP[2][17] = { {'0','0','0','0'}, {'0','0','0','0'} };
     int32_t oscPORT[2] = {8000, 8000};
     int32_t localPORT = 8000;
