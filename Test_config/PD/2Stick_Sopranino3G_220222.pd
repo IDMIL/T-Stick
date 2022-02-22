@@ -1,43 +1,36 @@
-#N canvas 2069 1296 1374 954 10;
+#N canvas 546 653 1374 954 10;
 #X obj 127 488 vsl 45 135 -32767 32767 0 0 empty empty AccelX 0 -9
-0 10 -262144 -1 -1 6700 1;
+0 10 #fcfcfc #000000 #000000 0 1;
 #X obj 177 488 vsl 45 135 -32767 32767 0 0 empty empty AccelY 0 -9
-0 10 -262144 -1 -1 6698 1;
+0 10 #fcfcfc #000000 #000000 0 1;
 #X obj 227 488 vsl 45 135 -32767 32767 0 0 empty empty AccelZ 0 -9
-0 10 -262144 -1 -1 6701 1;
-#X obj 277 488 vsl 45 135 -41 41 0 0 empty empty GyroX 0 -9 0 10 -262144
--1 -1 6696 1;
-#X obj 327 488 vsl 45 135 -41 41 0 0 empty empty GyroY 0 -9 0 10 -262144
--1 -1 6698 1;
-#X obj 377 488 vsl 45 135 -41 41 0 0 empty empty GyroZ 0 -9 0 10 -262144
--1 -1 6701 1;
+0 10 #fcfcfc #000000 #000000 0 1;
+#X obj 277 488 vsl 45 135 -41 41 0 0 empty empty GyroX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 327 488 vsl 45 135 -41 41 0 0 empty empty GyroY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 377 488 vsl 45 135 -41 41 0 0 empty empty GyroZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
 #X obj 577 488 vsl 45 135 0 4095 0 0 empty empty Pressure 0 -9 0 10
--262144 -1 -1 0 1;
-#X obj 627 488 vsl 45 135 0 1023 0 0 empty empty Piezo 0 -9 0 10 -262144
--1 -1 0 1;
+#fcfcfc #000000 #000000 0 1;
+#X obj 627 488 vsl 45 135 0 1023 0 0 empty empty Piezo 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
 #X obj 427 488 vsl 45 135 -32767 32767 0 0 empty empty MagX 0 -9 0
-10 -262144 -1 -1 6700 1;
+10 #fcfcfc #000000 #000000 0 1;
 #X obj 477 488 vsl 45 135 -32767 32767 0 0 empty empty MagY 0 -9 0
-10 -262144 -1 -1 6700 1;
+10 #fcfcfc #000000 #000000 0 1;
 #X obj 527 488 vsl 45 135 -32767 32767 0 0 empty empty MagZ 0 -9 0
-10 -262144 -1 -1 6700 1;
+10 #fcfcfc #000000 #000000 0 1;
 #X obj 617 132 timer;
-#X floatatom 617 156 8 0 0 0 - - -;
+#X floatatom 617 156 8 0 0 0 - - -, f 8;
 #X obj 617 107 t b b;
 #X obj 617 82 r rawtimer;
 #N canvas 0 22 450 278 (subpatch) 0;
-#X array rawtime 100 float 1;
-#A 0 1.45125 0 1.45125 1.45125 1.45125 4.35374 5.80499 18.8662 1.45125
-1.45125 0 0 1.45125 1.45125 1.45125 0 0 1.45125 1.45125 1.45125 1.45125
-52.2449 4.35374 34.8299 1.45125 4.35374 1.45125 21.7687 1.45125 1.45125
-1.45125 81.2698 15.9637 26.1224 5.80499 36.2812 0 0 1.45125 1.45125
-1.45125 5.80499 82.7211 34.8299 5.80499 11.61 0 0 0 1.45125 1.45125
-1.45125 53.6961 0 0 0 0 0 1.45125 1.45125 4.35374 10.1587 1.45125 68.2086
-1.45125 1.45125 26.1224 34.8299 1.45125 5.80499 30.4762 26.1224 26.1224
-13.0612 1.45125 1.45125 14.5125 50.7937 1.45125 14.5125 1.45125 69.6599
-1.45125 1.45125 20.3175 30.4762 15.9637 23.22 1.45125 1.45125 7.25624
-1.45125 1.45125 14.5125 1.45125 76.9161 53.6961 1.45125 1.45125 47.8912
-;
+#X array rawtime 100 float 1 black black;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0;
 #X coords 0 100 99 0 200 140 1;
 #X restore 411 79 graph;
 #N canvas 264 335 568 475 timegraph 0;
@@ -63,17 +56,17 @@
 #X connect 6 0 2 0;
 #X restore 617 180 pd timegraph;
 #X obj 617 204 array set rawtime;
-#X floatatom 227 631 7 0 0 0 - - -;
-#X floatatom 277 631 7 0 0 0 - - -;
-#X floatatom 327 631 7 0 0 0 - - -;
-#X floatatom 377 631 7 0 0 0 - - -;
-#X floatatom 577 631 7 0 0 0 - - -;
-#X floatatom 627 631 7 0 0 0 - - -;
-#X floatatom 427 631 7 0 0 0 - - -;
-#X floatatom 477 631 7 0 0 0 - - -;
-#X floatatom 527 631 7 0 0 0 - - -;
-#X floatatom 177 631 7 0 0 0 - - -;
-#X floatatom 127 631 7 0 0 0 - - -;
+#X floatatom 227 631 7 0 0 0 - - -, f 7;
+#X floatatom 277 631 7 0 0 0 - - -, f 7;
+#X floatatom 327 631 7 0 0 0 - - -, f 7;
+#X floatatom 377 631 7 0 0 0 - - -, f 7;
+#X floatatom 577 631 7 0 0 0 - - -, f 7;
+#X floatatom 627 631 7 0 0 0 - - -, f 7;
+#X floatatom 427 631 7 0 0 0 - - -, f 7;
+#X floatatom 477 631 7 0 0 0 - - -, f 7;
+#X floatatom 527 631 7 0 0 0 - - -, f 7;
+#X floatatom 177 631 7 0 0 0 - - -, f 7;
+#X floatatom 127 631 7 0 0 0 - - -, f 7;
 #X obj 97 149 netreceive -u -b;
 #X obj 97 170 oscparse;
 #X msg 97 126 listen \$1;
@@ -82,58 +75,58 @@
 #X obj 324 396 unpack f f f;
 #X obj 27 170 s rawtimer;
 #X obj 97 193 route list;
-#X obj 70 50 tgl 20 0 empty empty Receive_OSC_messages 22 8 0 10 -262144
--1 -1 1 1;
+#X obj 70 50 tgl 20 0 empty empty Receive_OSC_messages 22 8 0 10 #fcfcfc
+#000000 #000000 1 1;
 #X obj 70 78 sel 1;
 #X obj 534 328 unpack f f f f;
-#X floatatom 468 359 10 0 0 0 - - -;
-#X floatatom 534 359 10 0 0 0 - - -;
-#X floatatom 600 359 10 0 0 0 - - -;
-#X floatatom 666 359 10 0 0 0 - - -;
+#X floatatom 468 359 10 0 0 0 - - -, f 10;
+#X floatatom 534 359 10 0 0 0 - - -, f 10;
+#X floatatom 600 359 10 0 0 0 - - -, f 10;
+#X floatatom 666 359 10 0 0 0 - - -, f 10;
 #X text 543 308 Quaternions;
 #N canvas 0 22 450 278 (subpatch) 0;
-#X array Touch 30 float 1;
+#X array Touch 30 float 1 black black;
 #A 0 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 2 29 -1 140 140 1;
 #X restore 680 486 graph;
 #X obj 245 270 s info;
-#X floatatom 764 304 10 0 0 0 - - -;
-#X floatatom 830 304 10 0 0 0 - - -;
-#X floatatom 896 304 10 0 0 0 - - -;
+#X floatatom 764 304 10 0 0 0 - - -, f 10;
+#X floatatom 830 304 10 0 0 0 - - -, f 10;
+#X floatatom 896 304 10 0 0 0 - - -, f 10;
 #X obj 800 280 unpack f f f;
-#X obj 27 777 vsl 45 135 -1 1 0 0 empty empty AccelX 0 -9 0 10 -262144
--1 -1 13400 1;
-#X obj 77 777 vsl 45 135 -1 1 0 0 empty empty AccelY 0 -9 0 10 -262144
--1 -1 13400 1;
-#X obj 127 777 vsl 45 135 -1 1 0 0 empty empty AccelZ 0 -9 0 10 -262144
--1 -1 13400 1;
-#X obj 177 777 vsl 45 135 -1 1 0 0 empty empty GyroX 0 -9 0 10 -262144
--1 -1 13253 1;
-#X obj 227 777 vsl 45 135 -1 1 0 0 empty empty GyroY 0 -9 0 10 -262144
--1 -1 13341 1;
-#X obj 277 777 vsl 45 135 -1 1 0 0 empty empty GyroZ 0 -9 0 10 -262144
--1 -1 13400 1;
-#X obj 477 777 vsl 45 135 0 1 0 0 empty empty Pressure 0 -9 0 10 -262144
--1 -1 0 1;
-#X obj 527 777 vsl 45 135 0 1 0 0 empty empty Piezo 0 -9 0 10 -262144
--1 -1 0 1;
-#X obj 327 777 vsl 45 135 -1 1 0 0 empty empty MagX 0 -9 0 10 -262144
--1 -1 13400 1;
-#X obj 377 777 vsl 45 135 -1 1 0 0 empty empty MagY 0 -9 0 10 -262144
--1 -1 13400 1;
-#X obj 427 777 vsl 45 135 -1 1 0 0 empty empty MagZ 0 -9 0 10 -262144
--1 -1 13400 1;
-#X floatatom 127 920 7 0 0 0 - - -;
-#X floatatom 177 920 7 0 0 0 - - -;
-#X floatatom 227 920 7 0 0 0 - - -;
-#X floatatom 277 920 7 0 0 0 - - -;
-#X floatatom 477 920 7 0 0 0 - - -;
-#X floatatom 527 920 7 0 0 0 - - -;
-#X floatatom 327 920 7 0 0 0 - - -;
-#X floatatom 377 920 7 0 0 0 - - -;
-#X floatatom 427 920 7 0 0 0 - - -;
-#X floatatom 77 920 7 0 0 0 - - -;
-#X floatatom 27 920 7 0 0 0 - - -;
+#X obj 27 777 vsl 45 135 -1 1 0 0 empty empty AccelX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 77 777 vsl 45 135 -1 1 0 0 empty empty AccelY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 127 777 vsl 45 135 -1 1 0 0 empty empty AccelZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 177 777 vsl 45 135 -1 1 0 0 empty empty GyroX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 227 777 vsl 45 135 -1 1 0 0 empty empty GyroY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 277 777 vsl 45 135 -1 1 0 0 empty empty GyroZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 477 777 vsl 45 135 0 1 0 0 empty empty Pressure 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 527 777 vsl 45 135 0 1 0 0 empty empty Piezo 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 327 777 vsl 45 135 -1 1 0 0 empty empty MagX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 377 777 vsl 45 135 -1 1 0 0 empty empty MagY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 427 777 vsl 45 135 -1 1 0 0 empty empty MagZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 127 920 7 0 0 0 - - -, f 7;
+#X floatatom 177 920 7 0 0 0 - - -, f 7;
+#X floatatom 227 920 7 0 0 0 - - -, f 7;
+#X floatatom 277 920 7 0 0 0 - - -, f 7;
+#X floatatom 477 920 7 0 0 0 - - -, f 7;
+#X floatatom 527 920 7 0 0 0 - - -, f 7;
+#X floatatom 327 920 7 0 0 0 - - -, f 7;
+#X floatatom 377 920 7 0 0 0 - - -, f 7;
+#X floatatom 427 920 7 0 0 0 - - -, f 7;
+#X floatatom 77 920 7 0 0 0 - - -, f 7;
+#X floatatom 27 920 7 0 0 0 - - -, f 7;
 #X obj 148 727 unpack f f f;
 #X obj 228 727 unpack f f f;
 #X obj 309 727 unpack f f f;
@@ -142,7 +135,7 @@
 #X obj 177 654 r norm;
 #X text 50 469 Raw (/raw);
 #N canvas 0 22 450 278 (subpatch) 0;
-#X array Touch2 30 float 1;
+#X array Touch2 30 float 1 black black;
 #A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 2 29 -1 140 140 1;
 #X restore 823 486 graph;
@@ -150,15 +143,15 @@
 #X text 210 218 Change T-Stick NAME!;
 #X obj 338 271 s battery;
 #X obj 824 379 r battery;
-#X floatatom 824 409 4 0 0 1 % - -;
+#X floatatom 824 409 4 0 0 1 % - -, f 4;
 #X text 820 250 YPR;
 #X obj 564 398 route short long double;
-#X obj 618 427 tgl 15 0 empty empty long -4 23 0 10 -262144 -1 -1 0
-1;
-#X obj 654 427 tgl 15 0 empty empty double -9 23 0 10 -262144 -1 -1
-0 1;
-#X obj 564 443 bng 15 250 50 0 empty empty short 17 7 0 10 -262144
--1 -1;
+#X obj 618 427 tgl 15 0 empty empty long -4 23 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 654 427 tgl 15 0 empty empty double -9 23 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 564 443 bng 15 250 50 0 empty empty short 17 7 0 10 #fcfcfc
+#000000 #000000;
 #X obj 564 420 sel 1;
 #X text 698 417 button;
 #X obj 97 246 route raw orientation ypr info norm battery instrument
@@ -166,58 +159,58 @@
 #X obj 402 272 s instrument;
 #X obj 741 637 r instrument;
 #X obj 610 733 route all top middle bottom;
-#X obj 610 777 vsl 35 135 0 1 0 0 empty empty All 0 -9 0 10 -262144
--1 -1 11725 1;
-#X floatatom 610 920 6 0 0 0 - - -;
-#X obj 652 777 vsl 35 135 0 1 0 0 empty empty Top 0 -9 0 10 -262144
--1 -1 10050 1;
-#X floatatom 652 920 6 0 0 0 - - -;
-#X obj 695 777 vsl 35 135 0 1 0 0 empty empty Middle 0 -9 0 10 -262144
--1 -1 10050 1;
-#X floatatom 695 920 6 0 0 0 - - -;
-#X obj 737 777 vsl 35 135 0 1 0 0 empty empty Bottom 0 -9 0 10 -262144
--1 -1 10050 1;
-#X floatatom 737 920 6 0 0 0 - - -;
-#X obj 779 777 vsl 35 135 -1 1 0 0 empty empty Brush 0 -9 0 10 -262144
--1 -1 6700 1;
-#X floatatom 779 920 6 0 0 0 - - -;
+#X obj 610 777 vsl 35 135 0 1 0 0 empty empty All 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 610 920 6 0 0 0 - - -, f 6;
+#X obj 652 777 vsl 35 135 0 1 0 0 empty empty Top 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 652 920 6 0 0 0 - - -, f 6;
+#X obj 695 777 vsl 35 135 0 1 0 0 empty empty Middle 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 695 920 6 0 0 0 - - -, f 6;
+#X obj 737 777 vsl 35 135 0 1 0 0 empty empty Bottom 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 737 920 6 0 0 0 - - -, f 6;
+#X obj 779 777 vsl 35 135 -1 1 0 0 empty empty Brush 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 779 920 6 0 0 0 - - -, f 6;
 #X text 607 678 Instrument;
 #N canvas 0 22 450 278 (subpatch) 0;
-#X array multibrush 4 float 3;
+#X array multibrush 4 float 3 black black;
 #A 0 0 0 0 0;
 #X coords 0 -1 4 1 60 140 1;
 #X restore 821 775 graph;
 #X obj 780 733 array set multibrush;
-#X obj 888 777 vsl 35 135 0 10 0 0 empty empty Rub 0 -9 0 10 -262144
--1 -1 0 1;
-#X floatatom 888 920 6 0 0 0 - - -;
+#X obj 888 777 vsl 35 135 0 10 0 0 empty empty Rub 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 888 920 6 0 0 0 - - -, f 6;
 #N canvas 0 22 450 278 (subpatch) 0;
-#X array multirub 4 float 3;
+#X array multirub 4 float 3 black black;
 #A 0 0 0 0 0;
 #X coords 0 10 4 -0.1 60 140 1;
 #X restore 930 775 graph;
 #X obj 907 733 array set multirub;
-#X obj 997 777 vsl 35 135 0 100 0 0 empty empty ShakeX 0 -9 0 10 -262144
--1 -1 0 1;
-#X floatatom 997 920 6 0 0 0 - - -;
-#X obj 1039 777 vsl 35 135 0 10 0 0 empty empty ShakeY 0 -9 0 10 -262144
--1 -1 0 1;
-#X floatatom 1039 920 6 0 0 0 - - -;
-#X obj 1082 777 vsl 35 135 0 10 0 0 empty empty ShakeZ 0 -9 0 10 -262144
--1 -1 0 1;
-#X floatatom 1082 920 6 0 0 0 - - -;
+#X obj 997 777 vsl 35 135 0 100 0 0 empty empty ShakeX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 997 920 6 0 0 0 - - -, f 6;
+#X obj 1039 777 vsl 35 135 0 10 0 0 empty empty ShakeY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 1039 920 6 0 0 0 - - -, f 6;
+#X obj 1082 777 vsl 35 135 0 10 0 0 empty empty ShakeZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 1082 920 6 0 0 0 - - -, f 6;
 #X obj 1022 733 unpack f f f;
 #X obj 741 658 route touch brush multibrush rub multirub shakexyz jabxyz
 ypr, f 62;
-#X obj 1123 777 vsl 35 135 0 6 0 0 empty empty JabX 0 -9 0 10 -262144
--1 -1 0 1;
-#X floatatom 1123 920 6 0 0 0 - - -;
-#X obj 1165 777 vsl 35 135 0 6 0 0 empty empty JabY 0 -9 0 10 -262144
--1 -1 0 1;
-#X floatatom 1165 920 6 0 0 0 - - -;
-#X obj 1208 777 vsl 35 135 0 6 0 0 empty empty JabZ 0 -9 0 10 -262144
--1 -1 0 1;
-#X floatatom 1208 920 6 0 0 0 - - -;
+#X obj 1123 777 vsl 35 135 0 6 0 0 empty empty JabX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 1123 920 6 0 0 0 - - -, f 6;
+#X obj 1165 777 vsl 35 135 0 6 0 0 empty empty JabY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 1165 920 6 0 0 0 - - -, f 6;
+#X obj 1208 777 vsl 35 135 0 6 0 0 empty empty JabZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 1208 920 6 0 0 0 - - -, f 6;
 #X obj 1102 733 unpack f f f;
 #X obj 71 345 route capsense accl gyro magn fsr piezo button touchstrips
 , f 62;
@@ -231,7 +224,6 @@ ypr, f 62;
 #X obj 755 263 r ypr;
 #X obj 1070 683 s ypr;
 #X msg 60 100 8000;
-#X obj 980 392 print;
 #X obj 97 218 route T-Stick_311;
 #X connect 0 0 28 0;
 #X connect 1 0 27 0;
@@ -263,7 +255,7 @@ ypr, f 62;
 #X connect 34 0 8 0;
 #X connect 34 1 9 0;
 #X connect 34 2 10 0;
-#X connect 36 0 141 0;
+#X connect 36 0 140 0;
 #X connect 37 0 38 0;
 #X connect 38 0 139 0;
 #X connect 38 1 31 0;
@@ -343,7 +335,6 @@ ypr, f 62;
 #X connect 128 1 124 0;
 #X connect 128 2 126 0;
 #X connect 129 0 132 0;
-#X connect 129 0 140 0;
 #X connect 129 1 32 0;
 #X connect 129 2 33 0;
 #X connect 129 3 34 0;
@@ -357,5 +348,5 @@ ypr, f 62;
 #X connect 134 0 37 0;
 #X connect 137 0 50 0;
 #X connect 139 0 31 0;
-#X connect 141 0 93 0;
+#X connect 140 0 93 0;
 #X coords 0 0 1 1 470 216 0;
