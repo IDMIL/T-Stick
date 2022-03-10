@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name "trill-flex")(type "KiCad")(uri "D:/Documents/Trill/hardware/flex/trill-flex-kicad-libraries/trill-flex.pretty")(options "")(descr ""))
+)
