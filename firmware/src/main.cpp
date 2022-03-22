@@ -17,7 +17,7 @@ https://github.com/mathiasbredholt/libmapper-arduino/issues/3
 // ╺┻┛┗━╸╹  ┗━┛
 //
 
-const unsigned int firmware_version = 220222;
+const unsigned int firmware_version = 220322;
 
 /* 
   Choose proper microcontroller:
@@ -424,8 +424,8 @@ void loop() {
     instrument.updateInstrumentIMU(imu.getGyroX(), imu.getGyroY(), imu.getGyroZ());
 
   // send data via OSC
-    if (settings.osc) {
-      if (settings.mode==0 || WiFi.status() == WL_CONNECTED) { // Send data via OSC ...
+    if (settings.osc && WiFi.status() == WL_CONNECTED) {
+      if (settings.mode==0) { // Send data via OSC ...
           // sending continuous data
             if (millis() - global.oscDelay > global.messageTimer) { 
               global.messageTimer = millis();
