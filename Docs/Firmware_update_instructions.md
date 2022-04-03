@@ -89,15 +89,15 @@ You can also interact with the controller using the following commands:
 
 To test if the data is being send correctly:
 
-- Connect the T-Stick to a network (instructions [here](./Docs/T-Stick_2GW_Connecting_Guide(v1.1).md))
+- Connect the T-Stick to a network (instructions [here](./Docs/T-Stick_2GW_Connecting_Guide(v1.2).md))
 - Open the Pure Data (PD) or Max/MSP patch to receive T-Stick messages (they can be found [here](./Configuration))
 - Start receive OSC messages according to the chosen patch
 
 ## Other Documentation
 
-[T-Stick connection guide – v1.1 for wireless T-Sticks](./Docs/T-Stick_2GW_Connecting_Guide(v1.1).md) (model 2GW-19X)
+[T-Stick connection guide – v1.2 for wireless T-Sticks](./T-Stick_2GW_Connecting_Guide(v1.2).md)
 
-[How to build a T-Stick Sopranino](./Docs/T-Stick_2GW_building_instructions.md)
+[How to build a T-Stick Sopranino](./T-Stick_2GW_building_instructions.md)
 
 ## Firmware information
 

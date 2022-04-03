@@ -2,6 +2,10 @@ build
 
 .DS_Store
 
+# hidden files
+.*
+!/.gitignore
+
 # Prerequisites
 *.d
 

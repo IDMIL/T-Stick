@@ -17,7 +17,7 @@ https://github.com/mathiasbredholt/libmapper-arduino/issues/3
 // ╺┻┛┗━╸╹  ┗━┛
 //
 
-const unsigned int firmware_version = 220222;
+const unsigned int firmware_version = 220322;
 
 /* 
   Choose proper microcontroller:
