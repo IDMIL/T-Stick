@@ -12,6 +12,8 @@ This repository hosts up to date firmware for the T-Stick instruments currently 
 
 [How to build a T-Stick Sopranino](./Docs/T-Stick_2GW_building_instructions.md)
 
+[How to build a T-Stick Sopranino using the Trill sensor](./Docs/T-Stick_2GW_building_instructions(trill).md)
+
 [OSC sensor data list](./Docs/OSC.md)
 
 ## Instruments:
