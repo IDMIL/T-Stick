@@ -25,7 +25,7 @@ const unsigned int firmware_version = 220322;
   - Wemos D32 Pro
 */
 #define board_TINYPICO
-//#define board_WEMOS
+// #define board_WEMOS
 
 /*
   Choose the capacitive sensing board
@@ -33,7 +33,7 @@ const unsigned int firmware_version = 220322;
   - IDMIL Capsense board 
 */
 #define touch_TRILL
-//#define touch_CAPSENSE
+// #define touch_CAPSENSE
 
 
 //////////////
