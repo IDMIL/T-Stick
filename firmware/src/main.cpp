@@ -1,5 +1,6 @@
 //****************************************************************************//
-// GuitarAMI Module                                                           //
+// T-Stick - sopranino/soprano firmware                                       //
+// SAT/Metalab                                                                //
 // Input Devices and Music Interaction Laboratory (IDMIL), McGill University  //
 // Edu Meneses (2022) - https://www.edumeneses.com                            //
 //****************************************************************************//
@@ -9,8 +10,10 @@
  */
 
 
-unsigned int firmware_version = 220909;
+unsigned int firmware_version = 220911;
 
+// set the amount of capacitive stripes for the sopranino (15) or soprano (30)
+#define TSTICK_SIZE 15;
 
 /*
   Choose the capacitive sensing board
@@ -310,18 +313,17 @@ void setup() {
     std::cout << "    Initializing touch sensor... ";
     #ifdef touch_TRILL
         if (touch.initTouch()) {
-        std::cout << "done" << std::endl;
+            touch.touchSize = TSTICK_SIZE;
+            std::cout << "done" << std::endl;
         } else {
-        std::cout << "initialization failed!" << std::endl;
+            std::cout << "initialization failed!" << std::endl;
         }
     #endif
-
     #ifdef touch_CAPSENSE
         capsense.capsense_scan(); // Look for Capsense boards and return their addresses
                                 // must run before initLibmapper to get # of capsense boards
             std::cout << "done" << std::endl;
     #endif
-
 
     std::cout << "    Initializing Liblo server/client... ";
     osc1 = lo_address_new(puara.getIP1().c_str(), puara.getPORT1Str().c_str());
@@ -341,10 +343,10 @@ void setup() {
     lm.ypr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "ypr", 3, MPR_FLT, "fl", &lm.yprMin, &lm.yprMax, 0, 0, 0);
     lm.shake = mpr_sig_new(lm_dev, MPR_DIR_OUT, "shake", 3, MPR_FLT, "fl", &lm.shakeMin, &lm.shakeMax, 0, 0, 0);
     lm.jab = mpr_sig_new(lm_dev, MPR_DIR_OUT, "jab", 3, MPR_FLT, "fl", &lm.jabMin, &lm.jabMax, 0, 0, 0);
-    lm.brush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "brush", 1, MPR_INT32, "un", &lm.brushMin, &lm.brushMax, 0, 0, 0);
-    lm.rub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "rub", 1, MPR_INT32, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
-    lm.multibrush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "multibrush", 4, MPR_INT32, "un", &lm.brushMin, &lm.brushMax, 0, 0, 0);
-    lm.multirub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "multirub", 4, MPR_INT32, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
+    lm.brush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "brush", 1, MPR_FLT, "un", &lm.brushMin, &lm.brushMax, 0, 0, 0);
+    lm.rub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "rub", 1, MPR_FLT, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
+    lm.multibrush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "multibrush", 4, MPR_FLT, "un", &lm.brushMin, &lm.brushMax, 0, 0, 0);
+    lm.multirub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "multirub", 4, MPR_FLT, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
     lm.touch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "touch", touch.touchSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
     lm.count = mpr_sig_new(lm_dev, MPR_DIR_OUT, "count", 1, MPR_INT32, "un", &lm.countMin, &lm.countMax, 0, 0, 0);
     lm.tap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
@@ -398,7 +400,7 @@ void loop() {
     if (imu.dataAvailable()) {
         gestures.updateJabShake(imu.getGyroX(), imu.getGyroY(), imu.getGyroZ());
     }
-    gestures.updateTrigButton(touch.getValue());
+    gestures.updateTrigButton(button.getButton());
 
     // go to deep sleep if double press button
     if (gestures.getButtonDTap()){
@@ -482,14 +484,21 @@ void loop() {
     // Sending continuous OSC messages
     if (puara.IP1_ready()) {
 
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "touch");
-            lo_send(osc1, oscNamespace.c_str(), "f", sensors.fsr);
-
-
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "capsense");
+            lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiii", touch.touch[0], touch.touch[1],touch.touch[2],
+                    touch.touch[3],touch.touch[4],touch.touch[5], touch.touch[6], touch.touch[7], touch.touch[8],
+                    touch.touch[9], touch.touch[10], touch.touch[11], touch.touch[12], touch.touch[13], touch.touch[14]
+            );
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "fsr");
-            lo_send(osc1, oscNamespace.c_str(), "f", sensors.fsr);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "touch");
-            lo_send(osc1, oscNamespace.c_str(), "i", sensors.touch);
+            lo_send(osc1, oscNamespace.c_str(), "i", sensors.fsr);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "touchAll");
+            lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchAll);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "touchTop");
+            lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchTop);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "touchMiddle");
+            lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchMiddle);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "touchBottom");
+            lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchBottom);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "accl");
             lo_send(osc1, oscNamespace.c_str(), "fff", sensors.accl[0], sensors.accl[1], sensors.accl[2]);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "gyro");
@@ -502,10 +511,21 @@ void loop() {
             lo_send(osc1, oscNamespace.c_str(), "fff", sensors.ypr[0], sensors.ypr[1], sensors.ypr[2]);
     }
     if (puara.IP2_ready()) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "capsense");
+                lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiii", touch.touch[0], touch.touch[1],touch.touch[2],
+                        touch.touch[3],touch.touch[4],touch.touch[5], touch.touch[6], touch.touch[7], touch.touch[8],
+                        touch.touch[9], touch.touch[10], touch.touch[11], touch.touch[12], touch.touch[13], touch.touch[14]
+                );
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "fsr");
-            lo_send(osc2, oscNamespace.c_str(), "f", sensors.fsr);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "touch");
-            lo_send(osc2, oscNamespace.c_str(), "i", sensors.touch);
+            lo_send(osc2, oscNamespace.c_str(), "i", sensors.fsr);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "touchAll");
+            lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchAll);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "touchTop");
+            lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchTop);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "touchMiddle");
+            lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchMiddle);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "touchBottom");
+            lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchBottom);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "accl");
             lo_send(osc2, oscNamespace.c_str(), "fff", sensors.accl[0], sensors.accl[1], sensors.accl[2]);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "gyro");
@@ -520,6 +540,18 @@ void loop() {
 
     // Sending discrete OSC messages
     if (puara.IP1_ready()) {
+        if (event.brush) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "brush");
+            lo_send(osc1, oscNamespace.c_str(), "f", sensors.brush);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "multiBrush");
+            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.multibrush[0], sensors.multibrush[1], sensors.multibrush[2]);
+        }
+        if (event.rub) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "rub");
+            lo_send(osc1, oscNamespace.c_str(), "f", sensors.rub);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "multiRub");
+            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.multirub[0], sensors.multirub[1], sensors.multirub[2]);
+        }
         if (event.shake) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "shake");
             lo_send(osc1, oscNamespace.c_str(), "fff", sensors.shake[0], sensors.shake[1], sensors.shake[2]);
@@ -550,6 +582,18 @@ void loop() {
         }
     }
     if (puara.IP2_ready()) {
+        if (event.brush) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "brush");
+            lo_send(osc2, oscNamespace.c_str(), "f", sensors.brush);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "multiBrush");
+            lo_send(osc2, oscNamespace.c_str(), "fff", sensors.multibrush[0], sensors.multibrush[1], sensors.multibrush[2]);
+        }
+        if (event.rub) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "rub");
+            lo_send(osc2, oscNamespace.c_str(), "f", sensors.rub);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "multiRub");
+            lo_send(osc2, oscNamespace.c_str(), "fff", sensors.multirub[0], sensors.multirub[1], sensors.multirub[2]);
+        }
         if (event.shake) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "shake");
             lo_send(osc2, oscNamespace.c_str(), "fff", sensors.shake[0], sensors.shake[1], sensors.shake[2]);
