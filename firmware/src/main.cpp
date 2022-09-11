@@ -305,7 +305,7 @@ void setup() {
 
     std::cout << "    Initializing FSR... ";
     if (fsr.initFsr(pin.fsr, std::round(puara.getVarNumber("fsr_offset")))) {
-        std::cout << "done" << std::endl;
+        std::cout << "done (offset value: " << fsr.getOffset() << ")" << std::endl;
     } else {
         std::cout << "initialization failed!" << std::endl;
     }
@@ -410,7 +410,7 @@ void loop() {
     }
 
     // Preparing arrays for libmapper signals
-        sensors.fsr = fsr.getValue();
+        sensors.fsr = fsr.getCookedValue();
         sensors.accl[0] = imu.getAccelX();
         sensors.accl[1] = imu.getAccelY();
         sensors.accl[2] = imu.getAccelZ();
