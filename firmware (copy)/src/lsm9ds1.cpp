@@ -154,13 +154,35 @@ LSM9DS1 myIMU; // initialize library class
         Imu_LSM9DS1::magY = myIMU.calcMag(myIMU.my) / 10000; // in uTesla, converted from Gauss
         Imu_LSM9DS1::magZ = myIMU.calcMag(myIMU.mz) / 10000; // in uTesla, converted from Gauss
 
+        Imu_LSM9DS1::raw_accelX = myIMU.calcAccel(myIMU.ax);
+        Imu_LSM9DS1::raw_accelY = myIMU.calcAccel(myIMU.ay);
+        Imu_LSM9DS1::raw_accelZ = myIMU.calcAccel(myIMU.az);
+        Imu_LSM9DS1::raw_gyroX = myIMU.calcGyro(myIMU.gx);
+        Imu_LSM9DS1::raw_gyroY = myIMU.calcGyro(myIMU.gy);
+        Imu_LSM9DS1::raw_gyroZ = myIMU.calcGyro(myIMU.gz);
+        Imu_LSM9DS1::raw_magX = myIMU.calcMag(myIMU.mx);
+        Imu_LSM9DS1::raw_magY = myIMU.calcMag(myIMU.my);
+        Imu_LSM9DS1::raw_magZ = myIMU.calcMag(myIMU.mz);
+
+        Imu_LSM9DS1::norm_accelX = constrain(((raw_accelX + 32767) * 2) / 65533, -1, 1);
+        Imu_LSM9DS1::norm_accelY = constrain(((raw_accelY + 32767) * 2) / 65533, -1, 1);
+        Imu_LSM9DS1::norm_accelZ = constrain(((raw_accelZ + 32767) * 2) / 65533, -1, 1);
+        Imu_LSM9DS1::norm_gyroX = constrain((raw_gyroX + 41) * 2 / 81, -1, 1);
+        Imu_LSM9DS1::norm_gyroY = constrain((raw_gyroY + 41) * 2 / 81, -1, 1);
+        Imu_LSM9DS1::norm_gyroZ = constrain((raw_gyroZ + 41) * 2 / 81, -1, 1);
+        Imu_LSM9DS1::norm_magX = constrain(((raw_magX + 32767) * 2) / 65533, -1, 1);
+        Imu_LSM9DS1::norm_magY = constrain(((raw_magY + 32767) * 2) / 65533, -1, 1);
+        Imu_LSM9DS1::norm_magZ = constrain(((raw_magZ + 32767) * 2) / 65533, -1, 1);
+
         Imu_LSM9DS1::Now = micros();
         Imu_LSM9DS1::deltat = ((Imu_LSM9DS1::Now - Imu_LSM9DS1::lastUpdate)/1000000.0f); // set integration time by time elapsed since last filter update
         Imu_LSM9DS1::lastUpdate = Imu_LSM9DS1::Now;
         // Sensors x- and y-axes are aligned but magnetometer z-axis (+ down) is opposite to z-axis (+ up) of accelerometer and gyro!
         // This is ok by aircraft orientation standards!  
         // Pass gyro rate as rad/s        
-        Imu_LSM9DS1::MadgwickQuaternionUpdate(myIMU.calcAccel(myIMU.ax), myIMU.calcAccel(myIMU.ay), myIMU.calcAccel(myIMU.az), Imu_LSM9DS1::gyroX, Imu_LSM9DS1::gyroY, Imu_LSM9DS1::gyroZ, myIMU.calcMag(myIMU.mx), myIMU.calcMag(myIMU.my), myIMU.calcMag(myIMU.mz));
+        Imu_LSM9DS1::MadgwickQuaternionUpdate(myIMU.calcAccel(myIMU.ax), myIMU.calcAccel(myIMU.ay), myIMU.calcAccel(myIMU.az), 
+                                                Imu_LSM9DS1::gyroX,  Imu_LSM9DS1::gyroY, Imu_LSM9DS1::gyroZ, 
+                                                myIMU.calcMag(myIMU.mx), myIMU.calcMag(myIMU.my), myIMU.calcMag(myIMU.mz));
         Imu_LSM9DS1::taitBryanAngles(Imu_LSM9DS1::q1, Imu_LSM9DS1::q2, Imu_LSM9DS1::q3, Imu_LSM9DS1::q4);
         return 1;
     };
@@ -199,6 +221,42 @@ float Imu_LSM9DS1::getMagY() {
 
 float Imu_LSM9DS1::getMagZ() {
     return Imu_LSM9DS1::magZ;
+};
+
+float Imu_LSM9DS1::getNormAccelX() {
+    return Imu_LSM9DS1::norm_accelX;
+};
+
+float Imu_LSM9DS1::getNormAccelY() {
+    return Imu_LSM9DS1::norm_accelY;
+};
+
+float Imu_LSM9DS1::getNormAccelZ() {
+    return Imu_LSM9DS1::norm_accelZ;
+};
+
+float Imu_LSM9DS1::getNormGyroX() {
+    return Imu_LSM9DS1::norm_gyroX;
+};
+
+float Imu_LSM9DS1::getNormGyroY() {
+    return Imu_LSM9DS1::norm_gyroY;
+};
+
+float Imu_LSM9DS1::getNormGyroZ() {
+    return Imu_LSM9DS1::norm_gyroZ;
+};
+
+float Imu_LSM9DS1::getNormMagX() {
+    return Imu_LSM9DS1::norm_magX;
+};
+
+float Imu_LSM9DS1::getNormMagY() {
+    return Imu_LSM9DS1::norm_magY;
+};
+
+float Imu_LSM9DS1::getNormMagZ() {
+    return Imu_LSM9DS1::norm_magZ;
 };
 
 unsigned int Imu_LSM9DS1::getMagAccuracy() {
