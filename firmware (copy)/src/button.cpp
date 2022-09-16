@@ -17,21 +17,52 @@ void Button::readButton() {
     else if (Button::hold) {
         Button::hold = false;
         Button::button = false;
+        Button::count = 0;
     }
     else {
         if (Button::button) {
             Button::button = false;
             Button::pressTime = millis() - Button::timer;
             Button::timer = millis();
+            Button::count++;
         }
+    }
+    if (!Button::button && (millis() - Button::timer > Button::countInterval)) {
+        switch (Button::count) {
+            case 0:
+                Button::tap = 0;
+                Button::dtap = 0;
+                Button::ttap = 0;
+                break;
+            case 1: 
+                Button::tap = 1;
+                Button::dtap = 0;
+                Button::ttap = 0;
+                break;
+            case 2:
+                Button::tap = 0;
+                Button::dtap = 1;
+                Button::ttap = 0;
+                break;
+            case 3:
+                Button::tap = 0;
+                Button::dtap = 0;
+                Button::ttap = 1;
+                break;
+        }
+        Button::count = 0;
     }
 }
 
-bool Button::initButton(int &buttonPin) {
+bool Button::initButton(byte &buttonPin) {
     Button::pin = buttonPin;
     pinMode(Button::pin, INPUT_PULLUP);
     return 1;
 }
+
+unsigned int Button::getCount() {
+    return Button::count;
+};
 
 bool Button::getButton() {
     return Button::button;
@@ -39,6 +70,18 @@ bool Button::getButton() {
 
 unsigned int Button::getState() {
     return Button::buttonState;
+};
+
+unsigned int Button::getTap() {
+    return Button::tap;
+};
+
+unsigned int Button::getDTap() {
+    return Button::dtap;
+};
+
+unsigned int Button::getTTap() {
+    return Button::ttap;
 };
 
 unsigned int Button::getPressTime() {

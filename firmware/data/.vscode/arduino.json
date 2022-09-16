@@ -1,4 +1,0 @@
-{
-    "board": "esp32:esp32:esp32wrover",
-    "configuration": "PartitionScheme=min_spiffs,FlashMode=qio,FlashFreq=80,UploadSpeed=115200,DebugLevel=none"
-}

@@ -6,14 +6,14 @@
 </head>
 
 <body>
-    <p><a href="/">Config</a> &nbsp;&nbsp; <a href="/scan.html">Scan</a> &nbsp;&nbsp; <a href="/settings.html">Settings</a>
+    <p><a href="/">Config</a> &nbsp;&nbsp; <a href="/scan">Scan</a> &nbsp;&nbsp; <a href="/update">Update</a> &nbsp;&nbsp; <a href="/factory">Factory Settings</a>
 
-    <h1>%DMINAME%<h1>
+    <h1>%DEVICENAME%<h1>
             <p>%STATUS%</p>
-            <h2>Config:</h2>
+            <h2>Settings:</h2>
             <div class="container">
 
-                <form method="post" action="/#">
+                <form action="" method="post">
                     <div class="row">
                         <h3>Network: </h3>
                     </div>
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="row">
-                        <h3>%DEVICENAME% password:</h3>
+                        <h3>GuitarAMI module password:</h3>
                     </div>
 
                     <div class="row">
@@ -62,16 +62,27 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-25">
-                        </div>
-                        <div class="col-75">
-                            <input type="checkbox" id="persistentAP" name="persistentAP" value="true" %CURRENTPERSISTENT%>
-                            <label for="PersistentAP"> Persistent AP mode</label><br>
-                        </div>
+                        <h3>Operation mode:</h3>
+                    </div>
+
+                    <div class="row">
+                        <select id="mode" name="mode">
+                            <option value="0" %MODE0%>STA (station)</option>
+                            <option value="1" %MODE1%>AP (access point)</option>
+                        </select>
                     </div>
 
                     <div class="row">
                         <h3>OSC send settings:</h3>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-25">
+                        </div>
+                        <div class="col-75">
+                            <input type="checkbox" id="osc" name="osc" value="true" %CURRENTOSC%>
+                            <label for="OSC"> send OSC</label><br>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -112,15 +123,15 @@
 
                     <div class="row">
                         <div class="col-25">
-                            <label for="localPORT">Local port</label>
                         </div>
                         <div class="col-75">
-                            <input type="number" id="localPORT" name="localPORT" placeholder="0000" min="0" max="99999" value="%CURRENTLOCALPORT%">
+                            <input type="checkbox" id="libmapper" name="libmapper" value="true" %CURRENTLM%>
+                            <label for="Libmapper"> Libmapper ON/OFF</label><br>
                         </div>
                     </div>
 
                     <div class="row">
-                        <input type="submit" value="Save" action="/">
+                        <input type="submit" onclick="alert('Sending settings')" value="Save">
                     </div>
                 </form>
 
@@ -131,8 +142,8 @@
                 <div>
                     <table>
                         <tr>
-                            <td>Current stored SSID:</td>
-                            <td>%CURRENTSSID2%</td>
+                            <td>Current SSID:</td>
+                            <td>%CURRENTSSID%</td>
                         </tr>
                         <tr>
                             <td>Current IP address (STA):</td>
@@ -154,26 +165,26 @@
                 </div>
             </div>
 
-            <p><a href="/scan.html"><button class="button">scan for networks</button></a></p>
+            <p><a href="/scan"><button class="button">scan for networks</button></a></p>
 
             <h2>Instrument info:</h2>
             <div class="container">
                 <table>
                     <tr>
                         <td>ID (serial #):</td>
-                        <td>%MODULEID%</td>
+                        <td>%GUITARAMIID%</td>
                     </tr>
                     <tr>
-                        <td>Device author:</td>
-                        <td>%MODULEAUTH%</td>
+                        <td>GuitarAMI module author:</td>
+                        <td>%GUITARAMIAUTH%</td>
                     </tr>
                     <tr>
                         <td>Institution:</td>
-                        <td>%MODULEINST%</td>
+                        <td>%GUITARAMIINST%</td>
                     </tr>
                     <tr>
                         <td>Firmware version: </td>
-                        <td>%MODULEVER%</td>
+                        <td>%GUITARAMIVER%</td>
                     </tr>
                 </table>
             </div>
@@ -182,6 +193,7 @@
                 <form action="" method="post">
                     <input type="submit" float="center" name="reboot" value="Close and reboot">
                 </form>
+            <!-- <button type="button" onclick="alert('Rebooting. Please close this window.')">Close and reboot</button> --> 
 
             <br><br>
 

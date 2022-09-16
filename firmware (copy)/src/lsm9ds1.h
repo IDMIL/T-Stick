@@ -10,6 +10,8 @@
 
 #include <SparkFunLSM9DS1.h> // https://github.com/sparkfun/SparkFun_LSM9DS1_Arduino_Library
 
+#include "imu.h"
+
 #include <cmath>
 
 class Imu_LSM9DS1 {
@@ -25,6 +27,15 @@ class Imu_LSM9DS1 {
         float getMagX(); // in uTesla, converted from Gauss
         float getMagY();
         float getMagZ();
+        float getNormAccelX();
+        float getNormAccelY();
+        float getNormAccelZ();
+        float getNormGyroX(); // in radians per second, converted from DPS
+        float getNormGyroY();
+        float getNormGyroZ();
+        float getNormMagX(); // in uTesla, converted from Gauss
+        float getNormMagY();
+        float getNormMagZ();
         unsigned int getMagAccuracy();
         float getQuatI();
         float getQuatJ();
@@ -46,6 +57,24 @@ class Imu_LSM9DS1 {
         float magX = 0.0; // in uTesla, converted from Gauss
         float magY = 0.0;
         float magZ = 0.0;
+        float raw_accelX = 0.0; // in g's
+        float raw_accelY = 0.0;
+        float raw_accelZ = 0.0;
+        float raw_gyroX = 0.0; // in DPS
+        float raw_gyroY = 0.0;
+        float raw_gyroZ = 0.0;
+        float raw_magX = 0.0; // in Gauss
+        float raw_magY = 0.0;
+        float raw_magZ = 0.0;
+        float norm_accelX = 0.0;
+        float norm_accelY = 0.0;
+        float norm_accelZ = 0.0;
+        float norm_gyroX = 0.0;
+        float norm_gyroY = 0.0;
+        float norm_gyroZ = 0.0;
+        float norm_magX = 0.0;
+        float norm_magY = 0.0;
+        float norm_magZ = 0.0;
         float q1 = 1.0; // needs to be set to 1 for the first loop, otherwise NaN
         float q2 = 0.0;
         float q3 = 0.0;
@@ -60,4 +89,4 @@ class Imu_LSM9DS1 {
         float deltat = 0.0;        // integration interval for both filter schemes
 };
 
-  #endif
+#endif
