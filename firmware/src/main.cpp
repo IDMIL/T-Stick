@@ -10,18 +10,18 @@
  */
 
 
-unsigned int firmware_version = 220916;
+unsigned int firmware_version = 220929;
 
 // set the amount of capacitive stripes for the sopranino (15) or soprano (30)
-#define TSTICK_SIZE 15;
+#define TSTICK_SIZE 16;
 
 /*
   Choose the capacitive sensing board
   - Trill
   - IDMIL Capsense board 
 */
-#define touch_TRILL
-//#define touch_CAPSENSE
+//#define touch_TRILL
+#define touch_CAPSENSE
 
 
 #include "Arduino.h"
@@ -140,7 +140,6 @@ Imu_LSM9DS1 imu;
 
 #ifdef touch_CAPSENSE
   #include "capsense.h"
-  #include "instrument_touch.h"
   Capsense capsense;
 #endif
 
@@ -347,7 +346,12 @@ void setup() {
     lm.rub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/rub", 1, MPR_FLT, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
     lm.multibrush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multibrush", 4, MPR_FLT, "un", &lm.brushMin, &lm.brushMax, 0, 0, 0);
     lm.multirub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multirub", 4, MPR_FLT, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
-    lm.touch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", touch.touchSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
+    #ifdef touch_TRILL
+        lm.touch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", touch.touchSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
+    #endif
+    #ifdef touch_CAPSENSE
+        lm.touch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", capsense.touchStripsSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
+    #endif
     lm.count = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/count", 1, MPR_INT32, "un", &lm.countMin, &lm.countMax, 0, 0, 0);
     lm.tap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
     lm.ttap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/triple tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
@@ -386,7 +390,7 @@ void loop() {
     #endif
     #ifdef touch_CAPSENSE
         capsense.readCapsense();
-        instrument_touch.updateTouchArray(capsense.data,capsense.touchStripsSize);
+        gestures.updateTouchArray(capsense.data,capsense.touchStripsSize);
     #endif
 
     // read battery
@@ -479,16 +483,31 @@ void loop() {
     mpr_sig_set_value(lm.ttap, 0, 1, MPR_INT32, &sensors.dtap);
     mpr_sig_set_value(lm.dtap, 0, 1, MPR_INT32, &sensors.ttap);
     mpr_sig_set_value(lm.bat, 0, 1, MPR_FLT, &sensors.battery);
-    mpr_sig_set_value(lm.touch, 0, touch.touchSize, MPR_INT32, &touch.touch);
+    #ifdef touch_TRILL
+        mpr_sig_set_value(lm.touch, 0, touch.touchSize, MPR_INT32, &touch.touch);
+    #endif
+    #ifdef touch_CAPSENSE
+        mpr_sig_set_value(lm.touch, 0, capsense.touchStripsSize, MPR_INT32, &capsense.data);
+    #endif
+    
 
     // Sending continuous OSC messages
     if (puara.IP1_ready()) {
 
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
-            lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiii", touch.touch[0], touch.touch[1],touch.touch[2],
+            #ifdef touch_TRILL
+                lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiii", touch.touch[0], touch.touch[1],touch.touch[2],
                     touch.touch[3],touch.touch[4],touch.touch[5], touch.touch[6], touch.touch[7], touch.touch[8],
                     touch.touch[9], touch.touch[10], touch.touch[11], touch.touch[12], touch.touch[13], touch.touch[14]
             );
+            #endif
+            #ifdef touch_CAPSENSE
+                lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiii", capsense.data[0], capsense.data[1],capsense.data[2],
+                    capsense.data[3],capsense.data[4],capsense.data[5], capsense.data[6], capsense.data[7], capsense.data[8],
+                    capsense.data[9], capsense.data[10], capsense.data[11], capsense.data[12], capsense.data[13], capsense.data[14],
+                    capsense.data[15]
+            );
+            #endif
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/fsr");
             lo_send(osc1, oscNamespace.c_str(), "i", sensors.fsr);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/all");
@@ -512,10 +531,19 @@ void loop() {
     }
     if (puara.IP2_ready()) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
+            #ifdef touch_TRILL
                 lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiii", touch.touch[0], touch.touch[1],touch.touch[2],
-                        touch.touch[3],touch.touch[4],touch.touch[5], touch.touch[6], touch.touch[7], touch.touch[8],
-                        touch.touch[9], touch.touch[10], touch.touch[11], touch.touch[12], touch.touch[13], touch.touch[14]
-                );
+                    touch.touch[3],touch.touch[4],touch.touch[5], touch.touch[6], touch.touch[7], touch.touch[8],
+                    touch.touch[9], touch.touch[10], touch.touch[11], touch.touch[12], touch.touch[13], touch.touch[14]
+            );
+            #endif
+            #ifdef touch_CAPSENSE
+                lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiii", capsense.data[0], capsense.data[1],capsense.data[2],
+                    capsense.data[3],capsense.data[4],capsense.data[5], capsense.data[6], capsense.data[7], capsense.data[8],
+                    capsense.data[9], capsense.data[10], capsense.data[11], capsense.data[12], capsense.data[13], capsense.data[14],
+                    capsense.data[15]
+            );
+            #endif
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/fsr");
             lo_send(osc2, oscNamespace.c_str(), "i", sensors.fsr);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/all");
