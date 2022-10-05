@@ -95,17 +95,45 @@ void Capsense::capsense_scan() {
   
   printf("Scanning for CY8CMBR3116 Capsense boards...\n");
 
-  for(I2C_ADDR = 1; I2C_ADDR < 127; I2C_ADDR++ ) {
-    // This scanner requests the device's ID (I2C address)
-    // The CY8CMBR3116 chip should return 154
-    capsenseRequest(I2C_ADDR, FAMILY_ID, 1);
-    if (answer1 == 154) {
+  printf("    checking default capsense I2C_ADDR (37)\n");
+  I2C_ADDR = 0x37;
+  capsenseRequest(I2C_ADDR, FAMILY_ID, 1);
+  if (answer1 == 154) {
       printf("I2C device found at address 0x");
       if (I2C_ADDR<16) {printf("0");}
       printf("%x",I2C_ADDR);
       printf("  !\n");
       capsense_addresses[nCapsenses] = I2C_ADDR;
       nCapsenses++;
+  }
+
+  printf("    checking alternative soprano capsense second I2C_ADDR (38)\n");
+  I2C_ADDR = 0x38;
+  capsenseRequest(I2C_ADDR, FAMILY_ID, 1);
+  if (answer1 == 154) {
+      printf("I2C device found at address 0x");
+      if (I2C_ADDR<16) {printf("0");}
+      printf("%x",I2C_ADDR);
+      printf("  !\n");
+      capsense_addresses[nCapsenses] = I2C_ADDR;
+      nCapsenses++;
+  }
+
+  // if no capsense found in default addresses, try all possible option
+  // (this process is slow)
+  if (nCapsenses == 0) {
+    for(I2C_ADDR = 1; I2C_ADDR < 127; I2C_ADDR++ ) {
+      // This scanner requests the device's ID (I2C address)
+      // The CY8CMBR3116 chip should return 154
+      capsenseRequest(I2C_ADDR, FAMILY_ID, 1);
+      if (answer1 == 154) {
+        printf("I2C device found at address 0x");
+        if (I2C_ADDR<16) {printf("0");}
+        printf("%x",I2C_ADDR);
+        printf("  !\n");
+        capsense_addresses[nCapsenses] = I2C_ADDR;
+        nCapsenses++;
+      }
     }
   }
   if (nCapsenses == 0) {

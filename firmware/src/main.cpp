@@ -13,15 +13,15 @@
 unsigned int firmware_version = 220929;
 
 // set the amount of capacitive stripes for the sopranino (15) or soprano (30)
-#define TSTICK_SIZE 15;
+#define TSTICK_SIZE 16;
 
 /*
   Choose the capacitive sensing board
   - Trill
   - IDMIL Capsense board 
 */
-#define touch_TRILL
-//#define touch_CAPSENSE
+//#define touch_TRILL
+#define touch_CAPSENSE
 
 
 #include "Arduino.h"
