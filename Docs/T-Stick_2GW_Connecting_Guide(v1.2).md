@@ -38,6 +38,7 @@ careful, the password is never hidden).
 ![Save settings](./images/6_save_settings(v1.1).jpg "Save settings")
 
 - Wait at least 5 seconds before click in __how it went__. This will take you to the main setup page.
+- If your configuration page differs from that shown, you may need to return to the config page, scroll to the bottom, and reboot your T-Stick, at which point it should connect to the configured network (_guitarami/_router_ in our example).
 
 ![How it went](./images/7_how_it_went(v1.1).jpg "How it went")
 
