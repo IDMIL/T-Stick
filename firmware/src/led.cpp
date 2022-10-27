@@ -82,7 +82,3 @@ bool Led::setInterval(int interval) {
   Led::interval = interval;
   return 1;
 }
-
-byte Led::setPin(byte &ledPin) {
-    Led::pin = ledPin;
-}
