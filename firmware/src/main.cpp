@@ -324,7 +324,7 @@ void setup() {
             std::cout << "done" << std::endl;
     #endif
 
-    std::cout << "    Initializing Liblo server/client... ";
+    std::cout << "    Initializing Liblo server/client at " << puara.getLocalPORTStr() << " ... ";
     osc1 = lo_address_new(puara.getIP1().c_str(), puara.getPORT1Str().c_str());
     osc2 = lo_address_new(puara.getIP2().c_str(), puara.getPORT2Str().c_str());
     osc_server = lo_server_thread_new(puara.getLocalPORTStr().c_str(), error);
