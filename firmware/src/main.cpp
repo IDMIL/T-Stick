@@ -20,8 +20,8 @@ unsigned int firmware_version = 220929;
   - Trill
   - IDMIL Capsense board 
 */
-//#define touch_TRILL
-#define touch_CAPSENSE
+#define touch_TRILL
+//#define touch_CAPSENSE
 
 
 #include "Arduino.h"
@@ -375,6 +375,8 @@ void setup() {
 
 void loop() {
 
+    //std::cout << "x: " << std::to_string(gestures.getOrientationX()) << ", y: " << std::to_string(gestures.getOrientationY()) << ", z: " << std::to_string(gestures.getOrientationZ()) << std::endl;
+
     mpr_dev_poll(lm_dev, 0);
 
     button.readButton();
@@ -400,27 +402,28 @@ void loop() {
     }
 
     // read IMU and update puara-gestures
-        if (imu.accelAvailable() ) {
+        if (imu.accelAvailable()) {
         imu.readAccel();
         // Convert from g's to m/sec^2
         gestures.updateAccel(imu.calcAccel(imu.ax) * 9.80665,
                              imu.calcAccel(imu.ay) * 9.80665,
                              imu.calcAccel(imu.az) * 9.80665);
     }
-    if (imu.gyroAvailable() ) {
+    if (imu.gyroAvailable()) {
         imu.readGyro();
         // Convert from DPS to rad/sec
         gestures.updateGyro(imu.calcGyro(imu.gx) * M_PI / 180,
                             imu.calcGyro(imu.gy) * M_PI / 180,
                             imu.calcGyro(imu.gz) * M_PI / 180);
     }
-    if (imu.magAvailable() ) {
+    if (imu.magAvailable()) {
         imu.readMag();
-        // Convert from Gauss to uTesla
-        gestures.updateMag(imu.calcMag(imu.mx) / 10000,
-                           imu.calcMag(imu.my) / 10000,
-                           imu.calcMag(imu.mz) / 10000);
+        // Use in Gauss
+        gestures.updateMag(imu.calcMag(imu.mx),
+                           imu.calcMag(imu.my),
+                           imu.calcMag(imu.mz));
     }
+
     gestures.updateInertialGestures();
     gestures.updateTrigButton(button.getButton());
 
@@ -507,7 +510,6 @@ void loop() {
     #ifdef touch_CAPSENSE
         mpr_sig_set_value(lm.touch, 0, capsense.touchStripsSize, MPR_INT32, &capsense.data);
     #endif
-    
 
     // Sending continuous OSC messages
     if (puara.IP1_ready()) {
