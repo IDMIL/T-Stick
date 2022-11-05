@@ -375,8 +375,6 @@ void setup() {
 
 void loop() {
 
-    //std::cout << "x: " << std::to_string(gestures.getOrientationX()) << ", y: " << std::to_string(gestures.getOrientationY()) << ", z: " << std::to_string(gestures.getOrientationZ()) << std::endl;
-
     mpr_dev_poll(lm_dev, 0);
 
     button.readButton();
@@ -404,21 +402,21 @@ void loop() {
     // read IMU and update puara-gestures
         if (imu.accelAvailable()) {
         imu.readAccel();
-        // Convert from g's to m/sec^2
-        gestures.updateAccel(imu.calcAccel(imu.ax) * 9.80665,
-                             imu.calcAccel(imu.ay) * 9.80665,
-                             imu.calcAccel(imu.az) * 9.80665);
+        // In g's
+        gestures.updateAccel(imu.calcAccel(imu.ax),
+                             -imu.calcAccel(imu.ay),
+                             imu.calcAccel(imu.az));
     }
     if (imu.gyroAvailable()) {
         imu.readGyro();
-        // Convert from DPS to rad/sec
-        gestures.updateGyro(imu.calcGyro(imu.gx) * M_PI / 180,
-                            imu.calcGyro(imu.gy) * M_PI / 180,
-                            imu.calcGyro(imu.gz) * M_PI / 180);
+        // In degrees/sec
+        gestures.updateGyro(imu.calcGyro(imu.gx),
+                            -imu.calcGyro(imu.gy),
+                            imu.calcGyro(imu.gz));
     }
     if (imu.magAvailable()) {
         imu.readMag();
-        // Use in Gauss
+        // In Gauss
         gestures.updateMag(imu.calcMag(imu.mx),
                            imu.calcMag(imu.my),
                            imu.calcMag(imu.mz));
@@ -435,23 +433,28 @@ void loop() {
     }
 
     // Preparing arrays for libmapper signals
-        sensors.fsr = fsr.getCookedValue();
-        sensors.accl[0] = gestures.getAccelX();
-        sensors.accl[1] = gestures.getAccelY();
-        sensors.accl[2] = gestures.getAccelZ();
-        sensors.gyro[0] = gestures.getGyroX();
-        sensors.gyro[1] = gestures.getGyroY();
-        sensors.gyro[2] = gestures.getGyroZ();
-        sensors.magn[0] = gestures.getMagX();
-        sensors.magn[1] = gestures.getMagY();
-        sensors.magn[2] = gestures.getMagZ();
-        sensors.quat[0] = gestures.getOrientationX();
-        sensors.quat[1] = gestures.getOrientationY();;
-        sensors.quat[2] = gestures.getOrientationZ();;
-        sensors.quat[3] = gestures.getOrientationW();;
-        sensors.ypr[0] = gestures.getYaw();
-        sensors.ypr[1] = gestures.getPitch();
-        sensors.ypr[2] = gestures.getRoll();
+    sensors.fsr = fsr.getCookedValue();
+    // Convert accel from g's to meters/sec^2
+    sensors.accl[0] = gestures.getAccelX() * 9.80665;
+    sensors.accl[1] = gestures.getAccelY() * 9.80665;
+    sensors.accl[2] = gestures.getAccelZ() * 9.80665;
+    // Convert gyro from degrees/sec to radians/sec
+    sensors.gyro[0] = gestures.getGyroX() * M_PI / 180;
+    sensors.gyro[1] = gestures.getGyroY() * M_PI / 180;
+    sensors.gyro[2] = gestures.getGyroZ() * M_PI / 180;
+    // Convert mag from Gauss to uTesla
+    sensors.magn[0] = gestures.getMagX() / 10000;
+    sensors.magn[1] = gestures.getMagY() / 10000;
+    sensors.magn[2] = gestures.getMagZ() / 10000;
+    // Orientation quaternion
+    sensors.quat[0] = gestures.getOrientationW();
+    sensors.quat[1] = gestures.getOrientationX();
+    sensors.quat[2] = gestures.getOrientationY();
+    sensors.quat[3] = gestures.getOrientationZ();
+    // Yaw (heading), pitch (tilt) and roll
+    sensors.ypr[0] = gestures.getYaw();
+    sensors.ypr[1] = gestures.getPitch();
+    sensors.ypr[2] = gestures.getRoll();
     if (sensors.shake[0] != gestures.getShakeX() || sensors.shake[1] != gestures.getShakeY() || sensors.shake[2] != gestures.getShakeZ()) {
         sensors.shake[0] = gestures.getShakeX();
         sensors.shake[1] = gestures.getShakeY();
