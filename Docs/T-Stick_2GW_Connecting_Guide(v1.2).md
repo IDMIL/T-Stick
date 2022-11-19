@@ -23,7 +23,7 @@ The process, after learned, should take no more than 3min.
 
 <img src="./images/3_Connect_2_tstick_network(v1.1).jpg" alt="Connect to the T-Stick network"	title="Connect to the T-Stick network" width="50%" height=auto />
 
-- The setup portal should open automatically as soon as the computer connects to the T-Stick network. In case the setup portal does not open, locate the T-Stick's IP address (e.g. run `arp -a` at the command line on linux), and navigate to that address with your web browser.
+- The setup portal should open automatically as soon as the computer connects to the T-Stick network. In case the setup portal does not open, locate the T-Stick's IP address (e.g. run `arp -a` or `ip route` at the command line on linux), and navigate to that address with your web browser.
 - The page will inform the saved SSID and connection status. Click on Configuration.
 
 ![Access portal](./images/4_access_portal(v1.1).jpg "Access portal")

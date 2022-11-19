@@ -21,7 +21,6 @@
 #define beta sqrt(3.0f / 4.0f) * GyroMeasError   // compute beta
 #define zeta sqrt(3.0f / 4.0f) * GyroMeasDrift   // compute zeta, the other free parameter in the Madgwick scheme usually set to a small or zero value
 
-
 LSM9DS1 myIMU; // initialize library class
 
 // Initializing IMU
@@ -33,6 +32,7 @@ LSM9DS1 myIMU; // initialize library class
             myIMU.settings.gyro.enabled = true;
         // [scale] sets the full-scale range of the gyroscope.
         // scale can be set to either 245, 500, or 2000 dps
+        // Travis West 2022-11-02: I was able to saturate the output with 2000 dps, so this seems like an appropriate setting.
             myIMU.settings.gyro.scale = 2000;
         // [sampleRate] sets the output data rate (ODR) of the gyro
         // sampleRate can be set between 1-6
@@ -68,7 +68,12 @@ LSM9DS1 myIMU; // initialize library class
             myIMU.settings.accel.enableZ = true; // Enable Z
         // [scale] sets the full-scale range of the accelerometer.
         // accel scale can be 2, 4, 8, or 16 g's
-            myIMU.settings.accel.scale = 16;
+        // Travis West 2022-11-02: In my experiments I found that the effort required
+        // to get much more than 7.5 g of acceleration was significant enough that I
+        // was worried about causing damage the internal wiring of the instrument.
+        // As such, I think 8 g full scale range or less is appropriate, at least
+        // until such time as the mechanical robustness of the instrument is improved.
+            myIMU.settings.accel.scale = 8;
         // [sampleRate] sets the output data rate (ODR) of the
         // accelerometer. ONLY APPLICABLE WHEN THE GYROSCOPE IS
         // DISABLED! Otherwise accel sample rate = gyro sample rate.
@@ -98,7 +103,13 @@ LSM9DS1 myIMU; // initialize library class
             myIMU.settings.mag.enabled = true; // Enable magnetometer
         // [scale] sets the full-scale range of the magnetometer
         // mag scale can be 4, 8, 12, or 16 Gs
-            myIMU.settings.mag.scale = 16;
+        // Travis West 2022-11-02: Considering that the Earth's magnetic field is
+        // generally less than 1 Gs, the lowest setting available is likely best.
+        // A higher setting could be used if the sensor were installed next to a
+        // strong magnetic field, such as a magnet or speaker, since then the reading
+        // would not be saturated and the bias from the magnet could potentially be
+        // removed.
+            myIMU.settings.mag.scale = 4;
         // [sampleRate] sets the output data rate (ODR) of the
         // magnetometer.
         // mag data rate can be 0-7:
