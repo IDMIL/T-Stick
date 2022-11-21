@@ -11,7 +11,7 @@
     - [Find your IP Address MacOS](https://discussions.apple.com/thread/253927735)
     - [Find your IP Address Linux](https://opensource.com/article/18/5/how-find-ip-address-linux)
 
-### Connect to the T-Stick Module.
+### Connect to the T-Stick
 4. Power on your T-Stick and wait until the boot sequence is complete. If your T-Stick does not have a Power switch press the button once and wait for the T-Stick to turn on.
 5. Connect to the T-Stick_XXX wifi network where XXX is the ID of the T-Stick. ie: TStick_001. By default the password is mappings.
 6. Open your browser and go to [http://TStick_XXX.local/](http://TStick_XXX.local/) or [http://192.168.4.1](http://192.168.4.1), where XXX is the ID of the T-Stick module.
@@ -35,10 +35,10 @@
 
 ## Guide info:
 
-Version 1.3: (2022/11/19) Albert-Ngabo Niyonsenga - albert-ngabo.niyonsenga@mail.mcgill.ca
-Version 1.2: (2020/03/20) Edu Meneses - eduardo.meneses@mail.mcgill.ca
-Version 1.11: (2019/11/27) Edu Meneses
-Version 1.1: (2019/10/27) Edu Meneses
+Version 1.3: (2022/11/19) Albert-Ngabo Niyonsenga - albert-ngabo.niyonsenga@mail.mcgill.ca\
+Version 1.2: (2020/03/20) Edu Meneses - eduardo.meneses@mail.mcgill.ca\
+Version 1.11: (2019/11/27) Edu Meneses\
+Version 1.1: (2019/10/27) Edu Meneses\
 Version 1.0: (2019/08/28) Edu Meneses
 
 __Input Devices and Music Interaction Laboratory__\
