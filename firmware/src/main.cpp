@@ -403,23 +403,23 @@ void loop() {
         if (imu.accelAvailable()) {
         imu.readAccel();
         // In g's
-        gestures.updateAccel(imu.calcAccel(imu.ax),
-                             -imu.calcAccel(imu.ay),
-                             imu.calcAccel(imu.az));
+        gestures.setAccelerometerValues(imu.calcAccel(imu.ax),
+                                        -imu.calcAccel(imu.ay),
+                                        imu.calcAccel(imu.az));
     }
     if (imu.gyroAvailable()) {
         imu.readGyro();
         // In degrees/sec
-        gestures.updateGyro(imu.calcGyro(imu.gx),
-                            -imu.calcGyro(imu.gy),
-                            imu.calcGyro(imu.gz));
+        gestures.setGyroscopeValues(imu.calcGyro(imu.gx),
+                                    -imu.calcGyro(imu.gy),
+                                    imu.calcGyro(imu.gz));
     }
     if (imu.magAvailable()) {
         imu.readMag();
         // In Gauss
-        gestures.updateMag(imu.calcMag(imu.mx),
-                           imu.calcMag(imu.my),
-                           imu.calcMag(imu.mz));
+        gestures.setMagnetometerValues(imu.calcMag(imu.mx),
+                                       imu.calcMag(imu.my),
+                                       imu.calcMag(imu.mz));
     }
 
     gestures.updateInertialGestures();
@@ -447,10 +447,10 @@ void loop() {
     sensors.magn[1] = gestures.getMagY() / 10000;
     sensors.magn[2] = gestures.getMagZ() / 10000;
     // Orientation quaternion
-    sensors.quat[0] = gestures.getOrientationW();
-    sensors.quat[1] = gestures.getOrientationX();
-    sensors.quat[2] = gestures.getOrientationY();
-    sensors.quat[3] = gestures.getOrientationZ();
+    sensors.quat[0] = gestures.getOrientationQuaternion().w;
+    sensors.quat[1] = gestures.getOrientationQuaternion().x;
+    sensors.quat[2] = gestures.getOrientationQuaternion().y;
+    sensors.quat[3] = gestures.getOrientationQuaternion().z;
     // Yaw (heading), pitch (tilt) and roll
     sensors.ypr[0] = gestures.getYaw();
     sensors.ypr[1] = gestures.getPitch();
