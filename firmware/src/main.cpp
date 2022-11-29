@@ -13,15 +13,15 @@
 unsigned int firmware_version = 220929;
 
 // set the amount of capacitive stripes for the sopranino (15) or soprano (30)
-#define TSTICK_SIZE 16;
+#define TSTICK_SIZE 16
 
 /*
   Choose the capacitive sensing board
   - Trill
   - IDMIL Capsense board 
 */
-//#define touch_TRILL
-#define touch_CAPSENSE
+#define touch_TRILL
+//#define touch_CAPSENSE
 
 
 #include "Arduino.h"
@@ -188,37 +188,37 @@ struct Lm {
     float fsrMax = 4900;
     float fsrMin = 0;
     mpr_sig accel = 0;
-    float accelMax = 50;
-    float accelMin = -50;
+    float accelMax[3] = {50, 50, 50};
+    float accelMin[3] = {-50, -50, -50};
     mpr_sig gyro = 0;
-    float gyroMax = 25;
-    float gyroMin = -25;
+    float gyroMax[3] = {25, 25, 25};
+    float gyroMin[3] = {-25, -25, -25};
     mpr_sig magn = 0;
-    float magnMax = 25;
-    float magnMin = -25;
+    float magnMax[3] = {25, 25, 25};
+    float magnMin[3] = {-25, -25, -25};
     mpr_sig quat = 0;
-    float quatMax = 1;
-    float quatMin = -1;
+    float quatMax[4] = {1, 1, 1, 1};
+    float quatMin[4] = {-1, -1, -1, -1};
     mpr_sig ypr = 0;
-    float yprMax = 180;
-    float yprMin = -180;
+    float yprMax[3] = {180, 180, 180};
+    float yprMin[3] = {-180, -180, -180};
     mpr_sig shake = 0;
-    float shakeMax =  50;
-    float shakeMin = -50;
+    float shakeMax[3] = {50, 50, 50};
+    float shakeMin[3] = {-50, -50, -50};
     mpr_sig jab = 0;
-    float jabMax = 50;
-    float jabMin = -50;
+    float jabMax[3] = {50, 50, 50};
+    float jabMin[3] = {-50, -50, -50};
     mpr_sig brush = 0;
     mpr_sig multibrush = 0;
-    float brushMax = 50;
-    float brushMin = -50;
+    float brushMax[4] = {50, 50, 50, 50};
+    float brushMin[4] = {-50, -50, -50, -50};
     mpr_sig rub = 0;
     mpr_sig multirub = 0;
-    float rubMax = 50;
-    float rubMin = -50;
+    float rubMax[4] = {50, 50, 50, 50};
+    float rubMin[4] = {-50, -50, -50, -50};
     mpr_sig touch = 0;
-    int touchMax = 1;
-    int touchMin = 0;
+    int touchMax[TSTICK_SIZE]; // Initialized in setup()
+    int touchMin[TSTICK_SIZE];
     mpr_sig count = 0;
     int countMax = 100;
     int countMin = 0;
@@ -310,6 +310,8 @@ void setup() {
     }
 
     std::cout << "    Initializing touch sensor... ";
+    std::fill_n(lm.touchMin, TSTICK_SIZE, 0);
+    std::fill_n(lm.touchMax, TSTICK_SIZE, 1);
     #ifdef touch_TRILL
         if (touch.initTouch()) {
             touch.touchSize = TSTICK_SIZE;
@@ -338,14 +340,14 @@ void setup() {
     lm.accel = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/accel", 3, MPR_FLT, "m/s^2",  &lm.accelMin, &lm.accelMax, 0, 0, 0);
     lm.gyro = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/gyro", 3, MPR_FLT, "rad/s", &lm.gyroMin, &lm.gyroMax, 0, 0, 0);
     lm.magn = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/mag", 3, MPR_FLT, "uTesla", &lm.magnMin, &lm.magnMax, 0, 0, 0);
-    lm.quat = mpr_sig_new(lm_dev, MPR_DIR_OUT, "orientation", 4, MPR_FLT, "qt", &lm.quatMin, &lm.quatMax, 0, 0, 0);
-    lm.ypr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "ypr", 3, MPR_FLT, "fl", &lm.yprMin, &lm.yprMax, 0, 0, 0);
-    lm.shake = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/shake", 3, MPR_FLT, "fl", &lm.shakeMin, &lm.shakeMax, 0, 0, 0);
-    lm.jab = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/jab", 3, MPR_FLT, "fl", &lm.jabMin, &lm.jabMax, 0, 0, 0);
-    lm.brush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/brush", 1, MPR_FLT, "un", &lm.brushMin, &lm.brushMax, 0, 0, 0);
-    lm.rub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/rub", 1, MPR_FLT, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
-    lm.multibrush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multibrush", 4, MPR_FLT, "un", &lm.brushMin, &lm.brushMax, 0, 0, 0);
-    lm.multirub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multirub", 4, MPR_FLT, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
+    lm.quat = mpr_sig_new(lm_dev, MPR_DIR_OUT, "orientation", 4, MPR_FLT, "qt", lm.quatMin, lm.quatMax, 0, 0, 0);
+    lm.ypr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "ypr", 3, MPR_FLT, "fl", lm.yprMin, lm.yprMax, 0, 0, 0);
+    lm.shake = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/shake", 3, MPR_FLT, "fl", lm.shakeMin, lm.shakeMax, 0, 0, 0);
+    lm.jab = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/jab", 3, MPR_FLT, "fl", lm.jabMin, lm.jabMax, 0, 0, 0);
+    lm.brush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/brush", 1, MPR_FLT, "un", lm.brushMin, lm.brushMax, 0, 0, 0);
+    lm.rub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/rub", 1, MPR_FLT, "un", lm.rubMin, lm.rubMax, 0, 0, 0);
+    lm.multibrush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multibrush", 4, MPR_FLT, "un", lm.brushMin, lm.brushMax, 0, 0, 0);
+    lm.multirub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multirub", 4, MPR_FLT, "un", lm.rubMin, lm.rubMax, 0, 0, 0);
     #ifdef touch_TRILL
         lm.touch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", touch.touchSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
     #endif
