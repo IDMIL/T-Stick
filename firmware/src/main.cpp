@@ -375,6 +375,10 @@ void setup() {
 
 void loop() {
 
+    //std::cout << gestures.getAccelX() << "," << gestures.getAccelY() << "," << gestures.getAccelZ() << "," <<
+    //             gestures.getGyroX() << "," << gestures.getGyroY() << "," << gestures.getGyroZ() << "," <<
+    //             gestures.getMagX() << "," << gestures.getMagY() << "," << gestures.getMagZ() << "\n";
+
     mpr_dev_poll(lm_dev, 0);
 
     button.readButton();
@@ -404,14 +408,14 @@ void loop() {
         imu.readAccel();
         // In g's
         gestures.setAccelerometerValues(imu.calcAccel(imu.ax),
-                                        -imu.calcAccel(imu.ay),
+                                        imu.calcAccel(imu.ay),
                                         imu.calcAccel(imu.az));
     }
     if (imu.gyroAvailable()) {
         imu.readGyro();
         // In degrees/sec
         gestures.setGyroscopeValues(imu.calcGyro(imu.gx),
-                                    -imu.calcGyro(imu.gy),
+                                    imu.calcGyro(imu.gy),
                                     imu.calcGyro(imu.gz));
     }
     if (imu.magAvailable()) {
