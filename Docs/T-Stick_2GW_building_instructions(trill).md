@@ -113,7 +113,7 @@ Instructions to upload (flash) the T-Stick firmware and configuration files can 
 
 Read and follow __ALL__ the instructions at before upload it to the board. There are some steps to prepare your machine and the ESP32 before flash it for the first time.
 
-It is recommended to use the board test firmwares located [here](../test_config) to test the sensors after install them.
+It is recommended to use the board test firmwares located [here](../Test_config) to test the sensors after install them.
 
 ## Document info
 

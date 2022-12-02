@@ -13,15 +13,15 @@
 unsigned int firmware_version = 220929;
 
 // set the amount of capacitive stripes for the sopranino (15) or soprano (30)
-#define TSTICK_SIZE 16;
+#define TSTICK_SIZE 16
 
 /*
   Choose the capacitive sensing board
   - Trill
   - IDMIL Capsense board 
 */
-//#define touch_TRILL
-#define touch_CAPSENSE
+#define touch_TRILL
+//#define touch_CAPSENSE
 
 
 #include "Arduino.h"
@@ -126,8 +126,8 @@ Fsr fsr;
 // Include IMU function files //
 ////////////////////////////////
 
-#include "lsm9ds1.h"
-Imu_LSM9DS1 imu;
+#include <SparkFunLSM9DS1.h>
+LSM9DS1 imu;
 
 //////////////////////////////////////////////
 // Include Touch stuff                      //
@@ -188,37 +188,37 @@ struct Lm {
     float fsrMax = 4900;
     float fsrMin = 0;
     mpr_sig accel = 0;
-    float accelMax = 50;
-    float accelMin = -50;
+    float accelMax[3] = {50, 50, 50};
+    float accelMin[3] = {-50, -50, -50};
     mpr_sig gyro = 0;
-    float gyroMax = 25;
-    float gyroMin = -25;
+    float gyroMax[3] = {25, 25, 25};
+    float gyroMin[3] = {-25, -25, -25};
     mpr_sig magn = 0;
-    float magnMax = 25;
-    float magnMin = -25;
+    float magnMax[3] = {25, 25, 25};
+    float magnMin[3] = {-25, -25, -25};
     mpr_sig quat = 0;
-    float quatMax = 1;
-    float quatMin = -1;
+    float quatMax[4] = {1, 1, 1, 1};
+    float quatMin[4] = {-1, -1, -1, -1};
     mpr_sig ypr = 0;
-    float yprMax = 180;
-    float yprMin = -180;
+    float yprMax[3] = {180, 180, 180};
+    float yprMin[3] = {-180, -180, -180};
     mpr_sig shake = 0;
-    float shakeMax =  50;
-    float shakeMin = -50;
+    float shakeMax[3] = {50, 50, 50};
+    float shakeMin[3] = {-50, -50, -50};
     mpr_sig jab = 0;
-    float jabMax = 50;
-    float jabMin = -50;
+    float jabMax[3] = {50, 50, 50};
+    float jabMin[3] = {-50, -50, -50};
     mpr_sig brush = 0;
     mpr_sig multibrush = 0;
-    float brushMax = 50;
-    float brushMin = -50;
+    float brushMax[4] = {50, 50, 50, 50};
+    float brushMin[4] = {-50, -50, -50, -50};
     mpr_sig rub = 0;
     mpr_sig multirub = 0;
-    float rubMax = 50;
-    float rubMin = -50;
+    float rubMax[4] = {50, 50, 50, 50};
+    float rubMin[4] = {-50, -50, -50, -50};
     mpr_sig touch = 0;
-    int touchMax = 1;
-    int touchMin = 0;
+    int touchMax[TSTICK_SIZE]; // Initialized in setup()
+    int touchMin[TSTICK_SIZE];
     mpr_sig count = 0;
     int countMax = 100;
     int countMin = 0;
@@ -265,6 +265,8 @@ struct Event {
     bool battery;
 } event;
 
+void initIMU();
+
 ///////////
 // setup //
 ///////////
@@ -296,11 +298,8 @@ void setup() {
     }
 
     std::cout << "    Initializing IMU... ";
-    if (imu.initIMU()) {
-        std::cout << "done" << std::endl;
-    } else {
-        std::cout << "initialization failed!" << std::endl;
-    }
+    initIMU();
+    std::cout << "done" << std::endl;
 
     std::cout << "    Initializing FSR... ";
     if (fsr.initFsr(pin.fsr, std::round(puara.getVarNumber("fsr_offset")))) {
@@ -310,6 +309,8 @@ void setup() {
     }
 
     std::cout << "    Initializing touch sensor... ";
+    std::fill_n(lm.touchMin, TSTICK_SIZE, 0);
+    std::fill_n(lm.touchMax, TSTICK_SIZE, 1);
     #ifdef touch_TRILL
         if (touch.initTouch()) {
             touch.touchSize = TSTICK_SIZE;
@@ -338,14 +339,14 @@ void setup() {
     lm.accel = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/accel", 3, MPR_FLT, "m/s^2",  &lm.accelMin, &lm.accelMax, 0, 0, 0);
     lm.gyro = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/gyro", 3, MPR_FLT, "rad/s", &lm.gyroMin, &lm.gyroMax, 0, 0, 0);
     lm.magn = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/mag", 3, MPR_FLT, "uTesla", &lm.magnMin, &lm.magnMax, 0, 0, 0);
-    lm.quat = mpr_sig_new(lm_dev, MPR_DIR_OUT, "orientation", 4, MPR_FLT, "qt", &lm.quatMin, &lm.quatMax, 0, 0, 0);
-    lm.ypr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "ypr", 3, MPR_FLT, "fl", &lm.yprMin, &lm.yprMax, 0, 0, 0);
-    lm.shake = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/shake", 3, MPR_FLT, "fl", &lm.shakeMin, &lm.shakeMax, 0, 0, 0);
-    lm.jab = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/jab", 3, MPR_FLT, "fl", &lm.jabMin, &lm.jabMax, 0, 0, 0);
-    lm.brush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/brush", 1, MPR_FLT, "un", &lm.brushMin, &lm.brushMax, 0, 0, 0);
-    lm.rub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/rub", 1, MPR_FLT, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
-    lm.multibrush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multibrush", 4, MPR_FLT, "un", &lm.brushMin, &lm.brushMax, 0, 0, 0);
-    lm.multirub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multirub", 4, MPR_FLT, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
+    lm.quat = mpr_sig_new(lm_dev, MPR_DIR_OUT, "orientation", 4, MPR_FLT, "qt", lm.quatMin, lm.quatMax, 0, 0, 0);
+    lm.ypr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "ypr", 3, MPR_FLT, "fl", lm.yprMin, lm.yprMax, 0, 0, 0);
+    lm.shake = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/shake", 3, MPR_FLT, "fl", lm.shakeMin, lm.shakeMax, 0, 0, 0);
+    lm.jab = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/jab", 3, MPR_FLT, "fl", lm.jabMin, lm.jabMax, 0, 0, 0);
+    lm.brush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/brush", 1, MPR_FLT, "un", lm.brushMin, lm.brushMax, 0, 0, 0);
+    lm.rub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/rub", 1, MPR_FLT, "un", lm.rubMin, lm.rubMax, 0, 0, 0);
+    lm.multibrush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multibrush", 4, MPR_FLT, "un", lm.brushMin, lm.brushMax, 0, 0, 0);
+    lm.multirub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multirub", 4, MPR_FLT, "un", lm.rubMin, lm.rubMax, 0, 0, 0);
     #ifdef touch_TRILL
         lm.touch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", touch.touchSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
     #endif
@@ -376,6 +377,10 @@ void setup() {
 
 void loop() {
 
+    //std::cout << gestures.getAccelX() << "," << gestures.getAccelY() << "," << gestures.getAccelZ() << "," <<
+    //             gestures.getGyroX() << "," << gestures.getGyroY() << "," << gestures.getGyroZ() << "," <<
+    //             gestures.getMagX() << "," << gestures.getMagY() << "," << gestures.getMagZ() << "\n";
+
     mpr_dev_poll(lm_dev, 0);
 
     button.readButton();
@@ -401,9 +406,29 @@ void loop() {
     }
 
     // read IMU and update puara-gestures
-    if (imu.dataAvailable()) {
-        gestures.updateJabShake(imu.getGyroX(), imu.getGyroY(), imu.getGyroZ());
+        if (imu.accelAvailable()) {
+        imu.readAccel();
+        // In g's
+        gestures.setAccelerometerValues(imu.calcAccel(imu.ax),
+                                        imu.calcAccel(imu.ay),
+                                        imu.calcAccel(imu.az));
     }
+    if (imu.gyroAvailable()) {
+        imu.readGyro();
+        // In degrees/sec
+        gestures.setGyroscopeValues(imu.calcGyro(imu.gx),
+                                    imu.calcGyro(imu.gy),
+                                    imu.calcGyro(imu.gz));
+    }
+    if (imu.magAvailable()) {
+        imu.readMag();
+        // In Gauss
+        gestures.setMagnetometerValues(imu.calcMag(imu.mx),
+                                       imu.calcMag(imu.my),
+                                       imu.calcMag(imu.mz));
+    }
+
+    gestures.updateInertialGestures();
     gestures.updateTrigButton(button.getButton());
 
     // go to deep sleep if double press button
@@ -414,23 +439,28 @@ void loop() {
     }
 
     // Preparing arrays for libmapper signals
-        sensors.fsr = fsr.getCookedValue();
-        sensors.accl[0] = imu.getAccelX();
-        sensors.accl[1] = imu.getAccelY();
-        sensors.accl[2] = imu.getAccelZ();
-        sensors.gyro[0] = imu.getGyroX();
-        sensors.gyro[1] = imu.getGyroY();
-        sensors.gyro[2] = imu.getGyroZ();
-        sensors.magn[0] = imu.getMagX();
-        sensors.magn[1] = imu.getMagY();
-        sensors.magn[2] = imu.getMagZ();
-        sensors.quat[0] = imu.getQuatI();
-        sensors.quat[1] = imu.getQuatJ();
-        sensors.quat[2] = imu.getQuatK();
-        sensors.quat[3] = imu.getQuatReal();
-        sensors.ypr[0] = imu.getYaw();
-        sensors.ypr[1] = imu.getPitch();
-        sensors.ypr[2] = imu.getRoll();
+    sensors.fsr = fsr.getCookedValue();
+    // Convert accel from g's to meters/sec^2
+    sensors.accl[0] = gestures.getAccelX() * 9.80665;
+    sensors.accl[1] = gestures.getAccelY() * 9.80665;
+    sensors.accl[2] = gestures.getAccelZ() * 9.80665;
+    // Convert gyro from degrees/sec to radians/sec
+    sensors.gyro[0] = gestures.getGyroX() * M_PI / 180;
+    sensors.gyro[1] = gestures.getGyroY() * M_PI / 180;
+    sensors.gyro[2] = gestures.getGyroZ() * M_PI / 180;
+    // Convert mag from Gauss to uTesla
+    sensors.magn[0] = gestures.getMagX() / 10000;
+    sensors.magn[1] = gestures.getMagY() / 10000;
+    sensors.magn[2] = gestures.getMagZ() / 10000;
+    // Orientation quaternion
+    sensors.quat[0] = gestures.getOrientationQuaternion().w;
+    sensors.quat[1] = gestures.getOrientationQuaternion().x;
+    sensors.quat[2] = gestures.getOrientationQuaternion().y;
+    sensors.quat[3] = gestures.getOrientationQuaternion().z;
+    // Yaw (heading), pitch (tilt) and roll
+    sensors.ypr[0] = gestures.getYaw();
+    sensors.ypr[1] = gestures.getPitch();
+    sensors.ypr[2] = gestures.getRoll();
     if (sensors.shake[0] != gestures.getShakeX() || sensors.shake[1] != gestures.getShakeY() || sensors.shake[2] != gestures.getShakeZ()) {
         sensors.shake[0] = gestures.getShakeX();
         sensors.shake[1] = gestures.getShakeY();
@@ -489,7 +519,6 @@ void loop() {
     #ifdef touch_CAPSENSE
         mpr_sig_set_value(lm.touch, 0, capsense.touchStripsSize, MPR_INT32, &capsense.data);
     #endif
-    
 
     // Sending continuous OSC messages
     if (puara.IP1_ready()) {
@@ -689,4 +718,118 @@ void loop() {
 
     // run at 100 Hz
     //vTaskDelay(10 / portTICK_PERIOD_MS);
+}
+
+void initIMU() {
+    Wire.begin();
+
+    // [enabled] turns the gyro on or off.
+    imu.settings.gyro.enabled = true;
+    // [scale] sets the full-scale range of the gyroscope.
+    // scale can be set to either 245, 500, or 2000 dps
+    // Travis West 2022-11-02: I was able to saturate the output with 2000 dps, so this seems like an appropriate setting.
+    imu.settings.gyro.scale = 2000;
+    // [sampleRate] sets the output data rate (ODR) of the gyro
+    // sampleRate can be set between 1-6
+    // 1 = 14.9    4 = 238
+    // 2 = 59.5    5 = 476
+    // 3 = 119     6 = 952
+    imu.settings.gyro.sampleRate = 3; // 59.5Hz ODR
+    // [bandwidth] can set the cutoff frequency of the gyro.
+    // Allowed values: 0-3. Actual value of cutoff frequency
+    // depends on the sample rate. (Datasheet section 7.12)
+    imu.settings.gyro.bandwidth = 0;
+    // [lowPowerEnable] turns low-power mode on or off.
+    imu.settings.gyro.lowPowerEnable = false; // LP mode off
+    // [HPFEnable] enables or disables the high-pass filter
+    imu.settings.gyro.HPFEnable = true; // HPF disabled
+    // [HPFCutoff] sets the HPF cutoff frequency (if enabled)
+    // Allowable values are 0-9. Value depends on ODR.
+    // (Datasheet section 7.14)
+    imu.settings.gyro.HPFCutoff = 1; // HPF cutoff = 4Hz
+    // [flipX], [flipY], and [flipZ] are booleans that can
+    // automatically switch the positive/negative orientation
+    // of the three gyro axes.
+    imu.settings.gyro.flipX = false; // Don't flip X
+    imu.settings.gyro.flipY = false; // Don't flip Y
+    imu.settings.gyro.flipZ = false; // Don't flip Z
+    // [enabled] turns the acclerometer on or off.
+    imu.settings.accel.enabled = true; // Enable accelerometer
+    // [enableX], [enableY], and [enableZ] can turn on or off
+    // select axes of the acclerometer.
+    imu.settings.accel.enableX = true; // Enable X
+    imu.settings.accel.enableY = true; // Enable Y
+    imu.settings.accel.enableZ = true; // Enable Z
+    // [scale] sets the full-scale range of the accelerometer.
+    // accel scale can be 2, 4, 8, or 16 g's
+    // Travis West 2022-11-02: In my experiments I found that the effort required
+    // to get much more than 7.5 g of acceleration was significant enough that I
+    // was worried about causing damage the internal wiring of the instrument.
+    // As such, I think 8 g full scale range or less is appropriate, at least
+    // until such time as the mechanical robustness of the instrument is improved.
+    imu.settings.accel.scale = 8;
+    // [sampleRate] sets the output data rate (ODR) of the
+    // accelerometer. ONLY APPLICABLE WHEN THE GYROSCOPE IS
+    // DISABLED! Otherwise accel sample rate = gyro sample rate.
+    // accel sample rate can be 1-6
+    // 1 = 10 Hz    4 = 238 Hz
+    // 2 = 50 Hz    5 = 476 Hz
+    // 3 = 119 Hz   6 = 952 Hz
+    imu.settings.accel.sampleRate = 3;
+    // [bandwidth] sets the anti-aliasing filter bandwidth.
+    // Accel cutoff frequency can be any value between -1 - 3. 
+    // -1 = bandwidth determined by sample rate
+    // 0 = 408 Hz   2 = 105 Hz
+    // 1 = 211 Hz   3 = 50 Hz
+    imu.settings.accel.bandwidth = 0; // BW = 408Hz
+    // [highResEnable] enables or disables high resolution 
+    // mode for the acclerometer.
+    imu.settings.accel.highResEnable = false; // Disable HR
+    // [highResBandwidth] sets the LP cutoff frequency of
+    // the accelerometer if it's in high-res mode.
+    // can be any value between 0-3
+    // LP cutoff is set to a factor of sample rate
+    // 0 = ODR/50    2 = ODR/9
+    // 1 = ODR/100   3 = ODR/400
+    imu.settings.accel.highResBandwidth = 0;  
+    // [enabled] turns the magnetometer on or off.
+    imu.settings.mag.enabled = true; // Enable magnetometer
+    // [scale] sets the full-scale range of the magnetometer
+    // mag scale can be 4, 8, 12, or 16 Gs
+    // Travis West 2022-11-02: Considering that the Earth's magnetic field is
+    // generally less than 1 Gs, the lowest setting available is likely best.
+    // A higher setting could be used if the sensor were installed next to a
+    // strong magnetic field, such as a magnet or speaker, since then the reading
+    // would not be saturated and the bias from the magnet could potentially be
+    // removed.
+    imu.settings.mag.scale = 4;
+    // [sampleRate] sets the output data rate (ODR) of the
+    // magnetometer.
+    // mag data rate can be 0-7:
+    // 0 = 0.625 Hz  4 = 10 Hz
+    // 1 = 1.25 Hz   5 = 20 Hz
+    // 2 = 2.5 Hz    6 = 40 Hz
+    // 3 = 5 Hz      7 = 80 Hz
+    imu.settings.mag.sampleRate = 5; // Set OD rate to 20Hz
+    // [tempCompensationEnable] enables or disables 
+    // temperature compensation of the magnetometer.
+    imu.settings.mag.tempCompensationEnable = false;
+    // [XYPerformance] sets the x and y-axis performance of the
+    // magnetometer to either:
+    // 0 = Low power mode      2 = high performance
+    // 1 = medium performance  3 = ultra-high performance
+    imu.settings.mag.XYPerformance = 3; // Ultra-high perform.
+    // [ZPerformance] does the same thing, but only for the z
+    imu.settings.mag.ZPerformance = 3; // Ultra-high perform.
+    // [lowPowerEnable] enables or disables low power mode in
+    // the magnetometer.
+    imu.settings.mag.lowPowerEnable = false;
+    // [operatingMode] sets the operating mode of the
+    // magnetometer. operatingMode can be 0-2:
+    // 0 = continuous conversion
+    // 1 = single-conversion
+    // 2 = power down
+    imu.settings.mag.operatingMode = 0; // Continuous mode
+
+    imu.begin();
 }

@@ -6,7 +6,7 @@ This repository hosts up to date firmware for the T-Stick instruments currently 
 
 ## Documentation:
 
-[T-Stick connection guide – v1.2 for wireless T-Sticks](./Docs/T-Stick_2GW_Connecting_Guide(v1.2).md)
+[T-Stick connection guide – v1.3 for wireless T-Sticks](./Docs/T-Stick_2GW_Connecting_Guide(v1.3).md)
 
 [T-Stick firmware upgrade guide](./Docs/Firmware_update_instructions.md)
 
