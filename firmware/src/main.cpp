@@ -185,8 +185,8 @@ int generic_handler(const char *path, const char *types, lo_arg ** argv,
 
 struct Lm {
     mpr_sig fsr = 0;
-    float fsrMax = 4900;
-    float fsrMin = 0;
+    int fsrMax = 4900;
+    int fsrMin = 2000;
     mpr_sig accel = 0;
     float accelMax[3] = {50, 50, 50};
     float accelMin[3] = {-50, -50, -50};
@@ -203,8 +203,8 @@ struct Lm {
     float yprMax[3] = {180, 180, 180};
     float yprMin[3] = {-180, -180, -180};
     mpr_sig shake = 0;
-    float shakeMax[3] = {50, 50, 50};
-    float shakeMin[3] = {-50, -50, -50};
+    float shakeMax[3] = {100, 100, 100};
+    float shakeMin[3] = {0, 0, 0};
     mpr_sig jab = 0;
     float jabMax[3] = {50, 50, 50};
     float jabMin[3] = {-50, -50, -50};
@@ -214,8 +214,8 @@ struct Lm {
     float brushMin[4] = {-50, -50, -50, -50};
     mpr_sig rub = 0;
     mpr_sig multirub = 0;
-    float rubMax[4] = {50, 50, 50, 50};
-    float rubMin[4] = {-50, -50, -50, -50};
+    float rubMax[4] = {5, 5, 5, 5};
+    float rubMin[4] = {0, 0, 0, 0};
     mpr_sig touch = 0;
     int touchMax[TSTICK_SIZE]; // Initialized in setup()
     int touchMin[TSTICK_SIZE];
@@ -335,7 +335,7 @@ void setup() {
 
     std::cout << "    Initializing Libmapper device/signals... ";
     lm_dev = mpr_dev_new(puara.get_dmi_name().c_str(), 0);
-    lm.fsr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/fsr", 1, MPR_FLT, "un", &lm.fsrMin, &lm.fsrMax, 0, 0, 0);
+    lm.fsr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/fsr", 1, MPR_INT32, "un", &lm.fsrMin, &lm.fsrMax, 0, 0, 0);
     lm.accel = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/accel", 3, MPR_FLT, "m/s^2",  &lm.accelMin, &lm.accelMax, 0, 0, 0);
     lm.gyro = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/gyro", 3, MPR_FLT, "rad/s", &lm.gyroMin, &lm.gyroMax, 0, 0, 0);
     lm.magn = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/mag", 3, MPR_FLT, "uTesla", &lm.magnMin, &lm.magnMax, 0, 0, 0);
@@ -496,7 +496,7 @@ void loop() {
     if (sensors.battery != battery.percentage) {sensors.battery = battery.percentage; event.battery = true; } else { event.battery = false; }
 
     // updating libmapper signals
-    mpr_sig_set_value(lm.fsr, 0, 1, MPR_FLT, &sensors.fsr);
+    mpr_sig_set_value(lm.fsr, 0, 1, MPR_INT32, &sensors.fsr);
     mpr_sig_set_value(lm.accel, 0, 3, MPR_FLT, &sensors.accl);
     mpr_sig_set_value(lm.gyro, 0, 3, MPR_FLT, &sensors.gyro);
     mpr_sig_set_value(lm.magn, 0, 3, MPR_FLT, &sensors.magn);
