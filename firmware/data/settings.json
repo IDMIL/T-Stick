@@ -2,7 +2,7 @@
     "settings": [
         {
             "name": "fsr_offset",
-            "value": 0
+            "value": 2000
         }
     ]
 }

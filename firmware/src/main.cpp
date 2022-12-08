@@ -185,8 +185,8 @@ int generic_handler(const char *path, const char *types, lo_arg ** argv,
 
 struct Lm {
     mpr_sig fsr = 0;
-    int fsrMax = 4900;
-    int fsrMin = 2000;
+    int fsrMax = 2000;
+    int fsrMin = 0;
     mpr_sig accel = 0;
     float accelMax[3] = {50, 50, 50};
     float accelMin[3] = {-50, -50, -50};
