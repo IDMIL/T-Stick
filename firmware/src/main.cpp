@@ -200,8 +200,8 @@ struct Lm {
     float quatMax[4] = {1, 1, 1, 1};
     float quatMin[4] = {-1, -1, -1, -1};
     mpr_sig ypr = 0;
-    float yprMax[3] = {180, 180, 180};
-    float yprMin[3] = {-180, -180, -180};
+    float yprMax[3] = {M_PI, M_PI_2, M_PI};
+    float yprMin[3] = {-M_PI, -M_PI_2, -M_PI};
     mpr_sig shake = 0;
     float shakeMax[3] = {100, 100, 100};
     float shakeMin[3] = {0, 0, 0};
