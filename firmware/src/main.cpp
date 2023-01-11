@@ -432,7 +432,7 @@ void loop() {
     gestures.updateTrigButton(button.getButton());
 
     // go to deep sleep if double press button
-    if (gestures.getButtonDTap()){
+    if (gestures.getButtonHold()){
         std::cout << "\nEntering deep sleep.\n\nGoodbye!\n" << std::endl;
         delay(1000);
         esp_deep_sleep_start();
