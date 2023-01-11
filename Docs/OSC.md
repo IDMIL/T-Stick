@@ -1,4 +1,6 @@
-# T-Stick firmware 200422 - OSC sensor data
+# T-Stick OSC sensor data
+
+## firmware 220916
 
 #### (Replace XXX for the T-Stick ID number)
 
@@ -6,37 +8,23 @@
 
 /TStick_XXX/raw/capsense, i..., 0--255, ... (1 int per 8 capacitive stripes -- 8 bits)
 
-/TStick_XXX/raw/button/short, i, 0 or 1
-
-/TStick_XXX/raw/button/long, i, 0 or 1
-
-/TStick_XXX/raw/button/double, i, 0 or 1
-
 /TStick_XXX/raw/fsr, i, 0--4095
 
-/TStick_XXX/raw/piezo, i, 0--1023
+/TStick_XXX/raw/accl, fff, +/-24 (floats)
 
-/TStick_XXX/raw/accl, iii, +/-32767 (integers)
+/TStick_XXX/raw/gyro, fff, +/-42 (floats)
 
-/TStick_XXX/raw/gyro, fff, +/-34.90659 (floats)
-
-/TStick_XXX/raw/magn, iii, +/-32767 (integers)
-
-/raw (IMU data to be send to callibration app)
-
-## Normalized data
-
-/TStick_XXX/norm/fsr, f, 0--1
-
-/TStick_XXX/norm/piezo, f, 0--1
-
-/TStick_XXX/norm/accl, fff, +/-1, +/-1, +/-1
-
-/TStick_XXX/norm/gyro, fff, +/-1, +/-1, +/-1
-
-/TStick_XXX/norm/magn, fff, +/-1, +/-1, +/-1
+/TStick_XXX/raw/magn, iii, +/-0.001 (floats)
 
 ## Instrument data
+
+/TStick_XXX/instrument/button/count, i, 0--i
+
+/TStick_XXX/instrument/button/tap, i, 0 or 1
+
+/TStick_XXX/instrument/button/dtap, i, 0 or 1
+
+/TStick_XXX/instrument/button/ttap, i, 0 or 1
 
 /TStick_XXX/orientation, ffff, ?, ? ,? ,?
 
