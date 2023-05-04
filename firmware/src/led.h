@@ -11,9 +11,7 @@ class Led {
     unsigned long timer = 0;
     unsigned int interval = 1000;
     unsigned int n = 0;
-    byte pin = 5;
   public:
-    byte setPin(byte &ledPin);
     int blink(int intensity, int onTime);
     int rampUp(int currentValue, int startValue, int endValue);
     int rampDown(int currentValue, int startValue, int endValue);

@@ -12,29 +12,20 @@
 
 class Button {
     private:
-        byte pin = 15;
-        unsigned int count;
-        unsigned int countInterval = 200;
-        byte buttonState = 0;
+        int pin = 15;
+        int buttonState = 0;
         bool button = false;
-        unsigned int tap;
-        unsigned int dtap;
-        unsigned int ttap;
         bool hold;
         unsigned int holdInterval = 5000;
         unsigned int filterPeriod = 10;
         long timer;
         unsigned long pressTime;
     public:
-        bool initButton(byte &buttonPin);
+        bool initButton(int &buttonPin);
         void readButton();
-        unsigned int getCount();
         bool getButton();
         unsigned int getPressTime();
         unsigned int getState();
-        unsigned int getTap();
-        unsigned int getDTap();
-        unsigned int getTTap();
         bool getHold();
         unsigned int getHoldInterval();
         unsigned int setHoldInterval(int value);

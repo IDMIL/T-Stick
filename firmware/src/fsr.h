@@ -7,17 +7,19 @@
 
 class Fsr {
     private:
-        byte pin;
+        int pin;
         float value = 0;
         float normValue = 0;
+        float cookedValue = 0;
         int offset = 0;
     public:
-        byte initFsr(byte &fsr_pin, int &offsetValue);
-        byte readFsr();
+        int initFsr(int &fsr_pin, int offsetValue);
+        int readFsr();
         float getValue();
         float getNormValue();
+        float getCookedValue();
         int getOffset();
-        byte setOffset(int &offsetValue);
+        int setOffset(int offsetValue);
 };
 
 #endif

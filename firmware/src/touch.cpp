@@ -39,7 +39,7 @@ void Touch::cookData() {
         touchStatus = 1;
     }
 
-    // We need updated maxTouchValue to normalize touch
+    // We need a updated maxTouchValue to normalize touch
     maxTouchValue = std::max(maxTouchValue,instant_maxTouchValue);
 
     // Touch discretize and normalize
