@@ -38,4 +38,3 @@ build
 *.exe
 *.out
 *.app
-firmware/data/config.json
