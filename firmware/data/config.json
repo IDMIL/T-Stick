@@ -1,9 +1,9 @@
 {
     "device": "TStick",
-    "id": 308,
-    "author": "Edu Meneses",
+    "id": 1,
+    "author": "T-Stick Builder",
     "institution": "SAT/IDMIL (2022)",
-    "APpasswd": "mappings",
+    "APpasswd": "tstick_password",
     "wifiSSID": "SSID",
     "wifiPSK": "AP_password",
     "persistentAP": 1,
