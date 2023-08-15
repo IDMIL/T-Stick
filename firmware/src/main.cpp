@@ -60,12 +60,10 @@ struct Pin {
     int fsr;
     int button;
 };
+Pin pin{ 5, 35, 33, 15 };
 
-#ifdef ARDUINO_LOLIN_D32_PRO
-    Pin pin{ 5, 35, 33, 15 };
-#elif defined(ARDUINO_TINYPICO)
+#if defined(ARDUINO_TINYPICO)
     #include "TinyPICO.h"
-    Pin pin{ 5, 35, 33, 15 };
     TinyPICO tinypico = TinyPICO();
 #endif
 

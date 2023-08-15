@@ -4,7 +4,7 @@
 
 
 uint8_t Touch::initTouch() {
-    int ret = trillSensor.setup(Trill::TRILL_CRAFT);
+    int ret = trillSensor.setup(Trill::TRILL_FLEX);
     if(ret != 0) {
         Serial.println("failed to initialise trillSensor");
         Serial.print("Error code: ");
