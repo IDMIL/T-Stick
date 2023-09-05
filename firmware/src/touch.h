@@ -21,7 +21,7 @@ class Touch {
         void cookData();
         int touchSize = 30;
     private:
-        int maxTouchValue = 1000;
+        int maxTouchValue = 50;
 };
 
 #endif

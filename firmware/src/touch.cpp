@@ -19,9 +19,9 @@ uint8_t Touch::initTouch() {
     delay(10);
     trillSensor.setScanSettings(0,9);
     delay(10);
-    trillSensor.setNoiseThreshold(100);
+    trillSensor.setNoiseThreshold(30);
     delay(10);
-    trillSensor.setMode(Trill::DIFF);
+    trillSensor.setMode(Trill::RAW);
     return 1;
 }
 

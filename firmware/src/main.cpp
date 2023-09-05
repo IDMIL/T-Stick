@@ -300,9 +300,9 @@ void setup() {
         std::cout << "initialization failed!" << std::endl;
     }
 
-    std::cout << "    Initializing IMU... ";
-    initIMU();
-    std::cout << "done" << std::endl;
+    // std::cout << "    Initializing IMU... ";
+    // initIMU();
+    // std::cout << "done" << std::endl;
 
     std::cout << "    Initializing FSR... ";
     if (fsr.initFsr(pin.fsr, std::round(puara.getVarNumber("fsr_offset")))) {
@@ -408,30 +408,30 @@ void loop() {
       batteryFilter();
     }
 
-    // read IMU and update puara-gestures
-        if (imu.accelAvailable()) {
-        imu.readAccel();
-        // In g's
-        gestures.setAccelerometerValues(imu.calcAccel(imu.ax),
-                                        imu.calcAccel(imu.ay),
-                                        imu.calcAccel(imu.az));
-    }
-    if (imu.gyroAvailable()) {
-        imu.readGyro();
-        // In degrees/sec
-        gestures.setGyroscopeValues(imu.calcGyro(imu.gx),
-                                    imu.calcGyro(imu.gy),
-                                    imu.calcGyro(imu.gz));
-    }
-    if (imu.magAvailable()) {
-        imu.readMag();
-        // In Gauss
-        gestures.setMagnetometerValues(imu.calcMag(imu.mx),
-                                       imu.calcMag(imu.my),
-                                       imu.calcMag(imu.mz));
-    }
+    // // read IMU and update puara-gestures
+    //     if (imu.accelAvailable()) {
+    //     imu.readAccel();
+    //     // In g's
+    //     gestures.setAccelerometerValues(imu.calcAccel(imu.ax),
+    //                                     imu.calcAccel(imu.ay),
+    //                                     imu.calcAccel(imu.az));
+    // }
+    // if (imu.gyroAvailable()) {
+    //     imu.readGyro();
+    //     // In degrees/sec
+    //     gestures.setGyroscopeValues(imu.calcGyro(imu.gx),
+    //                                 imu.calcGyro(imu.gy),
+    //                                 imu.calcGyro(imu.gz));
+    // }
+    // if (imu.magAvailable()) {
+    //     imu.readMag();
+    //     // In Gauss
+    //     gestures.setMagnetometerValues(imu.calcMag(imu.mx),
+    //                                    imu.calcMag(imu.my),
+    //                                    imu.calcMag(imu.mz));
+    // }
 
-    gestures.updateInertialGestures();
+    // gestures.updateInertialGestures();
     gestures.updateTrigButton(button.getButton());
 
     // go to deep sleep if double press button
