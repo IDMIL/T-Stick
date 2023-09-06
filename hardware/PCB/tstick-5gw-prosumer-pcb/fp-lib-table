@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "solderpads")(type "KiCad")(uri "C:/Users/user/My Drive/Uni Stuff/McGill/Thesis Work/T-Stick PCB/Libraries/Solderpads/solderpads.pretty")(options "")(descr ""))
+)

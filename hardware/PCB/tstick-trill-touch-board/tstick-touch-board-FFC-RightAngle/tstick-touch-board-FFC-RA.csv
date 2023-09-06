@@ -1,0 +1,13 @@
+"Source:","C:\Users\Albert\My Drive\Uni Stuff\McGill\Thesis Work\T-Stick PCB\main-tstick-touch-board\tstick-touch-board-FFC-RightAngle\tstick-touch-board-FFC-RA.kicad_sch"
+"Date:","2023-08-21 10:12:01 AM"
+"Tool:","Eeschema 7.0.6"
+"Generator:","C:\Program Files\KiCad\7.0\bin\scripting\plugins/bom_csv_grouped_by_value.py"
+"Component Count:","6"
+
+"Collated Components:"
+
+"Item","Qty","Reference(s)","Value","LibPart","Footprint","Datasheet","DNP","Description Value Pkg","Digikey Part #","Mfg Part #"
+"1","1","J1","Conn_01x32","Connector_Generic:Conn_01x32","molex_ffc_footprints:CON_541323262_MOL","~","","32 Position FFC, FPC Connector Contacts, Bottom 0.020"" (0.50mm) Surface Mount, Right Angle","900-0541323262CT-ND","0541323262"
+"2","2","TOUCH1, TOUCH2","Conn_01x15","Connector_Generic:Conn_01x15","Connector_PinHeader_2.54mm:PinHeader_1x15_P2.54mm_Vertical_SMD_Pin1Left","~","","15 Position Receptacle, Pass Through Connector 0.100"" (2.54mm) Surface Mount Gold","SAM1148-15-ND","SSM-115-L-SV"
+"3","1","TOUCH3","Conn_01x06","Connector_Generic:Conn_01x06","Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical_SMD_Pin1Left","~","","","",""
+"4","2","TrillExtensionInput1, TrillExtensionOutput2","Conn_01x08","Connector_Generic:Conn_01x08","Connector_JST:JST_SHL_SM08B-SHLS-TF_1x08-1MP_P1.00mm_Horizontal","~","","Connector Header Surface Mount, Right Angle 8 position 0.039"" (1.00mm)","455-3960-1-ND","SM08B-SHLS-TF"
