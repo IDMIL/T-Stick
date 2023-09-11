@@ -1,9 +1,9 @@
 Manufacturer,Mfg Part #,Description Value Pkg,Reference(s),Qty
 JST Sales America Inc.,S2B-PH-SM4-TB,"Connector Header Surface Mount, Right Angle 2 position 0.079"" (2.00mm)",BT1,1
-Samsung Electro-Mechanics,CL03A104KP3NNNC,0.1 ÂµF Â±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric),"C1, C7, C13, C14",4
-Samsung Electro-Mechanics,CL03A474KQ3NNNC,0.47 ÂµF Â±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric),"C2, C11, C12",3
-Samsung Electro-Mechanics,CL03A105KQ3CSNC,1 ÂµF Â±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric),"C3, C4, C9, C10",4
-Samsung Electro-Mechanics,CL03A103KP3NNNC,10000 pF Â±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric),C8,1
+Samsung Electro-Mechanics,CL03A104KP3NNNC,0.1 µF ±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric),"C1, C7, C13, C14",4
+Samsung Electro-Mechanics,CL03A474KQ3NNNC,0.47 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric),"C2, C11, C12",3
+Samsung Electro-Mechanics,CL03A105KQ3CSNC,1 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric),"C3, C4, C9, C10",4
+Samsung Electro-Mechanics,CL03A103KP3NNNC,10000 pF ±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric),C8,1
 Kingbright,APG0603ZGC-5MAV,Green 525nm LED Indication - Discrete 2.85V 0201 (0603 Metric),CHARGLED1,1
 Infineon Technologies,BAT60BE6327HTSA1,Diode 10 V 3A Surface Mount PG-SOD323-3D,D1,1
 Analog Devices Inc./Maxim Integrated,MAX17055ETB+T,Battery Battery Monitor IC Multi-Chemistry 10-TDFN (2.5x2),FG1,1
@@ -26,8 +26,7 @@ Panasonic Electronic Components,ERJ-1GNF2003C,"200 kOhms Â±1% 0.05W, 1/20W Chip 
 C&K,PTS810 SJM 250 SMTR LFS,Tactile Switch SPST-NO Top Actuated Surface Mount,"SW2, SW3",2
 JST Sales America Inc.,SM04B-SRSS-TB,"Connector Header Surface Mount, Right Angle 4 position 0.039"" (1.00mm)",TrillExtensionInput1,1
 Torex Semiconductor Ltd,XC6222B331MR-G,Linear Voltage Regulator IC Positive Fixed 1 Output 700mA SOT-25-5,U1,1
-"
-WCH",CH340C,USB to serial chip CH340C,U2,1
+WCH,CH340C,USB to serial chip CH340C,U2,1
 Microchip Technology,MCP73831T-2DCI/OT,Charger IC Lithium Ion/Polymer SOT-23-5,U3,1
 NXP USA Inc.,"PCA9306DP1,125",Voltage Level Translator Bidirectional 1 Circuit 2 Channel 8-TSSOP,U4,1
 Analog Devices Inc./Maxim Integrated,MAX8511EXK18+T,Linear Voltage Regulator IC Positive Fixed 1 Output 120mA SC-70-5,Ud1,1
