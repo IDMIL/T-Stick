@@ -55,7 +55,9 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "clearance|51697801|88531501|1432b574-2e04-4924-87a1-c4cd8cf0f04f|bef18deb-2043-4502-9bed-73cacdeba10d"
+      ],
       "meta": {
         "version": 2
       },
@@ -65,7 +67,7 @@
         "connection_width": "warning",
         "copper_edge_clearance": "error",
         "copper_sliver": "warning",
-        "courtyards_overlap": "ignore",
+        "courtyards_overlap": "warning",
         "diff_pair_gap_out_of_range": "error",
         "diff_pair_uncoupled_length_too_long": "error",
         "drill_out_of_range": "error",
@@ -81,7 +83,7 @@
         "items_not_allowed": "error",
         "length_out_of_range": "error",
         "lib_footprint_issues": "warning",
-        "lib_footprint_mismatch": "warning",
+        "lib_footprint_mismatch": "ignore",
         "malformed_courtyard": "error",
         "microvia_drill_out_of_range": "error",
         "missing_courtyard": "ignore",
@@ -174,6 +176,7 @@
       "track_widths": [
         0.0,
         0.1524,
+        0.254,
         0.635,
         2.54
       ],
@@ -184,6 +187,10 @@
         },
         {
           "diameter": 0.508,
+          "drill": 0.254
+        },
+        {
+          "diameter": 0.635,
           "drill": 0.254
         }
       ],
@@ -412,7 +419,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "tstick-4gw-prosumer-pcb.kicad_pro",
+    "filename": "tstick-5gw-prosumer-pcb.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -430,8 +437,25 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.1524,
-        "via_diameter": 0.254,
-        "via_drill": 0.508,
+        "via_diameter": 0.508,
+        "via_drill": 0.254,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.129,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "Ground",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.254,
+        "via_diameter": 0.508,
+        "via_drill": 0.254,
         "wire_width": 6
       },
       {
@@ -446,9 +470,26 @@
         "name": "Power",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.635,
-        "via_diameter": 0.254,
-        "via_drill": 0.508,
+        "track_width": 0.254,
+        "via_diameter": 0.508,
+        "via_drill": 0.254,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.129,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "Signal",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.1524,
+        "via_diameter": 0.508,
+        "via_drill": 0.254,
         "wire_width": 6
       }
     ],
@@ -457,7 +498,56 @@
     },
     "net_colors": null,
     "netclass_assignments": null,
-    "netclass_patterns": []
+    "netclass_patterns": [
+      {
+        "netclass": "Power",
+        "pattern": "+3V3"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "+BATT"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "VIN"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "VUSB"
+      },
+      {
+        "netclass": "Ground",
+        "pattern": "GND"
+      },
+      {
+        "netclass": "Ground",
+        "pattern": "-BATT"
+      },
+      {
+        "netclass": "Ground",
+        "pattern": "CSP"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "+1V8"
+      },
+      {
+        "netclass": "Signal",
+        "pattern": "SDA"
+      },
+      {
+        "netclass": "Signal",
+        "pattern": "SCL"
+      },
+      {
+        "netclass": "Signal",
+        "pattern": "TXD"
+      },
+      {
+        "netclass": "Signal",
+        "pattern": "RXD"
+      }
+    ]
   },
   "pcbnew": {
     "last_paths": {
