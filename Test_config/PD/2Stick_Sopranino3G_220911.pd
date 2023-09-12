@@ -1,0 +1,252 @@
+#N canvas -6 28 1912 971 10;
+#X obj 39 488 vsl 45 135 -20 20 0 0 empty empty AccelX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 89 488 vsl 45 135 -20 20 0 0 empty empty AccelY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 139 488 vsl 45 135 -20 20 0 0 empty empty AccelZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 189 488 vsl 45 135 -20 20 0 0 empty empty GyroX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 239 488 vsl 45 135 -20 20 0 0 empty empty GyroY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 289 488 vsl 45 135 -20 20 0 0 empty empty GyroZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 489 488 vsl 45 135 0 4095 0 0 empty empty Pressure 0 -9 0 10
+#fcfcfc #000000 #000000 0 1;
+#X obj 339 488 vsl 45 135 -0.0001 0.0001 0 0 empty empty MagX 0 -9
+0 10 #fcfcfc #000000 #000000 0 1;
+#X obj 389 488 vsl 45 135 -0.0001 0.0001 0 0 empty empty MagY 0 -9
+0 10 #fcfcfc #000000 #000000 0 1;
+#X obj 439 488 vsl 45 135 -0.0001 0.0001 0 0 empty empty MagZ 0 -9
+0 10 #fcfcfc #000000 #000000 0 1;
+#X obj 659 132 timer;
+#X floatatom 659 156 8 0 0 0 - - - 0;
+#X obj 659 107 t b b;
+#X obj 659 82 r rawtimer;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array rawtime 100 float 1;
+#A 0 0 0 0 26.1224 5.80499 0 0 0 5.80499 0 0 0 0 4.35374 26.1224 0
+0 5.80499 0 0 0 0 0 0 0 31.9274 0 0 0 0 0 4.35374 0 0 5.80499 0 31.9274
+0 0 0 0 0 4.35374 0 0 0 0 31.9274 0 0 5.80499 0 0 0 0 0 4.35374 0 27.5737
+0 4.35374 0 0 0 0 0 5.80499 0 0 31.9274 0 0 4.35374 0 0 0 0 0 5.80499
+0 26.1224 0 0 5.80499 0 0 0 0 0 0 0 31.9274 0 4.35374 0 0 0 0 5.80499
+0;
+#X coords 0 100 99 0 200 140 1;
+#X restore 453 79 graph;
+#N canvas 264 335 568 475 timegraph 0;
+#X obj 111 257 list store;
+#X obj 117 300 list split 100;
+#X msg 148 105 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0;
+#X obj 54 178 moses 0;
+#X obj 78 215 moses 101;
+#X obj 57 59 inlet;
+#X obj 173 53 loadbang;
+#X obj 123 353 outlet;
+#X connect 0 0 1 0;
+#X connect 1 0 0 1;
+#X connect 1 0 7 0;
+#X connect 2 0 0 1;
+#X connect 2 0 7 0;
+#X connect 3 1 4 0;
+#X connect 4 0 0 0;
+#X connect 5 0 3 0;
+#X connect 6 0 2 0;
+#X restore 659 180 pd timegraph;
+#X obj 659 204 array set rawtime;
+#X floatatom 139 631 7 0 0 0 - - - 0;
+#X floatatom 189 631 7 0 0 0 - - - 0;
+#X floatatom 239 631 7 0 0 0 - - - 0;
+#X floatatom 289 631 7 0 0 0 - - - 0;
+#X floatatom 489 631 7 0 0 0 - - - 0;
+#X floatatom 339 631 7 0 0 0 - - - 0;
+#X floatatom 389 631 7 0 0 0 - - - 0;
+#X floatatom 439 631 7 0 0 0 - - - 0;
+#X floatatom 89 631 7 0 0 0 - - - 0;
+#X floatatom 39 631 7 0 0 0 - - - 0;
+#X obj 139 149 netreceive -u -b;
+#X obj 139 170 oscparse;
+#X msg 139 126 listen \$1;
+#X obj 109 396 unpack f f f;
+#X obj 189 396 unpack f f f;
+#X obj 270 396 unpack f f f;
+#X obj 69 170 s rawtimer;
+#X obj 139 193 route list;
+#X obj 112 50 tgl 20 0 empty empty Receive_OSC_messages 22 8 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 112 78 sel 1;
+#X obj 880 137 unpack f f f f;
+#X floatatom 814 168 10 0 0 0 - - - 0;
+#X floatatom 880 168 10 0 0 0 - - - 0;
+#X floatatom 946 168 10 0 0 0 - - - 0;
+#X floatatom 1012 168 10 0 0 0 - - - 0;
+#X text 889 117 Quaternions;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array Touch 30 float 1;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 2 29 -1 140 140 1;
+#X restore 38 680 graph;
+#X floatatom 942 259 10 0 0 0 - - - 0;
+#X floatatom 1008 259 10 0 0 0 - - - 0;
+#X floatatom 1074 259 10 0 0 0 - - - 0;
+#X obj 978 235 unpack f f f;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array Touch2 30 float 1;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#X coords 0 2 29 -1 140 140 1;
+#X restore 181 680 graph;
+#X text 252 218 Change T-Stick NAME!;
+#X floatatom 984 327 4 0 0 1 % - - 0;
+#X text 975 215 YPR;
+#X obj 541 488 vsl 35 135 0 1 0 0 empty empty All 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 541 631 6 0 0 0 - - - 0;
+#X obj 583 488 vsl 35 135 0 1 0 0 empty empty Top 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 583 631 6 0 0 0 - - - 0;
+#X obj 626 488 vsl 35 135 0 1 0 0 empty empty Middle 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 626 631 6 0 0 0 - - - 0;
+#X obj 668 488 vsl 35 135 0 1 0 0 empty empty Bottom 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 668 631 6 0 0 0 - - - 0;
+#X obj 710 488 vsl 35 135 -1 1 0 0 empty empty Brush 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 710 631 6 0 0 0 - - - 0;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array multibrush 4 float 3;
+#A 0 0 0 0 0;
+#X coords 0 -1 4 1 60 140 1;
+#X restore 752 486 graph;
+#X obj 819 488 vsl 35 135 0 10 0 0 empty empty Rub 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X floatatom 819 631 6 0 0 0 - - - 0;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array multirub 4 float 3;
+#A 0 0 0 0 0;
+#X coords 0 10 4 -0.1 60 140 1;
+#X restore 861 486 graph;
+#X obj 28 349 array set Touch;
+#X obj 42 302 list split 30;
+#X obj 45 326 array set Touch2;
+#X obj 112 20 loadbang;
+#X obj 933 218 r ypr;
+#X msg 102 100 8000;
+#X text 315 27 Edu Meneses - SAT/Metalab - IDMIL - Set/2022;
+#X text 315 10 T-Stick FW220911;
+#X obj 139 218 route T-Stick_312;
+#X obj 276 287 s ypr;
+#X obj 320 287 s quat;
+#X obj 848 103 r quat;
+#X obj 710 444 array set multibrush;
+#X obj 837 444 array set multirub;
+#X obj 927 488 vsl 35 135 0 100 0 0 empty empty ShakeX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 969 488 vsl 35 135 0 10 0 0 empty empty ShakeY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 1012 488 vsl 35 135 0 10 0 0 empty empty ShakeZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 952 444 unpack f f f;
+#X obj 1053 488 vsl 35 135 0 6 0 0 empty empty JabX 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 1095 488 vsl 35 135 0 6 0 0 empty empty JabY 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 1138 488 vsl 35 135 0 6 0 0 empty empty JabZ 0 -9 0 10 #fcfcfc
+#000000 #000000 0 1;
+#X obj 1032 444 unpack f f f;
+#X msg 84 125 0;
+#X obj 42 249 route capsense accl gyro mag fsr ypr quat touchAll touchTop
+touchMiddle touchBottom brush multiBrush rub multiRub shake jab tap
+dtap ttap battery, f 146;
+#X text 986 308 battery;
+#X obj 852 279 tgl 15 0 empty empty Ttap -4 23 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 822 279 tgl 15 0 empty empty Dtap -4 23 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 792 279 tgl 15 0 empty empty tap -1 23 0 10 #fcfcfc #000000
+#000000 0 1;
+#X connect 0 0 26 0;
+#X connect 1 0 25 0;
+#X connect 2 0 17 0;
+#X connect 3 0 18 0;
+#X connect 4 0 19 0;
+#X connect 5 0 20 0;
+#X connect 6 0 21 0;
+#X connect 7 0 22 0;
+#X connect 8 0 23 0;
+#X connect 9 0 24 0;
+#X connect 10 0 11 0;
+#X connect 11 0 15 0;
+#X connect 12 0 10 0;
+#X connect 12 1 10 1;
+#X connect 13 0 12 0;
+#X connect 15 0 16 0;
+#X connect 27 0 28 0;
+#X connect 27 0 33 0;
+#X connect 28 0 34 0;
+#X connect 29 0 27 0;
+#X connect 30 0 0 0;
+#X connect 30 1 1 0;
+#X connect 30 2 2 0;
+#X connect 31 0 3 0;
+#X connect 31 1 4 0;
+#X connect 31 2 5 0;
+#X connect 32 0 7 0;
+#X connect 32 1 8 0;
+#X connect 32 2 9 0;
+#X connect 34 0 74 0;
+#X connect 35 0 36 0;
+#X connect 36 0 71 0;
+#X connect 36 1 29 0;
+#X connect 37 0 38 0;
+#X connect 37 1 39 0;
+#X connect 37 2 40 0;
+#X connect 37 3 41 0;
+#X connect 47 0 44 0;
+#X connect 47 1 45 0;
+#X connect 47 2 46 0;
+#X connect 52 0 53 0;
+#X connect 54 0 55 0;
+#X connect 56 0 57 0;
+#X connect 58 0 59 0;
+#X connect 60 0 61 0;
+#X connect 63 0 64 0;
+#X connect 67 0 66 0;
+#X connect 67 1 68 0;
+#X connect 67 2 66 0;
+#X connect 69 0 35 0;
+#X connect 70 0 47 0;
+#X connect 71 0 29 0;
+#X connect 74 0 89 0;
+#X connect 77 0 37 0;
+#X connect 83 0 80 0;
+#X connect 83 1 81 0;
+#X connect 83 2 82 0;
+#X connect 87 0 84 0;
+#X connect 87 1 85 0;
+#X connect 87 2 86 0;
+#X connect 88 0 29 0;
+#X connect 89 0 67 0;
+#X connect 89 1 30 0;
+#X connect 89 2 31 0;
+#X connect 89 3 32 0;
+#X connect 89 4 6 0;
+#X connect 89 5 75 0;
+#X connect 89 6 76 0;
+#X connect 89 7 52 0;
+#X connect 89 8 54 0;
+#X connect 89 9 56 0;
+#X connect 89 10 58 0;
+#X connect 89 11 60 0;
+#X connect 89 12 78 0;
+#X connect 89 13 63 0;
+#X connect 89 14 79 0;
+#X connect 89 15 83 0;
+#X connect 89 16 87 0;
+#X connect 89 17 93 0;
+#X connect 89 18 92 0;
+#X connect 89 19 91 0;
+#X connect 89 20 50 0;
+#X coords 0 0 1 1 470 216 0;
