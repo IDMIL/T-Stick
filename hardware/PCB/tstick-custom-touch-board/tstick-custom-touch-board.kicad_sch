@@ -3082,7 +3082,7 @@
   )
 
   (symbol (lib_id "Connector_Generic:Conn_01x30") (at 116.84 73.66 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (in_bom no) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid dd76c53d-652c-4579-90ac-df2d5ff54cf7)
     (property "Reference" "TOUCH1" (at 119.38 73.66 0)
       (effects (font (size 1.27 1.27)) (justify left))

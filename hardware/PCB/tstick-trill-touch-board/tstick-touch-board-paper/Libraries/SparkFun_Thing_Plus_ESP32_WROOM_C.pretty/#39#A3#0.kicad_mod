@@ -1,0 +1,20 @@
+(footprint "#39#A3#0" (version 20221018) (generator pcbnew)
+  (layer "F.Cu")
+  (fp_text reference "REF**" (at 0 0) (layer "F.SilkS")
+      (effects (font (size 1.27 1.27) (thickness 0.15)))
+    (tstamp d23ac1e6-ed69-4659-9e5b-71b57b3e7c82)
+  )
+  (fp_text value "" (at 0 0) (layer "F.Fab")
+      (effects (font (size 1.27 1.27) (thickness 0.15)))
+    (tstamp 3c893836-46ce-4cba-9a16-040a85e364d3)
+  )
+  (fp_poly
+    (pts
+      (xy 3.755 0.07)
+      (xy 3.75 0.07)
+      (xy 3.75 0.065)
+      (xy 3.755 0.065)
+    )
+
+    (stroke (width 0) (type default)) (fill solid) (layer "F.SilkS") (tstamp 23b0d041-7f73-423c-9647-c20a2d37863a))
+)
