@@ -18,11 +18,15 @@ unsigned int firmware_version = 220929;
 /*
   Choose the capacitive sensing board
   - Trill
-  - IDMIL Capsense board 
+  - IDMIL Capsense board
 */
 #define touch_TRILL
-//#define touch_CAPSENSE
+// #define touch_CAPSENSE
 
+/*
+ Define libmapper
+*/
+#define LIBMAPPER
 
 #include "Arduino.h"
 
