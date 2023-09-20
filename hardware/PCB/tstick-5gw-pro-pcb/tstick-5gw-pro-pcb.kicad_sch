@@ -7659,7 +7659,7 @@
     (property "Value" "SK6812MINI" (at 299.72 167.64 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "neopixel:2659" (at 299.72 156.21 0)
+    (property "Footprint" "2659:2659" (at 299.72 156.21 0)
       (effects (font (size 1.27 1.27)) (justify bottom) hide)
     )
     (property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf" (at 299.72 156.21 0)
@@ -7707,10 +7707,10 @@
     (property "MANUFACTURER" "Adafruit Industries LLC" (at 299.72 156.21 0)
       (effects (font (size 1.27 1.27)) (justify bottom) hide)
     )
-    (pin "1" (uuid 86b18bfa-a378-4478-905a-02b5386127b4))
-    (pin "2" (uuid 9f908525-cd61-4488-8276-bdb9c9c1e052))
-    (pin "3" (uuid 67af1fd4-8df1-41a1-99aa-ace3b0bf29d1))
-    (pin "4" (uuid a4cd09f3-aec5-468d-9246-d148c8f2ded6))
+    (pin "1" (uuid 479fed84-d384-494d-8d54-ed527c30f347))
+    (pin "2" (uuid c9f1ac41-6474-4881-84e7-2478987f3e5d))
+    (pin "3" (uuid 18935bb6-7b93-4a11-a2cb-36d17d6f3d3b))
+    (pin "4" (uuid 957ae0fa-5b14-4255-af58-9b3f6764fd24))
     (instances
       (project "tstick-5gw-pro-pcb"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
