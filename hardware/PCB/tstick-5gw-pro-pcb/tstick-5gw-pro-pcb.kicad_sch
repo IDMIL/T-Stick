@@ -6522,36 +6522,6 @@
     )
   )
 
-  (symbol (lib_id "max17055-symbol:CSP") (at 21.59 252.73 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid 62dcd8e2-3e59-434d-bbc3-20b051a5c89b)
-    (property "Reference" "#ICGND01" (at 21.59 259.08 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "CSP" (at 21.59 256.54 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 17.78 252.73 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 17.78 252.73 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 8e228268-9375-4416-a9af-8fb9f02ad2c1))
-    (instances
-      (project "tstick-5gw-pro-pcb"
-        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
-          (reference "#ICGND01") (unit 1)
-        )
-      )
-      (project "tstick_pcb"
-        (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
-          (reference "#ICGND01") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_name "GND_1") (lib_id "power:GND") (at 396.24 212.09 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 651ed689-2413-4c4c-9044-72b0e54f5bee)
@@ -6698,36 +6668,6 @@
       (project "tstick_pcb"
         (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
           (reference "#PWR010") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "power:-BATT") (at 26.67 260.35 180) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 68f6a44d-c370-4258-a4c0-f8ccb564d2d7)
-    (property "Reference" "#PWR034" (at 26.67 256.54 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "-BATT" (at 26.67 265.43 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 26.67 260.35 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 26.67 260.35 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 1c39535c-8915-4e5a-9771-36b92b28547c))
-    (instances
-      (project "tstick-5gw-pro-pcb"
-        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
-          (reference "#PWR034") (unit 1)
-        )
-      )
-      (project "tstick_pcb"
-        (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
-          (reference "#PWR034") (unit 1)
         )
       )
     )
@@ -7521,6 +7461,36 @@
     )
   )
 
+  (symbol (lib_id "max17055-symbol:CSP") (at 26.67 261.62 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 92b1f280-c131-48be-b47e-bddb13fe33f6)
+    (property "Reference" "#ICGND01" (at 26.67 267.97 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "CSP" (at 26.67 265.43 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 22.86 261.62 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 22.86 261.62 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 53f51ff2-8dd6-4a68-9c7e-44e01c7df2cd))
+    (instances
+      (project "tstick-5gw-pro-pcb"
+        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
+          (reference "#ICGND01") (unit 1)
+        )
+      )
+      (project "tstick_pcb"
+        (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
+          (reference "#ICGND01") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_name "GND_2") (lib_id "power:GND") (at 388.62 63.5 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 92fe46dc-b378-417b-9580-c3c7b73e1cc0)
@@ -7724,6 +7694,36 @@
       (project "tstick_pcb"
         (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
           (reference "#PWR016") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:-BATT") (at 21.59 251.46 180) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid ad29dd35-b27d-4293-b15e-a55a1b8c5c60)
+    (property "Reference" "#PWR023" (at 21.59 247.65 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "-BATT" (at 21.59 256.54 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 21.59 251.46 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 21.59 251.46 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid c5a9e21b-106e-48c2-a5b7-7aeeaba60fac))
+    (instances
+      (project "tstick-5gw-pro-pcb"
+        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
+          (reference "#PWR023") (unit 1)
+        )
+      )
+      (project "tstick_pcb"
+        (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
+          (reference "#PWR034") (unit 1)
         )
       )
     )
@@ -9188,7 +9188,7 @@
     (property "Value" "Ohmite_LVK12 10m" (at 40.64 258.318 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "Resistor_SMD:R_Shunt_Ohmite_LVK12" (at 40.64 257.048 90)
+    (property "Footprint" "ul_LVK12R010CER-footprints:LVK12_OHM-L" (at 40.64 257.048 90)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 40.64 255.27 0)
