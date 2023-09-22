@@ -4,13 +4,24 @@
 
 
 uint8_t Touch::initTouch() {
-    int ret = trillSensor.setup(Trill::TRILL_CRAFT);
+    // Initialise Sensors
+    int ret = trillSensor.setup(Trill::TRILL_FLEX);
     if(ret != 0) {
         Serial.println("failed to initialise trillSensor");
         Serial.print("Error code: ");
         Serial.println(ret);
         return 0;
     }
+    delay(10);
+    trillSensor.setPrescaler(4);
+    delay(10);
+    trillSensor.updateBaseline();
+    delay(10);
+    trillSensor.setScanSettings(0,9);
+    delay(10);
+    trillSensor.setNoiseThreshold(30);
+    delay(10);
+    trillSensor.setMode(Trill::RAW);
     return 1;
 }
 
@@ -24,6 +35,7 @@ void Touch::readTouch() {
 }
 
 int Touch::getData(int data_index) {
+
     return Touch::data[data_index];
 }
 
@@ -45,10 +57,13 @@ void Touch::cookData() {
     // Touch discretize and normalize
     for (int i=0; i < touchSize; i++) {
         if (data[i] != 0) {
-            touch[i] = 1;
-            normTouch[i] = (float)data[i] / (float)maxTouchValue;
+            discreteTouch[i] = 1;
+            touch[i] = data[i];
+            normTouch[i] = (data[i] *100) / maxTouchValue;
         } else {
             touch[i] = 0;
+            normTouch[i] = 0;
+            discreteTouch[i] = 0;
         }
     }
 }

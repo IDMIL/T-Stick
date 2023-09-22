@@ -17,10 +17,11 @@ class Touch {
         byte touchStatus = 0;
         int touch[30];          // /instrument/touch/touch, i..., 0 or 1, ... (1 per stripe)
         float normTouch[30];    // /instrument/touch/norm, i..., 0--1, ... (1 per stripe)
+        int discreteTouch[30];    // /instrument/touch/raw, i..., 0--1, ... (1 per stripe)
         void cookData();
         int touchSize = 30;
     private:
-        int maxTouchValue;
+        int maxTouchValue = 50;
 };
 
 #endif

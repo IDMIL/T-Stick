@@ -13,7 +13,7 @@
 unsigned int firmware_version = 220929;
 
 // set the amount of capacitive stripes for the sopranino (15) or soprano (30)
-#define TSTICK_SIZE 16
+#define TSTICK_SIZE 30
 
 /*
   Choose the capacitive sensing board
@@ -60,12 +60,10 @@ struct Pin {
     int fsr;
     int button;
 };
+Pin pin{ 5, 35, 33, 15 };
 
-#ifdef ARDUINO_LOLIN_D32_PRO
-    Pin pin{ 5, 35, 33, 15 };
-#elif defined(ARDUINO_TINYPICO)
+#if defined(ARDUINO_TINYPICO)
     #include "TinyPICO.h"
-    Pin pin{ 5, 35, 33, 15 };
     TinyPICO tinypico = TinyPICO();
 #endif
 
@@ -140,6 +138,7 @@ LSM9DS1 imu;
 #ifdef touch_TRILL
   #include "touch.h"
   Touch touch;
+  Touch touch2;
 #endif
 
 #ifdef touch_CAPSENSE
@@ -301,9 +300,9 @@ void setup() {
         std::cout << "initialization failed!" << std::endl;
     }
 
-    std::cout << "    Initializing IMU... ";
-    initIMU();
-    std::cout << "done" << std::endl;
+    // std::cout << "    Initializing IMU... ";
+    // initIMU();
+    // std::cout << "done" << std::endl;
 
     std::cout << "    Initializing FSR... ";
     if (fsr.initFsr(pin.fsr, std::round(puara.getVarNumber("fsr_offset")))) {
@@ -395,7 +394,7 @@ void loop() {
     #ifdef touch_TRILL
         touch.readTouch();
         touch.cookData();
-        gestures.updateTouchArray(touch.touch,touch.touchSize);
+        gestures.updateTouchArray(touch.discreteTouch,touch.touchSize);
     #endif
     #ifdef touch_CAPSENSE
         capsense.readCapsense();
@@ -409,30 +408,30 @@ void loop() {
       batteryFilter();
     }
 
-    // read IMU and update puara-gestures
-        if (imu.accelAvailable()) {
-        imu.readAccel();
-        // In g's
-        gestures.setAccelerometerValues(imu.calcAccel(imu.ax),
-                                        imu.calcAccel(imu.ay),
-                                        imu.calcAccel(imu.az));
-    }
-    if (imu.gyroAvailable()) {
-        imu.readGyro();
-        // In degrees/sec
-        gestures.setGyroscopeValues(imu.calcGyro(imu.gx),
-                                    imu.calcGyro(imu.gy),
-                                    imu.calcGyro(imu.gz));
-    }
-    if (imu.magAvailable()) {
-        imu.readMag();
-        // In Gauss
-        gestures.setMagnetometerValues(imu.calcMag(imu.mx),
-                                       imu.calcMag(imu.my),
-                                       imu.calcMag(imu.mz));
-    }
+    // // read IMU and update puara-gestures
+    //     if (imu.accelAvailable()) {
+    //     imu.readAccel();
+    //     // In g's
+    //     gestures.setAccelerometerValues(imu.calcAccel(imu.ax),
+    //                                     imu.calcAccel(imu.ay),
+    //                                     imu.calcAccel(imu.az));
+    // }
+    // if (imu.gyroAvailable()) {
+    //     imu.readGyro();
+    //     // In degrees/sec
+    //     gestures.setGyroscopeValues(imu.calcGyro(imu.gx),
+    //                                 imu.calcGyro(imu.gy),
+    //                                 imu.calcGyro(imu.gz));
+    // }
+    // if (imu.magAvailable()) {
+    //     imu.readMag();
+    //     // In Gauss
+    //     gestures.setMagnetometerValues(imu.calcMag(imu.mx),
+    //                                    imu.calcMag(imu.my),
+    //                                    imu.calcMag(imu.mz));
+    // }
 
-    gestures.updateInertialGestures();
+    // gestures.updateInertialGestures();
     gestures.updateTrigButton(button.getButton());
 
     // go to deep sleep if double press button
@@ -529,10 +528,25 @@ void loop() {
 
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
             #ifdef touch_TRILL
-                lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiii", touch.touch[0], touch.touch[1],touch.touch[2],
-                    touch.touch[3],touch.touch[4],touch.touch[5], touch.touch[6], touch.touch[7], touch.touch[8],
-                    touch.touch[9], touch.touch[10], touch.touch[11], touch.touch[12], touch.touch[13], touch.touch[14]
-            );
+                lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", touch.touch[0], touch.touch[1],touch.touch[2],
+                touch.touch[3],touch.touch[4],touch.touch[5], touch.touch[6], touch.touch[7], touch.touch[8],
+                touch.touch[9], touch.touch[10], touch.touch[11], touch.touch[12], touch.touch[13], touch.touch[14], touch.touch[15], touch.touch[16],touch.touch[17],
+                touch.touch[18],touch.touch[19],touch.touch[20], touch.touch[21], touch.touch[22], touch.touch[23],
+                touch.touch[24], touch.touch[25], touch.touch[26], touch.touch[27], touch.touch[28], touch.touch[29]);
+                // Send normalised touch data
+                oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/norm");
+                lo_send(osc1, oscNamespace.c_str(), "ffffffffffffffffffffffffffffff", touch.normTouch[0], touch.normTouch[1],touch.normTouch[2],
+                touch.normTouch[3],touch.normTouch[4],touch.normTouch[5], touch.normTouch[6], touch.normTouch[7], touch.normTouch[8],
+                touch.normTouch[9], touch.normTouch[10], touch.normTouch[11], touch.normTouch[12], touch.normTouch[13], touch.normTouch[14], touch.normTouch[15], touch.normTouch[16],touch.normTouch[17],
+                touch.normTouch[18],touch.normTouch[19],touch.normTouch[20], touch.normTouch[21], touch.normTouch[22], touch.normTouch[23],
+                touch.normTouch[24], touch.normTouch[25], touch.normTouch[26], touch.normTouch[27], touch.normTouch[28], touch.normTouch[29]);
+                // Send discrete touch data
+                oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/disc");
+                lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", touch.discreteTouch[0], touch.discreteTouch[1],touch.discreteTouch[2],
+                touch.discreteTouch[3],touch.discreteTouch[4],touch.discreteTouch[5], touch.discreteTouch[6], touch.discreteTouch[7], touch.discreteTouch[8],
+                touch.discreteTouch[9], touch.discreteTouch[10], touch.discreteTouch[11], touch.discreteTouch[12], touch.discreteTouch[13], touch.discreteTouch[14], touch.discreteTouch[15], touch.discreteTouch[16],touch.discreteTouch[17],
+                touch.discreteTouch[18],touch.discreteTouch[19],touch.discreteTouch[20], touch.discreteTouch[21], touch.discreteTouch[22], touch.discreteTouch[23],
+                touch.discreteTouch[24], touch.discreteTouch[25], touch.discreteTouch[26], touch.discreteTouch[27], touch.discreteTouch[28], touch.discreteTouch[29]);
             #endif
             #ifdef touch_CAPSENSE
                 lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiii", capsense.data[0], capsense.data[1],capsense.data[2],
