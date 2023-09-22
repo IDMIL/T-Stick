@@ -74,6 +74,11 @@ Pin pin{ 5, 35, 33, 15 };
 struct BatteryData {
     unsigned int percentage = 0;
     unsigned int lastPercentage = 0;
+    float voltage = 0;
+    unsigned int current = 0;
+    float TTE = 0;
+    unsigned int rsense = 0;
+    unsigned int capacity = 0;
     float value;
     unsigned long timer = 0;
     int interval = 1000; // in ms (1/f)
@@ -82,18 +87,6 @@ struct BatteryData {
 } battery;
 
 // read battery level (based on https://www.youtube.com/watch?v=yZjpYmWVLh8&feature=youtu.be&t=88) 
-void readBattery() {
-    #ifdef ARDUINO_LOLIN_D32_PRO
-        battery.value = analogRead(pin.battery) / 4096.0 * 7.445;
-    #elif defined(ARDUINO_TINYPICO)
-        battery.value = tinypico.GetBatteryVoltage();
-    #endif
-    battery.percentage = static_cast<int>((battery.value - 2.9) * 100 / (4.15 - 2.9));
-    if (battery.percentage > 100)
-        battery.percentage = 100;
-    if (battery.percentage < 0)
-        battery.percentage = 0;
-}
 
 void batteryFilter() {
     battery.filterArray.push_back(battery.percentage);
@@ -128,8 +121,15 @@ Fsr fsr;
 // Include IMU function files //
 ////////////////////////////////
 
-#include <SparkFunLSM9DS1.h>
-LSM9DS1 imu;
+// #include <SparkFunLSM9DS1.h>
+// LSM9DS1 imu;
+#include "ICM_20948.h"
+ICM_20948_I2C imu;
+
+#define WIRE_PORT Wire // Your desired Wire port.      Used when "USE_SPI" is not defined
+// The value of the last bit of the I2C address.
+// On the SparkFun 9DoF IMU breakout the default is 1, and when the ADR jumper is closed the value becomes 0
+#define AD0_VAL 1
 
 //////////////////////////////////////////////
 // Include Touch stuff                      //
@@ -145,6 +145,16 @@ LSM9DS1 imu;
   #include "capsense.h"
   Capsense capsense;
 #endif
+
+//////////////////////////////////////////////
+// Include Fuel gauge stuff                      //
+//////////////////////////////////////////////
+
+#include <batt.h>
+FUELGAUGE fuelgauge;
+int designcap = 3200;
+float rsense = 0.1;
+float vempty = 2.5;
 
 ////////////////////////////////
 // Include LED function files //
@@ -279,6 +289,9 @@ void setup() {
         Serial.begin(115200);
     #endif
 
+    // Start Wire
+    Wire.begin();
+
     // Disable WiFi power save
     esp_wifi_set_ps(WIFI_PS_NONE);
 
@@ -303,6 +316,10 @@ void setup() {
     // std::cout << "    Initializing IMU... ";
     // initIMU();
     // std::cout << "done" << std::endl;
+
+    std::cout << "    Initializing Fuel Gauge... ";
+    fuelgauge.init(designcap, rsense, vempty);
+    std::cout << "done" << std::endl;
 
     std::cout << "    Initializing FSR... ";
     if (fsr.initFsr(pin.fsr, std::round(puara.getVarNumber("fsr_offset")))) {
@@ -402,34 +419,45 @@ void loop() {
     #endif
 
     // read battery
+    // battery.percentage = fuelgauge.getSOC();
+    // battery.current = fuelgauge.getInstantaneousCurrent();
+    // battery.voltage = fuelgauge.getInstantaneousVoltage();
+    // battery.TTE = fuelgauge.getTimeToEmpty();
+    // battery.rsense =fuelgauge.getResistSensor();
+    // battery.capacity = fuelgauge.getCapacity();
+    // if (battery.percentage > 100)
+    //     battery.percentage = 100;
+    // if (battery.percentage < 0)
+    //     battery.percentage = 0;
     if (millis() - battery.interval > battery.timer) {
-      battery.timer = millis();
-      readBattery();
-      batteryFilter();
+        battery.timer = millis();
+        fuelgauge.getBatteryData();
+        battery.percentage = fuelgauge.cooked_soc;
+        battery.current = fuelgauge.current;
+        battery.voltage = fuelgauge.voltage;
+        battery.TTE = fuelgauge.tte;
+        battery.rsense =fuelgauge.getresistsensor()*1000;
+        battery.capacity = fuelgauge.capacity;
+        if (battery.percentage > 100)
+            battery.percentage = 100;
+        if (battery.percentage < 0)
+            battery.percentage = 0;
     }
 
+    // // read IMU data
+    // imu.getAGMT();
+
     // // read IMU and update puara-gestures
-    //     if (imu.accelAvailable()) {
-    //     imu.readAccel();
-    //     // In g's
-    //     gestures.setAccelerometerValues(imu.calcAccel(imu.ax),
-    //                                     imu.calcAccel(imu.ay),
-    //                                     imu.calcAccel(imu.az));
-    // }
-    // if (imu.gyroAvailable()) {
-    //     imu.readGyro();
-    //     // In degrees/sec
-    //     gestures.setGyroscopeValues(imu.calcGyro(imu.gx),
-    //                                 imu.calcGyro(imu.gy),
-    //                                 imu.calcGyro(imu.gz));
-    // }
-    // if (imu.magAvailable()) {
-    //     imu.readMag();
-    //     // In Gauss
-    //     gestures.setMagnetometerValues(imu.calcMag(imu.mx),
-    //                                    imu.calcMag(imu.my),
-    //                                    imu.calcMag(imu.mz));
-    // }
+    // // In g's
+    // gestures.setAccelerometerValues(imu.accX(),
+    //                                 imu.accY(),
+    //                                 imu.accZ());
+    // gestures.setGyroscopeValues(imu.gyrX(),
+    //                             imu.gyrY(),
+    //                             imu.gyrZ());
+    // gestures.setMagnetometerValues(imu.magX(),
+    //                                 imu.magY(),
+    //                                 imu.magZ());
 
     // gestures.updateInertialGestures();
     gestures.updateTrigButton(button.getButton());
@@ -575,6 +603,20 @@ void loop() {
             lo_send(osc1, oscNamespace.c_str(), "ffff", sensors.quat[0], sensors.quat[1], sensors.quat[2], sensors.quat[3]);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "ypr");
             lo_send(osc1, oscNamespace.c_str(), "fff", sensors.ypr[0], sensors.ypr[1], sensors.ypr[2]);
+
+            // Battery Data
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/soc");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.percentage);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.voltage);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.current);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.TTE);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.rsense);
     }
     if (puara.IP2_ready()) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
@@ -611,6 +653,20 @@ void loop() {
             lo_send(osc2, oscNamespace.c_str(), "ffff", sensors.quat[0], sensors.quat[1], sensors.quat[2], sensors.quat[3]);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "ypr");
             lo_send(osc2, oscNamespace.c_str(), "fff", sensors.ypr[0], sensors.ypr[1], sensors.ypr[2]);
+
+            //Battery Data
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/soc");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.percentage);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.voltage);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.current);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.TTE);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.rsense);
     }
 
     // Sending discrete OSC messages
@@ -651,10 +707,21 @@ void loop() {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/ttap");
             lo_send(osc1, oscNamespace.c_str(), "i", sensors.ttap);
         }
-        if (event.battery) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery");
-            lo_send(osc1, oscNamespace.c_str(), "i", sensors.battery);
-        }
+        // if (event.battery) {
+        //     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/soc");
+        //     lo_send(osc1, oscNamespace.c_str(), "i", battery.percentage);
+        //     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
+        //     lo_send(osc1, oscNamespace.c_str(), "f", battery.voltage);
+        //     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
+        //     lo_send(osc1, oscNamespace.c_str(), "i", battery.current);
+        //     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
+        //     lo_send(osc1, oscNamespace.c_str(), "f", battery.TTE);
+        //     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
+        //     lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
+        //     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
+        //     lo_send(osc1, oscNamespace.c_str(), "i", battery.rsense);
+
+        // }
     }
     if (puara.IP2_ready()) {
         if (event.brush) {
@@ -693,10 +760,10 @@ void loop() {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/ttap");
             lo_send(osc2, oscNamespace.c_str(), "i", sensors.ttap);
         }
-        if (event.battery) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery");
-            lo_send(osc2, oscNamespace.c_str(), "i", sensors.battery);
-        }
+        // if (event.battery) {
+        //     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery");
+        //     lo_send(osc2, oscNamespace.c_str(), "i", sensors.battery);
+        // }
     }
 
     // Set LED - connection status and battery level
@@ -738,116 +805,7 @@ void loop() {
     //vTaskDelay(10 / portTICK_PERIOD_MS);
 }
 
-void initIMU() {
-    Wire.begin();
-
-    // [enabled] turns the gyro on or off.
-    imu.settings.gyro.enabled = true;
-    // [scale] sets the full-scale range of the gyroscope.
-    // scale can be set to either 245, 500, or 2000 dps
-    // Travis West 2022-11-02: I was able to saturate the output with 2000 dps, so this seems like an appropriate setting.
-    imu.settings.gyro.scale = 2000;
-    // [sampleRate] sets the output data rate (ODR) of the gyro
-    // sampleRate can be set between 1-6
-    // 1 = 14.9    4 = 238
-    // 2 = 59.5    5 = 476
-    // 3 = 119     6 = 952
-    imu.settings.gyro.sampleRate = 3; // 59.5Hz ODR
-    // [bandwidth] can set the cutoff frequency of the gyro.
-    // Allowed values: 0-3. Actual value of cutoff frequency
-    // depends on the sample rate. (Datasheet section 7.12)
-    imu.settings.gyro.bandwidth = 0;
-    // [lowPowerEnable] turns low-power mode on or off.
-    imu.settings.gyro.lowPowerEnable = false; // LP mode off
-    // [HPFEnable] enables or disables the high-pass filter
-    imu.settings.gyro.HPFEnable = true; // HPF disabled
-    // [HPFCutoff] sets the HPF cutoff frequency (if enabled)
-    // Allowable values are 0-9. Value depends on ODR.
-    // (Datasheet section 7.14)
-    imu.settings.gyro.HPFCutoff = 1; // HPF cutoff = 4Hz
-    // [flipX], [flipY], and [flipZ] are booleans that can
-    // automatically switch the positive/negative orientation
-    // of the three gyro axes.
-    imu.settings.gyro.flipX = false; // Don't flip X
-    imu.settings.gyro.flipY = false; // Don't flip Y
-    imu.settings.gyro.flipZ = false; // Don't flip Z
-    // [enabled] turns the acclerometer on or off.
-    imu.settings.accel.enabled = true; // Enable accelerometer
-    // [enableX], [enableY], and [enableZ] can turn on or off
-    // select axes of the acclerometer.
-    imu.settings.accel.enableX = true; // Enable X
-    imu.settings.accel.enableY = true; // Enable Y
-    imu.settings.accel.enableZ = true; // Enable Z
-    // [scale] sets the full-scale range of the accelerometer.
-    // accel scale can be 2, 4, 8, or 16 g's
-    // Travis West 2022-11-02: In my experiments I found that the effort required
-    // to get much more than 7.5 g of acceleration was significant enough that I
-    // was worried about causing damage the internal wiring of the instrument.
-    // As such, I think 8 g full scale range or less is appropriate, at least
-    // until such time as the mechanical robustness of the instrument is improved.
-    imu.settings.accel.scale = 8;
-    // [sampleRate] sets the output data rate (ODR) of the
-    // accelerometer. ONLY APPLICABLE WHEN THE GYROSCOPE IS
-    // DISABLED! Otherwise accel sample rate = gyro sample rate.
-    // accel sample rate can be 1-6
-    // 1 = 10 Hz    4 = 238 Hz
-    // 2 = 50 Hz    5 = 476 Hz
-    // 3 = 119 Hz   6 = 952 Hz
-    imu.settings.accel.sampleRate = 3;
-    // [bandwidth] sets the anti-aliasing filter bandwidth.
-    // Accel cutoff frequency can be any value between -1 - 3. 
-    // -1 = bandwidth determined by sample rate
-    // 0 = 408 Hz   2 = 105 Hz
-    // 1 = 211 Hz   3 = 50 Hz
-    imu.settings.accel.bandwidth = 0; // BW = 408Hz
-    // [highResEnable] enables or disables high resolution 
-    // mode for the acclerometer.
-    imu.settings.accel.highResEnable = false; // Disable HR
-    // [highResBandwidth] sets the LP cutoff frequency of
-    // the accelerometer if it's in high-res mode.
-    // can be any value between 0-3
-    // LP cutoff is set to a factor of sample rate
-    // 0 = ODR/50    2 = ODR/9
-    // 1 = ODR/100   3 = ODR/400
-    imu.settings.accel.highResBandwidth = 0;  
-    // [enabled] turns the magnetometer on or off.
-    imu.settings.mag.enabled = true; // Enable magnetometer
-    // [scale] sets the full-scale range of the magnetometer
-    // mag scale can be 4, 8, 12, or 16 Gs
-    // Travis West 2022-11-02: Considering that the Earth's magnetic field is
-    // generally less than 1 Gs, the lowest setting available is likely best.
-    // A higher setting could be used if the sensor were installed next to a
-    // strong magnetic field, such as a magnet or speaker, since then the reading
-    // would not be saturated and the bias from the magnet could potentially be
-    // removed.
-    imu.settings.mag.scale = 4;
-    // [sampleRate] sets the output data rate (ODR) of the
-    // magnetometer.
-    // mag data rate can be 0-7:
-    // 0 = 0.625 Hz  4 = 10 Hz
-    // 1 = 1.25 Hz   5 = 20 Hz
-    // 2 = 2.5 Hz    6 = 40 Hz
-    // 3 = 5 Hz      7 = 80 Hz
-    imu.settings.mag.sampleRate = 5; // Set OD rate to 20Hz
-    // [tempCompensationEnable] enables or disables 
-    // temperature compensation of the magnetometer.
-    imu.settings.mag.tempCompensationEnable = false;
-    // [XYPerformance] sets the x and y-axis performance of the
-    // magnetometer to either:
-    // 0 = Low power mode      2 = high performance
-    // 1 = medium performance  3 = ultra-high performance
-    imu.settings.mag.XYPerformance = 3; // Ultra-high perform.
-    // [ZPerformance] does the same thing, but only for the z
-    imu.settings.mag.ZPerformance = 3; // Ultra-high perform.
-    // [lowPowerEnable] enables or disables low power mode in
-    // the magnetometer.
-    imu.settings.mag.lowPowerEnable = false;
-    // [operatingMode] sets the operating mode of the
-    // magnetometer. operatingMode can be 0-2:
-    // 0 = continuous conversion
-    // 1 = single-conversion
-    // 2 = power down
-    imu.settings.mag.operatingMode = 0; // Continuous mode
-
-    imu.begin();
-}
+// void initIMU() {
+//     Wire.begin();
+//     imu.begin(WIRE_PORT,AD0_VAL);
+// }

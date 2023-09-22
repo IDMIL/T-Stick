@@ -5,7 +5,7 @@
 
 uint8_t Touch::initTouch() {
     // Initialise Sensors
-    int ret = trillSensor.setup(Trill::TRILL_FLEX);
+    int ret = trillSensor.setup(Trill::TRILL_CRAFT);
     if(ret != 0) {
         Serial.println("failed to initialise trillSensor");
         Serial.print("Error code: ");
@@ -21,7 +21,7 @@ uint8_t Touch::initTouch() {
     delay(10);
     trillSensor.setNoiseThreshold(30);
     delay(10);
-    trillSensor.setMode(Trill::RAW);
+    trillSensor.setMode(Trill::DIFF);
     return 1;
 }
 
