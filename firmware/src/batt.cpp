@@ -124,6 +124,11 @@ void FUELGAUGE::getBatteryData() {
     getparameters();
 }
 
+float FUELGAUGE::getresistsensor() {
+    // Output sense resistor value
+    return resistSensor;
+}
+
 // Private Methods
 
 void FUELGAUGE::setresistsensor(float rsense) {

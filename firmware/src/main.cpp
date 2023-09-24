@@ -152,10 +152,19 @@ ICM_20948_I2C imu;
 
 #include <batt.h>
 FUELGAUGE fuelgauge;
-int designcap = 3200;
-float rsense = 0.1;
-float vempty = 2.5;
-
+fuelgauge_config fg_config = {
+    0x36, //i2c_addr
+    3200, // capacity
+    0.1, // rsense
+    3, // empty voltage
+    3.88, //recovery voltage
+    0, // soc
+    0, // rcomp
+    0, // tempco
+    0, // fullcap
+    0, // fullcapnorm
+    0, // Charge Cycles
+};
 ////////////////////////////////
 // Include LED function files //
 ////////////////////////////////
@@ -318,7 +327,7 @@ void setup() {
     // std::cout << "done" << std::endl;
 
     std::cout << "    Initializing Fuel Gauge... ";
-    fuelgauge.init(designcap, rsense, vempty);
+    fuelgauge.init(fg_config);
     std::cout << "done" << std::endl;
 
     std::cout << "    Initializing FSR... ";
