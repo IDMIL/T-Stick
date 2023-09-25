@@ -1,4 +1,4 @@
-#N canvas 26 -8 1920 1117 10;
+#N canvas -449 -14 1920 1117 10;
 #X obj 87 476 vsl 45 135 -20 20 0 0 empty empty AccelX 0 -9 0 10 #fcfcfc #000000 #000000 0 1;
 #X obj 137 476 vsl 45 135 -20 20 0 0 empty empty AccelY 0 -9 0 10 #fcfcfc #000000 #000000 0 1;
 #X obj 187 476 vsl 45 135 -20 20 0 0 empty empty AccelZ 0 -9 0 10 #fcfcfc #000000 #000000 0 1;
@@ -15,7 +15,7 @@
 #X obj 617 82 r rawtimer;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array rawtime 100 float 1;
-#A 0 0 0 5.80499 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10.1587 31.9274 0 11.61 0 0 0 4.35374 0 0 0 0 0 0 0 0 0 0 0 5.80499 43.5374 5.80499 0 0 0 0 11.61 0 0 0 0 0 0 0 0 0 0 0 0 0 5.80499 5.80499 0 0 0 5.80499 0 0 0 0 0 0 0 0 0 0 0 0 0 52.2449 0 0 0 0 0 0 0 0 0 0 47.8912 0 0 5.80499 0 0 5.80499 0 10.1587 0 0 0;
+#A 0 0 21.7687 0 0 2.90249 2.90249 0 0 5.80499 0 5.80499 0 0 0 0 2.90249 2.90249 0 0 0 0 2.90249 2.90249 0 0 0 0 0 0 1.45125 4.35374 0 0 0 0 0 0 0 0 0 0 0 5.80499 0 0 0 0 0 0 0 5.80499 0 15.9637 0 0 29.0249 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4.35374 31.9274 0 0 0 4.35374 0 0 0 0 0 0 0 0 0 0 0 0 0 0 11.61 0 4.35374 5.80499 0 5.80499 0 0 0;
 #X coords 0 100 99 0 200 140 1;
 #X restore 411 79 graph;
 #N canvas 264 335 568 475 timegraph 0;
@@ -105,7 +105,7 @@
 #X text 89 662 Instrument;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array multibrush 4 float 3;
-#A 0 0 0 0 0;
+#A 0 0 -0.15 -0.0276 0;
 #X coords 0 -1 4 1 60 140 1;
 #X restore 442 787 graph;
 #X obj 277 745 array set multibrush;
@@ -113,7 +113,7 @@
 #X floatatom 509 932 6 0 0 0 - - - 0;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array multirub 4 float 3;
-#A 0 0 0 0 0;
+#A 0 0 0.15 0.445515 0;
 #X coords 0 10 4 -0.1 60 140 1;
 #X restore 646 788 graph;
 #X obj 623 746 array set multirub;
@@ -178,9 +178,10 @@
 #X floatatom 707 513 4 0 0 1 mA - - 0;
 #X floatatom 760 513 4 0 0 1 hours - - 0;
 #X obj 97 218 route TStick_500;
-#X obj 604 461 route soc voltage current tte capacity rsense;
 #X floatatom 826 513 4 0 0 1 mAh - - 0;
 #X floatatom 879 515 7 0 0 1 mohm - - 0;
+#X obj 604 461 route soc voltage current tte capacity rsense designcap;
+#X floatatom 956 515 7 0 0 1 mAh - - 0;
 #X connect 0 0 26 0;
 #X connect 1 0 25 0;
 #X connect 2 0 17 0;
@@ -221,7 +222,7 @@
 #X connect 47 0 44 0;
 #X connect 47 1 45 0;
 #X connect 47 2 46 0;
-#X connect 52 0 125 0;
+#X connect 52 0 127 0;
 #X connect 58 0 57 0;
 #X connect 60 0 101 0;
 #X connect 60 1 37 0;
@@ -283,10 +284,11 @@
 #X connect 114 1 116 0;
 #X connect 114 2 115 0;
 #X connect 124 0 60 0;
-#X connect 125 0 53 0;
-#X connect 125 1 121 0;
-#X connect 125 2 122 0;
-#X connect 125 3 123 0;
-#X connect 125 4 126 0;
-#X connect 125 5 127 0;
+#X connect 127 0 53 0;
+#X connect 127 1 121 0;
+#X connect 127 2 122 0;
+#X connect 127 3 123 0;
+#X connect 127 4 125 0;
+#X connect 127 5 126 0;
+#X connect 127 6 128 0;
 #X coords 0 0 1 1 470 216 0;

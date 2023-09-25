@@ -1,6 +1,6 @@
 #include "batt.h"
 
-bool FUELGAUGE::init(fuelgauge_config config, bool reset = true)
+bool FUELGAUGE::init(fuelgauge_config config, bool reset)
 {
     // Get the parameters and save them
     i2c_addr = config.i2c_addr;
@@ -25,7 +25,6 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset = true)
     {
         bool POR = readReg16Bit(STATUS_REG)&0x0002;
         setresistsensor(rsense);  
-        designcap = designcap;
         if (POR)
         {
             while(readReg16Bit(0x3D)&1) {
@@ -78,6 +77,7 @@ void FUELGAUGE::getsoc() {
 void FUELGAUGE::getcapacity() {
     // Get Battery Capacity
     capacity = capacity_multiplier_mAH * readReg16Bit(REPCAP_REG);
+    saved_designcap = capacity_multiplier_mAH * readReg16Bit(DESIGNCAP_REG);
 }
 
 void FUELGAUGE::getvoltage() {
@@ -134,7 +134,6 @@ float FUELGAUGE::getresistsensor() {
 void FUELGAUGE::setresistsensor(float rsense) {
     resistSensor = rsense;
     updateMultipliers();
-
 }
 
 void FUELGAUGE::updateMultipliers() {

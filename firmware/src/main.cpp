@@ -79,6 +79,7 @@ struct BatteryData {
     float TTE = 0;
     unsigned int rsense = 0;
     unsigned int capacity = 0;
+    unsigned int designcap = 0;
     float value;
     unsigned long timer = 0;
     int interval = 1000; // in ms (1/f)
@@ -447,10 +448,12 @@ void loop() {
         battery.TTE = fuelgauge.tte;
         battery.rsense =fuelgauge.getresistsensor()*1000;
         battery.capacity = fuelgauge.capacity;
+        battery.designcap = fuelgauge.saved_designcap;
         if (battery.percentage > 100)
             battery.percentage = 100;
         if (battery.percentage < 0)
             battery.percentage = 0;
+        event.battery = true;
     }
 
     // // read IMU data
@@ -533,7 +536,7 @@ void loop() {
     if (sensors.tap != gestures.getButtonTap()) {sensors.tap = gestures.getButtonTap(); event.tap = true; } else { event.tap = false; }
     if (sensors.dtap != gestures.getButtonDTap()) {sensors.dtap = gestures.getButtonDTap(); event.dtap = true; } else { event.dtap = false; }
     if (sensors.ttap != gestures.getButtonTTap()) {sensors.ttap = gestures.getButtonTTap(); event.ttap = true; } else { event.ttap = false; }
-    if (sensors.battery != battery.percentage) {sensors.battery = battery.percentage; event.battery = true; } else { event.battery = false; }
+    // if (sensors.battery != battery.percentage) {sensors.battery = battery.percentage; event.battery = true; } else { event.battery = false; }
 
     // updating libmapper signals
     mpr_sig_set_value(lm.fsr, 0, 1, MPR_FLT, &sensors.fsr);
@@ -612,20 +615,6 @@ void loop() {
             lo_send(osc1, oscNamespace.c_str(), "ffff", sensors.quat[0], sensors.quat[1], sensors.quat[2], sensors.quat[3]);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "ypr");
             lo_send(osc1, oscNamespace.c_str(), "fff", sensors.ypr[0], sensors.ypr[1], sensors.ypr[2]);
-
-            // Battery Data
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/soc");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.percentage);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
-            lo_send(osc1, oscNamespace.c_str(), "f", battery.voltage);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.current);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
-            lo_send(osc1, oscNamespace.c_str(), "f", battery.TTE);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.rsense);
     }
     if (puara.IP2_ready()) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
@@ -662,20 +651,6 @@ void loop() {
             lo_send(osc2, oscNamespace.c_str(), "ffff", sensors.quat[0], sensors.quat[1], sensors.quat[2], sensors.quat[3]);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "ypr");
             lo_send(osc2, oscNamespace.c_str(), "fff", sensors.ypr[0], sensors.ypr[1], sensors.ypr[2]);
-
-            //Battery Data
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/soc");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.percentage);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
-            lo_send(osc1, oscNamespace.c_str(), "f", battery.voltage);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.current);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
-            lo_send(osc1, oscNamespace.c_str(), "f", battery.TTE);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.rsense);
     }
 
     // Sending discrete OSC messages
@@ -716,21 +691,24 @@ void loop() {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/ttap");
             lo_send(osc1, oscNamespace.c_str(), "i", sensors.ttap);
         }
-        // if (event.battery) {
-        //     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/soc");
-        //     lo_send(osc1, oscNamespace.c_str(), "i", battery.percentage);
-        //     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
-        //     lo_send(osc1, oscNamespace.c_str(), "f", battery.voltage);
-        //     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
-        //     lo_send(osc1, oscNamespace.c_str(), "i", battery.current);
-        //     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
-        //     lo_send(osc1, oscNamespace.c_str(), "f", battery.TTE);
-        //     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
-        //     lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
-        //     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
-        //     lo_send(osc1, oscNamespace.c_str(), "i", battery.rsense);
-
-        // }
+        if (event.battery) {
+            // Battery Data
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/soc");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.percentage);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.voltage);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.current);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.TTE);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.rsense);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/designcap");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.designcap);
+            event.battery = false;
+        }
     }
     if (puara.IP2_ready()) {
         if (event.brush) {
@@ -769,10 +747,24 @@ void loop() {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/ttap");
             lo_send(osc2, oscNamespace.c_str(), "i", sensors.ttap);
         }
-        // if (event.battery) {
-        //     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery");
-        //     lo_send(osc2, oscNamespace.c_str(), "i", sensors.battery);
-        // }
+        if (event.battery) {
+            // Battery Data
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/soc");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.percentage);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.voltage);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.current);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.TTE);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.rsense);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/designcap");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.designcap);
+            event.battery = false;
+        }
     }
 
     // Set LED - connection status and battery level

@@ -53,7 +53,6 @@ class FUELGAUGE
 
         // Battery Parameters
         // Initialisation Elements
-        uint8_t i2c_addr = 0x36;
         int designcap = 2400;
         float rsense = 0.01;
         float vempty = 3.3;
@@ -65,7 +64,7 @@ class FUELGAUGE
         float voltage = 0;
         float avg_voltage = 0;
         int capacity = 0;
-        int designcap = 0;
+        int saved_designcap = 0;
 
         // learned variables
         int rcomp = 0;
