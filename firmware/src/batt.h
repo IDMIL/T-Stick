@@ -61,8 +61,8 @@ class FUELGAUGE
         // raw variables
         uint16_t raw_inst_voltage = 0;
         uint16_t raw_avg_voltage = 0;
-        uint16_t raw_inst_current = 0;
-        uint16_t raw_avg_current = 0;
+        int16_t raw_inst_current = 0;
+        int16_t raw_avg_current = 0;
         uint16_t raw_capacity = 0;
 
         // reported variables
