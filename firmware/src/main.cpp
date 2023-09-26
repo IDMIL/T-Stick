@@ -73,10 +73,14 @@ Pin pin{ 5, 35, 33, 15 };
   
 struct BatteryData {
     unsigned int percentage = 0;
+    unsigned int tinypico_percentage = 0;
+    float tinypico_voltage = 0;
     unsigned int lastPercentage = 0;
     float voltage = 0;
     unsigned int current = 0;
     float TTE = 0;
+    bool status = false; // is there a battery
+    bool tinypico_status = false; // is there a battery tinypico
     unsigned int rsense = 0;
     unsigned int capacity = 0;
     unsigned int designcap = 0;
@@ -90,15 +94,15 @@ struct BatteryData {
 // read battery level (based on https://www.youtube.com/watch?v=yZjpYmWVLh8&feature=youtu.be&t=88) 
 
 void batteryFilter() {
-    battery.filterArray.push_back(battery.percentage);
+    battery.filterArray.push_back(battery.tinypico_percentage);
     if(battery.filterArray.size() > battery.queueAmount) {
         battery.filterArray.pop_front();
     }
-    battery.percentage = 0;
+    battery.tinypico_percentage = 0;
     for (int i=0; i<battery.filterArray.size(); i++) {
-        battery.percentage += battery.filterArray.at(i);
+        battery.tinypico_percentage += battery.filterArray.at(i);
     }
-    battery.percentage /= battery.filterArray.size();
+    battery.tinypico_percentage /= battery.filterArray.size();
 }
 
 
@@ -327,13 +331,6 @@ void setup() {
     // initIMU();
     // std::cout << "done" << std::endl;
 
-    // Print out fuel gauge config
-    std::cout << " Fuel Gauge Config" << "\n"
-              << "Design Capacity: " << fg_config.designcap << "\n"
-              << "Rsense: " << fg_config.rsense << "\n"
-              << "Empty Voltage: " << fg_config.vempty << "\n"
-              << "Revoery Voltage: " << fg_config.recovery_voltage << "\n" << std::endl;
-
     std::cout << "    Initializing Fuel Gauge... ";
     fuelgauge.init(fg_config);
     std::cout << "done" << std::endl;
@@ -435,19 +432,9 @@ void loop() {
         gestures.updateTouchArray(capsense.data,capsense.touchStripsSize);
     #endif
 
-    // read battery
-    // battery.percentage = fuelgauge.getSOC();
-    // battery.current = fuelgauge.getInstantaneousCurrent();
-    // battery.voltage = fuelgauge.getInstantaneousVoltage();
-    // battery.TTE = fuelgauge.getTimeToEmpty();
-    // battery.rsense =fuelgauge.getResistSensor();
-    // battery.capacity = fuelgauge.getCapacity();
-    // if (battery.percentage > 100)
-    //     battery.percentage = 100;
-    // if (battery.percentage < 0)
-    //     battery.percentage = 0;
     if (millis() - battery.interval > battery.timer) {
         battery.timer = millis();
+        // Read battery stats from fuel gauge
         fuelgauge.getBatteryData();
         battery.percentage = fuelgauge.rep_soc;
         battery.current = fuelgauge.rep_inst_current;
@@ -455,19 +442,16 @@ void loop() {
         battery.TTE = fuelgauge.rep_tte;
         battery.rsense =fuelgauge.rsense;
         battery.capacity = fuelgauge.rep_capacity;
+        battery.status = fuelgauge.bat_status;
         event.battery = true;
-        std::cout << "Raw Battery Data " << "\n"
-                  << "Raw Voltage read: " << fuelgauge.raw_inst_voltage << "\n"
-                  << "Raw Current read: " << fuelgauge.raw_inst_current << "\n"
-                  << "Raw Capacity read: " <<fuelgauge.raw_capacity << "\n" 
-                  << "Raw Stored Design Capacity read: " <<fuelgauge.raw_design_capacity << "\n" 
-                  << "Design Capacity (in class object): " <<fuelgauge.reg_cap << "\n"
-                  << "Rsense (in class object): " <<fuelgauge.rsense << "\n"
-                  << "Capacity Multiplier (in class object): " << fuelgauge.getcapacityLSB() << "\n"
-                  << "Current Multiplier (in class object): " <<fuelgauge.getcurrentLSB() << "\n" 
-                  << "Raw SOC read: " << fuelgauge.raw_soc << "\n"
-                  << "Raw Age read: " << fuelgauge.raw_age << "\n"
-                  << "Raw TTE read: " << fuelgauge.raw_tte << "\n"<< "\n"<< std::endl;
+
+        // Read voltage and status from TinyPico to compare
+        battery.tinypico_voltage = tinypico.GetBatteryVoltage();
+        battery.tinypico_percentage = static_cast<int>((battery.tinypico_voltage - 2.9) * 100 / (4.15 - 2.9));
+        if (battery.tinypico_percentage > 100)
+            battery.tinypico_percentage = 100;
+        if (battery.tinypico_percentage < 0)
+            battery.tinypico_percentage = 0;
     } else {
         event.battery = false; // don't send new battery data
     }
@@ -721,6 +705,13 @@ void loop() {
             lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
             lo_send(osc1, oscNamespace.c_str(), "i", battery.rsense);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/status");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.status);            
+            //Tinypico data
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/pico/soc");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.tinypico_percentage);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/pico/voltage");
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.tinypico_voltage);             
         }
     }
     if (puara.IP2_ready()) {
@@ -763,17 +754,24 @@ void loop() {
         if (event.battery) {
             // Battery Data
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/soc");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.percentage);
+            lo_send(osc2, oscNamespace.c_str(), "i", battery.percentage);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
-            lo_send(osc1, oscNamespace.c_str(), "f", battery.voltage);
+            lo_send(osc2, oscNamespace.c_str(), "f", battery.voltage);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.current);
+            lo_send(osc2, oscNamespace.c_str(), "i", battery.current);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
-            lo_send(osc1, oscNamespace.c_str(), "f", battery.TTE);
+            lo_send(osc2, oscNamespace.c_str(), "f", battery.TTE);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
+            lo_send(osc2, oscNamespace.c_str(), "i", battery.capacity);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.rsense);
+            lo_send(osc2, oscNamespace.c_str(), "i", battery.rsense);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/status");
+            lo_send(osc2, oscNamespace.c_str(), "i", battery.status);      
+            //Tinypico data
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/pico/soc");
+            lo_send(osc2, oscNamespace.c_str(), "i", battery.tinypico_percentage);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/pico/voltage");
+            lo_send(osc2, oscNamespace.c_str(), "f", battery.tinypico_voltage);
         }
     }
 

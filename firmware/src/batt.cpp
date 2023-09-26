@@ -2,6 +2,13 @@
 
 bool FUELGAUGE::init(fuelgauge_config config, bool reset)
 {
+    // Print out fuel gauge config
+    std::cout << "\n    Fuel Gauge Config" << "\n"
+              << "    Design Capacity: " << config.designcap << "\n"
+              << "    Rsense: " << config.rsense << "\n"
+              << "    Empty Voltage: " << config.vempty << "\n"
+              << "    Revoery Voltage: " << config.recovery_voltage << "\n" << std::endl;
+
     // Get the parameters and save them
     i2c_addr = config.i2c_addr;
     designcap = config.designcap;
@@ -24,15 +31,18 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
     if (error == 0) //Device Acknowledged
     {
         uint16_t STATUS = readReg16Bit(STATUS_REG);
-        bool POR = STATUS&0x0002;
-        Serial.print("Checking status ");
-        Serial.print(STATUS);
-        Serial.print("Checking POR ");
-        Serial.print(POR);
-        updateMultipliers(); // compute multipliers
-        if (POR || reset)
+        uint16_t POR = STATUS&0x0002;
+        std::cout << "    Checking status " << "\n"
+                  << "    Status read: " << STATUS << "\n"
+                  << "    POR flag: " << POR << std::endl;
+        
+        // Compute multipliers
+        updateMultipliers(); 
+
+        // Reset the Fuel Gauge
+        if (POR)
         {
-            Serial.print("Initialising Fuel Gauge");
+            std::cout << "    Initialising Fuel Gauge" << std::endl;
             while(readReg16Bit(0x3D)&1) {
                 delay(10);
             }
@@ -65,11 +75,23 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
                 delay(10);
             }
             //Reload original HbCFG value
-            writeReg16Bit(0xBA,HibCFG);
-            writeVerifyReg16Bit(STATUS_REG,readReg16Bit(STATUS_REG)&0xFFFD); //reset POR Status            
+            writeReg16Bit(0xBA,HibCFG);    
         } else {
-            Serial.print("Loading old config");
+            std::cout << "    Loading old config" << std::endl;
         }
+        // Reset Status Register when init function runs
+        std::cout << "    Resetting Status" << std::endl;
+        STATUS = readReg16Bit(STATUS_REG);
+        
+        // Get new status
+        uint16_t RESET_STATUS = STATUS&0xFFFD;
+        std::cout << "    Setting new status: " << RESET_STATUS << std::endl;
+        writeVerifyReg16Bit(STATUS_REG,RESET_STATUS); //reset POR Status   
+
+        // Read Status to ensure it has been cleared (for debugging)
+        POR = readReg16Bit(STATUS_REG)&0x0002;
+        std::cout << "    Status Flag: " << readReg16Bit(STATUS_REG) << "\n"
+                  << "    POR Flag: " << POR << std::endl;     
         return true;
     }
     return false; //device not found
@@ -103,7 +125,6 @@ void FUELGAUGE::getsoc() {
 void FUELGAUGE::getcapacity() {
     // Get Battery Capacity
     raw_capacity = readReg16Bit(REPCAP_REG);
-    raw_design_capacity = readReg16Bit(DESIGNCAP_REG);
     rep_capacity = capacity_multiplier_mAH * raw_capacity;
 }
 
@@ -139,6 +160,12 @@ void FUELGAUGE::gettte() {
     rep_tte = time_multiplier_Hours * int(raw_tte);
 }
 
+void FUELGAUGE::getttf() {
+    // Get time to full
+    raw_ttf = readReg16Bit(TTF_REG);
+    rep_ttf = time_multiplier_Hours * int(raw_ttf);
+}
+
 void FUELGAUGE::getparameters() {
     // Get learned parameters
     rcomp = readReg16Bit(RCOMPP0_REG);
@@ -161,6 +188,40 @@ void FUELGAUGE::getBatteryData() {
     getparameters();
 }
 
+void FUELGAUGE::getBatteryStatus() {
+    // Get Battery Status
+    // Read status register
+    raw_status = readReg16Bit(STATUS_REG);
+
+    // Get the 4th bit
+    bat_status = raw_status&0x0800;
+    bat_status = !bat_status; // battery status 0 when present, must invert
+}
+
+void FUELGAUGE::getBatteryInsertion() {
+    // Get Battery Insertion
+    // Read status register
+    raw_status = readReg16Bit(STATUS_REG);
+
+    // Get the 11th bit
+    bat_insert = raw_status&0x0800;
+    
+    // Reset Insertion bit
+    writeVerifyReg16Bit(STATUS_REG,raw_status&0xF7FF);
+}
+
+void FUELGAUGE::getBatteryRemoval() {
+    // Get Battery Insertion
+    // Read status register
+    raw_status = readReg16Bit(STATUS_REG);
+
+    // Get the 15th bit
+    bat_remove = raw_status&0x8000;
+    
+    // Reset Removal bit
+    writeVerifyReg16Bit(STATUS_REG,raw_status&0x7FFF);
+}
+
 float FUELGAUGE::getcapacityLSB() {
     // return the capacity LSB
     return capacity_multiplier_mAH;
@@ -176,6 +237,10 @@ void FUELGAUGE::updateMultipliers() {
     // Compute and store new multipliers
     capacity_multiplier_mAH = (base_capacity_multiplier_mAh/rsense); //refer to row "Capacity"
     current_multiplier_mV = (base_current_multiplier_mAh/rsense); //refer to row "Current"
+
+    // Print new multipliers to serial
+    std::cout << "    New current multiplier: " << current_multiplier_mV << "\n"
+              << "    New capacity multiplier: " << capacity_multiplier_mAH << std::endl; 
 }
 
 
@@ -194,6 +259,7 @@ bool FUELGAUGE::writeVerifyReg16Bit(uint8_t reg, uint16_t value)
   int attempt = 0;
   // Verify that the value has been written before moving on
   while ((value != readReg16Bit(reg)) && (attempt < 10)) {
+    std::cout << "    Resetting Status ... attempt " << attempt << std::endl;
     //Write the value to the register
     writeReg16Bit(reg, value);
     // Wait a bit
@@ -205,8 +271,9 @@ bool FUELGAUGE::writeVerifyReg16Bit(uint8_t reg, uint16_t value)
   
   if (attempt > 10) {
     return false;
-    Serial.print("Failed to reset STATUS Flag");
+    std::cout << "    Failed to reset STATUS Flag" <<std::endl;
   } else {
+    std::cout << "    Status reset" << std::endl;
     return true;
   }
 }

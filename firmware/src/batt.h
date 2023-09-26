@@ -1,5 +1,7 @@
 #include <Arduino.h>
 #include <Wire.h>
+#include <iostream>
+
 // Inspired by https://github.com/AwotG/Arduino-MAX17055_Driver
 // Simple library for the MAX17055 fuel gauge
 
@@ -60,45 +62,65 @@ class FUELGAUGE
         float recovery_voltage = 3.88;
 
         // raw variables
-        uint16_t raw_inst_voltage = 0;
-        uint16_t raw_avg_voltage = 0;
-        int16_t raw_inst_current = 0;
-        int16_t raw_avg_current = 0;
-        uint16_t raw_capacity = 0;
-        uint16_t raw_design_capacity = 0;
-        uint16_t raw_tte = 0;
-        uint16_t raw_age = 0;
+        int16_t raw_inst_current = 0;       // Instantaneous Current (mV/rsense (mOhm))
+        int16_t raw_avg_current = 0;        // Average Current (mV/rsense (mOhm))
+        uint16_t raw_inst_voltage = 0;      // Instaneous Voltage (0.0078125V/bit)    
+        uint16_t raw_avg_voltage = 0;       // Average Voltage (0.0078125V/bit)
+        uint16_t raw_capacity = 0;          // Report capacity (mVh/rsense (mOhm))
+        uint16_t raw_soc = 0;               // State of Charge (1/256%) [Should be saved for reboot]
+        uint16_t raw_age = 0;               // Age of Battery (5.625s/bit)
+        uint16_t raw_tte = 0;               // Time till Empty (5.625s/bit)
+        uint16_t raw_ttf = 0;               // Time till Full (5.625s/bit)
+        uint16_t raw_status = 0;            // Value in Status register
 
         // reported variables
-        float rep_inst_current = 0;
-        float rep_avg_current = 0;
-        float rep_inst_voltage = 0;
-        float rep_avg_voltage = 0;
-        int rep_capacity = 0;
-        int rep_soc = 0; //
-        int rep_age = 0;
-        int rep_tte = 0;
+        float rep_inst_current = 0;         // Instantaneous Current (mA)
+        float rep_avg_current = 0;          // Average Current (mA)
+        float rep_inst_voltage = 0;         // Instaneous Voltage (V)
+        float rep_avg_voltage = 0;          // Average Voltage (V)
+        int rep_capacity = 0;               // Report capacity (mAh)
+        int rep_soc = 0;                    // State of Charge (%)
+        int rep_age = 0;                    // Age of Battery (hours)
+        int rep_tte = 0;                    // Time till Empty (hours)
+        int rep_ttf = 0;                    // Time till Full (hours)
+        
+        // Battery info variables
+        bool bat_status = false;            // Boolean for if a battery is present in the system
+        bool bat_insert = false;            // Boolean for if a battery is inserted in the system
+        bool bat_remove = false;            // Boolean for if a battery is removed from the system
 
         // learned variables
-        uint16_t raw_soc = 0;
-        uint16_t rcomp = 0;
-        uint16_t tempco = 0;
-        uint16_t fullcap = 0;
-        uint16_t cycles = 0;
-        uint16_t fullcapnorm = 0;
+        uint16_t rcomp = 0;                 // Characterisation information for computing open-circuit voltage of cell
+        uint16_t tempco = 0;                // Temperature compensation informtion for rcomp0
+        uint16_t fullcap = 0;               // Capacity of the battery when full (mAh)
+        uint16_t cycles = 0;                // Number of charge cycles
+        uint16_t fullcapnorm = 0;           // Capacity of the battery when full, normalised (%)
 
         // methods
         // Initialise Fuel Gauge
         bool init(fuelgauge_config config, bool reset = true);
 
-        // Get properties
-        void getsoc();
-        void getcapacity();
+        // Get Battery Data (analog meausrements + modelguage outputs)
+        void getBatteryData();
+
+        // Get Analog Measurements
         void getvoltage();
         void getcurrent();
+
+        // Get ModelGauge Outputs
+        void getsoc();
+        void getcapacity();
         void getage();
         void gettte();
-        void getBatteryData();
+        void getttf();
+
+        // Get Battery info (Battery Presence in system, battery removal/insertion)
+        void getBatteryInfo();
+
+        // Get Status
+        void getBatteryStatus();
+        void getBatteryInsertion();
+        void getBatteryRemoval();
 
         // Save learned parameters
         void getparameters();
@@ -115,7 +137,7 @@ class FUELGAUGE
         uint16_t HibCFG = 0;
         
         //Based on "Register Resolutions from MAX17055 Technical Reference" Table 6. 
-        float base_capacity_multiplier_mAh = 5;
+        float base_capacity_multiplier_mAh = 5.0;
         float base_current_multiplier_mAh = 1.5625;
         float capacity_multiplier_mAH = 0.5; //refer to row "Capacity" (for 10mOhm)
         float current_multiplier_mV = 0.15625; //refer to row "Current" (for 10mOhm)
