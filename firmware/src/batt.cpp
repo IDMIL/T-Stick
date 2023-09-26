@@ -27,6 +27,7 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
         updateMultipliers(); // compute multipliers
         if (POR)
         {
+            Serial.print("Initialising Fuel Gauge");
             while(readReg16Bit(0x3D)&1) {
                 delay(10);
             }
@@ -46,9 +47,9 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
 
             // Set empty voltage and recovery voltage
             // Empty voltage in increments of 10mV
-            int reg_vempty = vempty * 100; //empty voltage in 10mV
-            int reg_recover = 3.88 *25; //recovery voltage in 40mV increments
-            int voltage_settings = (reg_vempty << 7) | reg_recover; 
+            uint16_t reg_vempty = vempty * 100; //empty voltage in 10mV
+            uint16_t reg_recover = 3.88 *25; //recovery voltage in 40mV increments
+            uint16_t voltage_settings = (reg_vempty << 7) | reg_recover; 
             writeReg16Bit(VEMPTY_REG, voltage_settings); //Write Vempty
             
             // Set Model Characteristic
@@ -60,7 +61,9 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
             }
             //Reload original HbCFG value
             writeReg16Bit(0xBA,HibCFG);
-            writeReg16Bit(STATUS_REG,readReg16Bit(STATUS_REG)&0xFFFD); //reset POR Status            
+            writeVerifyReg16Bit(STATUS_REG,readReg16Bit(STATUS_REG)&0xFFFD); //reset POR Status            
+        } else {
+            Serial.print("Loading old config");
         }
         return true;
     }
@@ -168,6 +171,7 @@ bool FUELGAUGE::writeVerifyReg16Bit(uint8_t reg, uint16_t value)
   
   if (attempt > 10) {
     return false;
+    Serial.print("Failed to reset STATUS Flag");
   } else {
     return true;
   }

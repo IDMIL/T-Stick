@@ -446,7 +446,7 @@ void loop() {
         battery.current = fuelgauge.rep_inst_current;
         battery.voltage = fuelgauge.rep_inst_voltage;
         battery.TTE = fuelgauge.rep_tte;
-        battery.rsense =fuelgauge.getresistsensor()*1000;
+        battery.rsense =fuelgauge.rsense;
         battery.capacity = fuelgauge.rep_capacity;
         if (battery.percentage > 100)
             battery.percentage = 100;

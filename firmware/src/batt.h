@@ -95,7 +95,6 @@ class FUELGAUGE
         void getage();
         void gettte();
         void getBatteryData();
-        float getresistsensor();
 
         // Save learned parameters
         void getparameters();
