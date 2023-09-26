@@ -23,9 +23,14 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
     byte error = Wire.endTransmission();
     if (error == 0) //Device Acknowledged
     {
-        bool POR = readReg16Bit(STATUS_REG)&0x0002;
+        uint16_t STATUS = readReg16Bit(STATUS_REG);
+        bool POR = STATUS&0x0002;
+        Serial.print("Checking status ");
+        Serial.print(STATUS);
+        Serial.print("Checking POR ");
+        Serial.print(POR);
         updateMultipliers(); // compute multipliers
-        if (POR)
+        if (POR || reset)
         {
             Serial.print("Initialising Fuel Gauge");
             while(readReg16Bit(0x3D)&1) {
@@ -40,7 +45,7 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
 
             //EZ Config
             // Write Battery capacity
-            uint16_t reg_cap = designcap / capacity_multiplier_mAH;
+            reg_cap = (designcap * rsense) / base_capacity_multiplier_mAh;
             writeReg16Bit(DESIGNCAP_REG, reg_cap); //Write Design Cap
             writeReg16Bit(dQACC_REG, reg_cap/32); //Write dQAcc
             writeReg16Bit(dPACC_REG, 44138/32); //Write dPAcc
@@ -70,6 +75,24 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
     return false; //device not found
 }
 
+// Functions for setting design cap and rsense
+void FUELGAUGE::setrsense(int resist_sense) {
+    // Set current sensing resistor value in mOhms
+    rsense = resist_sense;
+
+    // Update the multipiers for capacity and current to adjust for capacity and current.
+    updateMultipliers();
+}
+
+/// Set design capacity (for use externally)
+void FUELGAUGE::setdesigncap(int design_capacity) {
+    // Set design capacity in mAh
+    designcap = design_capacity;
+
+    // Compute reg cap
+    reg_cap = designcap * (rsense / 5);
+}
+
 // Get Fuel Gauge data functions
 void FUELGAUGE::getsoc() {
     // Get the State of charge
@@ -80,6 +103,7 @@ void FUELGAUGE::getsoc() {
 void FUELGAUGE::getcapacity() {
     // Get Battery Capacity
     raw_capacity = readReg16Bit(REPCAP_REG);
+    raw_design_capacity = readReg16Bit(DESIGNCAP_REG);
     rep_capacity = capacity_multiplier_mAH * raw_capacity;
 }
 
@@ -105,12 +129,14 @@ void FUELGAUGE::getcurrent(){
 
 void FUELGAUGE::getage() {
     // Get Battery Age
-    rep_age = time_multiplier_Hours * readReg16Bit(AGE_REG);
+    raw_age = readReg16Bit(AGE_REG);
+    rep_age = time_multiplier_Hours * int(raw_age);
 }
 
 void FUELGAUGE::gettte() {
     // Get time to empty
-    rep_tte = time_multiplier_Hours * readReg16Bit(TTE_REG);
+    raw_tte = readReg16Bit(TTE_REG);
+    rep_tte = time_multiplier_Hours * int(raw_tte);
 }
 
 void FUELGAUGE::getparameters() {
@@ -135,10 +161,21 @@ void FUELGAUGE::getBatteryData() {
     getparameters();
 }
 
+float FUELGAUGE::getcapacityLSB() {
+    // return the capacity LSB
+    return capacity_multiplier_mAH;
+}
+
+float FUELGAUGE::getcurrentLSB() {
+    // return the current LSB
+    return current_multiplier_mV;
+}
+
 // Private Methods
 void FUELGAUGE::updateMultipliers() {
-    capacity_multiplier_mAH = (5e-6)/rsense; //refer to row "Capacity"
-    current_multiplier_mV = (1.5625e-6)/rsense; //refer to row "Current"
+    // Compute and store new multipliers
+    capacity_multiplier_mAH = (base_capacity_multiplier_mAh/rsense); //refer to row "Capacity"
+    current_multiplier_mV = (base_current_multiplier_mAh/rsense); //refer to row "Current"
 }
 
 
@@ -154,20 +191,17 @@ void FUELGAUGE::writeReg16Bit(uint8_t reg, uint16_t value)
 
 bool FUELGAUGE::writeVerifyReg16Bit(uint8_t reg, uint16_t value)
 {
-  //Write order is LSB first, and then MSB. Refer to AN635 pg 35 figure 1.12.2.5
-  Wire.beginTransmission(i2c_addr);
-  Wire.write(reg);
-  Wire.write( value       & 0xFF); // value low byte
-  Wire.write((value >> 8) & 0xFF); // value high byte
-  // Wait a bit
-  delay(10);
   int attempt = 0;
   // Verify that the value has been written before moving on
-  while (value != readReg16Bit(reg) && attempt < 10) {
-    delay(10);
+  while ((value != readReg16Bit(reg)) && (attempt < 10)) {
+    //Write the value to the register
+    writeReg16Bit(reg, value);
+    // Wait a bit
+    delay(1);
+
+    //Increase attempt
     attempt++;
   };
-  uint8_t last_status = Wire.endTransmission();
   
   if (attempt > 10) {
     return false;

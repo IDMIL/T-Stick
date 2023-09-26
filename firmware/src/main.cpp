@@ -327,6 +327,13 @@ void setup() {
     // initIMU();
     // std::cout << "done" << std::endl;
 
+    // Print out fuel gauge config
+    std::cout << " Fuel Gauge Config" << "\n"
+              << "Design Capacity: " << fg_config.designcap << "\n"
+              << "Rsense: " << fg_config.rsense << "\n"
+              << "Empty Voltage: " << fg_config.vempty << "\n"
+              << "Revoery Voltage: " << fg_config.recovery_voltage << "\n" << std::endl;
+
     std::cout << "    Initializing Fuel Gauge... ";
     fuelgauge.init(fg_config);
     std::cout << "done" << std::endl;
@@ -448,11 +455,19 @@ void loop() {
         battery.TTE = fuelgauge.rep_tte;
         battery.rsense =fuelgauge.rsense;
         battery.capacity = fuelgauge.rep_capacity;
-        if (battery.percentage > 100)
-            battery.percentage = 100;
-        if (battery.percentage < 0)
-            battery.percentage = 0;
         event.battery = true;
+        std::cout << "Raw Battery Data " << "\n"
+                  << "Raw Voltage read: " << fuelgauge.raw_inst_voltage << "\n"
+                  << "Raw Current read: " << fuelgauge.raw_inst_current << "\n"
+                  << "Raw Capacity read: " <<fuelgauge.raw_capacity << "\n" 
+                  << "Raw Stored Design Capacity read: " <<fuelgauge.raw_design_capacity << "\n" 
+                  << "Design Capacity (in class object): " <<fuelgauge.reg_cap << "\n"
+                  << "Rsense (in class object): " <<fuelgauge.rsense << "\n"
+                  << "Capacity Multiplier (in class object): " << fuelgauge.getcapacityLSB() << "\n"
+                  << "Current Multiplier (in class object): " <<fuelgauge.getcurrentLSB() << "\n" 
+                  << "Raw SOC read: " << fuelgauge.raw_soc << "\n"
+                  << "Raw Age read: " << fuelgauge.raw_age << "\n"
+                  << "Raw TTE read: " << fuelgauge.raw_tte << "\n"<< "\n"<< std::endl;
     } else {
         event.battery = false; // don't send new battery data
     }

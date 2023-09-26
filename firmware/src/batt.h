@@ -8,7 +8,7 @@ struct fuelgauge_config {
     // Initialisation Elements
     uint8_t i2c_addr;
     int designcap;
-    float rsense;
+    int rsense;
     float vempty;
     float recovery_voltage;
 
@@ -53,7 +53,8 @@ class FUELGAUGE
 
         // Battery Parameters
         // Initialisation Elements
-        uint16_t designcap = 2400;
+        int designcap = 2400;
+        uint16_t reg_cap = designcap *2;
         int rsense = 10;
         float vempty = 3.3;
         float recovery_voltage = 3.88;
@@ -64,6 +65,9 @@ class FUELGAUGE
         int16_t raw_inst_current = 0;
         int16_t raw_avg_current = 0;
         uint16_t raw_capacity = 0;
+        uint16_t raw_design_capacity = 0;
+        uint16_t raw_tte = 0;
+        uint16_t raw_age = 0;
 
         // reported variables
         float rep_inst_current = 0;
@@ -98,6 +102,12 @@ class FUELGAUGE
 
         // Save learned parameters
         void getparameters();
+        
+        // Set some properties
+        void setrsense(int rsense);
+        void setdesigncap(int designcap);
+        float getcapacityLSB();
+        float getcurrentLSB();
 
     private:
         //variables
@@ -105,8 +115,10 @@ class FUELGAUGE
         uint16_t HibCFG = 0;
         
         //Based on "Register Resolutions from MAX17055 Technical Reference" Table 6. 
-        float capacity_multiplier_mAH = (5e-6)/rsense; //refer to row "Capacity"
-        float current_multiplier_mV = (1.5625e-6)/rsense; //refer to row "Current"
+        float base_capacity_multiplier_mAh = 5;
+        float base_current_multiplier_mAh = 1.5625;
+        float capacity_multiplier_mAH = 0.5; //refer to row "Capacity" (for 10mOhm)
+        float current_multiplier_mV = 0.15625; //refer to row "Current" (for 10mOhm)
         float voltage_multiplier_V = 7.8125e-5; //refer to row "Voltage"
         float time_multiplier_Hours = 5.625/3600.0; //Least Significant Bit= 5.625 seconds, 3600 converts it to Hours.
         float percentage_multiplier = 1.0/256.0; //refer to row "Percentage"
