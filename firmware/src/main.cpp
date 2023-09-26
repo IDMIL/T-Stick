@@ -155,10 +155,10 @@ ICM_20948_I2C imu;
 FUELGAUGE fuelgauge;
 fuelgauge_config fg_config = {
     0x36, //i2c_addr
-    3200, // capacity
-    0.1, // rsense
-    3, // empty voltage
-    3.88, //recovery voltage
+    3200, // capacity (mAh)
+    10, // rsense (mOhm)
+    3, // empty voltage (V)
+    3.88, //recovery voltage (V)
     0, // soc
     0, // rcomp
     0, // tempco
@@ -442,18 +442,19 @@ void loop() {
     if (millis() - battery.interval > battery.timer) {
         battery.timer = millis();
         fuelgauge.getBatteryData();
-        battery.percentage = fuelgauge.cooked_soc;
-        battery.current = fuelgauge.current;
-        battery.voltage = fuelgauge.voltage;
-        battery.TTE = fuelgauge.tte;
+        battery.percentage = fuelgauge.rep_soc;
+        battery.current = fuelgauge.rep_inst_current;
+        battery.voltage = fuelgauge.rep_inst_voltage;
+        battery.TTE = fuelgauge.rep_tte;
         battery.rsense =fuelgauge.getresistsensor()*1000;
-        battery.capacity = fuelgauge.capacity;
-        battery.designcap = fuelgauge.saved_designcap;
+        battery.capacity = fuelgauge.rep_capacity;
         if (battery.percentage > 100)
             battery.percentage = 100;
         if (battery.percentage < 0)
             battery.percentage = 0;
         event.battery = true;
+    } else {
+        event.battery = false; // don't send new battery data
     }
 
     // // read IMU data
@@ -705,9 +706,6 @@ void loop() {
             lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
             lo_send(osc1, oscNamespace.c_str(), "i", battery.rsense);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/designcap");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.designcap);
-            event.battery = false;
         }
     }
     if (puara.IP2_ready()) {
@@ -761,9 +759,6 @@ void loop() {
             lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
             lo_send(osc1, oscNamespace.c_str(), "i", battery.rsense);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/designcap");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.designcap);
-            event.battery = false;
         }
     }
 

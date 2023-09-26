@@ -53,31 +53,35 @@ class FUELGAUGE
 
         // Battery Parameters
         // Initialisation Elements
-        int designcap = 2400;
-        float rsense = 0.01;
+        uint16_t designcap = 2400;
+        int rsense = 10;
         float vempty = 3.3;
         float recovery_voltage = 3.88;
 
         // raw variables
-        float current = 0;
-        float avg_current = 0;
-        float voltage = 0;
-        float avg_voltage = 0;
-        int capacity = 0;
-        int saved_designcap = 0;
+        uint16_t raw_inst_voltage = 0;
+        uint16_t raw_avg_voltage = 0;
+        uint16_t raw_inst_current = 0;
+        uint16_t raw_avg_current = 0;
+        uint16_t raw_capacity = 0;
+
+        // reported variables
+        float rep_inst_current = 0;
+        float rep_avg_current = 0;
+        float rep_inst_voltage = 0;
+        float rep_avg_voltage = 0;
+        int rep_capacity = 0;
+        int rep_soc = 0; //
+        int rep_age = 0;
+        int rep_tte = 0;
 
         // learned variables
-        int rcomp = 0;
-        int tempco = 0;
-        int fullcap = 0;
-        int cycles = 0;
-        int fullcapnorm = 0;
-
-        // SOC, age and time to empty
-        int raw_soc = 0; // State of charge
-        int cooked_soc = 0; //
-        int age = 0;
-        int tte = 0;
+        uint16_t raw_soc = 0;
+        uint16_t rcomp = 0;
+        uint16_t tempco = 0;
+        uint16_t fullcap = 0;
+        uint16_t cycles = 0;
+        uint16_t fullcapnorm = 0;
 
         // methods
         // Initialise Fuel Gauge
@@ -98,19 +102,17 @@ class FUELGAUGE
 
     private:
         //variables
-        float resistSensor = 0.01; //default internal resist sensor
         uint8_t i2c_addr = 0x36;
         uint16_t HibCFG = 0;
         
         //Based on "Register Resolutions from MAX17055 Technical Reference" Table 6. 
-        float capacity_multiplier_mAH = (5e-3)/resistSensor; //refer to row "Capacity"
-        float current_multiplier_mV = (1.5625e-3)/resistSensor; //refer to row "Current"
+        float capacity_multiplier_mAH = (5e-6)/rsense; //refer to row "Capacity"
+        float current_multiplier_mV = (1.5625e-6)/rsense; //refer to row "Current"
         float voltage_multiplier_V = 7.8125e-5; //refer to row "Voltage"
         float time_multiplier_Hours = 5.625/3600.0; //Least Significant Bit= 5.625 seconds, 3600 converts it to Hours.
         float percentage_multiplier = 1.0/256.0; //refer to row "Percentage"
         
         //methods
-        void setresistsensor(float rsense);
         void updateMultipliers();
         uint16_t readReg16Bit(uint8_t reg);
         void writeReg16Bit(uint8_t reg, uint16_t value);

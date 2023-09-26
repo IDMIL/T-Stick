@@ -24,7 +24,7 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
     if (error == 0) //Device Acknowledged
     {
         bool POR = readReg16Bit(STATUS_REG)&0x0002;
-        setresistsensor(rsense);  
+        updateMultipliers(); // compute multipliers
         if (POR)
         {
             while(readReg16Bit(0x3D)&1) {
@@ -39,7 +39,7 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
 
             //EZ Config
             // Write Battery capacity
-            int reg_cap = designcap / capacity_multiplier_mAH;
+            uint16_t reg_cap = designcap / capacity_multiplier_mAH;
             writeReg16Bit(DESIGNCAP_REG, reg_cap); //Write Design Cap
             writeReg16Bit(dQACC_REG, reg_cap/32); //Write dQAcc
             writeReg16Bit(dPACC_REG, 44138/32); //Write dPAcc
@@ -71,35 +71,43 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
 void FUELGAUGE::getsoc() {
     // Get the State of charge
     raw_soc = readReg16Bit(REPSOC_REG);
-    cooked_soc = percentage_multiplier * raw_soc;
+    rep_soc = percentage_multiplier * raw_soc;
 }
 
 void FUELGAUGE::getcapacity() {
     // Get Battery Capacity
-    capacity = capacity_multiplier_mAH * readReg16Bit(REPCAP_REG);
-    saved_designcap = capacity_multiplier_mAH * readReg16Bit(DESIGNCAP_REG);
+    raw_capacity = readReg16Bit(REPCAP_REG);
+    rep_capacity = capacity_multiplier_mAH * raw_capacity;
 }
 
 void FUELGAUGE::getvoltage() {
-    // Get voltage
-    voltage = voltage_multiplier_V * readReg16Bit(VCELL_REG);
-    avg_voltage = voltage_multiplier_V * readReg16Bit(AVGVCELL_REG);
+    // Get instantaneous voltage
+    raw_inst_voltage = readReg16Bit(VCELL_REG);
+    rep_inst_voltage = voltage_multiplier_V * raw_inst_voltage;
+
+    // Get Average Voltage
+    raw_avg_voltage = readReg16Bit(AVGVCELL_REG);
+    rep_avg_voltage = voltage_multiplier_V * raw_avg_voltage;
 }
 
 void FUELGAUGE::getcurrent(){
-    // Get current
-    current = current_multiplier_mV * readReg16Bit(CURRENT_REG);
-    avg_current = current_multiplier_mV * readReg16Bit(AVGCURRENT_REG);
+    // Get instantaneous current
+    raw_inst_current = readReg16Bit(CURRENT_REG);
+    rep_inst_current = current_multiplier_mV * raw_inst_current;
+
+    // Get average current
+    raw_avg_current = readReg16Bit(AVGCURRENT_REG);
+    rep_avg_current = current_multiplier_mV * raw_avg_current;
 }
 
 void FUELGAUGE::getage() {
     // Get Battery Age
-    age = time_multiplier_Hours * readReg16Bit(AGE_REG);
+    rep_age = time_multiplier_Hours * readReg16Bit(AGE_REG);
 }
 
 void FUELGAUGE::gettte() {
     // Get time to empty
-    tte = time_multiplier_Hours * readReg16Bit(TTE_REG);
+    rep_tte = time_multiplier_Hours * readReg16Bit(TTE_REG);
 }
 
 void FUELGAUGE::getparameters() {
@@ -124,21 +132,10 @@ void FUELGAUGE::getBatteryData() {
     getparameters();
 }
 
-float FUELGAUGE::getresistsensor() {
-    // Output sense resistor value
-    return resistSensor;
-}
-
 // Private Methods
-
-void FUELGAUGE::setresistsensor(float rsense) {
-    resistSensor = rsense;
-    updateMultipliers();
-}
-
 void FUELGAUGE::updateMultipliers() {
-    capacity_multiplier_mAH = (5e-3)/resistSensor; //refer to row "Capacity"
-    current_multiplier_mV = (1.5625e-3)/resistSensor; //refer to row "Current"
+    capacity_multiplier_mAH = (5e-6)/rsense; //refer to row "Capacity"
+    current_multiplier_mV = (1.5625e-6)/rsense; //refer to row "Current"
 }
 
 
