@@ -433,9 +433,13 @@ void loop() {
     #endif
 
     if (millis() - battery.interval > battery.timer) {
+        // Reset battery timer and set battery event as true
         battery.timer = millis();
+        event.battery = true;
+
         // Read battery stats from fuel gauge
         fuelgauge.getBatteryData();
+        fuelgauge.getBatteryInfo();
         battery.percentage = fuelgauge.rep_soc;
         battery.current = fuelgauge.rep_inst_current;
         battery.voltage = fuelgauge.rep_inst_voltage;
@@ -443,7 +447,6 @@ void loop() {
         battery.rsense =fuelgauge.rsense;
         battery.capacity = fuelgauge.rep_capacity;
         battery.status = fuelgauge.bat_status;
-        event.battery = true;
 
         // Read voltage and status from TinyPico to compare
         battery.tinypico_voltage = tinypico.GetBatteryVoltage();

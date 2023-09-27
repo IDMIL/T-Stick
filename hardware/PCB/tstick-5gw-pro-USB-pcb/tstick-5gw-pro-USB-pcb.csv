@@ -1,0 +1,30 @@
+Manufacturer,Mfg Part #,Qty,Reference(s),Description Value Pkg,Digikey Part #
+JST Sales America Inc.,B2B-PH-SM4-TBT,1,BT1,"Connector Header Surface Mount 2 position 0.079"" (2.00mm)",455-S2B-PH-SM4-TBTR-ND
+Samsung Electro-Mechanics,CL03A104KP3NNNC,4,"C1, C7, C13, C14",0.1 µF ±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric),1276-1115-2-ND
+Samsung Electro-Mechanics,CL03A474KQ3NNNC,3,"C2, C11, C12",0.47 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric),1276-1337-1-ND
+Samsung Electro-Mechanics,CL03A105KQ3CSNC,4,"C3, C4, C9, C10",1 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric),1276-1115-1-ND
+Samsung Electro-Mechanics,CL10A106KQ8NNNC,1,C8,10 µF ±10% 6.3V Ceramic Capacitor X5R 0603 (1608 Metric),1276-1038-1-ND
+Kingbright,APG0603ZGC-5MAV,1,CHARGLED1,Green 525nm LED Indication - Discrete 2.85V 0201 (0603 Metric),754-APG0603ZGC-5MAVCT-ND
+Infineon Technologies,BAT60BE6327HTSA1,1,D1,Diode 10 V 3A Surface Mount PG-SOD323-3D,BAT60BE6327HTSA1CT-ND
+Analog Devices Inc./Maxim Integrated,MAX17055ETB+T,1,FG1,Battery Battery Monitor IC Multi-Chemistry 10-TDFN (2.5x2),MAX17055ETB+TCT-ND
+JST Sales America Inc.,BM02B-SRSS-TB,2,"FSR1, SW1","Connector Header Surface Mount 2 position 0.039"" (1.00mm)",455-1788-1-ND
+TDK InvenSense,ICM-20948,1,IMU1,"Accelerometer, Gyroscope, Magnetometer, 9 Axis Sensor I²C, SPI Output",1428-1123-1-ND
+GCT,USB4105-GF-A,1,J1,"USB-C (USB TYPE-C) USB 2.0 Receptacle Connector 24 (16+8 Dummy) Position Surface Mount, Right Angle; Through Hole",2073-USB4105-GF-ACT-ND
+Espressif Systems,ESP32-S3-WROOM-2-N32R8V,1,MCU1,"Bluetooth, WiFi 802.11b/g/n, Bluetooth v5.0 Transceiver Module 2.4GHz PCB Trace Surface Mount",1965-ESP32-S3-WROOM-2-N32R8VCT-ND
+Adafruit Industries LLC,2659,1,PWLED1,"Addressable Lighting Neopixel 10 LED Discrete Serial (Shift Register) Red, Green, Blue (RGB) 3.50mm L x 3.50mm W",1528-1542-ND
+Micro Commercial Co,SI2305BHE3-TP,1,Q2,P-Channel 20 V 4.2A 1.4W Surface Mount SOT-23,353-SI2305BHE3-TPCT-ND
+ANBON SEMICONDUCTOR (INT'L) LIMITED,BSS138,1,Q3,N-Channel 50 V 220mA (Ta) 350mW (Ta) Surface Mount SOT-23,4530-BSS138CT-ND
+JST Sales America Inc.,BM04B-SRSS-TB,1,QWIIC1,"Connector Header Surface Mount, Right Angle 4 position 0.039"" (1.00mm)",455-BM04B-SRSS-TBTR-ND
+Panasonic Electronic Components,ERJ-1GNF1001C,2,"R1, R3","1 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film",P122413CT-ND
+Ohmite,LVK12R010CER,1,R2,"10 mOhms ±0.25% 0.5W, 1/2W Chip Resistor 1206 (3216 Metric) Anti-Corrosive, Current Sense, Moisture Resistant Thick Film",273-LVK12R010CERCT-ND
+Panasonic Electronic Components,ERJ-1GNF1002C,3,"R5, R13, R14","10 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film",P122414CT-ND
+Panasonic Electronic Components,ERJ-1GNJ512C,2,"R6, R7","5.1 kOhms ±5% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film",P123340CT-ND
+Panasonic Electronic Components,ERJ-1GNF2001C,1,R15,"2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film",P122812CT-ND 
+Panasonic Electronic Components,ERJ-1GNF2201C,6,"R16, R17, R19, R20, R21, R23","2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film",P122832CT-ND
+Panasonic Electronic Components,ERJ-1GNF2003C,1,R18,"200 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film",P122814CT-ND
+C&K,PTS810 SJM 250 SMTR LFS,2,"SW2, SW3",Tactile Switch SPST-NO Top Actuated Surface Mount,CKN10502CT-ND 
+JST Sales America Inc.,BM04B-SRSS-TB,1,TrillExtensionInput1,"Connector Header Surface Mount, Right Angle 4 position 0.039"" (1.00mm)",455-BM04B-SRSS-TBCT-ND
+Torex Semiconductor Ltd,XC6222B331MR-G,1,U1,Linear Voltage Regulator IC Positive Fixed 1 Output 700mA SOT-25-5,893-1143-1-ND
+Microchip Technology,MCP73831T-2DCI/OT,1,U3,Charger IC Lithium Ion/Polymer SOT-23-5,MCP73831T-2DCI/OTDKR-ND
+NXP USA Inc.,"PCA9306DP1,125",1,U4,Voltage Level Translator Bidirectional 1 Circuit 2 Channel 8-TSSOP,568-4243-1-ND
+Analog Devices Inc./Maxim Integrated,MAX8511EXK18+T,1,Ud1,Linear Voltage Regulator IC Positive Fixed 1 Output 120mA SC-70-5,MAX8511EXK18+TTR-ND
