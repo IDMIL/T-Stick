@@ -1,15 +1,15 @@
 {
     "device": "TStick",
-    "id": 1,
-    "author": "T-Stick Builder",
+    "id": 501,
+    "author": "Albert",
     "institution": "SAT/IDMIL (2022)",
-    "APpasswd": "tstick_password",
-    "wifiSSID": "SSID",
-    "wifiPSK": "AP_password",
+    "APpasswd": "mappings",
+    "wifiSSID": "t-stick_network",
+    "wifiPSK": "mappings",
     "persistentAP": 1,
-    "oscIP1": "192.168.4.2",
-    "oscPORT1": 8000,
+    "oscIP1": "192.168.137.1",
+    "oscPORT1": 8001,
     "oscIP2": "192.168.0.100",
-    "oscPORT2": 8000,
+    "oscPORT2": 8001,
     "localPORT": 8000
 }

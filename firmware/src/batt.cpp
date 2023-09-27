@@ -3,11 +3,11 @@
 bool FUELGAUGE::init(fuelgauge_config config, bool reset)
 {
     // Print out fuel gauge config
-    std::cout << "\n    Fuel Gauge Config" << "\n"
+    std::cout << "\n"
               << "    Design Capacity: " << config.designcap << "\n"
               << "    Rsense: " << config.rsense << "\n"
               << "    Empty Voltage: " << config.vempty << "\n"
-              << "    Revoery Voltage: " << config.recovery_voltage << "\n" << std::endl;
+              << "    Recovery Voltage: " << config.recovery_voltage << "\n" << std::endl;
 
     // Get the parameters and save them
     i2c_addr = config.i2c_addr;
@@ -46,6 +46,8 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
             while(readReg16Bit(0x3D)&1) {
                 delay(10);
             }
+
+            std::cout << "    Start up complete" << std::endl;
             //Initialise Configuration
             HibCFG = readReg16Bit(0xBA);
             // Exit hibernate mode
@@ -55,6 +57,7 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
 
             //EZ Config
             // Write Battery capacity
+            std::cout << "    Writing Capacity" << std::endl;
             reg_cap = (designcap * rsense) / base_capacity_multiplier_mAh;
             writeReg16Bit(DESIGNCAP_REG, reg_cap); //Write Design Cap
             writeReg16Bit(dQACC_REG, reg_cap/32); //Write dQAcc
@@ -62,6 +65,7 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
 
             // Set empty voltage and recovery voltage
             // Empty voltage in increments of 10mV
+            std::cout << "    Writing Voltage" << std::endl;
             uint16_t reg_vempty = vempty * 100; //empty voltage in 10mV
             uint16_t reg_recover = 3.88 *25; //recovery voltage in 40mV increments
             uint16_t voltage_settings = (reg_vempty << 7) | reg_recover; 
