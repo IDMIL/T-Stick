@@ -10,6 +10,7 @@ struct fuelgauge_config {
     // Initialisation Elements
     uint8_t i2c_addr;
     int designcap;
+    int ichg;
     int rsense;
     float vempty;
     float recovery_voltage;
@@ -37,7 +38,8 @@ class FUELGAUGE
         AVGVCELL_REG    = 0x19, //The AvgVCell register reports an average of the VCell register readings. 
         CURRENT_REG     = 0x0A, //Voltage between the CSP and CSN pins, and would need to convert to current
         AVGCURRENT_REG  = 0x0B, //The AvgCurrent register reports an average of Current register readings
-        REPSOC_REG      = 0x06, //The Reported State of Charge of connected battery. 
+        REPSOC_REG      = 0x06, //The Reported State of Charge of connected battery.
+        ICHTERM_REG     = 0x1E, // Register fo setting end of charge current 
         REPCAP_REG      = 0x05, //Reported Capacity.
         TTE_REG         = 0x11, //How long before battery is empty (in ms).
         TTF_REG         = 0x20, //How long until the battery is full (in ms)
@@ -56,7 +58,9 @@ class FUELGAUGE
         // Battery Parameters
         // Initialisation Elements
         int designcap = 2400;
-        uint16_t reg_cap = designcap *2;
+        int ichg = 50;
+        uint16_t reg_cap = designcap * 2;
+        uint16_t reg_ichg = ichg * 6.4;
         int rsense = 10;
         float vempty = 3.3;
         float recovery_voltage = 3.88;
@@ -98,7 +102,7 @@ class FUELGAUGE
 
         // methods
         // Initialise Fuel Gauge
-        bool init(fuelgauge_config config, bool reset = true);
+        bool init(fuelgauge_config config, bool reset = false);
 
         // Get Battery Data (analog meausrements + modelguage outputs)
         void getBatteryData();

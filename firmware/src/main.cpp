@@ -70,7 +70,7 @@ Pin pin{ 5, 35, 33, 15 };
 //////////////////////////////////
 // Battery struct and functions //
 //////////////////////////////////
-  
+
 struct BatteryData {
     unsigned int percentage = 0;
     unsigned int tinypico_percentage = 0;
@@ -105,6 +105,26 @@ void batteryFilter() {
     battery.tinypico_percentage /= battery.filterArray.size();
 }
 
+//////////////////////////////////////////////
+// Include Fuel gauge stuff                   
+//////////////////////////////////////////////
+
+#include <batt.h>
+FUELGAUGE fuelgauge;
+fuelgauge_config fg_config = {
+    0x36, //i2c_addr
+    3200, // capacity (mAh)
+    50, // End of charge Current (mA)
+    10, // rsense (mOhm)
+    3, // empty voltage (V)
+    3.88, //recovery voltage (V)
+    0, // soc
+    0, // rcomp
+    0, // tempco
+    0, // fullcap
+    0, // fullcapnorm
+    0, // Charge Cycles
+};
 
 ///////////////////////////////////
 // Include button function files //
@@ -134,7 +154,7 @@ ICM_20948_I2C imu;
 #define WIRE_PORT Wire // Your desired Wire port.      Used when "USE_SPI" is not defined
 // The value of the last bit of the I2C address.
 // On the SparkFun 9DoF IMU breakout the default is 1, and when the ADR jumper is closed the value becomes 0
-#define AD0_VAL 1
+#define AD0_VAL 0
 
 //////////////////////////////////////////////
 // Include Touch stuff                      //
@@ -151,25 +171,7 @@ ICM_20948_I2C imu;
   Capsense capsense;
 #endif
 
-//////////////////////////////////////////////
-// Include Fuel gauge stuff                      //
-//////////////////////////////////////////////
 
-#include <batt.h>
-FUELGAUGE fuelgauge;
-fuelgauge_config fg_config = {
-    0x36, //i2c_addr
-    3200, // capacity (mAh)
-    10, // rsense (mOhm)
-    3, // empty voltage (V)
-    3.88, //recovery voltage (V)
-    0, // soc
-    0, // rcomp
-    0, // tempco
-    0, // fullcap
-    0, // fullcapnorm
-    0, // Charge Cycles
-};
 ////////////////////////////////
 // Include LED function files //
 ////////////////////////////////
@@ -327,12 +329,12 @@ void setup() {
         std::cout << "initialization failed!" << std::endl;
     }
 
-    // std::cout << "    Initializing IMU... ";
-    // initIMU();
-    // std::cout << "done" << std::endl;
+    std::cout << "    Initializing IMU... ";
+    imu.begin(WIRE_PORT,AD0_VAL);;
+    std::cout << "done" << std::endl;
 
     std::cout << "    Initializing Fuel Gauge... ";
-    fuelgauge.init(fg_config);
+    fuelgauge.init(fg_config, true);
     std::cout << "done" << std::endl;
 
     std::cout << "    Initializing FSR... ";
@@ -439,7 +441,7 @@ void loop() {
 
         // Read battery stats from fuel gauge
         fuelgauge.getBatteryData();
-        fuelgauge.getBatteryInfo();
+        fuelgauge.getBatteryStatus();
         battery.percentage = fuelgauge.rep_soc;
         battery.current = fuelgauge.rep_inst_current;
         battery.voltage = fuelgauge.rep_inst_voltage;
@@ -459,20 +461,20 @@ void loop() {
         event.battery = false; // don't send new battery data
     }
 
-    // // read IMU data
-    // imu.getAGMT();
+    // read IMU data
+    imu.getAGMT();
 
-    // // read IMU and update puara-gestures
-    // // In g's
-    // gestures.setAccelerometerValues(imu.accX(),
-    //                                 imu.accY(),
-    //                                 imu.accZ());
-    // gestures.setGyroscopeValues(imu.gyrX(),
-    //                             imu.gyrY(),
-    //                             imu.gyrZ());
-    // gestures.setMagnetometerValues(imu.magX(),
-    //                                 imu.magY(),
-    //                                 imu.magZ());
+    // read IMU and update puara-gestures
+    // In g's
+    gestures.setAccelerometerValues(imu.accX(),
+                                    imu.accY(),
+                                    imu.accZ());
+    gestures.setGyroscopeValues(imu.gyrX(),
+                                imu.gyrY(),
+                                imu.gyrZ());
+    gestures.setMagnetometerValues(imu.magX(),
+                                    imu.magY(),
+                                    imu.magZ());
 
     // gestures.updateInertialGestures();
     gestures.updateTrigButton(button.getButton());
@@ -818,6 +820,5 @@ void loop() {
 }
 
 // void initIMU() {
-//     Wire.begin();
-//     imu.begin(WIRE_PORT,AD0_VAL);
+    
 // }

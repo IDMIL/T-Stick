@@ -4,14 +4,16 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
 {
     // Print out fuel gauge config
     std::cout << "\n"
-              << "    Design Capacity: " << config.designcap << "\n"
-              << "    Rsense: " << config.rsense << "\n"
-              << "    Empty Voltage: " << config.vempty << "\n"
-              << "    Recovery Voltage: " << config.recovery_voltage << "\n" << std::endl;
+              << "    Design Capacity: " << config.designcap << " mAh\n"
+              << "    End of Charge Current: " << config.ichg << " mA\n"
+              << "    Rsense: " << config.rsense << " mOhm\n"
+              << "    Empty Voltage: " << config.vempty << " V\n"
+              << "    Recovery Voltage: " << config.recovery_voltage << " V\n" << std::endl;
 
     // Get the parameters and save them
     i2c_addr = config.i2c_addr;
     designcap = config.designcap;
+    ichg = config.ichg;
     rsense = config.rsense;
     vempty = config.vempty;
     recovery_voltage = config.recovery_voltage;
@@ -40,7 +42,7 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
         updateMultipliers(); 
 
         // Reset the Fuel Gauge
-        if (POR)
+        if (POR || reset)
         {
             std::cout << "    Initialising Fuel Gauge" << std::endl;
             while(readReg16Bit(0x3D)&1) {
@@ -59,7 +61,9 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
             // Write Battery capacity
             std::cout << "    Writing Capacity" << std::endl;
             reg_cap = (designcap * rsense) / base_capacity_multiplier_mAh;
+            reg_ichg = (ichg * rsense) / base_current_multiplier_mAh;
             writeReg16Bit(DESIGNCAP_REG, reg_cap); //Write Design Cap
+            writeReg16Bit(ICHTERM_REG, reg_ichg); // End of charge current
             writeReg16Bit(dQACC_REG, reg_cap/32); //Write dQAcc
             writeReg16Bit(dPACC_REG, 44138/32); //Write dPAcc
 
@@ -226,6 +230,13 @@ void FUELGAUGE::getBatteryRemoval() {
     writeVerifyReg16Bit(STATUS_REG,raw_status&0x7FFF);
 }
 
+void FUELGAUGE::getBatteryInfo() {
+    // Get whether a battery has been, inserted, removed and if it is present
+    getBatteryStatus();
+    getBatteryRemoval();
+    getBatteryInsertion();
+}
+
 float FUELGAUGE::getcapacityLSB() {
     // return the capacity LSB
     return capacity_multiplier_mAH;
@@ -275,9 +286,9 @@ bool FUELGAUGE::writeVerifyReg16Bit(uint8_t reg, uint16_t value)
   
   if (attempt > 10) {
     return false;
-    std::cout << "    Failed to reset STATUS Flag" <<std::endl;
+    std::cout << "    Failed to write value" <<std::endl;
   } else {
-    std::cout << "    Status reset" << std::endl;
+    std::cout << "    Value successfully written" << std::endl;
     return true;
   }
 }
