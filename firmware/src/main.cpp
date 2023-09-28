@@ -334,7 +334,7 @@ void setup() {
     std::cout << "done" << std::endl;
 
     std::cout << "    Initializing Fuel Gauge... ";
-    fuelgauge.init(fg_config, true);
+    fuelgauge.init(fg_config);
     std::cout << "done" << std::endl;
 
     std::cout << "    Initializing FSR... ";
