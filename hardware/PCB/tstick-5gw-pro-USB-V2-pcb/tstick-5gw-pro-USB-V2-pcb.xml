@@ -1,0 +1,1976 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>D:\Documents\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb\tstick-5gw-pro-USB-V2-pcb.kicad_sch</source>
+    <date>2023-09-30 8:57:17 PM</date>
+    <tool>Eeschema 7.0.6</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>Custom T-Stick Board</title>
+        <company>Albert Niyonsenga</company>
+        <rev>0.0.2</rev>
+        <date>2023-09</date>
+        <source>tstick-5gw-pro-USB-V2-pcb.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="BT1">
+      <value>JST-PH-1x02-2.000mm</value>
+      <footprint>Connector_JST:JST_PH_B2B-PH-SM4-TB_1x02-1MP_P2.00mm_Vertical</footprint>
+      <fields>
+        <field name="Description Value Pkg">Connector Header Surface Mount 2 position 0.079" (2.00mm)</field>
+        <field name="Digikey Part #">455-S2B-PH-SM4-TBTR-ND</field>
+        <field name="Mfg Part #">B2B-PH-SM4-TBT</field>
+      </fields>
+      <libsource lib="Connector_Generic_MountingPin" part="Conn_01x02_MountingPin" description="Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Digikey Part #" value="455-S2B-PH-SM4-TBTR-ND"/>
+      <property name="Description Value Pkg" value="Connector Header Surface Mount 2 position 0.079&quot; (2.00mm)"/>
+      <property name="Mfg Part #" value="B2B-PH-SM4-TBT"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b5d50194-7695-4040-a5ad-ffa130c5f6cd</tstamps>
+    </comp>
+    <comp ref="C1">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0201_0603Metric</footprint>
+      <datasheet>1276-1115-1-ND</datasheet>
+      <fields>
+        <field name="Description Value Pkg">0.1 µF ±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">1276-1115-2-ND</field>
+        <field name="Mfg Part #">CL03A104KP3NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="0.1 µF ±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="CL03A104KP3NNNC"/>
+      <property name="Digikey Part #" value="1276-1115-2-ND"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ef8d3b0f-bd31-4708-b6b6-2472d8ea1f6b</tstamps>
+    </comp>
+    <comp ref="C2">
+      <value>0.47uF</value>
+      <footprint>Capacitor_SMD:C_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">0.47 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">1276-1337-1-ND</field>
+        <field name="Mfg Part #">CL03A474KQ3NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Digikey Part #" value="1276-1337-1-ND"/>
+      <property name="Description Value Pkg" value="0.47 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="CL03A474KQ3NNNC"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>fddfd9d3-2430-43a4-83a8-db7ae8792044</tstamps>
+    </comp>
+    <comp ref="C3">
+      <value>4.7uF</value>
+      <footprint>Capacitor_SMD:C_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">4.7 µF ±20% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">1276-CL03A475MQ5C65CCT-ND</field>
+        <field name="Mfg Part #">CL03A475MQ5C65C</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Digikey Part #" value="1276-CL03A475MQ5C65CCT-ND"/>
+      <property name="Description Value Pkg" value="4.7 µF ±20% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="CL03A475MQ5C65C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1d3371a1-f5ec-498c-a5d6-6a1e8fd1856e</tstamps>
+    </comp>
+    <comp ref="C4">
+      <value>22uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">22 µF ±10% 6.3V Ceramic Capacitor X5R 0603 (1608 Metric)</field>
+        <field name="Digikey Part #">1276-2867-1-ND</field>
+        <field name="Mfg Part #">CL10A226KQ8NRNE</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Digikey Part #" value="1276-2867-1-ND"/>
+      <property name="Description Value Pkg" value="22 µF ±10% 6.3V Ceramic Capacitor X5R 0603 (1608 Metric)"/>
+      <property name="Mfg Part #" value="CL10A226KQ8NRNE"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f85412b6-1059-4077-bd7c-ead5b95fc817</tstamps>
+    </comp>
+    <comp ref="C5">
+      <value>22uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">22 µF ±10% 6.3V Ceramic Capacitor X5R 0603 (1608 Metric)</field>
+        <field name="Digikey Part #">1276-2867-1-ND</field>
+        <field name="Mfg Part #">CL10A226KQ8NRNE</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Digikey Part #" value="1276-2867-1-ND"/>
+      <property name="Description Value Pkg" value="22 µF ±10% 6.3V Ceramic Capacitor X5R 0603 (1608 Metric)"/>
+      <property name="Mfg Part #" value="CL10A226KQ8NRNE"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ddeacbef-84b0-4bb5-ad51-c6aa2bc925db</tstamps>
+    </comp>
+    <comp ref="C8">
+      <value>4.7uF</value>
+      <footprint>Capacitor_SMD:C_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">4.7 µF ±20% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">1276-CL03A475MQ5C65CCT-ND</field>
+        <field name="Mfg Part #">CL03A475MQ5C65C</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Digikey Part #" value="1276-CL03A475MQ5C65CCT-ND"/>
+      <property name="Description Value Pkg" value="4.7 µF ±20% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="CL03A475MQ5C65C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e8421dff-a579-4b88-b5ef-c62b802c074e</tstamps>
+    </comp>
+    <comp ref="C9">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">1 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">1276-1323-1-ND</field>
+        <field name="Mfg Part #">CL03A105KQ3CSNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Digikey Part #" value="1276-1323-1-ND"/>
+      <property name="Description Value Pkg" value="1 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="CL03A105KQ3CSNC"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>13b740c8-eeba-4154-9392-b7209259ae1a</tstamps>
+    </comp>
+    <comp ref="C13">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">0.1 µF ±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">1276-1115-1-ND</field>
+        <field name="Mfg Part #">CL03A104KP3NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Digikey Part #" value="1276-1115-1-ND"/>
+      <property name="Description Value Pkg" value="0.1 µF ±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="CL03A104KP3NNNC"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ba9d13c9-d6e5-4b34-982d-643ab0de9b7a</tstamps>
+    </comp>
+    <comp ref="C14">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0201_0603Metric</footprint>
+      <datasheet>1276-1115-1-ND</datasheet>
+      <fields>
+        <field name="Description Value Pkg">0.1 µF ±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">1276-1115-1-ND</field>
+        <field name="Mfg Part #">CL03A104KP3NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="0.1 µF ±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="CL03A104KP3NNNC"/>
+      <property name="Digikey Part #" value="1276-1115-1-ND"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d6744096-afa3-46fb-b307-b917495aa1e1</tstamps>
+    </comp>
+    <comp ref="CHARGLED1">
+      <value>LED</value>
+      <footprint>LED_SMD:LED_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">Green 525nm LED Indication - Discrete 2.85V 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">754-APG0603ZGC-5MAVCT-ND</field>
+        <field name="Mfg Part #">APG0603ZGC-5MAV</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Digikey Part #" value="754-APG0603ZGC-5MAVCT-ND"/>
+      <property name="Description Value Pkg" value="Green 525nm LED Indication - Discrete 2.85V 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="APG0603ZGC-5MAV"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Light emitting diode"/>
+      <property name="ki_keywords" value="LED diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2769302b-b99c-4c5e-9f0a-952101f13b21</tstamps>
+    </comp>
+    <comp ref="FG1">
+      <value>MAX17055ETB+T</value>
+      <footprint>max17055-footprints:21-100013A_T102A2&amp;plus_1C_MXM</footprint>
+      <datasheet>MAX17055ETB+T</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Battery Battery Monitor IC Multi-Chemistry 10-TDFN (2.5x2)</field>
+        <field name="Digikey Part #">MAX17055ETB+TCT-ND</field>
+        <field name="Mfg Part #">MAX17055ETB+T</field>
+      </fields>
+      <libsource lib="max17055-symbol" part="MAX17055ETB+T" description=""/>
+      <property name="Digikey Part #" value="MAX17055ETB+TCT-ND"/>
+      <property name="Description Value Pkg" value="Battery Battery Monitor IC Multi-Chemistry 10-TDFN (2.5x2)"/>
+      <property name="Mfg Part #" value="MAX17055ETB+T"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_keywords" value="MAX17055ETB+T"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0794e91c-6ab2-4941-a0ad-62811dc492b3</tstamps>
+    </comp>
+    <comp ref="FSR1">
+      <value>JST-SH-1.00mm 1x2</value>
+      <footprint>Connector_JST:JST_SH_BM02B-SRSS-TB_1x02-1MP_P1.00mm_Vertical</footprint>
+      <fields>
+        <field name="Description Value Pkg">Connector Header Surface Mount 2 position 0.039" (1.00mm)</field>
+        <field name="Digikey Part #">455-1788-1-ND</field>
+        <field name="Mfg Part #">BM02B-SRSS-TB</field>
+      </fields>
+      <libsource lib="Connector_Generic_MountingPin" part="Conn_01x02_MountingPin" description="Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Digikey Part #" value="455-1788-1-ND"/>
+      <property name="Description Value Pkg" value="Connector Header Surface Mount 2 position 0.039&quot; (1.00mm)"/>
+      <property name="Mfg Part #" value="BM02B-SRSS-TB"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3e0471ee-a37d-472e-9eb1-d2b1c707cd8e</tstamps>
+    </comp>
+    <comp ref="IMU1">
+      <value>ICM-20948</value>
+      <footprint>ICM20948-footprints:QFN24_3X3X0P9_IVS</footprint>
+      <datasheet>http://www.invensense.com/wp-content/uploads/2016/06/DS-000189-ICM-20948-v1.3.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Accelerometer, Gyroscope, Magnetometer, 9 Axis Sensor I²C, SPI Output</field>
+        <field name="Digikey Part #">1428-1123-1-ND</field>
+        <field name="Mfg Part #">ICM-20948</field>
+      </fields>
+      <libsource lib="Sensor_Motion" part="ICM-20948" description="InvenSense 9-Axis Motion Sensor, Accelerometer, Gyroscope, Compass, I2C/SPI, QFN-24"/>
+      <property name="Digikey Part #" value="1428-1123-1-ND"/>
+      <property name="Description Value Pkg" value="Accelerometer, Gyroscope, Magnetometer, 9 Axis Sensor I²C, SPI Output"/>
+      <property name="Mfg Part #" value="ICM-20948"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="InvenSense 9-Axis Motion Sensor, Accelerometer, Gyroscope, Compass, I2C/SPI, QFN-24"/>
+      <property name="ki_keywords" value="mems magnetometer"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e716051c-0407-4bef-9a8f-7e64f84fd7c9</tstamps>
+    </comp>
+    <comp ref="J1">
+      <value>USB_C_Receptacle_USB2.0</value>
+      <footprint>Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal</footprint>
+      <datasheet>https://www.usb.org/sites/default/files/documents/usb_type-c.zip</datasheet>
+      <fields>
+        <field name="Description Value Pkg">USB-C (USB TYPE-C) USB 2.0 Receptacle Connector 24 (16+8 Dummy) Position Surface Mount, Right Angle; Through Hole</field>
+        <field name="Digikey Part #">2073-USB4105-GF-ACT-ND</field>
+        <field name="Mfg Part #">USB4105-GF-A</field>
+      </fields>
+      <libsource lib="Connector" part="USB_C_Receptacle_USB2.0" description="USB 2.0-only Type-C Receptacle connector"/>
+      <property name="Digikey Part #" value="2073-USB4105-GF-ACT-ND"/>
+      <property name="Description Value Pkg" value="USB-C (USB TYPE-C) USB 2.0 Receptacle Connector 24 (16+8 Dummy) Position Surface Mount, Right Angle; Through Hole"/>
+      <property name="Mfg Part #" value="USB4105-GF-A"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="USB 2.0-only Type-C Receptacle connector"/>
+      <property name="ki_keywords" value="usb universal serial bus type-C USB2.0"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b076b54e-a2a5-4875-a646-9caed5630305</tstamps>
+    </comp>
+    <comp ref="J2">
+      <value>GPIO2</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x06" description="Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Description Value Pkg" value=""/>
+      <property name="Mfg Part #" value=""/>
+      <property name="Digikey Part #" value=""/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d64ed71b-403d-4c32-b8be-ad0e57f9be58</tstamps>
+    </comp>
+    <comp ref="J3">
+      <value>GPIO1</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x08" description="Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Description Value Pkg" value=""/>
+      <property name="Mfg Part #" value=""/>
+      <property name="Digikey Part #" value=""/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8168f828-d1d8-43ff-8c94-70f75c3ea6de</tstamps>
+    </comp>
+    <comp ref="L1">
+      <value>4.7uH</value>
+      <footprint>Inductor_SMD:L_0603_1608Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">4.7 µH Shielded Multilayer Inductor 700 mA 500mOhm Max 0603 (1608 Metric)</field>
+        <field name="Digikey Part #">3442-MPH160809S4R7MTCT-ND</field>
+        <field name="Mfg Part #">MPH160809S4R7MT</field>
+      </fields>
+      <libsource lib="Device" part="L" description="Inductor"/>
+      <property name="Description Value Pkg" value="4.7 µH Shielded Multilayer Inductor 700 mA 500mOhm Max 0603 (1608 Metric)"/>
+      <property name="Mfg Part #" value="MPH160809S4R7MT"/>
+      <property name="Digikey Part #" value="3442-MPH160809S4R7MTCT-ND"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Inductor"/>
+      <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>957b29a4-e789-476a-930a-bf7b90554b2e</tstamps>
+    </comp>
+    <comp ref="L2">
+      <value>4.7uH</value>
+      <footprint>Inductor_SMD:L_0603_1608Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">4.7 µH Shielded Multilayer Inductor 700 mA 500mOhm Max 0603 (1608 Metric)</field>
+        <field name="Digikey Part #">3442-MPH160809S4R7MTCT-ND</field>
+        <field name="Mfg Part #">MPH160809S4R7MT</field>
+      </fields>
+      <libsource lib="Device" part="L" description="Inductor"/>
+      <property name="Description Value Pkg" value="4.7 µH Shielded Multilayer Inductor 700 mA 500mOhm Max 0603 (1608 Metric)"/>
+      <property name="Mfg Part #" value="MPH160809S4R7MT"/>
+      <property name="Digikey Part #" value="3442-MPH160809S4R7MTCT-ND"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Inductor"/>
+      <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>32450d61-7936-49cc-9f3f-ef1ccc49e83f</tstamps>
+    </comp>
+    <comp ref="MCU1">
+      <value>ESP32-S3-WROOM-2</value>
+      <footprint>PCM_Espressif:ESP32-S3-WROOM-2</footprint>
+      <datasheet>https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-2_datasheet_en.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Bluetooth, WiFi 802.11b/g/n, Bluetooth v5.0 Transceiver Module 2.4GHz PCB Trace Surface Mount</field>
+        <field name="Digikey Part #">1965-ESP32-S3-WROOM-2-N32R8VCT-ND</field>
+        <field name="Mfg Part #">ESP32-S3-WROOM-2-N32R8V</field>
+      </fields>
+      <libsource lib="PCM_Espressif" part="ESP32-S3-WROOM-2" description="2.4 GHz WiFi (802.11 b/g/n) and Bluetooth ® 5 (LE) module Built around ESP32S3 series of SoCs, Xtensa ® dualcore 32bit LX7 microprocessor Flash up to 16 MB, PSRAM up to 8 MB 36 GPIOs, rich set of peripherals Onboard PCB antenna"/>
+      <property name="Digikey Part #" value="1965-ESP32-S3-WROOM-2-N32R8VCT-ND"/>
+      <property name="Description Value Pkg" value="Bluetooth, WiFi 802.11b/g/n, Bluetooth v5.0 Transceiver Module 2.4GHz PCB Trace Surface Mount"/>
+      <property name="Mfg Part #" value="ESP32-S3-WROOM-2-N32R8V"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="2.4 GHz WiFi (802.11 b/g/n) and Bluetooth ® 5 (LE) module Built around ESP32S3 series of SoCs, Xtensa ® dualcore 32bit LX7 microprocessor Flash up to 16 MB, PSRAM up to 8 MB 36 GPIOs, rich set of peripherals Onboard PCB antenna"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d31bca28-0078-4d81-bbe9-259b245b324b</tstamps>
+    </comp>
+    <comp ref="PWLED1">
+      <value>SK6812MINI</value>
+      <footprint>neopixel:2659</footprint>
+      <datasheet>https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf</datasheet>
+      <fields>
+        <field name="Check_prices">https://www.snapeda.com/parts/2659/Adafruit+Industries+LLC/view-part/?ref=eda</field>
+        <field name="Description">
+ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, Asbestos, Text, English, Recycled Plas...
+</field>
+        <field name="Description Value Pkg">Addressable Lighting Neopixel 10 LED Discrete Serial (Shift Register) Red, Green, Blue (RGB) 3.50mm L x 3.50mm W</field>
+        <field name="Digikey Part #">1528-1542-ND</field>
+        <field name="MANUFACTURER">Adafruit Industries LLC</field>
+        <field name="MF">Adafruit Industries</field>
+        <field name="MP">2659</field>
+        <field name="Mfg Part #">2659</field>
+        <field name="PARTREV">01</field>
+        <field name="Package">None</field>
+        <field name="STANDARD">Manufacturer Recommendations</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/2659/Adafruit+Industries+LLC/view-part/?ref=snap</field>
+      </fields>
+      <libsource lib="neopixel" part="2659" description=""/>
+      <property name="Digikey Part #" value="1528-1542-ND"/>
+      <property name="Description Value Pkg" value="Addressable Lighting Neopixel 10 LED Discrete Serial (Shift Register) Red, Green, Blue (RGB) 3.50mm L x 3.50mm W"/>
+      <property name="Mfg Part #" value="2659"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="DigiKey_Part_Number" value=""/>
+      <property name="SnapEDA_Link" value="https://www.snapeda.com/parts/2659/Adafruit+Industries+LLC/view-part/?ref=snap"/>
+      <property name="Description" value="&#xA;ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, Asbestos, Text, English, Recycled Plas...&#xA;"/>
+      <property name="Package" value="None"/>
+      <property name="Check_prices" value="https://www.snapeda.com/parts/2659/Adafruit+Industries+LLC/view-part/?ref=eda"/>
+      <property name="STANDARD" value="Manufacturer Recommendations"/>
+      <property name="PARTREV" value="01"/>
+      <property name="MF" value="Adafruit Industries"/>
+      <property name="MP" value="2659"/>
+      <property name="MANUFACTURER" value="Adafruit Industries LLC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9b126ec3-bd08-48b7-bf07-5e16b84a0e56</tstamps>
+    </comp>
+    <comp ref="Q3">
+      <value>BSS138</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <datasheet>https://www.onsemi.com/pub/Collateral/BSS138-D.PDF</datasheet>
+      <fields>
+        <field name="Description Value Pkg">N-Channel 50 V 220mA (Ta) 350mW (Ta) Surface Mount SOT-23</field>
+        <field name="Digikey Part #">4530-BSS138CT-ND</field>
+        <field name="Mfg Part #">BSS138</field>
+      </fields>
+      <libsource lib="Transistor_FET" part="BSS138" description="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
+      <property name="Description Value Pkg" value="N-Channel 50 V 220mA (Ta) 350mW (Ta) Surface Mount SOT-23"/>
+      <property name="Mfg Part #" value="BSS138"/>
+      <property name="Digikey Part #" value="4530-BSS138CT-ND"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
+      <property name="ki_keywords" value="N-Channel MOSFET"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f335f83a-f2c2-40cf-affc-a2e6562da995</tstamps>
+    </comp>
+    <comp ref="QWIIC1">
+      <value>JST-SH-1x04 1.0mm</value>
+      <footprint>Connector_JST:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical</footprint>
+      <fields>
+        <field name="Description Value Pkg">Connector Header Surface Mount, Right Angle 4 position 0.039" (1.00mm)</field>
+        <field name="Digikey Part #">455-BM04B-SRSS-TBTR-ND</field>
+        <field name="Mfg Part #">BM04B-SRSS-TB</field>
+      </fields>
+      <libsource lib="Connector_Generic_MountingPin" part="Conn_01x04_MountingPin" description="Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Digikey Part #" value="455-BM04B-SRSS-TBTR-ND"/>
+      <property name="Description Value Pkg" value="Connector Header Surface Mount, Right Angle 4 position 0.039&quot; (1.00mm)"/>
+      <property name="Mfg Part #" value="BM04B-SRSS-TB"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>36f8f319-dab2-4b36-b23e-66fe7cfe1501</tstamps>
+    </comp>
+    <comp ref="R1">
+      <value>1k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">1 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122413CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF1001C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122413CT-ND"/>
+      <property name="Description Value Pkg" value="1 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF1001C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ecdf9af3-94ea-4e11-8862-e19a73339259</tstamps>
+    </comp>
+    <comp ref="R2">
+      <value>Ohmite_LVK12 10m</value>
+      <footprint>ul_LVK12R010CER-footprints:LVK12_OHM-L</footprint>
+      <fields>
+        <field name="Description Value Pkg">10 mOhms ±0.25% 0.5W, 1/2W Chip Resistor 1206 (3216 Metric) Anti-Corrosive, Current Sense, Moisture Resistant Thick Film</field>
+        <field name="Digikey Part #">273-LVK12R010CERCT-ND</field>
+        <field name="Mfg Part #">LVK12R010CER</field>
+      </fields>
+      <libsource lib="Device" part="R_Shunt_US" description="Shunt resistor, US symbol"/>
+      <property name="Digikey Part #" value="273-LVK12R010CERCT-ND"/>
+      <property name="Description Value Pkg" value="10 mOhms ±0.25% 0.5W, 1/2W Chip Resistor 1206 (3216 Metric) Anti-Corrosive, Current Sense, Moisture Resistant Thick Film"/>
+      <property name="Mfg Part #" value="LVK12R010CER"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Shunt resistor, US symbol"/>
+      <property name="ki_keywords" value="R res shunt resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e5844f53-5972-482c-8bea-04c285f7fa10</tstamps>
+    </comp>
+    <comp ref="R3">
+      <value>1k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">1 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122413CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF1001C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122413CT-ND"/>
+      <property name="Description Value Pkg" value="1 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF1001C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>69d1f5b2-bd0a-44d1-a8e5-2793de358d54</tstamps>
+    </comp>
+    <comp ref="R4">
+      <value>6.04k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">6.04 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P123095CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF6041C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P123095CT-ND"/>
+      <property name="Description Value Pkg" value="6.04 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF6041C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f0fad447-2cc2-473c-aa57-c65547721c62</tstamps>
+    </comp>
+    <comp ref="R5">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">10 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122414CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF1002C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122414CT-ND"/>
+      <property name="Description Value Pkg" value="10 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF1002C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>34e703ad-e207-4113-b2fd-94441be5bf49</tstamps>
+    </comp>
+    <comp ref="R6">
+      <value>5k1</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">5.1 kOhms ±5% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P123340CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNJ512C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P123340CT-ND"/>
+      <property name="Description Value Pkg" value="5.1 kOhms ±5% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNJ512C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>93ac3ebe-5a17-4cf0-9170-ec8264171855</tstamps>
+    </comp>
+    <comp ref="R7">
+      <value>5k1</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">5.1 kOhms ±5% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P123340CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNJ512C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P123340CT-ND"/>
+      <property name="Description Value Pkg" value="5.1 kOhms ±5% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNJ512C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>874adb2c-6633-4f87-9bd3-f179cafd8f9a</tstamps>
+    </comp>
+    <comp ref="R8">
+      <value>100k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">100 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122655CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF1003C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122655CT-ND"/>
+      <property name="Description Value Pkg" value="100 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF1003C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e6339121-2589-4b22-9b7b-360698f3ef2e</tstamps>
+    </comp>
+    <comp ref="R9">
+      <value>232k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">232 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122849CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF2323C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122849CT-ND"/>
+      <property name="Description Value Pkg" value="232 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF2323C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>22591d1f-40f8-4b21-b78b-858b42d8f5aa</tstamps>
+    </comp>
+    <comp ref="R10">
+      <value>100k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">100 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122655CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF1003C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122655CT-ND"/>
+      <property name="Description Value Pkg" value="100 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF1003C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e52e258c-e994-4020-b140-dbc839bab848</tstamps>
+    </comp>
+    <comp ref="R11">
+      <value>80.6k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">80.6 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P123166CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF8062C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P123166CT-ND"/>
+      <property name="Description Value Pkg" value="80.6 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF8062C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c6f90517-8358-49d9-83dc-79e68b13d62e</tstamps>
+    </comp>
+    <comp ref="R12">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">10 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122414CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF1002C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122414CT-ND"/>
+      <property name="Description Value Pkg" value="10 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF1002C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>624a5867-250e-4844-aa82-115989134d19</tstamps>
+    </comp>
+    <comp ref="R16">
+      <value>2k2</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122832CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF2201C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122832CT-ND"/>
+      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF2201C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>beda805c-6fd3-49dc-bc3e-969026d5017b</tstamps>
+    </comp>
+    <comp ref="R17">
+      <value>2k2</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122832CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF2201C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122832CT-ND"/>
+      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF2201C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1a47292d-14c1-4a39-b146-108047adae31</tstamps>
+    </comp>
+    <comp ref="R18">
+      <value>200k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">200 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122814CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF2003C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122814CT-ND"/>
+      <property name="Description Value Pkg" value="200 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF2003C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3a4bc621-98d3-4f54-997f-9e7b3c9e12e8</tstamps>
+    </comp>
+    <comp ref="R19">
+      <value>2k2</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122832CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF2201C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122832CT-ND"/>
+      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF2201C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>65de0876-95a8-4de6-a4c2-eee164324cca</tstamps>
+    </comp>
+    <comp ref="R20">
+      <value>2k2</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122832CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF2201C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122832CT-ND"/>
+      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF2201C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bddcf6f5-e971-4b6c-83a3-664b5fbfb5ff</tstamps>
+    </comp>
+    <comp ref="R21">
+      <value>2k2</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122832CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF2201C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122832CT-ND"/>
+      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF2201C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4ee10286-6ce3-45ef-b7af-b11ab4874bd7</tstamps>
+    </comp>
+    <comp ref="R23">
+      <value>2k2</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122832CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF2201C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122832CT-ND"/>
+      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF2201C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d9fc8217-cf6f-4b60-9a39-ee4151613955</tstamps>
+    </comp>
+    <comp ref="SW1">
+      <value>JST-SH-1.00mm 1x2</value>
+      <footprint>Connector_JST:JST_SH_BM02B-SRSS-TB_1x02-1MP_P1.00mm_Vertical</footprint>
+      <fields>
+        <field name="Description Value Pkg">Connector Header Surface Mount 2 position 0.039" (1.00mm)</field>
+        <field name="Digikey Part #">455-1788-1-ND</field>
+        <field name="Mfg Part #">BM02B-SRSS-TB</field>
+      </fields>
+      <libsource lib="Connector_Generic_MountingPin" part="Conn_01x02_MountingPin" description="Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Digikey Part #" value="455-1788-1-ND"/>
+      <property name="Description Value Pkg" value="Connector Header Surface Mount 2 position 0.039&quot; (1.00mm)"/>
+      <property name="Mfg Part #" value="BM02B-SRSS-TB"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e7fb5095-72e0-4d79-b466-6a849221272c</tstamps>
+    </comp>
+    <comp ref="SW2">
+      <value>PTS810 SJM Switch</value>
+      <footprint>Button_Switch_SMD:SW_SPST_PTS810</footprint>
+      <fields>
+        <field name="Description Value Pkg">Tactile Switch SPST-NO Top Actuated Surface Mount</field>
+        <field name="Digikey Part #">CKN10502CT-ND </field>
+        <field name="Mfg Part #">PTS810 SJM 250 SMTR LFS</field>
+      </fields>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <property name="Digikey Part #" value="CKN10502CT-ND "/>
+      <property name="Description Value Pkg" value="Tactile Switch SPST-NO Top Actuated Surface Mount"/>
+      <property name="Mfg Part #" value="PTS810 SJM 250 SMTR LFS"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Push button switch, generic, two pins"/>
+      <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>65e106f9-1491-4606-bd61-8cc485e2332e</tstamps>
+    </comp>
+    <comp ref="SW3">
+      <value>PTS810 SJM Switch</value>
+      <footprint>Button_Switch_SMD:SW_SPST_PTS810</footprint>
+      <fields>
+        <field name="Description Value Pkg">Tactile Switch SPST-NO Top Actuated Surface Mount</field>
+        <field name="Digikey Part #">CKN10502CT-ND </field>
+        <field name="Mfg Part #">PTS810 SJM 250 SMTR LFS</field>
+      </fields>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <property name="Digikey Part #" value="CKN10502CT-ND "/>
+      <property name="Description Value Pkg" value="Tactile Switch SPST-NO Top Actuated Surface Mount"/>
+      <property name="Mfg Part #" value="PTS810 SJM 250 SMTR LFS"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Push button switch, generic, two pins"/>
+      <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7139cdd2-b552-4952-82b5-8034e21d9f31</tstamps>
+    </comp>
+    <comp ref="TH1">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">NTC Thermistor 10k 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">P124053CT-ND</field>
+        <field name="Mfg Part #">ERT-JZEG103FA</field>
+      </fields>
+      <libsource lib="Device" part="Thermistor_NTC_US" description="Temperature dependent resistor, negative temperature coefficient, US symbol"/>
+      <property name="Description Value Pkg" value="NTC Thermistor 10k 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="ERT-JZEG103FA"/>
+      <property name="Digikey Part #" value="P124053CT-ND"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Temperature dependent resistor, negative temperature coefficient, US symbol"/>
+      <property name="ki_keywords" value="thermistor NTC resistor sensor RTD"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>44bd5aca-0be7-4f5f-9b5d-1afdd7bf33ae</tstamps>
+    </comp>
+    <comp ref="TrillExtensionInput1">
+      <value>JST-SH 1x08 1.00mm</value>
+      <footprint>Connector_JST:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical</footprint>
+      <fields>
+        <field name="Description Value Pkg">Connector Header Surface Mount, Right Angle 4 position 0.039" (1.00mm)</field>
+        <field name="Digikey Part #">455-BM04B-SRSS-TBCT-ND</field>
+        <field name="Mfg Part #">BM04B-SRSS-TB</field>
+      </fields>
+      <libsource lib="Connector_Generic_MountingPin" part="Conn_01x04_MountingPin" description="Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Digikey Part #" value="455-BM04B-SRSS-TBCT-ND"/>
+      <property name="Description Value Pkg" value="Connector Header Surface Mount, Right Angle 4 position 0.039&quot; (1.00mm)"/>
+      <property name="Mfg Part #" value="BM04B-SRSS-TB"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4e581376-c0fe-4877-a24d-fd564199b096</tstamps>
+    </comp>
+    <comp ref="U1">
+      <value>max8819ceti+</value>
+      <footprint>max8819-footprints:21-0139_T2844&amp;plus_1_MXM</footprint>
+      <datasheet>max8819ceti+</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Handheld/Mobile Devices PMIC 28-TQFN (4x4)</field>
+        <field name="Digikey Part #">MAX8819CETI+-ND</field>
+        <field name="Mfg Part #">MAX8819CETI+</field>
+      </fields>
+      <libsource lib="max8819-symbols" part="max8819ceti+" description=""/>
+      <property name="Description Value Pkg" value="Handheld/Mobile Devices PMIC 28-TQFN (4x4)"/>
+      <property name="Mfg Part #" value="MAX8819CETI+"/>
+      <property name="Digikey Part #" value="MAX8819CETI+-ND"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_keywords" value="max8819ceti+"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b524a05e-2d74-4488-8b29-374a1e108d71</tstamps>
+    </comp>
+    <comp ref="U4">
+      <value>PCA9306DP</value>
+      <footprint>Package_SO:TSSOP-8_3x3mm_P0.65mm</footprint>
+      <datasheet>https://www.nxp.com/docs/en/data-sheet/PCA9306.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Voltage Level Translator Bidirectional 1 Circuit 2 Channel 8-TSSOP</field>
+        <field name="Digikey Part #">568-4243-1-ND</field>
+        <field name="Mfg Part #">PCA9306DP1,125</field>
+      </fields>
+      <libsource lib="Interface" part="PCA9306DP" description="Dual bidirectional I2C Bus and SMBus voltage level translator, TSSOP-8"/>
+      <property name="Description Value Pkg" value="Voltage Level Translator Bidirectional 1 Circuit 2 Channel 8-TSSOP"/>
+      <property name="Mfg Part #" value="PCA9306DP1,125"/>
+      <property name="Digikey Part #" value="568-4243-1-ND"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Dual bidirectional I2C Bus and SMBus voltage level translator, TSSOP-8"/>
+      <property name="ki_keywords" value="I2C SMBus"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4f6ab94b-05a2-41f9-b26c-8be1fd8349ab</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Connector" part="USB_C_Receptacle_USB2.0">
+      <description>USB 2.0-only Type-C Receptacle connector</description>
+      <docs>https://www.usb.org/sites/default/files/documents/usb_type-c.zip</docs>
+      <footprints>
+        <fp>USB*C*Receptacle*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">USB_C_Receptacle_USB2.0</field>
+        <field name="Datasheet">https://www.usb.org/sites/default/files/documents/usb_type-c.zip</field>
+      </fields>
+      <pins>
+        <pin num="A1" name="GND" type="passive"/>
+        <pin num="A4" name="VBUS" type="passive"/>
+        <pin num="A5" name="CC1" type="bidirectional"/>
+        <pin num="A6" name="D+" type="bidirectional"/>
+        <pin num="A7" name="D-" type="bidirectional"/>
+        <pin num="A8" name="SBU1" type="bidirectional"/>
+        <pin num="A9" name="VBUS" type="passive"/>
+        <pin num="A12" name="GND" type="passive"/>
+        <pin num="B1" name="GND" type="passive"/>
+        <pin num="B4" name="VBUS" type="passive"/>
+        <pin num="B5" name="CC2" type="bidirectional"/>
+        <pin num="B6" name="D+" type="bidirectional"/>
+        <pin num="B7" name="D-" type="bidirectional"/>
+        <pin num="B8" name="SBU2" type="bidirectional"/>
+        <pin num="B9" name="VBUS" type="passive"/>
+        <pin num="B12" name="GND" type="passive"/>
+        <pin num="S1" name="SHIELD" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_01x04">
+      <description>Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x04</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_01x06">
+      <description>Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x06</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_01x08">
+      <description>Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x08</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+        <pin num="7" name="Pin_7" type="passive"/>
+        <pin num="8" name="Pin_8" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic_MountingPin" part="Conn_01x02_MountingPin">
+      <description>Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??-1MP*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x02_MountingPin</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="MP" name="MountPin" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic_MountingPin" part="Conn_01x04_MountingPin">
+      <description>Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??-1MP*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x04_MountingPin</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="MP" name="MountPin" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Battery_Cell">
+      <description>Single-cell battery</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">BT</field>
+        <field name="Value">Battery_Cell</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="+" type="passive"/>
+        <pin num="2" name="-" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="L">
+      <description>Inductor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Choke_*</fp>
+        <fp>*Coil*</fp>
+        <fp>Inductor_*</fp>
+        <fp>L_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">L</field>
+        <field name="Value">L</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="LED">
+      <description>Light emitting diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R_Shunt_US">
+      <description>Shunt resistor, US symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*Shunt*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R_Shunt_US</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+        <pin num="4" name="4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R_US">
+      <description>Resistor, US symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R_US</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Thermistor_NTC_US">
+      <description>Temperature dependent resistor, negative temperature coefficient, US symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>*NTC*</fp>
+        <fp>*Thermistor*</fp>
+        <fp>PIN?ARRAY*</fp>
+        <fp>bornier*</fp>
+        <fp>*Terminal?Block*</fp>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">TH</field>
+        <field name="Value">Thermistor_NTC_US</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Interface" part="PCA9306DP">
+      <description>Dual bidirectional I2C Bus and SMBus voltage level translator, TSSOP-8</description>
+      <docs>https://www.nxp.com/docs/en/data-sheet/PCA9306.pdf</docs>
+      <footprints>
+        <fp>TSSOP*3x3mm*P0.65mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">PCA9306DP</field>
+        <field name="Footprint">Package_SO:TSSOP-8_3x3mm_P0.65mm</field>
+        <field name="Datasheet">https://www.nxp.com/docs/en/data-sheet/PCA9306.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="VREF1" type="power_in"/>
+        <pin num="3" name="SCL1" type="bidirectional"/>
+        <pin num="4" name="SDA1" type="bidirectional"/>
+        <pin num="5" name="SDA2" type="bidirectional"/>
+        <pin num="6" name="SCL2" type="bidirectional"/>
+        <pin num="7" name="VREF2" type="power_in"/>
+        <pin num="8" name="EN" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="Mechanical" part="MountingHole">
+      <description>Mounting Hole without connection</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>MountingHole*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">H</field>
+        <field name="Value">MountingHole</field>
+        <field name="Datasheet">~</field>
+      </fields>
+    </libpart>
+    <libpart lib="PCM_Espressif" part="ESP32-S3-WROOM-2">
+      <description>2.4 GHz WiFi (802.11 b/g/n) and Bluetooth ® 5 (LE) module Built around ESP32S3 series of SoCs, Xtensa ® dualcore 32bit LX7 microprocessor Flash up to 16 MB, PSRAM up to 8 MB 36 GPIOs, rich set of peripherals Onboard PCB antenna</description>
+      <docs>https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-2_datasheet_en.pdf</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ESP32-S3-WROOM-2</field>
+        <field name="Footprint">Espressif:ESP32-S3-WROOM-2</field>
+        <field name="Datasheet">https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-2_datasheet_en.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="3V3" type="power_in"/>
+        <pin num="3" name="EN" type="input"/>
+        <pin num="4" name="GPIO4/TOUCH4/ADC1_CH3" type="bidirectional"/>
+        <pin num="5" name="GPIO5/TOUCH5/ADC1_CH4" type="bidirectional"/>
+        <pin num="6" name="GPIO6/TOUCH6/ADC1_CH5" type="bidirectional"/>
+        <pin num="7" name="GPIO7/TOUCH7/ADC1_CH6" type="bidirectional"/>
+        <pin num="8" name="GPIO15/U0RTS/ADC2_CH4/XTAL_32K_P" type="bidirectional"/>
+        <pin num="9" name="GPIO16/U0CTS/ADC2_CH5/XTAL_32K_N" type="bidirectional"/>
+        <pin num="10" name="GPIO17/U1TXD/ADC2_CH6" type="bidirectional"/>
+        <pin num="11" name="GPIO18/U1RXD/ADC2_CH7/CLK_OUT3" type="bidirectional"/>
+        <pin num="12" name="GPIO8/TOUCH8/ADC1_CH7/SUBSPICS1" type="bidirectional"/>
+        <pin num="13" name="GPIO19/U1RTS/ADC2_CH8/CLK_OUT2/USB_D-" type="bidirectional"/>
+        <pin num="14" name="GPIO20/U1CTS/ADC2_CH9/CLK_OUT1/USB_D+" type="bidirectional"/>
+        <pin num="15" name="GPIO3/TOUCH3/ADC1_CH2" type="bidirectional"/>
+        <pin num="16" name="GPIO46" type="bidirectional"/>
+        <pin num="17" name="GPIO9/TOUCH9/ADC1_CH8/FSPIHD/SUBSPIHD" type="bidirectional"/>
+        <pin num="18" name="GPIO10/TOUCH10/ADC1_CH9/FSPICS0/FSPIIO4/SUBSPICS0" type="bidirectional"/>
+        <pin num="19" name="GPIO11/TOUCH11/ADC2_CH0/FSPID/FSPIIO5/SUBSPID" type="bidirectional"/>
+        <pin num="20" name="GPIO12/TOUCH12/ADC2_CH1/FSPICLK/FSPIIO6/SUBSPICLK" type="bidirectional"/>
+        <pin num="21" name="GPIO13/TOUCH13/ADC2_CH2/FSPIQ/FSPIIO7/SUBSPIQ" type="bidirectional"/>
+        <pin num="22" name="GPIO14/TOUCH14/ADC2_CH3/FSPIWP/FSPIDQS/SUBSPIWP" type="bidirectional"/>
+        <pin num="23" name="GPIO21" type="bidirectional"/>
+        <pin num="24" name="GPIO47/SPICLK_P/SUBSPICLK_P_DIFF" type="bidirectional"/>
+        <pin num="25" name="GPIO48/SPICLK_N/SUBSPICLK_N_DIFF" type="bidirectional"/>
+        <pin num="26" name="GPIO45" type="bidirectional"/>
+        <pin num="27" name="GPIO0/BOOT" type="bidirectional"/>
+        <pin num="28" name="NC" type="no_connect"/>
+        <pin num="29" name="NC" type="no_connect"/>
+        <pin num="30" name="NC" type="no_connect"/>
+        <pin num="31" name="GPIO38/FSPIWP/SUBSPIWP" type="bidirectional"/>
+        <pin num="32" name="MTCK/GPIO39/CLK_OUT3/SUBSPICS1" type="bidirectional"/>
+        <pin num="33" name="MTDO/GPIO40/CLK_OUT2" type="bidirectional"/>
+        <pin num="34" name="MTDI/GPIO41/CLK_OUT1" type="bidirectional"/>
+        <pin num="35" name="MTMS/GPIO42" type="bidirectional"/>
+        <pin num="36" name="U0RXD/GPIO44/CLK_OUT2" type="bidirectional"/>
+        <pin num="37" name="U0TXD/GPIO43/CLK_OUT1" type="bidirectional"/>
+        <pin num="38" name="GPIO2/TOUCH2/ADC1_CH1" type="bidirectional"/>
+        <pin num="39" name="GPIO1/TOUCH1/ADC1_CH0" type="bidirectional"/>
+        <pin num="40" name="GND" type="passive"/>
+        <pin num="41" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Sensor_Motion" part="ICM-20948">
+      <description>InvenSense 9-Axis Motion Sensor, Accelerometer, Gyroscope, Compass, I2C/SPI, QFN-24</description>
+      <docs>http://www.invensense.com/wp-content/uploads/2016/06/DS-000189-ICM-20948-v1.3.pdf</docs>
+      <footprints>
+        <fp>InvenSense?QFN*3x3mm*P0.4mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ICM-20948</field>
+        <field name="Footprint">Sensor_Motion:InvenSense_QFN-24_3x3mm_P0.4mm</field>
+        <field name="Datasheet">http://www.invensense.com/wp-content/uploads/2016/06/DS-000189-ICM-20948-v1.3.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="NC" type="no_connect"/>
+        <pin num="2" name="NC" type="no_connect"/>
+        <pin num="3" name="NC" type="no_connect"/>
+        <pin num="4" name="NC" type="no_connect"/>
+        <pin num="5" name="NC" type="no_connect"/>
+        <pin num="6" name="NC" type="no_connect"/>
+        <pin num="7" name="AUX_CL" type="output"/>
+        <pin num="8" name="VDDIO" type="power_in"/>
+        <pin num="9" name="SDO/AD0" type="bidirectional"/>
+        <pin num="10" name="REGOUT" type="passive"/>
+        <pin num="11" name="FSYNC" type="input"/>
+        <pin num="12" name="INT1" type="output"/>
+        <pin num="13" name="VDD" type="power_in"/>
+        <pin num="14" name="NC" type="no_connect"/>
+        <pin num="15" name="NC" type="no_connect"/>
+        <pin num="16" name="NC" type="no_connect"/>
+        <pin num="17" name="NC" type="no_connect"/>
+        <pin num="18" name="GND" type="power_in"/>
+        <pin num="19" name="RESV" type="no_connect"/>
+        <pin num="20" name="GND" type="passive"/>
+        <pin num="21" name="AUX_DA" type="bidirectional"/>
+        <pin num="22" name="~{CS}" type="input"/>
+        <pin num="23" name="SCL/SCLK" type="input"/>
+        <pin num="24" name="SDA/SDI" type="bidirectional"/>
+      </pins>
+    </libpart>
+    <libpart lib="Switch" part="SW_Push">
+      <description>Push button switch, generic, two pins</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SW_Push</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Transistor_FET" part="BSS138">
+      <description>50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23</description>
+      <docs>https://www.onsemi.com/pub/Collateral/BSS138-D.PDF</docs>
+      <footprints>
+        <fp>SOT?23*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">BSS138</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
+        <field name="Datasheet">https://www.onsemi.com/pub/Collateral/BSS138-D.PDF</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="max17055-symbol" part="MAX17055ETB+T">
+      <docs>MAX17055ETB+T</docs>
+      <footprints>
+        <fp>21-100013A_T102A2+1C_MXM</fp>
+        <fp>21-100013A_T102A2+1C_MXM-M</fp>
+        <fp>21-100013A_T102A2+1C_MXM-L</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MAX17055ETB+T</field>
+        <field name="Footprint">21-100013A_T102A2+1C_MXM</field>
+        <field name="Datasheet">MAX17055ETB+T</field>
+      </fields>
+      <pins>
+        <pin num="1" name="N.C." type="no_connect"/>
+        <pin num="2" name="AIN" type="unspecified"/>
+        <pin num="3" name="SCL" type="unspecified"/>
+        <pin num="4" name="SDA" type="unspecified"/>
+        <pin num="5" name="CSN" type="unspecified"/>
+        <pin num="6" name="CSP" type="unspecified"/>
+        <pin num="7" name="REG" type="unspecified"/>
+        <pin num="8" name="ALRT" type="unspecified"/>
+        <pin num="9" name="THRM" type="unspecified"/>
+        <pin num="10" name="BATT" type="unspecified"/>
+        <pin num="11" name="EPAD" type="unspecified"/>
+      </pins>
+    </libpart>
+    <libpart lib="max8819-symbols" part="max8819ceti+">
+      <docs>max8819ceti+</docs>
+      <footprints>
+        <fp>21-0139_T2844+1_MXM</fp>
+        <fp>21-0139_T2844+1_MXM-M</fp>
+        <fp>21-0139_T2844+1_MXM-L</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">max8819ceti+</field>
+        <field name="Footprint">21-0139_T2844+1_MXM</field>
+        <field name="Datasheet">max8819ceti+</field>
+      </fields>
+      <pins>
+        <pin num="1" name="COMP4" type="unspecified"/>
+        <pin num="2" name="FB4" type="bidirectional"/>
+        <pin num="3" name="OVP4" type="unspecified"/>
+        <pin num="4" name="PG4" type="bidirectional"/>
+        <pin num="5" name="LX4" type="bidirectional"/>
+        <pin num="6" name="GND" type="power_out"/>
+        <pin num="7" name="EN4" type="bidirectional"/>
+        <pin num="8" name="*RST1" type="unspecified"/>
+        <pin num="9" name="BAT" type="unspecified"/>
+        <pin num="10" name="SYS" type="unspecified"/>
+        <pin num="11" name="DC" type="unspecified"/>
+        <pin num="12" name="CEN" type="unspecified"/>
+        <pin num="13" name="FB1" type="bidirectional"/>
+        <pin num="14" name="CISET" type="unspecified"/>
+        <pin num="15" name="*CHG" type="unspecified"/>
+        <pin num="16" name="PG1" type="bidirectional"/>
+        <pin num="17" name="LX1" type="bidirectional"/>
+        <pin num="18" name="PV13" type="bidirectional"/>
+        <pin num="19" name="LX3" type="bidirectional"/>
+        <pin num="20" name="PG3" type="bidirectional"/>
+        <pin num="21" name="DLIM1" type="bidirectional"/>
+        <pin num="22" name="FB2" type="bidirectional"/>
+        <pin num="23" name="FB3" type="bidirectional"/>
+        <pin num="24" name="EN123" type="bidirectional"/>
+        <pin num="25" name="PV2" type="bidirectional"/>
+        <pin num="26" name="LX2" type="bidirectional"/>
+        <pin num="27" name="PG2" type="bidirectional"/>
+        <pin num="28" name="DLIM2" type="bidirectional"/>
+        <pin num="29" name="EP" type="unspecified"/>
+      </pins>
+    </libpart>
+    <libpart lib="neopixel" part="2659">
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">2659</field>
+        <field name="Footprint">2659:2659</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/2659/Adafruit+Industries+LLC/view-part/?ref=snap</field>
+        <field name="Description">
+ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, Asbestos, Text, English, Recycled Plas...
+</field>
+        <field name="Package">None</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/2659/Adafruit+Industries+LLC/view-part/?ref=eda</field>
+        <field name="STANDARD">Manufacturer Recommendations</field>
+        <field name="PARTREV">01</field>
+        <field name="MF">Adafruit Industries</field>
+        <field name="MP">2659</field>
+        <field name="MANUFACTURER">Adafruit Industries LLC</field>
+      </fields>
+      <pins>
+        <pin num="1" name="DOUT" type="output"/>
+        <pin num="2" name="VSS" type="power_in"/>
+        <pin num="3" name="DIN" type="input"/>
+        <pin num="4" name="VDD" type="power_in"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Connector">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Connector.kicad_sym</uri>
+    </library>
+    <library logical="Connector_Generic">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Connector_Generic.kicad_sym</uri>
+    </library>
+    <library logical="Connector_Generic_MountingPin">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Connector_Generic_MountingPin.kicad_sym</uri>
+    </library>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Device.kicad_sym</uri>
+    </library>
+    <library logical="Interface">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Interface.kicad_sym</uri>
+    </library>
+    <library logical="Mechanical">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Mechanical.kicad_sym</uri>
+    </library>
+    <library logical="PCM_Espressif">
+      <uri>D:\Documents\KiCad\7.0\3rdparty/symbols/com_github_espressif_kicad-libraries/Espressif.kicad_sym</uri>
+    </library>
+    <library logical="Sensor_Motion">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Sensor_Motion.kicad_sym</uri>
+    </library>
+    <library logical="Switch">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Switch.kicad_sym</uri>
+    </library>
+    <library logical="Transistor_FET">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Transistor_FET.kicad_sym</uri>
+    </library>
+    <library logical="max17055-symbol">
+      <uri>D:\Documents\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/max17055-kicad/max17055-symbol.kicad_sym</uri>
+    </library>
+    <library logical="max8819-symbols">
+      <uri>D:\Documents\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/max8819/max8819-symbols.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="+1V8">
+      <node ref="C5" pin="1" pintype="passive"/>
+      <node ref="IMU1" pin="13" pinfunction="VDD" pintype="power_in"/>
+      <node ref="IMU1" pin="8" pinfunction="VDDIO" pintype="power_in"/>
+      <node ref="L2" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="Q3" pin="1" pinfunction="G" pintype="input"/>
+      <node ref="R11" pin="2" pintype="passive"/>
+      <node ref="R16" pin="2" pintype="passive"/>
+      <node ref="R17" pin="2" pintype="passive"/>
+      <node ref="R21" pin="2" pintype="passive"/>
+      <node ref="U4" pin="2" pinfunction="VREF1" pintype="power_in"/>
+    </net>
+    <net code="2" name="+3V3">
+      <node ref="C13" pin="1" pintype="passive"/>
+      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="FSR1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J2" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="L1" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="MCU1" pin="2" pinfunction="3V3" pintype="power_in"/>
+      <node ref="PWLED1" pin="4" pinfunction="VDD" pintype="power_in"/>
+      <node ref="QWIIC1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="R18" pin="2" pintype="passive"/>
+      <node ref="R19" pin="2" pintype="passive"/>
+      <node ref="R20" pin="2" pintype="passive"/>
+      <node ref="R23" pin="2" pintype="passive"/>
+      <node ref="R5" pin="2" pintype="passive"/>
+      <node ref="R9" pin="2" pintype="passive"/>
+      <node ref="U4" pin="7" pinfunction="VREF2" pintype="power_in"/>
+    </net>
+    <net code="3" name="+BATT">
+      <node ref="BT1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="C8" pin="1" pintype="passive"/>
+      <node ref="FG1" pin="10" pinfunction="BATT" pintype="unspecified"/>
+      <node ref="U1" pin="9" pinfunction="BAT" pintype="unspecified"/>
+    </net>
+    <net code="4" name="-BATT">
+      <node ref="BT1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="R2" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+    <net code="5" name="/AIN">
+      <node ref="FG1" pin="2" pinfunction="AIN" pintype="unspecified"/>
+      <node ref="R12" pin="1" pintype="passive"/>
+      <node ref="TH1" pin="1" pintype="passive"/>
+    </net>
+    <net code="10" name="/CIPO">
+      <node ref="J3" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="MCU1" pin="24" pinfunction="GPIO47/SPICLK_P/SUBSPICLK_P_DIFF" pintype="bidirectional"/>
+    </net>
+    <net code="11" name="/COPI">
+      <node ref="J3" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="MCU1" pin="31" pinfunction="GPIO38/FSPIWP/SUBSPIWP" pintype="bidirectional"/>
+    </net>
+    <net code="12" name="/EN">
+      <node ref="C9" pin="1" pintype="passive"/>
+      <node ref="J2" pin="6" pinfunction="Pin_6" pintype="passive"/>
+      <node ref="MCU1" pin="3" pinfunction="EN" pintype="input"/>
+      <node ref="R5" pin="1" pintype="passive"/>
+      <node ref="SW3" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+    <net code="14" name="/FB1">
+      <node ref="R8" pin="2" pintype="passive"/>
+      <node ref="R9" pin="1" pintype="passive"/>
+      <node ref="U1" pin="13" pinfunction="FB1" pintype="bidirectional"/>
+    </net>
+    <net code="15" name="/FB3">
+      <node ref="R10" pin="2" pintype="passive"/>
+      <node ref="R11" pin="1" pintype="passive"/>
+      <node ref="U1" pin="23" pinfunction="FB3" pintype="bidirectional"/>
+    </net>
+    <net code="16" name="/FG_CSN">
+      <node ref="FG1" pin="5" pinfunction="CSN" pintype="unspecified"/>
+      <node ref="R2" pin="3" pinfunction="3" pintype="passive"/>
+    </net>
+    <net code="22" name="/IMU_INT">
+      <node ref="IMU1" pin="12" pinfunction="INT1" pintype="output"/>
+      <node ref="Q3" pin="2" pinfunction="S" pintype="passive"/>
+      <node ref="R21" pin="1" pintype="passive"/>
+    </net>
+    <net code="23" name="/IO0">
+      <node ref="MCU1" pin="27" pinfunction="GPIO0/BOOT" pintype="bidirectional"/>
+      <node ref="SW2" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+    <net code="24" name="/IO1">
+      <node ref="J3" pin="7" pinfunction="Pin_7" pintype="passive"/>
+      <node ref="MCU1" pin="39" pinfunction="GPIO1/TOUCH1/ADC1_CH0" pintype="bidirectional"/>
+    </net>
+    <net code="25" name="/IO2">
+      <node ref="J3" pin="6" pinfunction="Pin_6" pintype="passive"/>
+      <node ref="MCU1" pin="38" pinfunction="GPIO2/TOUCH2/ADC1_CH1" pintype="bidirectional"/>
+    </net>
+    <net code="26" name="/IO3">
+      <node ref="MCU1" pin="15" pinfunction="GPIO3/TOUCH3/ADC1_CH2" pintype="bidirectional"/>
+      <node ref="SW1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+    </net>
+    <net code="27" name="/IO4">
+      <node ref="J3" pin="5" pinfunction="Pin_5" pintype="passive"/>
+      <node ref="MCU1" pin="4" pinfunction="GPIO4/TOUCH4/ADC1_CH3" pintype="bidirectional"/>
+    </net>
+    <net code="28" name="/IO5">
+      <node ref="J3" pin="4" pinfunction="Pin_4" pintype="passive"/>
+      <node ref="MCU1" pin="5" pinfunction="GPIO5/TOUCH5/ADC1_CH4" pintype="bidirectional"/>
+    </net>
+    <net code="29" name="/IO6">
+      <node ref="J2" pin="5" pinfunction="Pin_5" pintype="passive"/>
+      <node ref="MCU1" pin="6" pinfunction="GPIO6/TOUCH6/ADC1_CH5" pintype="bidirectional"/>
+    </net>
+    <net code="30" name="/IO7">
+      <node ref="J2" pin="4" pinfunction="Pin_4" pintype="passive"/>
+      <node ref="MCU1" pin="7" pinfunction="GPIO7/TOUCH7/ADC1_CH6" pintype="bidirectional"/>
+    </net>
+    <net code="31" name="/IO8">
+      <node ref="J2" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="MCU1" pin="12" pinfunction="GPIO8/TOUCH8/ADC1_CH7/SUBSPICS1" pintype="bidirectional"/>
+    </net>
+    <net code="32" name="/IO9">
+      <node ref="FSR1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="MCU1" pin="17" pinfunction="GPIO9/TOUCH9/ADC1_CH8/FSPIHD/SUBSPIHD" pintype="bidirectional"/>
+      <node ref="R1" pin="1" pintype="passive"/>
+    </net>
+    <net code="33" name="/IO10">
+      <node ref="MCU1" pin="18" pinfunction="GPIO10/TOUCH10/ADC1_CH9/FSPICS0/FSPIIO4/SUBSPICS0" pintype="bidirectional"/>
+    </net>
+    <net code="34" name="/IO13">
+      <node ref="MCU1" pin="21" pinfunction="GPIO13/TOUCH13/ADC2_CH2/FSPIQ/FSPIIO7/SUBSPIQ" pintype="bidirectional"/>
+    </net>
+    <net code="35" name="/IO14">
+      <node ref="MCU1" pin="22" pinfunction="GPIO14/TOUCH14/ADC2_CH3/FSPIWP/FSPIDQS/SUBSPIWP" pintype="bidirectional"/>
+    </net>
+    <net code="36" name="/IO15">
+      <node ref="MCU1" pin="8" pinfunction="GPIO15/U0RTS/ADC2_CH4/XTAL_32K_P" pintype="bidirectional"/>
+    </net>
+    <net code="37" name="/IO16">
+      <node ref="MCU1" pin="9" pinfunction="GPIO16/U0CTS/ADC2_CH5/XTAL_32K_N" pintype="bidirectional"/>
+    </net>
+    <net code="38" name="/IO17">
+      <node ref="FG1" pin="8" pinfunction="ALRT" pintype="unspecified"/>
+      <node ref="MCU1" pin="10" pinfunction="GPIO17/U1TXD/ADC2_CH6" pintype="bidirectional"/>
+    </net>
+    <net code="39" name="/IO18">
+      <node ref="MCU1" pin="11" pinfunction="GPIO18/U1RXD/ADC2_CH7/CLK_OUT3" pintype="bidirectional"/>
+    </net>
+    <net code="40" name="/IO21">
+      <node ref="MCU1" pin="23" pinfunction="GPIO21" pintype="bidirectional"/>
+      <node ref="Q3" pin="3" pinfunction="D" pintype="passive"/>
+      <node ref="R23" pin="1" pintype="passive"/>
+    </net>
+    <net code="41" name="/IO39">
+      <node ref="MCU1" pin="32" pinfunction="MTCK/GPIO39/CLK_OUT3/SUBSPICS1" pintype="bidirectional"/>
+      <node ref="TrillExtensionInput1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+    </net>
+    <net code="42" name="/IO40">
+      <node ref="MCU1" pin="33" pinfunction="MTDO/GPIO40/CLK_OUT2" pintype="bidirectional"/>
+      <node ref="TrillExtensionInput1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+    </net>
+    <net code="43" name="/IO41">
+      <node ref="MCU1" pin="34" pinfunction="MTDI/GPIO41/CLK_OUT1" pintype="bidirectional"/>
+      <node ref="TrillExtensionInput1" pin="3" pinfunction="Pin_3" pintype="passive"/>
+    </net>
+    <net code="44" name="/IO42">
+      <node ref="MCU1" pin="35" pinfunction="MTMS/GPIO42" pintype="bidirectional"/>
+      <node ref="TrillExtensionInput1" pin="4" pinfunction="Pin_4" pintype="passive"/>
+    </net>
+    <net code="45" name="/IO45">
+      <node ref="MCU1" pin="26" pinfunction="GPIO45" pintype="bidirectional"/>
+    </net>
+    <net code="46" name="/IO46">
+      <node ref="MCU1" pin="16" pinfunction="GPIO46" pintype="bidirectional"/>
+      <node ref="PWLED1" pin="3" pinfunction="DIN" pintype="input"/>
+    </net>
+    <net code="47" name="/ISET">
+      <node ref="R4" pin="2" pintype="passive"/>
+      <node ref="U1" pin="14" pinfunction="CISET" pintype="unspecified"/>
+    </net>
+    <net code="48" name="/LS_EN">
+      <node ref="C14" pin="1" pintype="passive"/>
+      <node ref="R18" pin="1" pintype="passive"/>
+      <node ref="U4" pin="8" pinfunction="EN" pintype="input"/>
+    </net>
+    <net code="50" name="/LV_SCL">
+      <node ref="IMU1" pin="23" pinfunction="SCL/SCLK" pintype="input"/>
+      <node ref="R16" pin="1" pintype="passive"/>
+      <node ref="U4" pin="3" pinfunction="SCL1" pintype="bidirectional"/>
+    </net>
+    <net code="51" name="/LV_SDA">
+      <node ref="IMU1" pin="24" pinfunction="SDA/SDI" pintype="bidirectional"/>
+      <node ref="R17" pin="1" pintype="passive"/>
+      <node ref="U4" pin="4" pinfunction="SDA1" pintype="bidirectional"/>
+    </net>
+    <net code="52" name="/LX1">
+      <node ref="L1" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="17" pinfunction="LX1" pintype="bidirectional"/>
+    </net>
+    <net code="53" name="/LX3">
+      <node ref="L2" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="U1" pin="19" pinfunction="LX3" pintype="bidirectional"/>
+    </net>
+    <net code="56" name="/REG">
+      <node ref="C2" pin="1" pintype="passive"/>
+      <node ref="FG1" pin="7" pinfunction="REG" pintype="unspecified"/>
+    </net>
+    <net code="58" name="/RXD">
+      <node ref="MCU1" pin="36" pinfunction="U0RXD/GPIO44/CLK_OUT2" pintype="bidirectional"/>
+    </net>
+    <net code="59" name="/SCK">
+      <node ref="J3" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="MCU1" pin="25" pinfunction="GPIO48/SPICLK_N/SUBSPICLK_N_DIFF" pintype="bidirectional"/>
+    </net>
+    <net code="60" name="/SCL">
+      <node ref="FG1" pin="3" pinfunction="SCL" pintype="unspecified"/>
+      <node ref="MCU1" pin="19" pinfunction="GPIO11/TOUCH11/ADC2_CH0/FSPID/FSPIIO5/SUBSPID" pintype="bidirectional"/>
+      <node ref="QWIIC1" pin="4" pinfunction="Pin_4" pintype="passive"/>
+      <node ref="R19" pin="1" pintype="passive"/>
+      <node ref="U4" pin="6" pinfunction="SCL2" pintype="bidirectional"/>
+    </net>
+    <net code="61" name="/SDA">
+      <node ref="FG1" pin="4" pinfunction="SDA" pintype="unspecified"/>
+      <node ref="MCU1" pin="20" pinfunction="GPIO12/TOUCH12/ADC2_CH1/FSPICLK/FSPIIO6/SUBSPICLK" pintype="bidirectional"/>
+      <node ref="QWIIC1" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="R20" pin="1" pintype="passive"/>
+      <node ref="U4" pin="5" pinfunction="SDA2" pintype="bidirectional"/>
+    </net>
+    <net code="62" name="/STAT">
+      <node ref="R3" pin="2" pintype="passive"/>
+      <node ref="U1" pin="15" pinfunction="*CHG" pintype="unspecified"/>
+    </net>
+    <net code="64" name="/SYS">
+      <node ref="C3" pin="1" pintype="passive"/>
+      <node ref="CHARGLED1" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="U1" pin="10" pinfunction="SYS" pintype="unspecified"/>
+      <node ref="U1" pin="18" pinfunction="PV13" pintype="bidirectional"/>
+      <node ref="U1" pin="24" pinfunction="EN123" pintype="bidirectional"/>
+    </net>
+    <net code="66" name="/THRM">
+      <node ref="FG1" pin="9" pinfunction="THRM" pintype="unspecified"/>
+      <node ref="R12" pin="2" pintype="passive"/>
+    </net>
+    <net code="68" name="/TXD">
+      <node ref="MCU1" pin="37" pinfunction="U0TXD/GPIO43/CLK_OUT1" pintype="bidirectional"/>
+    </net>
+    <net code="70" name="/USBD+">
+      <node ref="J1" pin="A6" pinfunction="D+" pintype="bidirectional"/>
+      <node ref="J1" pin="B6" pinfunction="D+" pintype="bidirectional"/>
+      <node ref="MCU1" pin="14" pinfunction="GPIO20/U1CTS/ADC2_CH9/CLK_OUT1/USB_D+" pintype="bidirectional"/>
+    </net>
+    <net code="71" name="/USBD-">
+      <node ref="J1" pin="A7" pinfunction="D-" pintype="bidirectional"/>
+      <node ref="J1" pin="B7" pinfunction="D-" pintype="bidirectional"/>
+      <node ref="MCU1" pin="13" pinfunction="GPIO19/U1RTS/ADC2_CH8/CLK_OUT2/USB_D-" pintype="bidirectional"/>
+    </net>
+    <net code="72" name="CSP">
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="C2" pin="2" pintype="passive"/>
+      <node ref="FG1" pin="11" pinfunction="EPAD" pintype="unspecified"/>
+      <node ref="FG1" pin="6" pinfunction="CSP" pintype="unspecified"/>
+      <node ref="R2" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="TH1" pin="2" pintype="passive"/>
+    </net>
+    <net code="73" name="GND">
+      <node ref="BT1" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="C13" pin="2" pintype="passive"/>
+      <node ref="C14" pin="2" pintype="passive"/>
+      <node ref="C3" pin="2" pintype="passive"/>
+      <node ref="C4" pin="2" pintype="passive"/>
+      <node ref="C5" pin="2" pintype="passive"/>
+      <node ref="C8" pin="2" pintype="passive"/>
+      <node ref="C9" pin="2" pintype="passive"/>
+      <node ref="FSR1" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="IMU1" pin="11" pinfunction="FSYNC" pintype="input"/>
+      <node ref="IMU1" pin="18" pinfunction="GND" pintype="power_in"/>
+      <node ref="IMU1" pin="20" pinfunction="GND" pintype="passive"/>
+      <node ref="J1" pin="A1" pinfunction="GND" pintype="passive"/>
+      <node ref="J1" pin="A12" pinfunction="GND" pintype="passive"/>
+      <node ref="J1" pin="B1" pinfunction="GND" pintype="passive"/>
+      <node ref="J1" pin="B12" pinfunction="GND" pintype="passive"/>
+      <node ref="J1" pin="S1" pinfunction="SHIELD" pintype="passive"/>
+      <node ref="J2" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J3" pin="8" pinfunction="Pin_8" pintype="passive"/>
+      <node ref="MCU1" pin="1" pinfunction="GND" pintype="power_in"/>
+      <node ref="MCU1" pin="40" pinfunction="GND" pintype="passive"/>
+      <node ref="MCU1" pin="41" pinfunction="GND" pintype="passive"/>
+      <node ref="PWLED1" pin="2" pinfunction="VSS" pintype="power_in"/>
+      <node ref="QWIIC1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="QWIIC1" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="R1" pin="2" pintype="passive"/>
+      <node ref="R10" pin="1" pintype="passive"/>
+      <node ref="R2" pin="4" pinfunction="4" pintype="passive"/>
+      <node ref="R4" pin="1" pintype="passive"/>
+      <node ref="R6" pin="1" pintype="passive"/>
+      <node ref="R7" pin="1" pintype="passive"/>
+      <node ref="R8" pin="1" pintype="passive"/>
+      <node ref="SW1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="SW1" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="SW2" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="SW3" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="TrillExtensionInput1" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="U1" pin="16" pinfunction="PG1" pintype="bidirectional"/>
+      <node ref="U1" pin="2" pinfunction="FB4" pintype="bidirectional"/>
+      <node ref="U1" pin="20" pinfunction="PG3" pintype="bidirectional"/>
+      <node ref="U1" pin="21" pinfunction="DLIM1" pintype="bidirectional"/>
+      <node ref="U1" pin="22" pinfunction="FB2" pintype="bidirectional"/>
+      <node ref="U1" pin="25" pinfunction="PV2" pintype="bidirectional"/>
+      <node ref="U1" pin="26" pinfunction="LX2" pintype="bidirectional"/>
+      <node ref="U1" pin="27" pinfunction="PG2" pintype="bidirectional"/>
+      <node ref="U1" pin="28" pinfunction="DLIM2" pintype="bidirectional"/>
+      <node ref="U1" pin="29" pinfunction="EP" pintype="unspecified"/>
+      <node ref="U1" pin="3" pinfunction="OVP4" pintype="unspecified"/>
+      <node ref="U1" pin="4" pinfunction="PG4" pintype="bidirectional"/>
+      <node ref="U1" pin="5" pinfunction="LX4" pintype="bidirectional"/>
+      <node ref="U1" pin="6" pinfunction="GND" pintype="power_out"/>
+      <node ref="U1" pin="7" pinfunction="EN4" pintype="bidirectional"/>
+      <node ref="U4" pin="1" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="74" name="Net-(CHARGLED1-K)">
+      <node ref="CHARGLED1" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="R3" pin="1" pintype="passive"/>
+    </net>
+    <net code="75" name="Net-(J1-CC1)">
+      <node ref="J1" pin="A5" pinfunction="CC1" pintype="bidirectional"/>
+      <node ref="R7" pin="2" pintype="passive"/>
+    </net>
+    <net code="76" name="Net-(J1-CC2)">
+      <node ref="J1" pin="B5" pinfunction="CC2" pintype="bidirectional"/>
+      <node ref="R6" pin="2" pintype="passive"/>
+    </net>
+    <net code="77" name="VUSB">
+      <node ref="J1" pin="A4" pinfunction="VBUS" pintype="passive"/>
+      <node ref="J1" pin="A9" pinfunction="VBUS" pintype="passive"/>
+      <node ref="J1" pin="B4" pinfunction="VBUS" pintype="passive"/>
+      <node ref="J1" pin="B9" pinfunction="VBUS" pintype="passive"/>
+      <node ref="U1" pin="11" pinfunction="DC" pintype="unspecified"/>
+      <node ref="U1" pin="12" pinfunction="CEN" pintype="unspecified"/>
+    </net>
+    <net code="78" name="unconnected-(FG1-N.C.-Pad1)">
+      <node ref="FG1" pin="1" pinfunction="N.C." pintype="no_connect"/>
+    </net>
+    <net code="79" name="unconnected-(IMU1-AUX_CL-Pad7)">
+      <node ref="IMU1" pin="7" pinfunction="AUX_CL" pintype="output+no_connect"/>
+    </net>
+    <net code="80" name="unconnected-(IMU1-AUX_DA-Pad21)">
+      <node ref="IMU1" pin="21" pinfunction="AUX_DA" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="81" name="unconnected-(IMU1-NC-Pad1)">
+      <node ref="IMU1" pin="1" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="82" name="unconnected-(IMU1-NC-Pad2)">
+      <node ref="IMU1" pin="2" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="83" name="unconnected-(IMU1-NC-Pad3)">
+      <node ref="IMU1" pin="3" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="84" name="unconnected-(IMU1-NC-Pad4)">
+      <node ref="IMU1" pin="4" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="85" name="unconnected-(IMU1-NC-Pad5)">
+      <node ref="IMU1" pin="5" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="86" name="unconnected-(IMU1-NC-Pad6)">
+      <node ref="IMU1" pin="6" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="87" name="unconnected-(IMU1-NC-Pad14)">
+      <node ref="IMU1" pin="14" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="88" name="unconnected-(IMU1-NC-Pad15)">
+      <node ref="IMU1" pin="15" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="89" name="unconnected-(IMU1-NC-Pad16)">
+      <node ref="IMU1" pin="16" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="90" name="unconnected-(IMU1-NC-Pad17)">
+      <node ref="IMU1" pin="17" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="91" name="unconnected-(IMU1-REGOUT-Pad10)">
+      <node ref="IMU1" pin="10" pinfunction="REGOUT" pintype="passive+no_connect"/>
+    </net>
+    <net code="92" name="unconnected-(IMU1-RESV-Pad19)">
+      <node ref="IMU1" pin="19" pinfunction="RESV" pintype="no_connect"/>
+    </net>
+    <net code="93" name="unconnected-(IMU1-SDO{slash}AD0-Pad9)">
+      <node ref="IMU1" pin="9" pinfunction="SDO/AD0" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="94" name="unconnected-(IMU1-~{CS}-Pad22)">
+      <node ref="IMU1" pin="22" pinfunction="~{CS}" pintype="input+no_connect"/>
+    </net>
+    <net code="95" name="unconnected-(J1-SBU1-PadA8)">
+      <node ref="J1" pin="A8" pinfunction="SBU1" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="96" name="unconnected-(J1-SBU2-PadB8)">
+      <node ref="J1" pin="B8" pinfunction="SBU2" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="97" name="unconnected-(MCU1-NC-Pad28)">
+      <node ref="MCU1" pin="28" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="98" name="unconnected-(MCU1-NC-Pad29)">
+      <node ref="MCU1" pin="29" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="99" name="unconnected-(MCU1-NC-Pad30)">
+      <node ref="MCU1" pin="30" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="100" name="unconnected-(PWLED1-DOUT-Pad1)">
+      <node ref="PWLED1" pin="1" pinfunction="DOUT" pintype="output+no_connect"/>
+    </net>
+    <net code="101" name="unconnected-(U1-*RST1-Pad8)">
+      <node ref="U1" pin="8" pinfunction="*RST1" pintype="unspecified+no_connect"/>
+    </net>
+    <net code="102" name="unconnected-(U1-COMP4-Pad1)">
+      <node ref="U1" pin="1" pinfunction="COMP4" pintype="unspecified+no_connect"/>
+    </net>
+  </nets>
+</export>
