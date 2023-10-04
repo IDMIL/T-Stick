@@ -1,4 +1,4 @@
-#N canvas 274 -8 1920 1117 10;
+#N canvas 1252 292 1600 817 10;
 #X obj 87 476 vsl 45 135 -20 20 0 0 empty empty AccelX 0 -9 0 10 #fcfcfc #000000 #000000 0 1;
 #X obj 137 476 vsl 45 135 -20 20 0 0 empty empty AccelY 0 -9 0 10 #fcfcfc #000000 #000000 0 1;
 #X obj 187 476 vsl 45 135 -20 20 0 0 empty empty AccelZ 0 -9 0 10 #fcfcfc #000000 #000000 0 1;
@@ -15,7 +15,7 @@
 #X obj 617 82 r rawtimer;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array rawtime 100 float 1;
-#A 0 0 0 0 0 0 0 0 0 0 0 0 0 42.0862 0 0 0 0 5.80499 0 0 0 11.61 0 0 4.35374 0 0 0 0 4.35374 0 0 0 2.90249 23.22 0 0 0 0 0 0 0 0 0 0 0 0 47.8912 0 0 0 0 5.80499 0 0 0 0 0 0 5.80499 23.22 0 0 0 0 0 0 0 0 0 0 0 11.61 7.25624 0 0 0 10.1587 0 0 0 0 0 0 0 0 46.4399 0 0 5.80499 0 0 0 0 0 0 0 7.25624 0 15.9637;
+#A 0 0 0 0 11.61 17.415 0 0 0 0 0 0 0 23.22 1.45125 0 0 0 0 0 0 0 0 0 0 0 39.1837 0 0 0 0 0 0 0 0 0 0 0 11.61 0 0 5.80499 0 0 0 0 0 13.0612 0 0 0 0 4.35374 0 0 0 7.25624 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 18.8662 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 23.22 0 0 0 0;
 #X coords 0 100 99 0 200 140 1;
 #X restore 411 79 graph;
 #N canvas 264 335 568 475 timegraph 0;
@@ -66,7 +66,7 @@
 #X text 543 288 Quaternions;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array Touch 30 float 1;
-#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#A 0 6 0 0 10 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 100 29 0 400 300 1 0 0;
 #X restore 1061 472 graph;
 #X floatatom 609 615 10 0 0 0 - - - 0;
@@ -105,7 +105,7 @@
 #X text 89 662 Instrument;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array multibrush 4 float 3;
-#A 0 0 0 0 0;
+#A 0 0 -0.066384 0.03 0;
 #X coords 0 -1 4 1 60 140 1;
 #X restore 442 787 graph;
 #X obj 277 745 array set multibrush;
@@ -113,7 +113,7 @@
 #X floatatom 509 932 6 0 0 0 - - - 0;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array multirub 4 float 3;
-#A 0 0 0 0 0;
+#A 0 0 0.735149 0.5955 0;
 #X coords 0 10 4 -0.1 60 140 1;
 #X restore 646 788 graph;
 #X obj 623 746 array set multirub;
@@ -148,7 +148,7 @@
 #X obj 26 396 array set rawTouch;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array rawTouch 30 float 1;
-#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#A 0 40 0 0 65 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 4000 29 0 400 300 1 0 0;
 #X restore 1066 81 graph;
 #X text 1299 59 Raw Touch Data;
@@ -163,7 +163,7 @@
 #X obj 283 1001 array set discTouch2;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array discTouch 30 float 1;
-#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#A 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 2 29 0 400 200 1 0 0;
 #X restore 1059 852 graph;
 #X text 1253 808 Discretised Touch Data;
@@ -185,7 +185,7 @@
 #X floatatom 958 459 7 0 0 1 - - - 0;
 #X text 931 481 Battery Status Present = 1 Missing = 0, f 15;
 #X msg 60 100 8001;
-#X obj 97 218 route TStick_501;
+#X obj 98 219 route TStick_501;
 #X connect 0 0 26 0;
 #X connect 1 0 25 0;
 #X connect 2 0 17 0;
