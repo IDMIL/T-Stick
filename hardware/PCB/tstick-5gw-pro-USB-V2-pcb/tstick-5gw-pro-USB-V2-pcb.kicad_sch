@@ -4088,7 +4088,7 @@
   )
 
   (text "Comms\n- SDA: IO12\n- SCL: IO11\n- USBD+: IO20\n- USBD-: IO19\nPeripherals\n- FSR: IO9\n- Button: IO3\n- UART TX: IO43\n- UART RX: IO44\n- Status LED: IO46\nInterrupts\n- IMU Interrupt: IO21\n- Fuel Gauge Interrupt: IO17\n- Touch Interrupt 1: IO39\n- Touch Interrupt 2: IO40\n- Touch Interrupt 3: IO41\n- Touch Interrupt 4: IO42"
-    (at 139.7 109.22 0)
+    (at 118.11 110.49 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 0f4ac62c-2814-4646-b773-9cd59624fd1e)
   )
@@ -4185,7 +4185,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid cc1e5955-8acf-449e-8ecd-b5b119bd202c)
   )
-  (text "Pinout" (at 138.43 72.39 0)
+  (text "Pinout" (at 116.84 72.39 0)
     (effects (font (size 2 2) (thickness 0.4) bold) (justify left bottom))
     (uuid cf90d0cf-313d-429e-b9e5-fbdd383a47e6)
   )
