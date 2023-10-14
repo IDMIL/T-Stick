@@ -136,4 +136,9 @@
   (pad "MP" smd rect (at -9.449985 0.2016) (size 1.6 2.4) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 3b89d03a-c97b-4d42-9f0d-16cf6b4342f5))
   (pad "MP" smd rect (at 9.449985 0.2016) (size 1.6 2.4) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 614db13b-b95d-405f-abc4-267ddcb5e92b))
   (pad "MP" smd rect (at 10.65 0.6016) (size 0.8 1.6) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp a73b8275-6c62-4ba2-bb93-c70358159e10))
+  (model "${KIPRJMOD}/Libraries/Molex_FFC Connector/541323262.stp"
+    (offset (xyz 0 2.5 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz -90 0 0))
+  )
 )

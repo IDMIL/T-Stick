@@ -431,4 +431,9 @@
     (solder_mask_margin 0.1016) (tstamp b3872fad-7608-473b-87a0-383e5820c021))
   (pad "EXP" smd rect (at 0 0) (size 5.33 5.33) (layers "F.Cu" "F.Mask")
     (solder_mask_margin 0.1016) (tstamp 3ad535ab-4fba-4857-85c6-e6fc9979fd15))
+  (model ":KICAD7_3DMODEL_DIR:Package_DFN_QFN.3dshapes/QFN-48-1EP_7x7mm_P0.5mm_EP5.15x5.15mm.step"
+    (offset (xyz 0 0 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
 )
