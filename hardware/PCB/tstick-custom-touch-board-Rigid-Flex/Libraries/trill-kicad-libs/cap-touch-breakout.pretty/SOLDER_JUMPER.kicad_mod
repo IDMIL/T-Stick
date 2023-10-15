@@ -1,0 +1,16 @@
+(footprint "SOLDER_JUMPER" (version 20221018) (generator pcbnew)
+  (layer "F.Cu")
+  (attr smd)
+  (fp_text reference "U$4" (at 0 0) (layer "F.SilkS") hide
+      (effects (font (size 1.27 1.27) (thickness 0.15)) (justify right top))
+    (tstamp 682509c3-968d-4a46-a677-6eac7ba76a9d)
+  )
+  (fp_text value "SOLDER_JUMPER" (at 0 0) (layer "F.SilkS") hide
+      (effects (font (size 1.27 1.27) (thickness 0.15)) (justify right top))
+    (tstamp ddf42a82-db6f-471f-8eca-26a7147b909b)
+  )
+  (pad "P$1" smd rect (at 0 0) (size 1 1.2) (layers "F.Cu" "F.Paste" "F.Mask")
+    (solder_mask_margin 0.1016) (tstamp 225085a1-426b-46c7-9644-c2a87d0b6694))
+  (pad "P$2" smd rect (at 1.2 0) (size 1 1.2) (layers "F.Cu" "F.Paste" "F.Mask")
+    (solder_mask_margin 0.1016) (tstamp 1de00474-7b9c-4bd8-9221-03bfd2242130))
+)

@@ -7,4 +7,5 @@
   (lib (name "trill-flex-base")(type "KiCad")(uri "${KIPRJMOD}/Libraries/trill-kicad-libs/trill-flex-base.pretty")(options "")(descr ""))
   (lib (name "trill-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/trill-kicad-libs/trill-footprints.pretty")(options "")(descr ""))
   (lib (name "CY8C20646A-CY8C20636A-footprint")(type "KiCad")(uri "${KIPRJMOD}/Libraries/IC_Cypress_CY8C20636A-24LTXI/CY8C20646A-CY8C20636A-footprint.pretty")(options "")(descr ""))
+  (lib (name "CY8C4024AZI-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/CY8C4024AZI_S413/footprints.pretty")(options "")(descr ""))
 )
