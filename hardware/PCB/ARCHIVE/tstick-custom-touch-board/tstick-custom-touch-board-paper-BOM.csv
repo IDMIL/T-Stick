@@ -1,7 +1,0 @@
-Manufacturer,Manufacturer Part #,Qty,Description Value Pkg,Reference(s)
-JST Sales America Inc.,SM04B-SRSS-TB,4,"Connector Header Surface Mount, Right Angle 4 position 0.039"" (1.00mm)","I2C1, I2C2, INT1, INT2"
-Infineon Technologies,CY8C20636A-24LTXI,1,MCU 8K FLASH 1K SRAM 48QFN,IC1
-Samsung Electro-Mechanics,CL10B222KB8NFNC,1,2200 pF ±10% 50V Ceramic Capacitor X7R 0603 (1608 Metric),C1
-Samsung Electro-Mechanics,CL10B104KB8NNNC,1,0.1 µF ±10% 50V Ceramic Capacitor X7R 0603 (1608 Metric),C2
-Panasonic Electronic Components,ERJ-UP3F1000V,2,"100 Ohms ±1% 0.25W, 1/4W Chip Resistor 0603 (1608 Metric) Anti-Sulfur, Automotive AEC-Q200, Pulse Withstanding Thick Film","R1, R2"
-Panasonic Electronic Components,ERJ-PB3B4702V,2,"47 kOhms ±0.1% 0.2W, 1/5W Chip Resistor 0603 (1608 Metric) Automotive AEC-Q200, Pulse Withstanding Thick Film","R3, R4"

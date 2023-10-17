@@ -1,7 +1,0 @@
-(sym_lib_table
-  (version 7)
-  (lib (name "cy8c206x6a")(type "KiCad")(uri "${KIPRJMOD}/Libraries/IC_Cypress_CY8C20636A-24LTXI/cy8c206x6a.kicad_sym")(options "")(descr ""))
-  (lib (name "trill-flex")(type "KiCad")(uri "${KIPRJMOD}/Libraries/trill-flex-kicad-libraries/trill-flex.kicad_sym")(options "")(descr ""))
-  (lib (name "trill-symbols")(type "KiCad")(uri "${KIPRJMOD}/Libraries/trill-kicad-libs/trill-symbols.kicad_sym")(options "")(descr ""))
-  (lib (name "CY8C4024AZI")(type "KiCad")(uri "${KIPRJMOD}/Libraries/CY8C4024AZI_S413/2023-10-15_05-30-30.kicad_sym")(options "")(descr ""))
-)

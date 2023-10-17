@@ -1,6 +1,0 @@
-(sym_lib_table
-  (version 7)
-  (lib (name "VUSB")(type "KiCad")(uri "${KIPRJMOD}/Libraries/PowerSymbols/VUSB.kicad_sym")(options "")(descr ""))
-  (lib (name "noraw106")(type "KiCad")(uri "${KIPRJMOD}/Libraries/Nora-W106/noraw106.kicad_sym")(options "")(descr ""))
-  (lib (name "2659")(type "KiCad")(uri "${KIPRJMOD}/Libraries/neopixel/2659.kicad_sym")(options "")(descr ""))
-)
