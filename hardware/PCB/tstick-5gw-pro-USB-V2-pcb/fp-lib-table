@@ -11,4 +11,5 @@
   (lib (name "max8663-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/max8663/max8663-footprints.pretty")(options "")(descr ""))
   (lib (name "max8819-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/max8819/max8819-footprints.pretty")(options "")(descr ""))
   (lib (name "max17262REWL-T-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/max17262REWL-T-kicad/max17262REWL-T-footprints.pretty")(options "")(descr ""))
+  (lib (name "pin-layout")(type "KiCad")(uri "${KIPRJMOD}/Libraries/board-layout/pin-layout.pretty")(options "")(descr ""))
 )
