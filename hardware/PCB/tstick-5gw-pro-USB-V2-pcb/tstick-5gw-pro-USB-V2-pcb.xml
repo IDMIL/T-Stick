@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>D:\Documents\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb\tstick-5gw-pro-USB-V2-pcb.kicad_sch</source>
-    <date>2023-09-30 8:57:17 PM</date>
+    <date>2023-10-17 12:57:17 AM</date>
     <tool>Eeschema 7.0.6</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -327,36 +327,6 @@
       <property name="ki_keywords" value="usb universal serial bus type-C USB2.0"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>b076b54e-a2a5-4875-a646-9caed5630305</tstamps>
-    </comp>
-    <comp ref="J2">
-      <value>GPIO2</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical</footprint>
-      <libsource lib="Connector_Generic" part="Conn_01x06" description="Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <property name="Description Value Pkg" value=""/>
-      <property name="Mfg Part #" value=""/>
-      <property name="Digikey Part #" value=""/>
-      <property name="Alternate Part #" value=""/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
-      <property name="ki_description" value="Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <property name="ki_keywords" value="connector"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>d64ed71b-403d-4c32-b8be-ad0e57f9be58</tstamps>
-    </comp>
-    <comp ref="J3">
-      <value>GPIO1</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical</footprint>
-      <libsource lib="Connector_Generic" part="Conn_01x08" description="Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <property name="Description Value Pkg" value=""/>
-      <property name="Mfg Part #" value=""/>
-      <property name="Digikey Part #" value=""/>
-      <property name="Alternate Part #" value=""/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
-      <property name="ki_description" value="Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
-      <property name="ki_keywords" value="connector"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>8168f828-d1d8-43ff-8c94-70f75c3ea6de</tstamps>
     </comp>
     <comp ref="L1">
       <value>4.7uH</value>
@@ -739,45 +709,25 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <sheetpath names="/" tstamps="/"/>
       <tstamps>624a5867-250e-4844-aa82-115989134d19</tstamps>
     </comp>
-    <comp ref="R16">
-      <value>2k2</value>
+    <comp ref="R13">
+      <value>300</value>
       <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
       <fields>
-        <field name="Description Value Pkg">2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
-        <field name="Digikey Part #">P122832CT-ND</field>
-        <field name="Mfg Part #">ERJ-1GNF2201C</field>
+        <field name="Description Value Pkg">300 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122911CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF3000C</field>
       </fields>
       <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
-      <property name="Digikey Part #" value="P122832CT-ND"/>
-      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
-      <property name="Mfg Part #" value="ERJ-1GNF2201C"/>
+      <property name="Digikey Part #" value="P122911CT-ND"/>
+      <property name="Description Value Pkg" value="300 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF3000C"/>
       <property name="Alternate Part #" value=""/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>beda805c-6fd3-49dc-bc3e-969026d5017b</tstamps>
-    </comp>
-    <comp ref="R17">
-      <value>2k2</value>
-      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
-      <fields>
-        <field name="Description Value Pkg">2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
-        <field name="Digikey Part #">P122832CT-ND</field>
-        <field name="Mfg Part #">ERJ-1GNF2201C</field>
-      </fields>
-      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
-      <property name="Digikey Part #" value="P122832CT-ND"/>
-      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
-      <property name="Mfg Part #" value="ERJ-1GNF2201C"/>
-      <property name="Alternate Part #" value=""/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
-      <property name="ki_description" value="Resistor, US symbol"/>
-      <property name="ki_keywords" value="R res resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>1a47292d-14c1-4a39-b146-108047adae31</tstamps>
+      <tstamps>54f15608-5e50-4ab7-be2d-161f53b2546c</tstamps>
     </comp>
     <comp ref="R18">
       <value>200k</value>
@@ -1051,66 +1001,6 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
         <pin num="B9" name="VBUS" type="passive"/>
         <pin num="B12" name="GND" type="passive"/>
         <pin num="S1" name="SHIELD" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Connector_Generic" part="Conn_01x04">
-      <description>Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
-      <docs>~</docs>
-      <footprints>
-        <fp>Connector*:*_1x??_*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">J</field>
-        <field name="Value">Conn_01x04</field>
-        <field name="Datasheet">~</field>
-      </fields>
-      <pins>
-        <pin num="1" name="Pin_1" type="passive"/>
-        <pin num="2" name="Pin_2" type="passive"/>
-        <pin num="3" name="Pin_3" type="passive"/>
-        <pin num="4" name="Pin_4" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Connector_Generic" part="Conn_01x06">
-      <description>Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
-      <docs>~</docs>
-      <footprints>
-        <fp>Connector*:*_1x??_*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">J</field>
-        <field name="Value">Conn_01x06</field>
-        <field name="Datasheet">~</field>
-      </fields>
-      <pins>
-        <pin num="1" name="Pin_1" type="passive"/>
-        <pin num="2" name="Pin_2" type="passive"/>
-        <pin num="3" name="Pin_3" type="passive"/>
-        <pin num="4" name="Pin_4" type="passive"/>
-        <pin num="5" name="Pin_5" type="passive"/>
-        <pin num="6" name="Pin_6" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Connector_Generic" part="Conn_01x08">
-      <description>Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
-      <docs>~</docs>
-      <footprints>
-        <fp>Connector*:*_1x??_*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">J</field>
-        <field name="Value">Conn_01x08</field>
-        <field name="Datasheet">~</field>
-      </fields>
-      <pins>
-        <pin num="1" name="Pin_1" type="passive"/>
-        <pin num="2" name="Pin_2" type="passive"/>
-        <pin num="3" name="Pin_3" type="passive"/>
-        <pin num="4" name="Pin_4" type="passive"/>
-        <pin num="5" name="Pin_5" type="passive"/>
-        <pin num="6" name="Pin_6" type="passive"/>
-        <pin num="7" name="Pin_7" type="passive"/>
-        <pin num="8" name="Pin_8" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="Connector_Generic_MountingPin" part="Conn_01x02_MountingPin">
@@ -1524,13 +1414,47 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
         <pin num="4" name="VDD" type="power_in"/>
       </pins>
     </libpart>
+    <libpart lib="pin-layout" part="board-layout">
+      <description>Board layout of custom esp32 board for t-stick</description>
+      <fields>
+        <field name="Reference">BOARDLAYOUT</field>
+        <field name="Value">LAYOUT</field>
+        <field name="Footprint">pin-layout:board-layout</field>
+      </fields>
+      <pins>
+        <pin num="1" name="3v3" type="power_in"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="IO08" type="bidirectional"/>
+        <pin num="4" name="IO07" type="bidirectional"/>
+        <pin num="5" name="IO06" type="bidirectional"/>
+        <pin num="6" name="EN" type="bidirectional"/>
+        <pin num="7" name="GND" type="power_in"/>
+        <pin num="8" name="IO01" type="bidirectional"/>
+        <pin num="9" name="IO02" type="bidirectional"/>
+        <pin num="10" name="IO04" type="bidirectional"/>
+        <pin num="11" name="IO05" type="bidirectional"/>
+        <pin num="12" name="COPI" type="bidirectional"/>
+        <pin num="13" name="SCK" type="bidirectional"/>
+        <pin num="14" name="CIPO" type="bidirectional"/>
+        <pin num="15" name="GND" type="power_in"/>
+        <pin num="16" name="3v3" type="power_in"/>
+        <pin num="17" name="SDA" type="bidirectional"/>
+        <pin num="18" name="SCL" type="bidirectional"/>
+      </pins>
+    </libpart>
+    <libpart lib="power-symbols" part="VSYS">
+      <fields>
+        <field name="Reference">SYS</field>
+        <field name="Value">SYS</field>
+      </fields>
+      <pins>
+        <pin num="1" name="SYS" type="power_in"/>
+      </pins>
+    </libpart>
   </libparts>
   <libraries>
     <library logical="Connector">
       <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Connector.kicad_sym</uri>
-    </library>
-    <library logical="Connector_Generic">
-      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Connector_Generic.kicad_sym</uri>
     </library>
     <library logical="Connector_Generic_MountingPin">
       <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Connector_Generic_MountingPin.kicad_sym</uri>
@@ -1562,6 +1486,12 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
     <library logical="max8819-symbols">
       <uri>D:\Documents\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/max8819/max8819-symbols.kicad_sym</uri>
     </library>
+    <library logical="pin-layout">
+      <uri>D:\Documents\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/board-layout/pin-layout.kicad_sym</uri>
+    </library>
+    <library logical="power-symbols">
+      <uri>D:\Documents\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/CUSTOM_POWER.kicad_sym</uri>
+    </library>
   </libraries>
   <nets>
     <net code="1" name="+1V8">
@@ -1571,8 +1501,6 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <node ref="L2" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="Q3" pin="1" pinfunction="G" pintype="input"/>
       <node ref="R11" pin="2" pintype="passive"/>
-      <node ref="R16" pin="2" pintype="passive"/>
-      <node ref="R17" pin="2" pintype="passive"/>
       <node ref="R21" pin="2" pintype="passive"/>
       <node ref="U4" pin="2" pinfunction="VREF1" pintype="power_in"/>
     </net>
@@ -1580,7 +1508,6 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <node ref="C13" pin="1" pintype="passive"/>
       <node ref="C4" pin="1" pintype="passive"/>
       <node ref="FSR1" pin="1" pinfunction="Pin_1" pintype="passive"/>
-      <node ref="J2" pin="1" pinfunction="Pin_1" pintype="passive"/>
       <node ref="L1" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="MCU1" pin="2" pinfunction="3V3" pintype="power_in"/>
       <node ref="PWLED1" pin="4" pinfunction="VDD" pintype="power_in"/>
@@ -1603,6 +1530,7 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
     <net code="4" name="-BATT">
       <node ref="BT1" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="R2" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="TH1" pin="2" pintype="passive"/>
     </net>
     <net code="5" name="/AIN">
       <node ref="FG1" pin="2" pinfunction="AIN" pintype="unspecified"/>
@@ -1610,16 +1538,13 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <node ref="TH1" pin="1" pintype="passive"/>
     </net>
     <net code="10" name="/CIPO">
-      <node ref="J3" pin="1" pinfunction="Pin_1" pintype="passive"/>
       <node ref="MCU1" pin="24" pinfunction="GPIO47/SPICLK_P/SUBSPICLK_P_DIFF" pintype="bidirectional"/>
     </net>
     <net code="11" name="/COPI">
-      <node ref="J3" pin="3" pinfunction="Pin_3" pintype="passive"/>
       <node ref="MCU1" pin="31" pinfunction="GPIO38/FSPIWP/SUBSPIWP" pintype="bidirectional"/>
     </net>
     <net code="12" name="/EN">
       <node ref="C9" pin="1" pintype="passive"/>
-      <node ref="J2" pin="6" pinfunction="Pin_6" pintype="passive"/>
       <node ref="MCU1" pin="3" pinfunction="EN" pintype="input"/>
       <node ref="R5" pin="1" pintype="passive"/>
       <node ref="SW3" pin="1" pinfunction="1" pintype="passive"/>
@@ -1648,41 +1573,34 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <node ref="SW2" pin="1" pinfunction="1" pintype="passive"/>
     </net>
     <net code="24" name="/IO1">
-      <node ref="J3" pin="7" pinfunction="Pin_7" pintype="passive"/>
       <node ref="MCU1" pin="39" pinfunction="GPIO1/TOUCH1/ADC1_CH0" pintype="bidirectional"/>
     </net>
     <net code="25" name="/IO2">
-      <node ref="J3" pin="6" pinfunction="Pin_6" pintype="passive"/>
       <node ref="MCU1" pin="38" pinfunction="GPIO2/TOUCH2/ADC1_CH1" pintype="bidirectional"/>
     </net>
     <net code="26" name="/IO3">
+      <node ref="FSR1" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="MCU1" pin="15" pinfunction="GPIO3/TOUCH3/ADC1_CH2" pintype="bidirectional"/>
-      <node ref="SW1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="R1" pin="1" pintype="passive"/>
     </net>
     <net code="27" name="/IO4">
-      <node ref="J3" pin="5" pinfunction="Pin_5" pintype="passive"/>
       <node ref="MCU1" pin="4" pinfunction="GPIO4/TOUCH4/ADC1_CH3" pintype="bidirectional"/>
     </net>
     <net code="28" name="/IO5">
-      <node ref="J3" pin="4" pinfunction="Pin_4" pintype="passive"/>
       <node ref="MCU1" pin="5" pinfunction="GPIO5/TOUCH5/ADC1_CH4" pintype="bidirectional"/>
     </net>
     <net code="29" name="/IO6">
-      <node ref="J2" pin="5" pinfunction="Pin_5" pintype="passive"/>
       <node ref="MCU1" pin="6" pinfunction="GPIO6/TOUCH6/ADC1_CH5" pintype="bidirectional"/>
     </net>
     <net code="30" name="/IO7">
-      <node ref="J2" pin="4" pinfunction="Pin_4" pintype="passive"/>
       <node ref="MCU1" pin="7" pinfunction="GPIO7/TOUCH7/ADC1_CH6" pintype="bidirectional"/>
     </net>
     <net code="31" name="/IO8">
-      <node ref="J2" pin="3" pinfunction="Pin_3" pintype="passive"/>
       <node ref="MCU1" pin="12" pinfunction="GPIO8/TOUCH8/ADC1_CH7/SUBSPICS1" pintype="bidirectional"/>
     </net>
     <net code="32" name="/IO9">
-      <node ref="FSR1" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="MCU1" pin="17" pinfunction="GPIO9/TOUCH9/ADC1_CH8/FSPIHD/SUBSPIHD" pintype="bidirectional"/>
-      <node ref="R1" pin="1" pintype="passive"/>
+      <node ref="SW1" pin="1" pinfunction="Pin_1" pintype="passive"/>
     </net>
     <net code="33" name="/IO10">
       <node ref="MCU1" pin="18" pinfunction="GPIO10/TOUCH10/ADC1_CH9/FSPICS0/FSPIIO4/SUBSPICS0" pintype="bidirectional"/>
@@ -1732,7 +1650,7 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
     </net>
     <net code="46" name="/IO46">
       <node ref="MCU1" pin="16" pinfunction="GPIO46" pintype="bidirectional"/>
-      <node ref="PWLED1" pin="3" pinfunction="DIN" pintype="input"/>
+      <node ref="R13" pin="1" pintype="passive"/>
     </net>
     <net code="47" name="/ISET">
       <node ref="R4" pin="2" pintype="passive"/>
@@ -1745,12 +1663,10 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
     </net>
     <net code="50" name="/LV_SCL">
       <node ref="IMU1" pin="23" pinfunction="SCL/SCLK" pintype="input"/>
-      <node ref="R16" pin="1" pintype="passive"/>
       <node ref="U4" pin="3" pinfunction="SCL1" pintype="bidirectional"/>
     </net>
     <net code="51" name="/LV_SDA">
       <node ref="IMU1" pin="24" pinfunction="SDA/SDI" pintype="bidirectional"/>
-      <node ref="R17" pin="1" pintype="passive"/>
       <node ref="U4" pin="4" pinfunction="SDA1" pintype="bidirectional"/>
     </net>
     <net code="52" name="/LX1">
@@ -1769,7 +1685,6 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <node ref="MCU1" pin="36" pinfunction="U0RXD/GPIO44/CLK_OUT2" pintype="bidirectional"/>
     </net>
     <net code="59" name="/SCK">
-      <node ref="J3" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="MCU1" pin="25" pinfunction="GPIO48/SPICLK_N/SUBSPICLK_N_DIFF" pintype="bidirectional"/>
     </net>
     <net code="60" name="/SCL">
@@ -1790,39 +1705,31 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <node ref="R3" pin="2" pintype="passive"/>
       <node ref="U1" pin="15" pinfunction="*CHG" pintype="unspecified"/>
     </net>
-    <net code="64" name="/SYS">
-      <node ref="C3" pin="1" pintype="passive"/>
-      <node ref="CHARGLED1" pin="2" pinfunction="A" pintype="passive"/>
-      <node ref="U1" pin="10" pinfunction="SYS" pintype="unspecified"/>
-      <node ref="U1" pin="18" pinfunction="PV13" pintype="bidirectional"/>
-      <node ref="U1" pin="24" pinfunction="EN123" pintype="bidirectional"/>
-    </net>
-    <net code="66" name="/THRM">
+    <net code="65" name="/THRM">
       <node ref="FG1" pin="9" pinfunction="THRM" pintype="unspecified"/>
       <node ref="R12" pin="2" pintype="passive"/>
     </net>
-    <net code="68" name="/TXD">
+    <net code="67" name="/TXD">
       <node ref="MCU1" pin="37" pinfunction="U0TXD/GPIO43/CLK_OUT1" pintype="bidirectional"/>
     </net>
-    <net code="70" name="/USBD+">
+    <net code="69" name="/USBD+">
       <node ref="J1" pin="A6" pinfunction="D+" pintype="bidirectional"/>
       <node ref="J1" pin="B6" pinfunction="D+" pintype="bidirectional"/>
       <node ref="MCU1" pin="14" pinfunction="GPIO20/U1CTS/ADC2_CH9/CLK_OUT1/USB_D+" pintype="bidirectional"/>
     </net>
-    <net code="71" name="/USBD-">
+    <net code="70" name="/USBD-">
       <node ref="J1" pin="A7" pinfunction="D-" pintype="bidirectional"/>
       <node ref="J1" pin="B7" pinfunction="D-" pintype="bidirectional"/>
       <node ref="MCU1" pin="13" pinfunction="GPIO19/U1RTS/ADC2_CH8/CLK_OUT2/USB_D-" pintype="bidirectional"/>
     </net>
-    <net code="72" name="CSP">
+    <net code="71" name="CSP">
       <node ref="C1" pin="2" pintype="passive"/>
       <node ref="C2" pin="2" pintype="passive"/>
       <node ref="FG1" pin="11" pinfunction="EPAD" pintype="unspecified"/>
       <node ref="FG1" pin="6" pinfunction="CSP" pintype="unspecified"/>
       <node ref="R2" pin="2" pinfunction="2" pintype="passive"/>
-      <node ref="TH1" pin="2" pintype="passive"/>
     </net>
-    <net code="73" name="GND">
+    <net code="72" name="GND">
       <node ref="BT1" pin="MP" pinfunction="MountPin" pintype="passive"/>
       <node ref="C13" pin="2" pintype="passive"/>
       <node ref="C14" pin="2" pintype="passive"/>
@@ -1840,8 +1747,6 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <node ref="J1" pin="B1" pinfunction="GND" pintype="passive"/>
       <node ref="J1" pin="B12" pinfunction="GND" pintype="passive"/>
       <node ref="J1" pin="S1" pinfunction="SHIELD" pintype="passive"/>
-      <node ref="J2" pin="2" pinfunction="Pin_2" pintype="passive"/>
-      <node ref="J3" pin="8" pinfunction="Pin_8" pintype="passive"/>
       <node ref="MCU1" pin="1" pinfunction="GND" pintype="power_in"/>
       <node ref="MCU1" pin="40" pinfunction="GND" pintype="passive"/>
       <node ref="MCU1" pin="41" pinfunction="GND" pintype="passive"/>
@@ -1877,19 +1782,30 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <node ref="U1" pin="7" pinfunction="EN4" pintype="bidirectional"/>
       <node ref="U4" pin="1" pinfunction="GND" pintype="power_in"/>
     </net>
-    <net code="74" name="Net-(CHARGLED1-K)">
+    <net code="73" name="Net-(CHARGLED1-K)">
       <node ref="CHARGLED1" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R3" pin="1" pintype="passive"/>
     </net>
-    <net code="75" name="Net-(J1-CC1)">
+    <net code="74" name="Net-(J1-CC1)">
       <node ref="J1" pin="A5" pinfunction="CC1" pintype="bidirectional"/>
       <node ref="R7" pin="2" pintype="passive"/>
     </net>
-    <net code="76" name="Net-(J1-CC2)">
+    <net code="75" name="Net-(J1-CC2)">
       <node ref="J1" pin="B5" pinfunction="CC2" pintype="bidirectional"/>
       <node ref="R6" pin="2" pintype="passive"/>
     </net>
-    <net code="77" name="VUSB">
+    <net code="76" name="Net-(PWLED1-DIN)">
+      <node ref="PWLED1" pin="3" pinfunction="DIN" pintype="input"/>
+      <node ref="R13" pin="2" pintype="passive"/>
+    </net>
+    <net code="77" name="SYS">
+      <node ref="C3" pin="1" pintype="passive"/>
+      <node ref="CHARGLED1" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="U1" pin="10" pinfunction="SYS" pintype="unspecified"/>
+      <node ref="U1" pin="18" pinfunction="PV13" pintype="bidirectional"/>
+      <node ref="U1" pin="24" pinfunction="EN123" pintype="bidirectional"/>
+    </net>
+    <net code="78" name="VUSB">
       <node ref="J1" pin="A4" pinfunction="VBUS" pintype="passive"/>
       <node ref="J1" pin="A9" pinfunction="VBUS" pintype="passive"/>
       <node ref="J1" pin="B4" pinfunction="VBUS" pintype="passive"/>
@@ -1897,79 +1813,79 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <node ref="U1" pin="11" pinfunction="DC" pintype="unspecified"/>
       <node ref="U1" pin="12" pinfunction="CEN" pintype="unspecified"/>
     </net>
-    <net code="78" name="unconnected-(FG1-N.C.-Pad1)">
+    <net code="79" name="unconnected-(FG1-N.C.-Pad1)">
       <node ref="FG1" pin="1" pinfunction="N.C." pintype="no_connect"/>
     </net>
-    <net code="79" name="unconnected-(IMU1-AUX_CL-Pad7)">
+    <net code="80" name="unconnected-(IMU1-AUX_CL-Pad7)">
       <node ref="IMU1" pin="7" pinfunction="AUX_CL" pintype="output+no_connect"/>
     </net>
-    <net code="80" name="unconnected-(IMU1-AUX_DA-Pad21)">
+    <net code="81" name="unconnected-(IMU1-AUX_DA-Pad21)">
       <node ref="IMU1" pin="21" pinfunction="AUX_DA" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="81" name="unconnected-(IMU1-NC-Pad1)">
+    <net code="82" name="unconnected-(IMU1-NC-Pad1)">
       <node ref="IMU1" pin="1" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="82" name="unconnected-(IMU1-NC-Pad2)">
+    <net code="83" name="unconnected-(IMU1-NC-Pad2)">
       <node ref="IMU1" pin="2" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="83" name="unconnected-(IMU1-NC-Pad3)">
+    <net code="84" name="unconnected-(IMU1-NC-Pad3)">
       <node ref="IMU1" pin="3" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="84" name="unconnected-(IMU1-NC-Pad4)">
+    <net code="85" name="unconnected-(IMU1-NC-Pad4)">
       <node ref="IMU1" pin="4" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="85" name="unconnected-(IMU1-NC-Pad5)">
+    <net code="86" name="unconnected-(IMU1-NC-Pad5)">
       <node ref="IMU1" pin="5" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="86" name="unconnected-(IMU1-NC-Pad6)">
+    <net code="87" name="unconnected-(IMU1-NC-Pad6)">
       <node ref="IMU1" pin="6" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="87" name="unconnected-(IMU1-NC-Pad14)">
+    <net code="88" name="unconnected-(IMU1-NC-Pad14)">
       <node ref="IMU1" pin="14" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="88" name="unconnected-(IMU1-NC-Pad15)">
+    <net code="89" name="unconnected-(IMU1-NC-Pad15)">
       <node ref="IMU1" pin="15" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="89" name="unconnected-(IMU1-NC-Pad16)">
+    <net code="90" name="unconnected-(IMU1-NC-Pad16)">
       <node ref="IMU1" pin="16" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="90" name="unconnected-(IMU1-NC-Pad17)">
+    <net code="91" name="unconnected-(IMU1-NC-Pad17)">
       <node ref="IMU1" pin="17" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="91" name="unconnected-(IMU1-REGOUT-Pad10)">
+    <net code="92" name="unconnected-(IMU1-REGOUT-Pad10)">
       <node ref="IMU1" pin="10" pinfunction="REGOUT" pintype="passive+no_connect"/>
     </net>
-    <net code="92" name="unconnected-(IMU1-RESV-Pad19)">
+    <net code="93" name="unconnected-(IMU1-RESV-Pad19)">
       <node ref="IMU1" pin="19" pinfunction="RESV" pintype="no_connect"/>
     </net>
-    <net code="93" name="unconnected-(IMU1-SDO{slash}AD0-Pad9)">
+    <net code="94" name="unconnected-(IMU1-SDO{slash}AD0-Pad9)">
       <node ref="IMU1" pin="9" pinfunction="SDO/AD0" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="94" name="unconnected-(IMU1-~{CS}-Pad22)">
+    <net code="95" name="unconnected-(IMU1-~{CS}-Pad22)">
       <node ref="IMU1" pin="22" pinfunction="~{CS}" pintype="input+no_connect"/>
     </net>
-    <net code="95" name="unconnected-(J1-SBU1-PadA8)">
+    <net code="96" name="unconnected-(J1-SBU1-PadA8)">
       <node ref="J1" pin="A8" pinfunction="SBU1" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="96" name="unconnected-(J1-SBU2-PadB8)">
+    <net code="97" name="unconnected-(J1-SBU2-PadB8)">
       <node ref="J1" pin="B8" pinfunction="SBU2" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="97" name="unconnected-(MCU1-NC-Pad28)">
+    <net code="98" name="unconnected-(MCU1-NC-Pad28)">
       <node ref="MCU1" pin="28" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="98" name="unconnected-(MCU1-NC-Pad29)">
+    <net code="99" name="unconnected-(MCU1-NC-Pad29)">
       <node ref="MCU1" pin="29" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="99" name="unconnected-(MCU1-NC-Pad30)">
+    <net code="100" name="unconnected-(MCU1-NC-Pad30)">
       <node ref="MCU1" pin="30" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="100" name="unconnected-(PWLED1-DOUT-Pad1)">
+    <net code="101" name="unconnected-(PWLED1-DOUT-Pad1)">
       <node ref="PWLED1" pin="1" pinfunction="DOUT" pintype="output+no_connect"/>
     </net>
-    <net code="101" name="unconnected-(U1-*RST1-Pad8)">
+    <net code="102" name="unconnected-(U1-*RST1-Pad8)">
       <node ref="U1" pin="8" pinfunction="*RST1" pintype="unspecified+no_connect"/>
     </net>
-    <net code="102" name="unconnected-(U1-COMP4-Pad1)">
+    <net code="103" name="unconnected-(U1-COMP4-Pad1)">
       <node ref="U1" pin="1" pinfunction="COMP4" pintype="unspecified+no_connect"/>
     </net>
   </nets>
