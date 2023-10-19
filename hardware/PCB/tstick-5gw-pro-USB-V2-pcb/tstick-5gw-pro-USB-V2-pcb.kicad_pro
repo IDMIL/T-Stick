@@ -55,9 +55,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "clearance|117622201|63187901|4205aa0a-5207-4333-af8f-39465863099d|eb26fc35-3af8-4e9f-bf5b-550fce1c8150"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -459,7 +457,7 @@
       },
       {
         "bus_width": 12,
-        "clearance": 0.1524,
+        "clearance": 0.129,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -590,11 +588,6 @@
         },
         {
           "name": "Mfg Part #",
-          "url": false,
-          "visible": false
-        },
-        {
-          "name": "Digikey Part #",
           "url": false,
           "visible": false
         },

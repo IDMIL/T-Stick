@@ -12,4 +12,6 @@
   (lib (name "max8819-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/max8819/max8819-footprints.pretty")(options "")(descr ""))
   (lib (name "max17262REWL-T-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/max17262REWL-T-kicad/max17262REWL-T-footprints.pretty")(options "")(descr ""))
   (lib (name "pin-layout")(type "KiCad")(uri "${KIPRJMOD}/Libraries/board-layout/pin-layout.pretty")(options "")(descr ""))
+  (lib (name "NCP167AMX330TBG-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/NCP167AMX330TBG/NCP167AMX330TBG-footprints.pretty")(options "")(descr ""))
+  (lib (name "MIC5225_1_8YM5_TR-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/MIC5225_1_8YM5_TR/MIC5225_1_8YM5_TR-footprints.pretty")(options "")(descr ""))
 )

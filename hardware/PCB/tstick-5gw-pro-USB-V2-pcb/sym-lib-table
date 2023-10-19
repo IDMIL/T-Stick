@@ -10,4 +10,6 @@
   (lib (name "max8819-symbols")(type "KiCad")(uri "${KIPRJMOD}/Libraries/max8819/max8819-symbols.kicad_sym")(options "")(descr ""))
   (lib (name "max17262REWL-T-symbol")(type "KiCad")(uri "${KIPRJMOD}/Libraries/max17262REWL-T-kicad/max17262REWL-T-symbol.kicad_sym")(options "")(descr ""))
   (lib (name "pin-layout")(type "KiCad")(uri "${KIPRJMOD}/Libraries/board-layout/pin-layout.kicad_sym")(options "")(descr ""))
+  (lib (name "NCP167")(type "KiCad")(uri "${KIPRJMOD}/Libraries/NCP167AMX330TBG/NCP167AMX330TBG.kicad_sym")(options "")(descr ""))
+  (lib (name "MIC5225")(type "KiCad")(uri "${KIPRJMOD}/Libraries/MIC5225_1_8YM5_TR/MIC5225.kicad_sym")(options "")(descr ""))
 )

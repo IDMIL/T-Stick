@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>D:\Documents\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb\tstick-5gw-pro-USB-V2-pcb.kicad_sch</source>
-    <date>2023-10-17 12:57:17 AM</date>
+    <date>2023-10-19 12:22:40 AM</date>
     <tool>Eeschema 7.0.6</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -106,44 +106,86 @@
       <tstamps>1d3371a1-f5ec-498c-a5d6-6a1e8fd1856e</tstamps>
     </comp>
     <comp ref="C4">
-      <value>22uF</value>
-      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0201_0603Metric</footprint>
       <fields>
-        <field name="Description Value Pkg">22 µF ±10% 6.3V Ceramic Capacitor X5R 0603 (1608 Metric)</field>
-        <field name="Digikey Part #">1276-2867-1-ND</field>
-        <field name="Mfg Part #">CL10A226KQ8NRNE</field>
+        <field name="Description Value Pkg">1 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">1276-1323-1-ND</field>
+        <field name="Mfg Part #">CL03A105KQ3CSNC</field>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <property name="Digikey Part #" value="1276-2867-1-ND"/>
-      <property name="Description Value Pkg" value="22 µF ±10% 6.3V Ceramic Capacitor X5R 0603 (1608 Metric)"/>
-      <property name="Mfg Part #" value="CL10A226KQ8NRNE"/>
+      <property name="Digikey Part #" value="1276-1323-1-ND"/>
+      <property name="Description Value Pkg" value="1 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="CL03A105KQ3CSNC"/>
       <property name="Alternate Part #" value=""/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f85412b6-1059-4077-bd7c-ead5b95fc817</tstamps>
+      <tstamps>24d5931b-944a-48db-8d54-e4a3313f7ea6</tstamps>
     </comp>
     <comp ref="C5">
-      <value>22uF</value>
-      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0201_0603Metric</footprint>
       <fields>
-        <field name="Description Value Pkg">22 µF ±10% 6.3V Ceramic Capacitor X5R 0603 (1608 Metric)</field>
-        <field name="Digikey Part #">1276-2867-1-ND</field>
-        <field name="Mfg Part #">CL10A226KQ8NRNE</field>
+        <field name="Description Value Pkg">1 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">1276-1323-1-ND</field>
+        <field name="Mfg Part #">CL03A105KQ3CSNC</field>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <property name="Digikey Part #" value="1276-2867-1-ND"/>
-      <property name="Description Value Pkg" value="22 µF ±10% 6.3V Ceramic Capacitor X5R 0603 (1608 Metric)"/>
-      <property name="Mfg Part #" value="CL10A226KQ8NRNE"/>
+      <property name="Digikey Part #" value="1276-1323-1-ND"/>
+      <property name="Description Value Pkg" value="1 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="CL03A105KQ3CSNC"/>
       <property name="Alternate Part #" value=""/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>ddeacbef-84b0-4bb5-ad51-c6aa2bc925db</tstamps>
+      <tstamps>bbafae0d-aaf8-4a2c-86f7-091aebb58aec</tstamps>
+    </comp>
+    <comp ref="C6">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0201_0603Metric</footprint>
+      <datasheet>1276-1115-1-ND</datasheet>
+      <fields>
+        <field name="Description Value Pkg">0.1 µF ±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">1276-1115-1-ND</field>
+        <field name="Mfg Part #">CL03A104KP3NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="0.1 µF ±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="CL03A104KP3NNNC"/>
+      <property name="Digikey Part #" value="1276-1115-1-ND"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>104a976f-09b6-4e6a-b036-1d959d5a859c</tstamps>
+    </comp>
+    <comp ref="C7">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0201_0603Metric</footprint>
+      <datasheet>1276-1115-1-ND</datasheet>
+      <fields>
+        <field name="Description Value Pkg">0.1 µF ±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">1276-1115-1-ND</field>
+        <field name="Mfg Part #">CL03A104KP3NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="0.1 µF ±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="CL03A104KP3NNNC"/>
+      <property name="Digikey Part #" value="1276-1115-1-ND"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1d2ade05-cc13-426b-97a7-56525435cd50</tstamps>
     </comp>
     <comp ref="C8">
       <value>4.7uF</value>
@@ -163,7 +205,7 @@
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>e8421dff-a579-4b88-b5ef-c62b802c074e</tstamps>
+      <tstamps>45afcdf4-2552-4f62-8698-1fd0718a5403</tstamps>
     </comp>
     <comp ref="C9">
       <value>1uF</value>
@@ -184,6 +226,66 @@
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>13b740c8-eeba-4154-9392-b7209259ae1a</tstamps>
+    </comp>
+    <comp ref="C10">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">1 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">1276-1323-1-ND</field>
+        <field name="Mfg Part #">CL03A105KQ3CSNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Digikey Part #" value="1276-1323-1-ND"/>
+      <property name="Description Value Pkg" value="1 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="CL03A105KQ3CSNC"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>60ef3c72-a9de-42fb-9281-bf8c97f2997d</tstamps>
+    </comp>
+    <comp ref="C11">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">1 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">1276-1323-1-ND</field>
+        <field name="Mfg Part #">CL03A105KQ3CSNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Digikey Part #" value="1276-1323-1-ND"/>
+      <property name="Description Value Pkg" value="1 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="CL03A105KQ3CSNC"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>aa7fec39-3259-47f0-90ef-ea2ef03eb243</tstamps>
+    </comp>
+    <comp ref="C12">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">1 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">1276-1323-1-ND</field>
+        <field name="Mfg Part #">CL03A105KQ3CSNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Digikey Part #" value="1276-1323-1-ND"/>
+      <property name="Description Value Pkg" value="1 µF ±10% 6.3V Ceramic Capacitor X5R 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="CL03A105KQ3CSNC"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>051f4be5-75cf-45b4-a912-6f22885350f6</tstamps>
     </comp>
     <comp ref="C13">
       <value>0.1uF</value>
@@ -206,45 +308,95 @@
       <tstamps>ba9d13c9-d6e5-4b34-982d-643ab0de9b7a</tstamps>
     </comp>
     <comp ref="C14">
-      <value>0.1uF</value>
-      <footprint>Capacitor_SMD:C_0201_0603Metric</footprint>
-      <datasheet>1276-1115-1-ND</datasheet>
+      <value>10uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
-        <field name="Description Value Pkg">0.1 µF ±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric)</field>
-        <field name="Digikey Part #">1276-1115-1-ND</field>
-        <field name="Mfg Part #">CL03A104KP3NNNC</field>
+        <field name="Description Value Pkg">10 µF ±10% 6.3V Ceramic Capacitor X5R 0603 (1608 Metric)</field>
+        <field name="Mfg Part #">CL10A106KQ8NNNC</field>
       </fields>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
-      <property name="Description Value Pkg" value="0.1 µF ±10% 10V Ceramic Capacitor X5R 0201 (0603 Metric)"/>
-      <property name="Mfg Part #" value="CL03A104KP3NNNC"/>
-      <property name="Digikey Part #" value="1276-1115-1-ND"/>
+      <property name="Description Value Pkg" value="10 µF ±10% 6.3V Ceramic Capacitor X5R 0603 (1608 Metric)"/>
+      <property name="Mfg Part #" value="CL10A106KQ8NNNC"/>
       <property name="Alternate Part #" value=""/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>d6744096-afa3-46fb-b307-b917495aa1e1</tstamps>
+      <tstamps>1da5755a-bda5-4714-b75f-4900b3722e6c</tstamps>
     </comp>
     <comp ref="CHARGLED1">
       <value>LED</value>
-      <footprint>LED_SMD:LED_0201_0603Metric</footprint>
+      <footprint>LED_SMD:LED_0402_1005Metric</footprint>
       <fields>
-        <field name="Description Value Pkg">Green 525nm LED Indication - Discrete 2.85V 0201 (0603 Metric)</field>
-        <field name="Digikey Part #">754-APG0603ZGC-5MAVCT-ND</field>
-        <field name="Mfg Part #">APG0603ZGC-5MAV</field>
+        <field name="Description Value Pkg">Red 630nm LED Indication - Discrete 1.95V 0402 (1005 Metric)</field>
+        <field name="Mfg Part #">APHHS1005SURCK</field>
       </fields>
       <libsource lib="Device" part="LED" description="Light emitting diode"/>
-      <property name="Digikey Part #" value="754-APG0603ZGC-5MAVCT-ND"/>
-      <property name="Description Value Pkg" value="Green 525nm LED Indication - Discrete 2.85V 0201 (0603 Metric)"/>
-      <property name="Mfg Part #" value="APG0603ZGC-5MAV"/>
+      <property name="Description Value Pkg" value="Red 630nm LED Indication - Discrete 1.95V 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="APHHS1005SURCK"/>
       <property name="Alternate Part #" value=""/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
       <property name="ki_description" value="Light emitting diode"/>
       <property name="ki_keywords" value="LED diode"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>2769302b-b99c-4c5e-9f0a-952101f13b21</tstamps>
+      <tstamps>91c39c67-bed3-4255-877b-d3ed64eec04b</tstamps>
+    </comp>
+    <comp ref="CHARGLED2">
+      <value>LED</value>
+      <footprint>LED_SMD:LED_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">Red 630nm LED Indication - Discrete 1.95V 0402 (1005 Metric)</field>
+        <field name="Mfg Part #">APHHS1005SURCK</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Description Value Pkg" value="Red 630nm LED Indication - Discrete 1.95V 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="APHHS1005SURCK"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Light emitting diode"/>
+      <property name="ki_keywords" value="LED diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e06d05fc-7d33-4b84-9bff-e4e6490bbf43</tstamps>
+    </comp>
+    <comp ref="CHARGLED3">
+      <value>LED</value>
+      <footprint>LED_SMD:LED_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">Red 630nm LED Indication - Discrete 1.95V 0402 (1005 Metric)</field>
+        <field name="Mfg Part #">APHHS1005SURCK</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Description Value Pkg" value="Red 630nm LED Indication - Discrete 1.95V 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="APHHS1005SURCK"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Light emitting diode"/>
+      <property name="ki_keywords" value="LED diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6abc0548-f850-4d4a-a2fa-304147aba697</tstamps>
+    </comp>
+    <comp ref="D2">
+      <value>PESD5Z3.3,115</value>
+      <footprint>Diode_SMD:D_SOD-523</footprint>
+      <datasheet>https://www.onsemi.com/pdf/datasheet/esd5z2.5t1-d.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">18V Clamp 20A (8/20µs) Ipp Tvs Diode Surface Mount SOD-523</field>
+        <field name="Mfg Part #">PESD5Z3.3,115</field>
+      </fields>
+      <libsource lib="Diode" part="ESD5Zxx" description="ESD Protection Diode, SOD-523"/>
+      <property name="Description Value Pkg" value="18V Clamp 20A (8/20µs) Ipp Tvs Diode Surface Mount SOD-523"/>
+      <property name="Mfg Part #" value="PESD5Z3.3,115"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="ESD Protection Diode, SOD-523"/>
+      <property name="ki_keywords" value="esd tvs unidirectional diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>349ac0de-a54f-423f-b42f-756debfcd69a</tstamps>
     </comp>
     <comp ref="FG1">
       <value>MAX17055ETB+T</value>
@@ -328,46 +480,6 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamps>b076b54e-a2a5-4875-a646-9caed5630305</tstamps>
     </comp>
-    <comp ref="L1">
-      <value>4.7uH</value>
-      <footprint>Inductor_SMD:L_0603_1608Metric</footprint>
-      <fields>
-        <field name="Description Value Pkg">4.7 µH Shielded Multilayer Inductor 700 mA 500mOhm Max 0603 (1608 Metric)</field>
-        <field name="Digikey Part #">3442-MPH160809S4R7MTCT-ND</field>
-        <field name="Mfg Part #">MPH160809S4R7MT</field>
-      </fields>
-      <libsource lib="Device" part="L" description="Inductor"/>
-      <property name="Description Value Pkg" value="4.7 µH Shielded Multilayer Inductor 700 mA 500mOhm Max 0603 (1608 Metric)"/>
-      <property name="Mfg Part #" value="MPH160809S4R7MT"/>
-      <property name="Digikey Part #" value="3442-MPH160809S4R7MTCT-ND"/>
-      <property name="Alternate Part #" value=""/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
-      <property name="ki_description" value="Inductor"/>
-      <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>957b29a4-e789-476a-930a-bf7b90554b2e</tstamps>
-    </comp>
-    <comp ref="L2">
-      <value>4.7uH</value>
-      <footprint>Inductor_SMD:L_0603_1608Metric</footprint>
-      <fields>
-        <field name="Description Value Pkg">4.7 µH Shielded Multilayer Inductor 700 mA 500mOhm Max 0603 (1608 Metric)</field>
-        <field name="Digikey Part #">3442-MPH160809S4R7MTCT-ND</field>
-        <field name="Mfg Part #">MPH160809S4R7MT</field>
-      </fields>
-      <libsource lib="Device" part="L" description="Inductor"/>
-      <property name="Description Value Pkg" value="4.7 µH Shielded Multilayer Inductor 700 mA 500mOhm Max 0603 (1608 Metric)"/>
-      <property name="Mfg Part #" value="MPH160809S4R7MT"/>
-      <property name="Digikey Part #" value="3442-MPH160809S4R7MTCT-ND"/>
-      <property name="Alternate Part #" value=""/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
-      <property name="ki_description" value="Inductor"/>
-      <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>32450d61-7936-49cc-9f3f-ef1ccc49e83f</tstamps>
-    </comp>
     <comp ref="MCU1">
       <value>ESP32-S3-WROOM-2</value>
       <footprint>PCM_Espressif:ESP32-S3-WROOM-2</footprint>
@@ -427,6 +539,48 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>9b126ec3-bd08-48b7-bf07-5e16b84a0e56</tstamps>
+    </comp>
+    <comp ref="Q1">
+      <value>BSS138</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <datasheet>https://www.onsemi.com/pub/Collateral/BSS138-D.PDF</datasheet>
+      <fields>
+        <field name="Description Value Pkg">N-Channel 50 V 220mA (Ta) 350mW (Ta) Surface Mount SOT-23</field>
+        <field name="Digikey Part #">4530-BSS138CT-ND</field>
+        <field name="Mfg Part #">BSS138</field>
+      </fields>
+      <libsource lib="Transistor_FET" part="BSS138" description="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
+      <property name="Description Value Pkg" value="N-Channel 50 V 220mA (Ta) 350mW (Ta) Surface Mount SOT-23"/>
+      <property name="Mfg Part #" value="BSS138"/>
+      <property name="Digikey Part #" value="4530-BSS138CT-ND"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
+      <property name="ki_keywords" value="N-Channel MOSFET"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>327a35bd-db56-4932-a45f-33cfcc0499b4</tstamps>
+    </comp>
+    <comp ref="Q2">
+      <value>BSS138</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <datasheet>https://www.onsemi.com/pub/Collateral/BSS138-D.PDF</datasheet>
+      <fields>
+        <field name="Description Value Pkg">N-Channel 50 V 220mA (Ta) 350mW (Ta) Surface Mount SOT-23</field>
+        <field name="Digikey Part #">4530-BSS138CT-ND</field>
+        <field name="Mfg Part #">BSS138</field>
+      </fields>
+      <libsource lib="Transistor_FET" part="BSS138" description="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
+      <property name="Description Value Pkg" value="N-Channel 50 V 220mA (Ta) 350mW (Ta) Surface Mount SOT-23"/>
+      <property name="Mfg Part #" value="BSS138"/>
+      <property name="Digikey Part #" value="4530-BSS138CT-ND"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
+      <property name="ki_keywords" value="N-Channel MOSFET"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6e4b0847-373a-4b83-bfd8-ef6e21e5059a</tstamps>
     </comp>
     <comp ref="Q3">
       <value>BSS138</value>
@@ -527,27 +681,25 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>69d1f5b2-bd0a-44d1-a8e5-2793de358d54</tstamps>
+      <tstamps>d69352d4-3ac4-4e6d-9649-fa204d963a86</tstamps>
     </comp>
     <comp ref="R4">
-      <value>6.04k</value>
+      <value>110k</value>
       <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
       <fields>
-        <field name="Description Value Pkg">6.04 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
-        <field name="Digikey Part #">P123095CT-ND</field>
-        <field name="Mfg Part #">ERJ-1GNF6041C</field>
+        <field name="Description Value Pkg">110 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Mfg Part #">ERJ-1GNF1103C</field>
       </fields>
       <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
-      <property name="Digikey Part #" value="P123095CT-ND"/>
-      <property name="Description Value Pkg" value="6.04 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
-      <property name="Mfg Part #" value="ERJ-1GNF6041C"/>
+      <property name="Description Value Pkg" value="110 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF1103C"/>
       <property name="Alternate Part #" value=""/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>f0fad447-2cc2-473c-aa57-c65547721c62</tstamps>
+      <tstamps>ab582003-f2ce-415a-adc0-517f9ec77f6a</tstamps>
     </comp>
     <comp ref="R5">
       <value>10k</value>
@@ -609,86 +761,6 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <sheetpath names="/" tstamps="/"/>
       <tstamps>874adb2c-6633-4f87-9bd3-f179cafd8f9a</tstamps>
     </comp>
-    <comp ref="R8">
-      <value>100k</value>
-      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
-      <fields>
-        <field name="Description Value Pkg">100 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
-        <field name="Digikey Part #">P122655CT-ND</field>
-        <field name="Mfg Part #">ERJ-1GNF1003C</field>
-      </fields>
-      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
-      <property name="Digikey Part #" value="P122655CT-ND"/>
-      <property name="Description Value Pkg" value="100 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
-      <property name="Mfg Part #" value="ERJ-1GNF1003C"/>
-      <property name="Alternate Part #" value=""/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
-      <property name="ki_description" value="Resistor, US symbol"/>
-      <property name="ki_keywords" value="R res resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>e6339121-2589-4b22-9b7b-360698f3ef2e</tstamps>
-    </comp>
-    <comp ref="R9">
-      <value>232k</value>
-      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
-      <fields>
-        <field name="Description Value Pkg">232 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
-        <field name="Digikey Part #">P122849CT-ND</field>
-        <field name="Mfg Part #">ERJ-1GNF2323C</field>
-      </fields>
-      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
-      <property name="Digikey Part #" value="P122849CT-ND"/>
-      <property name="Description Value Pkg" value="232 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
-      <property name="Mfg Part #" value="ERJ-1GNF2323C"/>
-      <property name="Alternate Part #" value=""/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
-      <property name="ki_description" value="Resistor, US symbol"/>
-      <property name="ki_keywords" value="R res resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>22591d1f-40f8-4b21-b78b-858b42d8f5aa</tstamps>
-    </comp>
-    <comp ref="R10">
-      <value>100k</value>
-      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
-      <fields>
-        <field name="Description Value Pkg">100 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
-        <field name="Digikey Part #">P122655CT-ND</field>
-        <field name="Mfg Part #">ERJ-1GNF1003C</field>
-      </fields>
-      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
-      <property name="Digikey Part #" value="P122655CT-ND"/>
-      <property name="Description Value Pkg" value="100 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
-      <property name="Mfg Part #" value="ERJ-1GNF1003C"/>
-      <property name="Alternate Part #" value=""/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
-      <property name="ki_description" value="Resistor, US symbol"/>
-      <property name="ki_keywords" value="R res resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>e52e258c-e994-4020-b140-dbc839bab848</tstamps>
-    </comp>
-    <comp ref="R11">
-      <value>80.6k</value>
-      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
-      <fields>
-        <field name="Description Value Pkg">80.6 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
-        <field name="Digikey Part #">P123166CT-ND</field>
-        <field name="Mfg Part #">ERJ-1GNF8062C</field>
-      </fields>
-      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
-      <property name="Digikey Part #" value="P123166CT-ND"/>
-      <property name="Description Value Pkg" value="80.6 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
-      <property name="Mfg Part #" value="ERJ-1GNF8062C"/>
-      <property name="Alternate Part #" value=""/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
-      <property name="ki_description" value="Resistor, US symbol"/>
-      <property name="ki_keywords" value="R res resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>c6f90517-8358-49d9-83dc-79e68b13d62e</tstamps>
-    </comp>
     <comp ref="R12">
       <value>10k</value>
       <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
@@ -729,25 +801,101 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <sheetpath names="/" tstamps="/"/>
       <tstamps>54f15608-5e50-4ab7-be2d-161f53b2546c</tstamps>
     </comp>
-    <comp ref="R18">
-      <value>200k</value>
+    <comp ref="R14">
+      <value>2k2</value>
       <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
       <fields>
-        <field name="Description Value Pkg">200 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
-        <field name="Digikey Part #">P122814CT-ND</field>
-        <field name="Mfg Part #">ERJ-1GNF2003C</field>
+        <field name="Description Value Pkg">2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122832CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF2201C</field>
       </fields>
       <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
-      <property name="Digikey Part #" value="P122814CT-ND"/>
-      <property name="Description Value Pkg" value="200 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
-      <property name="Mfg Part #" value="ERJ-1GNF2003C"/>
+      <property name="Digikey Part #" value="P122832CT-ND"/>
+      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF2201C"/>
       <property name="Alternate Part #" value=""/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>3a4bc621-98d3-4f54-997f-9e7b3c9e12e8</tstamps>
+      <tstamps>c9da8724-4e40-4b8f-8d37-029e34b60b5c</tstamps>
+    </comp>
+    <comp ref="R15">
+      <value>2k2</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122832CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF2201C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122832CT-ND"/>
+      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF2201C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>465f8b3b-858b-40bd-a545-810b8af7846b</tstamps>
+    </comp>
+    <comp ref="R16">
+      <value>2k2</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122832CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF2201C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122832CT-ND"/>
+      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF2201C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f0bbb526-d9e6-4fca-86fa-afa739f11871</tstamps>
+    </comp>
+    <comp ref="R17">
+      <value>24.9k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">24.9 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Mfg Part #">ERJ-1GNF2492C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="24.9 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF2492C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>434ee0d7-1232-458d-aef3-4236e28e0251</tstamps>
+    </comp>
+    <comp ref="R18">
+      <value>330k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">330 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Mfg Part #">ERJ-1GNF3303C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="330 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF3303C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>06c7fe5b-3c1f-417f-a2c6-4b71e209552e</tstamps>
     </comp>
     <comp ref="R19">
       <value>2k2</value>
@@ -770,24 +918,22 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <tstamps>65de0876-95a8-4de6-a4c2-eee164324cca</tstamps>
     </comp>
     <comp ref="R20">
-      <value>2k2</value>
+      <value>2k</value>
       <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
       <fields>
-        <field name="Description Value Pkg">2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
-        <field name="Digikey Part #">P122832CT-ND</field>
-        <field name="Mfg Part #">ERJ-1GNF2201C</field>
+        <field name="Description Value Pkg">RES SMD 2K OHM 1% 1/20W 0201</field>
+        <field name="Mfg Part #">ERJ-1GNF2001C</field>
       </fields>
       <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
-      <property name="Digikey Part #" value="P122832CT-ND"/>
-      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
-      <property name="Mfg Part #" value="ERJ-1GNF2201C"/>
+      <property name="Description Value Pkg" value="RES SMD 2K OHM 1% 1/20W 0201"/>
+      <property name="Mfg Part #" value="ERJ-1GNF2001C"/>
       <property name="Alternate Part #" value=""/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>bddcf6f5-e971-4b6c-83a3-664b5fbfb5ff</tstamps>
+      <tstamps>d1024521-4c02-450a-9029-34b9bcde6503</tstamps>
     </comp>
     <comp ref="R21">
       <value>2k2</value>
@@ -809,6 +955,26 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <sheetpath names="/" tstamps="/"/>
       <tstamps>4ee10286-6ce3-45ef-b7af-b11ab4874bd7</tstamps>
     </comp>
+    <comp ref="R22">
+      <value>1k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">1 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122413CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF1001C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122413CT-ND"/>
+      <property name="Description Value Pkg" value="1 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF1001C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1362128f-9c28-49bd-904a-2843b7c768c7</tstamps>
+    </comp>
     <comp ref="R23">
       <value>2k2</value>
       <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
@@ -828,6 +994,26 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>d9fc8217-cf6f-4b60-9a39-ee4151613955</tstamps>
+    </comp>
+    <comp ref="R24">
+      <value>1k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">1 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="Digikey Part #">P122413CT-ND</field>
+        <field name="Mfg Part #">ERJ-1GNF1001C</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Digikey Part #" value="P122413CT-ND"/>
+      <property name="Description Value Pkg" value="1 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-1GNF1001C"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>57c2b130-35ad-448c-b81a-b8910289c3b2</tstamps>
     </comp>
     <comp ref="SW1">
       <value>JST-SH-1.00mm 1x2</value>
@@ -909,6 +1095,26 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <sheetpath names="/" tstamps="/"/>
       <tstamps>44bd5aca-0be7-4f5f-9b5d-1afdd7bf33ae</tstamps>
     </comp>
+    <comp ref="TH2">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description Value Pkg">NTC Thermistor 10k 0201 (0603 Metric)</field>
+        <field name="Digikey Part #">P124053CT-ND</field>
+        <field name="Mfg Part #">ERT-JZEG103FA</field>
+      </fields>
+      <libsource lib="Device" part="Thermistor_NTC_US" description="Temperature dependent resistor, negative temperature coefficient, US symbol"/>
+      <property name="Description Value Pkg" value="NTC Thermistor 10k 0201 (0603 Metric)"/>
+      <property name="Mfg Part #" value="ERT-JZEG103FA"/>
+      <property name="Digikey Part #" value="P124053CT-ND"/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Temperature dependent resistor, negative temperature coefficient, US symbol"/>
+      <property name="ki_keywords" value="thermistor NTC resistor sensor RTD"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4865fd28-bcc7-4318-ae8e-9c4c3845bbfb</tstamps>
+    </comp>
     <comp ref="TrillExtensionInput1">
       <value>JST-SH 1x08 1.00mm</value>
       <footprint>Connector_JST:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical</footprint>
@@ -929,49 +1135,101 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <sheetpath names="/" tstamps="/"/>
       <tstamps>4e581376-c0fe-4877-a24d-fd564199b096</tstamps>
     </comp>
-    <comp ref="U1">
-      <value>max8819ceti+</value>
-      <footprint>max8819-footprints:21-0139_T2844&amp;plus_1_MXM</footprint>
-      <datasheet>max8819ceti+</datasheet>
+    <comp ref="U2">
+      <value>MCP73871</value>
+      <footprint>Package_DFN_QFN:QFN-20-1EP_4x4mm_P0.5mm_EP2.5x2.5mm</footprint>
+      <datasheet>http://www.mouser.com/ds/2/268/22090a-52174.pdf</datasheet>
       <fields>
-        <field name="Description Value Pkg">Handheld/Mobile Devices PMIC 28-TQFN (4x4)</field>
-        <field name="Digikey Part #">MAX8819CETI+-ND</field>
-        <field name="Mfg Part #">MAX8819CETI+</field>
+        <field name="Description Value Pkg">QFN-20 Battery Management ICs ROHS</field>
+        <field name="Mfg Part #">MCP73871-2CCI/ML</field>
       </fields>
-      <libsource lib="max8819-symbols" part="max8819ceti+" description=""/>
-      <property name="Description Value Pkg" value="Handheld/Mobile Devices PMIC 28-TQFN (4x4)"/>
-      <property name="Mfg Part #" value="MAX8819CETI+"/>
-      <property name="Digikey Part #" value="MAX8819CETI+-ND"/>
+      <libsource lib="Battery_Management" part="MCP73871" description="Single cell, Li-Ion/Li-Po charge management controller"/>
+      <property name="Description Value Pkg" value="QFN-20 Battery Management ICs ROHS"/>
+      <property name="Mfg Part #" value="MCP73871-2CCI/ML"/>
       <property name="Alternate Part #" value=""/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
-      <property name="ki_keywords" value="max8819ceti+"/>
+      <property name="ki_description" value="Single cell, Li-Ion/Li-Po charge management controller"/>
+      <property name="ki_keywords" value="battery charger lithium"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>b524a05e-2d74-4488-8b29-374a1e108d71</tstamps>
+      <tstamps>91099b62-3b6a-454b-a286-684d5a8e5195</tstamps>
+    </comp>
+    <comp ref="U3">
+      <value>NCP167AMX330TBG</value>
+      <footprint>XDFN4_1X1_711AJ_ONS</footprint>
+      <datasheet>NCP167AMX330TBG</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Linear Voltage Regulator IC Positive Fixed 1 Output 700mA 4-XDFN (1x1)</field>
+        <field name="Mfg Part #">NCP167AMX330TBG</field>
+      </fields>
+      <libsource lib="NCP167AMX330TBG" part="NCP167AMX330TBG" description=""/>
+      <property name="Description Value Pkg" value="Linear Voltage Regulator IC Positive Fixed 1 Output 700mA 4-XDFN (1x1)"/>
+      <property name="Mfg Part #" value="NCP167AMX330TBG"/>
+      <property name="Digikey Part #" value=""/>
+      <property name="Alternate Part #" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_keywords" value="NCP167AMX330TBG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ff8bf9bb-3de4-4e6d-bae2-c1112089f5fb</tstamps>
     </comp>
     <comp ref="U4">
-      <value>PCA9306DP</value>
-      <footprint>Package_SO:TSSOP-8_3x3mm_P0.65mm</footprint>
-      <datasheet>https://www.nxp.com/docs/en/data-sheet/PCA9306.pdf</datasheet>
+      <value>NCP167AMX180TBG</value>
+      <footprint>XDFN4_1X1_711AJ_ONS</footprint>
+      <datasheet>NCP167AMX180TBG</datasheet>
       <fields>
-        <field name="Description Value Pkg">Voltage Level Translator Bidirectional 1 Circuit 2 Channel 8-TSSOP</field>
-        <field name="Digikey Part #">568-4243-1-ND</field>
-        <field name="Mfg Part #">PCA9306DP1,125</field>
+        <field name="Description Value Pkg">Linear Voltage Regulator IC Positive Fixed 1 Output 700mA 4-XDFN (1x1)</field>
+        <field name="Mfg Part #">NCP167AMX180TBG</field>
       </fields>
-      <libsource lib="Interface" part="PCA9306DP" description="Dual bidirectional I2C Bus and SMBus voltage level translator, TSSOP-8"/>
-      <property name="Description Value Pkg" value="Voltage Level Translator Bidirectional 1 Circuit 2 Channel 8-TSSOP"/>
-      <property name="Mfg Part #" value="PCA9306DP1,125"/>
-      <property name="Digikey Part #" value="568-4243-1-ND"/>
+      <libsource lib="NCP167" part="NCP167AMX180TBG" description=""/>
+      <property name="Description Value Pkg" value="Linear Voltage Regulator IC Positive Fixed 1 Output 700mA 4-XDFN (1x1)"/>
+      <property name="Mfg Part #" value="NCP167AMX180TBG"/>
+      <property name="Digikey Part #" value=""/>
       <property name="Alternate Part #" value=""/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
-      <property name="ki_description" value="Dual bidirectional I2C Bus and SMBus voltage level translator, TSSOP-8"/>
-      <property name="ki_keywords" value="I2C SMBus"/>
+      <property name="ki_keywords" value="NCP167AMX330TBG"/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamps>4f6ab94b-05a2-41f9-b26c-8be1fd8349ab</tstamps>
+      <tstamps>b68b934a-852c-4735-a109-42914be35d94</tstamps>
     </comp>
   </components>
   <libparts>
+    <libpart lib="Battery_Management" part="MCP73871">
+      <description>Single cell, Li-Ion/Li-Po charge management controller</description>
+      <docs>http://www.mouser.com/ds/2/268/22090a-52174.pdf</docs>
+      <footprints>
+        <fp>QFN*4x4mm*P0.5mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MCP73871</field>
+        <field name="Footprint">Package_DFN_QFN:QFN-20-1EP_4x4mm_P0.5mm_EP2.5x2.5mm</field>
+        <field name="Datasheet">http://www.mouser.com/ds/2/268/22090a-52174.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="OUT" type="power_out"/>
+        <pin num="2" name="VPCC" type="input"/>
+        <pin num="3" name="SEL" type="input"/>
+        <pin num="4" name="PROG2" type="input"/>
+        <pin num="5" name="THERM" type="bidirectional"/>
+        <pin num="6" name="~{PG}" type="open_collector"/>
+        <pin num="7" name="STAT2" type="open_collector"/>
+        <pin num="8" name="STAT1/~{LBO}" type="open_collector"/>
+        <pin num="9" name="~{TE}" type="input"/>
+        <pin num="10" name="V_{SS}" type="power_in"/>
+        <pin num="11" name="V_{SS}" type="passive"/>
+        <pin num="12" name="PROG3" type="bidirectional"/>
+        <pin num="13" name="PROG1" type="bidirectional"/>
+        <pin num="14" name="V_{BAT}" type="power_out"/>
+        <pin num="15" name="V_{BAT}" type="passive"/>
+        <pin num="16" name="V_{BAT_SENSE}" type="input"/>
+        <pin num="17" name="CE" type="input"/>
+        <pin num="18" name="IN" type="power_in"/>
+        <pin num="19" name="IN" type="passive"/>
+        <pin num="20" name="OUT" type="passive"/>
+        <pin num="21" name="V_{SS}" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="Connector" part="USB_C_Receptacle_USB2.0">
       <description>USB 2.0-only Type-C Receptacle connector</description>
       <docs>https://www.usb.org/sites/default/files/documents/usb_type-c.zip</docs>
@@ -1068,25 +1326,6 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
         <pin num="2" name="" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Device" part="L">
-      <description>Inductor</description>
-      <docs>~</docs>
-      <footprints>
-        <fp>Choke_*</fp>
-        <fp>*Coil*</fp>
-        <fp>Inductor_*</fp>
-        <fp>L_*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">L</field>
-        <field name="Value">L</field>
-        <field name="Datasheet">~</field>
-      </fields>
-      <pins>
-        <pin num="1" name="1" type="passive"/>
-        <pin num="2" name="2" type="passive"/>
-      </pins>
-    </libpart>
     <libpart lib="Device" part="LED">
       <description>Light emitting diode</description>
       <docs>~</docs>
@@ -1160,27 +1399,21 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
         <pin num="2" name="" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Interface" part="PCA9306DP">
-      <description>Dual bidirectional I2C Bus and SMBus voltage level translator, TSSOP-8</description>
-      <docs>https://www.nxp.com/docs/en/data-sheet/PCA9306.pdf</docs>
+    <libpart lib="Diode" part="ESD5Zxx">
+      <description>ESD Protection Diode, SOD-523</description>
+      <docs>https://www.onsemi.com/pdf/datasheet/esd5z2.5t1-d.pdf</docs>
       <footprints>
-        <fp>TSSOP*3x3mm*P0.65mm*</fp>
+        <fp>D?SOD?523*</fp>
       </footprints>
       <fields>
-        <field name="Reference">U</field>
-        <field name="Value">PCA9306DP</field>
-        <field name="Footprint">Package_SO:TSSOP-8_3x3mm_P0.65mm</field>
-        <field name="Datasheet">https://www.nxp.com/docs/en/data-sheet/PCA9306.pdf</field>
+        <field name="Reference">D</field>
+        <field name="Value">ESD5Zxx</field>
+        <field name="Footprint">Diode_SMD:D_SOD-523</field>
+        <field name="Datasheet">https://www.onsemi.com/pdf/datasheet/esd5z2.5t1-d.pdf</field>
       </fields>
       <pins>
-        <pin num="1" name="GND" type="power_in"/>
-        <pin num="2" name="VREF1" type="power_in"/>
-        <pin num="3" name="SCL1" type="bidirectional"/>
-        <pin num="4" name="SDA1" type="bidirectional"/>
-        <pin num="5" name="SDA2" type="bidirectional"/>
-        <pin num="6" name="SCL2" type="bidirectional"/>
-        <pin num="7" name="VREF2" type="power_in"/>
-        <pin num="8" name="EN" type="input"/>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="Mechanical" part="MountingHole">
@@ -1194,6 +1427,44 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
         <field name="Value">MountingHole</field>
         <field name="Datasheet">~</field>
       </fields>
+    </libpart>
+    <libpart lib="NCP167" part="NCP167AMX180TBG">
+      <docs>NCP167AMX330TBG</docs>
+      <footprints>
+        <fp>XDFN4_1X1_711AJ_ONS</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">NCP167AMX180TBG</field>
+        <field name="Footprint">XDFN4_1X1_711AJ_ONS</field>
+        <field name="Datasheet">NCP167AMX330TBG</field>
+      </fields>
+      <pins>
+        <pin num="1" name="OUT" type="output"/>
+        <pin num="2" name="GND" type="power_out"/>
+        <pin num="3" name="EN" type="input"/>
+        <pin num="4" name="IN" type="power_in"/>
+        <pin num="5" name="GND" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="NCP167AMX330TBG" part="NCP167AMX330TBG">
+      <docs>NCP167AMX330TBG</docs>
+      <footprints>
+        <fp>XDFN4_1X1_711AJ_ONS</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">NCP167AMX330TBG</field>
+        <field name="Footprint">XDFN4_1X1_711AJ_ONS</field>
+        <field name="Datasheet">NCP167AMX330TBG</field>
+      </fields>
+      <pins>
+        <pin num="1" name="OUT" type="output"/>
+        <pin num="2" name="GND" type="power_out"/>
+        <pin num="3" name="EN" type="input"/>
+        <pin num="4" name="IN" type="power_in"/>
+        <pin num="5" name="GND" type="power_out"/>
+      </pins>
     </libpart>
     <libpart lib="PCM_Espressif" part="ESP32-S3-WROOM-2">
       <description>2.4 GHz WiFi (802.11 b/g/n) and Bluetooth ® 5 (LE) module Built around ESP32S3 series of SoCs, Xtensa ® dualcore 32bit LX7 microprocessor Flash up to 16 MB, PSRAM up to 8 MB 36 GPIOs, rich set of peripherals Onboard PCB antenna</description>
@@ -1345,51 +1616,6 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
         <pin num="11" name="EPAD" type="unspecified"/>
       </pins>
     </libpart>
-    <libpart lib="max8819-symbols" part="max8819ceti+">
-      <docs>max8819ceti+</docs>
-      <footprints>
-        <fp>21-0139_T2844+1_MXM</fp>
-        <fp>21-0139_T2844+1_MXM-M</fp>
-        <fp>21-0139_T2844+1_MXM-L</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">U</field>
-        <field name="Value">max8819ceti+</field>
-        <field name="Footprint">21-0139_T2844+1_MXM</field>
-        <field name="Datasheet">max8819ceti+</field>
-      </fields>
-      <pins>
-        <pin num="1" name="COMP4" type="unspecified"/>
-        <pin num="2" name="FB4" type="bidirectional"/>
-        <pin num="3" name="OVP4" type="unspecified"/>
-        <pin num="4" name="PG4" type="bidirectional"/>
-        <pin num="5" name="LX4" type="bidirectional"/>
-        <pin num="6" name="GND" type="power_out"/>
-        <pin num="7" name="EN4" type="bidirectional"/>
-        <pin num="8" name="*RST1" type="unspecified"/>
-        <pin num="9" name="BAT" type="unspecified"/>
-        <pin num="10" name="SYS" type="unspecified"/>
-        <pin num="11" name="DC" type="unspecified"/>
-        <pin num="12" name="CEN" type="unspecified"/>
-        <pin num="13" name="FB1" type="bidirectional"/>
-        <pin num="14" name="CISET" type="unspecified"/>
-        <pin num="15" name="*CHG" type="unspecified"/>
-        <pin num="16" name="PG1" type="bidirectional"/>
-        <pin num="17" name="LX1" type="bidirectional"/>
-        <pin num="18" name="PV13" type="bidirectional"/>
-        <pin num="19" name="LX3" type="bidirectional"/>
-        <pin num="20" name="PG3" type="bidirectional"/>
-        <pin num="21" name="DLIM1" type="bidirectional"/>
-        <pin num="22" name="FB2" type="bidirectional"/>
-        <pin num="23" name="FB3" type="bidirectional"/>
-        <pin num="24" name="EN123" type="bidirectional"/>
-        <pin num="25" name="PV2" type="bidirectional"/>
-        <pin num="26" name="LX2" type="bidirectional"/>
-        <pin num="27" name="PG2" type="bidirectional"/>
-        <pin num="28" name="DLIM2" type="bidirectional"/>
-        <pin num="29" name="EP" type="unspecified"/>
-      </pins>
-    </libpart>
     <libpart lib="neopixel" part="2659">
       <fields>
         <field name="Reference">D</field>
@@ -1453,6 +1679,9 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
     </libpart>
   </libparts>
   <libraries>
+    <library logical="Battery_Management">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Battery_Management.kicad_sym</uri>
+    </library>
     <library logical="Connector">
       <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Connector.kicad_sym</uri>
     </library>
@@ -1462,11 +1691,14 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
     <library logical="Device">
       <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Device.kicad_sym</uri>
     </library>
-    <library logical="Interface">
-      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Interface.kicad_sym</uri>
+    <library logical="Diode">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Diode.kicad_sym</uri>
     </library>
     <library logical="Mechanical">
       <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Mechanical.kicad_sym</uri>
+    </library>
+    <library logical="NCP167">
+      <uri>D:\Documents\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/NCP167AMX330TBG/NCP167AMX330TBG.kicad_sym</uri>
     </library>
     <library logical="PCM_Espressif">
       <uri>D:\Documents\KiCad\7.0\3rdparty/symbols/com_github_espressif_kicad-libraries/Espressif.kicad_sym</uri>
@@ -1483,9 +1715,6 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
     <library logical="max17055-symbol">
       <uri>D:\Documents\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/max17055-kicad/max17055-symbol.kicad_sym</uri>
     </library>
-    <library logical="max8819-symbols">
-      <uri>D:\Documents\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/max8819/max8819-symbols.kicad_sym</uri>
-    </library>
     <library logical="pin-layout">
       <uri>D:\Documents\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/board-layout/pin-layout.kicad_sym</uri>
     </library>
@@ -1495,37 +1724,41 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
   </libraries>
   <nets>
     <net code="1" name="+1V8">
-      <node ref="C5" pin="1" pintype="passive"/>
+      <node ref="C10" pin="1" pintype="passive"/>
+      <node ref="C12" pin="1" pintype="passive"/>
+      <node ref="C7" pin="1" pintype="passive"/>
       <node ref="IMU1" pin="13" pinfunction="VDD" pintype="power_in"/>
+      <node ref="IMU1" pin="22" pinfunction="~{CS}" pintype="input"/>
       <node ref="IMU1" pin="8" pinfunction="VDDIO" pintype="power_in"/>
-      <node ref="L2" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="Q1" pin="1" pinfunction="G" pintype="input"/>
+      <node ref="Q2" pin="1" pinfunction="G" pintype="input"/>
       <node ref="Q3" pin="1" pinfunction="G" pintype="input"/>
-      <node ref="R11" pin="2" pintype="passive"/>
+      <node ref="R14" pin="2" pintype="passive"/>
+      <node ref="R15" pin="2" pintype="passive"/>
       <node ref="R21" pin="2" pintype="passive"/>
-      <node ref="U4" pin="2" pinfunction="VREF1" pintype="power_in"/>
+      <node ref="U4" pin="1" pinfunction="OUT" pintype="output"/>
     </net>
     <net code="2" name="+3V3">
       <node ref="C13" pin="1" pintype="passive"/>
-      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="C5" pin="1" pintype="passive"/>
       <node ref="FSR1" pin="1" pinfunction="Pin_1" pintype="passive"/>
-      <node ref="L1" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="MCU1" pin="2" pinfunction="3V3" pintype="power_in"/>
       <node ref="PWLED1" pin="4" pinfunction="VDD" pintype="power_in"/>
       <node ref="QWIIC1" pin="2" pinfunction="Pin_2" pintype="passive"/>
-      <node ref="R18" pin="2" pintype="passive"/>
+      <node ref="R16" pin="2" pintype="passive"/>
       <node ref="R19" pin="2" pintype="passive"/>
-      <node ref="R20" pin="2" pintype="passive"/>
       <node ref="R23" pin="2" pintype="passive"/>
       <node ref="R5" pin="2" pintype="passive"/>
-      <node ref="R9" pin="2" pintype="passive"/>
-      <node ref="U4" pin="7" pinfunction="VREF2" pintype="power_in"/>
+      <node ref="U3" pin="1" pinfunction="OUT" pintype="output"/>
     </net>
     <net code="3" name="+BATT">
       <node ref="BT1" pin="1" pinfunction="Pin_1" pintype="passive"/>
       <node ref="C1" pin="1" pintype="passive"/>
       <node ref="C8" pin="1" pintype="passive"/>
       <node ref="FG1" pin="10" pinfunction="BATT" pintype="unspecified"/>
-      <node ref="U1" pin="9" pinfunction="BAT" pintype="unspecified"/>
+      <node ref="U2" pin="14" pinfunction="V_{BAT}" pintype="power_out"/>
+      <node ref="U2" pin="15" pinfunction="V_{BAT}" pintype="passive"/>
+      <node ref="U2" pin="16" pinfunction="V_{BAT_SENSE}" pintype="input"/>
     </net>
     <net code="4" name="-BATT">
       <node ref="BT1" pin="2" pinfunction="Pin_2" pintype="passive"/>
@@ -1537,27 +1770,17 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <node ref="R12" pin="1" pintype="passive"/>
       <node ref="TH1" pin="1" pintype="passive"/>
     </net>
-    <net code="10" name="/CIPO">
+    <net code="11" name="/CIPO">
       <node ref="MCU1" pin="24" pinfunction="GPIO47/SPICLK_P/SUBSPICLK_P_DIFF" pintype="bidirectional"/>
     </net>
-    <net code="11" name="/COPI">
+    <net code="12" name="/COPI">
       <node ref="MCU1" pin="31" pinfunction="GPIO38/FSPIWP/SUBSPIWP" pintype="bidirectional"/>
     </net>
-    <net code="12" name="/EN">
+    <net code="14" name="/EN">
       <node ref="C9" pin="1" pintype="passive"/>
       <node ref="MCU1" pin="3" pinfunction="EN" pintype="input"/>
       <node ref="R5" pin="1" pintype="passive"/>
       <node ref="SW3" pin="1" pinfunction="1" pintype="passive"/>
-    </net>
-    <net code="14" name="/FB1">
-      <node ref="R8" pin="2" pintype="passive"/>
-      <node ref="R9" pin="1" pintype="passive"/>
-      <node ref="U1" pin="13" pinfunction="FB1" pintype="bidirectional"/>
-    </net>
-    <net code="15" name="/FB3">
-      <node ref="R10" pin="2" pintype="passive"/>
-      <node ref="R11" pin="1" pintype="passive"/>
-      <node ref="U1" pin="23" pinfunction="FB3" pintype="bidirectional"/>
     </net>
     <net code="16" name="/FG_CSN">
       <node ref="FG1" pin="5" pinfunction="CSN" pintype="unspecified"/>
@@ -1652,58 +1875,63 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <node ref="MCU1" pin="16" pinfunction="GPIO46" pintype="bidirectional"/>
       <node ref="R13" pin="1" pintype="passive"/>
     </net>
-    <net code="47" name="/ISET">
-      <node ref="R4" pin="2" pintype="passive"/>
-      <node ref="U1" pin="14" pinfunction="CISET" pintype="unspecified"/>
-    </net>
-    <net code="48" name="/LS_EN">
-      <node ref="C14" pin="1" pintype="passive"/>
-      <node ref="R18" pin="1" pintype="passive"/>
-      <node ref="U4" pin="8" pinfunction="EN" pintype="input"/>
-    </net>
-    <net code="50" name="/LV_SCL">
+    <net code="48" name="/LV_SCL">
       <node ref="IMU1" pin="23" pinfunction="SCL/SCLK" pintype="input"/>
-      <node ref="U4" pin="3" pinfunction="SCL1" pintype="bidirectional"/>
+      <node ref="Q1" pin="2" pinfunction="S" pintype="passive"/>
+      <node ref="R14" pin="1" pintype="passive"/>
     </net>
-    <net code="51" name="/LV_SDA">
+    <net code="49" name="/LV_SDA">
       <node ref="IMU1" pin="24" pinfunction="SDA/SDI" pintype="bidirectional"/>
-      <node ref="U4" pin="4" pinfunction="SDA1" pintype="bidirectional"/>
+      <node ref="Q2" pin="2" pinfunction="S" pintype="passive"/>
+      <node ref="R15" pin="1" pintype="passive"/>
     </net>
-    <net code="52" name="/LX1">
-      <node ref="L1" pin="1" pinfunction="1" pintype="passive"/>
-      <node ref="U1" pin="17" pinfunction="LX1" pintype="bidirectional"/>
+    <net code="51" name="/PG">
+      <node ref="R24" pin="2" pintype="passive"/>
+      <node ref="U2" pin="6" pinfunction="~{PG}" pintype="open_collector"/>
     </net>
-    <net code="53" name="/LX3">
-      <node ref="L2" pin="1" pinfunction="1" pintype="passive"/>
-      <node ref="U1" pin="19" pinfunction="LX3" pintype="bidirectional"/>
+    <net code="52" name="/PROG1">
+      <node ref="R20" pin="2" pintype="passive"/>
+      <node ref="U2" pin="13" pinfunction="PROG1" pintype="bidirectional"/>
     </net>
-    <net code="56" name="/REG">
+    <net code="53" name="/PROG3">
+      <node ref="R17" pin="2" pintype="passive"/>
+      <node ref="U2" pin="12" pinfunction="PROG3" pintype="bidirectional"/>
+    </net>
+    <net code="54" name="/REG">
       <node ref="C2" pin="1" pintype="passive"/>
       <node ref="FG1" pin="7" pinfunction="REG" pintype="unspecified"/>
     </net>
-    <net code="58" name="/RXD">
+    <net code="56" name="/RXD">
       <node ref="MCU1" pin="36" pinfunction="U0RXD/GPIO44/CLK_OUT2" pintype="bidirectional"/>
     </net>
-    <net code="59" name="/SCK">
+    <net code="57" name="/SCK">
       <node ref="MCU1" pin="25" pinfunction="GPIO48/SPICLK_N/SUBSPICLK_N_DIFF" pintype="bidirectional"/>
     </net>
-    <net code="60" name="/SCL">
+    <net code="58" name="/SCL">
       <node ref="FG1" pin="3" pinfunction="SCL" pintype="unspecified"/>
       <node ref="MCU1" pin="19" pinfunction="GPIO11/TOUCH11/ADC2_CH0/FSPID/FSPIIO5/SUBSPID" pintype="bidirectional"/>
+      <node ref="Q1" pin="3" pinfunction="D" pintype="passive"/>
       <node ref="QWIIC1" pin="4" pinfunction="Pin_4" pintype="passive"/>
       <node ref="R19" pin="1" pintype="passive"/>
-      <node ref="U4" pin="6" pinfunction="SCL2" pintype="bidirectional"/>
     </net>
-    <net code="61" name="/SDA">
+    <net code="59" name="/SDA">
       <node ref="FG1" pin="4" pinfunction="SDA" pintype="unspecified"/>
       <node ref="MCU1" pin="20" pinfunction="GPIO12/TOUCH12/ADC2_CH1/FSPICLK/FSPIIO6/SUBSPICLK" pintype="bidirectional"/>
+      <node ref="Q2" pin="3" pinfunction="D" pintype="passive"/>
       <node ref="QWIIC1" pin="3" pinfunction="Pin_3" pintype="passive"/>
-      <node ref="R20" pin="1" pintype="passive"/>
-      <node ref="U4" pin="5" pinfunction="SDA2" pintype="bidirectional"/>
+      <node ref="R16" pin="1" pintype="passive"/>
     </net>
-    <net code="62" name="/STAT">
+    <net code="60" name="/STAT">
       <node ref="R3" pin="2" pintype="passive"/>
-      <node ref="U1" pin="15" pinfunction="*CHG" pintype="unspecified"/>
+      <node ref="U2" pin="8" pinfunction="STAT1/~{LBO}" pintype="open_collector"/>
+    </net>
+    <net code="61" name="/STAT2">
+      <node ref="R22" pin="2" pintype="passive"/>
+      <node ref="U2" pin="7" pinfunction="STAT2" pintype="open_collector"/>
+    </net>
+    <net code="64" name="/THERM">
+      <node ref="TH2" pin="2" pintype="passive"/>
+      <node ref="U2" pin="5" pinfunction="THERM" pintype="bidirectional"/>
     </net>
     <net code="65" name="/THRM">
       <node ref="FG1" pin="9" pinfunction="THRM" pintype="unspecified"/>
@@ -1722,26 +1950,38 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <node ref="J1" pin="B7" pinfunction="D-" pintype="bidirectional"/>
       <node ref="MCU1" pin="13" pinfunction="GPIO19/U1RTS/ADC2_CH8/CLK_OUT2/USB_D-" pintype="bidirectional"/>
     </net>
-    <net code="71" name="CSP">
+    <net code="71" name="/VPCC">
+      <node ref="R18" pin="1" pintype="passive"/>
+      <node ref="R4" pin="2" pintype="passive"/>
+      <node ref="U2" pin="2" pinfunction="VPCC" pintype="input"/>
+    </net>
+    <net code="72" name="CSP">
       <node ref="C1" pin="2" pintype="passive"/>
       <node ref="C2" pin="2" pintype="passive"/>
       <node ref="FG1" pin="11" pinfunction="EPAD" pintype="unspecified"/>
       <node ref="FG1" pin="6" pinfunction="CSP" pintype="unspecified"/>
       <node ref="R2" pin="2" pinfunction="2" pintype="passive"/>
     </net>
-    <net code="72" name="GND">
+    <net code="73" name="GND">
       <node ref="BT1" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="C10" pin="2" pintype="passive"/>
+      <node ref="C11" pin="2" pintype="passive"/>
+      <node ref="C12" pin="2" pintype="passive"/>
       <node ref="C13" pin="2" pintype="passive"/>
       <node ref="C14" pin="2" pintype="passive"/>
       <node ref="C3" pin="2" pintype="passive"/>
       <node ref="C4" pin="2" pintype="passive"/>
       <node ref="C5" pin="2" pintype="passive"/>
+      <node ref="C6" pin="2" pintype="passive"/>
+      <node ref="C7" pin="2" pintype="passive"/>
       <node ref="C8" pin="2" pintype="passive"/>
       <node ref="C9" pin="2" pintype="passive"/>
+      <node ref="D2" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="FSR1" pin="MP" pinfunction="MountPin" pintype="passive"/>
       <node ref="IMU1" pin="11" pinfunction="FSYNC" pintype="input"/>
       <node ref="IMU1" pin="18" pinfunction="GND" pintype="power_in"/>
       <node ref="IMU1" pin="20" pinfunction="GND" pintype="passive"/>
+      <node ref="IMU1" pin="9" pinfunction="SDO/AD0" pintype="bidirectional"/>
       <node ref="J1" pin="A1" pinfunction="GND" pintype="passive"/>
       <node ref="J1" pin="A12" pinfunction="GND" pintype="passive"/>
       <node ref="J1" pin="B1" pinfunction="GND" pintype="passive"/>
@@ -1754,139 +1994,142 @@ ZING 2659 Danger Sign, 10x14 In, R and BK/WHT, ENG. More details: Danger Sign, A
       <node ref="QWIIC1" pin="1" pinfunction="Pin_1" pintype="passive"/>
       <node ref="QWIIC1" pin="MP" pinfunction="MountPin" pintype="passive"/>
       <node ref="R1" pin="2" pintype="passive"/>
-      <node ref="R10" pin="1" pintype="passive"/>
+      <node ref="R17" pin="1" pintype="passive"/>
       <node ref="R2" pin="4" pinfunction="4" pintype="passive"/>
+      <node ref="R20" pin="1" pintype="passive"/>
       <node ref="R4" pin="1" pintype="passive"/>
       <node ref="R6" pin="1" pintype="passive"/>
       <node ref="R7" pin="1" pintype="passive"/>
-      <node ref="R8" pin="1" pintype="passive"/>
       <node ref="SW1" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="SW1" pin="MP" pinfunction="MountPin" pintype="passive"/>
       <node ref="SW2" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="SW3" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="TH2" pin="1" pintype="passive"/>
       <node ref="TrillExtensionInput1" pin="MP" pinfunction="MountPin" pintype="passive"/>
-      <node ref="U1" pin="16" pinfunction="PG1" pintype="bidirectional"/>
-      <node ref="U1" pin="2" pinfunction="FB4" pintype="bidirectional"/>
-      <node ref="U1" pin="20" pinfunction="PG3" pintype="bidirectional"/>
-      <node ref="U1" pin="21" pinfunction="DLIM1" pintype="bidirectional"/>
-      <node ref="U1" pin="22" pinfunction="FB2" pintype="bidirectional"/>
-      <node ref="U1" pin="25" pinfunction="PV2" pintype="bidirectional"/>
-      <node ref="U1" pin="26" pinfunction="LX2" pintype="bidirectional"/>
-      <node ref="U1" pin="27" pinfunction="PG2" pintype="bidirectional"/>
-      <node ref="U1" pin="28" pinfunction="DLIM2" pintype="bidirectional"/>
-      <node ref="U1" pin="29" pinfunction="EP" pintype="unspecified"/>
-      <node ref="U1" pin="3" pinfunction="OVP4" pintype="unspecified"/>
-      <node ref="U1" pin="4" pinfunction="PG4" pintype="bidirectional"/>
-      <node ref="U1" pin="5" pinfunction="LX4" pintype="bidirectional"/>
-      <node ref="U1" pin="6" pinfunction="GND" pintype="power_out"/>
-      <node ref="U1" pin="7" pinfunction="EN4" pintype="bidirectional"/>
-      <node ref="U4" pin="1" pinfunction="GND" pintype="power_in"/>
+      <node ref="U2" pin="10" pinfunction="V_{SS}" pintype="power_in"/>
+      <node ref="U2" pin="11" pinfunction="V_{SS}" pintype="passive"/>
+      <node ref="U2" pin="21" pinfunction="V_{SS}" pintype="passive"/>
+      <node ref="U2" pin="3" pinfunction="SEL" pintype="input"/>
+      <node ref="U2" pin="9" pinfunction="~{TE}" pintype="input"/>
+      <node ref="U3" pin="2" pinfunction="GND" pintype="power_out"/>
+      <node ref="U3" pin="5" pinfunction="GND" pintype="power_out"/>
+      <node ref="U4" pin="2" pinfunction="GND" pintype="power_out"/>
+      <node ref="U4" pin="5" pinfunction="GND" pintype="power_out"/>
     </net>
-    <net code="73" name="Net-(CHARGLED1-K)">
+    <net code="74" name="Net-(CHARGLED1-K)">
       <node ref="CHARGLED1" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R3" pin="1" pintype="passive"/>
     </net>
-    <net code="74" name="Net-(J1-CC1)">
+    <net code="75" name="Net-(CHARGLED2-K)">
+      <node ref="CHARGLED2" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="R22" pin="1" pintype="passive"/>
+    </net>
+    <net code="76" name="Net-(CHARGLED3-K)">
+      <node ref="CHARGLED3" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="R24" pin="1" pintype="passive"/>
+    </net>
+    <net code="77" name="Net-(IMU1-REGOUT)">
+      <node ref="C6" pin="1" pintype="passive"/>
+      <node ref="IMU1" pin="10" pinfunction="REGOUT" pintype="passive"/>
+    </net>
+    <net code="78" name="Net-(J1-CC1)">
       <node ref="J1" pin="A5" pinfunction="CC1" pintype="bidirectional"/>
       <node ref="R7" pin="2" pintype="passive"/>
     </net>
-    <net code="75" name="Net-(J1-CC2)">
+    <net code="79" name="Net-(J1-CC2)">
       <node ref="J1" pin="B5" pinfunction="CC2" pintype="bidirectional"/>
       <node ref="R6" pin="2" pintype="passive"/>
     </net>
-    <net code="76" name="Net-(PWLED1-DIN)">
+    <net code="80" name="Net-(PWLED1-DIN)">
       <node ref="PWLED1" pin="3" pinfunction="DIN" pintype="input"/>
       <node ref="R13" pin="2" pintype="passive"/>
     </net>
-    <net code="77" name="SYS">
+    <net code="81" name="SYS">
+      <node ref="C11" pin="1" pintype="passive"/>
       <node ref="C3" pin="1" pintype="passive"/>
-      <node ref="CHARGLED1" pin="2" pinfunction="A" pintype="passive"/>
-      <node ref="U1" pin="10" pinfunction="SYS" pintype="unspecified"/>
-      <node ref="U1" pin="18" pinfunction="PV13" pintype="bidirectional"/>
-      <node ref="U1" pin="24" pinfunction="EN123" pintype="bidirectional"/>
+      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="U2" pin="1" pinfunction="OUT" pintype="power_out"/>
+      <node ref="U2" pin="17" pinfunction="CE" pintype="input"/>
+      <node ref="U2" pin="20" pinfunction="OUT" pintype="passive"/>
+      <node ref="U2" pin="4" pinfunction="PROG2" pintype="input"/>
+      <node ref="U3" pin="3" pinfunction="EN" pintype="input"/>
+      <node ref="U3" pin="4" pinfunction="IN" pintype="power_in"/>
+      <node ref="U4" pin="3" pinfunction="EN" pintype="input"/>
+      <node ref="U4" pin="4" pinfunction="IN" pintype="power_in"/>
     </net>
-    <net code="78" name="VUSB">
+    <net code="82" name="VUSB">
+      <node ref="C14" pin="1" pintype="passive"/>
+      <node ref="CHARGLED1" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="CHARGLED2" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="CHARGLED3" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="D2" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="J1" pin="A4" pinfunction="VBUS" pintype="passive"/>
       <node ref="J1" pin="A9" pinfunction="VBUS" pintype="passive"/>
       <node ref="J1" pin="B4" pinfunction="VBUS" pintype="passive"/>
       <node ref="J1" pin="B9" pinfunction="VBUS" pintype="passive"/>
-      <node ref="U1" pin="11" pinfunction="DC" pintype="unspecified"/>
-      <node ref="U1" pin="12" pinfunction="CEN" pintype="unspecified"/>
+      <node ref="R18" pin="2" pintype="passive"/>
+      <node ref="U2" pin="18" pinfunction="IN" pintype="power_in"/>
+      <node ref="U2" pin="19" pinfunction="IN" pintype="passive"/>
     </net>
-    <net code="79" name="unconnected-(FG1-N.C.-Pad1)">
+    <net code="83" name="unconnected-(FG1-N.C.-Pad1)">
       <node ref="FG1" pin="1" pinfunction="N.C." pintype="no_connect"/>
     </net>
-    <net code="80" name="unconnected-(IMU1-AUX_CL-Pad7)">
+    <net code="84" name="unconnected-(IMU1-AUX_CL-Pad7)">
       <node ref="IMU1" pin="7" pinfunction="AUX_CL" pintype="output+no_connect"/>
     </net>
-    <net code="81" name="unconnected-(IMU1-AUX_DA-Pad21)">
+    <net code="85" name="unconnected-(IMU1-AUX_DA-Pad21)">
       <node ref="IMU1" pin="21" pinfunction="AUX_DA" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="82" name="unconnected-(IMU1-NC-Pad1)">
+    <net code="86" name="unconnected-(IMU1-NC-Pad1)">
       <node ref="IMU1" pin="1" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="83" name="unconnected-(IMU1-NC-Pad2)">
+    <net code="87" name="unconnected-(IMU1-NC-Pad2)">
       <node ref="IMU1" pin="2" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="84" name="unconnected-(IMU1-NC-Pad3)">
+    <net code="88" name="unconnected-(IMU1-NC-Pad3)">
       <node ref="IMU1" pin="3" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="85" name="unconnected-(IMU1-NC-Pad4)">
+    <net code="89" name="unconnected-(IMU1-NC-Pad4)">
       <node ref="IMU1" pin="4" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="86" name="unconnected-(IMU1-NC-Pad5)">
+    <net code="90" name="unconnected-(IMU1-NC-Pad5)">
       <node ref="IMU1" pin="5" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="87" name="unconnected-(IMU1-NC-Pad6)">
+    <net code="91" name="unconnected-(IMU1-NC-Pad6)">
       <node ref="IMU1" pin="6" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="88" name="unconnected-(IMU1-NC-Pad14)">
+    <net code="92" name="unconnected-(IMU1-NC-Pad14)">
       <node ref="IMU1" pin="14" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="89" name="unconnected-(IMU1-NC-Pad15)">
+    <net code="93" name="unconnected-(IMU1-NC-Pad15)">
       <node ref="IMU1" pin="15" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="90" name="unconnected-(IMU1-NC-Pad16)">
+    <net code="94" name="unconnected-(IMU1-NC-Pad16)">
       <node ref="IMU1" pin="16" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="91" name="unconnected-(IMU1-NC-Pad17)">
+    <net code="95" name="unconnected-(IMU1-NC-Pad17)">
       <node ref="IMU1" pin="17" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="92" name="unconnected-(IMU1-REGOUT-Pad10)">
-      <node ref="IMU1" pin="10" pinfunction="REGOUT" pintype="passive+no_connect"/>
-    </net>
-    <net code="93" name="unconnected-(IMU1-RESV-Pad19)">
+    <net code="96" name="unconnected-(IMU1-RESV-Pad19)">
       <node ref="IMU1" pin="19" pinfunction="RESV" pintype="no_connect"/>
     </net>
-    <net code="94" name="unconnected-(IMU1-SDO{slash}AD0-Pad9)">
-      <node ref="IMU1" pin="9" pinfunction="SDO/AD0" pintype="bidirectional+no_connect"/>
-    </net>
-    <net code="95" name="unconnected-(IMU1-~{CS}-Pad22)">
-      <node ref="IMU1" pin="22" pinfunction="~{CS}" pintype="input+no_connect"/>
-    </net>
-    <net code="96" name="unconnected-(J1-SBU1-PadA8)">
+    <net code="97" name="unconnected-(J1-SBU1-PadA8)">
       <node ref="J1" pin="A8" pinfunction="SBU1" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="97" name="unconnected-(J1-SBU2-PadB8)">
+    <net code="98" name="unconnected-(J1-SBU2-PadB8)">
       <node ref="J1" pin="B8" pinfunction="SBU2" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="98" name="unconnected-(MCU1-NC-Pad28)">
+    <net code="99" name="unconnected-(MCU1-NC-Pad28)">
       <node ref="MCU1" pin="28" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="99" name="unconnected-(MCU1-NC-Pad29)">
+    <net code="100" name="unconnected-(MCU1-NC-Pad29)">
       <node ref="MCU1" pin="29" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="100" name="unconnected-(MCU1-NC-Pad30)">
+    <net code="101" name="unconnected-(MCU1-NC-Pad30)">
       <node ref="MCU1" pin="30" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="101" name="unconnected-(PWLED1-DOUT-Pad1)">
+    <net code="102" name="unconnected-(PWLED1-DOUT-Pad1)">
       <node ref="PWLED1" pin="1" pinfunction="DOUT" pintype="output+no_connect"/>
-    </net>
-    <net code="102" name="unconnected-(U1-*RST1-Pad8)">
-      <node ref="U1" pin="8" pinfunction="*RST1" pintype="unspecified+no_connect"/>
-    </net>
-    <net code="103" name="unconnected-(U1-COMP4-Pad1)">
-      <node ref="U1" pin="1" pinfunction="COMP4" pintype="unspecified+no_connect"/>
     </net>
   </nets>
 </export>
