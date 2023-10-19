@@ -196,7 +196,7 @@
     (property "ki_keywords" "NCP167AMX330TBG")
     (path "/b68b934a-852c-4735-a109-42914be35d94")
     (attr smd)
-    (fp_text reference "U4" (at 0 0 180 unlocked) (layer "F.SilkS")
+    (fp_text reference "U4" (at 0 0 180 unlocked) (layer "F.SilkS") hide
         (effects (font (size 1 1) (thickness 0.15)))
       (tstamp 0a8c04dd-da4b-409e-814d-49b9b4aee0dd)
     )
@@ -4659,7 +4659,7 @@
     (property "ki_keywords" "NCP167AMX330TBG")
     (path "/ff8bf9bb-3de4-4e6d-bae2-c1112089f5fb")
     (attr smd)
-    (fp_text reference "U3" (at 0 0 180 unlocked) (layer "F.SilkS")
+    (fp_text reference "U3" (at 0 0 180 unlocked) (layer "F.SilkS") hide
         (effects (font (size 1 1) (thickness 0.15)))
       (tstamp 7cd6f5e4-4cdd-4aae-bc4f-60db7b982a53)
     )
