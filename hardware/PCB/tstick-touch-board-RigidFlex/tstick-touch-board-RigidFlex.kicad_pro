@@ -1,64 +1,6 @@
 {
   "board": {
-    "3dviewports": [
-      {
-        "name": "angle",
-        "ww": 1.0,
-        "wx": -16.361547470092773,
-        "wy": -4.095367908477783,
-        "wz": -1.5435538291931152,
-        "xw": 0.0,
-        "xx": 0.5911494493484497,
-        "xy": 0.40019771456718445,
-        "xz": -0.7002743482589722,
-        "yw": 0.0,
-        "yx": -0.8065605163574219,
-        "yy": 0.29162347316741943,
-        "yz": -0.5142151713371277,
-        "zw": 0.0,
-        "zx": -0.0015707197599112988,
-        "zy": 0.8687908053398132,
-        "zz": 0.4951748549938202
-      },
-      {
-        "name": "back",
-        "ww": 1.0,
-        "wx": 16.609691619873047,
-        "wy": 8.457509994506836,
-        "wz": -6.168394565582275,
-        "xw": 0.0,
-        "xx": -1.0,
-        "xy": 0.0,
-        "xz": -1.7555552403791808e-05,
-        "yw": 0.0,
-        "yx": 0.0,
-        "yy": 1.0,
-        "yz": 0.0,
-        "zw": 0.0,
-        "zx": 1.7555552403791808e-05,
-        "zy": 0.0,
-        "zz": -1.0
-      },
-      {
-        "name": "front",
-        "ww": 1.0,
-        "wx": -17.28655242919922,
-        "wy": 8.457509994506836,
-        "wz": -6.168692111968994,
-        "xw": 0.0,
-        "xx": 1.0,
-        "xy": 0.0,
-        "xz": 0.0,
-        "yw": 0.0,
-        "yx": 0.0,
-        "yy": 1.0,
-        "yz": 0.0,
-        "zw": 0.0,
-        "zx": 0.0,
-        "zy": 0.0,
-        "zz": 1.0
-      }
-    ],
+    "3dviewports": [],
     "design_settings": {
       "defaults": {
         "board_outline_line_width": 0.09999999999999999,
@@ -92,18 +34,18 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.0,
-          "height": 0.4,
-          "width": 0.46
+          "drill": 0.762,
+          "height": 1.524,
+          "width": 1.524
         },
-        "silk_line_width": 0.1016,
+        "silk_line_width": 0.15,
         "silk_text_italic": false,
-        "silk_text_size_h": 0.635,
-        "silk_text_size_v": 0.635,
-        "silk_text_thickness": 0.1016,
+        "silk_text_size_h": 1.0,
+        "silk_text_size_v": 1.0,
+        "silk_text_thickness": 0.15,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.15239999999999998
+          "min_clearance": 0.381
         }
       },
       "diff_pair_dimensions": [
@@ -172,7 +114,7 @@
         "min_clearance": 0.12,
         "min_connection": 0.0,
         "min_copper_edge_clearance": 0.0,
-        "min_hole_clearance": 0.16999999999999998,
+        "min_hole_clearance": 0.254,
         "min_hole_to_hole": 0.254,
         "min_microvia_diameter": 0.19999999999999998,
         "min_microvia_drill": 0.09999999999999999,
@@ -233,7 +175,8 @@
         0.0,
         0.1524,
         0.254,
-        0.508
+        0.635,
+        2.54
       ],
       "via_dimensions": [
         {
@@ -245,8 +188,8 @@
           "drill": 0.254
         },
         {
-          "diameter": 0.762,
-          "drill": 0.508
+          "diameter": 0.635,
+          "drill": 0.254
         }
       ],
       "zones_allow_external_fillets": false
@@ -459,7 +402,7 @@
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
       "pin_not_driven": "error",
-      "pin_to_pin": "error",
+      "pin_to_pin": "warning",
       "power_pin_not_driven": "error",
       "similar_labels": "warning",
       "simulation_model_issue": "ignore",
@@ -474,7 +417,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "tstick-5gw-pro-USB-V2-pcb.kicad_pro",
+    "filename": "tstick-touch-board-RigidFlex.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -515,7 +458,7 @@
       },
       {
         "bus_width": 12,
-        "clearance": 0.129,
+        "clearance": 0.1524,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -525,9 +468,9 @@
         "name": "Power",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.3048,
-        "via_diameter": 0.5588,
-        "via_drill": 0.3048,
+        "track_width": 0.254,
+        "via_diameter": 0.508,
+        "via_drill": 0.254,
         "wire_width": 6
       },
       {
@@ -542,7 +485,24 @@
         "name": "Signal",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.254,
+        "track_width": 0.1524,
+        "via_diameter": 0.508,
+        "via_drill": 0.254,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.25,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "touch",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.1524,
         "via_diameter": 0.508,
         "via_drill": 0.254,
         "wire_width": 6
@@ -552,7 +512,38 @@
       "version": 3
     },
     "net_colors": null,
-    "netclass_assignments": null,
+    "netclass_assignments": {
+      "/TOUCH0": "touch",
+      "/TOUCH1": "touch",
+      "/TOUCH10": "touch",
+      "/TOUCH11": "touch",
+      "/TOUCH12": "touch",
+      "/TOUCH13": "touch",
+      "/TOUCH14": "touch",
+      "/TOUCH15": "touch",
+      "/TOUCH16": "touch",
+      "/TOUCH17": "touch",
+      "/TOUCH18": "touch",
+      "/TOUCH19": "touch",
+      "/TOUCH2": "touch",
+      "/TOUCH20": "touch",
+      "/TOUCH21": "touch",
+      "/TOUCH22": "touch",
+      "/TOUCH23": "touch",
+      "/TOUCH24": "touch",
+      "/TOUCH25": "touch",
+      "/TOUCH26": "touch",
+      "/TOUCH27": "touch",
+      "/TOUCH28": "touch",
+      "/TOUCH29": "touch",
+      "/TOUCH3": "touch",
+      "/TOUCH4": "touch",
+      "/TOUCH5": "touch",
+      "/TOUCH6": "touch",
+      "/TOUCH7": "touch",
+      "/TOUCH8": "touch",
+      "/TOUCH9": "touch"
+    },
     "netclass_patterns": [
       {
         "netclass": "Power",
@@ -601,22 +592,6 @@
       {
         "netclass": "Signal",
         "pattern": "RXD"
-      },
-      {
-        "netclass": "Signal",
-        "pattern": "USBD+"
-      },
-      {
-        "netclass": "Signal",
-        "pattern": "USBD-"
-      },
-      {
-        "netclass": "Signal",
-        "pattern": "/SCL"
-      },
-      {
-        "netclass": "Signal",
-        "pattern": "/SDA"
       }
     ]
   },
@@ -638,23 +613,7 @@
       "dashed_lines_gap_length_ratio": 3.0,
       "default_line_thickness": 6.0,
       "default_text_size": 50.0,
-      "field_names": [
-        {
-          "name": "Description Value Pkg",
-          "url": false,
-          "visible": false
-        },
-        {
-          "name": "Mfg Part #",
-          "url": false,
-          "visible": false
-        },
-        {
-          "name": "Alternate Part #",
-          "url": false,
-          "visible": false
-        }
-      ],
+      "field_names": [],
       "intersheets_ref_own_page": false,
       "intersheets_ref_prefix": "",
       "intersheets_ref_short": false,
@@ -671,14 +630,6 @@
       "version": 1
     },
     "net_format_name": "",
-    "ngspice": {
-      "fix_include_paths": true,
-      "meta": {
-        "version": 0
-      },
-      "model_mode": 0,
-      "workbook_filename": ""
-    },
     "page_layout_descr_file": "",
     "plot_directory": "",
     "spice_current_sheet_as_root": false,
@@ -691,7 +642,7 @@
   },
   "sheets": [
     [
-      "1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1",
+      "46dbcacd-cba3-4bc1-8962-e2271e5f32af",
       ""
     ]
   ],

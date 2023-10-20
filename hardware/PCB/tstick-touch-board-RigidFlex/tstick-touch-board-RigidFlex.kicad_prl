@@ -1,8 +1,8 @@
 {
   "board": {
-    "active_layer": 51,
+    "active_layer": 37,
     "active_layer_preset": "",
-    "auto_track_width": false,
+    "auto_track_width": true,
     "hidden_netclasses": [],
     "hidden_nets": [],
     "high_contrast_mode": 0,
@@ -19,7 +19,7 @@
       "footprints": true,
       "graphics": true,
       "keepouts": true,
-      "lockedItems": false,
+      "lockedItems": true,
       "otherItems": true,
       "pads": true,
       "text": true,
@@ -64,11 +64,11 @@
       39,
       40
     ],
-    "visible_layers": "ffcffc3_7ffffff8",
+    "visible_layers": "ffcffff_ffffffff",
     "zone_display_mode": 0
   },
   "meta": {
-    "filename": "tstick-5gw-pro-USB-V2-pcb.kicad_prl",
+    "filename": "tstick-touch-board-RigidFlex.kicad_prl",
     "version": 3
   },
   "project": {
