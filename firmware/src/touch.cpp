@@ -13,11 +13,11 @@ uint8_t Touch::initTouch() {
         return 0;
     }
     delay(10);
-    trillSensor.setPrescaler(1);
+    trillSensor.setPrescaler(4);
     delay(10);
     trillSensor.updateBaseline();
     delay(10);
-    trillSensor.setScanSettings(0,9);
+    trillSensor.setScanSettings(3,16);
     delay(10);
     trillSensor.setNoiseThreshold(30);
     delay(10);
