@@ -1,0 +1,8 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "trill-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/trill-kicad-libs/trill-footprints.pretty")(options "")(descr ""))
+  (lib (name "trill-flex")(type "KiCad")(uri "${KIPRJMOD}/Libraries/trill-flex-kicad-libraries/trill-flex.pretty")(options "")(descr ""))
+  (lib (name "JST-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/JST Connectors/JST-footprints.pretty")(options "")(descr ""))
+  (lib (name "flex-touch-sensor")(type "KiCad")(uri "${KIPRJMOD}/Libraries/touch-arrays/flex-touch-sensor.pretty")(options "")(descr ""))
+  (lib (name "touch-sensors")(type "KiCad")(uri "${KIPRJMOD}/Libraries/touch-arrays/touch-sensors.pretty")(options "")(descr ""))
+)

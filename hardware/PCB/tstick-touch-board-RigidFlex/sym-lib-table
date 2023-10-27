@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "trill-flex")(type "KiCad")(uri "C:/Users/user/Documents/Github/T-Stick/hardware/PCB/touch-sensor-horizontal/trill-flex.kicad_sym")(options "")(descr ""))
+)

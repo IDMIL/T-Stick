@@ -6,15 +6,12 @@ This repository hosts up to date firmware for the T-Stick instruments currently 
 
 ## Documentation:
 
-[T-Stick connection guide – v1.3 for wireless T-Sticks](./Docs/T-Stick_2GW_Connecting_Guide(v1.3).md)
-
-[T-Stick firmware upgrade guide](./Docs/Firmware_update_instructions.md)
-
-[How to build a T-Stick Sopranino](./Docs/T-Stick_2GW_building_instructions.md)
-
-[How to build a T-Stick Sopranino using the Trill sensor](./Docs/T-Stick_2GW_building_instructions(trill).md)
-
-[OSC sensor data list](./Docs/OSC.md)
+Up to date T-Stick Documentation can be found at [idmil.github.io/tstick-docs](https://idmil.github.io/tstick-docs/). You cana lso check the files available in this repository.
+- [T-Stick connection guide – v1.3 for wireless T-Sticks](./Docs/T-Stick_2GW_Connecting_Guide(v1.3).md)
+- [T-Stick firmware upgrade guide](./Docs/Firmware_update_instructions.md)
+- [How to build a T-Stick Sopranino](./Docs/T-Stick_2GW_building_instructions.md)
+- [How to build a T-Stick Sopranino using the Trill sensor](./Docs/T-Stick_2GW_building_instructions(trill).md)
+- [OSC sensor data list](./Docs/OSC.md)
 
 ## Instruments:
 
