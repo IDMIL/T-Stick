@@ -11,7 +11,7 @@
  */
 
 
-unsigned int firmware_version = 220929;
+unsigned int firmware_version = 231027;
 
 // set the amount of capacitive stripes set 30 or 60
 #define TSTICK_SIZE 30

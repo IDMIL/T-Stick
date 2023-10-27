@@ -10,7 +10,7 @@
  */
 
 
-unsigned int firmware_version = 220929;
+unsigned int firmware_version = 231027;
 
 // set the amount of capacitive stripes for the sopranino (15) or soprano (30)
 #define TSTICK_SIZE 16
