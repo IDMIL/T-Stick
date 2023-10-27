@@ -15,7 +15,7 @@
 #X obj 617 82 r rawtimer;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array rawtime 100 float 1;
-#A 0 0 0 0 7.25624 0 0 0 0 1.45125 4.35374 0 0 27.5737 2.90249 5.80499 0 0 0 0 0 0 0 0 5.80499 0 17.415 0 0 0 0 0 0 0 0 0 0 0 0 46.4399 0 0 0 0 0 0 0 0 0 0 5.80499 5.80499 23.22 0 0 5.80499 0 0 0 0 0 1.45125 11.61 0 0 0 0 0 0 0 0 0 0 0 0 44.9887 0 0 0 0 5.80499 0 0 0 0 0 0 5.80499 29.0249 0 0 0 5.80499 0 0 0 0 0 0 0 0;
+#A 0 5.80499 0 0 17.415 0 0 0 0 0 0 0 5.80499 0 0 0 5.80499 0 23.22 17.415 0 0 0 0 2.90249 2.90249 0 0 0 0 5.80499 0 23.22 5.80499 0 2.90249 2.90249 0 0 0 0 0 0 0 0 0 27.5737 0 13.0612 0 0 0 0 0 5.80499 0 0 0 0 2.90249 2.90249 17.415 11.61 0 0 0 0 0 0 0 7.25624 0 0 0 0 17.415 5.80499 0 0 0 0 0 5.80499 0 0 0 0 0 0 34.8299 0 11.61 0 0 0 0 5.80499 0 0 0 0;
 #X coords 0 100 99 0 200 140 1;
 #X restore 411 79 graph;
 #N canvas 264 335 568 475 timegraph 0;
@@ -66,7 +66,7 @@
 #X text 543 288 Quaternions;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array Touch 30 float 1;
-#A 0 82 80 83 81 81 82 81 80 80 80 79 78 77 78 77 77 77 78 77 77 77 77 77 77 77 79 80 81 80 76;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 100 29 0 400 300 1 0 0;
 #X restore 1061 472 graph;
 #X floatatom 609 615 10 0 0 0 - - - 0;
@@ -148,7 +148,7 @@
 #X obj 26 396 array set rawTouch;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array rawTouch 30 float 1;
-#A 0 1343 1313 1353 1333 1334 1343 1324 1319 1318 1307 1302 1275 1271 1279 1265 1257 1266 1285 1265 1267 1264 1267 1256 1256 1265 1288 1305 1328 1312 1241;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 4000 29 0 400 300 1 0 0;
 #X restore 1066 81 graph;
 #X text 1299 59 Raw Touch Data;
@@ -163,7 +163,7 @@
 #X obj 283 1001 array set discTouch2;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array discTouch 30 float 1;
-#A 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 2 29 0 400 200 1 0 0;
 #X restore 1059 852 graph;
 #X text 1253 808 Discretised Touch Data;
@@ -185,11 +185,11 @@
 #X floatatom 958 459 7 0 0 1 - - - 0;
 #X text 931 481 Battery Status Present = 1 Missing = 0, f 15;
 #X msg 60 100 8000;
-#X obj 98 219 route TStick_500;
 #X obj 867 230 array max rawTouch;
 #X floatatom 862 309 5 0 0 0 - - - 0;
 #X obj 856 178 bng 16 250 50 0 empty empty empty 0 -8 0 10 #fcfcfc #000000 #000000;
 #X obj 905 184 tgl 16 0 empty empty empty 0 -8 0 10 #fcfcfc #000000 #000000 0 1;
+#X obj 98 219 route TStick_320;
 #X connect 0 0 26 0;
 #X connect 1 0 25 0;
 #X connect 2 0 17 0;
@@ -219,7 +219,7 @@
 #X connect 32 0 7 0;
 #X connect 32 1 8 0;
 #X connect 32 2 9 0;
-#X connect 34 0 132 0;
+#X connect 34 0 136 0;
 #X connect 35 0 36 0;
 #X connect 36 0 131 0;
 #X connect 36 1 29 0;
@@ -301,8 +301,8 @@
 #X connect 128 6 124 0;
 #X connect 128 7 129 0;
 #X connect 131 0 29 0;
-#X connect 132 0 60 0;
-#X connect 133 0 134 0;
-#X connect 135 0 133 0;
-#X connect 136 0 133 0;
+#X connect 132 0 133 0;
+#X connect 134 0 132 0;
+#X connect 135 0 132 0;
+#X connect 136 0 60 0;
 #X coords 0 0 1 1 470 216 0;
