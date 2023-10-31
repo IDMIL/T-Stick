@@ -189,8 +189,11 @@ int generic_handler(const char *path, const char *types, lo_arg ** argv,
 
 struct Lm {
     mpr_sig fsr = 0;
-    float fsrMax = 4900;
-    float fsrMin = 0;
+    int fsrMax = 4095;
+    int fsrMin = 0;
+    mpr_sig squeeze = 0;
+    float squeezeMax = 1.0f;
+    float squeezeMin = 0.0f;
     mpr_sig accel = 0;
     float accelMax[3] = {50, 50, 50};
     float accelMin[3] = {-50, -50, -50};
@@ -204,11 +207,11 @@ struct Lm {
     float quatMax[4] = {1, 1, 1, 1};
     float quatMin[4] = {-1, -1, -1, -1};
     mpr_sig ypr = 0;
-    float yprMax[3] = {180, 180, 180};
-    float yprMin[3] = {-180, -180, -180};
+    float yprMax[3] = {M_PI, M_PI_2, M_PI};
+    float yprMin[3] = {-M_PI, -M_PI_2, -M_PI};
     mpr_sig shake = 0;
-    float shakeMax[3] = {50, 50, 50};
-    float shakeMin[3] = {-50, -50, -50};
+    float shakeMax[3] = {100, 100, 100};
+    float shakeMin[3] = {0, 0, 0};
     mpr_sig jab = 0;
     float jabMax[3] = {50, 50, 50};
     float jabMin[3] = {-50, -50, -50};
@@ -218,8 +221,8 @@ struct Lm {
     float brushMin[4] = {-50, -50, -50, -50};
     mpr_sig rub = 0;
     mpr_sig multirub = 0;
-    float rubMax[4] = {50, 50, 50, 50};
-    float rubMin[4] = {-50, -50, -50, -50};
+    float rubMax[4] = {5, 5, 5, 5};
+    float rubMin[4] = {0, 0, 0, 0};
     mpr_sig touch = 0;
     int touchMax[TSTICK_SIZE]; // Initialized in setup()
     int touchMin[TSTICK_SIZE];
@@ -253,6 +256,7 @@ struct Sensors {
     int dtap;
     int ttap;
     int fsr;
+    float squeeze;
     int battery;
 } sensors;
 
@@ -263,7 +267,6 @@ struct Event {
     bool tap = false;
     bool dtap = false;
     bool ttap = false;
-    bool fsr = false;
     bool brush = false;
     bool rub = false;
     bool battery;
@@ -339,12 +342,13 @@ void setup() {
 
     std::cout << "    Initializing Libmapper device/signals... ";
     lm_dev = mpr_dev_new(puara.get_dmi_name().c_str(), 0);
-    lm.fsr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/fsr", 1, MPR_FLT, "un", &lm.fsrMin, &lm.fsrMax, 0, 0, 0);
+    lm.fsr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/fsr", 1, MPR_INT32, "un", &lm.fsrMin, &lm.fsrMax, 0, 0, 0);
     lm.accel = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/accel", 3, MPR_FLT, "m/s^2",  &lm.accelMin, &lm.accelMax, 0, 0, 0);
     lm.gyro = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/gyro", 3, MPR_FLT, "rad/s", &lm.gyroMin, &lm.gyroMax, 0, 0, 0);
     lm.magn = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/mag", 3, MPR_FLT, "uTesla", &lm.magnMin, &lm.magnMax, 0, 0, 0);
     lm.quat = mpr_sig_new(lm_dev, MPR_DIR_OUT, "orientation", 4, MPR_FLT, "qt", lm.quatMin, lm.quatMax, 0, 0, 0);
     lm.ypr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "ypr", 3, MPR_FLT, "fl", lm.yprMin, lm.yprMax, 0, 0, 0);
+    lm.squeeze = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/squeeze", 1, MPR_FLT, "fl", &lm.squeezeMin, &lm.squeezeMax, 0, 0, 0);
     lm.shake = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/shake", 3, MPR_FLT, "fl", lm.shakeMin, lm.shakeMax, 0, 0, 0);
     lm.jab = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/jab", 3, MPR_FLT, "fl", lm.jabMin, lm.jabMax, 0, 0, 0);
     lm.brush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/brush", 1, MPR_FLT, "un", lm.brushMin, lm.brushMax, 0, 0, 0);
@@ -443,7 +447,8 @@ void loop() {
     }
 
     // Preparing arrays for libmapper signals
-    sensors.fsr = fsr.getCookedValue();
+    sensors.fsr = fsr.getValue();
+    sensors.squeeze = fsr.getNormValue();
     // Convert accel from g's to meters/sec^2
     sensors.accl[0] = gestures.getAccelX() * 9.80665;
     sensors.accl[1] = gestures.getAccelY() * 9.80665;
@@ -500,12 +505,13 @@ void loop() {
     if (sensors.battery != battery.percentage) {sensors.battery = battery.percentage; event.battery = true; } else { event.battery = false; }
 
     // updating libmapper signals
-    mpr_sig_set_value(lm.fsr, 0, 1, MPR_FLT, &sensors.fsr);
+    mpr_sig_set_value(lm.fsr, 0, 1, MPR_INT32, &sensors.fsr);
     mpr_sig_set_value(lm.accel, 0, 3, MPR_FLT, &sensors.accl);
     mpr_sig_set_value(lm.gyro, 0, 3, MPR_FLT, &sensors.gyro);
     mpr_sig_set_value(lm.magn, 0, 3, MPR_FLT, &sensors.magn);
     mpr_sig_set_value(lm.quat, 0, 4, MPR_FLT, &sensors.quat);
     mpr_sig_set_value(lm.ypr, 0, 3, MPR_FLT, &sensors.ypr);
+    mpr_sig_set_value(lm.squeeze, 0, 1, MPR_FLT, &sensors.squeeze);
     mpr_sig_set_value(lm.shake, 0, 3, MPR_FLT, &sensors.shake);
     mpr_sig_set_value(lm.jab, 0, 3, MPR_FLT, &sensors.jab);
     mpr_sig_set_value(lm.rub, 0, 1, MPR_FLT, &sensors.rub);
@@ -543,6 +549,8 @@ void loop() {
             #endif
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/fsr");
             lo_send(osc1, oscNamespace.c_str(), "i", sensors.fsr);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/squeeze");
+            lo_send(osc1, oscNamespace.c_str(), "f", sensors.squeeze);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/all");
             lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchAll);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/top");
@@ -579,6 +587,8 @@ void loop() {
             #endif
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/fsr");
             lo_send(osc2, oscNamespace.c_str(), "i", sensors.fsr);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/squeeze");
+            lo_send(osc2, oscNamespace.c_str(), "f", sensors.squeeze);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/all");
             lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchAll);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/top");

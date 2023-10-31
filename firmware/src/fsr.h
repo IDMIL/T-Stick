@@ -12,12 +12,12 @@ class Fsr {
         float normValue = 0;
         float cookedValue = 0;
         int offset = 0;
+        float mapFloat(float x, float in_min, float in_max, float out_min, float out_max);
     public:
         int initFsr(int &fsr_pin, int offsetValue);
         int readFsr();
         float getValue();
         float getNormValue();
-        float getCookedValue();
         int getOffset();
         int setOffset(int offsetValue);
 };
