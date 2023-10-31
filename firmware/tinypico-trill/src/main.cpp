@@ -637,7 +637,7 @@ void loop() {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/pico/soc");
             lo_send(osc1, oscNamespace.c_str(), "i", sensors.battery);       
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/pico/voltage");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.value);       
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.value);       
         }
     }
     if (puara.IP2_ready()) {
@@ -682,7 +682,7 @@ void loop() {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/pico/soc");
             lo_send(osc2, oscNamespace.c_str(), "i", sensors.battery);       
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/pico/voltage");
-            lo_send(osc2, oscNamespace.c_str(), "i", battery.value);       
+            lo_send(osc2, oscNamespace.c_str(), "f", battery.value);       
         }
     }
 
