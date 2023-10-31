@@ -12,7 +12,7 @@
 
 unsigned int firmware_version = 231031;
 
-// set the amount of capacitive stripes for 16, for IDMIl capsense board, or 30/60 for Trill Board
+// set the amount of capacitive stripes for 16, for IDMIl capsense board, or 15/30/60 for Trill Board
 #define TSTICK_SIZE 30
 
 /*
@@ -142,6 +142,8 @@ LSM9DS1 imu;
   Touch touch;
   Touch touch2;
   uint8_t touchI2C = 0x31;
+  int mergedtouch[TSTICK_SIZE]; 
+  int mergeddiscretetouch[TSTICK_SIZE]; 
 #endif
 
 #ifdef touch_CAPSENSE
@@ -333,6 +335,7 @@ void setup() {
         }
         if (TSTICK_SIZE > 30) {
             if (touch2.initTouch(touchI2C)) {
+                    touch.touchSize = 30;
                     touch2.touchSize = TSTICK_SIZE-30;
                     std::cout << "done" << std::endl;
                 } else {
@@ -415,7 +418,20 @@ void loop() {
     #ifdef touch_TRILL
         touch.readTouch();
         touch.cookData();
-        gestures.updateTouchArray(touch.touch,touch.touchSize);
+        if (TSTICK_SIZE>30) {
+            touch2.readTouch();
+            touch2.cookData();
+        }
+        for (int i = 0; i < TSTICK_SIZE; ++i) {
+            if (i < 30) {
+                mergedtouch[i] = touch.touch[i];
+                mergeddiscretetouch[i] = touch.discreteTouch[i];
+            } else {
+                mergedtouch[i] = touch2.touch[i-30];
+                mergeddiscretetouch[i] = touch2.discreteTouch[i-30];
+            }
+        }
+        gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
     #endif
     #ifdef touch_CAPSENSE
         capsense.readCapsense();
@@ -541,8 +557,8 @@ void loop() {
     mpr_sig_set_value(lm.soc, 0, 1, MPR_FLT, &sensors.battery);
     mpr_sig_set_value(lm.batvolt, 0, 1, MPR_FLT, &battery.value);
     #ifdef touch_TRILL
-        mpr_sig_set_value(lm.rawtouch, 0, touch.touchSize, MPR_INT32, &touch.touch);
-        mpr_sig_set_value(lm.disctouch, 0, touch.touchSize, MPR_INT32, &touch.discreteTouch);
+        mpr_sig_set_value(lm.rawtouch, 0, TSTICK_SIZE, MPR_INT32, &mergedtouch);
+        mpr_sig_set_value(lm.disctouch, 0, TSTICK_SIZE, MPR_INT32, &mergeddiscretetouch);
     #endif
     #ifdef touch_CAPSENSE
         mpr_sig_set_value(lm.rawtouch, 0, capsense.touchStripsSize, MPR_INT32, &capsense.data);
