@@ -225,7 +225,8 @@ struct Lm {
     mpr_sig multirub = 0;
     float rubMax[4] = {5, 5, 5, 5};
     float rubMin[4] = {0, 0, 0, 0};
-    mpr_sig touch = 0;
+    mpr_sig rawtouch = 0;
+    mpr_sig disctouch = 0;
     int touchMax[TSTICK_SIZE]; // Initialized in setup()
     int touchMin[TSTICK_SIZE];
     mpr_sig count = 0;
@@ -236,9 +237,12 @@ struct Lm {
     mpr_sig dtap = 0;
     int tapMax = 1;
     int tapMin = 0;
-    mpr_sig bat = 0;
-    int batMax = 100;
-    int batMin = 0;
+    mpr_sig soc = 0;
+    int batSOCMax = 100;
+    int batSOCMin = 0;
+    mpr_sig batvolt = 0;
+    float batVoltMax = 4.2f;
+    float batVoltMin = 0.0f;
 } lm;
 
 struct Sensors {
@@ -366,16 +370,18 @@ void setup() {
     lm.multibrush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multibrush", 4, MPR_FLT, "un", lm.brushMin, lm.brushMax, 0, 0, 0);
     lm.multirub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multirub", 4, MPR_FLT, "un", lm.rubMin, lm.rubMax, 0, 0, 0);
     #ifdef touch_TRILL
-        lm.touch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", touch.touchSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
+        lm.rawtouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", touch.touchSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
+        lm.disctouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/discretetouch", touch.touchSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
     #endif
     #ifdef touch_CAPSENSE
-        lm.touch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", capsense.touchStripsSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
+        lm.rawtouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", capsense.touchStripsSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
     #endif
     lm.count = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/count", 1, MPR_INT32, "un", &lm.countMin, &lm.countMax, 0, 0, 0);
     lm.tap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
     lm.ttap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/triple tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
     lm.dtap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/double tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
-    lm.bat = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery", 1, MPR_FLT, "percent", &lm.batMin, &lm.batMax, 0, 0, 0);
+    lm.soc = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery", 1, MPR_FLT, "percent", &lm.batSOCMin, &lm.batSOCMax, 0, 0, 0);
+    lm.batvolt = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery", 1, MPR_FLT, "percent", &lm.batVoltMin, &lm.batVoltMax, 0, 0, 0);
     std::cout << "done" << std::endl;
 
     // Setting Deep sleep wake button
@@ -532,12 +538,14 @@ void loop() {
     mpr_sig_set_value(lm.tap, 0, 1, MPR_INT32, &sensors.tap);
     mpr_sig_set_value(lm.ttap, 0, 1, MPR_INT32, &sensors.dtap);
     mpr_sig_set_value(lm.dtap, 0, 1, MPR_INT32, &sensors.ttap);
-    mpr_sig_set_value(lm.bat, 0, 1, MPR_FLT, &sensors.battery);
+    mpr_sig_set_value(lm.soc, 0, 1, MPR_FLT, &sensors.battery);
+    mpr_sig_set_value(lm.batvolt, 0, 1, MPR_FLT, &battery.value);
     #ifdef touch_TRILL
-        mpr_sig_set_value(lm.touch, 0, touch.touchSize, MPR_INT32, &touch.touch);
+        mpr_sig_set_value(lm.rawtouch, 0, touch.touchSize, MPR_INT32, &touch.touch);
+        mpr_sig_set_value(lm.disctouch, 0, touch.touchSize, MPR_INT32, &touch.discreteTouch);
     #endif
     #ifdef touch_CAPSENSE
-        mpr_sig_set_value(lm.touch, 0, capsense.touchStripsSize, MPR_INT32, &capsense.data);
+        mpr_sig_set_value(lm.rawtouch, 0, capsense.touchStripsSize, MPR_INT32, &capsense.data);
     #endif
 
     // Sending continuous OSC messages
@@ -729,9 +737,9 @@ void loop() {
         }
         if (event.battery) {
             // Battery Data
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/pico/soc");
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/soc");
             lo_send(osc1, oscNamespace.c_str(), "i", sensors.battery);       
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/pico/voltage");
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
             lo_send(osc1, oscNamespace.c_str(), "f", battery.value);       
         }
     }
