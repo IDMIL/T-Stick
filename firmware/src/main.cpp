@@ -806,6 +806,40 @@ void loop() {
     }
     // run at 100 Hz
     //vTaskDelay(10 / portTICK_PERIOD_MS);
+        // Set LED - connection status and battery level
+    #ifdef ARDUINO_LOLIN_D32_PRO
+        if (battery.percentage < 10) {        // low battery - flickering
+        led.setInterval(75);
+        led_var.ledValue = led.blink(255, 50);
+        ledcWrite(0, led_var.ledValue);
+        } else {
+            if (puara.get_StaIsConnected()) { // blinks when connected, cycle when disconnected
+                led.setInterval(1000);
+                led_var.ledValue = led.blink(255, 40);
+                ledcWrite(0, led_var.ledValue);
+            } else {
+                led.setInterval(4000);
+                led_var.ledValue = led.cycle(led_var.ledValue, 0, 255);
+                ledcWrite(0, led_var.ledValue);
+            }
+        }
+    #elif defined(ARDUINO_TINYPICO)
+        if (battery.percentage < 10) {                // low battery (red)
+            led.setInterval(20);
+            led_var.color = led.blink(255, 20);
+            tinypico.DotStar_SetPixelColor(led_var.color, 0, 0);
+        } else {
+            if (puara.get_StaIsConnected()) {         // blinks when connected, cycle when disconnected
+                led.setInterval(1000);                // RGB: 0, 128, 255 (Dodger Blue)
+                led_var.color = led.blink(255,20);
+                tinypico.DotStar_SetPixelColor(0, uint8_t(led_var.color/2), led_var.color);
+            } else {
+                led.setInterval(4000);
+                led_var.color = led.cycle(led_var.color, 0, 255);
+                tinypico.DotStar_SetPixelColor(0, uint8_t(led_var.color/2), led_var.color);
+            }
+        }
+    #endif    
 }
 
 void initIMU() {
