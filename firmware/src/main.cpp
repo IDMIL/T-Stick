@@ -10,10 +10,10 @@
  */
 
 
-unsigned int firmware_version = 220929;
+unsigned int firmware_version = 231031;
 
-// set the amount of capacitive stripes for the sopranino (15) or soprano (30)
-#define TSTICK_SIZE 16
+// set the amount of capacitive stripes for 16, for IDMIl capsense board, or 30/60 for Trill Board
+#define TSTICK_SIZE 30
 
 /*
   Choose the capacitive sensing board
@@ -140,6 +140,8 @@ LSM9DS1 imu;
 #ifdef touch_TRILL
   #include "touch.h"
   Touch touch;
+  Touch touch2;
+  uint8_t touchI2C = 0x31;
 #endif
 
 #ifdef touch_CAPSENSE
@@ -324,6 +326,14 @@ void setup() {
             std::cout << "done" << std::endl;
         } else {
             std::cout << "initialization failed!" << std::endl;
+        }
+        if (TSTICK_SIZE > 30) {
+            if (touch2.initTouch(touchI2C)) {
+                    touch2.touchSize = TSTICK_SIZE-30;
+                    std::cout << "done" << std::endl;
+                } else {
+                    std::cout << "initialization failed!" << std::endl;
+                }
         }
     #endif
     #ifdef touch_CAPSENSE
@@ -531,15 +541,8 @@ void loop() {
     #endif
 
     // Sending continuous OSC messages
+    // Sending continuous OSC messages
     if (puara.IP1_ready()) {
-
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
-            #ifdef touch_TRILL
-                lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiii", touch.touch[0], touch.touch[1],touch.touch[2],
-                    touch.touch[3],touch.touch[4],touch.touch[5], touch.touch[6], touch.touch[7], touch.touch[8],
-                    touch.touch[9], touch.touch[10], touch.touch[11], touch.touch[12], touch.touch[13], touch.touch[14]
-            );
-            #endif
             #ifdef touch_CAPSENSE
                 lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiii", capsense.data[0], capsense.data[1],capsense.data[2],
                     capsense.data[3],capsense.data[4],capsense.data[5], capsense.data[6], capsense.data[7], capsense.data[8],
@@ -547,6 +550,48 @@ void loop() {
                     capsense.data[15]
             );
             #endif
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
+            lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", touch.touch[0], touch.touch[1],touch.touch[2],
+            touch.touch[3],touch.touch[4],touch.touch[5], touch.touch[6], touch.touch[7], touch.touch[8],
+            touch.touch[9], touch.touch[10], touch.touch[11], touch.touch[12], touch.touch[13], touch.touch[14], touch.touch[15], touch.touch[16],touch.touch[17],
+            touch.touch[18],touch.touch[19],touch.touch[20], touch.touch[21], touch.touch[22], touch.touch[23],
+            touch.touch[24], touch.touch[25], touch.touch[26], touch.touch[27], touch.touch[28], touch.touch[29]);
+            // Send normalised touch data
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/norm");
+            lo_send(osc1, oscNamespace.c_str(), "ffffffffffffffffffffffffffffff", touch.normTouch[0], touch.normTouch[1],touch.normTouch[2],
+            touch.normTouch[3],touch.normTouch[4],touch.normTouch[5], touch.normTouch[6], touch.normTouch[7], touch.normTouch[8],
+            touch.normTouch[9], touch.normTouch[10], touch.normTouch[11], touch.normTouch[12], touch.normTouch[13], touch.normTouch[14], touch.normTouch[15], touch.normTouch[16],touch.normTouch[17],
+            touch.normTouch[18],touch.normTouch[19],touch.normTouch[20], touch.normTouch[21], touch.normTouch[22], touch.normTouch[23],
+            touch.normTouch[24], touch.normTouch[25], touch.normTouch[26], touch.normTouch[27], touch.normTouch[28], touch.normTouch[29]);
+            // Send discrete touch data
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/disc");
+            lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", touch.discreteTouch[0], touch.discreteTouch[1],touch.discreteTouch[2],
+            touch.discreteTouch[3],touch.discreteTouch[4],touch.discreteTouch[5], touch.discreteTouch[6], touch.discreteTouch[7], touch.discreteTouch[8],
+            touch.discreteTouch[9], touch.discreteTouch[10], touch.discreteTouch[11], touch.discreteTouch[12], touch.discreteTouch[13], touch.discreteTouch[14], touch.discreteTouch[15], touch.discreteTouch[16],touch.discreteTouch[17],
+            touch.discreteTouch[18],touch.discreteTouch[19],touch.discreteTouch[20], touch.discreteTouch[21], touch.discreteTouch[22], touch.discreteTouch[23],
+            touch.discreteTouch[24], touch.discreteTouch[25], touch.discreteTouch[26], touch.discreteTouch[27], touch.discreteTouch[28], touch.discreteTouch[29]);
+            if (TSTICK_SIZE > 30) {
+                oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
+                lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", touch2.touch[0], touch2.touch[1],touch2.touch[2],
+                touch2.touch[3],touch2.touch[4],touch2.touch[5], touch2.touch[6], touch2.touch[7], touch2.touch[8],
+                touch2.touch[9], touch2.touch[10], touch2.touch[11], touch2.touch[12], touch2.touch[13], touch2.touch[14], touch2.touch[15], touch2.touch[16],touch2.touch[17],
+                touch2.touch[18],touch2.touch[19],touch2.touch[20], touch2.touch[21], touch2.touch[22], touch2.touch[23],
+                touch2.touch[24], touch2.touch[25], touch2.touch[26], touch2.touch[27], touch2.touch[28], touch2.touch[29]);
+                // Send normalised touch data
+                oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/norm");
+                lo_send(osc1, oscNamespace.c_str(), "ffffffffffffffffffffffffffffff", touch2.normTouch[0], touch2.normTouch[1],touch.normTouch[2],
+                touch2.normTouch[3],touch2.normTouch[4],touch2.normTouch[5], touch2.normTouch[6], touch2.normTouch[7], touch2.normTouch[8],
+                touch2.normTouch[9], touch2.normTouch[10], touch2.normTouch[11], touch2.normTouch[12], touch2.normTouch[13], touch2.normTouch[14], touch2.normTouch[15], touch2.normTouch[16],touch2.normTouch[17],
+                touch2.normTouch[18],touch2.normTouch[19],touch2.normTouch[20], touch2.normTouch[21], touch2.normTouch[22], touch2.normTouch[23],
+                touch2.normTouch[24], touch2.normTouch[25], touch2.normTouch[26], touch2.normTouch[27], touch2.normTouch[28], touch2.normTouch[29]);
+                // Send discrete touch data
+                oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/disc");
+                lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", touch2.discreteTouch[0], touch2.discreteTouch[1],touch2.discreteTouch[2],
+                touch2.discreteTouch[3],touch2.discreteTouch[4],touch2.discreteTouch[5], touch2.discreteTouch[6], touch2.discreteTouch[7], touch2.discreteTouch[8],
+                touch2.discreteTouch[9], touch2.discreteTouch[10], touch2.discreteTouch[11], touch2.discreteTouch[12], touch2.discreteTouch[13], touch2.discreteTouch[14], touch2.discreteTouch[15], touch2.discreteTouch[16],touch2.discreteTouch[17],
+                touch2.discreteTouch[18],touch2.discreteTouch[19],touch2.discreteTouch[20], touch2.discreteTouch[21], touch2.discreteTouch[22], touch2.discreteTouch[23],
+                touch2.discreteTouch[24], touch2.discreteTouch[25], touch2.discreteTouch[26], touch2.discreteTouch[27], touch2.discreteTouch[28], touch2.discreteTouch[29]);
+            }            
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/fsr");
             lo_send(osc1, oscNamespace.c_str(), "i", sensors.fsr);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/squeeze");
@@ -571,13 +616,6 @@ void loop() {
             lo_send(osc1, oscNamespace.c_str(), "fff", sensors.ypr[0], sensors.ypr[1], sensors.ypr[2]);
     }
     if (puara.IP2_ready()) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
-            #ifdef touch_TRILL
-                lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiii", touch.touch[0], touch.touch[1],touch.touch[2],
-                    touch.touch[3],touch.touch[4],touch.touch[5], touch.touch[6], touch.touch[7], touch.touch[8],
-                    touch.touch[9], touch.touch[10], touch.touch[11], touch.touch[12], touch.touch[13], touch.touch[14]
-            );
-            #endif
             #ifdef touch_CAPSENSE
                 lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiii", capsense.data[0], capsense.data[1],capsense.data[2],
                     capsense.data[3],capsense.data[4],capsense.data[5], capsense.data[6], capsense.data[7], capsense.data[8],
@@ -585,6 +623,48 @@ void loop() {
                     capsense.data[15]
             );
             #endif
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
+            lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", touch.touch[0], touch.touch[1],touch.touch[2],
+            touch.touch[3],touch.touch[4],touch.touch[5], touch.touch[6], touch.touch[7], touch.touch[8],
+            touch.touch[9], touch.touch[10], touch.touch[11], touch.touch[12], touch.touch[13], touch.touch[14], touch.touch[15], touch.touch[16],touch.touch[17],
+            touch.touch[18],touch.touch[19],touch.touch[20], touch.touch[21], touch.touch[22], touch.touch[23],
+            touch.touch[24], touch.touch[25], touch.touch[26], touch.touch[27], touch.touch[28], touch.touch[29]);
+            // Send normalised touch data
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/norm");
+            lo_send(osc2, oscNamespace.c_str(), "ffffffffffffffffffffffffffffff", touch.normTouch[0], touch.normTouch[1],touch.normTouch[2],
+            touch.normTouch[3],touch.normTouch[4],touch.normTouch[5], touch.normTouch[6], touch.normTouch[7], touch.normTouch[8],
+            touch.normTouch[9], touch.normTouch[10], touch.normTouch[11], touch.normTouch[12], touch.normTouch[13], touch.normTouch[14], touch.normTouch[15], touch.normTouch[16],touch.normTouch[17],
+            touch.normTouch[18],touch.normTouch[19],touch.normTouch[20], touch.normTouch[21], touch.normTouch[22], touch.normTouch[23],
+            touch.normTouch[24], touch.normTouch[25], touch.normTouch[26], touch.normTouch[27], touch.normTouch[28], touch.normTouch[29]);
+            // Send discrete touch data
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/disc");
+            lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", touch.discreteTouch[0], touch.discreteTouch[1],touch.discreteTouch[2],
+            touch.discreteTouch[3],touch.discreteTouch[4],touch.discreteTouch[5], touch.discreteTouch[6], touch.discreteTouch[7], touch.discreteTouch[8],
+            touch.discreteTouch[9], touch.discreteTouch[10], touch.discreteTouch[11], touch.discreteTouch[12], touch.discreteTouch[13], touch.discreteTouch[14], touch.discreteTouch[15], touch.discreteTouch[16],touch.discreteTouch[17],
+            touch.discreteTouch[18],touch.discreteTouch[19],touch.discreteTouch[20], touch.discreteTouch[21], touch.discreteTouch[22], touch.discreteTouch[23],
+            touch.discreteTouch[24], touch.discreteTouch[25], touch.discreteTouch[26], touch.discreteTouch[27], touch.discreteTouch[28], touch.discreteTouch[29]);
+            if (TSTICK_SIZE > 30) {
+                oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
+                lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", touch2.touch[0], touch2.touch[1],touch2.touch[2],
+                touch2.touch[3],touch2.touch[4],touch2.touch[5], touch2.touch[6], touch2.touch[7], touch2.touch[8],
+                touch2.touch[9], touch2.touch[10], touch2.touch[11], touch2.touch[12], touch2.touch[13], touch2.touch[14], touch2.touch[15], touch2.touch[16],touch2.touch[17],
+                touch2.touch[18],touch2.touch[19],touch2.touch[20], touch2.touch[21], touch2.touch[22], touch2.touch[23],
+                touch2.touch[24], touch2.touch[25], touch2.touch[26], touch2.touch[27], touch2.touch[28], touch2.touch[29]);
+                // Send normalised touch data
+                oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/norm");
+                lo_send(osc2, oscNamespace.c_str(), "ffffffffffffffffffffffffffffff", touch2.normTouch[0], touch2.normTouch[1],touch.normTouch[2],
+                touch2.normTouch[3],touch2.normTouch[4],touch2.normTouch[5], touch2.normTouch[6], touch2.normTouch[7], touch2.normTouch[8],
+                touch2.normTouch[9], touch2.normTouch[10], touch2.normTouch[11], touch2.normTouch[12], touch2.normTouch[13], touch2.normTouch[14], touch2.normTouch[15], touch2.normTouch[16],touch2.normTouch[17],
+                touch2.normTouch[18],touch2.normTouch[19],touch2.normTouch[20], touch2.normTouch[21], touch2.normTouch[22], touch2.normTouch[23],
+                touch2.normTouch[24], touch2.normTouch[25], touch2.normTouch[26], touch2.normTouch[27], touch2.normTouch[28], touch2.normTouch[29]);
+                // Send discrete touch data
+                oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/disc");
+                lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", touch2.discreteTouch[0], touch2.discreteTouch[1],touch2.discreteTouch[2],
+                touch2.discreteTouch[3],touch2.discreteTouch[4],touch2.discreteTouch[5], touch2.discreteTouch[6], touch2.discreteTouch[7], touch2.discreteTouch[8],
+                touch2.discreteTouch[9], touch2.discreteTouch[10], touch2.discreteTouch[11], touch2.discreteTouch[12], touch2.discreteTouch[13], touch2.discreteTouch[14], touch2.discreteTouch[15], touch2.discreteTouch[16],touch2.discreteTouch[17],
+                touch2.discreteTouch[18],touch2.discreteTouch[19],touch2.discreteTouch[20], touch2.discreteTouch[21], touch2.discreteTouch[22], touch2.discreteTouch[23],
+                touch2.discreteTouch[24], touch2.discreteTouch[25], touch2.discreteTouch[26], touch2.discreteTouch[27], touch2.discreteTouch[28], touch2.discreteTouch[29]);
+            }
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/fsr");
             lo_send(osc2, oscNamespace.c_str(), "i", sensors.fsr);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/squeeze");
@@ -648,8 +728,11 @@ void loop() {
             lo_send(osc1, oscNamespace.c_str(), "i", sensors.ttap);
         }
         if (event.battery) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery");
-            lo_send(osc1, oscNamespace.c_str(), "i", sensors.battery);
+            // Battery Data
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/pico/soc");
+            lo_send(osc1, oscNamespace.c_str(), "i", sensors.battery);       
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/pico/voltage");
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.value);       
         }
     }
     if (puara.IP2_ready()) {
@@ -690,46 +773,13 @@ void loop() {
             lo_send(osc2, oscNamespace.c_str(), "i", sensors.ttap);
         }
         if (event.battery) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery");
-            lo_send(osc2, oscNamespace.c_str(), "i", sensors.battery);
+            // Battery Data
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/soc");
+            lo_send(osc2, oscNamespace.c_str(), "i", sensors.battery);       
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
+            lo_send(osc2, oscNamespace.c_str(), "f", battery.value);       
         }
     }
-
-    // Set LED - connection status and battery level
-    #ifdef ARDUINO_LOLIN_D32_PRO
-        if (battery.percentage < 10) {        // low battery - flickering
-        led.setInterval(75);
-        led_var.ledValue = led.blink(255, 50);
-        ledcWrite(0, led_var.ledValue);
-        } else {
-            if (puara.get_StaIsConnected()) { // blinks when connected, cycle when disconnected
-                led.setInterval(1000);
-                led_var.ledValue = led.blink(255, 40);
-                ledcWrite(0, led_var.ledValue);
-            } else {
-                led.setInterval(4000);
-                led_var.ledValue = led.cycle(led_var.ledValue, 0, 255);
-                ledcWrite(0, led_var.ledValue);
-            }
-        }
-    #elif defined(ARDUINO_TINYPICO)
-        if (battery.percentage < 10) {                // low battery (red)
-            led.setInterval(20);
-            led_var.color = led.blink(255, 20);
-            tinypico.DotStar_SetPixelColor(led_var.color, 0, 0);
-        } else {
-            if (puara.get_StaIsConnected()) {         // blinks when connected, cycle when disconnected
-                led.setInterval(1000);                // RGB: 0, 128, 255 (Dodger Blue)
-                led_var.color = led.blink(255,20);
-                tinypico.DotStar_SetPixelColor(0, uint8_t(led_var.color/2), led_var.color);
-            } else {
-                led.setInterval(4000);
-                led_var.color = led.cycle(led_var.color, 0, 255);
-                tinypico.DotStar_SetPixelColor(0, uint8_t(led_var.color/2), led_var.color);
-            }
-        }
-    #endif    
-
     // run at 100 Hz
     //vTaskDelay(10 / portTICK_PERIOD_MS);
 }

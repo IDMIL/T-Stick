@@ -9,7 +9,7 @@
 
 class Touch {
     public:
-        uint8_t initTouch();
+        uint8_t initTouch(uint8_t I2C_addr = 0x30);
         void readTouch();
         int getData(int data_index);
         Trill trillSensor;      // for Trill Craft
@@ -17,10 +17,11 @@ class Touch {
         byte touchStatus = 0;
         int touch[30];          // /instrument/touch/touch, i..., 0 or 1, ... (1 per stripe)
         float normTouch[30];    // /instrument/touch/norm, i..., 0--1, ... (1 per stripe)
+        int discreteTouch[30];    // /instrument/touch/raw, i..., 0--1, ... (1 per stripe)
         void cookData();
         int touchSize = 30;
     private:
-        int maxTouchValue;
+        int maxTouchValue = 50;
 };
 
 #endif
