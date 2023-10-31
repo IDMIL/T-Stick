@@ -1,0 +1,20 @@
+(footprint "#VUSB#2" (version 20221018) (generator pcbnew)
+  (layer "F.Cu")
+  (fp_text reference "REF**" (at 0 0) (layer "F.SilkS")
+      (effects (font (size 1.27 1.27) (thickness 0.15)))
+    (tstamp 854bfa78-3141-412d-8e2c-1ff299e9b8fe)
+  )
+  (fp_text value "" (at 0 0) (layer "F.Fab")
+      (effects (font (size 1.27 1.27) (thickness 0.15)))
+    (tstamp a3bc860b-c23e-4975-b4cc-0d40a9e2b2cd)
+  )
+  (fp_poly
+    (pts
+      (xy -1.298143 0.235358)
+      (xy -1.3 0.24)
+      (xy -1.3 0.235)
+      (xy -1.299038 0.235)
+    )
+
+    (stroke (width 0) (type default)) (fill solid) (layer "F.SilkS") (tstamp 42958ccd-9c9e-439b-a376-c0c5eb526e84))
+)
