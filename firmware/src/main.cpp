@@ -804,9 +804,8 @@ void loop() {
             lo_send(osc2, oscNamespace.c_str(), "f", battery.value);       
         }
     }
-    // run at 100 Hz
-    //vTaskDelay(10 / portTICK_PERIOD_MS);
-        // Set LED - connection status and battery level
+
+    // Set LED - connection status and battery level
     #ifdef ARDUINO_LOLIN_D32_PRO
         if (battery.percentage < 10) {        // low battery - flickering
         led.setInterval(75);
