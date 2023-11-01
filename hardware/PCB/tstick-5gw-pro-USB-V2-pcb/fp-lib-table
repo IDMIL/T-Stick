@@ -1,7 +1,5 @@
 (fp_lib_table
   (version 7)
-  (lib (name "neopixel")(type "KiCad")(uri "${KIPRJMOD}/Libraries/neopixel/neopixel.pretty")(options "")(descr ""))
-  (lib (name "solderpads")(type "KiCad")(uri "${KIPRJMOD}/Libraries/Solderpads/solderpads.pretty")(options "")(descr ""))
   (lib (name "ul_LVK12R010CER-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/ul_LVK12R010CER/ul_LVK12R010CER-footprints.pretty")(options "")(descr ""))
   (lib (name "max17055-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/max17055-kicad/max17055-footprints.pretty")(options "")(descr ""))
   (lib (name "ICM20948-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/ICM20948-kicad/ICM20948-footprints.pretty")(options "")(descr ""))
