@@ -1,0 +1,6 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "trill-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/trill-kicad-libs/trill-footprints.pretty")(options "")(descr ""))
+  (lib (name "ffc_footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/Molex_FFC Connector/ffc_footprints.pretty")(options "")(descr ""))
+  (lib (name "JST Connectors")(type "KiCad")(uri "${KIPRJMOD}/Libraries/JST Connectors/JST-footprints.pretty")(options "")(descr ""))
+)
