@@ -12,7 +12,7 @@
 
 unsigned int firmware_version = 231031;
 
-// set the amount of capacitive stripes for 16, for IDMIl capsense board, or 15/30/60 for Trill Board
+// set the amount of capacitive stripes for 16, for IDMIl capsense board, or 15/30/45/60 for Trill Board
 #define TSTICK_SIZE 30
 
 /*
