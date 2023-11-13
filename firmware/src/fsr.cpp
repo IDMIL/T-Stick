@@ -10,15 +10,9 @@ int Fsr::initFsr(int &fsr_pin, int offsetValue){
 
 int Fsr::readFsr() {
     Fsr::value = analogRead(Fsr::pin);
-    Fsr::normValue = mapFloat(Fsr::value, Fsr::offset, 4095, 0, 1);
+    Fsr::normValue = constrain((Fsr::value - Fsr::offset) / (4095 - Fsr::offset), 0, 1);
+    Fsr::cookedValue = Fsr::value - Fsr::offset;
     return 1;
-}
-
-float Fsr::mapFloat(float x, float in_min, float in_max, float out_min, float out_max) {
-    x = constrain(x, in_min, in_max);
-    float result = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-    result = constrain(result, out_min, out_max);
-    return result;
 }
 
 float Fsr::getValue() {
@@ -27,6 +21,10 @@ float Fsr::getValue() {
 
 float Fsr::getNormValue() {
     return Fsr::normValue;
+}
+
+float Fsr::getCookedValue() {
+    return Fsr::cookedValue;
 }
 
 int Fsr::getOffset(){
