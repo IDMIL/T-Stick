@@ -10,10 +10,10 @@
  */
 
 
-unsigned int firmware_version = 220929;
+unsigned int firmware_version = 231031;
 
-// set the amount of capacitive stripes for the sopranino (15) or soprano (30)
-#define TSTICK_SIZE 16
+// set the amount of capacitive stripes for 16, for IDMIl capsense board, or 15/30/45/60 for Trill Board
+#define TSTICK_SIZE 30
 
 /*
   Choose the capacitive sensing board
@@ -140,6 +140,11 @@ LSM9DS1 imu;
 #ifdef touch_TRILL
   #include "touch.h"
   Touch touch;
+  Touch touch2;
+  uint8_t touchI2C = 0x31;
+  int mergedtouch[TSTICK_SIZE]; 
+  int mergeddiscretetouch[TSTICK_SIZE]; 
+  int mergednormalisedtouch[TSTICK_SIZE]; 
 #endif
 
 #ifdef touch_CAPSENSE
@@ -223,7 +228,8 @@ struct Lm {
     mpr_sig multirub = 0;
     float rubMax[4] = {5, 5, 5, 5};
     float rubMin[4] = {0, 0, 0, 0};
-    mpr_sig touch = 0;
+    mpr_sig rawtouch = 0;
+    mpr_sig disctouch = 0;
     int touchMax[TSTICK_SIZE]; // Initialized in setup()
     int touchMin[TSTICK_SIZE];
     mpr_sig count = 0;
@@ -234,9 +240,12 @@ struct Lm {
     mpr_sig dtap = 0;
     int tapMax = 1;
     int tapMin = 0;
-    mpr_sig bat = 0;
-    int batMax = 100;
-    int batMin = 0;
+    mpr_sig soc = 0;
+    int batSOCMax = 100;
+    int batSOCMin = 0;
+    mpr_sig batvolt = 0;
+    float batVoltMax = 4.2f;
+    float batVoltMin = 0.0f;
 } lm;
 
 struct Sensors {
@@ -325,6 +334,15 @@ void setup() {
         } else {
             std::cout << "initialization failed!" << std::endl;
         }
+        if (TSTICK_SIZE > 30) {
+            if (touch2.initTouch(touchI2C)) {
+                    touch.touchSize = 30;
+                    touch2.touchSize = TSTICK_SIZE-30;
+                    std::cout << "done" << std::endl;
+                } else {
+                    std::cout << "initialization failed!" << std::endl;
+                }
+        }
     #endif
     #ifdef touch_CAPSENSE
         capsense.capsense_scan(); // Look for Capsense boards and return their addresses
@@ -356,16 +374,18 @@ void setup() {
     lm.multibrush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multibrush", 4, MPR_FLT, "un", lm.brushMin, lm.brushMax, 0, 0, 0);
     lm.multirub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multirub", 4, MPR_FLT, "un", lm.rubMin, lm.rubMax, 0, 0, 0);
     #ifdef touch_TRILL
-        lm.touch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", touch.touchSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
+        lm.rawtouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", touch.touchSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
+        lm.disctouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/discretetouch", touch.touchSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
     #endif
     #ifdef touch_CAPSENSE
-        lm.touch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", capsense.touchStripsSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
+        lm.rawtouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", capsense.touchStripsSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
     #endif
     lm.count = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/count", 1, MPR_INT32, "un", &lm.countMin, &lm.countMax, 0, 0, 0);
     lm.tap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
     lm.ttap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/triple tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
     lm.dtap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/double tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
-    lm.bat = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery", 1, MPR_FLT, "percent", &lm.batMin, &lm.batMax, 0, 0, 0);
+    lm.soc = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery", 1, MPR_FLT, "percent", &lm.batSOCMin, &lm.batSOCMax, 0, 0, 0);
+    lm.batvolt = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery", 1, MPR_FLT, "percent", &lm.batVoltMin, &lm.batVoltMax, 0, 0, 0);
     std::cout << "done" << std::endl;
 
     // Setting Deep sleep wake button
@@ -399,7 +419,22 @@ void loop() {
     #ifdef touch_TRILL
         touch.readTouch();
         touch.cookData();
-        gestures.updateTouchArray(touch.touch,touch.touchSize);
+        if (TSTICK_SIZE>30) {
+            touch2.readTouch();
+            touch2.cookData();
+        }
+        for (int i = 0; i < TSTICK_SIZE; ++i) {
+            if (i < 30) {
+                mergedtouch[i] = touch.touch[i];
+                mergeddiscretetouch[i] = touch.discreteTouch[i];
+                mergednormalisedtouch[i] = touch.normTouch[i];
+            } else {
+                mergedtouch[i] = touch2.touch[i-30];
+                mergeddiscretetouch[i] = touch2.discreteTouch[i-30];
+                mergednormalisedtouch[i] = touch2.normTouch[i-30];
+            }
+        }
+        gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
     #endif
     #ifdef touch_CAPSENSE
         capsense.readCapsense();
@@ -522,23 +557,109 @@ void loop() {
     mpr_sig_set_value(lm.tap, 0, 1, MPR_INT32, &sensors.tap);
     mpr_sig_set_value(lm.ttap, 0, 1, MPR_INT32, &sensors.dtap);
     mpr_sig_set_value(lm.dtap, 0, 1, MPR_INT32, &sensors.ttap);
-    mpr_sig_set_value(lm.bat, 0, 1, MPR_FLT, &sensors.battery);
+    mpr_sig_set_value(lm.soc, 0, 1, MPR_FLT, &sensors.battery);
+    mpr_sig_set_value(lm.batvolt, 0, 1, MPR_FLT, &battery.value);
     #ifdef touch_TRILL
-        mpr_sig_set_value(lm.touch, 0, touch.touchSize, MPR_INT32, &touch.touch);
+        mpr_sig_set_value(lm.rawtouch, 0, TSTICK_SIZE, MPR_INT32, &mergedtouch);
+        mpr_sig_set_value(lm.disctouch, 0, TSTICK_SIZE, MPR_INT32, &mergeddiscretetouch);
     #endif
     #ifdef touch_CAPSENSE
-        mpr_sig_set_value(lm.touch, 0, capsense.touchStripsSize, MPR_INT32, &capsense.data);
+        mpr_sig_set_value(lm.rawtouch, 0, capsense.touchStripsSize, MPR_INT32, &capsense.data);
     #endif
 
     // Sending continuous OSC messages
+    // Sending continuous OSC messages
     if (puara.IP1_ready()) {
-
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
             #ifdef touch_TRILL
-                lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiii", touch.touch[0], touch.touch[1],touch.touch[2],
-                    touch.touch[3],touch.touch[4],touch.touch[5], touch.touch[6], touch.touch[7], touch.touch[8],
-                    touch.touch[9], touch.touch[10], touch.touch[11], touch.touch[12], touch.touch[13], touch.touch[14]
-            );
+                oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
+                if (TSTICK_SIZE == 30) {
+                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergedtouch[0], mergedtouch[1],mergedtouch[2],
+                    mergedtouch[3],mergedtouch[4],mergedtouch[5], mergedtouch[6], mergedtouch[7], mergedtouch[8],
+                    mergedtouch[9], mergedtouch[10], mergedtouch[11], mergedtouch[12], mergedtouch[13], mergedtouch[14], mergedtouch[15], mergedtouch[16],mergedtouch[17],
+                    mergedtouch[18],mergedtouch[19],mergedtouch[20], mergedtouch[21], mergedtouch[22], mergedtouch[23],
+                    mergedtouch[24], mergedtouch[25], mergedtouch[26], mergedtouch[27], mergedtouch[28], mergedtouch[29]);
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/normalised");
+                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergednormalisedtouch[0], mergednormalisedtouch[1],mergednormalisedtouch[2],
+                    mergednormalisedtouch[3],mergednormalisedtouch[4],mergednormalisedtouch[5], mergednormalisedtouch[6], mergednormalisedtouch[7], mergednormalisedtouch[8],
+                    mergednormalisedtouch[9], mergednormalisedtouch[10], mergednormalisedtouch[11], mergednormalisedtouch[12], mergednormalisedtouch[13], mergednormalisedtouch[14], mergednormalisedtouch[15], mergednormalisedtouch[16],mergednormalisedtouch[17],
+                    mergednormalisedtouch[18],mergednormalisedtouch[19],mergednormalisedtouch[20], mergednormalisedtouch[21], mergednormalisedtouch[22], mergednormalisedtouch[23],
+                    mergednormalisedtouch[24], mergednormalisedtouch[25], mergednormalisedtouch[26], mergednormalisedtouch[27], mergednormalisedtouch[28], mergednormalisedtouch[29]);
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/discrete");
+                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergeddiscretetouch[0], mergeddiscretetouch[1],mergeddiscretetouch[2],
+                    mergeddiscretetouch[3],mergeddiscretetouch[4],mergeddiscretetouch[5], mergeddiscretetouch[6], mergeddiscretetouch[7], mergeddiscretetouch[8],
+                    mergeddiscretetouch[9], mergeddiscretetouch[10], mergeddiscretetouch[11], mergeddiscretetouch[12], mergeddiscretetouch[13], mergeddiscretetouch[14], mergeddiscretetouch[15], mergeddiscretetouch[16],mergeddiscretetouch[17],
+                    mergeddiscretetouch[18],mergeddiscretetouch[19],mergeddiscretetouch[20], mergeddiscretetouch[21], mergeddiscretetouch[22], mergeddiscretetouch[23],
+                    mergeddiscretetouch[24], mergeddiscretetouch[25], mergeddiscretetouch[26], mergeddiscretetouch[27], mergeddiscretetouch[28], mergeddiscretetouch[29]);
+                } else if (TSTICK_SIZE == 45) {
+                    // Send data from the first board
+                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergedtouch[0], mergedtouch[1],mergedtouch[2],
+                    mergedtouch[3],mergedtouch[4],mergedtouch[5], mergedtouch[6], mergedtouch[7], mergedtouch[8],
+                    mergedtouch[9], mergedtouch[10], mergedtouch[11], mergedtouch[12], mergedtouch[13], mergedtouch[14], mergedtouch[15], mergedtouch[16],mergedtouch[17],
+                    mergedtouch[18],mergedtouch[19],mergedtouch[20], mergedtouch[21], mergedtouch[22], mergedtouch[23],
+                    mergedtouch[24], mergedtouch[25], mergedtouch[26], mergedtouch[27], mergedtouch[28], mergedtouch[29], mergedtouch[30], mergedtouch[31], 
+                    mergedtouch[32], mergedtouch[33], mergedtouch[34], mergedtouch[35], mergedtouch[36], mergedtouch[37], mergedtouch[38], mergedtouch[39], 
+                    mergedtouch[40], mergedtouch[41], mergedtouch[42], mergedtouch[43], mergedtouch[44]);
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/normalised");
+                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergednormalisedtouch[0], mergednormalisedtouch[1],mergednormalisedtouch[2],
+                    mergednormalisedtouch[3],mergednormalisedtouch[4],mergednormalisedtouch[5], mergednormalisedtouch[6], mergednormalisedtouch[7], mergednormalisedtouch[8],
+                    mergednormalisedtouch[9], mergednormalisedtouch[10], mergednormalisedtouch[11], mergednormalisedtouch[12], mergednormalisedtouch[13], mergednormalisedtouch[14], mergednormalisedtouch[15], mergednormalisedtouch[16],mergednormalisedtouch[17],
+                    mergednormalisedtouch[18],mergednormalisedtouch[19],mergednormalisedtouch[20], mergednormalisedtouch[21], mergednormalisedtouch[22], mergednormalisedtouch[23],
+                    mergednormalisedtouch[24], mergednormalisedtouch[25], mergednormalisedtouch[26], mergednormalisedtouch[27], mergednormalisedtouch[28], mergednormalisedtouch[29], mergednormalisedtouch[30], mergednormalisedtouch[31], 
+                    mergednormalisedtouch[32], mergednormalisedtouch[33], mergednormalisedtouch[34], mergednormalisedtouch[35], mergednormalisedtouch[36], mergednormalisedtouch[37], mergednormalisedtouch[38], mergednormalisedtouch[39], 
+                    mergednormalisedtouch[40], mergednormalisedtouch[41], mergednormalisedtouch[42], mergednormalisedtouch[43], mergednormalisedtouch[44]);
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/discrete");
+                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergeddiscretetouch[0], mergeddiscretetouch[1],mergeddiscretetouch[2],
+                    mergeddiscretetouch[3],mergeddiscretetouch[4],mergeddiscretetouch[5], mergeddiscretetouch[6], mergeddiscretetouch[7], mergeddiscretetouch[8],
+                    mergeddiscretetouch[9], mergeddiscretetouch[10], mergeddiscretetouch[11], mergeddiscretetouch[12], mergeddiscretetouch[13], mergeddiscretetouch[14], mergeddiscretetouch[15], mergeddiscretetouch[16],mergeddiscretetouch[17],
+                    mergeddiscretetouch[18],mergeddiscretetouch[19],mergeddiscretetouch[20], mergeddiscretetouch[21], mergeddiscretetouch[22], mergeddiscretetouch[23],
+                    mergeddiscretetouch[24], mergeddiscretetouch[25], mergeddiscretetouch[26], mergeddiscretetouch[27], mergeddiscretetouch[28], mergeddiscretetouch[29], mergeddiscretetouch[30], mergeddiscretetouch[31], 
+                    mergeddiscretetouch[32], mergeddiscretetouch[33], mergeddiscretetouch[34], mergeddiscretetouch[35], mergeddiscretetouch[36], mergeddiscretetouch[37], mergeddiscretetouch[38], mergeddiscretetouch[39], 
+                    mergeddiscretetouch[40], mergeddiscretetouch[41], mergeddiscretetouch[42], mergeddiscretetouch[43], mergeddiscretetouch[44]);
+                } else if (TSTICK_SIZE == 60) {
+                    // Send data from the first board
+                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergedtouch[0], mergedtouch[1],mergedtouch[2],
+                    mergedtouch[3],mergedtouch[4],mergedtouch[5], mergedtouch[6], mergedtouch[7], mergedtouch[8],
+                    mergedtouch[9], mergedtouch[10], mergedtouch[11], mergedtouch[12], mergedtouch[13], mergedtouch[14], mergedtouch[15], mergedtouch[16],mergedtouch[17],
+                    mergedtouch[18],mergedtouch[19],mergedtouch[20], mergedtouch[21], mergedtouch[22], mergedtouch[23],
+                    mergedtouch[24], mergedtouch[25], mergedtouch[26], mergedtouch[27], mergedtouch[28], mergedtouch[29], mergedtouch[30], mergedtouch[31], 
+                    mergedtouch[32], mergedtouch[33], mergedtouch[34], mergedtouch[35], mergedtouch[36], mergedtouch[37], mergedtouch[38], mergedtouch[39], 
+                    mergedtouch[40], mergedtouch[41], mergedtouch[42], mergedtouch[43], mergedtouch[44],mergedtouch[45],mergedtouch[46], mergedtouch[47], 
+                    mergedtouch[48], mergedtouch[49], mergedtouch[50],mergedtouch[51], mergedtouch[52],mergedtouch[53],
+                    mergedtouch[54], mergedtouch[55], mergedtouch[56], mergedtouch[57], mergedtouch[58], mergedtouch[59]);
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/normalised");
+                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergednormalisedtouch[0], mergednormalisedtouch[1],mergednormalisedtouch[2],
+                    mergednormalisedtouch[3],mergednormalisedtouch[4],mergednormalisedtouch[5], mergednormalisedtouch[6], mergednormalisedtouch[7], mergednormalisedtouch[8],
+                    mergednormalisedtouch[9], mergednormalisedtouch[10], mergednormalisedtouch[11], mergednormalisedtouch[12], mergednormalisedtouch[13], mergednormalisedtouch[14], mergednormalisedtouch[15], mergednormalisedtouch[16],mergednormalisedtouch[17],
+                    mergednormalisedtouch[18],mergednormalisedtouch[19],mergednormalisedtouch[20], mergednormalisedtouch[21], mergednormalisedtouch[22], mergednormalisedtouch[23],
+                    mergednormalisedtouch[24], mergednormalisedtouch[25], mergednormalisedtouch[26], mergednormalisedtouch[27], mergednormalisedtouch[28], mergednormalisedtouch[29], mergednormalisedtouch[30], mergednormalisedtouch[31], 
+                    mergednormalisedtouch[32], mergednormalisedtouch[33], mergednormalisedtouch[34], mergednormalisedtouch[35], mergednormalisedtouch[36], mergednormalisedtouch[37], mergednormalisedtouch[38], mergednormalisedtouch[39], 
+                    mergednormalisedtouch[40], mergednormalisedtouch[41], mergednormalisedtouch[42], mergednormalisedtouch[43], mergednormalisedtouch[44],mergednormalisedtouch[45],mergednormalisedtouch[46], mergednormalisedtouch[47], 
+                    mergednormalisedtouch[48], mergednormalisedtouch[49], mergednormalisedtouch[50],mergednormalisedtouch[51], mergednormalisedtouch[52],mergednormalisedtouch[53],
+                    mergednormalisedtouch[54], mergednormalisedtouch[55], mergednormalisedtouch[56], mergednormalisedtouch[57], mergednormalisedtouch[58], mergednormalisedtouch[59]);
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/discrete");
+                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergeddiscretetouch[0], mergeddiscretetouch[1],mergeddiscretetouch[2],
+                    mergeddiscretetouch[3],mergeddiscretetouch[4],mergeddiscretetouch[5], mergeddiscretetouch[6], mergeddiscretetouch[7], mergeddiscretetouch[8],
+                    mergeddiscretetouch[9], mergeddiscretetouch[10], mergeddiscretetouch[11], mergeddiscretetouch[12], mergeddiscretetouch[13], mergeddiscretetouch[14], mergeddiscretetouch[15], mergeddiscretetouch[16],mergeddiscretetouch[17],
+                    mergeddiscretetouch[18],mergeddiscretetouch[19],mergeddiscretetouch[20], mergeddiscretetouch[21], mergeddiscretetouch[22], mergeddiscretetouch[23],
+                    mergeddiscretetouch[24], mergeddiscretetouch[25], mergeddiscretetouch[26], mergeddiscretetouch[27], mergeddiscretetouch[28], mergeddiscretetouch[29], mergeddiscretetouch[30], mergeddiscretetouch[31], 
+                    mergeddiscretetouch[32], mergeddiscretetouch[33], mergeddiscretetouch[34], mergeddiscretetouch[35], mergeddiscretetouch[36], mergeddiscretetouch[37], mergeddiscretetouch[38], mergeddiscretetouch[39], 
+                    mergeddiscretetouch[40], mergeddiscretetouch[41], mergeddiscretetouch[42], mergeddiscretetouch[43], mergeddiscretetouch[44],mergeddiscretetouch[45],mergeddiscretetouch[46], mergeddiscretetouch[47], 
+                    mergeddiscretetouch[48], mergeddiscretetouch[49], mergeddiscretetouch[50],mergeddiscretetouch[51], mergeddiscretetouch[52],mergeddiscretetouch[53],
+                    mergeddiscretetouch[54], mergeddiscretetouch[55], mergeddiscretetouch[56], mergeddiscretetouch[57], mergeddiscretetouch[58], mergeddiscretetouch[59]);
+                }
+                else {
+                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiii", mergedtouch[0], mergedtouch[1], mergedtouch[2],
+                        mergedtouch[3],mergedtouch[4],mergedtouch[5], mergedtouch[6], mergedtouch[7], mergedtouch[8],
+                        mergedtouch[9], mergedtouch[10], mergedtouch[11], mergedtouch[12], mergedtouch[13], mergedtouch[14]);
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/normalised");
+                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiii", mergednormalisedtouch[0], mergednormalisedtouch[1], mergednormalisedtouch[2],
+                        mergednormalisedtouch[3],mergednormalisedtouch[4],mergednormalisedtouch[5], mergednormalisedtouch[6], mergednormalisedtouch[7], mergednormalisedtouch[8],
+                        mergednormalisedtouch[9], mergednormalisedtouch[10], mergednormalisedtouch[11], mergednormalisedtouch[12], mergednormalisedtouch[13], mergednormalisedtouch[14]);                   
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/discrete");
+                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiii", mergeddiscretetouch[0], mergeddiscretetouch[1], mergeddiscretetouch[2],
+                        mergeddiscretetouch[3],mergeddiscretetouch[4],mergeddiscretetouch[5], mergeddiscretetouch[6], mergeddiscretetouch[7], mergeddiscretetouch[8],
+                        mergeddiscretetouch[9], mergeddiscretetouch[10], mergeddiscretetouch[11], mergeddiscretetouch[12], mergeddiscretetouch[13], mergeddiscretetouch[14]);
+                }
             #endif
             #ifdef touch_CAPSENSE
                 lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiii", capsense.data[0], capsense.data[1],capsense.data[2],
@@ -571,14 +692,99 @@ void loop() {
             lo_send(osc1, oscNamespace.c_str(), "fff", sensors.ypr[0], sensors.ypr[1], sensors.ypr[2]);
     }
     if (puara.IP2_ready()) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
             #ifdef touch_TRILL
-                lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiii", touch.touch[0], touch.touch[1],touch.touch[2],
-                    touch.touch[3],touch.touch[4],touch.touch[5], touch.touch[6], touch.touch[7], touch.touch[8],
-                    touch.touch[9], touch.touch[10], touch.touch[11], touch.touch[12], touch.touch[13], touch.touch[14]
-            );
+                oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
+                if (TSTICK_SIZE == 30) {
+                    lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergedtouch[0], mergedtouch[1],mergedtouch[2],
+                    mergedtouch[3],mergedtouch[4],mergedtouch[5], mergedtouch[6], mergedtouch[7], mergedtouch[8],
+                    mergedtouch[9], mergedtouch[10], mergedtouch[11], mergedtouch[12], mergedtouch[13], mergedtouch[14], mergedtouch[15], mergedtouch[16],mergedtouch[17],
+                    mergedtouch[18],mergedtouch[19],mergedtouch[20], mergedtouch[21], mergedtouch[22], mergedtouch[23],
+                    mergedtouch[24], mergedtouch[25], mergedtouch[26], mergedtouch[27], mergedtouch[28], mergedtouch[29]);
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/normalised");
+                    lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergednormalisedtouch[0], mergednormalisedtouch[1],mergednormalisedtouch[2],
+                    mergednormalisedtouch[3],mergednormalisedtouch[4],mergednormalisedtouch[5], mergednormalisedtouch[6], mergednormalisedtouch[7], mergednormalisedtouch[8],
+                    mergednormalisedtouch[9], mergednormalisedtouch[10], mergednormalisedtouch[11], mergednormalisedtouch[12], mergednormalisedtouch[13], mergednormalisedtouch[14], mergednormalisedtouch[15], mergednormalisedtouch[16],mergednormalisedtouch[17],
+                    mergednormalisedtouch[18],mergednormalisedtouch[19],mergednormalisedtouch[20], mergednormalisedtouch[21], mergednormalisedtouch[22], mergednormalisedtouch[23],
+                    mergednormalisedtouch[24], mergednormalisedtouch[25], mergednormalisedtouch[26], mergednormalisedtouch[27], mergednormalisedtouch[28], mergednormalisedtouch[29]);
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/discrete");
+                    lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergeddiscretetouch[0], mergeddiscretetouch[1],mergeddiscretetouch[2],
+                    mergeddiscretetouch[3],mergeddiscretetouch[4],mergeddiscretetouch[5], mergeddiscretetouch[6], mergeddiscretetouch[7], mergeddiscretetouch[8],
+                    mergeddiscretetouch[9], mergeddiscretetouch[10], mergeddiscretetouch[11], mergeddiscretetouch[12], mergeddiscretetouch[13], mergeddiscretetouch[14], mergeddiscretetouch[15], mergeddiscretetouch[16],mergeddiscretetouch[17],
+                    mergeddiscretetouch[18],mergeddiscretetouch[19],mergeddiscretetouch[20], mergeddiscretetouch[21], mergeddiscretetouch[22], mergeddiscretetouch[23],
+                    mergeddiscretetouch[24], mergeddiscretetouch[25], mergeddiscretetouch[26], mergeddiscretetouch[27], mergeddiscretetouch[28], mergeddiscretetouch[29]);
+                } else if (TSTICK_SIZE == 45) {
+                    // Send data from the first board
+                    lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergedtouch[0], mergedtouch[1],mergedtouch[2],
+                    mergedtouch[3],mergedtouch[4],mergedtouch[5], mergedtouch[6], mergedtouch[7], mergedtouch[8],
+                    mergedtouch[9], mergedtouch[10], mergedtouch[11], mergedtouch[12], mergedtouch[13], mergedtouch[14], mergedtouch[15], mergedtouch[16],mergedtouch[17],
+                    mergedtouch[18],mergedtouch[19],mergedtouch[20], mergedtouch[21], mergedtouch[22], mergedtouch[23],
+                    mergedtouch[24], mergedtouch[25], mergedtouch[26], mergedtouch[27], mergedtouch[28], mergedtouch[29], mergedtouch[30], mergedtouch[31], 
+                    mergedtouch[32], mergedtouch[33], mergedtouch[34], mergedtouch[35], mergedtouch[36], mergedtouch[37], mergedtouch[38], mergedtouch[39], 
+                    mergedtouch[40], mergedtouch[41], mergedtouch[42], mergedtouch[43], mergedtouch[44]);
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/normalised");
+                    lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergednormalisedtouch[0], mergednormalisedtouch[1],mergednormalisedtouch[2],
+                    mergednormalisedtouch[3],mergednormalisedtouch[4],mergednormalisedtouch[5], mergednormalisedtouch[6], mergednormalisedtouch[7], mergednormalisedtouch[8],
+                    mergednormalisedtouch[9], mergednormalisedtouch[10], mergednormalisedtouch[11], mergednormalisedtouch[12], mergednormalisedtouch[13], mergednormalisedtouch[14], mergednormalisedtouch[15], mergednormalisedtouch[16],mergednormalisedtouch[17],
+                    mergednormalisedtouch[18],mergednormalisedtouch[19],mergednormalisedtouch[20], mergednormalisedtouch[21], mergednormalisedtouch[22], mergednormalisedtouch[23],
+                    mergednormalisedtouch[24], mergednormalisedtouch[25], mergednormalisedtouch[26], mergednormalisedtouch[27], mergednormalisedtouch[28], mergednormalisedtouch[29], mergednormalisedtouch[30], mergednormalisedtouch[31], 
+                    mergednormalisedtouch[32], mergednormalisedtouch[33], mergednormalisedtouch[34], mergednormalisedtouch[35], mergednormalisedtouch[36], mergednormalisedtouch[37], mergednormalisedtouch[38], mergednormalisedtouch[39], 
+                    mergednormalisedtouch[40], mergednormalisedtouch[41], mergednormalisedtouch[42], mergednormalisedtouch[43], mergednormalisedtouch[44]);
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/discrete");
+                    lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergeddiscretetouch[0], mergeddiscretetouch[1],mergeddiscretetouch[2],
+                    mergeddiscretetouch[3],mergeddiscretetouch[4],mergeddiscretetouch[5], mergeddiscretetouch[6], mergeddiscretetouch[7], mergeddiscretetouch[8],
+                    mergeddiscretetouch[9], mergeddiscretetouch[10], mergeddiscretetouch[11], mergeddiscretetouch[12], mergeddiscretetouch[13], mergeddiscretetouch[14], mergeddiscretetouch[15], mergeddiscretetouch[16],mergeddiscretetouch[17],
+                    mergeddiscretetouch[18],mergeddiscretetouch[19],mergeddiscretetouch[20], mergeddiscretetouch[21], mergeddiscretetouch[22], mergeddiscretetouch[23],
+                    mergeddiscretetouch[24], mergeddiscretetouch[25], mergeddiscretetouch[26], mergeddiscretetouch[27], mergeddiscretetouch[28], mergeddiscretetouch[29], mergeddiscretetouch[30], mergeddiscretetouch[31], 
+                    mergeddiscretetouch[32], mergeddiscretetouch[33], mergeddiscretetouch[34], mergeddiscretetouch[35], mergeddiscretetouch[36], mergeddiscretetouch[37], mergeddiscretetouch[38], mergeddiscretetouch[39], 
+                    mergeddiscretetouch[40], mergeddiscretetouch[41], mergeddiscretetouch[42], mergeddiscretetouch[43], mergeddiscretetouch[44]);
+                } else if (TSTICK_SIZE == 60) {
+                    // Send data from the first board
+                    lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergedtouch[0], mergedtouch[1],mergedtouch[2],
+                    mergedtouch[3],mergedtouch[4],mergedtouch[5], mergedtouch[6], mergedtouch[7], mergedtouch[8],
+                    mergedtouch[9], mergedtouch[10], mergedtouch[11], mergedtouch[12], mergedtouch[13], mergedtouch[14], mergedtouch[15], mergedtouch[16],mergedtouch[17],
+                    mergedtouch[18],mergedtouch[19],mergedtouch[20], mergedtouch[21], mergedtouch[22], mergedtouch[23],
+                    mergedtouch[24], mergedtouch[25], mergedtouch[26], mergedtouch[27], mergedtouch[28], mergedtouch[29], mergedtouch[30], mergedtouch[31], 
+                    mergedtouch[32], mergedtouch[33], mergedtouch[34], mergedtouch[35], mergedtouch[36], mergedtouch[37], mergedtouch[38], mergedtouch[39], 
+                    mergedtouch[40], mergedtouch[41], mergedtouch[42], mergedtouch[43], mergedtouch[44],mergedtouch[45],mergedtouch[46], mergedtouch[47], 
+                    mergedtouch[48], mergedtouch[49], mergedtouch[50],mergedtouch[51], mergedtouch[52],mergedtouch[53],
+                    mergedtouch[54], mergedtouch[55], mergedtouch[56], mergedtouch[57], mergedtouch[58], mergedtouch[59]);
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/normalised");
+                    lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergednormalisedtouch[0], mergednormalisedtouch[1],mergednormalisedtouch[2],
+                    mergednormalisedtouch[3],mergednormalisedtouch[4],mergednormalisedtouch[5], mergednormalisedtouch[6], mergednormalisedtouch[7], mergednormalisedtouch[8],
+                    mergednormalisedtouch[9], mergednormalisedtouch[10], mergednormalisedtouch[11], mergednormalisedtouch[12], mergednormalisedtouch[13], mergednormalisedtouch[14], mergednormalisedtouch[15], mergednormalisedtouch[16],mergednormalisedtouch[17],
+                    mergednormalisedtouch[18],mergednormalisedtouch[19],mergednormalisedtouch[20], mergednormalisedtouch[21], mergednormalisedtouch[22], mergednormalisedtouch[23],
+                    mergednormalisedtouch[24], mergednormalisedtouch[25], mergednormalisedtouch[26], mergednormalisedtouch[27], mergednormalisedtouch[28], mergednormalisedtouch[29], mergednormalisedtouch[30], mergednormalisedtouch[31], 
+                    mergednormalisedtouch[32], mergednormalisedtouch[33], mergednormalisedtouch[34], mergednormalisedtouch[35], mergednormalisedtouch[36], mergednormalisedtouch[37], mergednormalisedtouch[38], mergednormalisedtouch[39], 
+                    mergednormalisedtouch[40], mergednormalisedtouch[41], mergednormalisedtouch[42], mergednormalisedtouch[43], mergednormalisedtouch[44],mergednormalisedtouch[45],mergednormalisedtouch[46], mergednormalisedtouch[47], 
+                    mergednormalisedtouch[48], mergednormalisedtouch[49], mergednormalisedtouch[50],mergednormalisedtouch[51], mergednormalisedtouch[52],mergednormalisedtouch[53],
+                    mergednormalisedtouch[54], mergednormalisedtouch[55], mergednormalisedtouch[56], mergednormalisedtouch[57], mergednormalisedtouch[58], mergednormalisedtouch[59]);
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/discrete");
+                    lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergeddiscretetouch[0], mergeddiscretetouch[1],mergeddiscretetouch[2],
+                    mergeddiscretetouch[3],mergeddiscretetouch[4],mergeddiscretetouch[5], mergeddiscretetouch[6], mergeddiscretetouch[7], mergeddiscretetouch[8],
+                    mergeddiscretetouch[9], mergeddiscretetouch[10], mergeddiscretetouch[11], mergeddiscretetouch[12], mergeddiscretetouch[13], mergeddiscretetouch[14], mergeddiscretetouch[15], mergeddiscretetouch[16],mergeddiscretetouch[17],
+                    mergeddiscretetouch[18],mergeddiscretetouch[19],mergeddiscretetouch[20], mergeddiscretetouch[21], mergeddiscretetouch[22], mergeddiscretetouch[23],
+                    mergeddiscretetouch[24], mergeddiscretetouch[25], mergeddiscretetouch[26], mergeddiscretetouch[27], mergeddiscretetouch[28], mergeddiscretetouch[29], mergeddiscretetouch[30], mergeddiscretetouch[31], 
+                    mergeddiscretetouch[32], mergeddiscretetouch[33], mergeddiscretetouch[34], mergeddiscretetouch[35], mergeddiscretetouch[36], mergeddiscretetouch[37], mergeddiscretetouch[38], mergeddiscretetouch[39], 
+                    mergeddiscretetouch[40], mergeddiscretetouch[41], mergeddiscretetouch[42], mergeddiscretetouch[43], mergeddiscretetouch[44],mergeddiscretetouch[45],mergeddiscretetouch[46], mergeddiscretetouch[47], 
+                    mergeddiscretetouch[48], mergeddiscretetouch[49], mergeddiscretetouch[50],mergeddiscretetouch[51], mergeddiscretetouch[52],mergeddiscretetouch[53],
+                    mergeddiscretetouch[54], mergeddiscretetouch[55], mergeddiscretetouch[56], mergeddiscretetouch[57], mergeddiscretetouch[58], mergeddiscretetouch[59]);
+                }
+                else {
+                    lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiii", mergedtouch[0], mergedtouch[1], mergedtouch[2],
+                        mergedtouch[3],mergedtouch[4],mergedtouch[5], mergedtouch[6], mergedtouch[7], mergedtouch[8],
+                        mergedtouch[9], mergedtouch[10], mergedtouch[11], mergedtouch[12], mergedtouch[13], mergedtouch[14]);
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/normalised");
+                    lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiii", mergednormalisedtouch[0], mergednormalisedtouch[1], mergednormalisedtouch[2],
+                        mergednormalisedtouch[3],mergednormalisedtouch[4],mergednormalisedtouch[5], mergednormalisedtouch[6], mergednormalisedtouch[7], mergednormalisedtouch[8],
+                        mergednormalisedtouch[9], mergednormalisedtouch[10], mergednormalisedtouch[11], mergednormalisedtouch[12], mergednormalisedtouch[13], mergednormalisedtouch[14]);                   
+                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/discrete");
+                    lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiii", mergeddiscretetouch[0], mergeddiscretetouch[1], mergeddiscretetouch[2],
+                        mergeddiscretetouch[3],mergeddiscretetouch[4],mergeddiscretetouch[5], mergeddiscretetouch[6], mergeddiscretetouch[7], mergeddiscretetouch[8],
+                        mergeddiscretetouch[9], mergeddiscretetouch[10], mergeddiscretetouch[11], mergeddiscretetouch[12], mergeddiscretetouch[13], mergeddiscretetouch[14]);
+                }
             #endif
             #ifdef touch_CAPSENSE
+                oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
                 lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiii", capsense.data[0], capsense.data[1],capsense.data[2],
                     capsense.data[3],capsense.data[4],capsense.data[5], capsense.data[6], capsense.data[7], capsense.data[8],
                     capsense.data[9], capsense.data[10], capsense.data[11], capsense.data[12], capsense.data[13], capsense.data[14],
@@ -648,8 +854,11 @@ void loop() {
             lo_send(osc1, oscNamespace.c_str(), "i", sensors.ttap);
         }
         if (event.battery) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery");
-            lo_send(osc1, oscNamespace.c_str(), "i", sensors.battery);
+            // Battery Data
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/percentage");
+            lo_send(osc1, oscNamespace.c_str(), "i", sensors.battery);       
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.value);       
         }
     }
     if (puara.IP2_ready()) {
@@ -690,8 +899,11 @@ void loop() {
             lo_send(osc2, oscNamespace.c_str(), "i", sensors.ttap);
         }
         if (event.battery) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery");
-            lo_send(osc2, oscNamespace.c_str(), "i", sensors.battery);
+            // Battery Data
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/percentage");
+            lo_send(osc2, oscNamespace.c_str(), "i", sensors.battery);       
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
+            lo_send(osc2, oscNamespace.c_str(), "f", battery.value);       
         }
     }
 
@@ -729,9 +941,6 @@ void loop() {
             }
         }
     #endif    
-
-    // run at 100 Hz
-    //vTaskDelay(10 / portTICK_PERIOD_MS);
 }
 
 void initIMU() {

@@ -9,7 +9,7 @@
 
 class Touch {
     public:
-        uint8_t initTouch();
+        uint8_t initTouch(uint8_t I2C_addr = 0x30);
         void readTouch();
         int getData(int data_index);
         Trill trillSensor;      // for Trill Craft

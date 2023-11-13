@@ -3,9 +3,9 @@
 #include "touch.h"
 
 
-uint8_t Touch::initTouch() {
+uint8_t Touch::initTouch(uint8_t I2C_addr) {
     // Initialise Sensors
-    int ret = trillSensor.setup(Trill::TRILL_CRAFT);
+    int ret = trillSensor.setup(Trill::TRILL_CRAFT, I2C_addr);
     if(ret != 0) {
         Serial.println("failed to initialise trillSensor");
         Serial.print("Error code: ");
@@ -13,11 +13,11 @@ uint8_t Touch::initTouch() {
         return 0;
     }
     delay(10);
-    trillSensor.setPrescaler(4);
+    trillSensor.setPrescaler(1);
     delay(10);
     trillSensor.updateBaseline();
     delay(10);
-    trillSensor.setScanSettings(3,16);
+    trillSensor.setScanSettings(0,9);
     delay(10);
     trillSensor.setNoiseThreshold(30);
     delay(10);
