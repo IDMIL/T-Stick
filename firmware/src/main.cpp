@@ -61,21 +61,26 @@ struct Pin {
     int button;
 };
 
-#ifdef ARDUINO_LOLIN_D32_PRO
-    Pin pin{ 5, 35, 33, 15 };
-#elif defined(ARDUINO_TINYPICO)
-    #include "TinyPICO.h"
-    Pin pin{ 5, 35, 33, 15 };
-    TinyPICO tinypico = TinyPICO();
-#endif
+Pin pin{ 46, 35, 9, 3 };
 
 //////////////////////////////////
 // Battery struct and functions //
 //////////////////////////////////
+#include <batt.h>
   
 struct BatteryData {
     unsigned int percentage = 0;
+    unsigned int tinypico_percentage = 0;
+    float tinypico_voltage = 0;
     unsigned int lastPercentage = 0;
+    float voltage = 0;
+    unsigned int current = 0;
+    float TTE = 0;
+    bool status = false; // is there a battery
+    bool tinypico_status = false; // is there a battery tinypico
+    unsigned int rsense = 0;
+    unsigned int capacity = 0;
+    unsigned int designcap = 0;
     float value;
     unsigned long timer = 0;
     int interval = 1000; // in ms (1/f)
@@ -83,32 +88,21 @@ struct BatteryData {
     std::deque<int> filterArray; // store last values
 } battery;
 
-// read battery level (based on https://www.youtube.com/watch?v=yZjpYmWVLh8&feature=youtu.be&t=88) 
-void readBattery() {
-    #ifdef ARDUINO_LOLIN_D32_PRO
-        battery.value = analogRead(pin.battery) / 4096.0 * 7.445;
-    #elif defined(ARDUINO_TINYPICO)
-        battery.value = tinypico.GetBatteryVoltage();
-    #endif
-    battery.percentage = static_cast<int>((battery.value - 2.9) * 100 / (4.15 - 2.9));
-    if (battery.percentage > 100)
-        battery.percentage = 100;
-    if (battery.percentage < 0)
-        battery.percentage = 0;
-}
-
-void batteryFilter() {
-    battery.filterArray.push_back(battery.percentage);
-    if(battery.filterArray.size() > battery.queueAmount) {
-        battery.filterArray.pop_front();
-    }
-    battery.percentage = 0;
-    for (int i=0; i<battery.filterArray.size(); i++) {
-        battery.percentage += battery.filterArray.at(i);
-    }
-    battery.percentage /= battery.filterArray.size();
-}
-
+FUELGAUGE fuelgauge;
+fuelgauge_config fg_config = {
+    0x36, //i2c_addr
+    3200, // capacity (mAh)
+    50, // End of charge Current (mA)
+    10, // rsense (mOhm)
+    3, // empty voltage (V)
+    3.88, //recovery voltage (V)
+    0, // soc
+    0, // rcomp
+    0, // tempco
+    0, // fullcap
+    0, // fullcapnorm
+    0, // Charge Cycles
+};
 
 ///////////////////////////////////
 // Include button function files //
@@ -130,8 +124,13 @@ Fsr fsr;
 // Include IMU function files //
 ////////////////////////////////
 
-#include <SparkFunLSM9DS1.h>
-LSM9DS1 imu;
+#include "ICM_20948.h"
+ICM_20948_I2C imu;
+
+#define WIRE_PORT Wire // Your desired Wire port.      Used when "USE_SPI" is not defined
+// The value of the last bit of the I2C address.
+// On the SparkFun 9DoF IMU breakout the default is 1, and when the ADR jumper is closed the value becomes 0
+#define AD0_VAL 0
 
 //////////////////////////////////////////////
 // Include Touch stuff                      //
@@ -145,11 +144,6 @@ LSM9DS1 imu;
   int mergedtouch[TSTICK_SIZE]; 
   int mergeddiscretetouch[TSTICK_SIZE]; 
   int mergednormalisedtouch[TSTICK_SIZE]; 
-#endif
-
-#ifdef touch_CAPSENSE
-  #include "capsense.h"
-  Capsense capsense;
 #endif
 
 ////////////////////////////////
@@ -281,8 +275,6 @@ struct Event {
     bool battery;
 } event;
 
-void initIMU();
-
 ///////////
 // setup //
 ///////////
@@ -314,7 +306,7 @@ void setup() {
     }
 
     std::cout << "    Initializing IMU... ";
-    initIMU();
+    imu.begin(WIRE_PORT,AD0_VAL);;
     std::cout << "done" << std::endl;
 
     std::cout << "    Initializing FSR... ";
@@ -343,11 +335,6 @@ void setup() {
                     std::cout << "initialization failed!" << std::endl;
                 }
         }
-    #endif
-    #ifdef touch_CAPSENSE
-        capsense.capsense_scan(); // Look for Capsense boards and return their addresses
-                                // must run before initLibmapper to get # of capsense boards
-            std::cout << "done" << std::endl;
     #endif
 
     std::cout << "    Initializing Liblo server/client at " << puara.getLocalPORTStr() << " ... ";
@@ -384,8 +371,8 @@ void setup() {
     lm.tap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
     lm.ttap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/triple tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
     lm.dtap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/double tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
-    lm.soc = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery", 1, MPR_FLT, "percent", &lm.batSOCMin, &lm.batSOCMax, 0, 0, 0);
-    lm.batvolt = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery", 1, MPR_FLT, "percent", &lm.batVoltMin, &lm.batVoltMax, 0, 0, 0);
+    lm.soc = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/percentage", 1, MPR_FLT, "%", &lm.batSOCMin, &lm.batSOCMax, 0, 0, 0);
+    lm.batvolt = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/voltage", 1, MPR_FLT, "V", &lm.batVoltMin, &lm.batVoltMax, 0, 0, 0);
     std::cout << "done" << std::endl;
 
     // Setting Deep sleep wake button
@@ -436,41 +423,43 @@ void loop() {
         }
         gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
     #endif
-    #ifdef touch_CAPSENSE
-        capsense.readCapsense();
-        gestures.updateTouchArray(capsense.data,capsense.touchStripsSize);
-    #endif
 
     // read battery
     if (millis() - battery.interval > battery.timer) {
-      battery.timer = millis();
-      readBattery();
-      batteryFilter();
+        // Reset battery timer and set battery event as true
+        battery.timer = millis();
+
+        // Read battery stats from fuel gauge
+        fuelgauge.getBatteryData();
+        fuelgauge.getBatteryStatus();
+
+        // Store battery info
+        battery.percentage = fuelgauge.rep_soc;
+        battery.current = fuelgauge.rep_avg_current;
+        battery.voltage = fuelgauge.rep_avg_voltage;
+        battery.TTE = fuelgauge.rep_tte;
+        battery.rsense = fuelgauge.rsense;
+        battery.capacity = fuelgauge.rep_capacity;
+        battery.status = fuelgauge.bat_status;
     }
+
+    // read IMU data
+    imu.getAGMT();
 
     // read IMU and update puara-gestures
-        if (imu.accelAvailable()) {
-        imu.readAccel();
-        // In g's
-        gestures.setAccelerometerValues(imu.calcAccel(imu.ax),
-                                        imu.calcAccel(imu.ay),
-                                        imu.calcAccel(imu.az));
-    }
-    if (imu.gyroAvailable()) {
-        imu.readGyro();
-        // In degrees/sec
-        gestures.setGyroscopeValues(imu.calcGyro(imu.gx),
-                                    imu.calcGyro(imu.gy),
-                                    imu.calcGyro(imu.gz));
-    }
-    if (imu.magAvailable()) {
-        imu.readMag();
-        // In Gauss
-        gestures.setMagnetometerValues(imu.calcMag(imu.mx),
-                                       imu.calcMag(imu.my),
-                                       imu.calcMag(imu.mz));
-    }
+    // In g's
+    gestures.setAccelerometerValues(imu.accX(),
+                                    imu.accY(),
+                                    imu.accZ());
+    gestures.setGyroscopeValues(imu.gyrX(),
+                                imu.gyrY(),
+                                imu.gyrZ());
+    gestures.setMagnetometerValues(imu.magX(),
+                                    imu.magY(),
+                                    imu.magZ());
 
+    // gestures.updateInertialGestures();
+    gestures.updateTrigButton(button.getButton());
     gestures.updateInertialGestures();
     gestures.updateTrigButton(button.getButton());
 
@@ -568,7 +557,6 @@ void loop() {
     #endif
 
     // Sending continuous OSC messages
-    // Sending continuous OSC messages
     if (puara.IP1_ready()) {
             #ifdef touch_TRILL
                 oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
@@ -590,31 +578,6 @@ void loop() {
                     mergeddiscretetouch[9], mergeddiscretetouch[10], mergeddiscretetouch[11], mergeddiscretetouch[12], mergeddiscretetouch[13], mergeddiscretetouch[14], mergeddiscretetouch[15], mergeddiscretetouch[16],mergeddiscretetouch[17],
                     mergeddiscretetouch[18],mergeddiscretetouch[19],mergeddiscretetouch[20], mergeddiscretetouch[21], mergeddiscretetouch[22], mergeddiscretetouch[23],
                     mergeddiscretetouch[24], mergeddiscretetouch[25], mergeddiscretetouch[26], mergeddiscretetouch[27], mergeddiscretetouch[28], mergeddiscretetouch[29]);
-                } else if (TSTICK_SIZE == 45) {
-                    // Send data from the first board
-                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergedtouch[0], mergedtouch[1],mergedtouch[2],
-                    mergedtouch[3],mergedtouch[4],mergedtouch[5], mergedtouch[6], mergedtouch[7], mergedtouch[8],
-                    mergedtouch[9], mergedtouch[10], mergedtouch[11], mergedtouch[12], mergedtouch[13], mergedtouch[14], mergedtouch[15], mergedtouch[16],mergedtouch[17],
-                    mergedtouch[18],mergedtouch[19],mergedtouch[20], mergedtouch[21], mergedtouch[22], mergedtouch[23],
-                    mergedtouch[24], mergedtouch[25], mergedtouch[26], mergedtouch[27], mergedtouch[28], mergedtouch[29], mergedtouch[30], mergedtouch[31], 
-                    mergedtouch[32], mergedtouch[33], mergedtouch[34], mergedtouch[35], mergedtouch[36], mergedtouch[37], mergedtouch[38], mergedtouch[39], 
-                    mergedtouch[40], mergedtouch[41], mergedtouch[42], mergedtouch[43], mergedtouch[44]);
-                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/normalised");
-                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergednormalisedtouch[0], mergednormalisedtouch[1],mergednormalisedtouch[2],
-                    mergednormalisedtouch[3],mergednormalisedtouch[4],mergednormalisedtouch[5], mergednormalisedtouch[6], mergednormalisedtouch[7], mergednormalisedtouch[8],
-                    mergednormalisedtouch[9], mergednormalisedtouch[10], mergednormalisedtouch[11], mergednormalisedtouch[12], mergednormalisedtouch[13], mergednormalisedtouch[14], mergednormalisedtouch[15], mergednormalisedtouch[16],mergednormalisedtouch[17],
-                    mergednormalisedtouch[18],mergednormalisedtouch[19],mergednormalisedtouch[20], mergednormalisedtouch[21], mergednormalisedtouch[22], mergednormalisedtouch[23],
-                    mergednormalisedtouch[24], mergednormalisedtouch[25], mergednormalisedtouch[26], mergednormalisedtouch[27], mergednormalisedtouch[28], mergednormalisedtouch[29], mergednormalisedtouch[30], mergednormalisedtouch[31], 
-                    mergednormalisedtouch[32], mergednormalisedtouch[33], mergednormalisedtouch[34], mergednormalisedtouch[35], mergednormalisedtouch[36], mergednormalisedtouch[37], mergednormalisedtouch[38], mergednormalisedtouch[39], 
-                    mergednormalisedtouch[40], mergednormalisedtouch[41], mergednormalisedtouch[42], mergednormalisedtouch[43], mergednormalisedtouch[44]);
-                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/discrete");
-                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergeddiscretetouch[0], mergeddiscretetouch[1],mergeddiscretetouch[2],
-                    mergeddiscretetouch[3],mergeddiscretetouch[4],mergeddiscretetouch[5], mergeddiscretetouch[6], mergeddiscretetouch[7], mergeddiscretetouch[8],
-                    mergeddiscretetouch[9], mergeddiscretetouch[10], mergeddiscretetouch[11], mergeddiscretetouch[12], mergeddiscretetouch[13], mergeddiscretetouch[14], mergeddiscretetouch[15], mergeddiscretetouch[16],mergeddiscretetouch[17],
-                    mergeddiscretetouch[18],mergeddiscretetouch[19],mergeddiscretetouch[20], mergeddiscretetouch[21], mergeddiscretetouch[22], mergeddiscretetouch[23],
-                    mergeddiscretetouch[24], mergeddiscretetouch[25], mergeddiscretetouch[26], mergeddiscretetouch[27], mergeddiscretetouch[28], mergeddiscretetouch[29], mergeddiscretetouch[30], mergeddiscretetouch[31], 
-                    mergeddiscretetouch[32], mergeddiscretetouch[33], mergeddiscretetouch[34], mergeddiscretetouch[35], mergeddiscretetouch[36], mergeddiscretetouch[37], mergeddiscretetouch[38], mergeddiscretetouch[39], 
-                    mergeddiscretetouch[40], mergeddiscretetouch[41], mergeddiscretetouch[42], mergeddiscretetouch[43], mergeddiscretetouch[44]);
                 } else if (TSTICK_SIZE == 60) {
                     // Send data from the first board
                     lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergedtouch[0], mergedtouch[1],mergedtouch[2],
@@ -648,25 +611,24 @@ void loop() {
                     mergeddiscretetouch[54], mergeddiscretetouch[55], mergeddiscretetouch[56], mergeddiscretetouch[57], mergeddiscretetouch[58], mergeddiscretetouch[59]);
                 }
                 else {
-                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiii", mergedtouch[0], mergedtouch[1], mergedtouch[2],
-                        mergedtouch[3],mergedtouch[4],mergedtouch[5], mergedtouch[6], mergedtouch[7], mergedtouch[8],
-                        mergedtouch[9], mergedtouch[10], mergedtouch[11], mergedtouch[12], mergedtouch[13], mergedtouch[14]);
+                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergedtouch[0], mergedtouch[1],mergedtouch[2],
+                    mergedtouch[3],mergedtouch[4],mergedtouch[5], mergedtouch[6], mergedtouch[7], mergedtouch[8],
+                    mergedtouch[9], mergedtouch[10], mergedtouch[11], mergedtouch[12], mergedtouch[13], mergedtouch[14], mergedtouch[15], mergedtouch[16],mergedtouch[17],
+                    mergedtouch[18],mergedtouch[19],mergedtouch[20], mergedtouch[21], mergedtouch[22], mergedtouch[23],
+                    mergedtouch[24], mergedtouch[25], mergedtouch[26], mergedtouch[27], mergedtouch[28], mergedtouch[29]);
                     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/normalised");
-                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiii", mergednormalisedtouch[0], mergednormalisedtouch[1], mergednormalisedtouch[2],
-                        mergednormalisedtouch[3],mergednormalisedtouch[4],mergednormalisedtouch[5], mergednormalisedtouch[6], mergednormalisedtouch[7], mergednormalisedtouch[8],
-                        mergednormalisedtouch[9], mergednormalisedtouch[10], mergednormalisedtouch[11], mergednormalisedtouch[12], mergednormalisedtouch[13], mergednormalisedtouch[14]);                   
+                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergednormalisedtouch[0], mergednormalisedtouch[1],mergednormalisedtouch[2],
+                    mergednormalisedtouch[3],mergednormalisedtouch[4],mergednormalisedtouch[5], mergednormalisedtouch[6], mergednormalisedtouch[7], mergednormalisedtouch[8],
+                    mergednormalisedtouch[9], mergednormalisedtouch[10], mergednormalisedtouch[11], mergednormalisedtouch[12], mergednormalisedtouch[13], mergednormalisedtouch[14], mergednormalisedtouch[15], mergednormalisedtouch[16],mergednormalisedtouch[17],
+                    mergednormalisedtouch[18],mergednormalisedtouch[19],mergednormalisedtouch[20], mergednormalisedtouch[21], mergednormalisedtouch[22], mergednormalisedtouch[23],
+                    mergednormalisedtouch[24], mergednormalisedtouch[25], mergednormalisedtouch[26], mergednormalisedtouch[27], mergednormalisedtouch[28], mergednormalisedtouch[29]);
                     oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/discrete");
-                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiii", mergeddiscretetouch[0], mergeddiscretetouch[1], mergeddiscretetouch[2],
-                        mergeddiscretetouch[3],mergeddiscretetouch[4],mergeddiscretetouch[5], mergeddiscretetouch[6], mergeddiscretetouch[7], mergeddiscretetouch[8],
-                        mergeddiscretetouch[9], mergeddiscretetouch[10], mergeddiscretetouch[11], mergeddiscretetouch[12], mergeddiscretetouch[13], mergeddiscretetouch[14]);
+                    lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergeddiscretetouch[0], mergeddiscretetouch[1],mergeddiscretetouch[2],
+                    mergeddiscretetouch[3],mergeddiscretetouch[4],mergeddiscretetouch[5], mergeddiscretetouch[6], mergeddiscretetouch[7], mergeddiscretetouch[8],
+                    mergeddiscretetouch[9], mergeddiscretetouch[10], mergeddiscretetouch[11], mergeddiscretetouch[12], mergeddiscretetouch[13], mergeddiscretetouch[14], mergeddiscretetouch[15], mergeddiscretetouch[16],mergeddiscretetouch[17],
+                    mergeddiscretetouch[18],mergeddiscretetouch[19],mergeddiscretetouch[20], mergeddiscretetouch[21], mergeddiscretetouch[22], mergeddiscretetouch[23],
+                    mergeddiscretetouch[24], mergeddiscretetouch[25], mergeddiscretetouch[26], mergeddiscretetouch[27], mergeddiscretetouch[28], mergeddiscretetouch[29]);
                 }
-            #endif
-            #ifdef touch_CAPSENSE
-                lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiii", capsense.data[0], capsense.data[1],capsense.data[2],
-                    capsense.data[3],capsense.data[4],capsense.data[5], capsense.data[6], capsense.data[7], capsense.data[8],
-                    capsense.data[9], capsense.data[10], capsense.data[11], capsense.data[12], capsense.data[13], capsense.data[14],
-                    capsense.data[15]
-            );
             #endif
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/fsr");
             lo_send(osc1, oscNamespace.c_str(), "i", sensors.fsr);
@@ -712,31 +674,6 @@ void loop() {
                     mergeddiscretetouch[9], mergeddiscretetouch[10], mergeddiscretetouch[11], mergeddiscretetouch[12], mergeddiscretetouch[13], mergeddiscretetouch[14], mergeddiscretetouch[15], mergeddiscretetouch[16],mergeddiscretetouch[17],
                     mergeddiscretetouch[18],mergeddiscretetouch[19],mergeddiscretetouch[20], mergeddiscretetouch[21], mergeddiscretetouch[22], mergeddiscretetouch[23],
                     mergeddiscretetouch[24], mergeddiscretetouch[25], mergeddiscretetouch[26], mergeddiscretetouch[27], mergeddiscretetouch[28], mergeddiscretetouch[29]);
-                } else if (TSTICK_SIZE == 45) {
-                    // Send data from the first board
-                    lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergedtouch[0], mergedtouch[1],mergedtouch[2],
-                    mergedtouch[3],mergedtouch[4],mergedtouch[5], mergedtouch[6], mergedtouch[7], mergedtouch[8],
-                    mergedtouch[9], mergedtouch[10], mergedtouch[11], mergedtouch[12], mergedtouch[13], mergedtouch[14], mergedtouch[15], mergedtouch[16],mergedtouch[17],
-                    mergedtouch[18],mergedtouch[19],mergedtouch[20], mergedtouch[21], mergedtouch[22], mergedtouch[23],
-                    mergedtouch[24], mergedtouch[25], mergedtouch[26], mergedtouch[27], mergedtouch[28], mergedtouch[29], mergedtouch[30], mergedtouch[31], 
-                    mergedtouch[32], mergedtouch[33], mergedtouch[34], mergedtouch[35], mergedtouch[36], mergedtouch[37], mergedtouch[38], mergedtouch[39], 
-                    mergedtouch[40], mergedtouch[41], mergedtouch[42], mergedtouch[43], mergedtouch[44]);
-                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/normalised");
-                    lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergednormalisedtouch[0], mergednormalisedtouch[1],mergednormalisedtouch[2],
-                    mergednormalisedtouch[3],mergednormalisedtouch[4],mergednormalisedtouch[5], mergednormalisedtouch[6], mergednormalisedtouch[7], mergednormalisedtouch[8],
-                    mergednormalisedtouch[9], mergednormalisedtouch[10], mergednormalisedtouch[11], mergednormalisedtouch[12], mergednormalisedtouch[13], mergednormalisedtouch[14], mergednormalisedtouch[15], mergednormalisedtouch[16],mergednormalisedtouch[17],
-                    mergednormalisedtouch[18],mergednormalisedtouch[19],mergednormalisedtouch[20], mergednormalisedtouch[21], mergednormalisedtouch[22], mergednormalisedtouch[23],
-                    mergednormalisedtouch[24], mergednormalisedtouch[25], mergednormalisedtouch[26], mergednormalisedtouch[27], mergednormalisedtouch[28], mergednormalisedtouch[29], mergednormalisedtouch[30], mergednormalisedtouch[31], 
-                    mergednormalisedtouch[32], mergednormalisedtouch[33], mergednormalisedtouch[34], mergednormalisedtouch[35], mergednormalisedtouch[36], mergednormalisedtouch[37], mergednormalisedtouch[38], mergednormalisedtouch[39], 
-                    mergednormalisedtouch[40], mergednormalisedtouch[41], mergednormalisedtouch[42], mergednormalisedtouch[43], mergednormalisedtouch[44]);
-                    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/discrete");
-                    lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergeddiscretetouch[0], mergeddiscretetouch[1],mergeddiscretetouch[2],
-                    mergeddiscretetouch[3],mergeddiscretetouch[4],mergeddiscretetouch[5], mergeddiscretetouch[6], mergeddiscretetouch[7], mergeddiscretetouch[8],
-                    mergeddiscretetouch[9], mergeddiscretetouch[10], mergeddiscretetouch[11], mergeddiscretetouch[12], mergeddiscretetouch[13], mergeddiscretetouch[14], mergeddiscretetouch[15], mergeddiscretetouch[16],mergeddiscretetouch[17],
-                    mergeddiscretetouch[18],mergeddiscretetouch[19],mergeddiscretetouch[20], mergeddiscretetouch[21], mergeddiscretetouch[22], mergeddiscretetouch[23],
-                    mergeddiscretetouch[24], mergeddiscretetouch[25], mergeddiscretetouch[26], mergeddiscretetouch[27], mergeddiscretetouch[28], mergeddiscretetouch[29], mergeddiscretetouch[30], mergeddiscretetouch[31], 
-                    mergeddiscretetouch[32], mergeddiscretetouch[33], mergeddiscretetouch[34], mergeddiscretetouch[35], mergeddiscretetouch[36], mergeddiscretetouch[37], mergeddiscretetouch[38], mergeddiscretetouch[39], 
-                    mergeddiscretetouch[40], mergeddiscretetouch[41], mergeddiscretetouch[42], mergeddiscretetouch[43], mergeddiscretetouch[44]);
                 } else if (TSTICK_SIZE == 60) {
                     // Send data from the first board
                     lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii", mergedtouch[0], mergedtouch[1],mergedtouch[2],
@@ -782,14 +719,6 @@ void loop() {
                         mergeddiscretetouch[3],mergeddiscretetouch[4],mergeddiscretetouch[5], mergeddiscretetouch[6], mergeddiscretetouch[7], mergeddiscretetouch[8],
                         mergeddiscretetouch[9], mergeddiscretetouch[10], mergeddiscretetouch[11], mergeddiscretetouch[12], mergeddiscretetouch[13], mergeddiscretetouch[14]);
                 }
-            #endif
-            #ifdef touch_CAPSENSE
-                oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
-                lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiii", capsense.data[0], capsense.data[1],capsense.data[2],
-                    capsense.data[3],capsense.data[4],capsense.data[5], capsense.data[6], capsense.data[7], capsense.data[8],
-                    capsense.data[9], capsense.data[10], capsense.data[11], capsense.data[12], capsense.data[13], capsense.data[14],
-                    capsense.data[15]
-            );
             #endif
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/fsr");
             lo_send(osc2, oscNamespace.c_str(), "i", sensors.fsr);
@@ -856,9 +785,19 @@ void loop() {
         if (event.battery) {
             // Battery Data
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/percentage");
-            lo_send(osc1, oscNamespace.c_str(), "i", sensors.battery);       
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.percentage);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
-            lo_send(osc1, oscNamespace.c_str(), "f", battery.value);       
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.voltage);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.current);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.TTE);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.rsense);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/status");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.status);          
         }
     }
     if (puara.IP2_ready()) {
@@ -901,9 +840,19 @@ void loop() {
         if (event.battery) {
             // Battery Data
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/percentage");
-            lo_send(osc2, oscNamespace.c_str(), "i", sensors.battery);       
+            lo_send(osc2, oscNamespace.c_str(), "i", battery.percentage);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
-            lo_send(osc2, oscNamespace.c_str(), "f", battery.value);       
+            lo_send(osc2, oscNamespace.c_str(), "f", battery.voltage);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
+            lo_send(osc2, oscNamespace.c_str(), "i", battery.current);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
+            lo_send(osc2, oscNamespace.c_str(), "f", battery.TTE);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
+            lo_send(osc2, oscNamespace.c_str(), "i", battery.capacity);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
+            lo_send(osc2, oscNamespace.c_str(), "i", battery.rsense);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/status");
+            lo_send(osc2, oscNamespace.c_str(), "i", battery.status);         
         }
     }
 
@@ -941,118 +890,4 @@ void loop() {
             }
         }
     #endif    
-}
-
-void initIMU() {
-    Wire.begin();
-
-    // [enabled] turns the gyro on or off.
-    imu.settings.gyro.enabled = true;
-    // [scale] sets the full-scale range of the gyroscope.
-    // scale can be set to either 245, 500, or 2000 dps
-    // Travis West 2022-11-02: I was able to saturate the output with 2000 dps, so this seems like an appropriate setting.
-    imu.settings.gyro.scale = 2000;
-    // [sampleRate] sets the output data rate (ODR) of the gyro
-    // sampleRate can be set between 1-6
-    // 1 = 14.9    4 = 238
-    // 2 = 59.5    5 = 476
-    // 3 = 119     6 = 952
-    imu.settings.gyro.sampleRate = 3; // 59.5Hz ODR
-    // [bandwidth] can set the cutoff frequency of the gyro.
-    // Allowed values: 0-3. Actual value of cutoff frequency
-    // depends on the sample rate. (Datasheet section 7.12)
-    imu.settings.gyro.bandwidth = 0;
-    // [lowPowerEnable] turns low-power mode on or off.
-    imu.settings.gyro.lowPowerEnable = false; // LP mode off
-    // [HPFEnable] enables or disables the high-pass filter
-    imu.settings.gyro.HPFEnable = true; // HPF disabled
-    // [HPFCutoff] sets the HPF cutoff frequency (if enabled)
-    // Allowable values are 0-9. Value depends on ODR.
-    // (Datasheet section 7.14)
-    imu.settings.gyro.HPFCutoff = 1; // HPF cutoff = 4Hz
-    // [flipX], [flipY], and [flipZ] are booleans that can
-    // automatically switch the positive/negative orientation
-    // of the three gyro axes.
-    imu.settings.gyro.flipX = false; // Don't flip X
-    imu.settings.gyro.flipY = false; // Don't flip Y
-    imu.settings.gyro.flipZ = false; // Don't flip Z
-    // [enabled] turns the acclerometer on or off.
-    imu.settings.accel.enabled = true; // Enable accelerometer
-    // [enableX], [enableY], and [enableZ] can turn on or off
-    // select axes of the acclerometer.
-    imu.settings.accel.enableX = true; // Enable X
-    imu.settings.accel.enableY = true; // Enable Y
-    imu.settings.accel.enableZ = true; // Enable Z
-    // [scale] sets the full-scale range of the accelerometer.
-    // accel scale can be 2, 4, 8, or 16 g's
-    // Travis West 2022-11-02: In my experiments I found that the effort required
-    // to get much more than 7.5 g of acceleration was significant enough that I
-    // was worried about causing damage the internal wiring of the instrument.
-    // As such, I think 8 g full scale range or less is appropriate, at least
-    // until such time as the mechanical robustness of the instrument is improved.
-    imu.settings.accel.scale = 8;
-    // [sampleRate] sets the output data rate (ODR) of the
-    // accelerometer. ONLY APPLICABLE WHEN THE GYROSCOPE IS
-    // DISABLED! Otherwise accel sample rate = gyro sample rate.
-    // accel sample rate can be 1-6
-    // 1 = 10 Hz    4 = 238 Hz
-    // 2 = 50 Hz    5 = 476 Hz
-    // 3 = 119 Hz   6 = 952 Hz
-    imu.settings.accel.sampleRate = 3;
-    // [bandwidth] sets the anti-aliasing filter bandwidth.
-    // Accel cutoff frequency can be any value between -1 - 3. 
-    // -1 = bandwidth determined by sample rate
-    // 0 = 408 Hz   2 = 105 Hz
-    // 1 = 211 Hz   3 = 50 Hz
-    imu.settings.accel.bandwidth = 0; // BW = 408Hz
-    // [highResEnable] enables or disables high resolution 
-    // mode for the acclerometer.
-    imu.settings.accel.highResEnable = false; // Disable HR
-    // [highResBandwidth] sets the LP cutoff frequency of
-    // the accelerometer if it's in high-res mode.
-    // can be any value between 0-3
-    // LP cutoff is set to a factor of sample rate
-    // 0 = ODR/50    2 = ODR/9
-    // 1 = ODR/100   3 = ODR/400
-    imu.settings.accel.highResBandwidth = 0;  
-    // [enabled] turns the magnetometer on or off.
-    imu.settings.mag.enabled = true; // Enable magnetometer
-    // [scale] sets the full-scale range of the magnetometer
-    // mag scale can be 4, 8, 12, or 16 Gs
-    // Travis West 2022-11-02: Considering that the Earth's magnetic field is
-    // generally less than 1 Gs, the lowest setting available is likely best.
-    // A higher setting could be used if the sensor were installed next to a
-    // strong magnetic field, such as a magnet or speaker, since then the reading
-    // would not be saturated and the bias from the magnet could potentially be
-    // removed.
-    imu.settings.mag.scale = 4;
-    // [sampleRate] sets the output data rate (ODR) of the
-    // magnetometer.
-    // mag data rate can be 0-7:
-    // 0 = 0.625 Hz  4 = 10 Hz
-    // 1 = 1.25 Hz   5 = 20 Hz
-    // 2 = 2.5 Hz    6 = 40 Hz
-    // 3 = 5 Hz      7 = 80 Hz
-    imu.settings.mag.sampleRate = 5; // Set OD rate to 20Hz
-    // [tempCompensationEnable] enables or disables 
-    // temperature compensation of the magnetometer.
-    imu.settings.mag.tempCompensationEnable = false;
-    // [XYPerformance] sets the x and y-axis performance of the
-    // magnetometer to either:
-    // 0 = Low power mode      2 = high performance
-    // 1 = medium performance  3 = ultra-high performance
-    imu.settings.mag.XYPerformance = 3; // Ultra-high perform.
-    // [ZPerformance] does the same thing, but only for the z
-    imu.settings.mag.ZPerformance = 3; // Ultra-high perform.
-    // [lowPowerEnable] enables or disables low power mode in
-    // the magnetometer.
-    imu.settings.mag.lowPowerEnable = false;
-    // [operatingMode] sets the operating mode of the
-    // magnetometer. operatingMode can be 0-2:
-    // 0 = continuous conversion
-    // 1 = single-conversion
-    // 2 = power down
-    imu.settings.mag.operatingMode = 0; // Continuous mode
-
-    imu.begin();
 }
