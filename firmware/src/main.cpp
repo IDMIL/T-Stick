@@ -56,12 +56,18 @@ std::string oscNamespace;
 
 struct Pin {
     int led;     // Built In LED pin
-    int battery; // To check battery level (voltage)
     int fsr;
     int button;
 };
 
-Pin pin{ 46, 35, 9, 3 };
+Pin pin{ 10, 9, 3 };
+
+/////////////////////
+// I2C Settings //
+/////////////////////
+const int SDA_PIN = 12;
+const int SCL_PIN = 11;
+const int I2CUPDATE_FREQ = 400000;
 
 //////////////////////////////////
 // Battery struct and functions //
@@ -140,7 +146,11 @@ ICM_20948_I2C imu;
   #include "touch.h"
   Touch touch;
   Touch touch2;
-  uint8_t touchI2C = 0x31;
+  Touch touch3;
+  Touch touch4;
+  uint8_t touchI2C_1 = 0x31;
+  uint8_t touchI2C_2 = 0x32;
+  uint8_t touchI2C_3 = 0x33;
   int mergedtouch[TSTICK_SIZE]; 
   int mergeddiscretetouch[TSTICK_SIZE]; 
   int mergednormalisedtouch[TSTICK_SIZE]; 
@@ -149,7 +159,6 @@ ICM_20948_I2C imu;
 ////////////////////////////////
 // Include LED function files //
 ////////////////////////////////
-
 #include "led.h"
 
 Led led;
@@ -158,6 +167,11 @@ struct Led_variables {
     int ledValue = 0;
     uint8_t color = 0;
 } led_var;
+
+#include "Adafruit_NeoPixel.h"
+#define POWER_PIN 46
+#define NUMPIXELS 1
+Adafruit_NeoPixel pixels(NUMPIXELS, pin.led, NEO_GRB + NEO_KHZ800);
 
 //////////////////////
 // Liblo OSC server //
@@ -284,6 +298,10 @@ void setup() {
         Serial.begin(115200);
     #endif
 
+    // Set up I2C clock
+    Wire.begin(SDA_PIN, SCL_PIN);
+    Wire.setClock(I2CUPDATE_FREQ); // Fast mode
+
     // Disable WiFi power save
     esp_wifi_set_ps(WIFI_PS_NONE);
 
@@ -293,10 +311,10 @@ void setup() {
     baseNamespace.append("/");
     oscNamespace = baseNamespace;
 
-    #ifdef ARDUINO_LOLIN_D32_PRO // LED init for WEMOS boards
-      ledcSetup(0, 5000, 8);
-      ledcAttachPin(pin.led, 0);
-    #endif
+    // Initialise LED
+    pinMode(POWER_PIN, OUTPUT);
+    digitalWrite(POWER_PIN, HIGH);
+    pixels.begin();
 
     std::cout << "    Initializing button configuration... ";
     if (button.initButton(pin.button)) {
@@ -319,23 +337,75 @@ void setup() {
     std::cout << "    Initializing touch sensor... ";
     std::fill_n(lm.touchMin, TSTICK_SIZE, 0);
     std::fill_n(lm.touchMax, TSTICK_SIZE, 1);
-    #ifdef touch_TRILL
+
+    if (TSTICK_SIZE == 30) {
         if (touch.initTouch()) {
             touch.touchSize = TSTICK_SIZE;
             std::cout << "done" << std::endl;
         } else {
             std::cout << "initialization failed!" << std::endl;
         }
-        if (TSTICK_SIZE > 30) {
-            if (touch2.initTouch(touchI2C)) {
-                    touch.touchSize = 30;
-                    touch2.touchSize = TSTICK_SIZE-30;
-                    std::cout << "done" << std::endl;
-                } else {
-                    std::cout << "initialization failed!" << std::endl;
-                }
+    }
+    if (TSTICK_SIZE == 60) {
+        if (touch.initTouch()) {
+            touch.touchSize = 30;
+            std::cout << "touch 1 done" << std::endl;
+        } else {
+            std::cout << "initialization failed!" << std::endl;
         }
-    #endif
+        if (touch2.initTouch(touchI2C_1)) {
+            touch2.touchSize = 30;
+            std::cout << "touch 2 done" << std::endl;
+        } else {
+            std::cout << "initialization failed!" << std::endl;
+        }
+    }
+    if (TSTICK_SIZE == 90) {
+        if (touch.initTouch()) {
+            touch.touchSize = 30;
+            std::cout << "touch 1 done" << std::endl;
+        } else {
+            std::cout << "initialization failed!" << std::endl;
+        }
+        if (touch2.initTouch(touchI2C_1)) {
+            touch2.touchSize = 30;
+            std::cout << "touch 2 done" << std::endl;
+        } else {
+            std::cout << "initialization failed!" << std::endl;
+        }
+        if (touch3.initTouch(touchI2C_2)) {
+            touch3.touchSize = 30;
+            std::cout << "done" << std::endl;
+        } else {
+            std::cout << "initialization failed!" << std::endl;
+        }
+    }
+    if (TSTICK_SIZE == 120 ) {
+        if (touch.initTouch()) {
+            touch.touchSize = 30;
+            std::cout << "touch 1 done" << std::endl;
+        } else {
+            std::cout << "initialization failed!" << std::endl;
+        }
+        if (touch2.initTouch(touchI2C_1)) {
+            touch2.touchSize = 30;
+            std::cout << "touch 2 done" << std::endl;
+        } else {
+            std::cout << "initialization failed!" << std::endl;
+        }
+        if (touch3.initTouch(touchI2C_2)) {
+            touch3.touchSize = 30;
+            std::cout << "done" << std::endl;
+        } else {
+            std::cout << "initialization failed!" << std::endl;
+        }
+        if (touch4.initTouch(touchI2C_3)) {
+            touch4.touchSize = 30;
+            std::cout << "done" << std::endl;
+        } else {
+            std::cout << "initialization failed!" << std::endl;
+        }
+    }
 
     std::cout << "    Initializing Liblo server/client at " << puara.getLocalPORTStr() << " ... ";
     osc1 = lo_address_new(puara.getIP1().c_str(), puara.getPORT1Str().c_str());
@@ -410,16 +480,32 @@ void loop() {
             touch2.readTouch();
             touch2.cookData();
         }
+        if (TSTICK_SIZE>60) {
+            touch3.readTouch();
+            touch3.cookData();
+        }
+        if (TSTICK_SIZE>90) {
+            touch4.readTouch();
+            touch4.cookData();
+        }
         for (int i = 0; i < TSTICK_SIZE; ++i) {
             if (i < 30) {
                 mergedtouch[i] = touch.touch[i];
                 mergeddiscretetouch[i] = touch.discreteTouch[i];
                 mergednormalisedtouch[i] = touch.normTouch[i];
-            } else {
+            } else if (i < 60) {
                 mergedtouch[i] = touch2.touch[i-30];
                 mergeddiscretetouch[i] = touch2.discreteTouch[i-30];
                 mergednormalisedtouch[i] = touch2.normTouch[i-30];
-            }
+            } else if (i < 90) {
+                mergedtouch[i] = touch3.touch[i-60];
+                mergeddiscretetouch[i] = touch3.discreteTouch[i-60];
+                mergednormalisedtouch[i] = touch3.normTouch[i-60];
+            } else {
+                mergedtouch[i] = touch4.touch[i-90];
+                mergeddiscretetouch[i] = touch4.discreteTouch[i-90];
+                mergednormalisedtouch[i] = touch4.normTouch[i-90];
+            } 
         }
         gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
     #endif
@@ -857,37 +943,29 @@ void loop() {
     }
 
     // Set LED - connection status and battery level
-    #ifdef ARDUINO_LOLIN_D32_PRO
-        if (battery.percentage < 10) {        // low battery - flickering
-        led.setInterval(75);
-        led_var.ledValue = led.blink(255, 50);
-        ledcWrite(0, led_var.ledValue);
-        } else {
-            if (puara.get_StaIsConnected()) { // blinks when connected, cycle when disconnected
-                led.setInterval(1000);
-                led_var.ledValue = led.blink(255, 40);
-                ledcWrite(0, led_var.ledValue);
-            } else {
-                led.setInterval(4000);
-                led_var.ledValue = led.cycle(led_var.ledValue, 0, 255);
-                ledcWrite(0, led_var.ledValue);
-            }
-        }
-    #elif defined(ARDUINO_TINYPICO)
-        if (battery.percentage < 10) {                // low battery (red)
+
+        if (battery.percentage < 10) {
             led.setInterval(20);
             led_var.color = led.blink(255, 20);
-            tinypico.DotStar_SetPixelColor(led_var.color, 0, 0);
+            for (int i=0; i<NUMPIXELS; i++) {
+                pixels.setPixelColor(i, pixels.Color(led_var.color,0,0));   // low battery (red)
+                pixels.show();
+            }
         } else {
             if (puara.get_StaIsConnected()) {         // blinks when connected, cycle when disconnected
                 led.setInterval(1000);                // RGB: 0, 128, 255 (Dodger Blue)
                 led_var.color = led.blink(255,20);
-                tinypico.DotStar_SetPixelColor(0, uint8_t(led_var.color/2), led_var.color);
+                for (int i=0; i<NUMPIXELS; i++) {
+                    pixels.setPixelColor(i, pixels.Color(0, uint8_t(led_var.color/2), led_var.color));   // low battery (red)
+                    pixels.show();
+                }
             } else {
                 led.setInterval(4000);
                 led_var.color = led.cycle(led_var.color, 0, 255);
-                tinypico.DotStar_SetPixelColor(0, uint8_t(led_var.color/2), led_var.color);
+                for (int i=0; i<NUMPIXELS; i++) {
+                    pixels.setPixelColor(i, pixels.Color(0, uint8_t(led_var.color/2), led_var.color));   // low battery (red)
+                    pixels.show();
+                }
             }
-        }
-    #endif    
+        } 
 }

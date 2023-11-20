@@ -180,7 +180,16 @@ void FUELGAUGE::getparameters() {
     tempco = readReg16Bit(TEMPCO_REG);
     fullcap = readReg16Bit(FULLCAP_REG);
     fullcapnorm = readReg16Bit(FULLCAPNORM_REG);
-    cycles = readReg16Bit(CYCLES_REG);
+    uint16_t raw_cycles = readReg16Bit(CYCLES_REG);
+
+    int old_val = (cycles >> 6) & 0x1;
+    int cur_val = (raw_cycles >> 6) & 0x1;
+    cycles = raw_cycles; 
+
+    // Only save model parameters every 64% change in battery (equal to when bit 6 changes)
+    if (old_val != cur_val) {
+        save_params = true;
+    }
 }
 
 void FUELGAUGE::getBatteryData() {

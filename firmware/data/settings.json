@@ -3,6 +3,26 @@
         {
             "name": "fsr_offset",
             "value": 0
+        },
+        {
+            "name": "fuelgauge_chargecycles",
+            "value": 0
+        },
+        {
+            "name": "fuelgauge_rcomp",
+            "value": 0
+        },
+        {
+            "name": "fuelgauge_tempco",
+            "value": 0
+        },
+        {
+            "name": "fuelgauge_fullcap",
+            "value": 0
+        },
+        {
+            "name": "fuelgauge_fullcapnom",
+            "value": 0
         }
     ]
 }

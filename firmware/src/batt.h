@@ -99,6 +99,7 @@ class FUELGAUGE
         uint16_t fullcap = 0;               // Capacity of the battery when full (mAh)
         uint16_t cycles = 0;                // Number of charge cycles
         uint16_t fullcapnorm = 0;           // Capacity of the battery when full, normalised (%)
+        bool save_params = false;
 
         // methods
         // Initialise Fuel Gauge
