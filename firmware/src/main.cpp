@@ -76,22 +76,16 @@ const int I2CUPDATE_FREQ = 400000;
   
 struct BatteryData {
     unsigned int percentage = 0;
-    unsigned int tinypico_percentage = 0;
-    float tinypico_voltage = 0;
-    unsigned int lastPercentage = 0;
     float voltage = 0;
     unsigned int current = 0;
     float TTE = 0;
     bool status = false; // is there a battery
-    bool tinypico_status = false; // is there a battery tinypico
     unsigned int rsense = 0;
     unsigned int capacity = 0;
     unsigned int designcap = 0;
     float value;
     unsigned long timer = 0;
-    int interval = 1000; // in ms (1/f)
-    int queueAmount = 10; // # of values stored
-    std::deque<int> filterArray; // store last values
+    int interval = 60000; // in ms (1/f)
 } battery;
 
 FUELGAUGE fuelgauge;
@@ -341,7 +335,7 @@ void setup() {
     if (TSTICK_SIZE == 30) {
         if (touch.initTouch()) {
             touch.touchSize = TSTICK_SIZE;
-            std::cout << "done" << std::endl;
+            std::cout << "touch 1 done" << std::endl;
         } else {
             std::cout << "initialization failed!" << std::endl;
         }
@@ -375,7 +369,7 @@ void setup() {
         }
         if (touch3.initTouch(touchI2C_2)) {
             touch3.touchSize = 30;
-            std::cout << "done" << std::endl;
+            std::cout << "touch 3 done" << std::endl;
         } else {
             std::cout << "initialization failed!" << std::endl;
         }
@@ -395,13 +389,13 @@ void setup() {
         }
         if (touch3.initTouch(touchI2C_2)) {
             touch3.touchSize = 30;
-            std::cout << "done" << std::endl;
+            std::cout << "touch 3 done" << std::endl;
         } else {
             std::cout << "initialization failed!" << std::endl;
         }
         if (touch4.initTouch(touchI2C_3)) {
             touch4.touchSize = 30;
-            std::cout << "done" << std::endl;
+            std::cout << "touch 4 done" << std::endl;
         } else {
             std::cout << "initialization failed!" << std::endl;
         }
@@ -461,11 +455,6 @@ void setup() {
 //////////
 
 void loop() {
-
-    //std::cout << gestures.getAccelX() << "," << gestures.getAccelY() << "," << gestures.getAccelZ() << "," <<
-    //             gestures.getGyroX() << "," << gestures.getGyroY() << "," << gestures.getGyroZ() << "," <<
-    //             gestures.getMagX() << "," << gestures.getMagY() << "," << gestures.getMagZ() << "\n";
-
     mpr_dev_poll(lm_dev, 0);
 
     button.readButton();
@@ -473,42 +462,40 @@ void loop() {
     fsr.readFsr();
 
     // Read Touch
-    #ifdef touch_TRILL
-        touch.readTouch();
-        touch.cookData();
-        if (TSTICK_SIZE>30) {
-            touch2.readTouch();
-            touch2.cookData();
-        }
-        if (TSTICK_SIZE>60) {
-            touch3.readTouch();
-            touch3.cookData();
-        }
-        if (TSTICK_SIZE>90) {
-            touch4.readTouch();
-            touch4.cookData();
-        }
-        for (int i = 0; i < TSTICK_SIZE; ++i) {
-            if (i < 30) {
-                mergedtouch[i] = touch.touch[i];
-                mergeddiscretetouch[i] = touch.discreteTouch[i];
-                mergednormalisedtouch[i] = touch.normTouch[i];
-            } else if (i < 60) {
-                mergedtouch[i] = touch2.touch[i-30];
-                mergeddiscretetouch[i] = touch2.discreteTouch[i-30];
-                mergednormalisedtouch[i] = touch2.normTouch[i-30];
-            } else if (i < 90) {
-                mergedtouch[i] = touch3.touch[i-60];
-                mergeddiscretetouch[i] = touch3.discreteTouch[i-60];
-                mergednormalisedtouch[i] = touch3.normTouch[i-60];
-            } else {
-                mergedtouch[i] = touch4.touch[i-90];
-                mergeddiscretetouch[i] = touch4.discreteTouch[i-90];
-                mergednormalisedtouch[i] = touch4.normTouch[i-90];
-            } 
-        }
-        gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
-    #endif
+    touch.readTouch();
+    touch.cookData();
+    if (TSTICK_SIZE>30) {
+        touch2.readTouch();
+        touch2.cookData();
+    }
+    if (TSTICK_SIZE>60) {
+        touch3.readTouch();
+        touch3.cookData();
+    }
+    if (TSTICK_SIZE>90) {
+        touch4.readTouch();
+        touch4.cookData();
+    }
+    for (int i = 0; i < TSTICK_SIZE; ++i) {
+        if (i < 30) {
+            mergedtouch[i] = touch.touch[i];
+            mergeddiscretetouch[i] = touch.discreteTouch[i];
+            mergednormalisedtouch[i] = touch.normTouch[i];
+        } else if (i < 60) {
+            mergedtouch[i] = touch2.touch[i-30];
+            mergeddiscretetouch[i] = touch2.discreteTouch[i-30];
+            mergednormalisedtouch[i] = touch2.normTouch[i-30];
+        } else if (i < 90) {
+            mergedtouch[i] = touch3.touch[i-60];
+            mergeddiscretetouch[i] = touch3.discreteTouch[i-60];
+            mergednormalisedtouch[i] = touch3.normTouch[i-60];
+        } else {
+            mergedtouch[i] = touch4.touch[i-90];
+            mergeddiscretetouch[i] = touch4.discreteTouch[i-90];
+            mergednormalisedtouch[i] = touch4.normTouch[i-90];
+        } 
+    }
+    gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
 
     // read battery
     if (millis() - battery.interval > battery.timer) {
