@@ -13,7 +13,7 @@ uint8_t Touch::initTouch(uint8_t I2C_addr) {
         return 0;
     }
     delay(10);
-    trillSensor.setPrescaler(1);
+    trillSensor.setPrescaler(3);
     delay(10);
     trillSensor.updateBaseline();
     delay(10);

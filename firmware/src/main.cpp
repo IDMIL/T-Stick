@@ -54,13 +54,13 @@ std::string oscNamespace;
 // Pin definitions //
 /////////////////////
 
-struct Pin {
+struct TSTICK_Pin {
     int led;     // Built In LED pin
     int fsr;
     int button;
 };
 
-Pin pin{ 10, 9, 3 };
+TSTICK_Pin pin{ 10, 9, 3 };
 
 /////////////////////
 // I2C Settings //
@@ -85,7 +85,7 @@ struct BatteryData {
     unsigned int designcap = 0;
     float value;
     unsigned long timer = 0;
-    int interval = 60000; // in ms (1/f)
+    int interval = 5000; // in ms (1/f)
 } battery;
 
 FUELGAUGE fuelgauge;
@@ -162,11 +162,11 @@ struct Led_variables {
     uint8_t color = 0;
 } led_var;
 
-#include "Adafruit_NeoPixel.h"
+#include "FastLED.h"
 #define POWER_PIN 46
-#define NUMPIXELS 1
-Adafruit_NeoPixel pixels(NUMPIXELS, pin.led, NEO_GRB + NEO_KHZ800);
-
+#define NUM_LEDS 1
+#define DATA_PIN 10
+CRGB leds[NUM_LEDS];
 //////////////////////
 // Liblo OSC server //
 //////////////////////
@@ -308,7 +308,10 @@ void setup() {
     // Initialise LED
     pinMode(POWER_PIN, OUTPUT);
     digitalWrite(POWER_PIN, HIGH);
-    pixels.begin();
+    FastLED.addLeds<SK6812, DATA_PIN, RGB>(leds, NUM_LEDS); 
+    FastLED.setBrightness(128);
+    leds[0] = CRGB::Blue;
+    FastLED.show();
 
     std::cout << "    Initializing button configuration... ";
     if (button.initButton(pin.button)) {
@@ -501,6 +504,7 @@ void loop() {
     if (millis() - battery.interval > battery.timer) {
         // Reset battery timer and set battery event as true
         battery.timer = millis();
+        event.battery = true;
 
         // Read battery stats from fuel gauge
         fuelgauge.getBatteryData();
@@ -599,7 +603,7 @@ void loop() {
     if (sensors.tap != gestures.getButtonTap()) {sensors.tap = gestures.getButtonTap(); event.tap = true; } else { event.tap = false; }
     if (sensors.dtap != gestures.getButtonDTap()) {sensors.dtap = gestures.getButtonDTap(); event.dtap = true; } else { event.dtap = false; }
     if (sensors.ttap != gestures.getButtonTTap()) {sensors.ttap = gestures.getButtonTTap(); event.ttap = true; } else { event.ttap = false; }
-    if (sensors.battery != battery.percentage) {sensors.battery = battery.percentage; event.battery = true; } else { event.battery = false; }
+    // if (sensors.battery != battery.percentage) {sensors.battery = battery.percentage; event.battery = true; } else { event.battery = false; }
 
     // updating libmapper signals
     mpr_sig_set_value(lm.fsr, 0, 1, MPR_INT32, &sensors.fsr);
@@ -1030,7 +1034,8 @@ void loop() {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
             lo_send(osc1, oscNamespace.c_str(), "i", battery.rsense);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/status");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.status);          
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.status);       
+            event.battery = false;   
         }
     }
     if (puara.IP2_ready()) {
@@ -1091,28 +1096,28 @@ void loop() {
 
     // Set LED - connection status and battery level
 
-        if (battery.percentage < 10) {
-            led.setInterval(20);
-            led_var.color = led.blink(255, 20);
-            for (int i=0; i<NUMPIXELS; i++) {
-                pixels.setPixelColor(i, pixels.Color(led_var.color,0,0));   // low battery (red)
-                pixels.show();
-            }
-        } else {
-            if (puara.get_StaIsConnected()) {         // blinks when connected, cycle when disconnected
-                led.setInterval(1000);                // RGB: 0, 128, 255 (Dodger Blue)
-                led_var.color = led.blink(255,20);
-                for (int i=0; i<NUMPIXELS; i++) {
-                    pixels.setPixelColor(i, pixels.Color(0, uint8_t(led_var.color/2), led_var.color));   // low battery (red)
-                    pixels.show();
-                }
-            } else {
-                led.setInterval(4000);
-                led_var.color = led.cycle(led_var.color, 0, 255);
-                for (int i=0; i<NUMPIXELS; i++) {
-                    pixels.setPixelColor(i, pixels.Color(0, uint8_t(led_var.color/2), led_var.color));   // low battery (red)
-                    pixels.show();
-                }
-            }
-        } 
+        // if (battery.percentage < 10) {
+        //     led.setInterval(20);
+        //     led_var.color = led.blink(255, 20);
+        //     for (int i=0; i<NUMPIXELS; i++) {
+        //         pixels.setPixelColor(i, pixels.Color(led_var.color,0,0));   // low battery (red)
+        //         pixels.show();
+        //     }
+        // } else {
+        //     if (puara.get_StaIsConnected()) {         // blinks when connected, cycle when disconnected
+        //         led.setInterval(1000);                // RGB: 0, 128, 255 (Dodger Blue)
+        //         led_var.color = led.blink(255,20);
+        //         for (int i=0; i<NUMPIXELS; i++) {
+        //             pixels.setPixelColor(i, pixels.Color(0, uint8_t(led_var.color/2), led_var.color));   // low battery (red)
+        //             pixels.show();
+        //         }
+        //     } else {
+        //         led.setInterval(4000);
+        //         led_var.color = led.cycle(led_var.color, 0, 255);
+        //         for (int i=0; i<NUMPIXELS; i++) {
+        //             pixels.setPixelColor(i, pixels.Color(0, uint8_t(led_var.color/2), led_var.color));   // low battery (red)
+        //             pixels.show();
+        //         }
+        //     }
+        // } 
 }
