@@ -11,7 +11,7 @@
         "-DBOARD_HAS_PSRAM",
         "-DESP32S3_DEV",
         "-DARDUINO_USB_MODE=1",
-        "-DARDUINO_USB_CDC_ON_BOOT=1"
+        "-DARDUINO_USB_CDC_ON_BOOT=0"
       ],
       "f_cpu": "240000000L",
       "f_flash": "80000000L",

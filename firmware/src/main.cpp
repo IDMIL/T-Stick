@@ -308,9 +308,9 @@ void setup() {
     // Initialise LED
     pinMode(POWER_PIN, OUTPUT);
     digitalWrite(POWER_PIN, HIGH);
-    FastLED.addLeds<SK6812, DATA_PIN, RGB>(leds, NUM_LEDS); 
+    FastLED.addLeds<SK6812, DATA_PIN, GRB>(leds, NUM_LEDS); 
     FastLED.setBrightness(128);
-    leds[0] = CRGB::Blue;
+    fill_solid( leds, NUM_LEDS, CRGB::Red);
     FastLED.show();
 
     std::cout << "    Initializing button configuration... ";
