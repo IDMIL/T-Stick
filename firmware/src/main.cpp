@@ -309,7 +309,7 @@ void setup() {
     pinMode(POWER_PIN, OUTPUT);
     digitalWrite(POWER_PIN, HIGH);
     FastLED.addLeds<SK6812, DATA_PIN, GRB>(leds, NUM_LEDS); 
-    FastLED.setBrightness(128);
+    FastLED.setBrightness(64);
     fill_solid( leds, NUM_LEDS, CRGB::Red);
     FastLED.show();
 
