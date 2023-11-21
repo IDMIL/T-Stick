@@ -314,9 +314,6 @@ void setup() {
     oscNamespace = baseNamespace;
 
     // Initialise LED
-    // pinMode(GPIO_NUM_46, OUTPUT);
-    // pinMode(DATA_PIN, OUTPUT);
-    // digitalWrite(POWER_PIN, HIGH);
     // FastLED.addLeds<SK6812, DATA_PIN, GRB>(leds, NUM_LEDS); 
     // FastLED.setBrightness(64);
     // fill_solid( leds, NUM_LEDS, CRGB::Green);
