@@ -60,7 +60,7 @@ struct TSTICK_Pin {
     int button;
 };
 
-TSTICK_Pin pin{ 10, 9, 3 };
+TSTICK_Pin pin{ 10, 3, 9 };
 
 /////////////////////
 // I2C Settings //
@@ -85,7 +85,7 @@ struct BatteryData {
     unsigned int designcap = 0;
     float value;
     unsigned long timer = 0;
-    int interval = 5000; // in ms (1/f)
+    int interval = 1000; // in ms (1/f)
 } battery;
 
 FUELGAUGE fuelgauge;
@@ -111,6 +111,10 @@ fuelgauge_config fg_config = {
 #include "button.h"
 
 Button button;
+
+void buttton_isr() {
+    button.readButton();
+}
 
 ////////////////////////////////
 // Include FSR function files //
@@ -269,6 +273,8 @@ struct Sensors {
     int fsr;
     float squeeze;
     int battery;
+    int current;
+    float voltage;
 } sensors;
 
 struct Event {
@@ -281,6 +287,8 @@ struct Event {
     bool brush = false;
     bool rub = false;
     bool battery;
+    bool current;
+    bool voltage;
 } event;
 
 ///////////
@@ -288,9 +296,9 @@ struct Event {
 ///////////
 
 void setup() {
-    #ifdef Arduino_h
-        Serial.begin(115200);
-    #endif
+    // #ifdef Arduino_h
+    //     Serial.begin(115200);
+    // #endif
 
     // Set up I2C clock
     Wire.begin(SDA_PIN, SCL_PIN);
@@ -306,12 +314,13 @@ void setup() {
     oscNamespace = baseNamespace;
 
     // Initialise LED
-    pinMode(POWER_PIN, OUTPUT);
-    digitalWrite(POWER_PIN, HIGH);
-    FastLED.addLeds<SK6812, DATA_PIN, GRB>(leds, NUM_LEDS); 
-    FastLED.setBrightness(64);
-    fill_solid( leds, NUM_LEDS, CRGB::Red);
-    FastLED.show();
+    // pinMode(GPIO_NUM_46, OUTPUT);
+    // pinMode(DATA_PIN, OUTPUT);
+    // digitalWrite(POWER_PIN, HIGH);
+    // FastLED.addLeds<SK6812, DATA_PIN, GRB>(leds, NUM_LEDS); 
+    // FastLED.setBrightness(64);
+    // fill_solid( leds, NUM_LEDS, CRGB::Green);
+    // FastLED.show();
 
     std::cout << "    Initializing button configuration... ";
     if (button.initButton(pin.button)) {
@@ -319,6 +328,8 @@ void setup() {
     } else {
         std::cout << "initialization failed!" << std::endl;
     }
+    // Initialise Button Interrupt
+    attachInterrupt(pin.button, &buttton_isr, CHANGE);
 
     std::cout << "    Initializing IMU... ";
     imu.begin(WIRE_PORT,AD0_VAL);;
@@ -443,14 +454,13 @@ void setup() {
     std::cout << "done" << std::endl;
 
     // Setting Deep sleep wake button
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_15,0); // 1 = High, 0 = Low
+    esp_sleep_enable_ext0_wakeup(GPIO_NUM_9,0); // 1 = High, 0 = Low
     
     // Using Serial.print and delay to prevent interruptions
     delay(500);
-    Serial.println(); 
-    Serial.println(puara.get_dmi_name().c_str());
-    Serial.println("Edu Meneses\nMetalab - Société des Arts Technologiques (SAT)\nIDMIL - CIRMMT - McGill University");
-    Serial.print("Firmware version: "); Serial.println(firmware_version); Serial.println("\n");
+    std::cout << puara.get_dmi_name().c_str() << std::endl;
+    std::cout << "Edu Meneses\nMetalab - Société des Arts Technologiques (SAT)\nIDMIL - CIRMMT - McGill University" << std::endl;
+    std::cout << "Firmware version: \n" << firmware_version<< "\n" << std::endl;
 }
 
 //////////
@@ -459,9 +469,16 @@ void setup() {
 
 void loop() {
     mpr_dev_poll(lm_dev, 0);
+    // Update button
+    gestures.updateTrigButton(button.getButton());
 
-    button.readButton();
-    
+    // go to deep sleep if double press button
+    if (gestures.getButtonDTap()){
+        std::cout << "\nEntering deep sleep.\n\nGoodbye!\n" << std::endl;
+        delay(1000);
+        esp_deep_sleep_start();
+    }
+
     fsr.readFsr();
 
     // Read Touch
@@ -504,7 +521,6 @@ void loop() {
     if (millis() - battery.interval > battery.timer) {
         // Reset battery timer and set battery event as true
         battery.timer = millis();
-        event.battery = true;
 
         // Read battery stats from fuel gauge
         fuelgauge.getBatteryData();
@@ -534,18 +550,7 @@ void loop() {
     gestures.setMagnetometerValues(imu.magX(),
                                     imu.magY(),
                                     imu.magZ());
-
-    // gestures.updateInertialGestures();
-    gestures.updateTrigButton(button.getButton());
     gestures.updateInertialGestures();
-    gestures.updateTrigButton(button.getButton());
-
-    // go to deep sleep if double press button
-    if (gestures.getButtonDTap()){
-        std::cout << "\nEntering deep sleep.\n\nGoodbye!\n" << std::endl;
-        delay(1000);
-        esp_deep_sleep_start();
-    }
 
     // Preparing arrays for libmapper signals
     sensors.fsr = fsr.getValue();
@@ -603,7 +608,10 @@ void loop() {
     if (sensors.tap != gestures.getButtonTap()) {sensors.tap = gestures.getButtonTap(); event.tap = true; } else { event.tap = false; }
     if (sensors.dtap != gestures.getButtonDTap()) {sensors.dtap = gestures.getButtonDTap(); event.dtap = true; } else { event.dtap = false; }
     if (sensors.ttap != gestures.getButtonTTap()) {sensors.ttap = gestures.getButtonTTap(); event.ttap = true; } else { event.ttap = false; }
-    // if (sensors.battery != battery.percentage) {sensors.battery = battery.percentage; event.battery = true; } else { event.battery = false; }
+    if (sensors.battery != battery.percentage) {sensors.battery = battery.percentage; event.battery = true; } else { event.battery = false; }
+    if (sensors.current != battery.current) {sensors.current = battery.current; event.current = true; } else { event.current = false; }
+    if (sensors.voltage != battery.voltage) {sensors.voltage = battery.voltage; event.voltage = true; } else { event.voltage = false; }
+
 
     // updating libmapper signals
     mpr_sig_set_value(lm.fsr, 0, 1, MPR_INT32, &sensors.fsr);
@@ -1023,19 +1031,20 @@ void loop() {
             // Battery Data
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/percentage");
             lo_send(osc1, oscNamespace.c_str(), "i", battery.percentage);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
-            lo_send(osc1, oscNamespace.c_str(), "f", battery.voltage);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/status");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.status);       
+        }
+        if (event.current) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
             lo_send(osc1, oscNamespace.c_str(), "i", battery.current);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
             lo_send(osc1, oscNamespace.c_str(), "f", battery.TTE);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.rsense);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/status");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.status);       
-            event.battery = false;   
+        }
+        if (event.voltage) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.voltage);
         }
     }
     if (puara.IP2_ready()) {
@@ -1079,18 +1088,20 @@ void loop() {
             // Battery Data
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/percentage");
             lo_send(osc2, oscNamespace.c_str(), "i", battery.percentage);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
-            lo_send(osc2, oscNamespace.c_str(), "f", battery.voltage);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
+            lo_send(osc2, oscNamespace.c_str(), "i", battery.capacity);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/status");
+            lo_send(osc2, oscNamespace.c_str(), "i", battery.status);       
+        }
+        if (event.current) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
             lo_send(osc2, oscNamespace.c_str(), "i", battery.current);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
             lo_send(osc2, oscNamespace.c_str(), "f", battery.TTE);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
-            lo_send(osc2, oscNamespace.c_str(), "i", battery.capacity);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/rsense");
-            lo_send(osc2, oscNamespace.c_str(), "i", battery.rsense);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/status");
-            lo_send(osc2, oscNamespace.c_str(), "i", battery.status);         
+        }
+        if (event.voltage) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
+            lo_send(osc2, oscNamespace.c_str(), "f", battery.voltage);
         }
     }
 
