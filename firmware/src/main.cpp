@@ -136,6 +136,55 @@ ICM_20948_I2C imu;
 // On the SparkFun 9DoF IMU breakout the default is 1, and when the ADR jumper is closed the value becomes 0
 #define AD0_VAL 0
 
+void initIMU() {
+    // Initialise IMU based on Sparkfun IMC20948 library Advanced Example
+    // https://github.com/sparkfun/SparkFun_ICM-20948_ArduinoLibrary/blob/main/examples/Arduino/Example2_Advanced/Example2_Advanced.ino
+    imu.begin(WIRE_PORT,AD0_VAL);
+
+    // Reset IMU so it is in known stable
+    imu.swReset();
+    delay(200);
+
+    // wake up IMu
+    imu.sleep(false);
+    imu.lowPower(false);
+
+    // set continuous sample mode
+    imu.setSampleMode((ICM_20948_Internal_Acc | ICM_20948_Internal_Gyr), ICM_20948_Sample_Mode_Continuous);
+
+    // Set scale settings
+    ICM_20948_fss_t myFSS; // This uses a "Full Scale Settings" structure that can contain values for all configurable sensors
+    myFSS.a = gpm8; 
+    myFSS.g = dps2000;
+    imu.setFullScale((ICM_20948_Internal_Acc | ICM_20948_Internal_Gyr), myFSS);
+
+    // Set up Digital Low-Pass Filter configuration
+    ICM_20948_dlpcfg_t myDLPcfg;    // Similar to FSS, this uses a configuration structure for the desired sensors
+    myDLPcfg.a = acc_d473bw_n499bw; // (ICM_20948_ACCEL_CONFIG_DLPCFG_e)
+                                    // acc_d246bw_n265bw      - means 3db bandwidth is 246 hz and nyquist bandwidth is 265 hz
+                                    // acc_d111bw4_n136bw
+                                    // acc_d50bw4_n68bw8
+                                    // acc_d23bw9_n34bw4
+                                    // acc_d11bw5_n17bw
+                                    // acc_d5bw7_n8bw3        - means 3 db bandwidth is 5.7 hz and nyquist bandwidth is 8.3 hz
+                                    // acc_d473bw_n499bw
+    myDLPcfg.g = gyr_d361bw4_n376bw5; // (ICM_20948_GYRO_CONFIG_1_DLPCFG_e)
+                                    // gyr_d196bw6_n229bw8
+                                    // gyr_d151bw8_n187bw6
+                                    // gyr_d119bw5_n154bw3
+                                    // gyr_d51bw2_n73bw3
+                                    // gyr_d23bw9_n35bw9
+                                    // gyr_d11bw6_n17bw8
+                                    // gyr_d5bw7_n8bw9
+                                    // gyr_d361bw4_n376bw5
+    imu.setDLPFcfg((ICM_20948_Internal_Acc | ICM_20948_Internal_Gyr), myDLPcfg);
+    ICM_20948_Status_e accDLPEnableStat = imu.enableDLPF(ICM_20948_Internal_Acc, false);
+    ICM_20948_Status_e gyrDLPEnableStat = imu.enableDLPF(ICM_20948_Internal_Gyr, false);
+
+    // Enable magnetometer
+    imu.startupMagnetometer();
+}
+
 //////////////////////////////////////////////
 // Include Touch stuff                      //
 //////////////////////////////////////////////
@@ -329,7 +378,7 @@ void setup() {
     attachInterrupt(pin.button, &buttton_isr, CHANGE);
 
     std::cout << "    Initializing IMU... ";
-    imu.begin(WIRE_PORT,AD0_VAL);;
+    initIMU();
     std::cout << "done" << std::endl;
 
     std::cout << "    Initializing FSR... ";
@@ -538,9 +587,9 @@ void loop() {
 
     // read IMU and update puara-gestures
     // In g's
-    gestures.setAccelerometerValues(imu.accX(),
-                                    imu.accY(),
-                                    imu.accZ());
+    gestures.setAccelerometerValues(imu.accX() / 1000,
+                                    imu.accY() / 1000,
+                                    imu.accZ() / 1000);
     gestures.setGyroscopeValues(imu.gyrX(),
                                 imu.gyrY(),
                                 imu.gyrZ());
@@ -561,9 +610,9 @@ void loop() {
     sensors.gyro[1] = gestures.getGyroY() * M_PI / 180;
     sensors.gyro[2] = gestures.getGyroZ() * M_PI / 180;
     // Convert mag from Gauss to uTesla
-    sensors.magn[0] = gestures.getMagX() / 10000;
-    sensors.magn[1] = gestures.getMagY() / 10000;
-    sensors.magn[2] = gestures.getMagZ() / 10000;
+    sensors.magn[0] = gestures.getMagX();
+    sensors.magn[1] = gestures.getMagY();
+    sensors.magn[2] = gestures.getMagZ();
     // Orientation quaternion
     sensors.quat[0] = gestures.getOrientationQuaternion().w;
     sensors.quat[1] = gestures.getOrientationQuaternion().x;
