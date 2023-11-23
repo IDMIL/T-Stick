@@ -190,7 +190,7 @@ void initIMU() {
     // Enable and setup interrupts
     imu.cfgIntActiveLow(true);
     imu.cfgIntOpenDrain(false);
-    imu.cfgIntLatch(true);
+    imu.cfgIntLatch(false);
     imu.intEnableRawDataReady(true);
 }
 
@@ -395,9 +395,7 @@ void setup() {
         // Compute number of boards from TSTICK_SIZE
         float num_boards = TSTICK_SIZE / TRILL_BASETOUCHSIZE;
         if (touch.initTouch(num_boards, TRILL_NOISETHRESHOLD)) {
-            touch.touchSize = TSTICK_SIZE;
-            pinMode(TOUCH_INT, INPUT);
-            attachInterrupt(TOUCH_INT, touch_isr, RISING);
+            event.touchReady = true;
             std::cout << "done" << std::endl;
         } else {
             std::cout << "initialization failed!" << std::endl;
@@ -502,7 +500,7 @@ void loop() {
     // Read FSR
     fsr.readFsr();
 
-    if (event.touchReady && touch.running) {
+    if (event.touchReady) {
         // Read Touch
         touch.readTouch();
         touch.cookData();
@@ -812,7 +810,9 @@ void loop() {
                 lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchBottom);
 
                 // Reset touch event until next interrupt
+                #ifdef touch_ENCHANTI
                 event.touchReady = false;
+                #endif
             }
             if (event.mimu) {
                 oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/accl");

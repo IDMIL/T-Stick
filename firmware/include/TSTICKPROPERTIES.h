@@ -48,7 +48,7 @@ Define Interrupt pins for sensors
 /*
 Enable second OSC address
 */
-#define OSC2
+// #define OSC2
 
 /*
 *******************************************************************

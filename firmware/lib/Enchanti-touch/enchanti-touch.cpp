@@ -73,7 +73,7 @@ void EnchantiTouch::cookData() {
         // Set other data vectors
         if (touch[i] != 0) {
             discreteTouch[i] = 1;
-            normTouch[i] = float(data[i]) / float(maxTouchValue);
+            normTouch[i] = (data[i] *100) / maxTouchValue;
         } else {
             normTouch[i] = 0;
             discreteTouch[i] = 0;

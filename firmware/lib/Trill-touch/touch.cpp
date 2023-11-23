@@ -45,7 +45,7 @@ uint8_t Touch::initTouch(float num, int threshold, int mode) {
 }
 
 void Touch::readTouch() {
-    for (int i; i < ceil(num_boards); i++) {
+    for (int i=0; i < ceil(num_boards); i++) {
         touchArray[i]->requestRawData();
         for (int k=0; k<30; k++) {
             if (touchArray[i]->rawDataAvailable() > 0) {

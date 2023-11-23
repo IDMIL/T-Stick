@@ -40,7 +40,7 @@ class EnchantiTouch
         // Touch arrays
         uint16_t data[120];
         uint16_t touch[120];
-        float normTouch[120];
+        int normTouch[120];
         int discreteTouch[120];
 
         
