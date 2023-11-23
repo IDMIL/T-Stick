@@ -4115,7 +4115,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 02be165b-75da-4ac9-b65b-d58605da6a01)
   )
-  (text "Comms\n- SDA: IO12\n- SCL: IO11\n- USBD+: IO20\n- USBD-: IO19\nPeripherals\n- FSR: IO8\n- Button: IO9\n- UART TX: IO43\n- UART RX: IO44\n- Status LED (orange): IO15\n- Status LED (blue) I016\nInterrupts\n- IMU Interrupt: IO21\n- Fuel Gauge Interrupt: IO17\n- Touch Interrupt 1: IO4\n- Touch Interrupt 2: IO5\n- Touch Interrupt 3: IO6\n- Touch Interrupt 4: IO7"
+  (text "Comms\n- SDA: IO12\n- SCL: IO11\n- USBD+: IO20\n- USBD-: IO19\nPeripherals\n- FSR: IO8\n- Button: IO9\n- UART TX: IO43\n- UART RX: IO44\n- Status LED (orange): IO16\n- Status LED (blue) I015\nInterrupts\n- IMU Interrupt: IO21\n- Fuel Gauge Interrupt: IO17\n- Touch Interrupt 1: IO4\n- Touch Interrupt 2: IO5\n- Touch Interrupt 3: IO6\n- Touch Interrupt 4: IO7"
     (at 120.65 113.03 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 0f4ac62c-2814-4646-b773-9cd59624fd1e)

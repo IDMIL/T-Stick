@@ -18,15 +18,20 @@ unsigned int firmware_version = 231031;
 /*
   Choose the capacitive sensing board
   - Trill
-  - IDMIL Capsense board
+  - Enchanti Custom touch board
 */
-#define touch_TRILL
-// #define touch_CAPSENSE
+// #define touch_TRILL
+#define touch_ENCHANTI
 
 /*
  Define libmapper
 */
 #define LIBMAPPER
+
+/*
+ Choose if to send OSC over two IP addresses
+*/
+// #define OSC_TWO
 
 #include "Arduino.h"
 
@@ -190,18 +195,22 @@ void initIMU() {
 //////////////////////////////////////////////
 
 #ifdef touch_TRILL
-  #include "touch.h"
-  Touch touch;
-  Touch touch2;
-  Touch touch3;
-  Touch touch4;
-  uint8_t touchI2C_1 = 0x31;
-  uint8_t touchI2C_2 = 0x32;
-  uint8_t touchI2C_3 = 0x33;
-  int mergedtouch[TSTICK_SIZE]; 
-  int mergeddiscretetouch[TSTICK_SIZE]; 
-  int mergednormalisedtouch[TSTICK_SIZE]; 
+    #include "touch.h"
+    Touch touch;
+    Touch touch2;
+    Touch touch3;
+    Touch touch4;
+    uint8_t touchI2C_1 = 0x31;
+    uint8_t touchI2C_2 = 0x32;
+    uint8_t touchI2C_3 = 0x33;
 #endif
+#ifdef touch_ENCHANTI
+    #include "enchanti-touch.h"
+    EnchantiTouch touch;
+#endif
+int mergedtouch[TSTICK_SIZE]; 
+int mergeddiscretetouch[TSTICK_SIZE]; 
+int mergednormalisedtouch[TSTICK_SIZE]; 
 
 ////////////////////////////////
 // Include LED function files //
@@ -215,11 +224,9 @@ struct Led_variables {
     uint8_t color = 0;
 } led_var;
 
-#include "FastLED.h"
-#define POWER_PIN 46
-#define NUM_LEDS 1
-#define DATA_PIN 10
-CRGB leds[NUM_LEDS];
+#define BLUE_LED 15
+#define ORANGE_LED 16
+
 //////////////////////
 // Liblo OSC server //
 //////////////////////
@@ -345,10 +352,6 @@ struct Event {
 ///////////
 
 void setup() {
-    // #ifdef Arduino_h
-    //     Serial.begin(115200);
-    // #endif
-
     // Set up I2C clock
     Wire.begin(SDA_PIN, SCL_PIN);
     Wire.setClock(I2CUPDATE_FREQ); // Fast mode
@@ -363,10 +366,11 @@ void setup() {
     oscNamespace = baseNamespace;
 
     // Initialise LED
-    // FastLED.addLeds<SK6812, DATA_PIN, GRB>(leds, NUM_LEDS); 
-    // FastLED.setBrightness(64);
-    // fill_solid( leds, NUM_LEDS, CRGB::Green);
-    // FastLED.show();
+    pinMode(ORANGE_LED, OUTPUT);
+    pinMode(BLUE_LED, OUTPUT);
+
+    // Turn on orange LED to indicate setup
+    digitalWrite(ORANGE_LED, HIGH);
 
     std::cout << "    Initializing button configuration... ";
     if (button.initButton(pin.button)) {
@@ -392,74 +396,82 @@ void setup() {
     std::fill_n(lm.touchMin, TSTICK_SIZE, 0);
     std::fill_n(lm.touchMax, TSTICK_SIZE, 1);
 
-    if (TSTICK_SIZE == 30) {
-        if (touch.initTouch()) {
-            touch.touchSize = TSTICK_SIZE;
-            std::cout << "touch 1 done" << std::endl;
-        } else {
-            std::cout << "initialization failed!" << std::endl;
+    #ifdef touch_TRILL
+        if (TSTICK_SIZE == 30) {
+            if (touch.initTouch()) {
+                touch.touchSize = TSTICK_SIZE;
+                std::cout << "touch 1 done" << std::endl;
+            } else {
+                std::cout << "initialization failed!" << std::endl;
+            }
         }
-    }
-    if (TSTICK_SIZE == 60) {
-        if (touch.initTouch()) {
-            touch.touchSize = 30;
-            std::cout << "touch 1 done" << std::endl;
-        } else {
-            std::cout << "initialization failed!" << std::endl;
+        if (TSTICK_SIZE == 60) {
+            if (touch.initTouch()) {
+                touch.touchSize = 30;
+                std::cout << "touch 1 done" << std::endl;
+            } else {
+                std::cout << "initialization failed!" << std::endl;
+            }
+            if (touch2.initTouch(touchI2C_1)) {
+                touch2.touchSize = 30;
+                std::cout << "touch 2 done" << std::endl;
+            } else {
+                std::cout << "initialization failed!" << std::endl;
+            }
         }
-        if (touch2.initTouch(touchI2C_1)) {
-            touch2.touchSize = 30;
-            std::cout << "touch 2 done" << std::endl;
-        } else {
-            std::cout << "initialization failed!" << std::endl;
+        if (TSTICK_SIZE == 90) {
+            if (touch.initTouch()) {
+                touch.touchSize = 30;
+                std::cout << "touch 1 done" << std::endl;
+            } else {
+                std::cout << "initialization failed!" << std::endl;
+            }
+            if (touch2.initTouch(touchI2C_1)) {
+                touch2.touchSize = 30;
+                std::cout << "touch 2 done" << std::endl;
+            } else {
+                std::cout << "initialization failed!" << std::endl;
+            }
+            if (touch3.initTouch(touchI2C_2)) {
+                touch3.touchSize = 30;
+                std::cout << "touch 3 done" << std::endl;
+            } else {
+                std::cout << "initialization failed!" << std::endl;
+            }
         }
-    }
-    if (TSTICK_SIZE == 90) {
-        if (touch.initTouch()) {
-            touch.touchSize = 30;
-            std::cout << "touch 1 done" << std::endl;
-        } else {
-            std::cout << "initialization failed!" << std::endl;
+        if (TSTICK_SIZE == 120 ) {
+            if (touch.initTouch()) {
+                touch.touchSize = 30;
+                std::cout << "touch 1 done" << std::endl;
+            } else {
+                std::cout << "initialization failed!" << std::endl;
+            }
+            if (touch2.initTouch(touchI2C_1)) {
+                touch2.touchSize = 30;
+                std::cout << "touch 2 done" << std::endl;
+            } else {
+                std::cout << "initialization failed!" << std::endl;
+            }
+            if (touch3.initTouch(touchI2C_2)) {
+                touch3.touchSize = 30;
+                std::cout << "touch 3 done" << std::endl;
+            } else {
+                std::cout << "initialization failed!" << std::endl;
+            }
+            if (touch4.initTouch(touchI2C_3)) {
+                touch4.touchSize = 30;
+                std::cout << "touch 4 done" << std::endl;
+            } else {
+                std::cout << "initialization failed!" << std::endl;
+            }
         }
-        if (touch2.initTouch(touchI2C_1)) {
-            touch2.touchSize = 30;
-            std::cout << "touch 2 done" << std::endl;
-        } else {
-            std::cout << "initialization failed!" << std::endl;
-        }
-        if (touch3.initTouch(touchI2C_2)) {
-            touch3.touchSize = 30;
-            std::cout << "touch 3 done" << std::endl;
-        } else {
-            std::cout << "initialization failed!" << std::endl;
-        }
-    }
-    if (TSTICK_SIZE == 120 ) {
-        if (touch.initTouch()) {
-            touch.touchSize = 30;
-            std::cout << "touch 1 done" << std::endl;
-        } else {
-            std::cout << "initialization failed!" << std::endl;
-        }
-        if (touch2.initTouch(touchI2C_1)) {
-            touch2.touchSize = 30;
-            std::cout << "touch 2 done" << std::endl;
-        } else {
-            std::cout << "initialization failed!" << std::endl;
-        }
-        if (touch3.initTouch(touchI2C_2)) {
-            touch3.touchSize = 30;
-            std::cout << "touch 3 done" << std::endl;
-        } else {
-            std::cout << "initialization failed!" << std::endl;
-        }
-        if (touch4.initTouch(touchI2C_3)) {
-            touch4.touchSize = 30;
-            std::cout << "touch 4 done" << std::endl;
-        } else {
-            std::cout << "initialization failed!" << std::endl;
-        }
-    }
+    #endif
+    #ifdef touch_ENCHANTI
+        // Compute number of boards from TSTICK_SIZE
+        float num_boards = TSTICK_SIZE / BASETOUCHSIZE;
+        touch.initTouch(num_boards);
+        std::cout << "done" << std::endl;
+    #endif
 
     std::cout << "    Initializing Liblo server/client at " << puara.getLocalPORTStr() << " ... ";
     osc1 = lo_address_new(puara.getIP1().c_str(), puara.getPORT1Str().c_str());
@@ -525,42 +537,77 @@ void loop() {
         esp_deep_sleep_start();
     }
 
+    // Set LED - connection status and battery level
+    if (puara.get_StaIsConnected()) {         // blinks when connected, cycle when disconnected
+        // If connected to WiFi turn off Orange LED
+        if (digitalRead(ORANGE_LED)) {
+            digitalWrite(ORANGE_LED, LOW);
+        }
+        // Cycle LED on and Off
+        led.setInterval(1000);                // RGB: 0, 128, 255 (Dodger Blue)
+        led_var.color = led.blink(HIGH,20);
+        digitalWrite(BLUE_LED, led_var.color);
+        } else {
+        // If not connected to WiFi turn off blue LED
+        if (digitalRead(BLUE_LED)) {
+            digitalWrite(BLUE_LED, LOW);
+        }
+        // Cycle LED on and Off
+        led.setInterval(4000);
+        led_var.color = led.cycle(led_var.color, 0, 255);
+        digitalWrite(ORANGE_LED, led_var.color);
+    }
+
+    // Read FSR
     fsr.readFsr();
 
     // Read Touch
     touch.readTouch();
     touch.cookData();
-    if (TSTICK_SIZE>30) {
-        touch2.readTouch();
-        touch2.cookData();
-    }
-    if (TSTICK_SIZE>60) {
-        touch3.readTouch();
-        touch3.cookData();
-    }
-    if (TSTICK_SIZE>90) {
-        touch4.readTouch();
-        touch4.cookData();
-    }
-    for (int i = 0; i < TSTICK_SIZE; ++i) {
-        if (i < 30) {
-            mergedtouch[i] = touch.touch[i];
-            mergeddiscretetouch[i] = touch.discreteTouch[i];
-            mergednormalisedtouch[i] = touch.normTouch[i];
-        } else if (i < 60) {
-            mergedtouch[i] = touch2.touch[i-30];
-            mergeddiscretetouch[i] = touch2.discreteTouch[i-30];
-            mergednormalisedtouch[i] = touch2.normTouch[i-30];
-        } else if (i < 90) {
-            mergedtouch[i] = touch3.touch[i-60];
-            mergeddiscretetouch[i] = touch3.discreteTouch[i-60];
-            mergednormalisedtouch[i] = touch3.normTouch[i-60];
-        } else if (i < 120) {
-            mergedtouch[i] = touch4.touch[i-90];
-            mergeddiscretetouch[i] = touch4.discreteTouch[i-90];
-            mergednormalisedtouch[i] = touch4.normTouch[i-90];
-        } 
-    }
+
+    // Process touch data
+    #ifdef touch_TSTICK
+        if (TSTICK_SIZE>30) {
+            touch2.readTouch();
+            touch2.cookData();
+        }
+        if (TSTICK_SIZE>60) {
+            touch3.readTouch();
+            touch3.cookData();
+        }
+        if (TSTICK_SIZE>90) {
+            touch4.readTouch();
+            touch4.cookData();
+        }
+        for (int i = 0; i < TSTICK_SIZE; ++i) {
+            if (i < 30) {
+                mergedtouch[i] = touch.touch[i];
+                mergeddiscretetouch[i] = touch.discreteTouch[i];
+                mergednormalisedtouch[i] = touch.normTouch[i];
+            } else if (i < 60) {
+                mergedtouch[i] = touch2.touch[i-30];
+                mergeddiscretetouch[i] = touch2.discreteTouch[i-30];
+                mergednormalisedtouch[i] = touch2.normTouch[i-30];
+            } else if (i < 90) {
+                mergedtouch[i] = touch3.touch[i-60];
+                mergeddiscretetouch[i] = touch3.discreteTouch[i-60];
+                mergednormalisedtouch[i] = touch3.normTouch[i-60];
+            } else if (i < 120) {
+                mergedtouch[i] = touch4.touch[i-90];
+                mergeddiscretetouch[i] = touch4.discreteTouch[i-90];
+                mergednormalisedtouch[i] = touch4.normTouch[i-90];
+            } 
+        }
+    #endif
+    #ifdef touch_ENCHANTI
+        for (int i = 0; i < TSTICK_SIZE; ++i) {
+                mergedtouch[i] = touch.touch[i];
+                mergeddiscretetouch[i] = touch.discreteTouch[i];
+                mergednormalisedtouch[i] = touch.normTouch[i];
+        }
+    #endif
+
+    // Update touch gestures
     gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
 
     // read battery
@@ -861,6 +908,68 @@ void loop() {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "ypr");
             lo_send(osc1, oscNamespace.c_str(), "fff", sensors.ypr[0], sensors.ypr[1], sensors.ypr[2]);
     }
+
+    // Sending discrete OSC messages
+    if (puara.IP1_ready()) {
+        if (event.brush) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/brush");
+            lo_send(osc1, oscNamespace.c_str(), "f", sensors.brush);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/multibrush");
+            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.multibrush[0], sensors.multibrush[1], sensors.multibrush[2]);
+        }
+        if (event.rub) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/rub");
+            lo_send(osc1, oscNamespace.c_str(), "f", sensors.rub);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/multirub");
+            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.multirub[0], sensors.multirub[1], sensors.multirub[2]);
+        }
+        if (event.shake) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/shakexyz");
+            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.shake[0], sensors.shake[1], sensors.shake[2]);
+        }
+        if (event.jab) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/jabxyz");
+            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.jab[0], sensors.jab[1], sensors.jab[2]);
+        }
+        if (event.count) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/count");
+            lo_send(osc1, oscNamespace.c_str(), "i", sensors.count);
+        }
+        if (event.tap) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/tap");
+            lo_send(osc1, oscNamespace.c_str(), "i", sensors.tap);
+        }
+        if (event.dtap) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/dtap");
+            lo_send(osc1, oscNamespace.c_str(), "i", sensors.dtap);
+        }
+        if (event.ttap) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/ttap");
+            lo_send(osc1, oscNamespace.c_str(), "i", sensors.ttap);
+        }
+        if (event.battery) {
+            // Battery Data
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/percentage");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.percentage);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/status");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.status);       
+        }
+        if (event.current) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.current);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.TTE);
+        }
+        if (event.voltage) {
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
+            lo_send(osc1, oscNamespace.c_str(), "f", battery.voltage);
+        }
+    }
+
+    // Send touch message to second OSC address
+    #ifdef OSC_TWO
     if (puara.IP2_ready()) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
             if (TSTICK_SIZE == 30) {
@@ -1035,64 +1144,6 @@ void loop() {
             lo_send(osc2, oscNamespace.c_str(), "fff", sensors.ypr[0], sensors.ypr[1], sensors.ypr[2]);
     }
 
-    // Sending discrete OSC messages
-    if (puara.IP1_ready()) {
-        if (event.brush) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/brush");
-            lo_send(osc1, oscNamespace.c_str(), "f", sensors.brush);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/multibrush");
-            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.multibrush[0], sensors.multibrush[1], sensors.multibrush[2]);
-        }
-        if (event.rub) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/rub");
-            lo_send(osc1, oscNamespace.c_str(), "f", sensors.rub);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/multirub");
-            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.multirub[0], sensors.multirub[1], sensors.multirub[2]);
-        }
-        if (event.shake) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/shakexyz");
-            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.shake[0], sensors.shake[1], sensors.shake[2]);
-        }
-        if (event.jab) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/jabxyz");
-            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.jab[0], sensors.jab[1], sensors.jab[2]);
-        }
-        if (event.count) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/count");
-            lo_send(osc1, oscNamespace.c_str(), "i", sensors.count);
-        }
-        if (event.tap) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/tap");
-            lo_send(osc1, oscNamespace.c_str(), "i", sensors.tap);
-        }
-        if (event.dtap) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/dtap");
-            lo_send(osc1, oscNamespace.c_str(), "i", sensors.dtap);
-        }
-        if (event.ttap) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/ttap");
-            lo_send(osc1, oscNamespace.c_str(), "i", sensors.ttap);
-        }
-        if (event.battery) {
-            // Battery Data
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/percentage");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.percentage);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/status");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.status);       
-        }
-        if (event.current) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.current);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
-            lo_send(osc1, oscNamespace.c_str(), "f", battery.TTE);
-        }
-        if (event.voltage) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
-            lo_send(osc1, oscNamespace.c_str(), "f", battery.voltage);
-        }
-    }
     if (puara.IP2_ready()) {
         if (event.brush) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/brush");
@@ -1150,31 +1201,5 @@ void loop() {
             lo_send(osc2, oscNamespace.c_str(), "f", battery.voltage);
         }
     }
-
-    // Set LED - connection status and battery level
-
-        // if (battery.percentage < 10) {
-        //     led.setInterval(20);
-        //     led_var.color = led.blink(255, 20);
-        //     for (int i=0; i<NUMPIXELS; i++) {
-        //         pixels.setPixelColor(i, pixels.Color(led_var.color,0,0));   // low battery (red)
-        //         pixels.show();
-        //     }
-        // } else {
-        //     if (puara.get_StaIsConnected()) {         // blinks when connected, cycle when disconnected
-        //         led.setInterval(1000);                // RGB: 0, 128, 255 (Dodger Blue)
-        //         led_var.color = led.blink(255,20);
-        //         for (int i=0; i<NUMPIXELS; i++) {
-        //             pixels.setPixelColor(i, pixels.Color(0, uint8_t(led_var.color/2), led_var.color));   // low battery (red)
-        //             pixels.show();
-        //         }
-        //     } else {
-        //         led.setInterval(4000);
-        //         led_var.color = led.cycle(led_var.color, 0, 255);
-        //         for (int i=0; i<NUMPIXELS; i++) {
-        //             pixels.setPixelColor(i, pixels.Color(0, uint8_t(led_var.color/2), led_var.color));   // low battery (red)
-        //             pixels.show();
-        //         }
-        //     }
-        // } 
+    #endif
 }

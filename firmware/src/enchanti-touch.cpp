@@ -1,9 +1,7 @@
-#include "tstick_touch.h"
-
-#define BASETOUCHSIZE 60
+#include "enchanti-touch.h"
 
 // Initialise touch board, 
-void TouchBoard::init(float num, int threshold, int mode=DIFF) {
+void EnchantiTouch::initTouch(float num=1, int threshold=0, int mode=DIFF) {
     // Save properties to class
     num_boards = num;
     noise_threshold = threshold;
@@ -15,14 +13,14 @@ void TouchBoard::init(float num, int threshold, int mode=DIFF) {
     } else if (boardMode == BASELINE) {
         baseReg = BASELINE_REG;
     } else {
-        baseReg = RAW_REG;
+        baseReg = DIFF_REG;
     }
 
     // set touchsize
-    touchSize = num_boards * BASETOUCHSIZE;
+    touchSize = floor(num_boards * BASETOUCHSIZE);
 }
 
-void TouchBoard::readTouch(){
+void EnchantiTouch::readTouch(){
     // Read data from all 60 touch buttons
     // Compute buffer length
     int length = 0;
@@ -43,7 +41,7 @@ void TouchBoard::readTouch(){
     }
 }
 
-void TouchBoard::cookTouch() {
+void EnchantiTouch::cookData() {
     // Get max value, but also use it to check if any touch is pressed
     int instant_maxTouchValue = *std::max_element(data, data+touchSize);
 
@@ -59,17 +57,21 @@ void TouchBoard::cookTouch() {
 
     // Touch discretize and normalize
     for (int i=0; i < touchSize; i++) {
-        if (data[i] != 0) {
-            discreteData[i] = 1;
-            normalisedData[i] = float(data[i]) / float(maxTouchValue);
+        touch[i] = data[i] - noise_threshold;
+        if(touch[i] < 0) touch[i] = 0; // Make sure above 0
+
+        // Set other data vectors
+        if (touch[i] != 0) {
+            discreteTouch[i] = 1;
+            normTouch[i] = float(data[i]) / float(maxTouchValue);
         } else {
             normTouch[i] = 0;
-            discreteData[i] = 0;
+            discreteTouch[i] = 0;
         }
     }
 }
 
-void TouchBoard::readBuffer(int i2c_addr, uint8_t reg, uint8_t length, int offset = 0)
+void EnchantiTouch::readBuffer(int i2c_addr, uint8_t reg, uint8_t length, int offset = 0)
 {
     // prepare for data read
     uint16_t value = 0;  
@@ -78,7 +80,7 @@ void TouchBoard::readBuffer(int i2c_addr, uint8_t reg, uint8_t length, int offse
     uint8_t last_status = Wire.endTransmission(false);
 
     Wire.requestFrom(i2c_addr, length); 
-    for (int i=0; i < length; i++) {
+    for (int i=0; i < floor(length/2); i++) {
         // Read two bytes for each sensor
         value  = Wire.read();
         value |= (uint16_t)Wire.read() << 8;      // value low byte

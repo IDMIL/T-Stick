@@ -1,11 +1,12 @@
-#ifndef TSTICKTOUCH_H
-#define TSTICKTOUCH_H
-#endif
+#ifndef ENCHANTITOUCH_H
+#define ENCHANTITOUCH_H
 
+#include <Arduino.h>
 #include "Wire.h"
 
+#define BASETOUCHSIZE 60
 
-class TouchBoard
+class EnchantiTouch
 {
     public:
         // Board modes
@@ -36,16 +37,18 @@ class TouchBoard
         int touchSize = 60;
         int touchStatus = 0;
 
-        uint16_t data[touchSize];
-        float normalisedData[touchSize];
-        int discreteData[touchSize];
+        uint16_t data[120];
+        uint16_t touch[120];
+        float normTouch[120];
+        int discreteTouch[120];
 
 
         // Methods
-		void init(float num, int threshold, int mode=DIFF);
+		void initTouch(float num=1, int threshold=0, int mode=DIFF);
         void readTouch();
-        void cookTouch();
+        void cookData();
 
     private:
         void readBuffer(int i2c_addr, uint8_t reg, uint8_t length, int offset = 0);
-}
+};
+#endif
