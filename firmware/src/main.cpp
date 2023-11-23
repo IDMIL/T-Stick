@@ -209,11 +209,13 @@ void imu_isr() {
 #ifdef touch_ENCHANTI
     #include "enchanti-touch.h"
     EnchantiTouch touch;
-    
-    void touch_isr() {
-        event.touchReady = true;
-    }
 #endif
+// Interrupt routine
+void touch_isr() {
+    event.touchReady = true;
+}
+
+// Touch arrays 
 int mergedtouch[TSTICK_SIZE]; 
 int mergeddiscretetouch[TSTICK_SIZE]; 
 int mergednormalisedtouch[TSTICK_SIZE]; 
@@ -394,7 +396,8 @@ void setup() {
         float num_boards = TSTICK_SIZE / TRILL_BASETOUCHSIZE;
         if (touch.initTouch(num_boards, TRILL_NOISETHRESHOLD)) {
             touch.touchSize = TSTICK_SIZE;
-            event.touchReady = true; // always poll for trill board
+            pinMode(TOUCH_INT, INPUT);
+            attachInterrupt(TOUCH_INT, touch_isr, RISING);
             std::cout << "done" << std::endl;
         } else {
             std::cout << "initialization failed!" << std::endl;
@@ -807,10 +810,9 @@ void loop() {
                 lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchMiddle);
                 oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/bottom");
                 lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchBottom);
+
                 // Reset touch event until next interrupt
-                #ifdef touch_ENCHANTI
                 event.touchReady = false;
-                #endif
             }
             if (event.mimu) {
                 oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/accl");

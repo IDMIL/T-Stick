@@ -25,7 +25,7 @@ uint8_t Touch::initTouch(float num, int threshold, int mode) {
             running = false;
             return 0;
         }
-        delay(10);
+        // Set touch properties
         touchArray[i]->setPrescaler(2);
         delay(10);
         touchArray[i]->updateBaseline();
@@ -35,6 +35,10 @@ uint8_t Touch::initTouch(float num, int threshold, int mode) {
         touchArray[i]->setNoiseThreshold(30);
         delay(10);
         touchArray[i]->setMode(Trill::DIFF);
+
+        // Setup interrupt
+        touchArray[i]->setAutoScanInterval(1);
+        delay(10);
     }
     running = true;
     return 1;
