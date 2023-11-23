@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include "Wire.h"
 
-#define BASETOUCHSIZE 60
+#define ENCHANTI_BASETOUCHSIZE 60
 
 class EnchantiTouch
 {
@@ -37,11 +37,15 @@ class EnchantiTouch
         int touchSize = 60;
         int touchStatus = 0;
 
+        // Touch arrays
         uint16_t data[120];
         uint16_t touch[120];
         float normTouch[120];
         int discreteTouch[120];
 
+        
+        // Running or not
+        bool running = true;
 
         // Methods
 		void initTouch(float num=1, int threshold=0, int mode=DIFF);
@@ -49,6 +53,6 @@ class EnchantiTouch
         void cookData();
 
     private:
-        void readBuffer(int i2c_addr, uint8_t reg, uint8_t length, int offset = 0);
+        void readBuffer(uint8_t i2c_addr, uint8_t reg, uint8_t length, int offset = 0);
 };
 #endif

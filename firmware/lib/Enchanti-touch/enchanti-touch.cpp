@@ -1,7 +1,14 @@
 #include "enchanti-touch.h"
 
 // Initialise touch board, 
-void EnchantiTouch::initTouch(float num=1, int threshold=0, int mode=DIFF) {
+void EnchantiTouch::initTouch(float num, int threshold, int mode) {
+    // Clip number of touch boards to 2
+    if (num > 2) {
+        num = 2;
+    } else if (num < 0) {
+        num = 1;
+    }
+
     // Save properties to class
     num_boards = num;
     noise_threshold = threshold;
@@ -17,18 +24,21 @@ void EnchantiTouch::initTouch(float num=1, int threshold=0, int mode=DIFF) {
     }
 
     // set touchsize
-    touchSize = floor(num_boards * BASETOUCHSIZE);
+    touchSize = floor(num_boards * ENCHANTI_BASETOUCHSIZE);
+    // enable sensor
+    // TODO: send an I2C command back to sensor to start its initialisation process
+    running = true;
 }
 
 void EnchantiTouch::readTouch(){
     // Read data from all 60 touch buttons
     // Compute buffer length
     int length = 0;
-    if (touchSize < BASETOUCHSIZE) {
+    if (touchSize < ENCHANTI_BASETOUCHSIZE) {
         // Each sensor needs 2 bytes == 120 Byte read
         length = touchSize * 2;
     } else {
-        length = BASETOUCHSIZE * 2;
+        length = ENCHANTI_BASETOUCHSIZE * 2;
     }
     
     // Read touch data from I2C buffer
@@ -36,8 +46,8 @@ void EnchantiTouch::readTouch(){
 
     // Read auxillary touch board data
     if (num_boards > 1) {
-        length = (touchSize - BASETOUCHSIZE) * 2;
-        readBuffer(aux_i2c_addr, baseReg, length, BASETOUCHSIZE); // offset data index to not overwrite main touch board data
+        length = (touchSize - ENCHANTI_BASETOUCHSIZE) * 2;
+        readBuffer(aux_i2c_addr, baseReg, length, ENCHANTI_BASETOUCHSIZE); // offset data index to not overwrite main touch board data
     }
 }
 
@@ -71,7 +81,7 @@ void EnchantiTouch::cookData() {
     }
 }
 
-void EnchantiTouch::readBuffer(int i2c_addr, uint8_t reg, uint8_t length, int offset = 0)
+void EnchantiTouch::readBuffer(uint8_t i2c_addr, uint8_t reg, uint8_t length, int offset)
 {
     // prepare for data read
     uint16_t value = 0;  
