@@ -84,16 +84,20 @@ void EnchantiTouch::cookData() {
 void EnchantiTouch::readBuffer(uint8_t i2c_addr, uint8_t reg, uint8_t length, int offset)
 {
     // prepare for data read
+    uint8_t loc = 0;
     uint16_t value = 0;  
     Wire.beginTransmission(i2c_addr); 
     Wire.write(reg);
-    uint8_t last_status = Wire.endTransmission(false);
+    uint8_t last_status = Wire.endTransmission();
 
+    // Read the available data
     Wire.requestFrom(i2c_addr, length); 
-    for (int i=0; i < floor(length/2); i++) {
+    while (Wire.available() >= 2) {
         // Read two bytes for each sensor
-        value  = Wire.read();
-        value |= (uint16_t)Wire.read() << 8;      // value low byte
-        data[i + offset] = value;
+        uint8_t msb  = Wire.read();
+        uint8_t lsb  = Wire.read();
+        value = lsb + (msb << 8);
+        data[loc + offset] = value;
+        ++loc;
     }
 }

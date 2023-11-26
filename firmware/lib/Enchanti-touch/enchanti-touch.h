@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include "Wire.h"
+#include <iostream>
 
 #define ENCHANTI_BASETOUCHSIZE 60
 
@@ -19,16 +20,16 @@ class EnchantiTouch
         // Register addresses for touch data
         enum regAddr
         {
-            RAW_REG         = 0x01, // Register for raw data for button 1
-            DIFF_REG        = 0x79, // Register of difference data for button 1 (raw - baseline)
-            BASELINE_REG    = 0xF1, // Register of baseline data for button 1 
+            RAW_REG         = 4, // Register for raw data for button 1
+            DIFF_REG        = 4, // Register of difference data for button 1 (raw - baseline)
+            BASELINE_REG    = 4, // Register of baseline data for button 1 
         };
 
         // Board Properties
         int boardMode = RAW;
         float num_boards = 1; // number of touch boards, set half numbers to indicate if using only the first touch circuit
-        uint8_t main_i2c_addr = 0x30;
-        uint8_t aux_i2c_addr = 0x31;
+        uint8_t main_i2c_addr = 0x1E;
+        uint8_t aux_i2c_addr = 0x1F;
         uint8_t baseReg = RAW_REG;
 
         // Touch properties
@@ -42,6 +43,12 @@ class EnchantiTouch
         uint16_t touch[120];
         int normTouch[120];
         int discreteTouch[120];
+
+        // Time since last touch
+        int scantimer = 0;
+        int i2ctimer = 0;
+        int scantime = 0;
+        int polltime = 0;
 
         
         // Running or not

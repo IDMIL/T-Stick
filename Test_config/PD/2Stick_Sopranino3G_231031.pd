@@ -1,4 +1,4 @@
-#N canvas 2350 277 1600 817 10;
+#N canvas -289 -23 1920 1117 10;
 #X obj 87 476 vsl 45 135 -20 20 0 0 empty empty AccelX 0 -9 0 10 #fcfcfc #000000 #000000 0 1;
 #X obj 137 476 vsl 45 135 -20 20 0 0 empty empty AccelY 0 -9 0 10 #fcfcfc #000000 #000000 0 1;
 #X obj 187 476 vsl 45 135 -20 20 0 0 empty empty AccelZ 0 -9 0 10 #fcfcfc #000000 #000000 0 1;
@@ -15,7 +15,7 @@
 #X obj 617 82 r rawtimer;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array rawtime 100 float 1;
-#A 0 0 11.61 0 0 0 0 0 0 0 0 0 5.80499 0 0 0 7.25624 4.35374 0 5.80499 0 0 0 0 2.90249 0 0 2.90249 0 0 0 11.61 5.80499 0 0 0 5.80499 0 0 0 0 0 0 0 0 0 11.61 0 11.61 0 0 0 0 0 0 0 5.80499 0 0 0 0 0 11.61 0 5.80499 0 5.80499 0 0 0 0 0 0 0 0 0 0 7.25624 4.35374 0 13.0612 0 0 0 0 0 0 5.80499 0 0 0 0 0 0 11.61 0 10.1587 0 0 0 0;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 100 99 0 200 140 1;
 #X restore 411 79 graph;
 #N canvas 264 335 568 475 timegraph 0;
@@ -177,9 +177,9 @@
 #X obj 557 790 vsl 35 135 0 1 0 0 empty empty Squeeze 0 -9 0 10 #fcfcfc #000000 #000000 0 1;
 #X floatatom 557 933 6 0 0 0 - - - 0;
 #X obj 7 745 route all top middle bottom normalised discrete;
-#X obj 98 219 route TStick_510;
 #X obj 599 410 route percentage voltage current;
 #X floatatom 720 442 5 0 0 1 mA - - 0;
+#X obj 98 219 route TStick_512;
 #X connect 0 0 26 0;
 #X connect 1 0 25 0;
 #X connect 2 0 17 0;
@@ -209,7 +209,7 @@
 #X connect 32 0 7 0;
 #X connect 32 1 8 0;
 #X connect 32 2 9 0;
-#X connect 34 0 124 0;
+#X connect 34 0 126 0;
 #X connect 35 0 36 0;
 #X connect 36 0 118 0;
 #X connect 36 1 29 0;
@@ -220,7 +220,7 @@
 #X connect 47 0 44 0;
 #X connect 47 1 45 0;
 #X connect 47 2 46 0;
-#X connect 52 0 125 0;
+#X connect 52 0 124 0;
 #X connect 57 0 56 0;
 #X connect 59 0 99 0;
 #X connect 59 1 37 0;
@@ -283,8 +283,8 @@
 #X connect 123 3 68 0;
 #X connect 123 4 102 0;
 #X connect 123 5 109 0;
-#X connect 124 0 59 0;
-#X connect 125 0 116 0;
-#X connect 125 1 117 0;
-#X connect 125 2 126 0;
+#X connect 124 0 116 0;
+#X connect 124 1 117 0;
+#X connect 124 2 125 0;
+#X connect 126 0 59 0;
 #X coords 0 0 1 1 470 216 0;

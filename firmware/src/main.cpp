@@ -213,6 +213,9 @@ void imu_isr() {
 // Interrupt routine
 void touch_isr() {
     event.touchReady = true;
+    unsigned long now = micros();
+    touch.scantime = (now - touch.scantimer) / 1000;
+    touch.scantimer = now;
 }
 
 // Touch arrays 
@@ -406,10 +409,8 @@ void setup() {
         float num_boards = TSTICK_SIZE / ENCHANTI_BASETOUCHSIZE;
         touch.initTouch(num_boards, ENCHANTI_NOISETHRESHOLD);
         std::cout << "done" << std::endl;
-
-        // Setup interrupt
-        pinMode(TOUCH_INT, INPUT);
-        attachInterrupt(TOUCH_INT, touch_isr, CHANGE);
+        event.touchReady = true; // always poll for now
+        delay(10); // wait a bit after setting up touch
     #endif
 
     std::cout << "    Initializing Liblo server/client at " << puara.getLocalPORTStr() << " ... ";
@@ -476,26 +477,26 @@ void loop() {
         esp_deep_sleep_start();
     }
 
-    // Set LED - connection status and battery level
-    if (puara.get_StaIsConnected()) {         // blinks when connected, cycle when disconnected
-        // If connected to WiFi turn off Orange LED
-        if (digitalRead(ORANGE_LED)) {
-            digitalWrite(ORANGE_LED, LOW);
-        }
-        // Cycle LED on and Off
-        led.setInterval(1000);                // RGB: 0, 128, 255 (Dodger Blue)
-        led_var.color = led.blink(HIGH,20);
-        digitalWrite(BLUE_LED, led_var.color);
-        } else {
-        // If not connected to WiFi turn off blue LED
-        if (digitalRead(BLUE_LED)) {
-            digitalWrite(BLUE_LED, LOW);
-        }
-        // Cycle LED on and Off
-        led.setInterval(4000);
-        led_var.color = led.cycle(led_var.color, 0, 255);
-        digitalWrite(ORANGE_LED, led_var.color);
-    }
+    // // Set LED - connection status and battery level
+    // if (puara.get_StaIsConnected()) {         // blinks when connected, cycle when disconnected
+    //     // If connected to WiFi turn off Orange LED
+    //     if (digitalRead(ORANGE_LED)) {
+    //         digitalWrite(ORANGE_LED, LOW);
+    //     }
+    //     // Cycle LED on and Off
+    //     led.setInterval(1000);                // RGB: 0, 128, 255 (Dodger Blue)
+    //     led_var.color = led.blink(HIGH,20);
+    //     digitalWrite(BLUE_LED, led_var.color);
+    //     } else {
+    //     // If not connected to WiFi turn off blue LED
+    //     if (digitalRead(BLUE_LED)) {
+    //         digitalWrite(BLUE_LED, LOW);
+    //     }
+    //     // Cycle LED on and Off
+    //     led.setInterval(4000);
+    //     led_var.color = led.cycle(led_var.color, 0, 255);
+    //     digitalWrite(ORANGE_LED, led_var.color);
+    // }
 
     // Read FSR
     fsr.readFsr();
@@ -511,6 +512,13 @@ void loop() {
             mergeddiscretetouch[i] = touch.discreteTouch[i];
             mergednormalisedtouch[i] = touch.normTouch[i];
         }
+
+        // set timer
+        #ifdef touch_ENCHANTI
+        unsigned long  now = micros();
+        touch.polltime = (now = touch.i2ctimer) / 1000;
+        touch.i2ctimer = now;
+        #endif
     }
 
     // Update touch gestures
@@ -811,7 +819,11 @@ void loop() {
 
                 // Reset touch event until next interrupt
                 #ifdef touch_ENCHANTI
-                event.touchReady = false;
+                // event.touchReady = false;
+                oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/scantime");
+                lo_send(osc1, oscNamespace.c_str(), "i", touch.scantime);
+                oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/polltime");
+                lo_send(osc1, oscNamespace.c_str(), "i", touch.polltime);
                 #endif
             }
             if (event.mimu) {

@@ -43,7 +43,7 @@ Define Interrupt pins for sensors
 */
 #define IMU_INT_PIN 21
 #define FUELGAUE_INT_PIN 17
-#define TOUCH_INT 7
+#define TOUCH_INT 4
 
 /*
 Enable second OSC address
@@ -64,13 +64,13 @@ Touch properties
   - Trill
   - Enchanti Custom touch board
 */
-#define touch_TRILL
-// #define touch_ENCHANTI
+// #define touch_TRILL
+#define touch_ENCHANTI
 
 /*
 Set the amount of capacitive stripes to for the T-Stick, up to 120
 */
-#define TSTICK_SIZE 30
+#define TSTICK_SIZE 60
 
 /*
     Set default noise threshold

@@ -26,7 +26,8 @@ uint8_t Touch::initTouch(float num, int threshold, int mode) {
             return 0;
         }
         // Set touch properties
-        touchArray[i]->setPrescaler(2);
+        delay(10);
+        touchArray[i]->setPrescaler(3);
         delay(10);
         touchArray[i]->updateBaseline();
         delay(10);
