@@ -94,8 +94,8 @@ void EnchantiTouch::readBuffer(uint8_t i2c_addr, uint8_t reg, uint8_t length, in
     Wire.requestFrom(i2c_addr, length); 
     while (Wire.available() >= 2) {
         // Read two bytes for each sensor
-        uint8_t msb  = Wire.read();
         uint8_t lsb  = Wire.read();
+        uint8_t msb  = Wire.read();
         value = lsb + (msb << 8);
         data[loc + offset] = value;
         ++loc;
