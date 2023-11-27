@@ -214,7 +214,7 @@ void imu_isr() {
 void touch_isr() {
     event.touchReady = true;
     unsigned long now = micros();
-    touch.scantime = (now - touch.scantimer) / 1000;
+    touch.scantime = now - touch.scantimer;
     touch.scantimer = now;
 }
 
@@ -410,6 +410,9 @@ void setup() {
         touch.initTouch(num_boards, ENCHANTI_NOISETHRESHOLD);
         std::cout << "done" << std::endl;
         event.touchReady = true; // always poll for now
+
+        pinMode(TOUCH_INT, INPUT_PULLUP);
+        attachInterrupt(TOUCH_INT, touch_isr, CHANGE);
         delay(10); // wait a bit after setting up touch
     #endif
 
@@ -502,6 +505,9 @@ void loop() {
     fsr.readFsr();
 
     if (event.touchReady) {
+        #ifdef touch_ENCHANTI
+        touch.i2ctimer = micros();
+        #endif
         // Read Touch
         touch.readTouch();
         touch.cookData();
@@ -516,7 +522,7 @@ void loop() {
         // set timer
         #ifdef touch_ENCHANTI
         unsigned long  now = micros();
-        touch.polltime = (now = touch.i2ctimer) / 1000;
+        touch.polltime = now - touch.i2ctimer;
         touch.i2ctimer = now;
         #endif
     }
