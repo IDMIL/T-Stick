@@ -209,7 +209,6 @@ void imu_isr() {
 #ifdef touch_ENCHANTI
     #include "enchanti-touch.h"
     EnchantiTouch touch;
-#endif
 // Interrupt routine
 void touch_isr() {
     event.touchReady = true;
@@ -217,6 +216,7 @@ void touch_isr() {
     touch.scantime = now - touch.scantimer;
     touch.scantimer = now;
 }
+#endif
 
 // Touch arrays 
 int mergedtouch[TSTICK_SIZE]; 
@@ -476,6 +476,7 @@ void loop() {
     // go to deep sleep if double press button
     if (gestures.getButtonDTap()){
         std::cout << "\nEntering deep sleep.\n\nGoodbye!\n" << std::endl;
+        imu.sleep(true);
         delay(1000);
         esp_deep_sleep_start();
     }
@@ -541,7 +542,7 @@ void loop() {
 
         // Store battery info
         battery.percentage = fuelgauge.rep_soc;
-        battery.current = fuelgauge.rep_avg_current;
+        battery.current = fuelgauge.rep_inst_current;
         battery.voltage = fuelgauge.rep_avg_voltage;
         battery.TTE = fuelgauge.rep_tte;
         battery.rsense = fuelgauge.rsense;

@@ -64,14 +64,13 @@ Touch properties
   - Trill
   - Enchanti Custom touch board
 */
-// #define touch_TRILL
-#define touch_ENCHANTI
+#define touch_TRILL
+// #define touch_ENCHANTI
 
 /*
 Set the amount of capacitive stripes to for the T-Stick, up to 120
 */
-#define TSTICK_SIZE 60
-
+#define TSTICK_SIZE 30
 /*
     Set default noise threshold
 */
