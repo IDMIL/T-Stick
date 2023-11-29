@@ -110,7 +110,7 @@ fuelgauge_config fg_config = {
 ///////////////////////////////////
 // Include button function files //
 ///////////////////////////////////
-
+#include <driver/rtc_io.h> // needed for sleep
 #include "button.h"
 
 Button button;
@@ -455,6 +455,7 @@ void setup() {
     std::cout << "done" << std::endl;
 
     // Setting Deep sleep wake button
+    rtc_gpio_pullup_en(GPIO_NUM_9);
     esp_sleep_enable_ext0_wakeup(GPIO_NUM_9,0); // 1 = High, 0 = Low
     
     // Using Serial.print and delay to prevent interruptions
