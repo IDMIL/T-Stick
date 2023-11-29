@@ -577,6 +577,7 @@ void loop() {
         gestures.jabYThreshold = puara.getVarNumber("jaby_threshold");
         gestures.jabZThreshold = puara.getVarNumber("jabz_threshold");
 
+        // Update inertial gestures
         gestures.updateInertialGestures();
 
         // Clear interrupt
