@@ -2,27 +2,19 @@
     "settings": [
         {
             "name": "fsr_offset",
-            "value": 0
+            "value": 2000
         },
         {
-            "name": "fuelgauge_chargecycles",
-            "value": 0
+            "name": "jabx_threshold",
+            "value": 5
         },
         {
-            "name": "fuelgauge_rcomp",
-            "value": 0
+            "name": "jaby_threshold",
+            "value": 5
         },
         {
-            "name": "fuelgauge_tempco",
-            "value": 0
-        },
-        {
-            "name": "fuelgauge_fullcap",
-            "value": 0
-        },
-        {
-            "name": "fuelgauge_fullcapnom",
-            "value": 0
+            "name": "jabz_threshold",
+            "value": 5
         }
     ]
 }

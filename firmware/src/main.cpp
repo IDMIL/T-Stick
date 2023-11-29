@@ -383,6 +383,11 @@ void setup() {
     attachInterrupt(digitalPinToInterrupt(IMU_INT_PIN), imu_isr, FALLING);
     std::cout << "done" << std::endl;
 
+    // Setup jabx,jaby and jabz thresholds
+    gestures.jabXThreshold = puara.getVarNumber("jabx_threshold");
+    gestures.jabYThreshold = puara.getVarNumber("jaby_threshold");
+    gestures.jabZThreshold = puara.getVarNumber("jabz_threshold");
+
     std::cout << "    Initializing FSR... ";
     if (fsr.initFsr(pin.fsr, std::round(puara.getVarNumber("fsr_offset")))) {
         std::cout << "done (offset value: " << fsr.getOffset() << ")" << std::endl;
@@ -567,6 +572,11 @@ void loop() {
         gestures.setMagnetometerValues(imu.magX(),
                                         imu.magY(),
                                         imu.magZ());
+        // Update Jab thresholds
+        gestures.jabXThreshold = puara.getVarNumber("jabx_threshold");
+        gestures.jabYThreshold = puara.getVarNumber("jaby_threshold");
+        gestures.jabZThreshold = puara.getVarNumber("jabz_threshold");
+
         gestures.updateInertialGestures();
 
         // Clear interrupt
