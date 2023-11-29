@@ -354,7 +354,9 @@ void setup() {
     esp_wifi_set_ps(WIFI_PS_NONE);
 
     puara.set_version(firmware_version);
-    puara.start();
+    
+    // Set monitor type and start
+    puara.start(Puara::JTAG_MONITOR);
     baseNamespace.append(puara.get_dmi_name());
     baseNamespace.append("/");
     oscNamespace = baseNamespace;
@@ -377,6 +379,15 @@ void setup() {
 
     std::cout << "    Initializing IMU... ";
     initIMU();
+
+    // Initialise Fuel Gauge
+    std::cout << "    Initializing Fuel Gauge configuration... ";
+    if (fuelgauge.init(fg_config)) {
+        std::cout << "done" << std::endl;
+    } else {
+        std::cout << "initialization failed!" << std::endl;
+    }
+
 
     // Setup IMU intterupt
     pinMode(IMU_INT_PIN, INPUT_PULLUP);
