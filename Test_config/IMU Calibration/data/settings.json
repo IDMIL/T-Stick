@@ -1,0 +1,20 @@
+{
+    "settings": [
+        {
+            "name": "fsr_offset",
+            "value": 2000
+        },
+        {
+            "name": "jabx_threshold",
+            "value": 5
+        },
+        {
+            "name": "jaby_threshold",
+            "value": 5
+        },
+        {
+            "name": "jabz_threshold",
+            "value": 5
+        }
+    ]
+}
