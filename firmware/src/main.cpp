@@ -379,6 +379,7 @@ void setup() {
 
     std::cout << "    Initializing IMU... ";
     initIMU();
+    std::cout << "done" << std::endl;
 
     // Initialise Fuel Gauge
     std::cout << "    Initializing Fuel Gauge configuration... ";
