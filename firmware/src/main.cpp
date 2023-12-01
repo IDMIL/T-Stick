@@ -19,6 +19,8 @@ Include T-Stick properties
 #include "TSTICKPROPERTIES.h"
 
 #include "Arduino.h"
+// For JTAG monitor
+#include "USB.h"
 
 // For disabling power saving
 #include "esp_wifi.h"
@@ -39,6 +41,32 @@ lo_address osc1;
 lo_address osc2;
 std::string baseNamespace = "/";
 std::string oscNamespace;
+
+///////////////////////////
+// Calibration Structure //
+///////////////////////////
+// struct calibrationParameters {
+//     // Accelerometer Parameters
+//     float accel_zerog[3];
+
+//     // Gyroscope Parameters
+//     float gyro_zerorate[3];
+    
+//     // Magnetometer Parameters
+//     float sx[3];
+//     float sy[3];
+//     float sz[3];
+//     float h[3];
+// };
+float accel_zerog[3];
+float gyro_zerorate[3];
+float sx[3];
+float sy[3];
+float sz[3];
+float h[3];
+
+calibrationParameters imuParams;
+
 
 /////////////////////
 // Pin definitions //
@@ -198,6 +226,9 @@ void imu_isr() {
     event.mimu = true;
 }
 
+#include "SensorFusion.h" //SF
+SF fusion;
+
 //////////////////////////////////////////////
 // Include Touch stuff                      //
 //////////////////////////////////////////////
@@ -354,6 +385,9 @@ void setup() {
     esp_wifi_set_ps(WIFI_PS_NONE);
 
     puara.set_version(firmware_version);
+
+    // Start Serial Monitor
+    Serial.begin(115200);
     
     // Set monitor type and start
     puara.start(Puara::JTAG_MONITOR);
@@ -399,6 +433,38 @@ void setup() {
     gestures.jabXThreshold = puara.getVarNumber("jabx_threshold");
     gestures.jabYThreshold = puara.getVarNumber("jaby_threshold");
     gestures.jabZThreshold = puara.getVarNumber("jabz_threshold");
+
+    // Calibrate IMU
+    // Set acceleration zero rate
+    imuParams.accel_zerog[0] = puara.getVarNumber("accel_zerog1");
+    imuParams.accel_zerog[1] = puara.getVarNumber("accel_zerog2");
+    imuParams.accel_zerog[2] = puara.getVarNumber("accel_zerog3");
+
+    // Set gyroscope zero rate
+    imuParams.gyro_zerorate[0] = puara.getVarNumber("gyro_zerorate1");
+    imuParams.gyro_zerorate[1] = puara.getVarNumber("gyro_zerorate2");
+    imuParams.gyro_zerorate[2] = puara.getVarNumber("gyro_zerorate3");
+
+    // Set Magnetometer hard offset
+    imuParams.h[0] = puara.getVarNumber("hard_offset1");
+    imuParams.h[1] = puara.getVarNumber("hard_offset2");
+    imuParams.h[2] = puara.getVarNumber("hard_offset3");
+
+    // Set magnetometer soft offset
+    imuParams.sx[0] = puara.getVarNumber("soft_offsetx1");
+    imuParams.sx[1] = puara.getVarNumber("soft_offsetx2");
+    imuParams.sx[2] = puara.getVarNumber("soft_offsetx3");
+
+    imuParams.sy[0] = puara.getVarNumber("soft_offsety1");
+    imuParams.sy[1] = puara.getVarNumber("soft_offsety2");
+    imuParams.sy[2] = puara.getVarNumber("soft_offsety3");
+
+    imuParams.sz[0] = puara.getVarNumber("soft_offsetz1");
+    imuParams.sz[1] = puara.getVarNumber("soft_offsetz2");
+    imuParams.sz[2] = puara.getVarNumber("soft_offsetz3");
+
+    // Set calibration parameters
+    gestures.setCalibrationParameters(imuParams);
 
     std::cout << "    Initializing FSR... ";
     if (fsr.initFsr(pin.fsr, std::round(puara.getVarNumber("fsr_offset")))) {
@@ -575,8 +641,8 @@ void loop() {
 
         // read IMU and update puara-gestures
         // In g's
-        gestures.setAccelerometerValues(imu.accX() / 1000,
-                                        imu.accY() / 1000,
+        gestures.setAccelerometerValues(-imu.accX() / 1000,
+                                        -imu.accY() / 1000,
                                         imu.accZ() / 1000);
         gestures.setGyroscopeValues(imu.gyrX(),
                                     imu.gyrY(),
@@ -591,6 +657,11 @@ void loop() {
 
         // Update inertial gestures
         gestures.updateInertialGestures();
+
+        // Test
+        float deltat = fusion.deltatUpdate(); //this have to be done before calling the fusion update
+        //choose only one of these two:
+        fusion.MadgwickUpdate(gestures.getGyroX() * M_PI / 180, gestures.getGyroY() * M_PI / 180, gestures.getGyroZ() * M_PI / 180, gestures.getAccelX(), gestures.getAccelY(), gestures.getAccelZ(), gestures.getMagX(), gestures.getMagY(), gestures.getMagZ(), deltat);  //else use the magwick, it is slower but more accurate
 
         // Clear interrupt
         imu.clearInterrupts();
@@ -617,9 +688,19 @@ void loop() {
     sensors.quat[2] = gestures.getOrientationQuaternion().y;
     sensors.quat[3] = gestures.getOrientationQuaternion().z;
     // Yaw (heading), pitch (tilt) and roll
-    sensors.ypr[0] = gestures.getYaw();
-    sensors.ypr[1] = gestures.getPitch();
-    sensors.ypr[2] = gestures.getRoll();
+    sensors.ypr[0] = ((round(gestures.getYaw() * 1000)) / 1000);
+    sensors.ypr[1] = ((round(gestures.getPitch() * 1000)) / 1000);
+    sensors.ypr[2] = ((round(gestures.getRoll() * 1000)) / 1000);
+    // sensors.ypr[0] = fusion.getYaw();
+    // sensors.ypr[1] = fusion.getPitch();
+    // sensors.ypr[2] = fusion.getRoll();
+
+    // Serial.print("Orientation: ");
+    // Serial.print(sensors.ypr[0]);
+    // Serial.print(", ");
+    // Serial.print(sensors.ypr[1]);
+    // Serial.print(", ");
+    // Serial.println(sensors.ypr[2]);
     if (sensors.shake[0] != gestures.getShakeX() || sensors.shake[1] != gestures.getShakeY() || sensors.shake[2] != gestures.getShakeZ()) {
         sensors.shake[0] = gestures.getShakeX();
         sensors.shake[1] = gestures.getShakeY();

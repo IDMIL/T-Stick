@@ -86,27 +86,6 @@ void initIMU() {
     // Enable magnetometer
     imu.startupMagnetometer();
 }
-// Gyroscope
-float gyro_min_x, gyro_max_x, gyro_mid_x;
-float gyro_min_y, gyro_max_y, gyro_mid_y;
-float gyro_min_z, gyro_max_z, gyro_mid_z;
-
-// Accelerometer
-
-
-// Magnetometer
-float mag_min_x, mag_max_x, mag_mid_x;
-float mag_min_y, mag_max_y, mag_mid_y;
-float mag_min_z, mag_max_z, mag_mid_z;
-
-// Function for simple gyroscope and accel calibration
-std::vector<float> gyroX = {};
-std::vector<float> gyroY = {};
-std::vector<float> gyroZ = {};
-
-std::vector<float> accelX = {};
-std::vector<float> accelY = {};
-std::vector<float> accelZ = {};
 
 // Calibrate Accelerometer
 void calibrate_accelerometer() {
@@ -116,6 +95,10 @@ void calibrate_accelerometer() {
 
     // Get samples
     for (int i; i < NUMBER_SAMPLES; i++) {
+        if (i % 100 == 0) {
+            Serial.print("Sample ");
+            Serial.println(i);
+        }
         imu.getAGMT();
         // Get Accelerometer
         float x = imu.accX() / 1000;
@@ -134,8 +117,11 @@ void calibrate_accelerometer() {
         mid_x = (max_x + min_x) / 2;
         mid_y = (max_y + min_y) / 2;
         mid_z = (max_z + min_z) / 2;  
+
+        // Add delay between reads
+        delay(10);
     }
-    Serial.println(F("\n\nFinal zero g offset in gs: "));
+    Serial.println(F("\n\nFinal zero g offset in g: "));
     Serial.print(mid_x, 4); Serial.print(", ");
     Serial.print(mid_y, 4); Serial.print(", ");
     Serial.println(mid_z, 4);
@@ -149,6 +135,11 @@ void calibrate_gyroscope() {
 
     // Get samples
     for (int i; i < NUMBER_SAMPLES; i++) {
+        if (i % 100 == 0) {
+            Serial.print("Sample ");
+            Serial.println(i);
+        }
+
         imu.getAGMT();
         // Get Gyroscope
         float x = imu.gyrX() * M_PI / 180;
@@ -167,6 +158,9 @@ void calibrate_gyroscope() {
         mid_x = (max_x + min_x) / 2;
         mid_y = (max_y + min_y) / 2;
         mid_z = (max_z + min_z) / 2;
+
+        // Add delay between reads
+        delay(10);
     }
     Serial.println(F("\n\nFinal zero rate offset in radians/s: "));
     Serial.print(mid_x, 4); Serial.print(", ");
@@ -181,37 +175,47 @@ void calibrate_magnetometer() {
     float min_z, max_z, mid_z;
     imu.getAGMT();
 
-    float x = imu.magX();
-    float y = imu.magY();
-    float z = imu.magZ();
+    for (int i; i < NUMBER_SAMPLES; i++) {
+        if (i % 100 == 0) {
+            Serial.print("Sample ");
+            Serial.println(i);
+        }
+        float x = imu.magX();
+        float y = imu.magY();
+        float z = imu.magZ();
 
-    Serial.print("Mag: (");
-    Serial.print(x); Serial.print(", ");
-    Serial.print(y); Serial.print(", ");
-    Serial.print(z); Serial.print(")");
+        Serial.print("Mag: (");
+        Serial.print(x); Serial.print(", ");
+        Serial.print(y); Serial.print(", ");
+        Serial.print(z); Serial.print(")");
 
-    min_x = min(min_x, x);
-    min_y = min(min_y, y);
-    min_z = min(min_z, z);
+        min_x = min(min_x, x);
+        min_y = min(min_y, y);
+        min_z = min(min_z, z);
 
-    max_x = max(max_x, x);
-    max_y = max(max_y, y);
-    max_z = max(max_z, z);
+        max_x = max(max_x, x);
+        max_y = max(max_y, y);
+        max_z = max(max_z, z);
 
-    mid_x = (max_x + min_x) / 2;
-    mid_y = (max_y + min_y) / 2;
-    mid_z = (max_z + min_z) / 2;
+        mid_x = (max_x + min_x) / 2;
+        mid_y = (max_y + min_y) / 2;
+        mid_z = (max_z + min_z) / 2;
 
-    Serial.print(" Hard offset: (");
-    Serial.print(mid_x); Serial.print(", ");
-    Serial.print(mid_y); Serial.print(", ");
-    Serial.print(mid_z); Serial.print(")");  
+        Serial.print(" Hard offset: (");
+        Serial.print(mid_x); Serial.print(", ");
+        Serial.print(mid_y); Serial.print(", ");
+        Serial.print(mid_z); Serial.print(")");  
 
-    Serial.print(" Field: (");
-    Serial.print((max_x - min_x)/2); Serial.print(", ");
-    Serial.print((max_y - min_y)/2); Serial.print(", ");
-    Serial.print((max_z - min_z)/2); Serial.println(")");    
-    delay(10); 
+        Serial.print(" Field: (");
+        Serial.print((max_x - min_x)/2); Serial.print(", ");
+        Serial.print((max_y - min_y)/2); Serial.print(", ");
+        Serial.print((max_z - min_z)/2); Serial.println(")");    
+        delay(10); 
+    }
+    Serial.println(F("\n\nFinal Hard offset: "));
+    Serial.print(mid_x, 4); Serial.print(", ");
+    Serial.print(mid_y, 4); Serial.print(", ");
+    Serial.println(mid_z, 4);
 }
 
 // Send to motion cal
@@ -241,7 +245,6 @@ void advanced_calibration() {
     Serial.print(int(imu.magX())); Serial.print(",");
     Serial.print(int(imu.magY())); Serial.print(",");
     Serial.print(int(imu.magZ())); Serial.println("");
-
 }
 ///////////
 // setup //
@@ -252,6 +255,11 @@ void setup() {
     // Set up I2C clock
     Wire.begin(SDA_PIN, SCL_PIN);
     Wire.setClock(I2CUPDATE_FREQ); // Fast mode
+
+    
+    while(!Serial) {
+        // Wait for serial port to be available
+    }
 
     std::cout << "    Initializing IMU... ";
     initIMU();
@@ -273,8 +281,9 @@ void loop() {
     delay(500);
     Serial.print("Calibrating Magnetometer");
     calibrate_magnetometer();
-    #elif ADVANCED_CAL
-
+    #endif
+    #ifdef ADVANCED_CAL
+    advanced_calibration();
     #endif
 
     // read IMU and update puara-gestures
