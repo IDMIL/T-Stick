@@ -16,7 +16,8 @@ unsigned int firmware_version = 231031;
 Include T-Stick properties
 - Go to include/TSTICKPROPERTIES.h to edit properties for your T-Stick
 */ 
-#include "TSTICKPROPERTIES.h"
+#include "tstick-properties.h"
+#include "tstick-sensors.h"
 
 #include "Arduino.h"
 // For JTAG monitor
@@ -480,7 +481,7 @@ void setup() {
     #ifdef touch_TRILL
         // Compute number of boards from TSTICK_SIZE
         float num_boards = TSTICK_SIZE / TRILL_BASETOUCHSIZE;
-        if (touch.initTouch(num_boards, TRILL_NOISETHRESHOLD)) {
+        if (touch.initTouch(num_boards, NOISETHRESHOLD)) {
             event.touchReady = true;
             std::cout << "done" << std::endl;
         } else {
@@ -490,7 +491,7 @@ void setup() {
     #ifdef touch_ENCHANTI
         // Compute number of boards from TSTICK_SIZE
         float num_boards = TSTICK_SIZE / ENCHANTI_BASETOUCHSIZE;
-        touch.initTouch(num_boards, ENCHANTI_NOISETHRESHOLD);
+        touch.initTouch(num_boards, NOISETHRESHOLD);
         std::cout << "done" << std::endl;
         event.touchReady = true; // always poll for now
 

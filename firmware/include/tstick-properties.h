@@ -2,23 +2,37 @@
 
 Contains definitions useful for the T-Stick 
 - General Properties
-- Touch Properties
+- Sensor Boards
 ********************************************************************/
 
 /********************************************************************
 General properties
+    - T-Stick MCU Board
     - SDA/SCL pins
     - Button pin
     - fsr pin
     - interrupt pins
     - Enable OSC2
 ********************************************************************/
+/*
+Define the ESP32 Board
+*/
+#define board_ENCHANTI
+// #define board_TINYPICO
+// #define board_LOLIND32
+
+/*
+Set the amount of capacitive stripes to for the T-Stick, up to 120
+*/
+#define TSTICK_SIZE 30
 
 /*
 Define I2C properties
 */
+#ifdef board_ENCHANTI
 #define SDA_PIN 12
 #define SCL_PIN 11
+#endif
 #define I2CUPDATE_FREQ 400000
 
 /*
@@ -49,30 +63,3 @@ Define Interrupt pins for sensors
 Enable second OSC address
 */
 // #define OSC2
-
-/*
-*******************************************************************
-Touch properties
-    - touch board
-    - tstick size (number of touch sensors)
-    - default trill settings
-*******************************************************************
-*/
-
-/*
-  Choose the capacitive sensing board
-  - Trill
-  - Enchanti Custom touch board
-*/
-#define touch_TRILL
-// #define touch_ENCHANTI
-
-/*
-Set the amount of capacitive stripes to for the T-Stick, up to 120
-*/
-#define TSTICK_SIZE 30
-/*
-    Set default noise threshold
-*/
-#define TRILL_NOISETHRESHOLD 30
-#define ENCHANTI_NOISETHRESHOLD 0
