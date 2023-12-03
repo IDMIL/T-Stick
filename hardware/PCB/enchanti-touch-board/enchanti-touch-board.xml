@@ -1,0 +1,2726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>D:\Documents\Github\touch-board\custom-touch-board\custom-touch-board.kicad_sch</source>
+    <date>2023-11-02 12:42:14 AM</date>
+    <tool>Eeschema 7.0.6</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>Custom Touch Board</title>
+        <company/>
+        <rev>1</rev>
+        <date>2023-11</date>
+        <source>custom-touch-board.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C1">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="MPN">GCM155R71C104KA55J</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GCM155R71C104KA55J"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a231c912-391b-42ed-8159-07243cdcbe72</tstamps>
+    </comp>
+    <comp ref="C2">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="MPN">GRM155R61C105KA12D</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GRM155R61C105KA12D"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1f186afb-25b4-4179-b709-86b2782d8c12</tstamps>
+    </comp>
+    <comp ref="C3">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="MPN">GCM155R71C104KA55J</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GCM155R71C104KA55J"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>668fca71-d693-42c2-854b-3f28bad46aaf</tstamps>
+    </comp>
+    <comp ref="C4">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="MPN">GRM155R61C105KA12D</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GRM155R61C105KA12D"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5c3800f2-0fe3-4251-be05-ad20743da376</tstamps>
+    </comp>
+    <comp ref="C5">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="MPN">GCM155R71C104KA55J</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GCM155R71C104KA55J"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c291b757-bd9e-4c84-8515-92f1bc71c6f1</tstamps>
+    </comp>
+    <comp ref="C6">
+      <value>2.2nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">2200 pF ±5% 50V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="MPN">GRM155R71H222JA01J</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="2200 pF ±5% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GRM155R71H222JA01J"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bd379a97-7cfb-4371-ab60-bc90a99edbcd</tstamps>
+    </comp>
+    <comp ref="C7">
+      <value>2.2nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">2200 pF ±5% 50V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="MPN">GRM155R71H222JA01J</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="2200 pF ±5% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GRM155R71H222JA01J"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>df0c8066-f5c4-4483-8232-446f4f28d11d</tstamps>
+    </comp>
+    <comp ref="C8">
+      <value>2.2nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">2200 pF ±5% 50V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="MPN">GRM155R71H222JA01J</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="2200 pF ±5% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GRM155R71H222JA01J"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ab8ae615-dd7a-4aac-8ba6-71bc709a106c</tstamps>
+    </comp>
+    <comp ref="C9">
+      <value>2.2nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">2200 pF ±5% 50V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="MPN">GRM155R71H222JA01J</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="2200 pF ±5% 50V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GRM155R71H222JA01J"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ef4ff0a0-92f8-4737-b85c-9e164cb8e684</tstamps>
+    </comp>
+    <comp ref="C10">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="MPN">GCM155R71C104KA55J</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GCM155R71C104KA55J"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>dbf55ca9-3f88-4ad5-9268-be25d5cc5e23</tstamps>
+    </comp>
+    <comp ref="C11">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="MPN">GRM155R61C105KA12D</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GRM155R61C105KA12D"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>40ee5f3d-542c-448e-a85a-21ef20e3f055</tstamps>
+    </comp>
+    <comp ref="C12">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="MPN">GCM155R71C104KA55J</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GCM155R71C104KA55J"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>719ba915-9210-4809-a43b-610d2b182875</tstamps>
+    </comp>
+    <comp ref="C13">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="MPN">GRM155R61C105KA12D</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GRM155R61C105KA12D"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>33aaf9a0-5c6f-41b9-a7c7-3ae76b5e8c77</tstamps>
+    </comp>
+    <comp ref="C14">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="MPN">GCM155R71C104KA55J</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GCM155R71C104KA55J"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b4c05334-8bb3-4fd0-80ee-3adc499cb906</tstamps>
+    </comp>
+    <comp ref="C15">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="MPN">GRM155R61C105KA12D</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GRM155R61C105KA12D"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8678017d-9b72-47fa-8677-260402d1aaaf</tstamps>
+    </comp>
+    <comp ref="C16">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="MPN">GCM155R71C104KA55J</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GCM155R71C104KA55J"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bb0f8bb5-5dc5-4545-9d5f-825f30e6a04c</tstamps>
+    </comp>
+    <comp ref="C17">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="MPN">GRM155R61C105KA12D</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GRM155R61C105KA12D"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e37c5edb-8497-49a5-ad3a-88d183e2e638</tstamps>
+    </comp>
+    <comp ref="C18">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <fields>
+        <field name="Description">1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="MPN">GRM155R61C105KA12D</field>
+        <field name="Manufacturer">Murata Electronics</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description" value="1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="MPN" value="GRM155R61C105KA12D"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b4e9bd57-6b37-43e1-9711-425a01d134c6</tstamps>
+    </comp>
+    <comp ref="D1">
+      <value>ESD5Zxx</value>
+      <footprint>Diode_SMD:D_SOD-523</footprint>
+      <datasheet>https://www.onsemi.com/pdf/datasheet/esd5z2.5t1-d.pdf</datasheet>
+      <fields>
+        <field name="Description">18.6V Clamp 11.6A (8/20µs) Ipp Tvs Diode Surface Mount SOD-523</field>
+        <field name="MPN">ESD5V0D5-TP</field>
+        <field name="Manufacturer">Micro Commercial Co</field>
+      </fields>
+      <libsource lib="Diode" part="ESD5Zxx" description="ESD Protection Diode, SOD-523"/>
+      <property name="Description" value="18.6V Clamp 11.6A (8/20µs) Ipp Tvs Diode Surface Mount SOD-523"/>
+      <property name="MPN" value="ESD5V0D5-TP"/>
+      <property name="Manufacturer" value="Micro Commercial Co"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="ESD Protection Diode, SOD-523"/>
+      <property name="ki_keywords" value="esd tvs unidirectional diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>58fe1470-b151-4f6d-84f2-7c38ee66227f</tstamps>
+    </comp>
+    <comp ref="GPIO1">
+      <value>I2C</value>
+      <footprint>JST-footprints:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical</footprint>
+      <fields>
+        <field name="Description">Connector Header Surface Mount 4 position 0.039" (1.00mm)</field>
+        <field name="MPN">BM04B-SRSS-TB</field>
+        <field name="Manufacturer">JST Sales America Inc.</field>
+      </fields>
+      <libsource lib="Connector_Generic_MountingPin" part="Conn_01x04_MountingPin" description="Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Description" value="Connector Header Surface Mount 4 position 0.039&quot; (1.00mm)"/>
+      <property name="MPN" value="BM04B-SRSS-TB"/>
+      <property name="Manufacturer" value="JST Sales America Inc."/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9d4372af-26b2-41a1-8305-5e22eb1679a3</tstamps>
+    </comp>
+    <comp ref="GPIO2">
+      <value>INTERRUPT</value>
+      <footprint>JST-footprints:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical</footprint>
+      <fields>
+        <field name="Description">Connector Header Surface Mount 4 position 0.039" (1.00mm)</field>
+        <field name="MPN">BM04B-SRSS-TB</field>
+        <field name="Manufacturer">JST Sales America Inc.</field>
+      </fields>
+      <libsource lib="Connector_Generic_MountingPin" part="Conn_01x04_MountingPin" description="Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Description" value="Connector Header Surface Mount 4 position 0.039&quot; (1.00mm)"/>
+      <property name="MPN" value="BM04B-SRSS-TB"/>
+      <property name="Manufacturer" value="JST Sales America Inc."/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bffa35f0-e551-46c5-be0b-c9d4636511f7</tstamps>
+    </comp>
+    <comp ref="GPIO3">
+      <value>SPI</value>
+      <footprint>Connector_JST:JST_XA_B06B-XASK-1_1x06_P2.50mm_Vertical</footprint>
+      <fields>
+        <field name="Description">Connector Header Through Hole 6 position 0.098" (2.50mm)</field>
+        <field name="MPN">B06B-XASK-1</field>
+        <field name="Manufacturer">JST Sales America Inc.</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_01x06" description="Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Description" value="Connector Header Through Hole 6 position 0.098&quot; (2.50mm)"/>
+      <property name="MPN" value="B06B-XASK-1"/>
+      <property name="Manufacturer" value="JST Sales America Inc."/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>546760f5-21da-49b5-9889-2a613d2ffd79</tstamps>
+    </comp>
+    <comp ref="J2">
+      <value>Progamming Header</value>
+      <footprint>Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical_SMD</footprint>
+      <fields>
+        <field name="Description">Connector Header Surface Mount 10 position 0.050" (1.27mm)</field>
+        <field name="MPN">3220-10-0300-00</field>
+        <field name="Manufacturer"> CNC Tech</field>
+      </fields>
+      <libsource lib="Connector_Generic" part="Conn_02x05_Odd_Even" description="Generic connector, double row, 02x05, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="MPN" value="3220-10-0300-00"/>
+      <property name="Description" value="Connector Header Surface Mount 10 position 0.050&quot; (1.27mm)"/>
+      <property name="Manufacturer" value=" CNC Tech"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Generic connector, double row, 02x05, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>da973744-ae2c-4c3f-ba30-55497b27120b</tstamps>
+    </comp>
+    <comp ref="R1">
+      <value>330</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">330 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF3300C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="330 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF3300C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7c7c1bb5-de3e-44de-8ef2-54488ed0bd33</tstamps>
+    </comp>
+    <comp ref="R2">
+      <value>330</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">330 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF3300C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="330 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF3300C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c7d74745-823e-451b-a85b-5e6529f9bf82</tstamps>
+    </comp>
+    <comp ref="R3">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cca625cf-3d8d-4367-8de6-14c878645ebf</tstamps>
+    </comp>
+    <comp ref="R4">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9e796929-659f-4d8b-9254-ae0cca7bf518</tstamps>
+    </comp>
+    <comp ref="R5">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5529ae3e-6673-4d3e-8bbb-8cf14597a06a</tstamps>
+    </comp>
+    <comp ref="R6">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>23bdcd7f-05ab-45aa-84e7-159847ff4377</tstamps>
+    </comp>
+    <comp ref="R7">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>484b7f76-dbbd-4c4a-b322-99c88f4c589c</tstamps>
+    </comp>
+    <comp ref="R8">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>dfb3caa0-dc4a-435c-920c-d8b36ff46f48</tstamps>
+    </comp>
+    <comp ref="R9">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>52be7b1f-0441-4a59-a4f3-e6ba4b56e76b</tstamps>
+    </comp>
+    <comp ref="R10">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>59b9cc52-3a5b-4a06-92bf-af868595abcb</tstamps>
+    </comp>
+    <comp ref="R11">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6cadb0b6-2afc-4260-a4cf-5e8b30dfaf53</tstamps>
+    </comp>
+    <comp ref="R12">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2eae02fd-85b7-428e-8012-2ea987015211</tstamps>
+    </comp>
+    <comp ref="R13">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>78d7f8ed-8ef3-4647-98a1-3a268b6de36c</tstamps>
+    </comp>
+    <comp ref="R14">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>864c4a69-78ef-4b89-9ed5-f0030842dd0e</tstamps>
+    </comp>
+    <comp ref="R15">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7dbfcb4c-635c-42ab-8575-8ace10c7f889</tstamps>
+    </comp>
+    <comp ref="R16">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>56ba254c-366c-4133-bcc1-1d64eaf35f35</tstamps>
+    </comp>
+    <comp ref="R17">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6187b9c8-938a-4d0b-a928-4a1f3a7f016a</tstamps>
+    </comp>
+    <comp ref="R18">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c3ee6244-abb3-4a61-b8ec-ff456c7f9f7f</tstamps>
+    </comp>
+    <comp ref="R19">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9bb8e7a7-c0df-4510-9fcd-57aea496b3fc</tstamps>
+    </comp>
+    <comp ref="R20">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c3a16f60-c03b-4d43-badb-41c5f5cce174</tstamps>
+    </comp>
+    <comp ref="R21">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cca01523-d574-410e-9863-1bdd83e28794</tstamps>
+    </comp>
+    <comp ref="R22">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>fdd36deb-6fad-4a71-8205-b45a3eb10dba</tstamps>
+    </comp>
+    <comp ref="R23">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2354b33f-69e0-4b4c-8f9d-ddd984a6a595</tstamps>
+    </comp>
+    <comp ref="R24">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>16b7b2f5-d763-4f19-b8a7-b7ae2933d77a</tstamps>
+    </comp>
+    <comp ref="R25">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c0a20f93-4c32-4f79-ac38-3631d4659bfd</tstamps>
+    </comp>
+    <comp ref="R26">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a9b52cb3-b83a-43eb-afbd-41a9d9e4c6b3</tstamps>
+    </comp>
+    <comp ref="R27">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>05b8862a-c63e-48c7-86c4-2b1baeff25fb</tstamps>
+    </comp>
+    <comp ref="R28">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>90cbba9a-311a-47ea-bc86-cafab6f10ad5</tstamps>
+    </comp>
+    <comp ref="R29">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1d0d7266-5e81-4aba-8352-940520cdb956</tstamps>
+    </comp>
+    <comp ref="R30">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>923a86b2-73bc-45a8-b364-900055c71c02</tstamps>
+    </comp>
+    <comp ref="R31">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d98813fa-8d68-4814-8670-493727c60f7d</tstamps>
+    </comp>
+    <comp ref="R32">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8d4820b9-dbe9-421d-a0f5-894807f3178f</tstamps>
+    </comp>
+    <comp ref="R33">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8ff4325c-bc78-4585-bff9-4f035ca03210</tstamps>
+    </comp>
+    <comp ref="R34">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1b9a036c-c3ae-4472-b6e6-ce60b18b3c51</tstamps>
+    </comp>
+    <comp ref="R35">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4e7550da-16d6-4c0e-93c8-72ce841c6874</tstamps>
+    </comp>
+    <comp ref="R36">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8ecf1b90-5535-4954-ae04-5e440a73551b</tstamps>
+    </comp>
+    <comp ref="R37">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>748fd496-fbbd-475a-bc00-9131c61d1ad4</tstamps>
+    </comp>
+    <comp ref="R38">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a62e06d8-8fb7-4c5a-bcfd-a41485505b13</tstamps>
+    </comp>
+    <comp ref="R39">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7fd166de-47e8-4dda-9967-8ad835227b5c</tstamps>
+    </comp>
+    <comp ref="R40">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bc2627c4-d2d4-4225-9a8a-2189aaf15cb7</tstamps>
+    </comp>
+    <comp ref="R41">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1e922d16-9d56-4740-8eac-0b447acf7bae</tstamps>
+    </comp>
+    <comp ref="R42">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>174257b9-f36b-4601-b682-1c1d26cf03dd</tstamps>
+    </comp>
+    <comp ref="R43">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3e16b23e-c14c-4c5c-9b05-84953ed206f5</tstamps>
+    </comp>
+    <comp ref="R44">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1fd1f265-259e-46fe-8d01-57c16abfb717</tstamps>
+    </comp>
+    <comp ref="R45">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>47a9d204-9c8f-4db5-9ce0-9bb8e6ae402a</tstamps>
+    </comp>
+    <comp ref="R46">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9dcf1c07-44bb-43de-a11b-d36b89c65e2a</tstamps>
+    </comp>
+    <comp ref="R47">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f1538c1e-2dcd-4786-ae5b-f5e99fa3c919</tstamps>
+    </comp>
+    <comp ref="R48">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b38754ce-bb0b-42e4-97b2-cca26576bbf1</tstamps>
+    </comp>
+    <comp ref="R49">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e65a2b1f-16d5-4829-9ff0-ab6ecd4e04b4</tstamps>
+    </comp>
+    <comp ref="R50">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9cbfcd11-a24c-43f3-8355-bc50a5ab53dd</tstamps>
+    </comp>
+    <comp ref="R51">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c34b1856-de98-44f3-8fa4-9a2936200cc2</tstamps>
+    </comp>
+    <comp ref="R52">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7a6541cc-151a-4950-8b80-5418d0621abd</tstamps>
+    </comp>
+    <comp ref="R53">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>251f9c3e-cf9c-4d3d-bb10-a4fe71a81ce6</tstamps>
+    </comp>
+    <comp ref="R54">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cc4c80b7-a91c-456b-bd0e-951cc7bcab68</tstamps>
+    </comp>
+    <comp ref="R55">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b34b8b81-27f3-495d-a55c-b0e3cfd363ca</tstamps>
+    </comp>
+    <comp ref="R56">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>01c44e58-7e4f-4d74-a3c4-85594d0c4413</tstamps>
+    </comp>
+    <comp ref="R57">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d0b4f096-a134-4005-b5ae-2737d3e17d1e</tstamps>
+    </comp>
+    <comp ref="R58">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0d0300e1-ac16-450c-80ca-061252b04cd5</tstamps>
+    </comp>
+    <comp ref="R59">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>488873e1-0ffb-4214-803d-6fd4980efaf4</tstamps>
+    </comp>
+    <comp ref="R60">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b2f4cfa5-9c48-4d67-b784-62df245feb77</tstamps>
+    </comp>
+    <comp ref="R61">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1a3b15ad-fe27-489f-8e2e-6fcea1e146c0</tstamps>
+    </comp>
+    <comp ref="R62">
+      <value>560</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF5600C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF5600C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9551ae67-a899-4003-9194-ed4a7f0d40bd</tstamps>
+    </comp>
+    <comp ref="R63">
+      <value>4.7k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">4.7 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF4701C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="4.7 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF4701C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8104386d-a500-436b-9daf-d500680f6a13</tstamps>
+    </comp>
+    <comp ref="R64">
+      <value>4.7k</value>
+      <footprint>Resistor_SMD:R_0201_0603Metric</footprint>
+      <fields>
+        <field name="Description">4.7 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film</field>
+        <field name="MPN">ERJ-1GNF4701C</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description" value="4.7 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film"/>
+      <property name="MPN" value="ERJ-1GNF4701C"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>29c2185f-ed8d-433d-be6c-1b9c673b0813</tstamps>
+    </comp>
+    <comp ref="TOUCH1">
+      <value>FFCHEADER</value>
+      <footprint>ffc_footprints:CON_541323262_MOL</footprint>
+      <fields>
+        <field name="Description">32 Position FFC, FPC Connector Contacts, Bottom 0.020" (0.50mm) Surface Mount, Right Angle</field>
+        <field name="MPN">54132-3262</field>
+        <field name="Manufacturer">Molex</field>
+      </fields>
+      <libsource lib="Connector_Generic_MountingPin" part="Conn_01x32_MountingPin" description="Generic connectable mounting pin connector, single row, 01x32, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Description" value="32 Position FFC, FPC Connector Contacts, Bottom 0.020&quot; (0.50mm) Surface Mount, Right Angle"/>
+      <property name="MPN" value="54132-3262"/>
+      <property name="Manufacturer" value="Molex"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x32, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d0195347-b915-4587-93b7-88a7d04e5da3</tstamps>
+    </comp>
+    <comp ref="TOUCH2">
+      <value>FFCHEADER</value>
+      <footprint>ffc_footprints:CON_541323262_MOL</footprint>
+      <fields>
+        <field name="Description">32 Position FFC, FPC Connector Contacts, Bottom 0.020" (0.50mm) Surface Mount, Right Angle</field>
+        <field name="MPN">54132-3262</field>
+        <field name="Manufacturer">Molex</field>
+      </fields>
+      <libsource lib="Connector_Generic_MountingPin" part="Conn_01x32_MountingPin" description="Generic connectable mounting pin connector, single row, 01x32, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Description" value="32 Position FFC, FPC Connector Contacts, Bottom 0.020&quot; (0.50mm) Surface Mount, Right Angle"/>
+      <property name="MPN" value="54132-3262"/>
+      <property name="Manufacturer" value="Molex"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x32, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>69eb0c60-a557-47aa-8ece-9624878352fc</tstamps>
+    </comp>
+    <comp ref="U1">
+      <value>CY8C4149AZI-S598</value>
+      <footprint>CY8C4149AZI-S598-footprints:QFP-100</footprint>
+      <datasheet>CY8C4149AZI-S598</datasheet>
+      <fields>
+        <field name="Description">ARM® Cortex®-M0+ PSOC® 4 CY8C4100S Microcontroller IC 32-Bit 48MHz 384KB (384K x 8) FLASH 100-TQFP (14x14)</field>
+        <field name="MPN">CY8C4149AZI-S598</field>
+        <field name="Manufacturer">Infineon Technologies</field>
+      </fields>
+      <libsource lib="CY8C4149AZI-S598" part="CY8C4149AZI-S598" description=""/>
+      <property name="Description" value="ARM® Cortex®-M0+ PSOC® 4 CY8C4100S Microcontroller IC 32-Bit 48MHz 384KB (384K x 8) FLASH 100-TQFP (14x14)"/>
+      <property name="MPN" value="CY8C4149AZI-S598"/>
+      <property name="Manufacturer" value="Infineon Technologies"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="custom-touch-board.kicad_sch"/>
+      <property name="ki_keywords" value="CY8C4149AZA-S598"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cc1f7777-3bd1-473e-b4a6-9c099e0d901e</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="CY8C4149AZI-S598" part="CY8C4149AZI-S598">
+      <docs>CY8C4149AZI-S598</docs>
+      <footprints>
+        <fp>TQFP-64</fp>
+        <fp>TQFP-64-M</fp>
+        <fp>TQFP-64-L</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">CY8C4149AZI-S598</field>
+        <field name="Footprint">TQFP-100</field>
+        <field name="Datasheet">CY8C4149AZI-S598</field>
+      </fields>
+      <pins>
+        <pin num="1" name="UC" type="no_connect"/>
+        <pin num="2" name="P2.0" type="bidirectional"/>
+        <pin num="3" name="P2.1" type="bidirectional"/>
+        <pin num="4" name="P2.2" type="bidirectional"/>
+        <pin num="5" name="P2.3" type="bidirectional"/>
+        <pin num="6" name="P2.4" type="bidirectional"/>
+        <pin num="7" name="P2.5" type="bidirectional"/>
+        <pin num="8" name="P2.6" type="bidirectional"/>
+        <pin num="9" name="P2.7" type="bidirectional"/>
+        <pin num="10" name="VSSD" type="power_out"/>
+        <pin num="11" name="VDDD" type="power_out"/>
+        <pin num="12" name="P10.0" type="bidirectional"/>
+        <pin num="13" name="P10.1" type="bidirectional"/>
+        <pin num="14" name="P10.2" type="bidirectional"/>
+        <pin num="15" name="P10.3" type="bidirectional"/>
+        <pin num="16" name="P10.4" type="bidirectional"/>
+        <pin num="17" name="P10.5" type="bidirectional"/>
+        <pin num="18" name="P6.0" type="bidirectional"/>
+        <pin num="19" name="P6.1" type="bidirectional"/>
+        <pin num="20" name="P6.2" type="bidirectional"/>
+        <pin num="21" name="P6.3" type="bidirectional"/>
+        <pin num="22" name="P6.4" type="bidirectional"/>
+        <pin num="23" name="P12.0" type="bidirectional"/>
+        <pin num="24" name="P12.1" type="bidirectional"/>
+        <pin num="25" name="P6.5" type="bidirectional"/>
+        <pin num="26" name="VDDD" type="power_in"/>
+        <pin num="27" name="P3.0" type="bidirectional"/>
+        <pin num="28" name="P3.1" type="bidirectional"/>
+        <pin num="29" name="P3.2" type="bidirectional"/>
+        <pin num="30" name="P3.3" type="bidirectional"/>
+        <pin num="31" name="P3.4" type="bidirectional"/>
+        <pin num="32" name="P3.5" type="bidirectional"/>
+        <pin num="33" name="P3.6" type="bidirectional"/>
+        <pin num="34" name="P3.7" type="bidirectional"/>
+        <pin num="35" name="VDDD" type="power_in"/>
+        <pin num="36" name="P11.0" type="bidirectional"/>
+        <pin num="37" name="P11.1" type="bidirectional"/>
+        <pin num="38" name="P11.2" type="bidirectional"/>
+        <pin num="39" name="P11.3" type="bidirectional"/>
+        <pin num="40" name="P11.4" type="bidirectional"/>
+        <pin num="41" name="P11.5" type="bidirectional"/>
+        <pin num="42" name="VDDD" type="power_in"/>
+        <pin num="43" name="P4.0" type="bidirectional"/>
+        <pin num="44" name="P4.1" type="bidirectional"/>
+        <pin num="45" name="P4.2" type="bidirectional"/>
+        <pin num="46" name="P4.3" type="bidirectional"/>
+        <pin num="47" name="P4.4" type="bidirectional"/>
+        <pin num="48" name="P4.5" type="bidirectional"/>
+        <pin num="49" name="P4.6" type="bidirectional"/>
+        <pin num="50" name="P4.7" type="bidirectional"/>
+        <pin num="51" name="VSSD" type="power_out"/>
+        <pin num="52" name="UC" type="no_connect"/>
+        <pin num="53" name="P5.6" type="bidirectional"/>
+        <pin num="54" name="P5.7" type="bidirectional"/>
+        <pin num="55" name="P7.0" type="bidirectional"/>
+        <pin num="56" name="P7.1" type="bidirectional"/>
+        <pin num="57" name="P7.2" type="bidirectional"/>
+        <pin num="58" name="P7.3" type="bidirectional"/>
+        <pin num="59" name="P7.4" type="bidirectional"/>
+        <pin num="60" name="P7.5" type="bidirectional"/>
+        <pin num="61" name="P7.6" type="bidirectional"/>
+        <pin num="62" name="P7.7" type="bidirectional"/>
+        <pin num="63" name="P0.0" type="bidirectional"/>
+        <pin num="64" name="P0.1" type="bidirectional"/>
+        <pin num="65" name="P0.2" type="bidirectional"/>
+        <pin num="66" name="P0.3" type="bidirectional"/>
+        <pin num="67" name="P0.4" type="bidirectional"/>
+        <pin num="68" name="P0.5" type="bidirectional"/>
+        <pin num="69" name="P0.6" type="bidirectional"/>
+        <pin num="70" name="P0.7" type="bidirectional"/>
+        <pin num="71" name="P8.0" type="bidirectional"/>
+        <pin num="72" name="P8.1" type="bidirectional"/>
+        <pin num="73" name="P8.2" type="bidirectional"/>
+        <pin num="74" name="P8.3" type="bidirectional"/>
+        <pin num="75" name="XRES" type="unspecified"/>
+        <pin num="76" name="VCCD" type="power_in"/>
+        <pin num="77" name="VSSD" type="power_out"/>
+        <pin num="78" name="VDDD" type="power_in"/>
+        <pin num="79" name="P9.0" type="bidirectional"/>
+        <pin num="80" name="P9.1" type="bidirectional"/>
+        <pin num="81" name="P9.2" type="bidirectional"/>
+        <pin num="82" name="P9.3" type="bidirectional"/>
+        <pin num="83" name="P5.0" type="bidirectional"/>
+        <pin num="84" name="P5.1" type="bidirectional"/>
+        <pin num="85" name="P5.2" type="bidirectional"/>
+        <pin num="86" name="P5.3" type="bidirectional"/>
+        <pin num="87" name="P5.4" type="bidirectional"/>
+        <pin num="88" name="P5.5" type="bidirectional"/>
+        <pin num="89" name="UC" type="no_connect"/>
+        <pin num="90" name="UC" type="no_connect"/>
+        <pin num="91" name="VDDA" type="power_in"/>
+        <pin num="92" name="VSSA" type="power_out"/>
+        <pin num="93" name="P1.0" type="bidirectional"/>
+        <pin num="94" name="P1.1" type="bidirectional"/>
+        <pin num="95" name="P1.2" type="bidirectional"/>
+        <pin num="96" name="P1.3" type="bidirectional"/>
+        <pin num="97" name="P1.4" type="bidirectional"/>
+        <pin num="98" name="P1.5" type="bidirectional"/>
+        <pin num="99" name="P1.6" type="bidirectional"/>
+        <pin num="100" name="P1.7" type="bidirectional"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_01x06">
+      <description>Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x06</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_02x05_Odd_Even">
+      <description>Generic connector, double row, 02x05, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_2x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_02x05_Odd_Even</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+        <pin num="7" name="Pin_7" type="passive"/>
+        <pin num="8" name="Pin_8" type="passive"/>
+        <pin num="9" name="Pin_9" type="passive"/>
+        <pin num="10" name="Pin_10" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic_MountingPin" part="Conn_01x04_MountingPin">
+      <description>Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??-1MP*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x04_MountingPin</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="MP" name="MountPin" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic_MountingPin" part="Conn_01x32_MountingPin">
+      <description>Generic connectable mounting pin connector, single row, 01x32, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??-1MP*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x32_MountingPin</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+        <pin num="7" name="Pin_7" type="passive"/>
+        <pin num="8" name="Pin_8" type="passive"/>
+        <pin num="9" name="Pin_9" type="passive"/>
+        <pin num="10" name="Pin_10" type="passive"/>
+        <pin num="11" name="Pin_11" type="passive"/>
+        <pin num="12" name="Pin_12" type="passive"/>
+        <pin num="13" name="Pin_13" type="passive"/>
+        <pin num="14" name="Pin_14" type="passive"/>
+        <pin num="15" name="Pin_15" type="passive"/>
+        <pin num="16" name="Pin_16" type="passive"/>
+        <pin num="17" name="Pin_17" type="passive"/>
+        <pin num="18" name="Pin_18" type="passive"/>
+        <pin num="19" name="Pin_19" type="passive"/>
+        <pin num="20" name="Pin_20" type="passive"/>
+        <pin num="21" name="Pin_21" type="passive"/>
+        <pin num="22" name="Pin_22" type="passive"/>
+        <pin num="23" name="Pin_23" type="passive"/>
+        <pin num="24" name="Pin_24" type="passive"/>
+        <pin num="25" name="Pin_25" type="passive"/>
+        <pin num="26" name="Pin_26" type="passive"/>
+        <pin num="27" name="Pin_27" type="passive"/>
+        <pin num="28" name="Pin_28" type="passive"/>
+        <pin num="29" name="Pin_29" type="passive"/>
+        <pin num="30" name="Pin_30" type="passive"/>
+        <pin num="31" name="Pin_31" type="passive"/>
+        <pin num="32" name="Pin_32" type="passive"/>
+        <pin num="MP" name="MountPin" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R_US">
+      <description>Resistor, US symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R_US</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Diode" part="ESD5Zxx">
+      <description>ESD Protection Diode, SOD-523</description>
+      <docs>https://www.onsemi.com/pdf/datasheet/esd5z2.5t1-d.pdf</docs>
+      <footprints>
+        <fp>D?SOD?523*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">ESD5Zxx</field>
+        <field name="Footprint">Diode_SMD:D_SOD-523</field>
+        <field name="Datasheet">https://www.onsemi.com/pdf/datasheet/esd5z2.5t1-d.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Mechanical" part="MountingHole">
+      <description>Mounting Hole without connection</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>MountingHole*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">H</field>
+        <field name="Value">MountingHole</field>
+        <field name="Datasheet">~</field>
+      </fields>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="CY8C4149AZI-S598">
+      <uri>D:\Documents\Github\touch-board\custom-touch-board/Libraries/CY8C4149AZI-S598/CY8C4149AZI-S598.kicad_sym</uri>
+    </library>
+    <library logical="Connector_Generic">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Connector_Generic.kicad_sym</uri>
+    </library>
+    <library logical="Connector_Generic_MountingPin">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Connector_Generic_MountingPin.kicad_sym</uri>
+    </library>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Device.kicad_sym</uri>
+    </library>
+    <library logical="Diode">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Diode.kicad_sym</uri>
+    </library>
+    <library logical="Mechanical">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Mechanical.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="+3V3">
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="C10" pin="2" pintype="passive"/>
+      <node ref="C11" pin="2" pintype="passive"/>
+      <node ref="C12" pin="2" pintype="passive"/>
+      <node ref="C13" pin="2" pintype="passive"/>
+      <node ref="C14" pin="2" pintype="passive"/>
+      <node ref="C15" pin="2" pintype="passive"/>
+      <node ref="C16" pin="2" pintype="passive"/>
+      <node ref="C17" pin="2" pintype="passive"/>
+      <node ref="C18" pin="2" pintype="passive"/>
+      <node ref="C2" pin="2" pintype="passive"/>
+      <node ref="C4" pin="2" pintype="passive"/>
+      <node ref="C5" pin="2" pintype="passive"/>
+      <node ref="D1" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="GPIO1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="GPIO3" pin="5" pinfunction="Pin_5" pintype="passive"/>
+      <node ref="J2" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="R63" pin="2" pintype="passive"/>
+      <node ref="R64" pin="2" pintype="passive"/>
+      <node ref="U1" pin="11" pinfunction="VDDD" pintype="power_out"/>
+      <node ref="U1" pin="26" pinfunction="VDDD" pintype="power_in"/>
+      <node ref="U1" pin="35" pinfunction="VDDD" pintype="power_in"/>
+      <node ref="U1" pin="42" pinfunction="VDDD" pintype="power_in"/>
+      <node ref="U1" pin="78" pinfunction="VDDD" pintype="power_in"/>
+      <node ref="U1" pin="91" pinfunction="VDDA" pintype="power_in"/>
+    </net>
+    <net code="3" name="/CMOD00">
+      <node ref="C6" pin="2" pintype="passive"/>
+      <node ref="U1" pin="43" pinfunction="P4.0" pintype="bidirectional"/>
+    </net>
+    <net code="4" name="/CMOD01">
+      <node ref="C7" pin="2" pintype="passive"/>
+      <node ref="U1" pin="44" pinfunction="P4.1" pintype="bidirectional"/>
+    </net>
+    <net code="5" name="/CMOD10">
+      <node ref="C8" pin="2" pintype="passive"/>
+      <node ref="U1" pin="55" pinfunction="P7.0" pintype="bidirectional"/>
+    </net>
+    <net code="6" name="/CMOD11">
+      <node ref="C9" pin="2" pintype="passive"/>
+      <node ref="U1" pin="56" pinfunction="P7.1" pintype="bidirectional"/>
+    </net>
+    <net code="7" name="/CS">
+      <node ref="GPIO3" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="U1" pin="39" pinfunction="P11.3" pintype="bidirectional"/>
+    </net>
+    <net code="8" name="/EVT">
+      <node ref="GPIO2" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="U1" pin="31" pinfunction="P3.4" pintype="bidirectional"/>
+    </net>
+    <net code="9" name="/MISO">
+      <node ref="GPIO3" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="U1" pin="37" pinfunction="P11.1" pintype="bidirectional"/>
+    </net>
+    <net code="10" name="/MOSI">
+      <node ref="GPIO3" pin="4" pinfunction="Pin_4" pintype="passive"/>
+      <node ref="U1" pin="36" pinfunction="P11.0" pintype="bidirectional"/>
+    </net>
+    <net code="11" name="/MSC000">
+      <node ref="R3" pin="1" pintype="passive"/>
+      <node ref="U1" pin="93" pinfunction="P1.0" pintype="bidirectional"/>
+    </net>
+    <net code="12" name="/MSC001">
+      <node ref="R4" pin="1" pintype="passive"/>
+      <node ref="U1" pin="94" pinfunction="P1.1" pintype="bidirectional"/>
+    </net>
+    <net code="13" name="/MSC002">
+      <node ref="R5" pin="1" pintype="passive"/>
+      <node ref="U1" pin="95" pinfunction="P1.2" pintype="bidirectional"/>
+    </net>
+    <net code="14" name="/MSC003">
+      <node ref="R6" pin="1" pintype="passive"/>
+      <node ref="U1" pin="96" pinfunction="P1.3" pintype="bidirectional"/>
+    </net>
+    <net code="15" name="/MSC004">
+      <node ref="R7" pin="1" pintype="passive"/>
+      <node ref="U1" pin="97" pinfunction="P1.4" pintype="bidirectional"/>
+    </net>
+    <net code="16" name="/MSC005">
+      <node ref="R8" pin="1" pintype="passive"/>
+      <node ref="U1" pin="98" pinfunction="P1.5" pintype="bidirectional"/>
+    </net>
+    <net code="17" name="/MSC006">
+      <node ref="R9" pin="1" pintype="passive"/>
+      <node ref="U1" pin="99" pinfunction="P1.6" pintype="bidirectional"/>
+    </net>
+    <net code="18" name="/MSC007">
+      <node ref="R10" pin="1" pintype="passive"/>
+      <node ref="U1" pin="100" pinfunction="P1.7" pintype="bidirectional"/>
+    </net>
+    <net code="19" name="/MSC008">
+      <node ref="R11" pin="1" pintype="passive"/>
+      <node ref="U1" pin="2" pinfunction="P2.0" pintype="bidirectional"/>
+    </net>
+    <net code="20" name="/MSC009">
+      <node ref="R12" pin="1" pintype="passive"/>
+      <node ref="U1" pin="3" pinfunction="P2.1" pintype="bidirectional"/>
+    </net>
+    <net code="21" name="/MSC010">
+      <node ref="R13" pin="1" pintype="passive"/>
+      <node ref="U1" pin="4" pinfunction="P2.2" pintype="bidirectional"/>
+    </net>
+    <net code="22" name="/MSC011">
+      <node ref="R14" pin="1" pintype="passive"/>
+      <node ref="U1" pin="5" pinfunction="P2.3" pintype="bidirectional"/>
+    </net>
+    <net code="23" name="/MSC012">
+      <node ref="R15" pin="1" pintype="passive"/>
+      <node ref="U1" pin="6" pinfunction="P2.4" pintype="bidirectional"/>
+    </net>
+    <net code="24" name="/MSC013">
+      <node ref="R16" pin="1" pintype="passive"/>
+      <node ref="U1" pin="7" pinfunction="P2.5" pintype="bidirectional"/>
+    </net>
+    <net code="25" name="/MSC014">
+      <node ref="R17" pin="1" pintype="passive"/>
+      <node ref="U1" pin="8" pinfunction="P2.6" pintype="bidirectional"/>
+    </net>
+    <net code="26" name="/MSC015">
+      <node ref="R18" pin="1" pintype="passive"/>
+      <node ref="U1" pin="9" pinfunction="P2.7" pintype="bidirectional"/>
+    </net>
+    <net code="27" name="/MSC016">
+      <node ref="R19" pin="1" pintype="passive"/>
+      <node ref="U1" pin="12" pinfunction="P10.0" pintype="bidirectional"/>
+    </net>
+    <net code="28" name="/MSC017">
+      <node ref="R20" pin="1" pintype="passive"/>
+      <node ref="U1" pin="13" pinfunction="P10.1" pintype="bidirectional"/>
+    </net>
+    <net code="29" name="/MSC018">
+      <node ref="R21" pin="1" pintype="passive"/>
+      <node ref="U1" pin="14" pinfunction="P10.2" pintype="bidirectional"/>
+    </net>
+    <net code="30" name="/MSC019">
+      <node ref="R22" pin="1" pintype="passive"/>
+      <node ref="U1" pin="15" pinfunction="P10.3" pintype="bidirectional"/>
+    </net>
+    <net code="31" name="/MSC020">
+      <node ref="R23" pin="1" pintype="passive"/>
+      <node ref="U1" pin="16" pinfunction="P10.4" pintype="bidirectional"/>
+    </net>
+    <net code="32" name="/MSC021">
+      <node ref="R24" pin="1" pintype="passive"/>
+      <node ref="U1" pin="17" pinfunction="P10.5" pintype="bidirectional"/>
+    </net>
+    <net code="33" name="/MSC022">
+      <node ref="R25" pin="1" pintype="passive"/>
+      <node ref="U1" pin="18" pinfunction="P6.0" pintype="bidirectional"/>
+    </net>
+    <net code="34" name="/MSC023">
+      <node ref="R26" pin="1" pintype="passive"/>
+      <node ref="U1" pin="19" pinfunction="P6.1" pintype="bidirectional"/>
+    </net>
+    <net code="35" name="/MSC024">
+      <node ref="R27" pin="1" pintype="passive"/>
+      <node ref="U1" pin="20" pinfunction="P6.2" pintype="bidirectional"/>
+    </net>
+    <net code="36" name="/MSC025">
+      <node ref="R28" pin="1" pintype="passive"/>
+      <node ref="U1" pin="21" pinfunction="P6.3" pintype="bidirectional"/>
+    </net>
+    <net code="37" name="/MSC026">
+      <node ref="R29" pin="1" pintype="passive"/>
+      <node ref="U1" pin="22" pinfunction="P6.4" pintype="bidirectional"/>
+    </net>
+    <net code="38" name="/MSC027">
+      <node ref="R30" pin="1" pintype="passive"/>
+      <node ref="U1" pin="23" pinfunction="P12.0" pintype="bidirectional"/>
+    </net>
+    <net code="39" name="/MSC028">
+      <node ref="R31" pin="1" pintype="passive"/>
+      <node ref="U1" pin="24" pinfunction="P12.1" pintype="bidirectional"/>
+    </net>
+    <net code="40" name="/MSC029">
+      <node ref="R32" pin="1" pintype="passive"/>
+      <node ref="U1" pin="25" pinfunction="P6.5" pintype="bidirectional"/>
+    </net>
+    <net code="41" name="/MSC035">
+      <node ref="U1" pin="32" pinfunction="P3.5" pintype="bidirectional"/>
+    </net>
+    <net code="42" name="/MSC036">
+      <node ref="U1" pin="33" pinfunction="P3.6" pintype="bidirectional"/>
+    </net>
+    <net code="43" name="/MSC037">
+      <node ref="U1" pin="34" pinfunction="P3.7" pintype="bidirectional"/>
+    </net>
+    <net code="44" name="/MSC042">
+      <node ref="U1" pin="40" pinfunction="P11.4" pintype="bidirectional"/>
+    </net>
+    <net code="45" name="/MSC043">
+      <node ref="U1" pin="41" pinfunction="P11.5" pintype="bidirectional"/>
+    </net>
+    <net code="46" name="/MSC046">
+      <node ref="U1" pin="45" pinfunction="P4.2" pintype="bidirectional"/>
+    </net>
+    <net code="47" name="/MSC047">
+      <node ref="U1" pin="46" pinfunction="P4.3" pintype="bidirectional"/>
+    </net>
+    <net code="48" name="/MSC048">
+      <node ref="U1" pin="47" pinfunction="P4.4" pintype="bidirectional"/>
+    </net>
+    <net code="49" name="/MSC049">
+      <node ref="U1" pin="48" pinfunction="P4.5" pintype="bidirectional"/>
+    </net>
+    <net code="50" name="/MSC050">
+      <node ref="U1" pin="49" pinfunction="P4.6" pintype="bidirectional"/>
+    </net>
+    <net code="51" name="/MSC051">
+      <node ref="U1" pin="50" pinfunction="P4.7" pintype="bidirectional"/>
+    </net>
+    <net code="52" name="/MSC100">
+      <node ref="R62" pin="1" pintype="passive"/>
+      <node ref="U1" pin="88" pinfunction="P5.5" pintype="bidirectional"/>
+    </net>
+    <net code="53" name="/MSC101">
+      <node ref="R61" pin="1" pintype="passive"/>
+      <node ref="U1" pin="87" pinfunction="P5.4" pintype="bidirectional"/>
+    </net>
+    <net code="54" name="/MSC102">
+      <node ref="R60" pin="1" pintype="passive"/>
+      <node ref="U1" pin="86" pinfunction="P5.3" pintype="bidirectional"/>
+    </net>
+    <net code="55" name="/MSC103">
+      <node ref="R59" pin="1" pintype="passive"/>
+      <node ref="U1" pin="85" pinfunction="P5.2" pintype="bidirectional"/>
+    </net>
+    <net code="56" name="/MSC104">
+      <node ref="R33" pin="1" pintype="passive"/>
+      <node ref="U1" pin="53" pinfunction="P5.6" pintype="bidirectional"/>
+    </net>
+    <net code="57" name="/MSC105">
+      <node ref="R34" pin="1" pintype="passive"/>
+      <node ref="U1" pin="54" pinfunction="P5.7" pintype="bidirectional"/>
+    </net>
+    <net code="58" name="/MSC108">
+      <node ref="R35" pin="1" pintype="passive"/>
+      <node ref="U1" pin="57" pinfunction="P7.2" pintype="bidirectional"/>
+    </net>
+    <net code="59" name="/MSC109">
+      <node ref="R36" pin="1" pintype="passive"/>
+      <node ref="U1" pin="58" pinfunction="P7.3" pintype="bidirectional"/>
+    </net>
+    <net code="60" name="/MSC110">
+      <node ref="R37" pin="1" pintype="passive"/>
+      <node ref="U1" pin="59" pinfunction="P7.4" pintype="bidirectional"/>
+    </net>
+    <net code="61" name="/MSC111">
+      <node ref="R38" pin="1" pintype="passive"/>
+      <node ref="U1" pin="60" pinfunction="P7.5" pintype="bidirectional"/>
+    </net>
+    <net code="62" name="/MSC112">
+      <node ref="R39" pin="1" pintype="passive"/>
+      <node ref="U1" pin="61" pinfunction="P7.6" pintype="bidirectional"/>
+    </net>
+    <net code="63" name="/MSC113">
+      <node ref="R40" pin="1" pintype="passive"/>
+      <node ref="U1" pin="62" pinfunction="P7.7" pintype="bidirectional"/>
+    </net>
+    <net code="64" name="/MSC114">
+      <node ref="R41" pin="1" pintype="passive"/>
+      <node ref="U1" pin="63" pinfunction="P0.0" pintype="bidirectional"/>
+    </net>
+    <net code="65" name="/MSC115">
+      <node ref="R42" pin="1" pintype="passive"/>
+      <node ref="U1" pin="64" pinfunction="P0.1" pintype="bidirectional"/>
+    </net>
+    <net code="66" name="/MSC116">
+      <node ref="R43" pin="1" pintype="passive"/>
+      <node ref="U1" pin="65" pinfunction="P0.2" pintype="bidirectional"/>
+    </net>
+    <net code="67" name="/MSC117">
+      <node ref="R44" pin="1" pintype="passive"/>
+      <node ref="U1" pin="66" pinfunction="P0.3" pintype="bidirectional"/>
+    </net>
+    <net code="68" name="/MSC118">
+      <node ref="R45" pin="1" pintype="passive"/>
+      <node ref="U1" pin="67" pinfunction="P0.4" pintype="bidirectional"/>
+    </net>
+    <net code="69" name="/MSC119">
+      <node ref="R46" pin="1" pintype="passive"/>
+      <node ref="U1" pin="68" pinfunction="P0.5" pintype="bidirectional"/>
+    </net>
+    <net code="70" name="/MSC120">
+      <node ref="R47" pin="1" pintype="passive"/>
+      <node ref="U1" pin="69" pinfunction="P0.6" pintype="bidirectional"/>
+    </net>
+    <net code="71" name="/MSC121">
+      <node ref="R48" pin="1" pintype="passive"/>
+      <node ref="U1" pin="70" pinfunction="P0.7" pintype="bidirectional"/>
+    </net>
+    <net code="72" name="/MSC122">
+      <node ref="R49" pin="1" pintype="passive"/>
+      <node ref="U1" pin="71" pinfunction="P8.0" pintype="bidirectional"/>
+    </net>
+    <net code="73" name="/MSC123">
+      <node ref="R50" pin="1" pintype="passive"/>
+      <node ref="U1" pin="72" pinfunction="P8.1" pintype="bidirectional"/>
+    </net>
+    <net code="74" name="/MSC124">
+      <node ref="R51" pin="1" pintype="passive"/>
+      <node ref="U1" pin="73" pinfunction="P8.2" pintype="bidirectional"/>
+    </net>
+    <net code="75" name="/MSC125">
+      <node ref="R52" pin="1" pintype="passive"/>
+      <node ref="U1" pin="74" pinfunction="P8.3" pintype="bidirectional"/>
+    </net>
+    <net code="76" name="/MSC126">
+      <node ref="R53" pin="1" pintype="passive"/>
+      <node ref="U1" pin="79" pinfunction="P9.0" pintype="bidirectional"/>
+    </net>
+    <net code="77" name="/MSC127">
+      <node ref="R54" pin="1" pintype="passive"/>
+      <node ref="U1" pin="80" pinfunction="P9.1" pintype="bidirectional"/>
+    </net>
+    <net code="78" name="/MSC128">
+      <node ref="R55" pin="1" pintype="passive"/>
+      <node ref="U1" pin="81" pinfunction="P9.2" pintype="bidirectional"/>
+    </net>
+    <net code="79" name="/MSC129">
+      <node ref="R56" pin="1" pintype="passive"/>
+      <node ref="U1" pin="82" pinfunction="P9.3" pintype="bidirectional"/>
+    </net>
+    <net code="80" name="/MSC130">
+      <node ref="R57" pin="1" pintype="passive"/>
+      <node ref="U1" pin="83" pinfunction="P5.0" pintype="bidirectional"/>
+    </net>
+    <net code="81" name="/MSC131">
+      <node ref="R58" pin="1" pintype="passive"/>
+      <node ref="U1" pin="84" pinfunction="P5.1" pintype="bidirectional"/>
+    </net>
+    <net code="82" name="/P30">
+      <node ref="R1" pin="1" pintype="passive"/>
+      <node ref="U1" pin="27" pinfunction="P3.0" pintype="bidirectional"/>
+    </net>
+    <net code="83" name="/P31">
+      <node ref="R2" pin="1" pintype="passive"/>
+      <node ref="U1" pin="28" pinfunction="P3.1" pintype="bidirectional"/>
+    </net>
+    <net code="84" name="/RES">
+      <node ref="J2" pin="10" pinfunction="Pin_10" pintype="passive"/>
+      <node ref="U1" pin="75" pinfunction="XRES" pintype="unspecified"/>
+    </net>
+    <net code="85" name="/SCL">
+      <node ref="GPIO1" pin="4" pinfunction="Pin_4" pintype="passive"/>
+      <node ref="R1" pin="2" pintype="passive"/>
+      <node ref="R64" pin="1" pintype="passive"/>
+    </net>
+    <net code="86" name="/SDA">
+      <node ref="GPIO1" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="R2" pin="2" pintype="passive"/>
+      <node ref="R63" pin="1" pintype="passive"/>
+    </net>
+    <net code="87" name="/SPICLK">
+      <node ref="GPIO3" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="U1" pin="38" pinfunction="P11.2" pintype="bidirectional"/>
+    </net>
+    <net code="88" name="/SWCLK">
+      <node ref="J2" pin="4" pinfunction="Pin_4" pintype="passive"/>
+      <node ref="U1" pin="30" pinfunction="P3.3" pintype="bidirectional"/>
+    </net>
+    <net code="89" name="/SWDA">
+      <node ref="J2" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="U1" pin="29" pinfunction="P3.2" pintype="bidirectional"/>
+    </net>
+    <net code="90" name="/TOUCH000">
+      <node ref="R3" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="2" pinfunction="Pin_2" pintype="passive"/>
+    </net>
+    <net code="91" name="/TOUCH001">
+      <node ref="R4" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="3" pinfunction="Pin_3" pintype="passive"/>
+    </net>
+    <net code="92" name="/TOUCH002">
+      <node ref="R5" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="4" pinfunction="Pin_4" pintype="passive"/>
+    </net>
+    <net code="93" name="/TOUCH003">
+      <node ref="R6" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="5" pinfunction="Pin_5" pintype="passive"/>
+    </net>
+    <net code="94" name="/TOUCH004">
+      <node ref="R7" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="6" pinfunction="Pin_6" pintype="passive"/>
+    </net>
+    <net code="95" name="/TOUCH005">
+      <node ref="R8" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="7" pinfunction="Pin_7" pintype="passive"/>
+    </net>
+    <net code="96" name="/TOUCH006">
+      <node ref="R9" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="8" pinfunction="Pin_8" pintype="passive"/>
+    </net>
+    <net code="97" name="/TOUCH007">
+      <node ref="R10" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="9" pinfunction="Pin_9" pintype="passive"/>
+    </net>
+    <net code="98" name="/TOUCH008">
+      <node ref="R11" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="10" pinfunction="Pin_10" pintype="passive"/>
+    </net>
+    <net code="99" name="/TOUCH009">
+      <node ref="R12" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="11" pinfunction="Pin_11" pintype="passive"/>
+    </net>
+    <net code="100" name="/TOUCH010">
+      <node ref="R13" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="12" pinfunction="Pin_12" pintype="passive"/>
+    </net>
+    <net code="101" name="/TOUCH011">
+      <node ref="R14" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="13" pinfunction="Pin_13" pintype="passive"/>
+    </net>
+    <net code="102" name="/TOUCH012">
+      <node ref="R15" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="14" pinfunction="Pin_14" pintype="passive"/>
+    </net>
+    <net code="103" name="/TOUCH013">
+      <node ref="R16" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="15" pinfunction="Pin_15" pintype="passive"/>
+    </net>
+    <net code="104" name="/TOUCH014">
+      <node ref="R17" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="16" pinfunction="Pin_16" pintype="passive"/>
+    </net>
+    <net code="105" name="/TOUCH015">
+      <node ref="R18" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="17" pinfunction="Pin_17" pintype="passive"/>
+    </net>
+    <net code="106" name="/TOUCH016">
+      <node ref="R19" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="18" pinfunction="Pin_18" pintype="passive"/>
+    </net>
+    <net code="107" name="/TOUCH017">
+      <node ref="R20" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="19" pinfunction="Pin_19" pintype="passive"/>
+    </net>
+    <net code="108" name="/TOUCH018">
+      <node ref="R21" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="20" pinfunction="Pin_20" pintype="passive"/>
+    </net>
+    <net code="109" name="/TOUCH019">
+      <node ref="R22" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="21" pinfunction="Pin_21" pintype="passive"/>
+    </net>
+    <net code="110" name="/TOUCH020">
+      <node ref="R23" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="22" pinfunction="Pin_22" pintype="passive"/>
+    </net>
+    <net code="111" name="/TOUCH021">
+      <node ref="R24" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="23" pinfunction="Pin_23" pintype="passive"/>
+    </net>
+    <net code="112" name="/TOUCH022">
+      <node ref="R25" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="24" pinfunction="Pin_24" pintype="passive"/>
+    </net>
+    <net code="113" name="/TOUCH023">
+      <node ref="R26" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="25" pinfunction="Pin_25" pintype="passive"/>
+    </net>
+    <net code="114" name="/TOUCH024">
+      <node ref="R27" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="26" pinfunction="Pin_26" pintype="passive"/>
+    </net>
+    <net code="115" name="/TOUCH025">
+      <node ref="R28" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="27" pinfunction="Pin_27" pintype="passive"/>
+    </net>
+    <net code="116" name="/TOUCH026">
+      <node ref="R29" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="28" pinfunction="Pin_28" pintype="passive"/>
+    </net>
+    <net code="117" name="/TOUCH027">
+      <node ref="R30" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="29" pinfunction="Pin_29" pintype="passive"/>
+    </net>
+    <net code="118" name="/TOUCH028">
+      <node ref="R31" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="30" pinfunction="Pin_30" pintype="passive"/>
+    </net>
+    <net code="119" name="/TOUCH029">
+      <node ref="R32" pin="2" pintype="passive"/>
+      <node ref="TOUCH2" pin="31" pinfunction="Pin_31" pintype="passive"/>
+    </net>
+    <net code="120" name="/TOUCH100">
+      <node ref="R33" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+    </net>
+    <net code="121" name="/TOUCH101">
+      <node ref="R34" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="3" pinfunction="Pin_3" pintype="passive"/>
+    </net>
+    <net code="122" name="/TOUCH102">
+      <node ref="R35" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="4" pinfunction="Pin_4" pintype="passive"/>
+    </net>
+    <net code="123" name="/TOUCH103">
+      <node ref="R36" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="5" pinfunction="Pin_5" pintype="passive"/>
+    </net>
+    <net code="124" name="/TOUCH104">
+      <node ref="R37" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="6" pinfunction="Pin_6" pintype="passive"/>
+    </net>
+    <net code="125" name="/TOUCH105">
+      <node ref="R38" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="7" pinfunction="Pin_7" pintype="passive"/>
+    </net>
+    <net code="126" name="/TOUCH106">
+      <node ref="R39" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="8" pinfunction="Pin_8" pintype="passive"/>
+    </net>
+    <net code="127" name="/TOUCH107">
+      <node ref="R40" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="9" pinfunction="Pin_9" pintype="passive"/>
+    </net>
+    <net code="128" name="/TOUCH108">
+      <node ref="R41" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="10" pinfunction="Pin_10" pintype="passive"/>
+    </net>
+    <net code="129" name="/TOUCH109">
+      <node ref="R42" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="11" pinfunction="Pin_11" pintype="passive"/>
+    </net>
+    <net code="130" name="/TOUCH110">
+      <node ref="R43" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="12" pinfunction="Pin_12" pintype="passive"/>
+    </net>
+    <net code="131" name="/TOUCH111">
+      <node ref="R44" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="13" pinfunction="Pin_13" pintype="passive"/>
+    </net>
+    <net code="132" name="/TOUCH112">
+      <node ref="R45" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="14" pinfunction="Pin_14" pintype="passive"/>
+    </net>
+    <net code="133" name="/TOUCH113">
+      <node ref="R46" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="15" pinfunction="Pin_15" pintype="passive"/>
+    </net>
+    <net code="134" name="/TOUCH114">
+      <node ref="R47" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="16" pinfunction="Pin_16" pintype="passive"/>
+    </net>
+    <net code="135" name="/TOUCH115">
+      <node ref="R48" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="17" pinfunction="Pin_17" pintype="passive"/>
+    </net>
+    <net code="136" name="/TOUCH116">
+      <node ref="R49" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="18" pinfunction="Pin_18" pintype="passive"/>
+    </net>
+    <net code="137" name="/TOUCH117">
+      <node ref="R50" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="19" pinfunction="Pin_19" pintype="passive"/>
+    </net>
+    <net code="138" name="/TOUCH118">
+      <node ref="R51" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="20" pinfunction="Pin_20" pintype="passive"/>
+    </net>
+    <net code="139" name="/TOUCH119">
+      <node ref="R52" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="21" pinfunction="Pin_21" pintype="passive"/>
+    </net>
+    <net code="140" name="/TOUCH120">
+      <node ref="R53" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="22" pinfunction="Pin_22" pintype="passive"/>
+    </net>
+    <net code="141" name="/TOUCH121">
+      <node ref="R54" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="23" pinfunction="Pin_23" pintype="passive"/>
+    </net>
+    <net code="142" name="/TOUCH122">
+      <node ref="R55" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="24" pinfunction="Pin_24" pintype="passive"/>
+    </net>
+    <net code="143" name="/TOUCH123">
+      <node ref="R56" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="25" pinfunction="Pin_25" pintype="passive"/>
+    </net>
+    <net code="144" name="/TOUCH124">
+      <node ref="R57" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="26" pinfunction="Pin_26" pintype="passive"/>
+    </net>
+    <net code="145" name="/TOUCH125">
+      <node ref="R58" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="27" pinfunction="Pin_27" pintype="passive"/>
+    </net>
+    <net code="146" name="/TOUCH126">
+      <node ref="R59" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="28" pinfunction="Pin_28" pintype="passive"/>
+    </net>
+    <net code="147" name="/TOUCH127">
+      <node ref="R60" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="29" pinfunction="Pin_29" pintype="passive"/>
+    </net>
+    <net code="148" name="/TOUCH128">
+      <node ref="R61" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="30" pinfunction="Pin_30" pintype="passive"/>
+    </net>
+    <net code="149" name="/TOUCH129">
+      <node ref="R62" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="31" pinfunction="Pin_31" pintype="passive"/>
+    </net>
+    <net code="150" name="/VCCD">
+      <node ref="C3" pin="2" pintype="passive"/>
+      <node ref="U1" pin="76" pinfunction="VCCD" pintype="power_in"/>
+    </net>
+    <net code="151" name="GND">
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="C10" pin="1" pintype="passive"/>
+      <node ref="C11" pin="1" pintype="passive"/>
+      <node ref="C12" pin="1" pintype="passive"/>
+      <node ref="C13" pin="1" pintype="passive"/>
+      <node ref="C14" pin="1" pintype="passive"/>
+      <node ref="C15" pin="1" pintype="passive"/>
+      <node ref="C16" pin="1" pintype="passive"/>
+      <node ref="C17" pin="1" pintype="passive"/>
+      <node ref="C18" pin="1" pintype="passive"/>
+      <node ref="C2" pin="1" pintype="passive"/>
+      <node ref="C3" pin="1" pintype="passive"/>
+      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="C5" pin="1" pintype="passive"/>
+      <node ref="C6" pin="1" pintype="passive"/>
+      <node ref="C7" pin="1" pintype="passive"/>
+      <node ref="C8" pin="1" pintype="passive"/>
+      <node ref="C9" pin="1" pintype="passive"/>
+      <node ref="D1" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="GPIO1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="GPIO1" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="GPIO2" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="GPIO3" pin="6" pinfunction="Pin_6" pintype="passive"/>
+      <node ref="J2" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="J2" pin="5" pinfunction="Pin_5" pintype="passive"/>
+      <node ref="J2" pin="7" pinfunction="Pin_7" pintype="passive"/>
+      <node ref="J2" pin="9" pinfunction="Pin_9" pintype="passive"/>
+      <node ref="TOUCH1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="TOUCH1" pin="32" pinfunction="Pin_32" pintype="passive"/>
+      <node ref="TOUCH1" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="TOUCH2" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="TOUCH2" pin="32" pinfunction="Pin_32" pintype="passive"/>
+      <node ref="TOUCH2" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="U1" pin="10" pinfunction="VSSD" pintype="power_out"/>
+      <node ref="U1" pin="51" pinfunction="VSSD" pintype="power_out"/>
+      <node ref="U1" pin="77" pinfunction="VSSD" pintype="power_out"/>
+      <node ref="U1" pin="92" pinfunction="VSSA" pintype="power_out"/>
+    </net>
+    <net code="152" name="unconnected-(GPIO2-Pin_2-Pad2)">
+      <node ref="GPIO2" pin="2" pinfunction="Pin_2" pintype="passive+no_connect"/>
+    </net>
+    <net code="153" name="unconnected-(GPIO2-Pin_3-Pad3)">
+      <node ref="GPIO2" pin="3" pinfunction="Pin_3" pintype="passive+no_connect"/>
+    </net>
+    <net code="154" name="unconnected-(GPIO2-Pin_4-Pad4)">
+      <node ref="GPIO2" pin="4" pinfunction="Pin_4" pintype="passive+no_connect"/>
+    </net>
+    <net code="155" name="unconnected-(J2-Pin_6-Pad6)">
+      <node ref="J2" pin="6" pinfunction="Pin_6" pintype="passive+no_connect"/>
+    </net>
+    <net code="156" name="unconnected-(J2-Pin_8-Pad8)">
+      <node ref="J2" pin="8" pinfunction="Pin_8" pintype="passive+no_connect"/>
+    </net>
+    <net code="157" name="unconnected-(U1-UC-Pad1)">
+      <node ref="U1" pin="1" pinfunction="UC" pintype="no_connect"/>
+    </net>
+    <net code="158" name="unconnected-(U1-UC-Pad52)">
+      <node ref="U1" pin="52" pinfunction="UC" pintype="no_connect"/>
+    </net>
+    <net code="159" name="unconnected-(U1-UC-Pad89)">
+      <node ref="U1" pin="89" pinfunction="UC" pintype="no_connect"/>
+    </net>
+    <net code="160" name="unconnected-(U1-UC-Pad90)">
+      <node ref="U1" pin="90" pinfunction="UC" pintype="no_connect"/>
+    </net>
+  </nets>
+</export>
