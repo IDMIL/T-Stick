@@ -1,4 +1,4 @@
-22468614133322206
+22470315767536332
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -92533,12 +92533,19 @@ TOUCHSTRIPS
 30
 30
 touch-sensors
+tstick-buttons
+
+
+0
+30
+30
+touch-sensors
 tstick-slider
 
 
 0
-250
-32
+234
+30
 trill-flex
 trill_flex
 
