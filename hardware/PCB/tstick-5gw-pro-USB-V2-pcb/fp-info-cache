@@ -1,4 +1,4 @@
-22546929178463409
+22546929712205648
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -92859,8 +92859,8 @@ board-layout
 
 
 0
-18
-18
+22
+22
 ul_LVK12R010CER-footprints
 LVK12_OHM
 
