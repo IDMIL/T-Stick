@@ -1,19 +1,3 @@
-/******************************************************************** 
-Includes sensor properties
-- MIMU
-- Fuel gauge
-- Touch Sensor
-********************************************************************/
-
-#include "tstick-properties.h"
-#include "touch.h"
-#include "button.h"
-#include "led.h"
-#include "fsr.h"
-#include "batt.h"
-#include "imu.h"
-
-
 /*
 *******************************************************************
 Sensor Boards
@@ -29,17 +13,25 @@ Sensor Boards
   - IDMIL Capsense Board
   - Enchanti Custom touch board
 */
-#define touch_TRILL
-//#define touch_IDMIL
-//#define touch_ENCHANTI
 
+enum board_TOUCH
+{
+  touch_TRILL = 0,
+  touch_IDMIL = 1,
+  touch_ENCHANTI = 2
+}
+ 
 /*
  Choose IMU board
   - LSM9DS1
   - ICM20948
 */
-#define ICM20948
-//#define LSM9DS1
+
+enum board_IMU 
+{
+  imu_ICM20948 = 0,
+  imu_LSM9DS1 = 1
+}
 
 /*
  Choose fuel gauge
@@ -47,16 +39,10 @@ Sensor Boards
   - MAX17055
   - Voltage based
 */
-#define MAX17055
-//#define MAX17048
-//#define VOLTAGEBASED
 
-/*
-*******************************************************************
-Touch Sensor
-    - touch board
-    - default settings
-*******************************************************************
-*/
-#define TRILL_TYPE 3 // 3 for Trill craft, 6 for trill flex
-#define NOISETHRESHOLD 0
+enum board_FUELGAUGE
+{
+  fg_MAX17055 = 0,
+  fg_MAX17048 = 1,
+  NONE = 2
+}

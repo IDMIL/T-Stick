@@ -17,7 +17,6 @@ Include T-Stick properties
 - Go to include/TSTICKPROPERTIES.h to edit properties for your T-Stick
 */ 
 #include "tstick-properties.h"
-#include "tstick-sensors.h"
 
 #include "Arduino.h"
 // For JTAG monitor

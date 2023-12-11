@@ -5,6 +5,16 @@ Contains definitions useful for the T-Stick
 - Sensor Boards
 ********************************************************************/
 
+#include "touch.h"
+#include "button.h"
+#include "led.h"
+#include "fsr.h"
+#include "batt.h"
+#include "imu.h"
+
+// Sensors
+#include "tstick-sensors.h"
+
 /********************************************************************
 General properties
     - T-Stick MCU Board
