@@ -3,5 +3,4 @@
 !/.gitignore
 
 # Ignore Kicad backups
-*.zip
-!/.kicad_pcb.zip
+/*backups
