@@ -336,9 +336,9 @@ Task updateBattery (BATTERY_UPDATE_RATE, TASK_FOREVER, &readBattery, &runnerSens
 Task updateLED (LED_UPDATE_RATE, TASK_FOREVER, &changeLED, &runnerSensors, false);
 
 // Setup comms tasks
-Task libmapperPoll (LIBMAPPER_POLL_RATE, TASK_FOREVER, &pollLibmapper, &runnerComms, false);
-Task libmapperUpdate (LIBMAPPER_UPDATE_RATE, TASK_FOREVER, &updateLibmapper, &runnerComms, false);
-Task OSCupdate1 (OSC_UPDATE_RATE, TASK_FOREVER, &updateOSC1, &runnerComms, false);
+Task libmapperPoll (LIBMAPPER_POLL_RATE, TASK_FOREVER, &pollLibmapper, &runnerComms, true);
+Task libmapperUpdate (LIBMAPPER_UPDATE_RATE, TASK_FOREVER, &updateLibmapper, &runnerComms, true);
+Task OSCupdate1 (OSC_UPDATE_RATE, TASK_FOREVER, &updateOSC1, &runnerComms, true);
 Task OSCupdate2 (OSC_UPDATE_RATE, TASK_FOREVER, &updateOSC2, &runnerComms, false);
 
 // Define callbacks
@@ -1248,7 +1248,9 @@ void setup() {
     esp_sleep_enable_ext0_wakeup(GPIO_NUM_9,0); // 1 = High, 0 = Low
 
     // Enable tasks
-    runnerComms.enableAll();
+    #ifdef OSC2
+    OSCupdate2.enable();
+    #endif
     runnerSensors.enableAll();
     
     // Using Serial.print and delay to prevent interruptions
