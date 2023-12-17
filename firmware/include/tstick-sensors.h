@@ -14,35 +14,25 @@ Sensor Boards
   - Enchanti Custom touch board
 */
 
-enum board_TOUCH
-{
-  touch_TRILL = 0,
-  touch_IDMIL = 1,
-  touch_ENCHANTI = 2
-}
- 
 /*
- Choose IMU board
-  - LSM9DS1
-  - ICM20948
+Define the Touch Board
 */
-
-enum board_IMU 
-{
-  imu_ICM20948 = 0,
-  imu_LSM9DS1 = 1
-}
+#define touch_TRILL
+//#define touch_IDMIL
+//#define touch_ENCHANTI
 
 /*
- Choose fuel gauge
+Define the IMU
+*/
+#define imu_ICM20948
+//#define imu_LSM9DS1 
+
+/*
+Define the fuel gauge
   - MAX17048
   - MAX17055
   - Voltage based
 */
-
-enum board_FUELGAUGE
-{
-  fg_MAX17055 = 0,
-  fg_MAX17048 = 1,
-  NONE = 2
-}
+#define fg_MAX17055
+//#define fg_MAX17048 
+//#define fg_NONE

@@ -1,10 +1,8 @@
 #include "imu.h"
 
-bool IMU::initIMU(imu_config config) {
+bool IMU::initIMU() {
     // Get IMU config
-    imuboard = config.imu_board;
-
-    if (imuboard = board_IMU::imu_ICM20948) {
+    #ifdef imu_ICM20948
         // Initialise IMU based on Sparkfun IMC20948 library Advanced Example
         // https://github.com/sparkfun/SparkFun_ICM-20948_ArduinoLibrary/blob/main/examples/Arduino/Example2_Advanced/Example2_Advanced.ino
         icm20948_imu.begin(WIRE_PORT,AD0_VAL);
@@ -57,7 +55,8 @@ bool IMU::initIMU(imu_config config) {
         icm20948_imu.cfgIntOpenDrain(false);
         icm20948_imu.cfgIntLatch(false);
         icm20948_imu.intEnableRawDataReady(true);
-    } else if (imuboard = board_IMU::imu_LSM9DS1) {
+    #endif
+    #ifdef imu_LSM9DS1
         // [enabled] turns the gyro on or off.
         lsm9ds1_imu.settings.gyro.enabled = true;
         // [scale] sets the full-scale range of the gyroscope.
@@ -167,15 +166,13 @@ bool IMU::initIMU(imu_config config) {
         lsm9ds1_imu.settings.mag.operatingMode = 0; // Continuous mode
 
         lsm9ds1_imu.begin();
-    } else {
-        return false;
-    }
+    #endif
     return true;
 }
 
 void IMU::getData() {
     // Get data from the IMU and save it
-    if (imuboard = board_IMU::imu_ICM20948) {
+    #ifdef imu_ICM20948
         icm20948_imu.getAGMT();
 
         // read icm20948_imu
@@ -193,7 +190,8 @@ void IMU::getData() {
         magn[1] = icm20948_imu.magY();
         magn[2] = icm20948_imu.magZ();
 
-    } else if (imuboard = board_IMU::imu_LSM9DS1) {
+    #endif
+    #ifdef imu_LSM9DS1
         if (lsm9ds1_imu.accelAvailable()) {
             lsm9ds1_imu.readAccel();
             // In g's
@@ -215,5 +213,5 @@ void IMU::getData() {
             magn[1] = lsm9ds1_imu.calcMag(lsm9ds1_imu.my);
             magn[2] = lsm9ds1_imu.calcMag(lsm9ds1_imu.mz);
         }
-    }
+    #endif
 }

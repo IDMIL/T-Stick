@@ -1,8 +1,8 @@
 // Include Bela Trill Libraries
 
 
-#ifndef TOUCH_H
-#define TOUCH_H
+#ifndef TRILLTOUCH_H
+#define TRILLTOUCH_H
 
 #include <Arduino.h>
 #include <Trill.h>
@@ -10,7 +10,7 @@
 
 #define TRILL_BASETOUCHSIZE 30
 
-class Touch {
+class TrillTouch {
     public:
         uint8_t initTouch(float num=1, int threshold=0, int mode=Trill::DIFF);
         void readTouch();

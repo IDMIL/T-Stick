@@ -5,6 +5,10 @@
             "value": 2000
         },
         {
+            "name": "touch_noise",
+            "value": 0
+        },
+        {
             "name": "jabx_threshold",
             "value": 5
         },
