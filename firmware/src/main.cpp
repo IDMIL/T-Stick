@@ -173,16 +173,6 @@ IMU imu;
 // Include Touch stuff                      //
 //////////////////////////////////////////////
 
-#ifdef touch_ENCHANTI
-// Interrupt routine
-void touch_isr() {
-    event.touchReady = true;
-    unsigned long now = micros();
-    touch.scantime = now - touch.scantimer;
-    touch.scantimer = now;
-}
-#endif
-
 // Touch arrays 
 int mergedtouch[TSTICK_SIZE]; 
 int mergeddiscretetouch[TSTICK_SIZE]; 
@@ -785,10 +775,6 @@ void updateOSC2() {
             lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchMiddle);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/bottom");
             lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchBottom);
-            // Reset touch event until next interrupt
-            #ifdef touch_ENCHANTI
-            event.touchReady = false;
-            #endif
         }
         if (event.mimu) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/accl");
@@ -914,6 +900,14 @@ void readTouch() {
 
     // Update touch gestures
     gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
+
+    // Update event structure
+    if (touch.newData) {
+        event.touchReady = true;
+        touch.newData = 0;
+    } else {
+        event.touchReady = false;
+    }
 }
 
 void readAnalog() {
@@ -1034,9 +1028,9 @@ void imu_isr() {
 }
 #endif
 
-/ Set up multithreading
-#define SENSOR_CPU 0
-#define COMMS_CPU 1
+// Set up multithreading
+#define COMMS_CPU 0
+#define SENSOR_CPU 1
 
 // ===== rtos task handles =========================
 TaskHandle_t tSensors;
@@ -1062,7 +1056,7 @@ void createCoreTasks() {
     8096,
     NULL,
     2,
-    &tHaptics,
+    &tSensors,
     SENSOR_CPU);
 
   xTaskCreatePinnedToCore(
@@ -1187,7 +1181,6 @@ void setup() {
         float num_boards = TSTICK_SIZE / TRILL_BASETOUCHSIZE;
         int touch_noise = puara.getVarNumber("touch_noise");
         if (touch.initTouch(num_boards, touch_noise)) {
-            event.touchReady = true;
             std::cout << "done" << std::endl;
         } else {
             std::cout << "initialization failed!" << std::endl;
@@ -1196,13 +1189,9 @@ void setup() {
     #ifdef touch_ENCHANTI
         // Compute number of boards from TSTICK_SIZE
         float num_boards = TSTICK_SIZE / ENCHANTI_BASETOUCHSIZE;
-        touch.initTouch(num_boards, NOISETHRESHOLD);
+        int touch_noise = puara.getVarNumber("touch_noise");
+        touch.initTouch(num_boards, touch_noise);
         std::cout << "done" << std::endl;
-        event.touchReady = true; // always poll for now
-
-        pinMode(TOUCH_INT, INPUT_PULLUP);
-        attachInterrupt(TOUCH_INT, touch_isr, CHANGE);
-        delay(10); // wait a bit after setting up touch
     #endif
 
     std::cout << "    Initializing Liblo server/client at " << puara.getLocalPORTStr() << " ... ";

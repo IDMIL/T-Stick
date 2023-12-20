@@ -97,7 +97,10 @@ void EnchantiTouch::readBuffer(uint8_t i2c_addr, uint8_t reg, uint8_t length, in
         uint8_t lsb  = Wire.read();
         uint8_t msb  = Wire.read();
         value = lsb + (msb << 8);
-        data[loc + offset] = value;
+        if (data[loc + offset] != value) {
+            newData = 1;
+            data[loc + offset] = value;
+        }
         ++loc;
     }
 }

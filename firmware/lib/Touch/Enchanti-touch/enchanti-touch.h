@@ -27,6 +27,7 @@ class EnchantiTouch
 
         // Board Properties
         int boardMode = RAW;
+        int newData = 0;
         float num_boards = 1; // number of touch boards, set half numbers to indicate if using only the first touch circuit
         uint8_t main_i2c_addr = 0x1E;
         uint8_t aux_i2c_addr = 0x1F;

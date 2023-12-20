@@ -26,6 +26,7 @@ class TrillTouch {
 
         int data[120];
         byte touchStatus = 0;
+        int newData = 0;
         int touch[120];          // /instrument/touch/touch, i..., 0 or 1, ... (1 per stripe)
         float normTouch[120];    // /instrument/touch/norm, i..., 0--1, ... (1 per stripe)
         int discreteTouch[120];    // /instrument/touch/raw, i..., 0--1, ... (1 per stripe)

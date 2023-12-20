@@ -50,7 +50,11 @@ void TrillTouch::readTouch() {
         touchArray[i]->requestRawData();
         for (int k=0; k<30; k++) {
             if (touchArray[i]->rawDataAvailable() > 0) {
-                TrillTouch::data[k+(i*TRILL_BASETOUCHSIZE)] = touchArray[i]->rawDataRead();
+                int rawData = touchArray[i]->rawDataRead();
+                if (TrillTouch::data[k+(i*TRILL_BASETOUCHSIZE)] != rawData) {
+                    newData = 1;
+                    TrillTouch::data[k+(i*TRILL_BASETOUCHSIZE)] = rawData;
+                }
             }
         }
     }
