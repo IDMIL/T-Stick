@@ -4136,7 +4136,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 02be165b-75da-4ac9-b65b-d58605da6a01)
   )
-  (text "Comms\n- SDA: IO21\n- SCL: IO14\n- USBD+: IO20\n- USBD-: IO19\n- COPI: 10\n- CIPO: 13\n- SCLK: 12\n- CS0: 11\nPeripherals\n- FSR: IO8\n- Button: IO9\n- UART TX: IO43\n- UART RX: IO44\n- Status LED (orange): IO16\n- Status LED (blue) I015\nInterrupts\n- IMU Interrupt: IO21\n- Fuel Gauge Interrupt: IO17\n- Touch Interrupt 1: IO4\n- Touch Interrupt 2: IO5\n- Touch Interrupt 3: IO6\n- Touch Interrupt 4: IO7"
+  (text "Comms\n- SDA: IO21\n- SCL: IO14\n- USBD+: IO20\n- USBD-: IO19\n- COPI: 10\n- CIPO: 13\n- SCLK: 12\n- CS0: 11\nPeripherals\n- FSR: IO8\n- Button: IO9\n- UART TX: IO43\n- UART RX: IO44\n- Status LED (orange): IO16\n- Status LED (blue) I015\nInterrupts\n- IMU Interrupt: IO48\n- Fuel Gauge Interrupt: IO17\n- Touch Interrupt 1: IO4\n- Touch Interrupt 2: IO5\n- Touch Interrupt 3: IO6\n- Touch Interrupt 4: IO7"
     (at 113.03 118.11 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 0f4ac62c-2814-4646-b773-9cd59624fd1e)
@@ -4739,7 +4739,7 @@
     (pin "1" (uuid d918eb60-6b1e-43b1-8b4e-5bbac37e98c0))
     (pin "2" (uuid 351a17ca-7032-44f3-9d25-32c3111d657a))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R8") (unit 1)
         )
@@ -4769,7 +4769,7 @@
     )
     (pin "1" (uuid c97c7850-e333-4025-9f45-270e7b900789))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR065") (unit 1)
         )
@@ -4812,7 +4812,7 @@
     (pin "1" (uuid 2e2cebe5-e9d1-44ae-81f2-326dad79d1dc))
     (pin "2" (uuid 62b2f968-ff1a-4f6b-b3e5-3ade8e222105))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C12") (unit 1)
         )
@@ -4842,7 +4842,7 @@
     )
     (pin "1" (uuid 3f269889-92d1-4784-9b46-c70e7496a0d7))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#ICGND04") (unit 1)
         )
@@ -4885,7 +4885,7 @@
     (pin "1" (uuid 84daf9d9-6636-420b-8ebf-90c3f0ea4d41))
     (pin "2" (uuid da76e915-25dc-4572-b2c9-9c68f19e16d4))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R18") (unit 1)
         )
@@ -4942,7 +4942,7 @@
     (pin "8" (uuid 5d1ca44d-793d-41bb-9f32-39fb770a1551))
     (pin "9" (uuid 1dd2d7e0-4052-4022-9d3d-919c956a037e))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "FG1") (unit 1)
         )
@@ -4972,7 +4972,7 @@
     )
     (pin "1" (uuid 0cf5020c-bf88-4033-83d3-a17d7d166f21))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#VUSB08") (unit 1)
         )
@@ -4997,7 +4997,7 @@
     )
     (pin "1" (uuid 0668bfab-1881-46ee-b4c5-2a4b3b0c850f))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR015") (unit 1)
         )
@@ -5027,7 +5027,7 @@
     )
     (pin "1" (uuid cd0d811d-d336-404e-a1fc-710f96e28473))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR034") (unit 1)
         )
@@ -5066,7 +5066,7 @@
     )
     (pin "1" (uuid e9492824-befc-4dc3-a4f1-6a51907a247c))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "SYS5") (unit 1)
         )
@@ -5104,7 +5104,7 @@
     (pin "1" (uuid e4637032-06e8-4d7d-835a-34fdba077f17))
     (pin "2" (uuid d0a6e12b-8017-47b8-a8a2-37084afb5e7c))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C6") (unit 1)
         )
@@ -5139,7 +5139,7 @@
     )
     (pin "1" (uuid e95e8c82-052a-4d3e-aae7-96b8ba4bc4a4))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR030") (unit 1)
         )
@@ -5169,7 +5169,7 @@
     )
     (pin "1" (uuid e89ebc54-605d-4eb7-9263-fa5f14bce8d4))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR01") (unit 1)
         )
@@ -5199,7 +5199,7 @@
     )
     (pin "1" (uuid 3483a7ec-61e3-4c45-a651-42bf882b4f37))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR083") (unit 1)
         )
@@ -5242,7 +5242,7 @@
     (pin "1" (uuid 80846436-94c7-4818-9c2f-8820d5a0f6bb))
     (pin "2" (uuid 43ba62cb-e2c1-468e-9bf2-9692fd0335be))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R22") (unit 1)
         )
@@ -5286,7 +5286,7 @@
     (pin "2" (uuid 11249374-e9d7-4985-b998-3a73310b3796))
     (pin "MP" (uuid ea13c621-1401-42c2-ae08-886c7b1757ea))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "BT2") (unit 1)
         )
@@ -5328,7 +5328,7 @@
     )
     (pin "1" (uuid 3397ed16-8b19-4572-8582-c1a74666c908))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR027") (unit 1)
         )
@@ -5371,7 +5371,7 @@
     (pin "1" (uuid ee8647dd-7e19-4d87-9e21-249b0ae1a267))
     (pin "2" (uuid b7b280d3-129b-4c4a-b452-ea263279209f))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C9") (unit 1)
         )
@@ -5401,7 +5401,7 @@
     )
     (pin "1" (uuid aade0e7c-c7f5-4c3a-aa67-46ff61aeac89))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR081") (unit 1)
         )
@@ -5447,7 +5447,7 @@
     (pin "4" (uuid 435ebcc5-dcea-4484-950c-4a4d762c96a1))
     (pin "MP" (uuid 158670d6-a78d-4dbd-b910-9bde56b72b60))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "TOUCH1") (unit 1)
         )
@@ -5477,7 +5477,7 @@
     )
     (pin "1" (uuid 55ad79b1-1b9a-4995-81e2-77751317e013))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR056") (unit 1)
         )
@@ -5524,7 +5524,7 @@
     )
     (pin "1" (uuid be1c6f91-5b57-49f3-8712-fec528a6a87c))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR063") (unit 1)
         )
@@ -5554,7 +5554,7 @@
     )
     (pin "1" (uuid ce477ca1-08a4-44aa-8f59-1c903cce5138))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR032") (unit 1)
         )
@@ -5584,7 +5584,7 @@
     )
     (pin "1" (uuid fb717f5d-c54e-42fa-a2b5-ccc70dd24934))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#VUSB07") (unit 1)
         )
@@ -5617,7 +5617,7 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "H2") (unit 1)
         )
@@ -5665,7 +5665,7 @@
     (pin "1" (uuid 0547c697-4d48-41b6-b77d-62586c52b888))
     (pin "2" (uuid a9179fac-9a7f-481e-8703-b9d04ef39d13))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C7") (unit 1)
         )
@@ -5713,7 +5713,7 @@
     (pin "1" (uuid b1369c39-191c-4c29-9a67-633bf26a10aa))
     (pin "2" (uuid 0ac63a9a-435e-44f1-8787-13e1c0d4e2b6))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C3") (unit 1)
         )
@@ -5756,7 +5756,7 @@
     (pin "1" (uuid fef0ebac-fe82-42e9-824c-c8bceda40f94))
     (pin "2" (uuid 65efefa4-28d1-46ab-a1af-1cdef64bd590))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C14") (unit 1)
         )
@@ -5786,7 +5786,7 @@
     )
     (pin "1" (uuid a2814787-1c16-49b2-8a5d-d44ceec81c92))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR055") (unit 1)
         )
@@ -5816,7 +5816,7 @@
     )
     (pin "1" (uuid 926a43f5-cf8d-40cd-b273-04eabf4a28c9))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR053") (unit 1)
         )
@@ -5858,7 +5858,7 @@
     )
     (pin "1" (uuid cae7df60-a809-406d-b923-ea54dc9aa6e9))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR052") (unit 1)
         )
@@ -5888,7 +5888,7 @@
     )
     (pin "1" (uuid fa234ced-a254-4883-92c8-bbd89a7f0dff))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR017") (unit 1)
         )
@@ -5931,7 +5931,7 @@
     (pin "1" (uuid b98823a5-1070-40b9-b745-e830c9f18966))
     (pin "2" (uuid 5574ae3a-9c94-4231-a659-0c0ef2880076))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C4") (unit 1)
         )
@@ -5961,7 +5961,7 @@
     )
     (pin "1" (uuid 285d4508-88cb-4270-a4d3-592398a56ca8))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR062") (unit 1)
         )
@@ -5991,7 +5991,7 @@
     )
     (pin "1" (uuid cf883dcc-6054-42ad-acec-f49654ea309e))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR025") (unit 1)
         )
@@ -6021,7 +6021,7 @@
     )
     (pin "1" (uuid cc80d2c5-9ee8-4afc-96b1-de8ed476a61e))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR06") (unit 1)
         )
@@ -6051,7 +6051,7 @@
     )
     (pin "1" (uuid 60c5285d-e080-49e2-9e1c-8efcd60c03eb))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#VUSB01") (unit 1)
         )
@@ -6076,7 +6076,7 @@
     )
     (pin "1" (uuid fd80a0f2-1857-43f4-bf6c-c4cd79fef5d4))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#VUSB05") (unit 1)
         )
@@ -6113,7 +6113,7 @@
     )
     (pin "1" (uuid 97fe933e-7c17-4cfa-8b28-6c499d17987d))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR066") (unit 1)
         )
@@ -6143,7 +6143,7 @@
     )
     (pin "1" (uuid 8f8cf850-6ddf-4f21-b4a9-9cad721c5963))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#VUSB02") (unit 1)
         )
@@ -6168,7 +6168,7 @@
     )
     (pin "1" (uuid e8d3d608-83ac-414a-8455-218a7ea60e8b))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR073") (unit 1)
         )
@@ -6212,7 +6212,7 @@
     (pin "2" (uuid 585e79a4-3e3a-4ecf-a1fb-962a88dcd0e3))
     (pin "3" (uuid 3cbea182-257b-4585-9fe9-01c48882d293))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "Q1") (unit 1)
         )
@@ -6255,7 +6255,7 @@
     (pin "1" (uuid 608884db-bb0e-4df3-9039-421bec5efc1c))
     (pin "2" (uuid 13eb3c9b-79b9-47b1-9478-1fa21c5d713d))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R5") (unit 1)
         )
@@ -6285,7 +6285,7 @@
     )
     (pin "1" (uuid 7258b5b7-85c7-4758-9cc1-b83b379d1107))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR044") (unit 1)
         )
@@ -6328,7 +6328,7 @@
     (pin "1" (uuid 7c179179-728b-4b2e-a740-50407c48d21f))
     (pin "2" (uuid b2033897-1180-48c9-93fa-9fef901fe99c))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R10") (unit 1)
         )
@@ -6370,7 +6370,7 @@
     )
     (pin "1" (uuid a3172fb3-8769-4c07-bbd6-d3bf21d024a6))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR013") (unit 1)
         )
@@ -6400,7 +6400,7 @@
     )
     (pin "1" (uuid 20e16572-bb14-4740-b75b-0ddeffa68e53))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR070") (unit 1)
         )
@@ -6430,7 +6430,7 @@
     )
     (pin "1" (uuid f19821c7-19fc-4411-a79c-b207bf29e28e))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR024") (unit 1)
         )
@@ -6460,7 +6460,7 @@
     )
     (pin "1" (uuid 94848a68-f3cc-4e84-8885-0f90efef8224))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR023") (unit 1)
         )
@@ -6504,7 +6504,7 @@
     (pin "2" (uuid 3e35af7a-ed87-43fd-9f5a-761d227a8974))
     (pin "MP" (uuid dfe682a8-24bc-4599-ae73-2a9e3600b450))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "ANG1") (unit 1)
         )
@@ -6534,7 +6534,7 @@
     )
     (pin "1" (uuid d30f1b65-9390-440f-9f4f-4ae206245aa1))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR049") (unit 1)
         )
@@ -6564,7 +6564,7 @@
     )
     (pin "1" (uuid 37f25528-b511-4675-acc5-5e89798ff0e6))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR082") (unit 1)
         )
@@ -6594,7 +6594,7 @@
     )
     (pin "1" (uuid 34baf4cf-6d32-4041-a336-daf03f45b0e4))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR036") (unit 1)
         )
@@ -6637,7 +6637,7 @@
     (pin "1" (uuid ac7a301e-2aa2-47ea-9e42-f9688f4e82fb))
     (pin "2" (uuid 872f0629-63bb-4f23-9467-3263df9a69ad))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R17") (unit 1)
         )
@@ -6685,7 +6685,7 @@
     (pin "1" (uuid 1876dbbb-32d8-4325-9d33-a34573dbe384))
     (pin "2" (uuid 4f977724-42d1-4cb4-a687-66c9f40c1983))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "TH1") (unit 1)
         )
@@ -6723,7 +6723,7 @@
     (pin "1" (uuid da9426e6-c33b-4f2a-9e97-6e136de5450c))
     (pin "2" (uuid c4fafda1-cd3b-4a76-91ef-c87a9774f5b4))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C8") (unit 1)
         )
@@ -6753,7 +6753,7 @@
     )
     (pin "1" (uuid 2d2cdd6e-735c-46be-96a0-a057893c1e50))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR039") (unit 1)
         )
@@ -6796,7 +6796,7 @@
     (pin "1" (uuid 9e95e0d2-65a6-4727-beeb-e7393b90d446))
     (pin "2" (uuid f1789ac3-8681-4f33-a5df-cfa2d27b74db))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R15") (unit 1)
         )
@@ -6831,7 +6831,7 @@
     )
     (pin "1" (uuid dac2d3fc-439b-4923-828a-565e8adebf53))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR04") (unit 1)
         )
@@ -6873,7 +6873,7 @@
     )
     (pin "1" (uuid 5b8d5594-b964-47e6-b82f-62961b0c844f))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR058") (unit 1)
         )
@@ -6921,7 +6921,7 @@
     (pin "1" (uuid 3c0fdb67-4b3f-4f68-ab60-6e5f0e85558a))
     (pin "2" (uuid a5335259-e34e-4305-91dc-a28ebd477e1f))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R21") (unit 1)
         )
@@ -6956,7 +6956,7 @@
     )
     (pin "1" (uuid ced13898-b98c-4d53-8a0e-01db67a4778e))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR08") (unit 1)
         )
@@ -6986,7 +6986,7 @@
     )
     (pin "1" (uuid 5641dfc3-6738-43e8-86c0-61953a7f8932))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR019") (unit 1)
         )
@@ -7016,7 +7016,7 @@
     )
     (pin "1" (uuid 710a4347-1225-42e8-9805-b65106a5ce92))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR060") (unit 1)
         )
@@ -7046,7 +7046,7 @@
     )
     (pin "1" (uuid 483b31c8-ef67-4394-b0b2-6ee366c82a78))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR051") (unit 1)
         )
@@ -7076,7 +7076,7 @@
     )
     (pin "1" (uuid 78417f4e-96b6-42bf-a281-dfc9268398a6))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#VUSB09") (unit 1)
         )
@@ -7114,7 +7114,7 @@
     (pin "1" (uuid ab061b00-272a-4660-891e-3c646403c5f2))
     (pin "2" (uuid e7a136f8-4fe0-4d5f-be57-02458164d5ff))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R24") (unit 1)
         )
@@ -7144,7 +7144,7 @@
     )
     (pin "1" (uuid 701f47da-fc7c-45b3-a02f-b8ab4d6e0763))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR068") (unit 1)
         )
@@ -7187,7 +7187,7 @@
     (pin "1" (uuid 2b00cfe7-7a46-4546-a022-ce8a281c7a6e))
     (pin "2" (uuid 8dc71e5d-94fb-4acb-93b9-790190a472d9))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "STATLED2") (unit 1)
         )
@@ -7217,7 +7217,7 @@
     )
     (pin "1" (uuid 4689a360-970b-4840-9750-4be513caf463))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR057") (unit 1)
         )
@@ -7252,7 +7252,7 @@
     )
     (pin "1" (uuid 453d8263-b8ff-47c7-85e1-c4102812a3cf))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR037") (unit 1)
         )
@@ -7282,7 +7282,7 @@
     )
     (pin "1" (uuid 7fc1d358-4ba1-4f8c-acc4-687784e09acb))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#VUSB011") (unit 1)
         )
@@ -7320,7 +7320,7 @@
     (pin "1" (uuid 588285de-c038-4d8a-a89c-7b5dde7ac411))
     (pin "2" (uuid 2a4e0416-34fd-4114-980f-7ec742c2c04a))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C10") (unit 1)
         )
@@ -7363,7 +7363,7 @@
     (pin "1" (uuid e07d1af7-cfe2-4953-b54e-377fc1137512))
     (pin "2" (uuid 4e211115-4a72-442e-ba10-64b7a09501a2))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R12") (unit 1)
         )
@@ -7398,7 +7398,7 @@
     )
     (pin "1" (uuid d799a672-b0b5-46f7-a0e0-f50b6859441e))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR067") (unit 1)
         )
@@ -7428,7 +7428,7 @@
     )
     (pin "1" (uuid 367ebb15-6cea-42f9-86fd-64e552f9d888))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR02") (unit 1)
         )
@@ -7471,7 +7471,7 @@
     (pin "1" (uuid 1fe2dfde-1d7a-48fa-ab36-36fed221bbad))
     (pin "2" (uuid 22302250-3e53-4a27-9f7e-b8faf94248b0))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R19") (unit 1)
         )
@@ -7519,7 +7519,7 @@
     (pin "1" (uuid a2707501-7ffc-460c-8328-ba8b5b033c3e))
     (pin "2" (uuid 161959e2-c721-49b8-9253-a1129ec2342a))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "SW1") (unit 1)
         )
@@ -7549,7 +7549,7 @@
     )
     (pin "1" (uuid 9a07c834-8e3a-4370-9314-54569c556537))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR03") (unit 1)
         )
@@ -7592,7 +7592,7 @@
     (pin "1" (uuid 0a8a453f-9e45-4d99-8f45-8d665e839fdf))
     (pin "2" (uuid 63bc84e5-3508-4fb5-b39d-52c8c2c54615))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "CHARGLED3") (unit 1)
         )
@@ -7631,7 +7631,7 @@
     )
     (pin "1" (uuid 840aa12b-165c-4b9e-84d7-22b0ca6c924f))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "SYS1") (unit 1)
         )
@@ -7656,7 +7656,7 @@
     )
     (pin "1" (uuid 515b9f95-08e1-4030-8eeb-769713a0da22))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR041") (unit 1)
         )
@@ -7695,7 +7695,7 @@
     )
     (pin "1" (uuid d6226b76-ace7-4272-8747-ec16a3e18da6))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "SYS2") (unit 1)
         )
@@ -7732,7 +7732,7 @@
     )
     (pin "1" (uuid 662b1d58-e571-41a0-a915-d540a9686488))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR054") (unit 1)
         )
@@ -7781,7 +7781,7 @@
     (pin "2" (uuid 2cb53925-467c-42d1-9b9a-55c172961ec1))
     (pin "3" (uuid 1e8b6051-c8d2-4205-854c-996e91e498f0))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "Q2") (unit 1)
         )
@@ -7811,7 +7811,7 @@
     )
     (pin "1" (uuid 1ab6b283-600f-4149-b2ad-52dbdfc914e5))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR075") (unit 1)
         )
@@ -7841,7 +7841,7 @@
     )
     (pin "1" (uuid b87f4600-4018-473b-9b17-d813a32fc084))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR080") (unit 1)
         )
@@ -7871,7 +7871,7 @@
     )
     (pin "1" (uuid 26fad759-a9d1-4477-9133-dadc029b0e9a))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR047") (unit 1)
         )
@@ -7901,7 +7901,7 @@
     )
     (pin "1" (uuid 2be7f4ab-68e7-4ff7-bd99-e27859af0c7c))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR028") (unit 1)
         )
@@ -7931,7 +7931,7 @@
     )
     (pin "1" (uuid bc5582ee-2c4b-4d05-a816-2f877d509d3a))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR046") (unit 1)
         )
@@ -7961,7 +7961,7 @@
     )
     (pin "1" (uuid a1c9a02e-24b8-4781-b460-0432de90994e))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR09") (unit 1)
         )
@@ -7991,7 +7991,7 @@
     )
     (pin "1" (uuid efb420dc-aae0-4de3-902a-c60d1d23da4d))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR071") (unit 1)
         )
@@ -8026,7 +8026,7 @@
     )
     (pin "1" (uuid e42dd582-e2d7-4822-a3d2-cdbd44fc1894))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR021") (unit 1)
         )
@@ -8069,7 +8069,7 @@
     (pin "1" (uuid 7559dd11-3f05-4829-b2d5-b54b214d04c0))
     (pin "2" (uuid 2d09656d-f36d-49eb-9541-4009b5de34d0))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C15") (unit 1)
         )
@@ -8104,7 +8104,7 @@
     )
     (pin "1" (uuid e7784379-304c-4cef-ac31-2c52349dab6e))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR045") (unit 1)
         )
@@ -8146,7 +8146,7 @@
     )
     (pin "1" (uuid a092ca51-3488-48f1-9859-2c5b58ec1fb2))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR061") (unit 1)
         )
@@ -8176,7 +8176,7 @@
     )
     (pin "1" (uuid 4ec2fd06-d349-4ad6-a99a-e6f11d7fc38c))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR05") (unit 1)
         )
@@ -8206,7 +8206,7 @@
     )
     (pin "1" (uuid 3402a2a7-c776-4ba6-b05a-4d2f9735d00c))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR018") (unit 1)
         )
@@ -8249,7 +8249,7 @@
     (pin "1" (uuid cf8c13af-1b2e-41e0-bd71-4e8578ac2fe8))
     (pin "2" (uuid 69c9cfa6-e842-43cc-a456-7f294358c2f3))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R7") (unit 1)
         )
@@ -8279,7 +8279,7 @@
     )
     (pin "1" (uuid 01db3a37-2a67-448a-a1f4-c057e9723b0e))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR074") (unit 1)
         )
@@ -8321,7 +8321,7 @@
     )
     (pin "1" (uuid 7df49744-bcfc-45e1-86a3-a8557f81279f))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR012") (unit 1)
         )
@@ -8364,7 +8364,7 @@
     (pin "1" (uuid bba913d2-5469-4b58-9d6b-36c05712f8e9))
     (pin "2" (uuid 24974d11-f4df-446d-a291-ee6b872dfbfd))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C13") (unit 1)
         )
@@ -8406,7 +8406,7 @@
     )
     (pin "1" (uuid 35ed5c8c-abe4-4a26-9e3c-6d8abc778ed7))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR022") (unit 1)
         )
@@ -8446,30 +8446,30 @@
     (property "Manufacturer" "" (at 367.03 143.51 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2.7" (uuid 8a4c12a9-4d8b-43e4-8bcf-f5f24c86abb9))
+    (pin "1.1" (uuid defdb3bc-f370-4374-9e6c-9c63e62d112a))
     (pin "1.2" (uuid 0b938c97-13db-4d50-8b56-e39a80237dbb))
-    (pin "3.2" (uuid 6678253a-50b8-4fe4-9d19-b61632e20aef))
-    (pin "1.4" (uuid 4fad9b6f-87e6-4338-8216-d23a2a9f6926))
-    (pin "2.6" (uuid ffabb16d-4fb5-4446-8673-d127bab4ac68))
-    (pin "3.5" (uuid 47741537-c42a-4701-8eb8-3957afd92bc2))
-    (pin "1.6" (uuid b3147db3-2873-41d1-a0c7-8afaa64d7ef8))
-    (pin "3.3" (uuid 672af295-4c6b-4283-b62c-249fee5bda24))
-    (pin "2.1" (uuid ffb6dfa5-c2a8-4dbd-9919-601c9e0648d7))
     (pin "1.3" (uuid 345e931c-101d-4bd0-b701-f834550803c7))
+    (pin "1.4" (uuid 4fad9b6f-87e6-4338-8216-d23a2a9f6926))
+    (pin "1.5" (uuid c11a3aeb-53fc-473a-b776-d40177ea504b))
+    (pin "1.6" (uuid b3147db3-2873-41d1-a0c7-8afaa64d7ef8))
+    (pin "1.7" (uuid d98520b9-a823-4631-b48a-2557b09891d3))
+    (pin "1.8" (uuid 6591cea9-9a28-4c94-990b-ba0c50873772))
+    (pin "2.1" (uuid ffb6dfa5-c2a8-4dbd-9919-601c9e0648d7))
     (pin "2.2" (uuid d1ff3bbe-5b80-4f14-95b2-4a0a07b9d748))
     (pin "2.3" (uuid 0f893e96-d867-45e6-ae4c-31c68b52856f))
-    (pin "1.5" (uuid c11a3aeb-53fc-473a-b776-d40177ea504b))
-    (pin "1.7" (uuid d98520b9-a823-4631-b48a-2557b09891d3))
-    (pin "1.1" (uuid defdb3bc-f370-4374-9e6c-9c63e62d112a))
-    (pin "3.1" (uuid 0d53442e-4d5d-41dc-9575-1f3952de444d))
-    (pin "2.5" (uuid dee91f29-b7ef-405b-8eef-d48fc1d6591d))
-    (pin "3.4" (uuid 912b092a-8b27-434a-90f2-1f876aeed3c8))
-    (pin "2.8" (uuid 25d1c04b-3c50-4914-9489-d7a203639442))
-    (pin "3.6" (uuid e9bcbe0d-9e96-425f-a3d1-e663a18cce14))
     (pin "2.4" (uuid aec039f6-6ae5-4941-8cc3-814737c90762))
-    (pin "1.8" (uuid 6591cea9-9a28-4c94-990b-ba0c50873772))
+    (pin "2.5" (uuid dee91f29-b7ef-405b-8eef-d48fc1d6591d))
+    (pin "2.6" (uuid ffabb16d-4fb5-4446-8673-d127bab4ac68))
+    (pin "2.7" (uuid 8a4c12a9-4d8b-43e4-8bcf-f5f24c86abb9))
+    (pin "2.8" (uuid 25d1c04b-3c50-4914-9489-d7a203639442))
+    (pin "3.1" (uuid 0d53442e-4d5d-41dc-9575-1f3952de444d))
+    (pin "3.2" (uuid 6678253a-50b8-4fe4-9d19-b61632e20aef))
+    (pin "3.3" (uuid 672af295-4c6b-4283-b62c-249fee5bda24))
+    (pin "3.4" (uuid 912b092a-8b27-434a-90f2-1f876aeed3c8))
+    (pin "3.5" (uuid 47741537-c42a-4701-8eb8-3957afd92bc2))
+    (pin "3.6" (uuid e9bcbe0d-9e96-425f-a3d1-e663a18cce14))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "BOARDLAYOUT1") (unit 1)
         )
@@ -8526,7 +8526,7 @@
     (pin "8" (uuid 7b2d8498-c886-408a-b264-c73503d65320))
     (pin "9" (uuid a779bc53-459a-4be7-80aa-fb50e49f4d00))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "U2") (unit 1)
         )
@@ -8564,7 +8564,7 @@
     (pin "1" (uuid cac85d78-d3c8-43be-86b1-63141b8d2713))
     (pin "2" (uuid 038806ef-16d3-4d99-8c22-9d711444563a))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "CHARGLED1") (unit 1)
         )
@@ -8594,7 +8594,7 @@
     )
     (pin "1" (uuid 5e5fae74-dcc7-4c22-9e07-c68755406557))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR048") (unit 1)
         )
@@ -8637,7 +8637,7 @@
     (pin "1" (uuid cbce9e8b-e358-48d8-a05f-6bc83a4b407a))
     (pin "2" (uuid 60658957-8876-44e7-9d41-c0b71ee90a10))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R6") (unit 1)
         )
@@ -8667,7 +8667,7 @@
     )
     (pin "1" (uuid 453229a7-af0d-4a2d-96f1-792025c765ca))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR038") (unit 1)
         )
@@ -8697,7 +8697,7 @@
     )
     (pin "1" (uuid 1a6a112d-3944-4889-909f-4ce447e54029))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR064") (unit 1)
         )
@@ -8727,7 +8727,7 @@
     )
     (pin "1" (uuid d418460e-e13b-4440-89dc-05b5e6476ed9))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR031") (unit 1)
         )
@@ -8757,7 +8757,7 @@
     )
     (pin "1" (uuid d4f2ab9a-dbeb-4aa7-a592-9f869dd6aec0))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR0102") (unit 1)
         )
@@ -8800,7 +8800,7 @@
     (pin "1" (uuid fea83a9f-7f4c-4154-ab54-c54dfcf8a1c3))
     (pin "2" (uuid e04574d6-10e3-472d-8e21-6dcc4cbe2631))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "SW2") (unit 1)
         )
@@ -8830,7 +8830,7 @@
     )
     (pin "1" (uuid 54a31d09-7670-4f35-a7be-3d9423187147))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR050") (unit 1)
         )
@@ -8860,7 +8860,7 @@
     )
     (pin "1" (uuid 2ec878b1-9004-49e2-a0f4-f06c592a77b4))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR010") (unit 1)
         )
@@ -8903,7 +8903,7 @@
     (pin "1" (uuid 7afd9a8d-7edd-4c84-92e1-0be4a4ca956e))
     (pin "2" (uuid 91ae2f7d-8c8f-447f-9a4b-1164b787fa12))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C19") (unit 1)
         )
@@ -8951,7 +8951,7 @@
     (pin "1" (uuid 8887196b-94ca-4c33-b487-4c16bda0bc5d))
     (pin "2" (uuid 2da63fce-9cf7-4cd2-acf1-a7e0f32f51dc))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C11") (unit 1)
         )
@@ -8994,7 +8994,7 @@
     (pin "1" (uuid 013b7ee2-259c-4944-9da4-fb1c5bc791f8))
     (pin "2" (uuid 22418b2c-2ea1-447b-8539-b1b6993851c2))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R4") (unit 1)
         )
@@ -9029,7 +9029,7 @@
     )
     (pin "1" (uuid 43c00baf-e5b3-4846-910c-e15523b2da7d))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#VUSB010") (unit 1)
         )
@@ -9067,7 +9067,7 @@
     (pin "1" (uuid 2ebd9a8f-fdb2-4a92-9012-bbe1d717b633))
     (pin "2" (uuid 962efeb2-da39-4dcd-a07c-2485b07f0bc4))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R9") (unit 1)
         )
@@ -9102,7 +9102,7 @@
     )
     (pin "1" (uuid 591bc94f-66f7-4c10-89a2-c642d4cc6e66))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR07") (unit 1)
         )
@@ -9160,7 +9160,7 @@
     (pin "B9" (uuid 8926b700-658c-4764-84ad-897b3d873c7c))
     (pin "S1" (uuid 3e304998-7118-4175-a428-81788c179d62))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "J1") (unit 1)
         )
@@ -9185,7 +9185,7 @@
     )
     (pin "1" (uuid dcc3b66b-e49d-471c-b593-4a36c6f7d048))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR011") (unit 1)
         )
@@ -9215,7 +9215,7 @@
     )
     (pin "1" (uuid f30a7ab2-03ac-4025-b560-621092e50415))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#ICGND02") (unit 1)
         )
@@ -9259,7 +9259,7 @@
     (pin "2" (uuid 2ca36eda-2a0d-4c89-a0e2-7499ed0bfa0e))
     (pin "MP" (uuid 9271ec71-c00d-4c9d-a8a9-9b78a12784e0))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "BT1") (unit 1)
         )
@@ -9305,7 +9305,7 @@
     (pin "4" (uuid ba249174-ee89-43be-bea0-f1930865db27))
     (pin "5" (uuid 2a0befd3-0ae2-47a7-a141-7b651031010e))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "U4") (unit 1)
         )
@@ -9342,7 +9342,7 @@
     )
     (pin "1" (uuid f2c0f0b6-faec-4103-9b2c-dd81ac78cdf1))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR026") (unit 1)
         )
@@ -9381,7 +9381,7 @@
     )
     (pin "1" (uuid 9a136b5b-3287-4bba-bc95-2813810f401e))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "SYS6") (unit 1)
         )
@@ -9406,7 +9406,7 @@
     )
     (pin "1" (uuid 1b66a2ce-2a45-4dbc-adf3-d1dca27fb446))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#ICGND01") (unit 1)
         )
@@ -9449,7 +9449,7 @@
     (pin "1" (uuid 839893e5-2be1-4362-8e4c-1186eadeae81))
     (pin "2" (uuid 5744b4df-446f-46ca-b5e3-3150577e6f7d))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C5") (unit 1)
         )
@@ -9492,7 +9492,7 @@
     (pin "1" (uuid 6bc00069-1139-4b7d-bcb0-8f08fad58193))
     (pin "2" (uuid 141560ff-6967-4a0d-94b9-887e1b83fe5d))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R14") (unit 1)
         )
@@ -9527,7 +9527,7 @@
     )
     (pin "1" (uuid bb07ab29-7fb5-49b6-ace0-be633345f2ef))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR059") (unit 1)
         )
@@ -9565,7 +9565,7 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "H1") (unit 1)
         )
@@ -9600,7 +9600,7 @@
     )
     (pin "1" (uuid b8adf9d0-c48a-456c-abb9-029ed7d70bb4))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR035") (unit 1)
         )
@@ -9630,7 +9630,7 @@
     )
     (pin "1" (uuid 57c189b8-da6c-432a-9e07-01b9882a147a))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR020") (unit 1)
         )
@@ -9673,7 +9673,7 @@
     (pin "1" (uuid a089271b-6c83-48fc-bfe5-a237eb9ab9a2))
     (pin "2" (uuid ec2d3cd6-a295-48d5-bd19-579d4ce3ef53))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R20") (unit 1)
         )
@@ -9708,7 +9708,7 @@
     )
     (pin "1" (uuid 3fde55a1-d684-435a-ab4e-18510c4aa25c))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR040") (unit 1)
         )
@@ -9790,7 +9790,7 @@
     (pin "8" (uuid 42f013cc-cb82-4489-83bb-625dff6e17b0))
     (pin "9" (uuid 2bec635d-f823-4698-a733-42d77b3ed8c2))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "MCU1") (unit 1)
         )
@@ -9832,7 +9832,7 @@
     (pin "5" (uuid 2f52fe55-3683-4bd9-899c-c13374df0477))
     (pin "6" (uuid 51c598d8-bac2-42c0-a4b7-44c67786ae30))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "U1") (unit 1)
         )
@@ -9857,7 +9857,7 @@
     )
     (pin "1" (uuid d1d72d93-29c0-4a3d-9876-47a9d2c799b7))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#VUSB06") (unit 1)
         )
@@ -9882,7 +9882,7 @@
     )
     (pin "1" (uuid fdd8ef67-83b1-481d-b14d-9d0a6a2187b3))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR033") (unit 1)
         )
@@ -9925,7 +9925,7 @@
     (pin "1" (uuid 1fb04a07-fde0-4545-b8b2-7d248284c88e))
     (pin "2" (uuid 9ff48290-a5fb-4d7e-b8d7-e2e2d6e48942))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R3") (unit 1)
         )
@@ -9955,7 +9955,7 @@
     )
     (pin "1" (uuid a1379179-30ed-4926-9e5b-99bb06fc5a97))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#VUSB04") (unit 1)
         )
@@ -9980,7 +9980,7 @@
     )
     (pin "1" (uuid c8fed303-e4bd-40a7-8961-3baf99c6e072))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR014") (unit 1)
         )
@@ -10010,7 +10010,7 @@
     )
     (pin "1" (uuid 04ad3128-2ec3-4b66-bde9-f1ced083b8fd))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR016") (unit 1)
         )
@@ -10040,7 +10040,7 @@
     )
     (pin "1" (uuid 01b476ed-3d83-462b-9622-b32abbac2a05))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR042") (unit 1)
         )
@@ -10070,7 +10070,7 @@
     )
     (pin "1" (uuid 0a58458d-88f8-4e6b-979c-2a3e3feb870a))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#ICGND03") (unit 1)
         )
@@ -10113,7 +10113,7 @@
     (pin "1" (uuid d90fb0d7-e960-4cd2-81cb-61586f0d3aea))
     (pin "2" (uuid 082f4381-d813-4b5a-b050-dd9ba7a53ce9))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R23") (unit 1)
         )
@@ -10161,7 +10161,7 @@
     (pin "1" (uuid ab87089d-deb1-4748-91c9-cb6acd2a3d11))
     (pin "2" (uuid 23dda6df-8883-43a7-a95c-95f0e078411d))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "CHARGLED2") (unit 1)
         )
@@ -10203,7 +10203,7 @@
     )
     (pin "1" (uuid 788b3ef6-2bb7-4453-aa22-974666e38fe7))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR069") (unit 1)
         )
@@ -10251,7 +10251,7 @@
     (pin "1" (uuid e12f3e5c-849a-49c9-af4d-ce6060837e18))
     (pin "2" (uuid 2c044a5e-981c-47cf-9e21-ea043da8a7c1))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "STATLED1") (unit 1)
         )
@@ -10296,7 +10296,7 @@
     (pin "3" (uuid e19ce81f-0a00-4713-8e57-f1f41a311741))
     (pin "4" (uuid cead9395-4121-400f-a4a0-d38d152b87c0))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R2") (unit 1)
         )
@@ -10335,7 +10335,7 @@
     )
     (pin "1" (uuid a7920e48-a808-4128-8435-78af499aed50))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "SYS3") (unit 1)
         )
@@ -10395,7 +10395,7 @@
     (pin "8" (uuid 698ba4a1-a4cf-4421-ac07-04b772332d9b))
     (pin "9" (uuid 7f039049-8a35-4cb4-9a29-918e16cef590))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "IMU1") (unit 1)
         )
@@ -10441,7 +10441,7 @@
     (pin "4" (uuid 99ea0022-8c48-4e18-aa11-7796d413f530))
     (pin "MP" (uuid fff47af7-5de9-4845-a10f-ece2cc2d516d))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "TOUCH2") (unit 1)
         )
@@ -10484,7 +10484,7 @@
     (pin "1" (uuid 11ba3a0f-8f55-4eab-a1c2-d52c8210082c))
     (pin "2" (uuid fbeba853-5516-45d6-a274-078185176e76))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R1") (unit 1)
         )
@@ -10528,7 +10528,7 @@
     (pin "2" (uuid 7ddb94ff-df14-4162-86d0-8125acde3dbc))
     (pin "MP" (uuid 251cb2f9-e61b-4f5d-bdae-4ce07105729c))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "ANG2") (unit 1)
         )
@@ -10571,7 +10571,7 @@
     (pin "1" (uuid 168794bd-161e-4aa8-b00d-fceae0586e55))
     (pin "2" (uuid f17ca8cf-1032-4b8d-876f-5f281d7cb378))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C1") (unit 1)
         )
@@ -10614,7 +10614,7 @@
     (pin "1" (uuid 0b9c4a3c-cf2b-4340-82f2-84aff54fff16))
     (pin "2" (uuid cb3f4179-14b0-4063-a85f-9d5d494c5d21))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "R16") (unit 1)
         )
@@ -10649,7 +10649,7 @@
     )
     (pin "1" (uuid 89968634-ff0d-4ee1-926e-d592ccd95260))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#VUSB03") (unit 1)
         )
@@ -10688,7 +10688,7 @@
     (pin "2" (uuid 352042c7-c159-4eae-89ad-cd24103b1138))
     (pin "3" (uuid f2845bec-29d5-439a-a67a-4e2dd37a8fe1))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "Q3") (unit 1)
         )
@@ -10718,7 +10718,7 @@
     )
     (pin "1" (uuid e38d9ae0-362f-4969-8e56-b06c75bbe996))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR029") (unit 1)
         )
@@ -10748,7 +10748,7 @@
     )
     (pin "1" (uuid 6b6213cf-c2f0-4e31-88fd-2e6f4381bc64))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#ICGND06") (unit 1)
         )
@@ -10778,7 +10778,7 @@
     )
     (pin "1" (uuid a68ab586-2144-4932-926f-9178302e5d70))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR043") (unit 1)
         )
@@ -10808,7 +10808,7 @@
     )
     (pin "1" (uuid 1a527023-fd4b-4432-b70b-ec36c3947f17))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "#PWR072") (unit 1)
         )
@@ -10851,7 +10851,7 @@
     (pin "1" (uuid 25ada1ad-e0af-4930-87b0-43560b428931))
     (pin "2" (uuid cfd59796-5c63-42df-be12-300f32d3fa83))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "C2") (unit 1)
         )
@@ -10897,7 +10897,7 @@
     (pin "4" (uuid 36d133b1-7fc8-4fec-802e-42ed80af569a))
     (pin "5" (uuid 5918d1d0-0a97-4d67-a2a5-e7f2f829fe0d))
     (instances
-      (project "tstick-5gw-pro-USB-V2-pcb"
+      (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "U3") (unit 1)
         )
