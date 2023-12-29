@@ -89,7 +89,7 @@ Task Rates
 // Comms
 #define LIBMAPPER_POLL_RATE 5 // ms (as fast as possible)
 #define LIBMAPPER_UPDATE_RATE 10 // ms
-#define OSC_UPDATE_RATE 10 // ms 
+#define OSC_UPDATE_RATE 13 // ms (~77Hz) 
 
 // Sensors
 #define TOUCH_UPDATE_RATE 10 // ms (takes 6ms to read 120 bytes over I2C)
