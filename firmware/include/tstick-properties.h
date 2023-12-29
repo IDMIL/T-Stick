@@ -38,8 +38,8 @@ Define I2C properties
 #define SCL_PIN 11
 #endif
 #ifdef board_ENCHANTI_rev2
-#define SDA_PIN 12
-#define SCL_PIN 11
+#define SDA_PIN 21
+#define SCL_PIN 14
 #endif
 #define I2CUPDATE_FREQ 400000
 
@@ -72,7 +72,7 @@ Define Interrupt pins for sensors
 #define IMU_INT_PIN 21
 #endif 
 #ifdef board_ENCHANTI_rev2
-#define IMU_INT_PIN 46
+#define IMU_INT_PIN 48
 #endif
 #define FUELGAUE_INT_PIN 17
 #define TOUCH_INT 4
@@ -87,9 +87,9 @@ Task Rates
 */
 // Timing variables
 // Comms
-#define LIBMAPPER_POLL_RATE 1 // ms (as fast as possible)
+#define LIBMAPPER_POLL_RATE 5 // ms (as fast as possible)
 #define LIBMAPPER_UPDATE_RATE 10 // ms
-#define OSC_UPDATE_RATE 20 // ms 
+#define OSC_UPDATE_RATE 10 // ms 
 
 // Sensors
 #define TOUCH_UPDATE_RATE 10 // ms (takes 6ms to read 120 bytes over I2C)

@@ -129,7 +129,7 @@ struct BatteryData {
 FUELGAUGE fuelgauge;
 fuelgauge_config fg_config = {
     0x36, //i2c_addr
-    3200, // capacity (mAh)
+    2000, // capacity (mAh)
     50, // End of charge Current (mA)
     10, // rsense (mOhm)
     3, // empty voltage (V)
@@ -319,7 +319,7 @@ void updateGestures();
 
 // Setup sensor tasks (task rates defined in tstick-properties.h)
 Task updateIMU (TASK_IMMEDIATE, TASK_ONCE, &readIMU, &runnerSensors, false);
-Task updateTOUCH (TOUCH_UPDATE_RATE, TASK_FOREVER, &readTouch, &runnerSensors, false);
+// Task updateTOUCH (TOUCH_UPDATE_RATE, TASK_FOREVER, &readTouch, &runnerSensors, false);
 Task updateANALOG (ANG_UPDATE_RATE, TASK_FOREVER, &readAnalog, &runnerSensors, false);
 Task updateGesture (GESTURE_UPDATE_RATE, TASK_FOREVER, &updateGestures, &runnerSensors, false);
 Task updateBattery (BATTERY_UPDATE_RATE, TASK_FOREVER, &readBattery, &runnerSensors, false);
@@ -874,6 +874,12 @@ void readIMU() {
     sensors.magn[0] = gestures.getMagX();
     sensors.magn[1] = gestures.getMagY();
     sensors.magn[2] = gestures.getMagZ();
+
+    // set imu event true
+    event.mimu = true;
+
+    // disable task
+    updateIMU.disable();
 }
 
 void readTouch() {
@@ -1024,7 +1030,7 @@ void updateGestures() {
 
 #ifdef imu_ICM20948
 void imu_isr() {
-    updateIMU.enable();
+    updateIMU.restart();
 }
 #endif
 
@@ -1075,6 +1081,13 @@ void createCoreTasks() {
 ///////////
 
 void setup() {
+    // Initialise LED
+    pinMode(ORANGE_LED, OUTPUT);
+    pinMode(BLUE_LED, OUTPUT);
+
+    // Turn on orange LED to indicate setup
+    digitalWrite(ORANGE_LED, HIGH);
+    
     // Set up I2C clock
     Wire.begin(SDA_PIN, SCL_PIN);
     Wire.setClock(I2CUPDATE_FREQ); // Fast mode
@@ -1093,13 +1106,6 @@ void setup() {
     baseNamespace.append("/");
     oscNamespace = baseNamespace;
 
-    // Initialise LED
-    pinMode(ORANGE_LED, OUTPUT);
-    pinMode(BLUE_LED, OUTPUT);
-
-    // Turn on orange LED to indicate setup
-    digitalWrite(ORANGE_LED, HIGH);
-
     std::cout << "    Initializing button configuration... ";
     if (button.initButton(pin.button)) {
         std::cout << "done" << std::endl;
@@ -1110,7 +1116,12 @@ void setup() {
     attachInterrupt(pin.button, buttton_isr, CHANGE);
 
     std::cout << "    Initializing IMU... ";
-    imu.initIMU();
+    #ifdef imu_ICM20948
+        imu.initIMU(MIMUBOARD::mimu_ICM20948);
+    #endif
+    #ifdef imu_LSM9DS1
+        imu.initIMU(MIMUBOARD::mimu_LSM9DS1);
+    #endif
     readIMU(); // get some data and save it to avoid puara-gesture crashes due to empty buffer
     std::cout << "done" << std::endl;
 
@@ -1125,7 +1136,7 @@ void setup() {
 
     // Setup IMU intterupt
     pinMode(IMU_INT_PIN, INPUT_PULLUP);
-    attachInterrupt(digitalPinToInterrupt(IMU_INT_PIN), imu_isr, FALLING);
+    attachInterrupt(IMU_INT_PIN, imu_isr, FALLING);
     std::cout << "done" << std::endl;
 
     // Setup jabx,jaby and jabz thresholds
@@ -1249,7 +1260,7 @@ void setup() {
     std::cout << "Firmware version: \n" << firmware_version<< "\n" << std::endl;
 
     // Create tasks
-    createCoreTasks();
+    // createCoreTasks();
 }
 
 //////////
@@ -1257,6 +1268,6 @@ void setup() {
 //////////
 
 void loop() {
-    // runnerComms.execute();
-    // runnerSensors.execute();
+    runnerComms.execute();
+    runnerSensors.execute();
 }

@@ -25,7 +25,7 @@ Define the Touch Board
 Define the IMU
 */
 #define imu_ICM20948
-//#define imu_LSM9DS1 
+//#define imu_LSM9DS1
 
 /*
 Define the fuel gauge
