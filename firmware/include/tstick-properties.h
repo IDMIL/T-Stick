@@ -75,21 +75,21 @@ Define Interrupt pins for sensors
 #define IMU_INT_PIN 48
 #endif
 #define FUELGAUE_INT_PIN 17
-#define TOUCH_INT 4
+//#define TOUCH_INT 4
 
 /*
 Enable second OSC address
 */
-#define OSC2
+//#define OSC2
 
 /*
 Task Rates
 */
 // Timing variables
 // Comms
-#define LIBMAPPER_POLL_RATE 5 // ms (as fast as possible)
-#define LIBMAPPER_UPDATE_RATE 10 // ms
-#define OSC_UPDATE_RATE 13 // ms (~77Hz) 
+#define LIBMAPPER_POLL_RATE 2 // ms (as fast as possible)
+#define LIBMAPPER_UPDATE_RATE 2 // ms
+#define OSC_UPDATE_RATE 10 // ms (~77Hz) 
 
 // Sensors
 #define TOUCH_UPDATE_RATE 10 // ms (takes 6ms to read 120 bytes over I2C)

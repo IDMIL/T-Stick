@@ -326,7 +326,7 @@ Task updateBattery (BATTERY_UPDATE_RATE, TASK_FOREVER, &readBattery, &runnerSens
 Task updateLED (LED_UPDATE_RATE, TASK_FOREVER, &changeLED, &runnerSensors, false);
 
 // Setup comms tasks
-Task libmapperPoll (LIBMAPPER_POLL_RATE, TASK_FOREVER, &pollLibmapper, &runnerComms, true);
+// Task libmapperPoll (LIBMAPPER_POLL_RATE, TASK_FOREVER, &pollLibmapper, &runnerComms, true);
 Task libmapperUpdate (LIBMAPPER_UPDATE_RATE, TASK_FOREVER, &updateLibmapper, &runnerComms, true);
 Task OSCupdate1 (OSC_UPDATE_RATE, TASK_FOREVER, &updateOSC1, &runnerComms, true);
 Task OSCupdate2 (OSC_UPDATE_RATE, TASK_FOREVER, &updateOSC2, &runnerComms, false);
@@ -337,6 +337,7 @@ void pollLibmapper() {
     mpr_dev_poll(lm_dev, 0);
 }
 void updateLibmapper() {
+    mpr_dev_poll(lm_dev, 0);
     mpr_sig_set_value(lm.fsr, 0, 1, MPR_INT32, &sensors.fsr);
     mpr_sig_set_value(lm.accel, 0, 3, MPR_FLT, &sensors.accl);
     mpr_sig_set_value(lm.gyro, 0, 3, MPR_FLT, &sensors.gyro);
@@ -529,13 +530,7 @@ void updateOSC1() {
             lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchBottom);
 
             // Reset touch event until next interrupt
-            #ifdef touch_ENCHANTI
-            // event.touchReady = false;
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/scantime");
-            lo_send(osc1, oscNamespace.c_str(), "i", touch.scantime);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/polltime");
-            lo_send(osc1, oscNamespace.c_str(), "i", touch.polltime);
-            #endif
+            event.touchReady = false;
         }
         if (event.mimu) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/accl");
@@ -556,36 +551,44 @@ void updateOSC1() {
             lo_send(osc1, oscNamespace.c_str(), "f", sensors.brush);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/multibrush");
             lo_send(osc1, oscNamespace.c_str(), "fff", sensors.multibrush[0], sensors.multibrush[1], sensors.multibrush[2]);
+            event.brush = false;
         }
         if (event.rub) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/rub");
             lo_send(osc1, oscNamespace.c_str(), "f", sensors.rub);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/multirub");
             lo_send(osc1, oscNamespace.c_str(), "fff", sensors.multirub[0], sensors.multirub[1], sensors.multirub[2]);
+            event.rub = false;
         }
         if (event.shake) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/shakexyz");
             lo_send(osc1, oscNamespace.c_str(), "fff", sensors.shake[0], sensors.shake[1], sensors.shake[2]);
+            event.shake = false;
         }
         if (event.jab) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/jabxyz");
             lo_send(osc1, oscNamespace.c_str(), "fff", sensors.jab[0], sensors.jab[1], sensors.jab[2]);
+            event.jab = false;
         }
         if (event.count) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/count");
             lo_send(osc1, oscNamespace.c_str(), "i", sensors.count);
+            event.count = false;
         }
         if (event.tap) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/tap");
             lo_send(osc1, oscNamespace.c_str(), "i", sensors.tap);
+            event.tap = false;
         }
         if (event.dtap) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/dtap");
             lo_send(osc1, oscNamespace.c_str(), "i", sensors.dtap);
+            event.dtap = false;
         }
         if (event.ttap) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/ttap");
             lo_send(osc1, oscNamespace.c_str(), "i", sensors.ttap);
+            event.ttap = false;
         }
         if (event.battery) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/percentage");
@@ -593,17 +596,20 @@ void updateOSC1() {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
             lo_send(osc1, oscNamespace.c_str(), "i", battery.capacity);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/status");
-            lo_send(osc1, oscNamespace.c_str(), "i", battery.status);       
+            lo_send(osc1, oscNamespace.c_str(), "i", battery.status);     
+            event.battery = false;  
         }
         if (event.current) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
             lo_send(osc1, oscNamespace.c_str(), "i", battery.current);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
             lo_send(osc1, oscNamespace.c_str(), "f", battery.TTE);
+            event.current = false;
         }
         if (event.voltage) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
             lo_send(osc1, oscNamespace.c_str(), "f", battery.voltage);
+            event.voltage = false;
         }
         }    
 }
@@ -775,6 +781,8 @@ void updateOSC2() {
             lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchMiddle);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/bottom");
             lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchBottom);
+
+            event.touchReady - false;
         }
         if (event.mimu) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/accl");
@@ -795,36 +803,44 @@ void updateOSC2() {
             lo_send(osc2, oscNamespace.c_str(), "f", sensors.brush);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/multibrush");
             lo_send(osc2, oscNamespace.c_str(), "fff", sensors.multibrush[0], sensors.multibrush[1], sensors.multibrush[2]);
+            event.brush = false;
         }
         if (event.rub) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/rub");
             lo_send(osc2, oscNamespace.c_str(), "f", sensors.rub);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/multirub");
             lo_send(osc2, oscNamespace.c_str(), "fff", sensors.multirub[0], sensors.multirub[1], sensors.multirub[2]);
+            event.rub = false;
         }
         if (event.shake) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/shakexyz");
             lo_send(osc2, oscNamespace.c_str(), "fff", sensors.shake[0], sensors.shake[1], sensors.shake[2]);
+            event.shake = false;
         }
         if (event.jab) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/jabxyz");
             lo_send(osc2, oscNamespace.c_str(), "fff", sensors.jab[0], sensors.jab[1], sensors.jab[2]);
+            event.jab = false;
         }
         if (event.count) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/count");
             lo_send(osc2, oscNamespace.c_str(), "i", sensors.count);
+            event.count = false;
         }
         if (event.tap) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/tap");
             lo_send(osc2, oscNamespace.c_str(), "i", sensors.tap);
+            event.tap = false;
         }
         if (event.dtap) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/dtap");
             lo_send(osc2, oscNamespace.c_str(), "i", sensors.dtap);
+            event.dtap = false;
         }
         if (event.ttap) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/ttap");
             lo_send(osc2, oscNamespace.c_str(), "i", sensors.ttap);
+            event.ttap = false;
         }
         if (event.battery) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/percentage");
@@ -832,17 +848,20 @@ void updateOSC2() {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/capacity");
             lo_send(osc2, oscNamespace.c_str(), "i", battery.capacity);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/status");
-            lo_send(osc2, oscNamespace.c_str(), "i", battery.status);       
+            lo_send(osc2, oscNamespace.c_str(), "i", battery.status);    
+            event.battery = false;   
         }
         if (event.current) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/current");
             lo_send(osc2, oscNamespace.c_str(), "i", battery.current);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/tte");
             lo_send(osc2, oscNamespace.c_str(), "f", battery.TTE);
+            event.current = false;
         }
         if (event.voltage) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery/voltage");
             lo_send(osc2, oscNamespace.c_str(), "f", battery.voltage);
+            event.voltage = false;
         }    
     }
 }
@@ -952,6 +971,11 @@ void readBattery() {
     if (sensors.battery != battery.percentage) {sensors.battery = battery.percentage; event.battery = true; } else { event.battery = false; }
     if (sensors.current != battery.current) {sensors.current = battery.current; event.current = true; } else { event.current = false; }
     if (sensors.voltage != battery.voltage) {sensors.voltage = battery.voltage; event.voltage = true; } else { event.voltage = false; }
+
+    // Send battery data always (for testing)
+    event.battery = true;
+    event.voltage = true;
+    event.current = true;
 }
 
 void changeLED() {
@@ -1035,8 +1059,8 @@ void imu_isr() {
 #endif
 
 // Set up multithreading
-#define COMMS_CPU 0
-#define SENSOR_CPU 1
+#define COMMS_CPU 1
+#define SENSOR_CPU 0
 
 // ===== rtos task handles =========================
 TaskHandle_t tSensors;
@@ -1059,9 +1083,9 @@ void createCoreTasks() {
   xTaskCreatePinnedToCore(
     tSensorTasks,
     "sensors",
-    8096,
+    10000,
     NULL,
-    2,
+    10,
     &tSensors,
     SENSOR_CPU);
 
@@ -1070,7 +1094,7 @@ void createCoreTasks() {
     "comms",     /* name of task. */
     10000,       /* Stack size of task */
     NULL,        /* parameter of the task */
-    2,           /* priority of the task */
+    5,           /* priority of the task */
     &tMappings,  /* task handle */
     COMMS_CPU);
 }
@@ -1087,7 +1111,7 @@ void setup() {
 
     // Turn on orange LED to indicate setup
     digitalWrite(ORANGE_LED, HIGH);
-    
+
     // Set up I2C clock
     Wire.begin(SDA_PIN, SCL_PIN);
     Wire.setClock(I2CUPDATE_FREQ); // Fast mode
@@ -1260,7 +1284,7 @@ void setup() {
     std::cout << "Firmware version: \n" << firmware_version<< "\n" << std::endl;
 
     // Create tasks
-    // createCoreTasks();
+    createCoreTasks();
 }
 
 //////////
@@ -1268,6 +1292,7 @@ void setup() {
 //////////
 
 void loop() {
-    runnerComms.execute();
-    runnerSensors.execute();
+    // runnerComms.execute();
+    // runnerSensors.execute();
+    vTaskDelete(NULL);
 }
