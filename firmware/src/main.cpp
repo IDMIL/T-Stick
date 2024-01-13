@@ -19,6 +19,11 @@ Include T-Stick properties
 #include "tstick-properties.h"
 #include "tstick-sensors.h"
 
+// Includ SPI
+#include "SPI.h"
+#if CONFIG_IDF_TARGET_ESP32S2 || CONFIG_IDF_TARGET_ESP32S3
+#define VSPI FSPI
+#endif
 // Sensor libraries
 #include "touch.h"
 
@@ -319,7 +324,7 @@ void updateGestures();
 
 // Setup sensor tasks (task rates defined in tstick-properties.h)
 Task updateIMU (TASK_IMMEDIATE, TASK_ONCE, &readIMU, &runnerSensors, false);
-// Task updateTOUCH (TOUCH_UPDATE_RATE, TASK_FOREVER, &readTouch, &runnerSensors, false);
+Task updateTOUCH (TOUCH_UPDATE_RATE, TASK_FOREVER, &readTouch, &runnerSensors, false);
 Task updateANALOG (ANG_UPDATE_RATE, TASK_FOREVER, &readAnalog, &runnerSensors, false);
 Task updateGesture (GESTURE_UPDATE_RATE, TASK_FOREVER, &updateGestures, &runnerSensors, false);
 Task updateBattery (BATTERY_UPDATE_RATE, TASK_FOREVER, &readBattery, &runnerSensors, false);
@@ -519,6 +524,13 @@ void updateOSC1() {
                 mergeddiscretetouch[108],mergeddiscretetouch[109],mergeddiscretetouch[110], mergeddiscretetouch[111], mergeddiscretetouch[112], mergeddiscretetouch[113],
                 mergeddiscretetouch[114], mergeddiscretetouch[115], mergeddiscretetouch[116], mergeddiscretetouch[117], mergeddiscretetouch[118], mergeddiscretetouch[119]);
             }
+
+            #ifdef touch_ENCHANTI
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/scantime");
+            lo_send(osc1, oscNamespace.c_str(), "i", touch.scantime);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/polltime");
+            lo_send(osc1, oscNamespace.c_str(), "i", touch.polltime);
+            #endif
 
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/all");
             lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchAll);
@@ -773,6 +785,13 @@ void updateOSC2() {
                 mergeddiscretetouch[114], mergeddiscretetouch[115], mergeddiscretetouch[116], mergeddiscretetouch[117], mergeddiscretetouch[118], mergeddiscretetouch[119]);
             }
 
+            #ifdef touch_ENCHANTI
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/scantime");
+            lo_send(osc2, oscNamespace.c_str(), "i", touch.scantime);
+            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/polltime");
+            lo_send(osc2, oscNamespace.c_str(), "i", touch.polltime);
+            #endif
+
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/all");
             lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchAll);
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/top");
@@ -782,7 +801,8 @@ void updateOSC2() {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/bottom");
             lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchBottom);
 
-            event.touchReady - false;
+            event.touchReady = false;
+            touch.newData = 0; // clear new data flag
         }
         if (event.mimu) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/accl");
@@ -929,11 +949,9 @@ void readTouch() {
     // Update event structure
     if (touch.newData) {
         event.touchReady = true;
-        touch.newData = 0;
-    } else {
-        event.touchReady = false;
     }
 }
+    
 
 void readAnalog() {
     // Update button

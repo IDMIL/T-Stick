@@ -1,7 +1,7 @@
 #include "enchanti-touch.h"
 
 // Initialise touch board, 
-void EnchantiTouch::initTouch(float num, int threshold, int mode) {
+void EnchantiTouch::initTouch(float num, int threshold, int mode, int com_mode) {
     // Clip number of touch boards to 2
     if (num > 2) {
         num = 2;
@@ -13,15 +13,41 @@ void EnchantiTouch::initTouch(float num, int threshold, int mode) {
     num_boards = num;
     noise_threshold = threshold;
     boardMode = mode;
-    if (boardMode == RAW) {
-        baseReg = RAW_REG;
-    } else if (boardMode == DIFF) {
-        baseReg = DIFF_REG;
-    } else if (boardMode == BASELINE) {
-        baseReg = BASELINE_REG;
-    } else {
-        baseReg = DIFF_REG;
+    comMode = com_mode;
+
+    // Setup SPI if spi mode selected
+    if (comMode == SPI_MODE) {
+        // to use DMA buffer, use these methods to allocate buffer
+        spi_master_tx_buf = master.allocDMABuffer(ENCHANTI_BUFFERSIZE);
+        spi_master_rx_buf = master.allocDMABuffer(ENCHANTI_BUFFERSIZE);
+
+        // set the DMA buffer
+        for (uint32_t i = 0; i < ENCHANTI_BUFFERSIZE; i++) {
+            spi_master_tx_buf[i] = i & 0xFF;
+        }
+        memset(spi_master_rx_buf, 0, ENCHANTI_BUFFERSIZE);
+
+        // intialising the spi bus 
+        master.setDataMode(SPI_MODE0);    
+        master.setFrequency(spiClk);            
+        master.setMaxTransferSize(ENCHANTI_BUFFERSIZE);  
+        master.setDutyCyclePos(96);
+        // Start bus
+        master.begin();
     }
+
+    // // Send configuration data to touch board
+    // // Send number of boards
+    // Wire.beginTransmission(main_i2c_addr);
+    // Wire.write(NUMBOARD_REG);
+    // Wire.write(int(num_boards));
+    // uint8_t last_status = Wire.endTransmission();
+
+    // // Set up touch mode
+    // Wire.beginTransmission(main_i2c_addr);
+    // Wire.write(TOUCHMODE_REG);
+    // Wire.write(mode);
+    // last_status = Wire.endTransmission();    
 
     // set touchsize
     touchSize = floor(num_boards * ENCHANTI_BASETOUCHSIZE);
@@ -31,23 +57,28 @@ void EnchantiTouch::initTouch(float num, int threshold, int mode) {
 }
 
 void EnchantiTouch::readTouch(){
-    // Read data from all 60 touch buttons
-    // Compute buffer length
-    int length = 0;
-    if (touchSize < ENCHANTI_BASETOUCHSIZE) {
-        // Each sensor needs 2 bytes == 120 Byte read
-        length = touchSize * 2;
-    } else {
-        length = ENCHANTI_BASETOUCHSIZE * 2;
-    }
-    
-    // Read touch data from I2C buffer
-    readBuffer(main_i2c_addr, baseReg, length);
+    // Read data from all touch buttons
+    if (comMode == I2C_MODE) {
+        // Compute buffer length
+        int length = 0;
+        if (touchSize < ENCHANTI_BASETOUCHSIZE) {
+            // Each sensor needs 2 bytes == 120 Byte read
+            length = touchSize * 2;
+        } else {
+            length = ENCHANTI_BASETOUCHSIZE * 2;
+        }
 
-    // Read auxillary touch board data
-    if (num_boards > 1) {
-        length = (touchSize - ENCHANTI_BASETOUCHSIZE) * 2;
-        readBuffer(aux_i2c_addr, baseReg, length, ENCHANTI_BASETOUCHSIZE); // offset data index to not overwrite main touch board data
+        // Read touch data from I2C buffer
+        readI2CBuffer(main_i2c_addr, baseReg, length);
+
+        // Read auxillary touch board data
+        if (num_boards > 1) {
+            length = (touchSize - ENCHANTI_BASETOUCHSIZE) * 2;
+            readI2CBuffer(aux_i2c_addr, baseReg, length, ENCHANTI_BASETOUCHSIZE); // offset data index to not overwrite main touch board data
+        }
+    }
+    if (comMode == SPI_MODE) {
+        readSPIBuffer(ENCHANTI_BUFFERSIZE, 2);
     }
 }
 
@@ -81,7 +112,7 @@ void EnchantiTouch::cookData() {
     }
 }
 
-void EnchantiTouch::readBuffer(uint8_t i2c_addr, uint8_t reg, uint8_t length, int offset)
+void EnchantiTouch::readI2CBuffer(uint8_t i2c_addr, uint8_t reg, uint8_t length, int offset)
 {
     // prepare for data read
     uint8_t loc = 0;
@@ -103,4 +134,29 @@ void EnchantiTouch::readBuffer(uint8_t i2c_addr, uint8_t reg, uint8_t length, in
         }
         ++loc;
     }
+}
+
+void EnchantiTouch::readSPIBuffer(uint16_t length, int offset)
+{
+    // prepare for data read
+    uint8_t loc = 0;
+    uint16_t value = 0;  
+
+    // Start transaction
+    master.transfer(NULL, spi_master_rx_buf, length);
+
+    // Process data
+    while (loc < (touchSize*2)) {
+        uint8_t lsb  = spi_master_rx_buf[loc+offset];
+        ++loc;
+        uint8_t msb  = spi_master_rx_buf[loc+offset];
+        ++loc;
+        value = uint16_t(msb << 8) | uint16_t(lsb);
+        if (data[int(loc/2)] != value) {
+            newData = 1;
+        }
+        if (value < 10000) { // spi occassionally throws junk ignore it
+            data[int(loc/2)] = value;
+        }
+    }   
 }

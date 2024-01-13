@@ -6,7 +6,7 @@
 TrillTouch touch;
 #endif
 #ifdef touch_ENCHANTI
-#include "Enchanti-touch/enchanti-touch."
+#include "Enchanti-touch/enchanti-touch.h"
 EnchantiTouch touch;
 #endif
 #ifdef touch_IDMIL

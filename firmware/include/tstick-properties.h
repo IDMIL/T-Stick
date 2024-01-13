@@ -28,7 +28,7 @@ Define the ESP32 Board
 /*
 Set the amount of capacitive stripes to for the T-Stick, up to 120
 */
-#define TSTICK_SIZE 30
+#define TSTICK_SIZE 60
 
 /*
 Define I2C properties
@@ -80,7 +80,7 @@ Define Interrupt pins for sensors
 /*
 Enable second OSC address
 */
-//#define OSC2
+#define OSC2
 
 /*
 Task Rates
@@ -92,7 +92,7 @@ Task Rates
 #define OSC_UPDATE_RATE 10 // ms (~77Hz) 
 
 // Sensors
-#define TOUCH_UPDATE_RATE 10 // ms (takes 6ms to read 120 bytes over I2C)
+#define TOUCH_UPDATE_RATE 10 // ms (takes 3ms to read 120 bytes over I2C)
 #define IMU_UPDATE_RATE 2 // ms
 #define ANG_UPDATE_RATE 2 // ms
 

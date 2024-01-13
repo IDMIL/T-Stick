@@ -17,9 +17,9 @@ Sensor Boards
 /*
 Define the Touch Board
 */
-#define touch_TRILL
+//#define touch_TRILL
 //#define touch_IDMIL
-//#define touch_ENCHANTI
+#define touch_ENCHANTI
 
 /*
 Define the IMU
