@@ -858,6 +858,13 @@ void readAnalog() {
     // Update button
     gestures.updateTrigButton(button.getButton());
     
+    // go to deep sleep if double press button
+    if (gestures.getButtonDTap()){
+        std::cout << "\nEntering deep sleep.\n\nGoodbye!\n" << std::endl;
+        delay(1000);
+        esp_deep_sleep_start();
+    }
+
     // Read FSR
     fsr.readFsr();
 

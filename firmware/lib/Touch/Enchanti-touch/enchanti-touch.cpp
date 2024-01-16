@@ -152,7 +152,7 @@ void EnchantiTouch::readSPIBuffer(uint16_t length, int offset)
         uint8_t msb  = spi_master_rx_buf[loc+offset];
         ++loc;
         value = uint16_t(msb << 8) | uint16_t(lsb);
-        if (value < 4096) { // spi occassionally throws junk ignore it
+        if (value < 4097) { // spi occassionally throws junk ignore it
             if (data[int(loc/2)] != value) {
                 newData = 1;
             }
