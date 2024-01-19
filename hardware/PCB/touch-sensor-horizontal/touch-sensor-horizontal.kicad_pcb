@@ -846,7 +846,7 @@
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp dbd7005e-7f30-4c2d-b97b-924170253541))
   (gr_line (start 345.74 127) (end 354.33 127)
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp f301a108-aeb9-4b17-af59-6cc10847987c))
-  (gr_text "TAPE AREA \n(BOT, opposite of copper pads)" (at 153.67 156.21) (layer "Cmts.User") (tstamp 30e69606-7e8d-4754-9900-ba3e857dc509)
+  (gr_text "TAPE AREA \n(BOT)" (at 153.67 156.21) (layer "Cmts.User") (tstamp 30e69606-7e8d-4754-9900-ba3e857dc509)
     (effects (font (size 5 5) (thickness 1) bold) (justify left bottom))
   )
   (gr_text "PI STIFFENER AREA\nTOP, 0.1mm" (at 329.35 119.925) (layer "Cmts.User") (tstamp cf983620-68c3-471a-bc19-bdcaaf272092)
