@@ -3,11 +3,11 @@
 This file contains instructions for ordering the touch-sensor from JLCPCB or PCBWAY. Both companies offer relatively cheap Flexible PCB options however JLCPCB is significantly cheaper for small runs but in my opinion worse customer support.
 
 ## Ordering from JLCPCB
-1. Got to jlcpcb.com and click the blue **Instant Quote** button.
+1. Click the blue **Instant Quote** button.
 2. Select **Flex** as the Base material.
 3. Click the blue **Add gerber file** button.
 4. Select the **touch-sensor-horizontal.kicad_pcb.zip** from this folder and upload it. Several options should now be automatically filled out such as the layers and dimensions.
-5. Select the appropriate PCB Qty. in the PCB Qty. section.
+5. Select the appropriate PCB Qty.
 6. Under **PCB Specifications** change _PCB Thickness_ to 0.2.
 7. Under **High-spec Options** change the following settings:
     - _Gold Fingers_ = Yes
