@@ -301,6 +301,11 @@ struct Sensors {
     float voltage;
 } sensors;
 
+// Timers
+uint32_t start = 0;
+uint32_t end = 0;
+uint32_t time_taken = 0;
+
 /////////////////
 // Setup Tasks //
 /////////////////
@@ -850,7 +855,10 @@ void readTouch() {
     gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
 
     // Update event structure
-    event.touchReady = true;
+    if (touch.newData || event.touchReady) {
+        event.touchReady = true;
+        touch.newData = 0;
+    }
 }
     
 
