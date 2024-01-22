@@ -1,0 +1,2308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>C:\Users\aniyo\Documents\GitHub\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb\tstick-5gw-pro-USB-V2-pcb.kicad_sch</source>
+    <date>12/7/2023 6:30:59 AM</date>
+    <tool>Eeschema 7.0.9</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>Custom T-Stick Board</title>
+        <company>Albert Niyonsenga</company>
+        <rev>0.0.2</rev>
+        <date>2023-09</date>
+        <source>tstick-5gw-pro-USB-V2-pcb.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="ANG1">
+      <value>JST-SH-1.00mm 1x2</value>
+      <footprint>Connector_JST:JST_SH_BM02B-SRSS-TB_1x02-1MP_P1.00mm_Vertical</footprint>
+      <datasheet>https://www.jst.com/wp-content/uploads/2021/03/eSR_SZ-new.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Connector Header Surface Mount 2 position 0.039" (1.00mm)</field>
+        <field name="Manufacturer">JST Sales America Inc.</field>
+        <field name="Mfg Part #">BM02B-SRSS-TB</field>
+        <field name="mpn">BM02B-SRSS-TB</field>
+      </fields>
+      <libsource lib="Connector_Generic_MountingPin" part="Conn_01x02_MountingPin" description="Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Description Value Pkg" value="Connector Header Surface Mount 2 position 0.039&quot; (1.00mm)"/>
+      <property name="Mfg Part #" value="BM02B-SRSS-TB"/>
+      <property name="Manufacturer" value="JST Sales America Inc."/>
+      <property name="mpn" value="BM02B-SRSS-TB"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3e0471ee-a37d-472e-9eb1-d2b1c707cd8e</tstamps>
+    </comp>
+    <comp ref="ANG2">
+      <value>JST-SH-1.00mm 1x2</value>
+      <footprint>Connector_JST:JST_SH_BM02B-SRSS-TB_1x02-1MP_P1.00mm_Vertical</footprint>
+      <datasheet>https://www.jst.com/wp-content/uploads/2021/03/eSR_SZ-new.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Connector Header Surface Mount 2 position 0.039" (1.00mm)</field>
+        <field name="Manufacturer">JST Sales America Inc.</field>
+        <field name="Mfg Part #">BM02B-SRSS-TB</field>
+        <field name="mpn">BM02B-SRSS-TB</field>
+      </fields>
+      <libsource lib="Connector_Generic_MountingPin" part="Conn_01x02_MountingPin" description="Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Description Value Pkg" value="Connector Header Surface Mount 2 position 0.039&quot; (1.00mm)"/>
+      <property name="Mfg Part #" value="BM02B-SRSS-TB"/>
+      <property name="Manufacturer" value="JST Sales America Inc."/>
+      <property name="mpn" value="BM02B-SRSS-TB"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ef7981f3-fd27-4a54-ab10-48807f5f88c8</tstamps>
+    </comp>
+    <comp ref="BT1">
+      <value>JST-PH-1x02-2.000mm</value>
+      <footprint>Connector_JST:JST_PH_S2B-PH-SM4-TB_1x02-1MP_P2.00mm_Horizontal</footprint>
+      <datasheet>https://www.jst-mfg.com/product/pdf/eng/ePH.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Connector Header Surface Mount, Right Angle 2 position 0.079" (2.00mm)</field>
+        <field name="Manufacturer">JST Sales America Inc.</field>
+        <field name="Mfg Part #">S2B-PH-SM4-TB</field>
+        <field name="mpn">B2B-PH-SM4-TBT</field>
+      </fields>
+      <libsource lib="Connector_Generic_MountingPin" part="Conn_01x02_MountingPin" description="Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Description Value Pkg" value="Connector Header Surface Mount, Right Angle 2 position 0.079&quot; (2.00mm)"/>
+      <property name="Mfg Part #" value="S2B-PH-SM4-TB"/>
+      <property name="Manufacturer" value="JST Sales America Inc."/>
+      <property name="mpn" value="B2B-PH-SM4-TBT"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b5d50194-7695-4040-a5ad-ffa130c5f6cd</tstamps>
+    </comp>
+    <comp ref="C1">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/41/CL03A104KP3NNNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL05B104KO5NNNC</field>
+        <field name="mpn">CL05B104KO5NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="CL05B104KO5NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL05B104KO5NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ef8d3b0f-bd31-4708-b6b6-2472d8ea1f6b</tstamps>
+    </comp>
+    <comp ref="C2">
+      <value>0.47uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/41/CL03A474KQ3NNNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">0.47 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Murata Electronics</field>
+        <field name="Mfg Part #">GRT155R61C474KE01D</field>
+        <field name="mpn">GRT155R61C474KE01D</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="0.47 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="GRT155R61C474KE01D"/>
+      <property name="Manufacturer" value="Murata Electronics"/>
+      <property name="mpn" value="GRT155R61C474KE01D"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>fddfd9d3-2430-43a4-83a8-db7ae8792044</tstamps>
+    </comp>
+    <comp ref="C3">
+      <value>4.7uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>https://weblib.samsungsem.com/mlcc/mlcc-ec-data-sheet.do?partNumber=CL03A475MQ5C65</datasheet>
+      <fields>
+        <field name="Description Value Pkg">4.7 µF ±10% 16V Ceramic Capacitor X5R 0603 (1608 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL10A475KO8NNNC</field>
+        <field name="mpn">CL10A475KO8NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="4.7 µF ±10% 16V Ceramic Capacitor X5R 0603 (1608 Metric)"/>
+      <property name="Mfg Part #" value="CL10A475KO8NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL10A475KO8NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1d3371a1-f5ec-498c-a5d6-6a1e8fd1856e</tstamps>
+    </comp>
+    <comp ref="C4">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/41/CL03A105KQ3CSNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL05A105KO5NNNC</field>
+        <field name="mpn">CL05A105KO5NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="CL05A105KO5NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL05A105KO5NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>24d5931b-944a-48db-8d54-e4a3313f7ea6</tstamps>
+    </comp>
+    <comp ref="C5">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/41/CL03A105KQ3CSNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL05A105KO5NNNC</field>
+        <field name="mpn">CL05A105KO5NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="CL05A105KO5NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL05A105KO5NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bbafae0d-aaf8-4a2c-86f7-091aebb58aec</tstamps>
+    </comp>
+    <comp ref="C6">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/41/CL03A104KP3NNNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL05B104KO5NNNC</field>
+        <field name="mpn">CL05B104KO5NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="CL05B104KO5NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL05B104KO5NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>104a976f-09b6-4e6a-b036-1d959d5a859c</tstamps>
+    </comp>
+    <comp ref="C7">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/41/CL03A104KP3NNNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL05B104KO5NNNC</field>
+        <field name="mpn">CL05B104KO5NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="CL05B104KO5NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL05B104KO5NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1d2ade05-cc13-426b-97a7-56525435cd50</tstamps>
+    </comp>
+    <comp ref="C8">
+      <value>4.7uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>https://weblib.samsungsem.com/mlcc/mlcc-ec-data-sheet.do?partNumber=CL03A475MQ5C65</datasheet>
+      <fields>
+        <field name="Description Value Pkg">4.7 µF ±10% 16V Ceramic Capacitor X5R 0603 (1608 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL10A475KO8NNNC</field>
+        <field name="mpn">CL10A475KO8NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="4.7 µF ±10% 16V Ceramic Capacitor X5R 0603 (1608 Metric)"/>
+      <property name="Mfg Part #" value="CL10A475KO8NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL10A475KO8NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>45afcdf4-2552-4f62-8698-1fd0718a5403</tstamps>
+    </comp>
+    <comp ref="C9">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/41/CL03A105KQ3CSNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL05A105KO5NNNC</field>
+        <field name="mpn">CL05A105KO5NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="CL05A105KO5NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL05A105KO5NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>13b740c8-eeba-4154-9392-b7209259ae1a</tstamps>
+    </comp>
+    <comp ref="C10">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/41/CL03A105KQ3CSNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL05A105KO5NNNC</field>
+        <field name="mpn">CL05A105KO5NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="CL05A105KO5NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL05A105KO5NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>60ef3c72-a9de-42fb-9281-bf8c97f2997d</tstamps>
+    </comp>
+    <comp ref="C11">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/41/CL03A105KQ3CSNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL05A105KO5NNNC</field>
+        <field name="mpn">CL05A105KO5NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="CL05A105KO5NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL05A105KO5NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>aa7fec39-3259-47f0-90ef-ea2ef03eb243</tstamps>
+    </comp>
+    <comp ref="C12">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/41/CL03A105KQ3CSNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL05A105KO5NNNC</field>
+        <field name="mpn">CL05A105KO5NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="CL05A105KO5NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL05A105KO5NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>051f4be5-75cf-45b4-a912-6f22885350f6</tstamps>
+    </comp>
+    <comp ref="C13">
+      <value>10uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/609/CL10A106KQ8NNNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">10 µF ±10% 6.3V Ceramic Capacitor X5R 0603 (1608 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL10A105KO8NNNC</field>
+        <field name="mpn">CL10A105KO8NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="10 µF ±10% 6.3V Ceramic Capacitor X5R 0603 (1608 Metric)"/>
+      <property name="Mfg Part #" value="CL10A105KO8NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL10A105KO8NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8bc7f5e0-968b-4fae-a206-3baded0d50b3</tstamps>
+    </comp>
+    <comp ref="C14">
+      <value>10uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/609/CL10A106KQ8NNNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">10 µF ±10% 6.3V Ceramic Capacitor X5R 0603 (1608 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL10A105KO8NNNC</field>
+        <field name="mpn">CL10A105KO8NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="10 µF ±10% 6.3V Ceramic Capacitor X5R 0603 (1608 Metric)"/>
+      <property name="Mfg Part #" value="CL10A105KO8NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL10A105KO8NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1da5755a-bda5-4714-b75f-4900b3722e6c</tstamps>
+    </comp>
+    <comp ref="C15">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/41/CL03A104KP3NNNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL05B104KO5NNNC</field>
+        <field name="mpn">CL05B104KO5NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="CL05B104KO5NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL05B104KO5NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7a7ac201-0317-4a71-a778-0cd1bdac2537</tstamps>
+    </comp>
+    <comp ref="C19">
+      <value>0.1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/41/CL03A104KP3NNNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL05B104KO5NNNC</field>
+        <field name="mpn">CL05B104KO5NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="CL05B104KO5NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL05B104KO5NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a7cdb57b-ab20-4e3b-a6f1-15d45f8713aa</tstamps>
+    </comp>
+    <comp ref="CHARGLED1">
+      <value>S1</value>
+      <footprint>LED_SMD:LED_0402_1005Metric</footprint>
+      <datasheet>https://www.kingbrightusa.com/images/catalog/SPEC/APHHS1005SURCK.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Red 630nm LED Indication - Discrete 1.95V 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Kingbright</field>
+        <field name="Mfg Part #">APHHS1005SURCK</field>
+        <field name="mpn">APHHS1005SURCK</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Description Value Pkg" value="Red 630nm LED Indication - Discrete 1.95V 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="APHHS1005SURCK"/>
+      <property name="Manufacturer" value="Kingbright"/>
+      <property name="mpn" value="APHHS1005SURCK"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Light emitting diode"/>
+      <property name="ki_keywords" value="LED diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>91c39c67-bed3-4255-877b-d3ed64eec04b</tstamps>
+    </comp>
+    <comp ref="CHARGLED2">
+      <value>S2</value>
+      <footprint>LED_SMD:LED_0402_1005Metric</footprint>
+      <datasheet>https://www.kingbrightusa.com/images/catalog/SPEC/APHHS1005SYCK.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Yellow 590nm LED Indication - Discrete 2V 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Kingbright</field>
+        <field name="Mfg Part #">APHHS1005SYCK</field>
+        <field name="mpn">APHHS1005SURCK</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Description Value Pkg" value="Yellow 590nm LED Indication - Discrete 2V 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="APHHS1005SYCK"/>
+      <property name="Manufacturer" value="Kingbright"/>
+      <property name="mpn" value="APHHS1005SURCK"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Light emitting diode"/>
+      <property name="ki_keywords" value="LED diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e06d05fc-7d33-4b84-9bff-e4e6490bbf43</tstamps>
+    </comp>
+    <comp ref="CHARGLED3">
+      <value>PG</value>
+      <footprint>LED_SMD:LED_0402_1005Metric</footprint>
+      <datasheet>https://www.kingbrightusa.com/images/catalog/SPEC/APHHS1005CGCK.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Green 570nm LED Indication - Discrete 2.1V 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Kingbright</field>
+        <field name="Mfg Part #">APHHS1005CGCK</field>
+        <field name="mpn">APHHS1005SURCK</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Description Value Pkg" value="Green 570nm LED Indication - Discrete 2.1V 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="APHHS1005CGCK"/>
+      <property name="Manufacturer" value="Kingbright"/>
+      <property name="mpn" value="APHHS1005SURCK"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Light emitting diode"/>
+      <property name="ki_keywords" value="LED diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6abc0548-f850-4d4a-a2fa-304147aba697</tstamps>
+    </comp>
+    <comp ref="FG1">
+      <value>MAX17055ETB+T</value>
+      <footprint>max17055-footprints:21-100013A_T102A2&amp;plus_1C_MXM</footprint>
+      <datasheet>https://www.analog.com/media/en/technical-documentation/data-sheets/max17055.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Battery Battery Monitor IC Multi-Chemistry 10-TDFN (2.5x2)</field>
+        <field name="Manufacturer">Analog Devices Inc./Maxim Integrated</field>
+        <field name="Mfg Part #">MAX17055ETB+T</field>
+        <field name="mpn">MAX17055ETB+T</field>
+      </fields>
+      <libsource lib="max17055-symbol" part="MAX17055ETB+T" description=""/>
+      <property name="Description Value Pkg" value="Battery Battery Monitor IC Multi-Chemistry 10-TDFN (2.5x2)"/>
+      <property name="Mfg Part #" value="MAX17055ETB+T"/>
+      <property name="Manufacturer" value="Analog Devices Inc./Maxim Integrated"/>
+      <property name="mpn" value="MAX17055ETB+T"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_keywords" value="MAX17055ETB+T"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0794e91c-6ab2-4941-a0ad-62811dc492b3</tstamps>
+    </comp>
+    <comp ref="IMU1">
+      <value>ICM-20948</value>
+      <footprint>ICM20948-footprints:QFN24_3X3X0P9_IVS</footprint>
+      <datasheet>http://www.invensense.com/wp-content/uploads/2016/06/DS-000189-ICM-20948-v1.3.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Accelerometer, Gyroscope, Magnetometer, 9 Axis Sensor I²C, SPI Output</field>
+        <field name="Manufacturer">TDK InvenSense</field>
+        <field name="Mfg Part #">ICM-20948</field>
+        <field name="mpn">ICM-20948</field>
+      </fields>
+      <libsource lib="Sensor_Motion" part="ICM-20948" description="InvenSense 9-Axis Motion Sensor, Accelerometer, Gyroscope, Compass, I2C/SPI, QFN-24"/>
+      <property name="Description Value Pkg" value="Accelerometer, Gyroscope, Magnetometer, 9 Axis Sensor I²C, SPI Output"/>
+      <property name="Mfg Part #" value="ICM-20948"/>
+      <property name="Manufacturer" value="TDK InvenSense"/>
+      <property name="mpn" value="ICM-20948"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="InvenSense 9-Axis Motion Sensor, Accelerometer, Gyroscope, Compass, I2C/SPI, QFN-24"/>
+      <property name="ki_keywords" value="mems magnetometer"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e716051c-0407-4bef-9a8f-7e64f84fd7c9</tstamps>
+    </comp>
+    <comp ref="J1">
+      <value>USB_C_Receptacle_USB2.0</value>
+      <footprint>Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal</footprint>
+      <datasheet>https://www.usb.org/sites/default/files/documents/usb_type-c.zip</datasheet>
+      <fields>
+        <field name="Description Value Pkg">USB-C (USB TYPE-C) USB 2.0 Receptacle Connector 24 (16+8 Dummy) Position Surface Mount, Right Angle; Through Hole</field>
+        <field name="Manufacturer">GCT</field>
+        <field name="Mfg Part #">USB4105-GF-A</field>
+        <field name="mpn">USB4105-GF-A</field>
+      </fields>
+      <libsource lib="Connector" part="USB_C_Receptacle_USB2.0" description="USB 2.0-only Type-C Receptacle connector"/>
+      <property name="Description Value Pkg" value="USB-C (USB TYPE-C) USB 2.0 Receptacle Connector 24 (16+8 Dummy) Position Surface Mount, Right Angle; Through Hole"/>
+      <property name="Mfg Part #" value="USB4105-GF-A"/>
+      <property name="Manufacturer" value="GCT"/>
+      <property name="mpn" value="USB4105-GF-A"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="USB 2.0-only Type-C Receptacle connector"/>
+      <property name="ki_keywords" value="usb universal serial bus type-C USB2.0"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b076b54e-a2a5-4875-a646-9caed5630305</tstamps>
+    </comp>
+    <comp ref="MCU1">
+      <value>ESP32-S3-WROOM-2</value>
+      <footprint>PCM_Espressif:ESP32-S3-WROOM-2</footprint>
+      <datasheet>https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-2_datasheet_en.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Bluetooth, WiFi 802.11b/g/n, Bluetooth v5.0 Transceiver Module 2.4GHz PCB Trace Surface Mount</field>
+        <field name="Manufacturer">Espressif Systems</field>
+        <field name="Mfg Part #">ESP32-S3-WROOM-2-N32R8V</field>
+        <field name="mpn">ESP32-S3-WROOM-2-N32R8V</field>
+      </fields>
+      <libsource lib="PCM_Espressif" part="ESP32-S3-WROOM-2" description="2.4 GHz WiFi (802.11 b/g/n) and Bluetooth ® 5 (LE) module Built around ESP32S3 series of SoCs, Xtensa ® dualcore 32bit LX7 microprocessor Flash up to 16 MB, PSRAM up to 8 MB 36 GPIOs, rich set of peripherals Onboard PCB antenna"/>
+      <property name="Description Value Pkg" value="Bluetooth, WiFi 802.11b/g/n, Bluetooth v5.0 Transceiver Module 2.4GHz PCB Trace Surface Mount"/>
+      <property name="Mfg Part #" value="ESP32-S3-WROOM-2-N32R8V"/>
+      <property name="Manufacturer" value="Espressif Systems"/>
+      <property name="mpn" value="ESP32-S3-WROOM-2-N32R8V"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="2.4 GHz WiFi (802.11 b/g/n) and Bluetooth ® 5 (LE) module Built around ESP32S3 series of SoCs, Xtensa ® dualcore 32bit LX7 microprocessor Flash up to 16 MB, PSRAM up to 8 MB 36 GPIOs, rich set of peripherals Onboard PCB antenna"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d31bca28-0078-4d81-bbe9-259b245b324b</tstamps>
+    </comp>
+    <comp ref="Q1">
+      <value>BSS138</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <datasheet>https://www.onsemi.com/pub/Collateral/BSS138-D.PDF</datasheet>
+      <fields>
+        <field name="Description Value Pkg">N-Channel 50 V 220mA (Ta) 350mW (Ta) Surface Mount SOT-23</field>
+        <field name="Manufacturer">ANBON SEMICONDUCTOR (INT'L) LIMITED</field>
+        <field name="Mfg Part #">BSS138</field>
+        <field name="mpn">BSS138</field>
+      </fields>
+      <libsource lib="Transistor_FET" part="BSS138" description="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
+      <property name="Description Value Pkg" value="N-Channel 50 V 220mA (Ta) 350mW (Ta) Surface Mount SOT-23"/>
+      <property name="Mfg Part #" value="BSS138"/>
+      <property name="Manufacturer" value="ANBON SEMICONDUCTOR (INT'L) LIMITED"/>
+      <property name="mpn" value="BSS138"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
+      <property name="ki_keywords" value="N-Channel MOSFET"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>327a35bd-db56-4932-a45f-33cfcc0499b4</tstamps>
+    </comp>
+    <comp ref="Q2">
+      <value>BSS138</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <datasheet>https://www.onsemi.com/pub/Collateral/BSS138-D.PDF</datasheet>
+      <fields>
+        <field name="Description Value Pkg">N-Channel 50 V 220mA (Ta) 350mW (Ta) Surface Mount SOT-23</field>
+        <field name="Manufacturer">ANBON SEMICONDUCTOR (INT'L) LIMITED</field>
+        <field name="Mfg Part #">BSS138</field>
+        <field name="mpn">BSS138</field>
+      </fields>
+      <libsource lib="Transistor_FET" part="BSS138" description="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
+      <property name="Description Value Pkg" value="N-Channel 50 V 220mA (Ta) 350mW (Ta) Surface Mount SOT-23"/>
+      <property name="Mfg Part #" value="BSS138"/>
+      <property name="Manufacturer" value="ANBON SEMICONDUCTOR (INT'L) LIMITED"/>
+      <property name="mpn" value="BSS138"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
+      <property name="ki_keywords" value="N-Channel MOSFET"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6e4b0847-373a-4b83-bfd8-ef6e21e5059a</tstamps>
+    </comp>
+    <comp ref="Q3">
+      <value>BSS138</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <datasheet>https://www.onsemi.com/pub/Collateral/BSS138-D.PDF</datasheet>
+      <fields>
+        <field name="Description Value Pkg">N-Channel 50 V 220mA (Ta) 350mW (Ta) Surface Mount SOT-23</field>
+        <field name="Manufacturer">ANBON SEMICONDUCTOR (INT'L) LIMITED</field>
+        <field name="Mfg Part #">BSS138</field>
+        <field name="mpn">BSS138</field>
+      </fields>
+      <libsource lib="Transistor_FET" part="BSS138" description="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
+      <property name="Description Value Pkg" value="N-Channel 50 V 220mA (Ta) 350mW (Ta) Surface Mount SOT-23"/>
+      <property name="Mfg Part #" value="BSS138"/>
+      <property name="Manufacturer" value="ANBON SEMICONDUCTOR (INT'L) LIMITED"/>
+      <property name="mpn" value="BSS138"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
+      <property name="ki_keywords" value="N-Channel MOSFET"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f335f83a-f2c2-40cf-affc-a2e6562da995</tstamps>
+    </comp>
+    <comp ref="R1">
+      <value>1k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF1001X</field>
+        <field name="mpn">ERJ-2RKF1001X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF1001X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF1001X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ecdf9af3-94ea-4e11-8862-e19a73339259</tstamps>
+    </comp>
+    <comp ref="R2">
+      <value>Ohmite_LVK12 10m</value>
+      <footprint>ul_LVK12R010CER-footprints:LVK12_OHM-L</footprint>
+      <datasheet>https://www.ohmite.com/assets/docs/res_lvk.pdf?r=false</datasheet>
+      <fields>
+        <field name="Description Value Pkg">10 mOhms ±0.25% 0.5W, 1/2W Chip Resistor 1206 (3216 Metric) Anti-Corrosive, Current Sense, Moisture Resistant Thick Film</field>
+        <field name="Manufacturer">Ohmite</field>
+        <field name="Mfg Part #">LVK12R010CER</field>
+        <field name="mpn">LVK12R010CER</field>
+      </fields>
+      <libsource lib="Device" part="R_Shunt_US" description="Shunt resistor, US symbol"/>
+      <property name="Description Value Pkg" value="10 mOhms ±0.25% 0.5W, 1/2W Chip Resistor 1206 (3216 Metric) Anti-Corrosive, Current Sense, Moisture Resistant Thick Film"/>
+      <property name="Mfg Part #" value="LVK12R010CER"/>
+      <property name="Manufacturer" value="Ohmite"/>
+      <property name="mpn" value="LVK12R010CER"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Shunt resistor, US symbol"/>
+      <property name="ki_keywords" value="R res shunt resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e5844f53-5972-482c-8bea-04c285f7fa10</tstamps>
+    </comp>
+    <comp ref="R3">
+      <value>1k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF1001X</field>
+        <field name="mpn">ERJ-2RKF1001X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF1001X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF1001X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d69352d4-3ac4-4e6d-9649-fa204d963a86</tstamps>
+    </comp>
+    <comp ref="R4">
+      <value>110k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">110 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF1103X</field>
+        <field name="mpn">ERJ-2RKF1103X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="110 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF1103X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF1103X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ab582003-f2ce-415a-adc0-517f9ec77f6a</tstamps>
+    </comp>
+    <comp ref="R5">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">10 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF1002X</field>
+        <field name="mpn">ERJ-2RKF1002X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="10 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF1002X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF1002X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>34e703ad-e207-4113-b2fd-94441be5bf49</tstamps>
+    </comp>
+    <comp ref="R6">
+      <value>5k1</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">5.1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF5101X</field>
+        <field name="mpn">ERJ-2RKF5101X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="5.1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF5101X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF5101X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>93ac3ebe-5a17-4cf0-9170-ec8264171855</tstamps>
+    </comp>
+    <comp ref="R7">
+      <value>5k1</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">5.1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF5101X</field>
+        <field name="mpn">ERJ-2RKF5101X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="5.1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF5101X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF5101X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>874adb2c-6633-4f87-9bd3-f179cafd8f9a</tstamps>
+    </comp>
+    <comp ref="R8">
+      <value>1k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF1001X</field>
+        <field name="mpn">ERJ-2RKF1001X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF1001X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF1001X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>00acd28c-0fe0-42dc-a3eb-244439061ecf</tstamps>
+    </comp>
+    <comp ref="R9">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">10 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF1002X</field>
+        <field name="mpn">ERJ-2RKF1002X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="10 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF1002X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF1002X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ae92dba2-9182-4a83-9e0d-0dd15cc60781</tstamps>
+    </comp>
+    <comp ref="R10">
+      <value>1k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF1001X</field>
+        <field name="mpn">ERJ-2RKF1001X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF1001X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF1001X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3619649c-aca1-4cef-9ed7-3a61080da24c</tstamps>
+    </comp>
+    <comp ref="R12">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">10 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF1002X</field>
+        <field name="mpn">ERJ-2RKF1002X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="10 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF1002X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF1002X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>624a5867-250e-4844-aa82-115989134d19</tstamps>
+    </comp>
+    <comp ref="R14">
+      <value>2k2</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">2.2 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF2201X</field>
+        <field name="mpn">ERJ-2RKF2201X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF2201X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF2201X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c9da8724-4e40-4b8f-8d37-029e34b60b5c</tstamps>
+    </comp>
+    <comp ref="R15">
+      <value>2k2</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">2.2 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF2201X</field>
+        <field name="mpn">ERJ-2RKF2201X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF2201X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF2201X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>465f8b3b-858b-40bd-a545-810b8af7846b</tstamps>
+    </comp>
+    <comp ref="R16">
+      <value>2k2</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">2.2 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF2201X</field>
+        <field name="mpn">ERJ-2RKF2201X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF2201X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF2201X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f0bbb526-d9e6-4fca-86fa-afa739f11871</tstamps>
+    </comp>
+    <comp ref="R17">
+      <value>24.9k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">24.9 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF2492X</field>
+        <field name="mpn">ERJ-2RKF2492X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="24.9 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF2492X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF2492X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>434ee0d7-1232-458d-aef3-4236e28e0251</tstamps>
+    </comp>
+    <comp ref="R18">
+      <value>330k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">330 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF3303X</field>
+        <field name="mpn">ERJ-2RKF3303X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="330 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF3303X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF3303X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>06c7fe5b-3c1f-417f-a2c6-4b71e209552e</tstamps>
+    </comp>
+    <comp ref="R19">
+      <value>2k2</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">2.2 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF2201X</field>
+        <field name="mpn">ERJ-2RKF2201X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF2201X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF2201X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>65de0876-95a8-4de6-a4c2-eee164324cca</tstamps>
+    </comp>
+    <comp ref="R20">
+      <value>2k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">2 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF2001X</field>
+        <field name="mpn">ERJ-2RKF2001X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="2 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF2001X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF2001X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d1024521-4c02-450a-9029-34b9bcde6503</tstamps>
+    </comp>
+    <comp ref="R21">
+      <value>2k2</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">2.2 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF2201X</field>
+        <field name="mpn">ERJ-2RKF2201X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF2201X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF2201X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4ee10286-6ce3-45ef-b7af-b11ab4874bd7</tstamps>
+    </comp>
+    <comp ref="R22">
+      <value>1k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF1001X</field>
+        <field name="mpn">ERJ-2RKF1001X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF1001X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF1001X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1362128f-9c28-49bd-904a-2843b7c768c7</tstamps>
+    </comp>
+    <comp ref="R23">
+      <value>2k2</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">2.2 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF2201X</field>
+        <field name="mpn">ERJ-2RKF2201X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="2.2 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF2201X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF2201X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d9fc8217-cf6f-4b60-9a39-ee4151613955</tstamps>
+    </comp>
+    <comp ref="R24">
+      <value>1k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERJ-2RKF1001X</field>
+        <field name="mpn">ERJ-2RKF1001X</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Description Value Pkg" value="1 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
+      <property name="Mfg Part #" value="ERJ-2RKF1001X"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERJ-2RKF1001X"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Resistor, US symbol"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>57c2b130-35ad-448c-b81a-b8910289c3b2</tstamps>
+    </comp>
+    <comp ref="STATLED1">
+      <value>WIFISTATUS</value>
+      <footprint>LED_SMD:LED_0402_1005Metric</footprint>
+      <datasheet>https://www.kingbrightusa.com/images/catalog/SPEC/APHHS1005SURCK.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Blue 465nm LED Indication - Discrete 3.3V 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Kingbright</field>
+        <field name="Mfg Part #">APHHS1005QBC/D</field>
+        <field name="mpn">APHHS1005SURCK</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Description Value Pkg" value="Blue 465nm LED Indication - Discrete 3.3V 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="APHHS1005QBC/D"/>
+      <property name="Manufacturer" value="Kingbright"/>
+      <property name="mpn" value="APHHS1005SURCK"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Light emitting diode"/>
+      <property name="ki_keywords" value="LED diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e36b2e0c-2aa5-4072-87e8-bf4893bb76ac</tstamps>
+    </comp>
+    <comp ref="STATLED2">
+      <value>GENERAL STATUS</value>
+      <footprint>LED_SMD:LED_0402_1005Metric</footprint>
+      <datasheet>https://www.kingbrightusa.com/images/catalog/SPEC/APHHS1005SURCK.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Orange 601nm LED Indication - Discrete 2.1V 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Kingbright</field>
+        <field name="Mfg Part #">APHHS1005SECK</field>
+        <field name="mpn">APHHS1005SURCK</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="Description Value Pkg" value="Orange 601nm LED Indication - Discrete 2.1V 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="APHHS1005SECK"/>
+      <property name="Manufacturer" value="Kingbright"/>
+      <property name="mpn" value="APHHS1005SURCK"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Light emitting diode"/>
+      <property name="ki_keywords" value="LED diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5a908190-d712-4561-b06f-b303a6a32078</tstamps>
+    </comp>
+    <comp ref="SW1">
+      <value>B3U-1000P</value>
+      <footprint>Button_Switch_SMD:SW_SPST_B3U-1000P</footprint>
+      <datasheet>https://omronfs.omron.com/en_US/ecb/products/pdf/en-b3u.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Tactile Switch SPST-NO Top Actuated Surface Mount</field>
+        <field name="Manufacturer">Omron Electronics Inc-EMC Div</field>
+        <field name="Mfg Part #">B3U-1000P</field>
+        <field name="mpn">PTS810 SJM 250 SMTR LFS</field>
+      </fields>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <property name="Description Value Pkg" value="Tactile Switch SPST-NO Top Actuated Surface Mount"/>
+      <property name="Mfg Part #" value="B3U-1000P"/>
+      <property name="Manufacturer" value="Omron Electronics Inc-EMC Div"/>
+      <property name="mpn" value="PTS810 SJM 250 SMTR LFS"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Push button switch, generic, two pins"/>
+      <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>65e106f9-1491-4606-bd61-8cc485e2332e</tstamps>
+    </comp>
+    <comp ref="SW2">
+      <value>B3U-1000P</value>
+      <footprint>Button_Switch_SMD:SW_SPST_B3U-1000P</footprint>
+      <datasheet>https://omronfs.omron.com/en_US/ecb/products/pdf/en-b3u.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Tactile Switch SPST-NO Top Actuated Surface Mount</field>
+        <field name="Manufacturer">Omron Electronics Inc-EMC Div</field>
+        <field name="Mfg Part #">B3U-1000P</field>
+        <field name="mpn">PTS810 SJM 250 SMTR LFS</field>
+      </fields>
+      <libsource lib="Switch" part="SW_Push" description="Push button switch, generic, two pins"/>
+      <property name="Description Value Pkg" value="Tactile Switch SPST-NO Top Actuated Surface Mount"/>
+      <property name="Mfg Part #" value="B3U-1000P"/>
+      <property name="Manufacturer" value="Omron Electronics Inc-EMC Div"/>
+      <property name="mpn" value="PTS810 SJM 250 SMTR LFS"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Push button switch, generic, two pins"/>
+      <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a1243956-769f-42ab-8262-4edf3b5762d1</tstamps>
+    </comp>
+    <comp ref="TH1">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/AUA0000/AUA0000C8.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">NTC Thermistor 10k 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Panasonic Electronic Components</field>
+        <field name="Mfg Part #">ERT-J0EG103FA</field>
+        <field name="mpn">ERT-JZEG103FA</field>
+      </fields>
+      <libsource lib="Device" part="Thermistor_NTC_US" description="Temperature dependent resistor, negative temperature coefficient, US symbol"/>
+      <property name="Description Value Pkg" value="NTC Thermistor 10k 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="ERT-J0EG103FA"/>
+      <property name="Manufacturer" value="Panasonic Electronic Components"/>
+      <property name="mpn" value="ERT-JZEG103FA"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Temperature dependent resistor, negative temperature coefficient, US symbol"/>
+      <property name="ki_keywords" value="thermistor NTC resistor sensor RTD"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>44bd5aca-0be7-4f5f-9b5d-1afdd7bf33ae</tstamps>
+    </comp>
+    <comp ref="TOUCH1">
+      <value>JST-SH-1x04 1.0mm</value>
+      <footprint>Connector_JST:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical</footprint>
+      <datasheet>https://www.jst-mfg.com/product/pdf/eng/eSH.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Connector Header Surface Mount 4 position 0.039" (1.00mm)</field>
+        <field name="Manufacturer">JST Sales America Inc.</field>
+        <field name="Mfg Part #">BM04B-SRSS-TB</field>
+        <field name="mpn">BM04B-SRSS-TB</field>
+      </fields>
+      <libsource lib="Connector_Generic_MountingPin" part="Conn_01x04_MountingPin" description="Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Description Value Pkg" value="Connector Header Surface Mount 4 position 0.039&quot; (1.00mm)"/>
+      <property name="Mfg Part #" value="BM04B-SRSS-TB"/>
+      <property name="Manufacturer" value="JST Sales America Inc."/>
+      <property name="mpn" value="BM04B-SRSS-TB"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>16f0672e-685e-4768-a19e-a504fe110509</tstamps>
+    </comp>
+    <comp ref="TOUCH2">
+      <value>JST-SH-1x04 1.0mm</value>
+      <footprint>Connector_JST:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical</footprint>
+      <datasheet>https://www.jst-mfg.com/product/pdf/eng/eSH.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Connector Header Surface Mount 4 position 0.039" (1.00mm)</field>
+        <field name="Manufacturer">JST Sales America Inc.</field>
+        <field name="Mfg Part #">BM04B-SRSS-TB</field>
+        <field name="mpn">BM04B-SRSS-TB</field>
+      </fields>
+      <libsource lib="Connector_Generic_MountingPin" part="Conn_01x04_MountingPin" description="Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Description Value Pkg" value="Connector Header Surface Mount 4 position 0.039&quot; (1.00mm)"/>
+      <property name="Mfg Part #" value="BM04B-SRSS-TB"/>
+      <property name="Manufacturer" value="JST Sales America Inc."/>
+      <property name="mpn" value="BM04B-SRSS-TB"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="ki_keywords" value="connector"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ec73ddbe-d779-4f34-91e3-5d8c3198d636</tstamps>
+    </comp>
+    <comp ref="U1">
+      <value>USBLC6-2P6</value>
+      <footprint>Package_TO_SOT_SMD:SOT-666</footprint>
+      <datasheet>https://www.st.com/resource/en/datasheet/usblc6-2.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">17V Clamp 5A (8/20µs) Ipp Tvs Diode Surface Mount SOT-666</field>
+        <field name="Manufacturer">STMicroelectronics</field>
+        <field name="Mfg Part #">USBLC6-2P6</field>
+        <field name="mpn">USBLC6-2P6</field>
+      </fields>
+      <libsource lib="Power_Protection" part="USBLC6-2P6" description="Very low capacitance ESD protection diode, 2 data-line, SOT-666"/>
+      <property name="Description Value Pkg" value="17V Clamp 5A (8/20µs) Ipp Tvs Diode Surface Mount SOT-666"/>
+      <property name="Mfg Part #" value="USBLC6-2P6"/>
+      <property name="Manufacturer" value="STMicroelectronics"/>
+      <property name="mpn" value="USBLC6-2P6"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Very low capacitance ESD protection diode, 2 data-line, SOT-666"/>
+      <property name="ki_keywords" value="usb ethernet video"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d39e24d7-e306-4940-a80a-396681245143</tstamps>
+    </comp>
+    <comp ref="U2">
+      <value>MCP73871</value>
+      <footprint>Package_DFN_QFN:QFN-20-1EP_4x4mm_P0.5mm_EP2.5x2.5mm</footprint>
+      <datasheet>http://www.mouser.com/ds/2/268/22090a-52174.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">QFN-20 Battery Management ICs ROHS</field>
+        <field name="Manufacturer">Microchip Technology</field>
+        <field name="Mfg Part #">MCP73871-2CCI/ML</field>
+        <field name="mpn">MCP73871-2CCI/ML</field>
+      </fields>
+      <libsource lib="Battery_Management" part="MCP73871" description="Single cell, Li-Ion/Li-Po charge management controller"/>
+      <property name="Description Value Pkg" value="QFN-20 Battery Management ICs ROHS"/>
+      <property name="Mfg Part #" value="MCP73871-2CCI/ML"/>
+      <property name="Manufacturer" value="Microchip Technology"/>
+      <property name="mpn" value="MCP73871-2CCI/ML"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_description" value="Single cell, Li-Ion/Li-Po charge management controller"/>
+      <property name="ki_keywords" value="battery charger lithium"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>91099b62-3b6a-454b-a286-684d5a8e5195</tstamps>
+    </comp>
+    <comp ref="U3">
+      <value>NCP167AMX330TBG</value>
+      <footprint>XDFN4_1X1_711AJ_ONS</footprint>
+      <datasheet>https://www.onsemi.com/pdf/datasheet/ncp167-d.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Linear Voltage Regulator IC Positive Fixed 1 Output 700mA 4-XDFN (1x1), 3.3V</field>
+        <field name="Manufacturer">onsemi</field>
+        <field name="Mfg Part #">NCP167AMX330TBG</field>
+        <field name="mpn">NCP167AMX330TBG</field>
+      </fields>
+      <libsource lib="NCP167AMX330TBG" part="NCP167AMX330TBG" description=""/>
+      <property name="Description Value Pkg" value="Linear Voltage Regulator IC Positive Fixed 1 Output 700mA 4-XDFN (1x1), 3.3V"/>
+      <property name="Mfg Part #" value="NCP167AMX330TBG"/>
+      <property name="Manufacturer" value="onsemi"/>
+      <property name="mpn" value="NCP167AMX330TBG"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_keywords" value="NCP167AMX330TBG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ff8bf9bb-3de4-4e6d-bae2-c1112089f5fb</tstamps>
+    </comp>
+    <comp ref="U4">
+      <value>NCP167AMX180TBG</value>
+      <footprint>XDFN4_1X1_711AJ_ONS</footprint>
+      <datasheet>https://www.onsemi.com/pdf/datasheet/ncp167-d.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Linear Voltage Regulator IC Positive Fixed 1 Output 700mA 4-XDFN (1x1), 1.8V</field>
+        <field name="Manufacturer">onsemi</field>
+        <field name="Mfg Part #">NCP167AMX180TBG</field>
+        <field name="mpn">NCP167AMX180TBG</field>
+      </fields>
+      <libsource lib="NCP167" part="NCP167AMX180TBG" description=""/>
+      <property name="Description Value Pkg" value="Linear Voltage Regulator IC Positive Fixed 1 Output 700mA 4-XDFN (1x1), 1.8V"/>
+      <property name="Mfg Part #" value="NCP167AMX180TBG"/>
+      <property name="Manufacturer" value="onsemi"/>
+      <property name="mpn" value="NCP167AMX180TBG"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="ki_keywords" value="NCP167AMX330TBG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b68b934a-852c-4735-a109-42914be35d94</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Battery_Management" part="MCP73871">
+      <description>Single cell, Li-Ion/Li-Po charge management controller</description>
+      <docs>http://www.mouser.com/ds/2/268/22090a-52174.pdf</docs>
+      <footprints>
+        <fp>QFN*4x4mm*P0.5mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MCP73871</field>
+        <field name="Footprint">Package_DFN_QFN:QFN-20-1EP_4x4mm_P0.5mm_EP2.5x2.5mm</field>
+        <field name="Datasheet">http://www.mouser.com/ds/2/268/22090a-52174.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="OUT" type="power_out"/>
+        <pin num="2" name="VPCC" type="input"/>
+        <pin num="3" name="SEL" type="input"/>
+        <pin num="4" name="PROG2" type="input"/>
+        <pin num="5" name="THERM" type="bidirectional"/>
+        <pin num="6" name="~{PG}" type="open_collector"/>
+        <pin num="7" name="STAT2" type="open_collector"/>
+        <pin num="8" name="STAT1/~{LBO}" type="open_collector"/>
+        <pin num="9" name="~{TE}" type="input"/>
+        <pin num="10" name="V_{SS}" type="power_in"/>
+        <pin num="11" name="V_{SS}" type="passive"/>
+        <pin num="12" name="PROG3" type="bidirectional"/>
+        <pin num="13" name="PROG1" type="bidirectional"/>
+        <pin num="14" name="V_{BAT}" type="power_out"/>
+        <pin num="15" name="V_{BAT}" type="passive"/>
+        <pin num="16" name="V_{BAT_SENSE}" type="input"/>
+        <pin num="17" name="CE" type="input"/>
+        <pin num="18" name="IN" type="power_in"/>
+        <pin num="19" name="IN" type="passive"/>
+        <pin num="20" name="OUT" type="passive"/>
+        <pin num="21" name="V_{SS}" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="USB_C_Receptacle_USB2.0">
+      <description>USB 2.0-only Type-C Receptacle connector</description>
+      <docs>https://www.usb.org/sites/default/files/documents/usb_type-c.zip</docs>
+      <footprints>
+        <fp>USB*C*Receptacle*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">USB_C_Receptacle_USB2.0</field>
+        <field name="Datasheet">https://www.usb.org/sites/default/files/documents/usb_type-c.zip</field>
+      </fields>
+      <pins>
+        <pin num="A1" name="GND" type="passive"/>
+        <pin num="A4" name="VBUS" type="passive"/>
+        <pin num="A5" name="CC1" type="bidirectional"/>
+        <pin num="A6" name="D+" type="bidirectional"/>
+        <pin num="A7" name="D-" type="bidirectional"/>
+        <pin num="A8" name="SBU1" type="bidirectional"/>
+        <pin num="A9" name="VBUS" type="passive"/>
+        <pin num="A12" name="GND" type="passive"/>
+        <pin num="B1" name="GND" type="passive"/>
+        <pin num="B4" name="VBUS" type="passive"/>
+        <pin num="B5" name="CC2" type="bidirectional"/>
+        <pin num="B6" name="D+" type="bidirectional"/>
+        <pin num="B7" name="D-" type="bidirectional"/>
+        <pin num="B8" name="SBU2" type="bidirectional"/>
+        <pin num="B9" name="VBUS" type="passive"/>
+        <pin num="B12" name="GND" type="passive"/>
+        <pin num="S1" name="SHIELD" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic_MountingPin" part="Conn_01x02_MountingPin">
+      <description>Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??-1MP*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x02_MountingPin</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="MP" name="MountPin" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic_MountingPin" part="Conn_01x04_MountingPin">
+      <description>Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??-1MP*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x04_MountingPin</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="MP" name="MountPin" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="LED">
+      <description>Light emitting diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R_Shunt_US">
+      <description>Shunt resistor, US symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*Shunt*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R_Shunt_US</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+        <pin num="4" name="4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R_US">
+      <description>Resistor, US symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R_US</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Thermistor_NTC_US">
+      <description>Temperature dependent resistor, negative temperature coefficient, US symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>*NTC*</fp>
+        <fp>*Thermistor*</fp>
+        <fp>PIN?ARRAY*</fp>
+        <fp>bornier*</fp>
+        <fp>*Terminal?Block*</fp>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">TH</field>
+        <field name="Value">Thermistor_NTC_US</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Mechanical" part="MountingHole">
+      <description>Mounting Hole without connection</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>MountingHole*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">H</field>
+        <field name="Value">MountingHole</field>
+        <field name="Datasheet">~</field>
+      </fields>
+    </libpart>
+    <libpart lib="NCP167" part="NCP167AMX180TBG">
+      <docs>NCP167AMX330TBG</docs>
+      <footprints>
+        <fp>XDFN4_1X1_711AJ_ONS</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">NCP167AMX180TBG</field>
+        <field name="Footprint">XDFN4_1X1_711AJ_ONS</field>
+        <field name="Datasheet">NCP167AMX330TBG</field>
+      </fields>
+      <pins>
+        <pin num="1" name="OUT" type="output"/>
+        <pin num="2" name="GND" type="power_out"/>
+        <pin num="3" name="EN" type="input"/>
+        <pin num="4" name="IN" type="power_in"/>
+        <pin num="5" name="GND" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="NCP167AMX330TBG" part="NCP167AMX330TBG">
+      <docs>NCP167AMX330TBG</docs>
+      <footprints>
+        <fp>XDFN4_1X1_711AJ_ONS</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">NCP167AMX330TBG</field>
+        <field name="Footprint">XDFN4_1X1_711AJ_ONS</field>
+        <field name="Datasheet">NCP167AMX330TBG</field>
+      </fields>
+      <pins>
+        <pin num="1" name="OUT" type="output"/>
+        <pin num="2" name="GND" type="power_out"/>
+        <pin num="3" name="EN" type="input"/>
+        <pin num="4" name="IN" type="power_in"/>
+        <pin num="5" name="GND" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="PCM_Espressif" part="ESP32-S3-WROOM-2">
+      <description>2.4 GHz WiFi (802.11 b/g/n) and Bluetooth ® 5 (LE) module Built around ESP32S3 series of SoCs, Xtensa ® dualcore 32bit LX7 microprocessor Flash up to 16 MB, PSRAM up to 8 MB 36 GPIOs, rich set of peripherals Onboard PCB antenna</description>
+      <docs>https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-2_datasheet_en.pdf</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ESP32-S3-WROOM-2</field>
+        <field name="Footprint">Espressif:ESP32-S3-WROOM-2</field>
+        <field name="Datasheet">https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-2_datasheet_en.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="3V3" type="power_in"/>
+        <pin num="3" name="EN" type="input"/>
+        <pin num="4" name="GPIO4/TOUCH4/ADC1_CH3" type="bidirectional"/>
+        <pin num="5" name="GPIO5/TOUCH5/ADC1_CH4" type="bidirectional"/>
+        <pin num="6" name="GPIO6/TOUCH6/ADC1_CH5" type="bidirectional"/>
+        <pin num="7" name="GPIO7/TOUCH7/ADC1_CH6" type="bidirectional"/>
+        <pin num="8" name="GPIO15/U0RTS/ADC2_CH4/XTAL_32K_P" type="bidirectional"/>
+        <pin num="9" name="GPIO16/U0CTS/ADC2_CH5/XTAL_32K_N" type="bidirectional"/>
+        <pin num="10" name="GPIO17/U1TXD/ADC2_CH6" type="bidirectional"/>
+        <pin num="11" name="GPIO18/U1RXD/ADC2_CH7/CLK_OUT3" type="bidirectional"/>
+        <pin num="12" name="GPIO8/TOUCH8/ADC1_CH7/SUBSPICS1" type="bidirectional"/>
+        <pin num="13" name="GPIO19/U1RTS/ADC2_CH8/CLK_OUT2/USB_D-" type="bidirectional"/>
+        <pin num="14" name="GPIO20/U1CTS/ADC2_CH9/CLK_OUT1/USB_D+" type="bidirectional"/>
+        <pin num="15" name="GPIO3/TOUCH3/ADC1_CH2" type="bidirectional"/>
+        <pin num="16" name="GPIO46" type="bidirectional"/>
+        <pin num="17" name="GPIO9/TOUCH9/ADC1_CH8/FSPIHD/SUBSPIHD" type="bidirectional"/>
+        <pin num="18" name="GPIO10/TOUCH10/ADC1_CH9/FSPICS0/FSPIIO4/SUBSPICS0" type="bidirectional"/>
+        <pin num="19" name="GPIO11/TOUCH11/ADC2_CH0/FSPID/FSPIIO5/SUBSPID" type="bidirectional"/>
+        <pin num="20" name="GPIO12/TOUCH12/ADC2_CH1/FSPICLK/FSPIIO6/SUBSPICLK" type="bidirectional"/>
+        <pin num="21" name="GPIO13/TOUCH13/ADC2_CH2/FSPIQ/FSPIIO7/SUBSPIQ" type="bidirectional"/>
+        <pin num="22" name="GPIO14/TOUCH14/ADC2_CH3/FSPIWP/FSPIDQS/SUBSPIWP" type="bidirectional"/>
+        <pin num="23" name="GPIO21" type="bidirectional"/>
+        <pin num="24" name="GPIO47/SPICLK_P/SUBSPICLK_P_DIFF" type="bidirectional"/>
+        <pin num="25" name="GPIO48/SPICLK_N/SUBSPICLK_N_DIFF" type="bidirectional"/>
+        <pin num="26" name="GPIO45" type="bidirectional"/>
+        <pin num="27" name="GPIO0/BOOT" type="bidirectional"/>
+        <pin num="28" name="NC" type="no_connect"/>
+        <pin num="29" name="NC" type="no_connect"/>
+        <pin num="30" name="NC" type="no_connect"/>
+        <pin num="31" name="GPIO38/FSPIWP/SUBSPIWP" type="bidirectional"/>
+        <pin num="32" name="MTCK/GPIO39/CLK_OUT3/SUBSPICS1" type="bidirectional"/>
+        <pin num="33" name="MTDO/GPIO40/CLK_OUT2" type="bidirectional"/>
+        <pin num="34" name="MTDI/GPIO41/CLK_OUT1" type="bidirectional"/>
+        <pin num="35" name="MTMS/GPIO42" type="bidirectional"/>
+        <pin num="36" name="U0RXD/GPIO44/CLK_OUT2" type="bidirectional"/>
+        <pin num="37" name="U0TXD/GPIO43/CLK_OUT1" type="bidirectional"/>
+        <pin num="38" name="GPIO2/TOUCH2/ADC1_CH1" type="bidirectional"/>
+        <pin num="39" name="GPIO1/TOUCH1/ADC1_CH0" type="bidirectional"/>
+        <pin num="40" name="GND" type="passive"/>
+        <pin num="41" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Power_Protection" part="USBLC6-2P6">
+      <description>Very low capacitance ESD protection diode, 2 data-line, SOT-666</description>
+      <docs>https://www.st.com/resource/en/datasheet/usblc6-2.pdf</docs>
+      <footprints>
+        <fp>SOT?666*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">USBLC6-2P6</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-666</field>
+        <field name="Datasheet">https://www.st.com/resource/en/datasheet/usblc6-2.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="I/O1" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+        <pin num="3" name="I/O2" type="passive"/>
+        <pin num="4" name="I/O2" type="passive"/>
+        <pin num="5" name="VBUS" type="passive"/>
+        <pin num="6" name="I/O1" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Sensor_Motion" part="ICM-20948">
+      <description>InvenSense 9-Axis Motion Sensor, Accelerometer, Gyroscope, Compass, I2C/SPI, QFN-24</description>
+      <docs>http://www.invensense.com/wp-content/uploads/2016/06/DS-000189-ICM-20948-v1.3.pdf</docs>
+      <footprints>
+        <fp>InvenSense?QFN*3x3mm*P0.4mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ICM-20948</field>
+        <field name="Footprint">Sensor_Motion:InvenSense_QFN-24_3x3mm_P0.4mm</field>
+        <field name="Datasheet">http://www.invensense.com/wp-content/uploads/2016/06/DS-000189-ICM-20948-v1.3.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="NC" type="no_connect"/>
+        <pin num="2" name="NC" type="no_connect"/>
+        <pin num="3" name="NC" type="no_connect"/>
+        <pin num="4" name="NC" type="no_connect"/>
+        <pin num="5" name="NC" type="no_connect"/>
+        <pin num="6" name="NC" type="no_connect"/>
+        <pin num="7" name="AUX_CL" type="output"/>
+        <pin num="8" name="VDDIO" type="power_in"/>
+        <pin num="9" name="SDO/AD0" type="bidirectional"/>
+        <pin num="10" name="REGOUT" type="passive"/>
+        <pin num="11" name="FSYNC" type="input"/>
+        <pin num="12" name="INT1" type="output"/>
+        <pin num="13" name="VDD" type="power_in"/>
+        <pin num="14" name="NC" type="no_connect"/>
+        <pin num="15" name="NC" type="no_connect"/>
+        <pin num="16" name="NC" type="no_connect"/>
+        <pin num="17" name="NC" type="no_connect"/>
+        <pin num="18" name="GND" type="power_in"/>
+        <pin num="19" name="RESV" type="no_connect"/>
+        <pin num="20" name="GND" type="passive"/>
+        <pin num="21" name="AUX_DA" type="bidirectional"/>
+        <pin num="22" name="~{CS}" type="input"/>
+        <pin num="23" name="SCL/SCLK" type="input"/>
+        <pin num="24" name="SDA/SDI" type="bidirectional"/>
+      </pins>
+    </libpart>
+    <libpart lib="Switch" part="SW_Push">
+      <description>Push button switch, generic, two pins</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SW_Push</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Transistor_FET" part="BSS138">
+      <description>50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23</description>
+      <docs>https://www.onsemi.com/pub/Collateral/BSS138-D.PDF</docs>
+      <footprints>
+        <fp>SOT?23*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">BSS138</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
+        <field name="Datasheet">https://www.onsemi.com/pub/Collateral/BSS138-D.PDF</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="max17055-symbol" part="MAX17055ETB+T">
+      <docs>MAX17055ETB+T</docs>
+      <footprints>
+        <fp>21-100013A_T102A2+1C_MXM</fp>
+        <fp>21-100013A_T102A2+1C_MXM-M</fp>
+        <fp>21-100013A_T102A2+1C_MXM-L</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MAX17055ETB+T</field>
+        <field name="Footprint">21-100013A_T102A2+1C_MXM</field>
+        <field name="Datasheet">MAX17055ETB+T</field>
+      </fields>
+      <pins>
+        <pin num="1" name="N.C." type="no_connect"/>
+        <pin num="2" name="AIN" type="unspecified"/>
+        <pin num="3" name="SCL" type="unspecified"/>
+        <pin num="4" name="SDA" type="unspecified"/>
+        <pin num="5" name="CSN" type="unspecified"/>
+        <pin num="6" name="CSP" type="unspecified"/>
+        <pin num="7" name="REG" type="unspecified"/>
+        <pin num="8" name="ALRT" type="unspecified"/>
+        <pin num="9" name="THRM" type="unspecified"/>
+        <pin num="10" name="BATT" type="unspecified"/>
+        <pin num="11" name="EPAD" type="unspecified"/>
+      </pins>
+    </libpart>
+    <libpart lib="pin-layout" part="board-layout">
+      <description>Board layout of custom esp32 board for t-stick</description>
+      <fields>
+        <field name="Reference">BOARDLAYOUT</field>
+        <field name="Value">LAYOUT</field>
+        <field name="Footprint">pin-layout:board-layout</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VBAT" type="power_in"/>
+        <pin num="2" name="BATGND" type="power_in"/>
+        <pin num="3" name="3v3" type="power_in"/>
+        <pin num="4" name="GND" type="power_in"/>
+        <pin num="5" name="SYS" type="power_in"/>
+        <pin num="6" name="EN" type="bidirectional"/>
+        <pin num="7" name="GND" type="power_in"/>
+        <pin num="8" name="IO01" type="bidirectional"/>
+        <pin num="9" name="IO02" type="bidirectional"/>
+        <pin num="10" name="IO08" type="bidirectional"/>
+        <pin num="11" name="COPI" type="bidirectional"/>
+        <pin num="12" name="SCK" type="bidirectional"/>
+        <pin num="13" name="CIPO" type="bidirectional"/>
+        <pin num="14" name="SDA" type="bidirectional"/>
+        <pin num="15" name="SCL" type="bidirectional"/>
+        <pin num="16" name="GND" type="power_in"/>
+        <pin num="17" name="3v3" type="power_in"/>
+        <pin num="18" name="5v" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="power-symbols" part="VSYS">
+      <fields>
+        <field name="Reference">SYS</field>
+        <field name="Value">SYS</field>
+      </fields>
+      <pins>
+        <pin num="1" name="SYS" type="power_in"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Battery_Management">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Battery_Management.kicad_sym</uri>
+    </library>
+    <library logical="Connector">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Connector.kicad_sym</uri>
+    </library>
+    <library logical="Connector_Generic_MountingPin">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Connector_Generic_MountingPin.kicad_sym</uri>
+    </library>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Device.kicad_sym</uri>
+    </library>
+    <library logical="Mechanical">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Mechanical.kicad_sym</uri>
+    </library>
+    <library logical="NCP167">
+      <uri>C:\Users\aniyo\Documents\GitHub\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/NCP167AMX330TBG/NCP167AMX330TBG.kicad_sym</uri>
+    </library>
+    <library logical="PCM_Espressif">
+      <uri>C:\Users\aniyo\Documents\KiCad\7.0\3rdparty/symbols/com_github_espressif_kicad-libraries/Espressif.kicad_sym</uri>
+    </library>
+    <library logical="Power_Protection">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Power_Protection.kicad_sym</uri>
+    </library>
+    <library logical="Sensor_Motion">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Sensor_Motion.kicad_sym</uri>
+    </library>
+    <library logical="Switch">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Switch.kicad_sym</uri>
+    </library>
+    <library logical="Transistor_FET">
+      <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Transistor_FET.kicad_sym</uri>
+    </library>
+    <library logical="max17055-symbol">
+      <uri>C:\Users\aniyo\Documents\GitHub\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/max17055-kicad/max17055-symbol.kicad_sym</uri>
+    </library>
+    <library logical="pin-layout">
+      <uri>C:\Users\aniyo\Documents\GitHub\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/board-layout/pin-layout.kicad_sym</uri>
+    </library>
+    <library logical="power-symbols">
+      <uri>C:\Users\aniyo\Documents\GitHub\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/CUSTOM_POWER.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="+1V8">
+      <node ref="C10" pin="1" pintype="passive"/>
+      <node ref="C12" pin="1" pintype="passive"/>
+      <node ref="C7" pin="1" pintype="passive"/>
+      <node ref="IMU1" pin="13" pinfunction="VDD" pintype="power_in"/>
+      <node ref="IMU1" pin="22" pinfunction="~{CS}" pintype="input"/>
+      <node ref="IMU1" pin="8" pinfunction="VDDIO" pintype="power_in"/>
+      <node ref="Q1" pin="1" pinfunction="G" pintype="input"/>
+      <node ref="Q2" pin="1" pinfunction="G" pintype="input"/>
+      <node ref="Q3" pin="1" pinfunction="G" pintype="input"/>
+      <node ref="R14" pin="2" pintype="passive"/>
+      <node ref="R15" pin="2" pintype="passive"/>
+      <node ref="R21" pin="2" pintype="passive"/>
+      <node ref="U4" pin="1" pinfunction="OUT" pintype="output"/>
+    </net>
+    <net code="2" name="+3V3">
+      <node ref="ANG1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="C13" pin="1" pintype="passive"/>
+      <node ref="C19" pin="1" pintype="passive"/>
+      <node ref="C5" pin="1" pintype="passive"/>
+      <node ref="MCU1" pin="2" pinfunction="3V3" pintype="power_in"/>
+      <node ref="R16" pin="2" pintype="passive"/>
+      <node ref="R19" pin="2" pintype="passive"/>
+      <node ref="R23" pin="2" pintype="passive"/>
+      <node ref="R5" pin="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="U3" pin="1" pinfunction="OUT" pintype="output"/>
+    </net>
+    <net code="3" name="+BATT">
+      <node ref="BT1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="C8" pin="1" pintype="passive"/>
+      <node ref="FG1" pin="10" pinfunction="BATT" pintype="unspecified"/>
+      <node ref="U2" pin="14" pinfunction="V_{BAT}" pintype="power_out"/>
+      <node ref="U2" pin="15" pinfunction="V_{BAT}" pintype="passive"/>
+      <node ref="U2" pin="16" pinfunction="V_{BAT_SENSE}" pintype="input"/>
+    </net>
+    <net code="4" name="-BATT">
+      <node ref="BT1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="R2" pin="1" pinfunction="1" pintype="passive"/>
+      <node ref="TH1" pin="2" pintype="passive"/>
+    </net>
+    <net code="5" name="/AIN">
+      <node ref="FG1" pin="2" pinfunction="AIN" pintype="unspecified"/>
+      <node ref="R12" pin="1" pintype="passive"/>
+      <node ref="TH1" pin="1" pintype="passive"/>
+    </net>
+    <net code="6" name="/CIPO">
+      <node ref="MCU1" pin="24" pinfunction="GPIO47/SPICLK_P/SUBSPICLK_P_DIFF" pintype="bidirectional"/>
+    </net>
+    <net code="7" name="/COPI">
+      <node ref="MCU1" pin="31" pinfunction="GPIO38/FSPIWP/SUBSPIWP" pintype="bidirectional"/>
+    </net>
+    <net code="8" name="/D+">
+      <node ref="J1" pin="A6" pinfunction="D+" pintype="bidirectional"/>
+      <node ref="J1" pin="B6" pinfunction="D+" pintype="bidirectional"/>
+      <node ref="U1" pin="3" pinfunction="I/O2" pintype="passive"/>
+    </net>
+    <net code="9" name="/D-">
+      <node ref="J1" pin="A7" pinfunction="D-" pintype="bidirectional"/>
+      <node ref="J1" pin="B7" pinfunction="D-" pintype="bidirectional"/>
+      <node ref="U1" pin="1" pinfunction="I/O1" pintype="passive"/>
+    </net>
+    <net code="10" name="/EN">
+      <node ref="C9" pin="1" pintype="passive"/>
+      <node ref="MCU1" pin="3" pinfunction="EN" pintype="input"/>
+      <node ref="R5" pin="1" pintype="passive"/>
+      <node ref="SW2" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+    <net code="11" name="/FG_CSN">
+      <node ref="FG1" pin="5" pinfunction="CSN" pintype="unspecified"/>
+      <node ref="R2" pin="3" pinfunction="3" pintype="passive"/>
+    </net>
+    <net code="12" name="/IMU_INT">
+      <node ref="IMU1" pin="12" pinfunction="INT1" pintype="output"/>
+      <node ref="Q3" pin="2" pinfunction="S" pintype="passive"/>
+      <node ref="R21" pin="1" pintype="passive"/>
+    </net>
+    <net code="13" name="/IO0">
+      <node ref="MCU1" pin="27" pinfunction="GPIO0/BOOT" pintype="bidirectional"/>
+      <node ref="SW1" pin="1" pinfunction="1" pintype="passive"/>
+    </net>
+    <net code="14" name="/IO1">
+      <node ref="MCU1" pin="39" pinfunction="GPIO1/TOUCH1/ADC1_CH0" pintype="bidirectional"/>
+    </net>
+    <net code="15" name="/IO2">
+      <node ref="MCU1" pin="38" pinfunction="GPIO2/TOUCH2/ADC1_CH1" pintype="bidirectional"/>
+    </net>
+    <net code="16" name="/IO3">
+      <node ref="MCU1" pin="15" pinfunction="GPIO3/TOUCH3/ADC1_CH2" pintype="bidirectional"/>
+    </net>
+    <net code="17" name="/IO4">
+      <node ref="MCU1" pin="4" pinfunction="GPIO4/TOUCH4/ADC1_CH3" pintype="bidirectional"/>
+      <node ref="TOUCH2" pin="1" pinfunction="Pin_1" pintype="passive"/>
+    </net>
+    <net code="18" name="/IO5">
+      <node ref="MCU1" pin="5" pinfunction="GPIO5/TOUCH5/ADC1_CH4" pintype="bidirectional"/>
+      <node ref="TOUCH2" pin="2" pinfunction="Pin_2" pintype="passive"/>
+    </net>
+    <net code="19" name="/IO6">
+      <node ref="MCU1" pin="6" pinfunction="GPIO6/TOUCH6/ADC1_CH5" pintype="bidirectional"/>
+      <node ref="TOUCH2" pin="3" pinfunction="Pin_3" pintype="passive"/>
+    </net>
+    <net code="20" name="/IO7">
+      <node ref="MCU1" pin="7" pinfunction="GPIO7/TOUCH7/ADC1_CH6" pintype="bidirectional"/>
+      <node ref="TOUCH2" pin="4" pinfunction="Pin_4" pintype="passive"/>
+    </net>
+    <net code="21" name="/IO8">
+      <node ref="ANG1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="MCU1" pin="12" pinfunction="GPIO8/TOUCH8/ADC1_CH7/SUBSPICS1" pintype="bidirectional"/>
+      <node ref="R1" pin="1" pintype="passive"/>
+    </net>
+    <net code="22" name="/IO9">
+      <node ref="ANG2" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="MCU1" pin="17" pinfunction="GPIO9/TOUCH9/ADC1_CH8/FSPIHD/SUBSPIHD" pintype="bidirectional"/>
+    </net>
+    <net code="23" name="/IO10">
+      <node ref="MCU1" pin="18" pinfunction="GPIO10/TOUCH10/ADC1_CH9/FSPICS0/FSPIIO4/SUBSPICS0" pintype="bidirectional"/>
+    </net>
+    <net code="24" name="/IO13">
+      <node ref="MCU1" pin="21" pinfunction="GPIO13/TOUCH13/ADC2_CH2/FSPIQ/FSPIIO7/SUBSPIQ" pintype="bidirectional"/>
+    </net>
+    <net code="25" name="/IO14">
+      <node ref="MCU1" pin="22" pinfunction="GPIO14/TOUCH14/ADC2_CH3/FSPIWP/FSPIDQS/SUBSPIWP" pintype="bidirectional"/>
+    </net>
+    <net code="26" name="/IO15">
+      <node ref="MCU1" pin="8" pinfunction="GPIO15/U0RTS/ADC2_CH4/XTAL_32K_P" pintype="bidirectional"/>
+      <node ref="R8" pin="1" pintype="passive"/>
+    </net>
+    <net code="27" name="/IO16">
+      <node ref="MCU1" pin="9" pinfunction="GPIO16/U0CTS/ADC2_CH5/XTAL_32K_N" pintype="bidirectional"/>
+      <node ref="R10" pin="1" pintype="passive"/>
+    </net>
+    <net code="28" name="/IO17">
+      <node ref="FG1" pin="8" pinfunction="ALRT" pintype="unspecified"/>
+      <node ref="MCU1" pin="10" pinfunction="GPIO17/U1TXD/ADC2_CH6" pintype="bidirectional"/>
+    </net>
+    <net code="29" name="/IO18">
+      <node ref="MCU1" pin="11" pinfunction="GPIO18/U1RXD/ADC2_CH7/CLK_OUT3" pintype="bidirectional"/>
+    </net>
+    <net code="30" name="/IO21">
+      <node ref="MCU1" pin="23" pinfunction="GPIO21" pintype="bidirectional"/>
+      <node ref="Q3" pin="3" pinfunction="D" pintype="passive"/>
+      <node ref="R23" pin="1" pintype="passive"/>
+    </net>
+    <net code="31" name="/IO39">
+      <node ref="MCU1" pin="32" pinfunction="MTCK/GPIO39/CLK_OUT3/SUBSPICS1" pintype="bidirectional"/>
+    </net>
+    <net code="32" name="/IO40">
+      <node ref="MCU1" pin="33" pinfunction="MTDO/GPIO40/CLK_OUT2" pintype="bidirectional"/>
+    </net>
+    <net code="33" name="/IO41">
+      <node ref="MCU1" pin="34" pinfunction="MTDI/GPIO41/CLK_OUT1" pintype="bidirectional"/>
+    </net>
+    <net code="34" name="/IO42">
+      <node ref="MCU1" pin="35" pinfunction="MTMS/GPIO42" pintype="bidirectional"/>
+    </net>
+    <net code="35" name="/IO45">
+      <node ref="MCU1" pin="26" pinfunction="GPIO45" pintype="bidirectional"/>
+    </net>
+    <net code="36" name="/IO46">
+      <node ref="MCU1" pin="16" pinfunction="GPIO46" pintype="bidirectional"/>
+    </net>
+    <net code="37" name="/LV_SCL">
+      <node ref="IMU1" pin="23" pinfunction="SCL/SCLK" pintype="input"/>
+      <node ref="Q1" pin="2" pinfunction="S" pintype="passive"/>
+      <node ref="R14" pin="1" pintype="passive"/>
+    </net>
+    <net code="38" name="/LV_SDA">
+      <node ref="IMU1" pin="24" pinfunction="SDA/SDI" pintype="bidirectional"/>
+      <node ref="Q2" pin="2" pinfunction="S" pintype="passive"/>
+      <node ref="R15" pin="1" pintype="passive"/>
+    </net>
+    <net code="39" name="/PG">
+      <node ref="R24" pin="2" pintype="passive"/>
+      <node ref="U2" pin="6" pinfunction="~{PG}" pintype="open_collector"/>
+    </net>
+    <net code="40" name="/PROG1">
+      <node ref="R20" pin="2" pintype="passive"/>
+      <node ref="U2" pin="13" pinfunction="PROG1" pintype="bidirectional"/>
+    </net>
+    <net code="41" name="/PROG3">
+      <node ref="R17" pin="2" pintype="passive"/>
+      <node ref="U2" pin="12" pinfunction="PROG3" pintype="bidirectional"/>
+    </net>
+    <net code="42" name="/REG">
+      <node ref="C2" pin="1" pintype="passive"/>
+      <node ref="FG1" pin="7" pinfunction="REG" pintype="unspecified"/>
+    </net>
+    <net code="43" name="/RXD">
+      <node ref="MCU1" pin="36" pinfunction="U0RXD/GPIO44/CLK_OUT2" pintype="bidirectional"/>
+    </net>
+    <net code="44" name="/SCK">
+      <node ref="MCU1" pin="25" pinfunction="GPIO48/SPICLK_N/SUBSPICLK_N_DIFF" pintype="bidirectional"/>
+    </net>
+    <net code="45" name="/SCL">
+      <node ref="FG1" pin="3" pinfunction="SCL" pintype="unspecified"/>
+      <node ref="MCU1" pin="19" pinfunction="GPIO11/TOUCH11/ADC2_CH0/FSPID/FSPIIO5/SUBSPID" pintype="bidirectional"/>
+      <node ref="Q1" pin="3" pinfunction="D" pintype="passive"/>
+      <node ref="R19" pin="1" pintype="passive"/>
+      <node ref="TOUCH1" pin="4" pinfunction="Pin_4" pintype="passive"/>
+    </net>
+    <net code="46" name="/SDA">
+      <node ref="FG1" pin="4" pinfunction="SDA" pintype="unspecified"/>
+      <node ref="MCU1" pin="20" pinfunction="GPIO12/TOUCH12/ADC2_CH1/FSPICLK/FSPIIO6/SUBSPICLK" pintype="bidirectional"/>
+      <node ref="Q2" pin="3" pinfunction="D" pintype="passive"/>
+      <node ref="R16" pin="1" pintype="passive"/>
+      <node ref="TOUCH1" pin="3" pinfunction="Pin_3" pintype="passive"/>
+    </net>
+    <net code="47" name="/STAT">
+      <node ref="R3" pin="2" pintype="passive"/>
+      <node ref="U2" pin="8" pinfunction="STAT1/~{LBO}" pintype="open_collector"/>
+    </net>
+    <net code="48" name="/STAT2">
+      <node ref="R22" pin="2" pintype="passive"/>
+      <node ref="U2" pin="7" pinfunction="STAT2" pintype="open_collector"/>
+    </net>
+    <net code="49" name="/THERM">
+      <node ref="R9" pin="2" pintype="passive"/>
+      <node ref="U2" pin="5" pinfunction="THERM" pintype="bidirectional"/>
+    </net>
+    <net code="50" name="/THRM">
+      <node ref="FG1" pin="9" pinfunction="THRM" pintype="unspecified"/>
+      <node ref="R12" pin="2" pintype="passive"/>
+    </net>
+    <net code="51" name="/TXD">
+      <node ref="MCU1" pin="37" pinfunction="U0TXD/GPIO43/CLK_OUT1" pintype="bidirectional"/>
+    </net>
+    <net code="52" name="/USBD+">
+      <node ref="MCU1" pin="14" pinfunction="GPIO20/U1CTS/ADC2_CH9/CLK_OUT1/USB_D+" pintype="bidirectional"/>
+      <node ref="U1" pin="4" pinfunction="I/O2" pintype="passive"/>
+    </net>
+    <net code="53" name="/USBD-">
+      <node ref="MCU1" pin="13" pinfunction="GPIO19/U1RTS/ADC2_CH8/CLK_OUT2/USB_D-" pintype="bidirectional"/>
+      <node ref="U1" pin="6" pinfunction="I/O1" pintype="passive"/>
+    </net>
+    <net code="54" name="/VPCC">
+      <node ref="R18" pin="1" pintype="passive"/>
+      <node ref="R4" pin="2" pintype="passive"/>
+      <node ref="U2" pin="2" pinfunction="VPCC" pintype="input"/>
+    </net>
+    <net code="55" name="CSP">
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="C2" pin="2" pintype="passive"/>
+      <node ref="FG1" pin="11" pinfunction="EPAD" pintype="unspecified"/>
+      <node ref="FG1" pin="6" pinfunction="CSP" pintype="unspecified"/>
+      <node ref="R2" pin="2" pinfunction="2" pintype="passive"/>
+    </net>
+    <net code="56" name="GND">
+      <node ref="ANG1" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="ANG2" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="ANG2" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="BT1" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="C10" pin="2" pintype="passive"/>
+      <node ref="C11" pin="2" pintype="passive"/>
+      <node ref="C12" pin="2" pintype="passive"/>
+      <node ref="C13" pin="2" pintype="passive"/>
+      <node ref="C14" pin="2" pintype="passive"/>
+      <node ref="C15" pin="2" pintype="passive"/>
+      <node ref="C19" pin="2" pintype="passive"/>
+      <node ref="C3" pin="2" pintype="passive"/>
+      <node ref="C4" pin="2" pintype="passive"/>
+      <node ref="C5" pin="2" pintype="passive"/>
+      <node ref="C6" pin="2" pintype="passive"/>
+      <node ref="C7" pin="2" pintype="passive"/>
+      <node ref="C8" pin="2" pintype="passive"/>
+      <node ref="C9" pin="2" pintype="passive"/>
+      <node ref="IMU1" pin="11" pinfunction="FSYNC" pintype="input"/>
+      <node ref="IMU1" pin="18" pinfunction="GND" pintype="power_in"/>
+      <node ref="IMU1" pin="20" pinfunction="GND" pintype="passive"/>
+      <node ref="IMU1" pin="9" pinfunction="SDO/AD0" pintype="bidirectional"/>
+      <node ref="J1" pin="A1" pinfunction="GND" pintype="passive"/>
+      <node ref="J1" pin="A12" pinfunction="GND" pintype="passive"/>
+      <node ref="J1" pin="B1" pinfunction="GND" pintype="passive"/>
+      <node ref="J1" pin="B12" pinfunction="GND" pintype="passive"/>
+      <node ref="J1" pin="S1" pinfunction="SHIELD" pintype="passive"/>
+      <node ref="MCU1" pin="1" pinfunction="GND" pintype="power_in"/>
+      <node ref="MCU1" pin="40" pinfunction="GND" pintype="passive"/>
+      <node ref="MCU1" pin="41" pinfunction="GND" pintype="passive"/>
+      <node ref="R1" pin="2" pintype="passive"/>
+      <node ref="R17" pin="1" pintype="passive"/>
+      <node ref="R2" pin="4" pinfunction="4" pintype="passive"/>
+      <node ref="R20" pin="1" pintype="passive"/>
+      <node ref="R4" pin="1" pintype="passive"/>
+      <node ref="R6" pin="1" pintype="passive"/>
+      <node ref="R7" pin="1" pintype="passive"/>
+      <node ref="R9" pin="1" pintype="passive"/>
+      <node ref="STATLED1" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="STATLED2" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="SW1" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="SW2" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="TOUCH1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="TOUCH1" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="TOUCH2" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="U1" pin="2" pinfunction="GND" pintype="passive"/>
+      <node ref="U2" pin="10" pinfunction="V_{SS}" pintype="power_in"/>
+      <node ref="U2" pin="11" pinfunction="V_{SS}" pintype="passive"/>
+      <node ref="U2" pin="21" pinfunction="V_{SS}" pintype="passive"/>
+      <node ref="U2" pin="9" pinfunction="~{TE}" pintype="input"/>
+      <node ref="U3" pin="2" pinfunction="GND" pintype="power_out"/>
+      <node ref="U3" pin="5" pinfunction="GND" pintype="power_out"/>
+      <node ref="U4" pin="2" pinfunction="GND" pintype="power_out"/>
+      <node ref="U4" pin="5" pinfunction="GND" pintype="power_out"/>
+    </net>
+    <net code="57" name="Net-(CHARGLED1-K)">
+      <node ref="CHARGLED1" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="R3" pin="1" pintype="passive"/>
+    </net>
+    <net code="58" name="Net-(CHARGLED2-K)">
+      <node ref="CHARGLED2" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="R22" pin="1" pintype="passive"/>
+    </net>
+    <net code="59" name="Net-(CHARGLED3-K)">
+      <node ref="CHARGLED3" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="R24" pin="1" pintype="passive"/>
+    </net>
+    <net code="60" name="Net-(IMU1-REGOUT)">
+      <node ref="C6" pin="1" pintype="passive"/>
+      <node ref="IMU1" pin="10" pinfunction="REGOUT" pintype="passive"/>
+    </net>
+    <net code="61" name="Net-(J1-CC1)">
+      <node ref="J1" pin="A5" pinfunction="CC1" pintype="bidirectional"/>
+      <node ref="R7" pin="2" pintype="passive"/>
+    </net>
+    <net code="62" name="Net-(J1-CC2)">
+      <node ref="J1" pin="B5" pinfunction="CC2" pintype="bidirectional"/>
+      <node ref="R6" pin="2" pintype="passive"/>
+    </net>
+    <net code="63" name="Net-(STATLED1-A)">
+      <node ref="R8" pin="2" pintype="passive"/>
+      <node ref="STATLED1" pin="2" pinfunction="A" pintype="passive"/>
+    </net>
+    <net code="64" name="Net-(STATLED2-A)">
+      <node ref="R10" pin="2" pintype="passive"/>
+      <node ref="STATLED2" pin="2" pinfunction="A" pintype="passive"/>
+    </net>
+    <net code="65" name="SYS">
+      <node ref="C11" pin="1" pintype="passive"/>
+      <node ref="C3" pin="1" pintype="passive"/>
+      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="U2" pin="1" pinfunction="OUT" pintype="power_out"/>
+      <node ref="U2" pin="20" pinfunction="OUT" pintype="passive"/>
+      <node ref="U3" pin="3" pinfunction="EN" pintype="input"/>
+      <node ref="U3" pin="4" pinfunction="IN" pintype="power_in"/>
+      <node ref="U4" pin="3" pinfunction="EN" pintype="input"/>
+      <node ref="U4" pin="4" pinfunction="IN" pintype="power_in"/>
+    </net>
+    <net code="66" name="VUSB">
+      <node ref="C14" pin="1" pintype="passive"/>
+      <node ref="C15" pin="1" pintype="passive"/>
+      <node ref="CHARGLED1" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="CHARGLED2" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="CHARGLED3" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="J1" pin="A4" pinfunction="VBUS" pintype="passive"/>
+      <node ref="J1" pin="A9" pinfunction="VBUS" pintype="passive"/>
+      <node ref="J1" pin="B4" pinfunction="VBUS" pintype="passive"/>
+      <node ref="J1" pin="B9" pinfunction="VBUS" pintype="passive"/>
+      <node ref="R18" pin="2" pintype="passive"/>
+      <node ref="U1" pin="5" pinfunction="VBUS" pintype="passive"/>
+      <node ref="U2" pin="17" pinfunction="CE" pintype="input"/>
+      <node ref="U2" pin="18" pinfunction="IN" pintype="power_in"/>
+      <node ref="U2" pin="19" pinfunction="IN" pintype="passive"/>
+      <node ref="U2" pin="3" pinfunction="SEL" pintype="input"/>
+      <node ref="U2" pin="4" pinfunction="PROG2" pintype="input"/>
+    </net>
+    <net code="67" name="unconnected-(FG1-N.C.-Pad1)">
+      <node ref="FG1" pin="1" pinfunction="N.C." pintype="no_connect"/>
+    </net>
+    <net code="68" name="unconnected-(IMU1-AUX_CL-Pad7)">
+      <node ref="IMU1" pin="7" pinfunction="AUX_CL" pintype="output+no_connect"/>
+    </net>
+    <net code="69" name="unconnected-(IMU1-AUX_DA-Pad21)">
+      <node ref="IMU1" pin="21" pinfunction="AUX_DA" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="70" name="unconnected-(IMU1-NC-Pad1)">
+      <node ref="IMU1" pin="1" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="71" name="unconnected-(IMU1-NC-Pad2)">
+      <node ref="IMU1" pin="2" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="72" name="unconnected-(IMU1-NC-Pad3)">
+      <node ref="IMU1" pin="3" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="73" name="unconnected-(IMU1-NC-Pad4)">
+      <node ref="IMU1" pin="4" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="74" name="unconnected-(IMU1-NC-Pad5)">
+      <node ref="IMU1" pin="5" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="75" name="unconnected-(IMU1-NC-Pad6)">
+      <node ref="IMU1" pin="6" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="76" name="unconnected-(IMU1-NC-Pad14)">
+      <node ref="IMU1" pin="14" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="77" name="unconnected-(IMU1-NC-Pad15)">
+      <node ref="IMU1" pin="15" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="78" name="unconnected-(IMU1-NC-Pad16)">
+      <node ref="IMU1" pin="16" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="79" name="unconnected-(IMU1-NC-Pad17)">
+      <node ref="IMU1" pin="17" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="80" name="unconnected-(IMU1-RESV-Pad19)">
+      <node ref="IMU1" pin="19" pinfunction="RESV" pintype="no_connect"/>
+    </net>
+    <net code="81" name="unconnected-(J1-SBU1-PadA8)">
+      <node ref="J1" pin="A8" pinfunction="SBU1" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="82" name="unconnected-(J1-SBU2-PadB8)">
+      <node ref="J1" pin="B8" pinfunction="SBU2" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="83" name="unconnected-(MCU1-NC-Pad28)">
+      <node ref="MCU1" pin="28" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="84" name="unconnected-(MCU1-NC-Pad29)">
+      <node ref="MCU1" pin="29" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="85" name="unconnected-(MCU1-NC-Pad30)">
+      <node ref="MCU1" pin="30" pinfunction="NC" pintype="no_connect"/>
+    </net>
+  </nets>
+</export>

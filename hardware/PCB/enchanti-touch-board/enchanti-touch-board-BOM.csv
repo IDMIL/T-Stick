@@ -1,0 +1,12 @@
+Manufacturer,MPN,Qty,Description,Reference(s),Footprint
+Murata Electronics,GCM155R71C104KA55J,6,0.1 µF ±10% 16V Ceramic Capacitor X7R 0402 (1005 Metric),"C1, C10, C12, C14, C3, C5",Capacitor_SMD:C_0402_1005Metric
+Murata Electronics,GRM155R61C105KA12D,6,1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric),"C11, C13, C15, C18, C2, C4",Capacitor_SMD:C_0402_1005Metric
+Murata Electronics,GRM155R71H222JA01J,4,2200 pF ±5% 50V Ceramic Capacitor X7R 0402 (1005 Metric),"C6, C7, C8, C9",Capacitor_SMD:C_0402_1005Metric
+Micro Commercial Co,ESD5V0D5-TP,1,18.6V Clamp 11.6A (8/20µs) Ipp Tvs Diode Surface Mount SOD-523,D1,Diode_SMD:D_SOD-523
+JST Sales America Inc.,BM04B-SRSS-TB,4,"Connector Header Surface Mount 4 position 0.039"" (1.00mm)","GPIO1, GPIO2, GPIO3, GPIO4",JST-footprints:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical
+ CNC Tech,3220-10-0300-00,1,"Connector Header Surface Mount 10 position 0.050"" (1.27mm)",J2,Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical_SMD
+Panasonic Electronic Components,ERJ-1GNF3300C,2,"330 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film","R1, R2",Resistor_SMD:R_0201_0603Metric
+Panasonic Electronic Components,ERJ-1GNF5600C,60,"560 Ohms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film","R3, R4, R5, R6, R7, R8, R9, R10, R11, R12, R13, R14, R15, R16, R17, R18, R19, R20, R21, R22, R23, R24, R25, R26, R27, R28, R29, R30, R31, R32, R33, R34, R35, R36, R37, R38, R39, R40, R41, R42, R43, R44, R45, R46, R47, R48, R49, R50, R51, R52, R53, R54, R55, R56, R57, R58, R59, R60, R61, R62",Resistor_SMD:R_0201_0603Metric
+Panasonic Electronic Components,ERJ-1GNF4701C,2,"4.7 kOhms ±1% 0.05W, 1/20W Chip Resistor 0201 (0603 Metric) Thick Film","R63, R64",Resistor_SMD:R_0201_0603Metric
+Molex,54132-3262,2,"32 Position FFC, FPC Connector Contacts, Bottom 0.020"" (0.50mm) Surface Mount, Right Angle","TOUCH1, TOUCH2",ffc_footprints:CON_541323262_MOL
+Infineon Technologies,CY8C4149AZI-S598,1,ARM® Cortex®-M0+ PSOC® 4 CY8C4100S Microcontroller IC 32-Bit 48MHz 384KB (384K x 8) FLASH 100-TQFP (14x14),U1,CY8C4149AZI-S598-footprints:QFP-100
