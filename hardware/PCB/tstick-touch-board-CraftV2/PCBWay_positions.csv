@@ -1,0 +1,13 @@
+﻿pos_x,pos_y,rotation,side,designator,mpn,pack,value,mount_type,place
+222.885,-97.155,0.0,top,H1,,MountingHole_3.2mm_M3_DIN965,MountingHole,tht,False
+210.185,-97.155,0.0,top,H2,,MountingHole_3.2mm_M3_DIN965,MountingHole,tht,False
+140.8,-101.046,90.0,top,I2C1,,JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical,Conn_01x04,smt,True
+228.685,-101.043,-90.0,top,I2C2,,JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical,Conn_01x04,smt,True
+140.8,-93.225,90.0,top,INT1,,JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical,Conn_01x04,smt,True
+228.685,-93.243,-90.0,top,INT2,,JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical,Conn_01x04,smt,True
+215.189985,-110.447993,0.0,top,J1,,CON_541323262_MOL,Conn_01x32,smt,True
+148.385,-85.693,180.0,top,JP1,,SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm,SolderJumper_2_Open,tht,False
+148.385,-88.193,180.0,top,JP2,,SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm,SolderJumper_2_Open,tht,False
+148.385,-90.743,180.0,top,JP3,,SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm,SolderJumper_2_Open,tht,False
+148.385,-93.293,180.0,top,JP4,,SolderJumper-2_P1.3mm_Open_RoundedPad1.0x1.5mm,SolderJumper_2_Open,tht,False
+176.6458,-97.33,0.0,top,U1,,Trill-Craft-Headers,Trill_Craft,tht,False
