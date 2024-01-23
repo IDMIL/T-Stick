@@ -41,7 +41,7 @@ Define I2C properties
 #define SDA_PIN 21
 #define SCL_PIN 14
 #endif
-#define I2CUPDATE_FREQ 400000
+#define I2CUPDATE_FREQ 3400000
 
 /*
 Define FSR pin numbers

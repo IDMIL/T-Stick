@@ -309,8 +309,8 @@ uint32_t time_taken = 0;
 // timing variables
 int start_time[6] = { 0, 0, 0, 0, 0, 0};
 int end_time[6] = { 0, 0, 0, 0, 0, 0};
-int num_loops = 10000;
-int OSC_loops = 1000;
+int num_loops = 100000;
+int OSC_loops = 100000;
 int bat_loops = 20;
 int task_period[6] = { 0, 0, 0, 0, 0, 0};
 int task_delay[6] = { 0, 0, 0, 0, 0, 0};
@@ -378,7 +378,6 @@ void libtOff();
 void osctOff();
 
 // Setup sensor tasks (task rates defined in tstick-properties.h)
-Task updateIMU (TASK_IMMEDIATE, TASK_ONCE, &readIMU, &runnerSensors, false);
 Task updateTOUCH (TOUCH_UPDATE_RATE, TASK_FOREVER, &readTouch, &runnerSensors, false);
 Task updateANALOG (ANG_UPDATE_RATE, TASK_FOREVER, &readAnalog, &runnerSensors, false);
 Task updateGesture (GESTURE_UPDATE_RATE, TASK_FOREVER, &updateGestures, &runnerSensors, false);
@@ -500,7 +499,7 @@ void gestOff() {
     double std_frequency = frequency - (1000000.0f / (period + std_period));
 
     std::cout 
-    <<" Test Results for Gesture Loop Profiling: " << num_loops << " iterations" << "\n"
+    <<" Test Results for IMU Loop Profiling: " << num_loops << " iterations" << "\n"
     <<" Average Delay: " << avg_task_delay << " \u00b1 " << std_task_delay << "us\n"
     <<" Average Duration: " << task_duration << " \u00b1 " << std_task_duration << "us\n"
     <<" Average Period: " << period << " \u00b1 " << std_period << "us\n"
@@ -537,7 +536,7 @@ void batOff() {
     double std_frequency = frequency - (1000000.0f / (period + std_period));
 
     std::cout 
-    <<" Test Results for Battery Loop Profiling: " << num_loops << " iterations" << "\n"
+    <<" Test Results for Battery Loop Profiling: " << bat_loops << " iterations" << "\n"
     <<" Average Delay: " << avg_task_delay << " \u00b1 " << std_task_delay << "us\n"
     <<" Average Duration: " << task_duration << " \u00b1 " << std_task_duration << "us\n"
     <<" Average Period: " << period << " \u00b1 " << std_period << "us\n"
@@ -1117,7 +1116,6 @@ void updateOSC2() {
 }
 // Sensor callbacks
 void readIMU() {
-    start = micros();
     imu.getData();
 
     // Save data to puara gestures
@@ -1146,11 +1144,6 @@ void readIMU() {
 
     // set imu event true
     event.mimu = true;
-
-    // disable task
-    end = micros();
-    time_taken = end - start;
-    updateIMU.disable();
 }
 
 void readTouch() {
@@ -1192,6 +1185,26 @@ void readTouch() {
         event.touchReady = true;
         touch.newData = 0;
     }
+
+    // Update touch gestures
+    gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
+
+    if (sensors.brush != gestures.brush || sensors.multibrush[0] != gestures.multiBrush[0]) {
+        sensors.brush = gestures.brush;
+        sensors.multibrush[0] = gestures.multiBrush[0];
+        sensors.multibrush[1] = gestures.multiBrush[1];
+        sensors.multibrush[2] = gestures.multiBrush[2];
+        sensors.multibrush[3] = gestures.multiBrush[3];
+        event.brush = true;
+    } else { event.brush = false; }
+    if (sensors.rub != gestures.rub || sensors.multirub[0] != gestures.multiRub[0]) {
+        sensors.rub = gestures.rub;
+        sensors.multirub[0] = gestures.multiRub[0];
+        sensors.multirub[1] = gestures.multiRub[1];
+        sensors.multirub[2] = gestures.multiRub[2];
+        sensors.multirub[3] = gestures.multiRub[3];
+        event.rub = true;
+    } else { event.rub = false; }
 
     // Compute duration
     end_time[0] = micros();
@@ -1326,11 +1339,11 @@ void updateGestures() {
       gest_period.push_back(task_period[2]);
     }
 
+    // read IMU
+    readIMU();
+
     // Update inertial gestures
     gestures.updateInertialGestures();
-
-    // Update touch gestures
-    gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
 
     // Orientation quaternion
     sensors.quat[0] = gestures.getOrientationQuaternion().w;
@@ -1343,22 +1356,6 @@ void updateGestures() {
     sensors.ypr[2] = ((round(gestures.getRoll() * 1000)) / 1000);
 
     // Send data if event is true
-    if (sensors.brush != gestures.brush || sensors.multibrush[0] != gestures.multiBrush[0]) {
-        sensors.brush = gestures.brush;
-        sensors.multibrush[0] = gestures.multiBrush[0];
-        sensors.multibrush[1] = gestures.multiBrush[1];
-        sensors.multibrush[2] = gestures.multiBrush[2];
-        sensors.multibrush[3] = gestures.multiBrush[3];
-        event.brush = true;
-    } else { event.brush = false; }
-    if (sensors.rub != gestures.rub || sensors.multirub[0] != gestures.multiRub[0]) {
-        sensors.rub = gestures.rub;
-        sensors.multirub[0] = gestures.multiRub[0];
-        sensors.multirub[1] = gestures.multiRub[1];
-        sensors.multirub[2] = gestures.multiRub[2];
-        sensors.multirub[3] = gestures.multiRub[3];
-        event.rub = true;
-    } else { event.rub = false; }
     if (sensors.shake[0] != gestures.getShakeX() || sensors.shake[1] != gestures.getShakeY() || sensors.shake[2] != gestures.getShakeZ()) {
         sensors.shake[0] = gestures.getShakeX();
         sensors.shake[1] = gestures.getShakeY();
@@ -1377,13 +1374,6 @@ void updateGestures() {
     task_dur[2] = end_time[2] - start_time[2];
     gest_dur.push_back(task_dur[2]);
 }
-
-#ifdef imu_ICM20948
-void imu_isr() {
-    updateIMU.restart();
-    // imu.clearInterrupt();
-}
-#endif
 
 // Set up multithreading
 #define COMMS_CPU 1
@@ -1483,11 +1473,6 @@ void setup() {
     } else {
         std::cout << "initialization failed!" << std::endl;
     }
-
-
-    // Setup IMU intterupt
-    pinMode(IMU_INT_PIN, INPUT_PULLUP);
-    attachInterrupt(IMU_INT_PIN, imu_isr, FALLING);
     std::cout << "done" << std::endl;
 
     // Setup jabx,jaby and jabz thresholds
