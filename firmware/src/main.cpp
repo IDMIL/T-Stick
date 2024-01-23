@@ -325,13 +325,12 @@ void readTouch();
 void readAnalog();
 void readBattery();
 void changeLED();
-void updateGestures();
+void updateMIMU();
 
 // Setup sensor tasks (task rates defined in tstick-properties.h)
-Task updateIMU (TASK_IMMEDIATE, TASK_ONCE, &readIMU, &runnerSensors, false);
 Task updateTOUCH (TOUCH_UPDATE_RATE, TASK_FOREVER, &readTouch, &runnerSensors, false);
 Task updateANALOG (ANG_UPDATE_RATE, TASK_FOREVER, &readAnalog, &runnerSensors, false);
-Task updateGesture (GESTURE_UPDATE_RATE, TASK_FOREVER, &updateGestures, &runnerSensors, false);
+Task updateIMU (IMU_UPDATE_RATE, TASK_FOREVER, &updateMIMU, &runnerSensors, false);
 Task updateBattery (BATTERY_UPDATE_RATE, TASK_FOREVER, &readBattery, &runnerSensors, false);
 
 // Setup comms tasks
@@ -799,7 +798,6 @@ void updateOSC2() {
 }
 // Sensor callbacks
 void readIMU() {
-    start = micros();
     imu.getData();
 
     // Save data to puara gestures
@@ -828,11 +826,6 @@ void readIMU() {
 
     // set imu event true
     event.mimu = true;
-
-    // disable task
-    updateIMU.disable();
-    end = micros();
-    time_taken = end - start;
 }
 
 void readTouch() {
@@ -856,8 +849,28 @@ void readTouch() {
     touch.polltime = now - touch.i2ctimer;
     touch.i2ctimer = now;
     #endif
-    
+
+    // Update touch gestures
+    gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
+
     // Update event structure
+    if (sensors.brush != gestures.brush || sensors.multibrush[0] != gestures.multiBrush[0]) {
+        sensors.brush = gestures.brush;
+        sensors.multibrush[0] = gestures.multiBrush[0];
+        sensors.multibrush[1] = gestures.multiBrush[1];
+        sensors.multibrush[2] = gestures.multiBrush[2];
+        sensors.multibrush[3] = gestures.multiBrush[3];
+        event.brush = true;
+    } else { event.brush = false; }
+    if (sensors.rub != gestures.rub || sensors.multirub[0] != gestures.multiRub[0]) {
+        sensors.rub = gestures.rub;
+        sensors.multirub[0] = gestures.multiRub[0];
+        sensors.multirub[1] = gestures.multiRub[1];
+        sensors.multirub[2] = gestures.multiRub[2];
+        sensors.multirub[3] = gestures.multiRub[3];
+        event.rub = true;
+    } else { event.rub = false; }
+    
     if (touch.newData || event.touchReady) {
         event.touchReady = true;
         touch.newData = 0;
@@ -944,12 +957,12 @@ void changeLED() {
     #endif
 }
 
-void updateGestures() {
+void updateMIMU() {
+    // Get IMU data
+    readIMU();
+
     // Update inertial gestures
     gestures.updateInertialGestures();
-
-    // Update touch gestures
-    gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
 
     // Orientation quaternion
     sensors.quat[0] = gestures.getOrientationQuaternion().w;
@@ -962,22 +975,6 @@ void updateGestures() {
     sensors.ypr[2] = ((round(gestures.getRoll() * 1000)) / 1000);
 
     // Send data if event is true
-    if (sensors.brush != gestures.brush || sensors.multibrush[0] != gestures.multiBrush[0]) {
-        sensors.brush = gestures.brush;
-        sensors.multibrush[0] = gestures.multiBrush[0];
-        sensors.multibrush[1] = gestures.multiBrush[1];
-        sensors.multibrush[2] = gestures.multiBrush[2];
-        sensors.multibrush[3] = gestures.multiBrush[3];
-        event.brush = true;
-    } else { event.brush = false; }
-    if (sensors.rub != gestures.rub || sensors.multirub[0] != gestures.multiRub[0]) {
-        sensors.rub = gestures.rub;
-        sensors.multirub[0] = gestures.multiRub[0];
-        sensors.multirub[1] = gestures.multiRub[1];
-        sensors.multirub[2] = gestures.multiRub[2];
-        sensors.multirub[3] = gestures.multiRub[3];
-        event.rub = true;
-    } else { event.rub = false; }
     if (sensors.shake[0] != gestures.getShakeX() || sensors.shake[1] != gestures.getShakeY() || sensors.shake[2] != gestures.getShakeZ()) {
         sensors.shake[0] = gestures.getShakeX();
         sensors.shake[1] = gestures.getShakeY();
@@ -991,13 +988,6 @@ void updateGestures() {
         event.jab = true;
     } else { event.jab = false; }
 }
-
-#ifdef imu_ICM20948
-void imu_isr() {
-    updateIMU.restart();
-    // imu.clearInterrupt();
-}
-#endif
 
 // Set up multithreading
 #define COMMS_CPU 1
@@ -1097,11 +1087,6 @@ void setup() {
     } else {
         std::cout << "initialization failed!" << std::endl;
     }
-
-
-    // Setup IMU intterupt
-    pinMode(IMU_INT_PIN, INPUT_PULLUP);
-    attachInterrupt(IMU_INT_PIN, imu_isr, FALLING);
     std::cout << "done" << std::endl;
 
     // Setup jabx,jaby and jabz thresholds
