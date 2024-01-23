@@ -82,8 +82,8 @@ Task Rates
 */
 // Timing variables
 // Comms
-#define LIBMAPPER_UPDATE_RATE 4000 // us (250 Hz)
-#define OSC_UPDATE_RATE 20000 // us (50Hz) 
+#define LIBMAPPER_UPDATE_RATE 5000 // us (200 Hz)
+#define OSC_UPDATE_RATE 10000 // us (100Hz) 
 
 // Sensors
 #define TOUCH_UPDATE_RATE 2000 // us (500 Hz)
