@@ -27,6 +27,8 @@ class IMU {
         
         // Read data
         void getData();
+        void sleep();
+        void clearInterrupt();
 
         // Store data
         float accl[3];

@@ -82,17 +82,17 @@ Task Rates
 */
 // Timing variables
 // Comms
-#define LIBMAPPER_UPDATE_RATE 2 // ms (500 Hz)
-#define OSC_UPDATE_RATE 10 // ms (100Hz) 
+#define LIBMAPPER_UPDATE_RATE 4000 // us (250 Hz)
+#define OSC_UPDATE_RATE 20000 // us (50Hz) 
 
 // Sensors
-#define TOUCH_UPDATE_RATE 2 // ms (500 Hz)
-#define IMU_UPDATE_RATE 2 // ms (500 Hz)
-#define ANG_UPDATE_RATE 2 // ms (500 Hz)
+#define TOUCH_UPDATE_RATE 2000 // us (500 Hz)
+#define IMU_UPDATE_RATE 2000 // us (500 Hz)
+#define ANG_UPDATE_RATE 2000 // us (500 Hz)
 
 // Embedded Gestures
-#define GESTURE_UPDATE_RATE 5 // ms (200 Hz)
+#define GESTURE_UPDATE_RATE 5000 // us (200 Hz)
 
 // Feedback sensors
-#define BATTERY_UPDATE_RATE 5000 // ms ( 0.2 Hz)
-#define LED_UPDATE_RATE 100 // ms (10 Hz)
+#define BATTERY_UPDATE_RATE 5000000 // us ( 0.2 Hz)
+#define LED_UPDATE_RATE 100000 // us (10 Hz)

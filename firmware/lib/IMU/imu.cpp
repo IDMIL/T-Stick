@@ -214,3 +214,15 @@ void IMU::getData() {
         }
     }
 }
+
+void IMU::sleep() {
+    if (mimu_board == MIMUBOARD::mimu_ICM20948) {
+        icm20948_imu.sleep(true);
+    }
+}
+
+void IMU::clearInterrupt() {
+    if (mimu_board == MIMUBOARD::mimu_ICM20948) {
+        icm20948_imu.clearInterrupts();
+    }
+}
