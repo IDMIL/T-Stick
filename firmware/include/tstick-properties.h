@@ -78,27 +78,21 @@ Define Interrupt pins for sensors
 //#define TOUCH_INT 4
 
 /*
-Enable second OSC address
-*/
-#define OSC2
-
-/*
 Task Rates
 */
 // Timing variables
 // Comms
-#define LIBMAPPER_POLL_RATE 2 // ms (as fast as possible)
-#define LIBMAPPER_UPDATE_RATE 2 // ms
-#define OSC_UPDATE_RATE 10 // ms (50Hz) 
+#define LIBMAPPER_UPDATE_RATE 2 // ms (500 Hz)
+#define OSC_UPDATE_RATE 10 // ms (100Hz) 
 
 // Sensors
-#define TOUCH_UPDATE_RATE 2 // ms (takes 3ms to read 120 bytes over I2C)
-#define IMU_UPDATE_RATE 2 // ms
-#define ANG_UPDATE_RATE 2 // ms
+#define TOUCH_UPDATE_RATE 2 // ms (500 Hz)
+#define IMU_UPDATE_RATE 2 // ms (500 Hz)
+#define ANG_UPDATE_RATE 2 // ms (500 Hz)
 
 // Embedded Gestures
-#define GESTURE_UPDATE_RATE 2 // ms (high rate needed for sensor fusion)
+#define GESTURE_UPDATE_RATE 5 // ms (200 Hz)
 
 // Feedback sensors
-#define BATTERY_UPDATE_RATE 5000 // ms
-#define LED_UPDATE_RATE 100 // ms
+#define BATTERY_UPDATE_RATE 5000 // ms ( 0.2 Hz)
+#define LED_UPDATE_RATE 100 // ms (10 Hz)
