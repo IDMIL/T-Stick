@@ -378,6 +378,15 @@ void updateOSC1() {
         oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/squeeze");
         lo_send(osc1, oscNamespace.c_str(), "f", sensors.squeeze);
 
+        oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/all");
+        lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchAll);
+        oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/top");
+        lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchTop);
+        oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/middle");
+        lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchMiddle);
+        oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/bottom");
+        lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchBottom);
+
         if (event.brush) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/brush");
             lo_send(osc1, oscNamespace.c_str(), "f", sensors.brush);
@@ -452,6 +461,16 @@ void updateOSC2() {
         lo_send(osc2, oscNamespace.c_str(), "i", sensors.fsr);
         oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/squeeze");
         lo_send(osc2, oscNamespace.c_str(), "f", sensors.squeeze);
+
+        oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/all");
+        lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchAll);
+        oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/top");
+        lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchTop);
+        oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/middle");
+        lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchMiddle);
+        oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/bottom");
+        lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchBottom);
+
 
         if (event.brush) {
             oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/brush");
@@ -633,15 +652,6 @@ void sendOSCTouch() {
             lo_send(osc1, oscNamespace.c_str(), "i", touch.polltime);
             #endif
 
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/all");
-            lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchAll);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/top");
-            lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchTop);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/middle");
-            lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchMiddle);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/bottom");
-            lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchBottom);
-
             // Reset touch event until next interrupt
             event.touchReady = false;
     }
@@ -754,16 +764,6 @@ void sendOSCTouch() {
         oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/polltime");
         lo_send(osc2, oscNamespace.c_str(), "i", touch.polltime);
         #endif
-
-        oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/all");
-        lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchAll);
-        oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/top");
-        lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchTop);
-        oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/middle");
-        lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchMiddle);
-        oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/bottom");
-        lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchBottom);
-
         event.touchReady = false;
     }
 }
@@ -961,6 +961,22 @@ void updateGestures() {
     sensors.ypr[2] = ((round(gestures.getRoll() * 1000)) / 1000);
 
     // Send data if event is true
+    if (sensors.brush != gestures.brush || sensors.multibrush[0] != gestures.multiBrush[0]) {
+        sensors.brush = gestures.brush;
+        sensors.multibrush[0] = gestures.multiBrush[0];
+        sensors.multibrush[1] = gestures.multiBrush[1];
+        sensors.multibrush[2] = gestures.multiBrush[2];
+        sensors.multibrush[3] = gestures.multiBrush[3];
+        event.brush = true;
+    } else { event.brush = false; }
+    if (sensors.rub != gestures.rub || sensors.multirub[0] != gestures.multiRub[0]) {
+        sensors.rub = gestures.rub;
+        sensors.multirub[0] = gestures.multiRub[0];
+        sensors.multirub[1] = gestures.multiRub[1];
+        sensors.multirub[2] = gestures.multiRub[2];
+        sensors.multirub[3] = gestures.multiRub[3];
+        event.rub = true;
+    } else { event.rub = false; }
     if (sensors.shake[0] != gestures.getShakeX() || sensors.shake[1] != gestures.getShakeY() || sensors.shake[2] != gestures.getShakeZ()) {
         sensors.shake[0] = gestures.getShakeX();
         sensors.shake[1] = gestures.getShakeY();
