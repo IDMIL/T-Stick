@@ -87,11 +87,8 @@ Task Rates
 
 // Sensors
 #define TOUCH_UPDATE_RATE 2000 // us (500 Hz)
-#define IMU_UPDATE_RATE 2000 // us (500 Hz)
+#define IMU_UPDATE_RATE 5000 // us (500 Hz)
 #define ANG_UPDATE_RATE 2000 // us (500 Hz)
-
-// Embedded Gestures
-#define GESTURE_UPDATE_RATE 5000 // us (200 Hz)
 
 // Feedback sensors
 #define BATTERY_UPDATE_RATE 5000000 // us ( 0.2 Hz)
