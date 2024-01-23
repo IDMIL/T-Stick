@@ -656,10 +656,7 @@ void changeLED() {
 void updateMIMU() {
     // Get IMU data
     readIMU();
-
-    // read IMU
-    readIMU();
-
+    
     // Update inertial gestures
     gestures.updateInertialGestures();
 
