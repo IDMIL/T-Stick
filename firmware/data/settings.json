@@ -22,67 +22,67 @@
         },
         {
             "name": "soft_offsetx1",
-            "value": 2.075
+            "value": 1
         },
         {
             "name": "soft_offsetx2",
-            "value": 0.274
+            "value": 0
         },
         {
             "name": "soft_offsetx3",
-            "value": 0.322
+            "value": 0
         },
         {
             "name": "soft_offsety1",
-            "value": 0.274
+            "value": 1
         },
         {
             "name": "soft_offsety2",
-            "value": 2.615
+            "value": 0
         },
         {
             "name": "soft_offsety3",
-            "value": -0.670
+            "value": 0
         },
         {
             "name": "soft_offsetz1",
-            "value": 0.322
+            "value": 1
         },
         {
             "name": "soft_offsetz2",
-            "value": -0.670
+            "value": 0
         },
         {
             "name": "soft_offsetz3",
-            "value": 0.434
+            "value": 0
         },
         {
             "name": "hard_offset1",
-            "value": 34.41
+            "value": 0
         },
         {
             "name": "hard_offset2",
-            "value": -54.69
+            "value": 0
         },
         {
             "name": "hard_offset3",
-            "value": -168.78
+            "value": 0
         },
         {
             "name": "accel_zerog1",
-            "value": -1.0054
+            "value": 0
         },
         {
             "name": "accel_zerog2",
-            "value": 0.0244
+            "value": 0
         },
         {
             "name": "accel_zerog3",
-            "value": 0.0215
+            "value": 0
         },
         {
             "name": "gyro_zerorate1",
-            "value": -1.43
+            "value": 0
         },
         {
             "name": "gyro_zerorate2",
