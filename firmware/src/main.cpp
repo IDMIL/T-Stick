@@ -732,6 +732,9 @@ void createCoreTasks() {
 ///////////
 
 void setup() {
+    // Set CPU Frequency to max
+    setCpuFrequencyMhz(240);
+    
     // Initialise LED
     pinMode(ORANGE_LED, OUTPUT);
     pinMode(BLUE_LED, OUTPUT);
