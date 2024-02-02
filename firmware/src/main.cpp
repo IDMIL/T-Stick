@@ -19,11 +19,6 @@ Include T-Stick properties
 #include "tstick-properties.h"
 #include "tstick-sensors.h"
 
-// Includ SPI
-#include "SPI.h"
-#if CONFIG_IDF_TARGET_ESP32S2 || CONFIG_IDF_TARGET_ESP32S3
-#define VSPI FSPI
-#endif
 // Sensor libraries
 #include "touch.h"
 

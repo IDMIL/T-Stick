@@ -15,7 +15,7 @@
 #X obj 617 82 r rawtimer;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array rawtime 100 float 1;
-#A 0 0 0 0 0 0 0 0 0 0 0 0 0 5.80499 0 0 23.22 0 0 0 0 0 0 0 0 0 0 0 0 5.80499 0 0 11.61 0 0 0 0 0 0 0 5.80499 0 0 0 5.80499 0 0 0 18.8662 5.80499 5.80499 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 7.25624 0 0 0 0 4.35374 0 0 0 0 0 0 17.415 0 0 0 46.4399 0 0 0 23.22 0 0 0 0 0 0 0 0 0 0;
+#A 0 0 0 5.80499 0 0 0 5.80499 5.80499 0 0 5.80499 0 0 7.25624 0 5.80499 0 1.45125 4.35374 5.80499 0 0 5.80499 5.80499 0 0 0 0 5.80499 0 5.80499 7.25624 0 0 0 5.80499 0 5.80499 0 5.80499 0 5.80499 0 0 0 5.80499 0 5.80499 0 7.25624 0 5.80499 0 0 5.80499 0 5.80499 0 0 5.80499 0 5.80499 2.90249 2.90249 5.80499 0 0 7.25624 0 0 0 0 5.80499 0 5.80499 0 0 5.80499 0 11.61 0 0 5.80499 7.25624 0 0 5.80499 0 0 0 5.80499 5.80499 0 0 5.80499 0 5.80499 0 0 5.80499;
 #X coords 0 100 99 0 200 140 1;
 #X restore 411 79 graph;
 #N canvas 264 335 568 475 timegraph 0;
@@ -102,7 +102,7 @@
 #X floatatom 509 932 6 0 0 0 - - - 0;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array multirub 4 float 3;
-#A 0 0.00101733 0 0 0;
+#A 0 0 0 0 0;
 #X coords 0 10 4 -0.1 60 140 1;
 #X restore 646 788 graph;
 #X obj 623 746 array set multirub;
@@ -132,7 +132,7 @@
 #X obj 26 396 array set rawTouch;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array rawTouch 30 float 1;
-#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#A 0 0 0 0 0 0 0 0 64 63 53 0 54 83 79 0 82 80 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 4096 29 0 400 300 1 0 0;
 #X restore 1066 81 graph;
 #X text 1299 59 Raw Touch Data;
@@ -146,7 +146,7 @@
 #X obj 248 910 array set discTouch2;
 #N canvas 0 22 450 278 (subpatch) 0;
 #X array discTouch 30 float 1;
-#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+#A 0 0 0 0 0 0 0 0 1 1 1 0 1 1 1 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0;
 #X coords 0 2 29 0 400 200 1 0 0;
 #X restore 1059 852 graph;
 #X text 1253 808 Discretised Touch Data;
@@ -164,9 +164,9 @@
 #X floatatom 557 933 6 0 0 0 - - - 0;
 #X obj 599 410 route percentage voltage current;
 #X floatatom 720 442 5 0 0 1 mA - - 0;
-#X obj 99 219 route TStick_511;
-#X text 1243 427;
+#X text 1243 427 comment;
 #X obj 7 745 route all top middle bottom discrete;
+#X obj 99 219 route TStick_513;
 #X connect 0 0 26 0;
 #X connect 1 0 25 0;
 #X connect 2 0 17 0;
@@ -196,7 +196,7 @@
 #X connect 32 0 7 0;
 #X connect 32 1 8 0;
 #X connect 32 2 9 0;
-#X connect 34 0 119 0;
+#X connect 34 0 121 0;
 #X connect 35 0 36 0;
 #X connect 36 0 112 0;
 #X connect 36 1 29 0;
@@ -251,7 +251,7 @@
 #X connect 104 1 106 0;
 #X connect 104 2 105 0;
 #X connect 112 0 29 0;
-#X connect 114 0 121 0;
+#X connect 114 0 120 0;
 #X connect 114 1 68 0;
 #X connect 114 2 72 0;
 #X connect 114 3 73 0;
@@ -264,10 +264,10 @@
 #X connect 117 0 110 0;
 #X connect 117 1 111 0;
 #X connect 117 2 118 0;
-#X connect 119 0 57 0;
-#X connect 121 0 60 0;
-#X connect 121 1 62 0;
-#X connect 121 2 64 0;
-#X connect 121 3 66 0;
-#X connect 121 4 104 0;
+#X connect 120 0 60 0;
+#X connect 120 1 62 0;
+#X connect 120 2 64 0;
+#X connect 120 3 66 0;
+#X connect 120 4 104 0;
+#X connect 121 0 57 0;
 #X coords 0 0 1 1 470 216 0;
