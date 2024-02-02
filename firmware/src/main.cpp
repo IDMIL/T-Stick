@@ -530,6 +530,9 @@ void loop() {
         mpr_sig_set_value(lm.touch, 0, capsense.touchStripsSize, MPR_INT32, &capsense.data);
     #endif
 
+    // when finished updating libmapper signal values
+    mpr_dev_update_maps(lm_dev);
+
     // Sending continuous OSC messages
     if (puara.IP1_ready()) {
 
