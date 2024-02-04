@@ -42,7 +42,7 @@ class EnchantiTouch
 
         // Include SPI
         ESP32DMASPI::Master master;
-        const int spiClk = 8000000;
+        const int spiClk = 2000000;
         uint8_t* spi_master_tx_buf;
         uint8_t* spi_master_rx_buf;
 

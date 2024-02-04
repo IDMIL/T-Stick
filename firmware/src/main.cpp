@@ -121,7 +121,7 @@ struct BatteryData {
     unsigned int designcap = 0;
     float value;
     unsigned long timer = 0;
-    int interval = 1000; // in ms (1/f)
+    int interval = 5000; // in ms (1/f)
 } battery;
 
 
@@ -325,8 +325,8 @@ uint32_t start = 0;
 uint32_t end = 0;
 uint32_t time_taken = 0;
 
-// Update rates
-uint32_t LIBMAPPER_UPDATE_RATE = COMMS_UPDATE_RATE;
+// Set default communication rate at half of the preset (125Hz)
+uint32_t LIBMAPPER_UPDATE_RATE = COMMS_UPDATE_RATE * 2;
 uint32_t OSC_UPDATE_RATE = COMMS_UPDATE_RATE * 2;
 
 /////////////////
@@ -384,21 +384,28 @@ void updateLibmapper() {
     mpr_sig_set_value(lm.batvolt, 0, 1, MPR_FLT, &battery.value);
     mpr_sig_set_value(lm.rawtouch, 0, TSTICK_SIZE, MPR_INT32, &mergedtouch);
     mpr_sig_set_value(lm.disctouch, 0, TSTICK_SIZE, MPR_INT32, &mergeddiscretetouch);
+    mpr_dev_update_maps(lm_dev);
 }
 
 void updateOSC() {
-    lo_bundle puara_osc = lo_bundle_new(LO_TT_IMMEDIATE);
-    updateOSC_bundle(puara_osc);
+    // Create a bundle and send it to both IP addresses
+    if (puara.IP1_ready() || puara.IP2_ready()) {
+        lo_bundle bundle = lo_bundle_new(LO_TT_IMMEDIATE);
+        if (!bundle) {
+            return;
+        }
+        updateOSC_bundle(bundle);
 
-    if (puara.IP1_ready()) {
-        lo_send_bundle(osc1, puara_osc);
-    }
-    if (puara.IP2_ready()) {
-        lo_send_bundle(osc2, puara_osc);
-    }
+        if (puara.IP1_ready()) {
+            lo_send_bundle(osc1, bundle);
+        }
+        if (puara.IP2_ready()) {
+            lo_send_bundle(osc2, bundle);
+        }
 
-    // free memory from bundle
-    lo_bundle_free_recursive(puara_osc);
+        // free memory from bundle
+        lo_bundle_free_recursive(bundle);
+    }
 }
 
 void updateOSC_bundle(lo_bundle puara_bundle) {
@@ -419,7 +426,7 @@ void updateOSC_bundle(lo_bundle puara_bundle) {
     osc_bundle_add_float_array(puara_bundle, "instrument/multibrush", 4, sensors.multibrush);
     osc_bundle_add_float(puara_bundle, "instrument/rub", sensors.rub);
     osc_bundle_add_float_array(puara_bundle, "instrument/multirub", 4, sensors.multirub);
-
+    
     // MIMU data
     osc_bundle_add_float_array(puara_bundle, "raw/accl", 3, sensors.accl);
     osc_bundle_add_float_array(puara_bundle, "raw/gyro", 3, sensors.gyro);
@@ -430,13 +437,11 @@ void updateOSC_bundle(lo_bundle puara_bundle) {
     // Inertial gestures
     osc_bundle_add_float_array(puara_bundle, "instrument/shakexyz", 3, sensors.shake);
     osc_bundle_add_float_array(puara_bundle, "instrument/jabxyz", 3, sensors.jab);
-
     // Button Gestures
     osc_bundle_add_int(puara_bundle, "instrument/button/count", sensors.count);
     osc_bundle_add_int(puara_bundle, "instrument/button/tap", sensors.tap);
     osc_bundle_add_int(puara_bundle, "instrument/button/dtap", sensors.dtap);
     osc_bundle_add_int(puara_bundle, "instrument/button/ttap", sensors.ttap);
-    
     // Battery Data
     osc_bundle_add_int(puara_bundle, "battery/percentage", battery.percentage);
     osc_bundle_add_int(puara_bundle, "battery/current", battery.current);
@@ -477,9 +482,6 @@ void readIMU() {
 }
 
 void readTouch() {
-    #ifdef touch_ENCHANTI
-    touch.i2ctimer = micros();
-    #endif
     // Read Touch
     touch.readTouch();
     touch.cookData();
@@ -490,13 +492,6 @@ void readTouch() {
         mergeddiscretetouch[i] = touch.discreteTouch[i];
         mergednormalisedtouch[i] = touch.normTouch[i];
     }
-
-    // set timer
-    #ifdef touch_ENCHANTI
-    unsigned long  now = micros();
-    touch.polltime = now - touch.i2ctimer;
-    touch.i2ctimer = now;
-    #endif
 
     // Update touch gestures
     gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
@@ -876,8 +871,9 @@ void setup() {
     // Enable tasks
     // Update OSC task rate depending on if both ports are used
     if ((puara.IP1_ready() == false) || (puara.IP2_ready() == false)) {
-        // If only one IP port is used double the OSC rate
+        // If only one IP port is used double the libmapper and OSC rate
         OSCupdate.setInterval(COMMS_UPDATE_RATE);
+        libmapperUpdate.setInterval(COMMS_UPDATE_RATE);
     }
     runnerComms.enableAll();
     runnerSensors.enableAll();
@@ -897,7 +893,6 @@ void setup() {
 //////////
 
 void loop() {
-    // runnerComms.execute();
-    // runnerSensors.execute();
+    // Delete loop task
     vTaskDelete(NULL);
 }
