@@ -4,10 +4,10 @@ Defines presets for the T-Stick
 // General Properties
 #define TSTICK_SIZE 60
 #define I2CUPDATE_FREQ 3400000
-#define COMMS_UPDATE_RATE 5000 // us (200Hz)
-#define TOUCH_UPDATE_RATE 2000 // us (500 Hz)
-#define IMU_UPDATE_RATE 5000 // us (500 Hz)
-#define ANG_UPDATE_RATE 2000 // us (500 Hz)
+#define COMMS_UPDATE_RATE 4000 // us (250Hz)
+#define TOUCH_UPDATE_RATE 4000 // us (250 Hz)
+#define IMU_UPDATE_RATE 4000 // us (250 Hz)
+#define ANG_UPDATE_RATE 4000 // us (250 Hz)
 
 // Feedback sensors
 #define BATTERY_UPDATE_RATE 5000000 // us ( 0.2 Hz)
