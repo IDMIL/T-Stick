@@ -16,11 +16,7 @@ unsigned int firmware_version = 231031;
 Include T-Stick properties
 - Go to include/TSTICKPROPERTIES.h to edit properties for your T-Stick
 */ 
-#include "tstick-properties.h"
-#include "tstick-sensors.h"
-
-// Sensor libraries
-#include "touch.h"
+#include "tstick-presets.h"
 
 #include "Arduino.h"
 // For JTAG monitor
@@ -114,8 +110,6 @@ struct Event {
 //////////////////////////////////
 // Battery struct and functions //
 //////////////////////////////////
-#include <batt.h>
-  
 struct BatteryData {
     unsigned int percentage = 0;
     float voltage = 0;
@@ -130,21 +124,7 @@ struct BatteryData {
     int interval = 1000; // in ms (1/f)
 } battery;
 
-FUELGAUGE fuelgauge;
-fuelgauge_config fg_config = {
-    0x36, //i2c_addr
-    2000, // capacity (mAh)
-    50, // End of charge Current (mA)
-    10, // rsense (mOhm)
-    3, // empty voltage (V)
-    3.88, //recovery voltage (V)
-    0, // soc
-    0, // rcomp
-    0, // tempco
-    0, // fullcap
-    0, // fullcapnorm
-    0, // Charge Cycles
-};
+
 
 ///////////////////////////////////
 // Include button function files //
@@ -162,16 +142,13 @@ void buttton_isr() {
 // Include FSR function files //
 ////////////////////////////////
 
-#include "fsr.h"
 
-Fsr fsr;
 
 ////////////////////////////////
 // Include IMU function files //
 ////////////////////////////////
 
-#include "imu.h"
-IMU imu;
+
 
 //////////////////////////////////////////////
 // Include Touch stuff                      //
@@ -185,9 +162,7 @@ int mergednormalisedtouch[TSTICK_SIZE];
 ////////////////////////////////
 // Include LED function files //
 ////////////////////////////////
-#include "led.h"
 
-Led led;
 
 struct Led_variables {
     int ledValue = 0;
@@ -350,6 +325,9 @@ uint32_t start = 0;
 uint32_t end = 0;
 uint32_t time_taken = 0;
 
+// Update rates
+uint32_t LIBMAPPER_UPDATE_RATE = COMMS_UPDATE_RATE;
+uint32_t OSC_UPDATE_RATE = COMMS_UPDATE_RATE * 2;
 
 /////////////////
 // Setup Tasks //
@@ -882,13 +860,8 @@ void setup() {
     lm.rub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/rub", 1, MPR_FLT, "un", lm.rubMin, lm.rubMax, 0, 0, 0);
     lm.multibrush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multibrush", 4, MPR_FLT, "un", lm.brushMin, lm.brushMax, 0, 0, 0);
     lm.multirub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multirub", 4, MPR_FLT, "un", lm.rubMin, lm.rubMax, 0, 0, 0);
-    #ifdef touch_TRILL
-        lm.rawtouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", touch.touchSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
-        lm.disctouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/discretetouch", touch.touchSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
-    #endif
-    #ifdef touch_CAPSENSE
-        lm.rawtouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", capsense.touchStripsSize, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
-    #endif
+    lm.rawtouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", TSTICK_SIZE, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
+    lm.disctouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/discretetouch", TSTICK_SIZE, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
     lm.count = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/count", 1, MPR_INT32, "un", &lm.countMin, &lm.countMax, 0, 0, 0);
     lm.tap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
     lm.ttap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/triple tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
@@ -902,6 +875,11 @@ void setup() {
     esp_sleep_enable_ext0_wakeup(GPIO_NUM_9,0); // 1 = High, 0 = Low
 
     // Enable tasks
+    // Update OSC task rate depending on if both ports are used
+    if ((puara.IP1_ready() == false) || (puara.IP2_ready() == false)) {
+        // If only one IP port is used double the OSC rate
+        OSCupdate.setInterval(COMMS_UPDATE_RATE);
+    }
     runnerComms.enableAll();
     runnerSensors.enableAll();
     
