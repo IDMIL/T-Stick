@@ -29,7 +29,6 @@ unsigned int firmware_version = 220929;
 #define LIBMAPPER
 
 #include "Arduino.h"
-#include "USB.h"
 
 // For disabling power saving
 #include "esp_wifi.h"
@@ -772,7 +771,8 @@ void updateOSC_bundle(lo_bundle puara_bundle) {
     osc_bundle_add_float(puara_bundle, "instrument/touch/bottom", gestures.touchBottom);
     #ifdef touch_TRILL
     osc_bundle_add_int_array(puara_bundle, "raw/capsense", TSTICK_SIZE, touch.touch);
-    #elif (touch_CAPSENSE)
+    #endif
+    #ifdef touch_CAPSENSE
     osc_bundle_add_int_array(puara_bundle, "raw/capsense", TSTICK_SIZE, capsense.data);
     #endif
     // Touch gestures
