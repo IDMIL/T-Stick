@@ -17,18 +17,23 @@ void EnchantiTouch::initTouch(float num, int threshold, int mode, int com_mode) 
 
     // Setup SPI if spi mode selected
     if (comMode == SPI_MODE) {
-        esp_err_t ret;
-        ret = spi_bus_initialize(TOUCH_HOST, &buscfg, SPI_DMA_CH_AUTO);
-        ESP_ERROR_CHECK(ret);
-        //Attach the LCD to the SPI bus
-        ret = spi_bus_add_device(TOUCH_HOST, &devcfg, &spi);
-        ESP_ERROR_CHECK(ret);
+        // to use DMA buffer, use these methods to allocate buffer
+        spi_master_tx_buf = master.allocDMABuffer(ENCHANTI_BUFFERSIZE);
+        spi_master_rx_buf = master.allocDMABuffer(ENCHANTI_BUFFERSIZE);
 
         // set the DMA buffer
         for (uint32_t i = 0; i < ENCHANTI_BUFFERSIZE; i++) {
             spi_master_tx_buf[i] = i & 0xFF;
         }
         memset(spi_master_rx_buf, 0, ENCHANTI_BUFFERSIZE);
+
+        // intialising the spi bus 
+        master.setDataMode(SPI_MODE0);    
+        master.setFrequency(spiClk);            
+        master.setMaxTransferSize(ENCHANTI_BUFFERSIZE);  
+        master.setDutyCyclePos(96);
+        // Start bus
+        master.begin();
     }
 
     // // Send configuration data to touch board
@@ -138,20 +143,8 @@ void EnchantiTouch::readSPIBuffer(uint16_t length, int offset)
     uint16_t value = 0;  
 
     // Start transaction
-    esp_err_t ret;
-    static spi_transaction_t trans;
-    memset(&trans, 0, sizeof(spi_transaction_t));
-
-    // Reset rx buffer
-    memset(&spi_master_rx_buf, 0, ENCHANTI_BUFFERSIZE);
-    
-    // Setup properties
-    trans.length = length;
-    trans.flags = SPI_TRANS_USE_RXDATA;
-    trans.rx_buffer = &spi_master_rx_buf;
-
-    // Start transaction
-    ret = spi_device_polling_transmit(spi, &trans);
+    memset(spi_master_rx_buf, 0, ENCHANTI_BUFFERSIZE);
+    const size_t received_bytes = master.transfer(NULL, spi_master_rx_buf, length);
 
     // Process data
     while (loc < (touchSize*2)) {

@@ -387,19 +387,18 @@ void updateLibmapper() {
 }
 
 void updateOSC() {
-    lo_bundle puara_osc1 = lo_bundle_new(LO_TT_IMMEDIATE);
-    lo_bundle puara_osc2 = lo_bundle_new(LO_TT_IMMEDIATE);
+    lo_bundle puara_osc = lo_bundle_new(LO_TT_IMMEDIATE);
+    updateOSC_bundle(puara_osc);
 
     if (puara.IP1_ready()) {
-        updateOSC_bundle(puara_osc1);
-        lo_send_bundle(osc1, puara_osc1);
-        lo_bundle_free_recursive(puara_osc1);
+        lo_send_bundle(osc1, puara_osc);
     }
     if (puara.IP2_ready()) {
-        updateOSC_bundle(puara_osc2);
-        lo_send_bundle(osc2, puara_osc2);
-        lo_bundle_free_recursive(puara_osc2);
+        lo_send_bundle(osc2, puara_osc);
     }
+
+    // free memory from bundle
+    lo_bundle_free_recursive(puara_osc);
 }
 
 void updateOSC_bundle(lo_bundle puara_bundle) {

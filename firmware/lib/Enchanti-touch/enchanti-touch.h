@@ -3,21 +3,18 @@
 
 #include <Arduino.h>
 #include "Wire.h"
+#include <ESP32DMASPIMaster.h>
 #include <iostream>
-#include "driver/spi_master.h"
-#include "esp_system.h"
 
 #define ENCHANTI_BASETOUCHSIZE 60
 #define ENCHANTI_BUFFERSIZE 256
 #define ENCHANTI_MAXBUFFERSIZE 1024
 
-// 
-#define TOUCH_HOST    SPI2_HOST
 // SPI Pins
-#define PIN_NUM_CS 10
-#define PIN_NUM_MISO 13
-#define PIN_NUM_MOSI 11
-#define PIN_NUM_CLK 12
+#define CS 10
+#define MISO 13
+#define MOSI 11
+#define CLK 12
 
 class EnchantiTouch
 {
@@ -42,28 +39,12 @@ class EnchantiTouch
             TOUCHMODE_REG   = 3, // Register for the touch mode
             DATA_REG        = 4, // Register of difference data for button 1 (raw - baseline)
         };
-        // SPI   
-        uint8_t spi_master_tx_buf[ENCHANTI_BUFFERSIZE];
-        uint8_t spi_master_rx_buf[ENCHANTI_BUFFERSIZE];
 
         // Include SPI
-        spi_device_handle_t spi;
-        spi_bus_config_t buscfg = {
-            .mosi_io_num = PIN_NUM_MOSI,
-            .miso_io_num = PIN_NUM_MISO,
-            .sclk_io_num = PIN_NUM_CLK,
-            .quadwp_io_num = -1,
-            .quadhd_io_num = -1,
-            .max_transfer_sz = ENCHANTI_MAXBUFFERSIZE
-        };
-
-        // Interface config
-        spi_device_interface_config_t devcfg = {
-                .mode = 0,                              //SPI mode 0
-                .clock_speed_hz = SPI_MASTER_FREQ_8M,   //SPI Clk
-                .spics_io_num = PIN_NUM_CS,             //CS pin
-                .queue_size = 1,                        //We want to be able to queue 7 transactions at a time
-        };
+        ESP32DMASPI::Master master;
+        const int spiClk = 8000000;
+        uint8_t* spi_master_tx_buf;
+        uint8_t* spi_master_rx_buf;
 
         // Board Properties
         int comMode = SPI_MODE;
