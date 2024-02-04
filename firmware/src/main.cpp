@@ -338,6 +338,10 @@ void setup() {
         Serial.begin(115200);
     #endif
 
+    // Start Wire
+    Wire.begin();
+    Wire.setClock(400000);
+
     // Disable WiFi power save
     esp_wifi_set_ps(WIFI_PS_NONE);
 
