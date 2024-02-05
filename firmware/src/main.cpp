@@ -129,7 +129,7 @@ struct BatteryData {
 } battery;
 
 // read battery level (based on https://www.youtube.com/watch?v=yZjpYmWVLh8&feature=youtu.be&t=88) 
-void readBattery() {
+void analogBatteryRead() {
     #ifdef ARDUINO_LOLIN_D32_PRO
         battery.value = analogRead(pin.battery) / 4096.0 * 7.445;
     #elif defined(ARDUINO_TINYPICO)
@@ -600,7 +600,7 @@ void readBattery() {
     battery.capacity = fuelgauge.rep_capacity;
     battery.status = fuelgauge.bat_status;
     #elif defined(fg_NONE)
-        readBattery();
+        analogBatteryRead();
         batteryFilter();
     #endif
 
