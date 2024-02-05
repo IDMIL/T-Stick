@@ -80,11 +80,13 @@ calibrationParameters imuParams;
 /////////////////////
 
 struct TSTICK_Pin {
+    int led;
+    int battery;
     int fsr;
     int button;
 };
 
-TSTICK_Pin pin{ FSR_PIN, BUTTON_PIN };
+TSTICK_Pin pin{ LED_PIN, 35, FSR_PIN, BUTTON_PIN };
 
 ////////////////////////////////
 // Sensor Events //
@@ -122,9 +124,35 @@ struct BatteryData {
     float value;
     unsigned long timer = 0;
     int interval = 5000; // in ms (1/f)
+    int queueAmount = 10; // # of values stored
+    std::deque<int> filterArray; // store last values
 } battery;
 
+// read battery level (based on https://www.youtube.com/watch?v=yZjpYmWVLh8&feature=youtu.be&t=88) 
+void readBattery() {
+    #ifdef ARDUINO_LOLIN_D32_PRO
+        battery.value = analogRead(pin.battery) / 4096.0 * 7.445;
+    #elif defined(ARDUINO_TINYPICO)
+        battery.value = tinypico.GetBatteryVoltage();
+    #endif
+    battery.percentage = static_cast<int>((battery.value - 2.9) * 100 / (4.15 - 2.9));
+    if (battery.percentage > 100)
+        battery.percentage = 100;
+    if (battery.percentage < 0)
+        battery.percentage = 0;
+}
 
+void batteryFilter() {
+    battery.filterArray.push_back(battery.percentage);
+    if(battery.filterArray.size() > battery.queueAmount) {
+        battery.filterArray.pop_front();
+    }
+    battery.percentage = 0;
+    for (int i=0; i<battery.filterArray.size(); i++) {
+        battery.percentage += battery.filterArray.at(i);
+    }
+    battery.percentage /= battery.filterArray.size();
+}
 
 ///////////////////////////////////
 // Include button function files //
@@ -138,18 +166,6 @@ void buttton_isr() {
     button.readButton();
 }
 
-////////////////////////////////
-// Include FSR function files //
-////////////////////////////////
-
-
-
-////////////////////////////////
-// Include IMU function files //
-////////////////////////////////
-
-
-
 //////////////////////////////////////////////
 // Include Touch stuff                      //
 //////////////////////////////////////////////
@@ -162,7 +178,6 @@ int mergednormalisedtouch[TSTICK_SIZE];
 ////////////////////////////////
 // Include LED function files //
 ////////////////////////////////
-
 
 struct Led_variables {
     int ledValue = 0;
@@ -571,6 +586,7 @@ void readAnalog() {
 }
 
 void readBattery() {
+    #ifdef fg_MAX17055
     // Read battery stats from fuel gauge
     fuelgauge.getBatteryData();
     fuelgauge.getBatteryStatus();
@@ -583,13 +599,17 @@ void readBattery() {
     battery.rsense = fuelgauge.rsense;
     battery.capacity = fuelgauge.rep_capacity;
     battery.status = fuelgauge.bat_status;
+    #elif defined(fg_NONE)
+        readBattery();
+        batteryFilter();
+    #endif
 
     // Save to sensors array
     if (sensors.battery != battery.percentage) {sensors.battery = battery.percentage; event.battery = true; } else { event.battery = false; }
     if (sensors.current != battery.current) {sensors.current = battery.current; event.current = true; } else { event.current = false; }
     if (sensors.voltage != battery.voltage) {sensors.voltage = battery.voltage; event.voltage = true; } else { event.voltage = false; }
 
-    // Send battery data always
+    // Send battery data always (for debugging)
     event.battery = true;
     event.voltage = true;
     event.current = true;
@@ -597,27 +617,57 @@ void readBattery() {
 
 void changeLED() {
     // Set LED - connection status and battery level
-    #ifdef board_ENCHANTI_rev2
+    #if defined(board_ENCHANTI_rev2) || defined(board_ENCHANTI_rev3)
     if (puara.get_StaIsConnected()) {         // blinks when connected, cycle when disconnected
         // If connected to WiFi turn off Orange LED
         if (digitalRead(ORANGE_LED)) {
             digitalWrite(ORANGE_LED, LOW);
         }
-        // Cycle LED on and Off
-        led.setInterval(1000);                // RGB: 0, 128, 255 (Dodger Blue)
-        led_var.color = led.blink(HIGH,20);
-        digitalWrite(BLUE_LED, led_var.color);
-        } else {
+        led.setInterval(1000);
+        led_var.ledValue = led.blink(255, 40);
+        ledcWrite(0, led_var.ledValue);
+    } else {
         // If not connected to WiFi turn off blue LED
-        if (digitalRead(BLUE_LED)) {
-            digitalWrite(BLUE_LED, LOW);
-        }
+        ledcWrite(0, 0);
         // Cycle LED on and Off
-        led.setInterval(4000);
-        led_var.color = led.cycle(led_var.color, 0, 255);
-        digitalWrite(ORANGE_LED, led_var.color);
+        digitalWrite(ORANGE_LED, HIGH);
     }
     #endif
+    // Set LED - connection status and battery level
+    #ifdef ARDUINO_LOLIN_D32_PRO
+        if (battery.percentage < 10) {        // low battery - flickering
+        led.setInterval(75);
+        led_var.ledValue = led.blink(255, 50);
+        ledcWrite(0, led_var.ledValue);
+        } else {
+            if (puara.get_StaIsConnected()) { // blinks when connected, cycle when disconnected
+                led.setInterval(1000);
+                led_var.ledValue = led.blink(255, 40);
+                ledcWrite(0, led_var.ledValue);
+            } else {
+                led.setInterval(4000);
+                led_var.ledValue = led.cycle(led_var.ledValue, 0, 255);
+                ledcWrite(0, led_var.ledValue);
+            }
+        }
+    #elif defined(ARDUINO_TINYPICO)
+        if (battery.percentage < 10) {                // low battery (red)
+            led.setInterval(20);
+            led_var.color = led.blink(255, 20);
+            tinypico.DotStar_SetPixelColor(led_var.color, 0, 0);
+        } else {
+            if (puara.get_StaIsConnected()) {         // blinks when connected, cycle when disconnected
+                led.setInterval(1000);                // RGB: 0, 128, 255 (Dodger Blue)
+                led_var.color = led.blink(255,20);
+                tinypico.DotStar_SetPixelColor(0, uint8_t(led_var.color/2), led_var.color);
+            } else {
+                led.setInterval(4000);
+                led_var.color = led.cycle(led_var.color, 0, 255);
+                tinypico.DotStar_SetPixelColor(0, uint8_t(led_var.color/2), led_var.color);
+            }
+        }
+    #endif 
+
 }
 
 void updateMIMU() {
@@ -701,13 +751,18 @@ void createCoreTasks() {
 void setup() {
     // Set CPU Frequency to max
     setCpuFrequencyMhz(240);
-    
-    // Initialise LED
-    pinMode(ORANGE_LED, OUTPUT);
-    pinMode(BLUE_LED, OUTPUT);
 
-    // Turn on orange LED to indicate setup
-    digitalWrite(ORANGE_LED, HIGH);
+    #ifdef ORANGE_LED
+        // Turn on orange LED to indicate setup (Enchanti Boards)
+        pinMode(ORANGE_LED, OUTPUT);
+        digitalWrite(ORANGE_LED, HIGH);
+    #endif
+
+    // Set up LEDs
+    #ifdef INDICATOR_LED
+      ledcSetup(0, 5000, 8);
+      ledcAttachPin(pin.led, 0);
+    #endif
 
     // Set up I2C clock
     Wire.begin(SDA_PIN, SCL_PIN);
@@ -747,6 +802,7 @@ void setup() {
     std::cout << "done" << std::endl;
 
     // Initialise Fuel Gauge
+    #ifdef fg_MAX17055
     std::cout << "    Initializing Fuel Gauge configuration... ";
     if (fuelgauge.init(fg_config)) {
         std::cout << "done" << std::endl;
@@ -754,6 +810,7 @@ void setup() {
         std::cout << "initialization failed!" << std::endl;
     }
     std::cout << "done" << std::endl;
+    #endif
 
     // Setup jabx,jaby and jabz thresholds
     gestures.jabXThreshold = puara.getVarNumber("jabx_threshold");
