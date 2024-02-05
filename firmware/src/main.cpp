@@ -875,6 +875,11 @@ void setup() {
         OSCupdate.setInterval(COMMS_UPDATE_RATE);
         libmapperUpdate.setInterval(COMMS_UPDATE_RATE);
     }
+    // Disable OSC task if neither port is used and set libmapper to 400Hz
+    if ((puara.IP1_ready() == false) && (puara.IP2_ready() == false)) {
+        OSCupdate.disable();
+        libmapperUpdate.setInterval(2500);
+    }
     runnerComms.enableAll();
     runnerSensors.enableAll();
     
