@@ -827,7 +827,7 @@ void setup() {
             num_boards = 2;
         }
         int touch_noise = puara.getVarNumber("touch_noise");
-        touch.initTouch(num_boards, touch_noise);
+        touch.initTouch(num_boards, touch_noise, 3, 2);
         std::cout << "done" << std::endl;
     #endif
 
