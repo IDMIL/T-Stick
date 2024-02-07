@@ -41,6 +41,15 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
         // Compute multipliers
         updateMultipliers(); 
 
+        // read the registers to ensure the values are correct
+        uint16_t raw_design_cap = readReg16Bit(DESIGNCAP_REG);
+        uint16_t raw_igchg = readReg16Bit(ICHTERM_REG);
+
+        // Compute raw cap and raw end of charge current 
+        if ((reg_cap != raw_design_cap) || (reg_ichg != raw_igchg)) {
+            reset = true;
+        }
+
         // Reset the Fuel Gauge
         if (POR || reset)
         {
@@ -60,8 +69,6 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
             //EZ Config
             // Write Battery capacity
             std::cout << "    Writing Capacity" << std::endl;
-            reg_cap = (designcap * rsense) / base_capacity_multiplier_mAh;
-            reg_ichg = (ichg * rsense) / base_current_multiplier_mAh;
             writeReg16Bit(DESIGNCAP_REG, reg_cap); //Write Design Cap
             writeReg16Bit(ICHTERM_REG, reg_ichg); // End of charge current
             writeReg16Bit(dQACC_REG, reg_cap/32); //Write dQAcc
@@ -84,22 +91,23 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
             }
             //Reload original HbCFG value
             writeReg16Bit(0xBA,HibCFG);    
+
+            // Reset Status Register when init function runs
+            std::cout << "    Resetting Status" << std::endl;
+            STATUS = readReg16Bit(STATUS_REG);
+            
+            // Get new status
+            uint16_t RESET_STATUS = STATUS&0xFFFD;
+            std::cout << "    Setting new status: " << RESET_STATUS << std::endl;
+            writeVerifyReg16Bit(STATUS_REG,RESET_STATUS); //reset POR Status   
+
+            // Read Status to ensure it has been cleared (for debugging)
+            POR = readReg16Bit(STATUS_REG)&0x0002;
+            std::cout << "    Status Flag: " << readReg16Bit(STATUS_REG) << "\n"
+                    << "    POR Flag: " << POR << std::endl;  
         } else {
             std::cout << "    Loading old config" << std::endl;
-        }
-        // Reset Status Register when init function runs
-        std::cout << "    Resetting Status" << std::endl;
-        STATUS = readReg16Bit(STATUS_REG);
-        
-        // Get new status
-        uint16_t RESET_STATUS = STATUS&0xFFFD;
-        std::cout << "    Setting new status: " << RESET_STATUS << std::endl;
-        writeVerifyReg16Bit(STATUS_REG,RESET_STATUS); //reset POR Status   
-
-        // Read Status to ensure it has been cleared (for debugging)
-        POR = readReg16Bit(STATUS_REG)&0x0002;
-        std::cout << "    Status Flag: " << readReg16Bit(STATUS_REG) << "\n"
-                  << "    POR Flag: " << POR << std::endl;     
+        }   
         return true;
     }
     return false; //device not found

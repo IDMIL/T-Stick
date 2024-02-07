@@ -14,7 +14,7 @@ unsigned int firmware_version = 231031;
 
 /*
 Include T-Stick properties
-- Go to include/TSTICKPROPERTIES.h to edit properties for your T-Stick
+- Go to tstick-presets.h to edit properties for your T-Stick
 */ 
 #include "tstick-presets.h"
 
@@ -364,7 +364,7 @@ void readBattery();
 void changeLED();
 void updateMIMU();
 
-// Setup sensor tasks (task rates defined in tstick-properties.h)
+// Setup sensor tasks (task rates defined in tstick-presets.h)
 Task updateTOUCH (TOUCH_UPDATE_RATE, TASK_FOREVER, &readTouch, &runnerSensors, false);
 Task updateANALOG (ANG_UPDATE_RATE, TASK_FOREVER, &readAnalog, &runnerSensors, false);
 Task updateIMU (IMU_UPDATE_RATE, TASK_FOREVER, &updateMIMU, &runnerSensors, false);
@@ -589,7 +589,6 @@ void readBattery() {
     #ifdef fg_MAX17055
     // Read battery stats from fuel gauge
     fuelgauge.getBatteryData();
-    fuelgauge.getBatteryStatus();
 
     // Store battery info
     battery.percentage = fuelgauge.rep_soc;
