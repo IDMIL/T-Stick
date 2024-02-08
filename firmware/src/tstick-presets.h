@@ -23,10 +23,6 @@ General Properties for the T-Stick
 ********************************************************************/
 #define TSTICK_SIZE 60
 #define I2CUPDATE_FREQ 400000 // Note that the I2C frequency is capped by Wire at 1MHz
-#define COMMS_UPDATE_RATE 4000 // us (250Hz)
-#define TOUCH_UPDATE_RATE 4000 // us (250Hz)
-#define IMU_UPDATE_RATE 4000 // us (250 Hz)
-#define ANG_UPDATE_RATE 4000 // us (250 Hz)
 
 // Feedback sensors
 #define BATTERY_UPDATE_RATE 1000000 // us ( 1 Hz)

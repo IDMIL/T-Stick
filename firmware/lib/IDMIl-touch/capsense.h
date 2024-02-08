@@ -20,6 +20,7 @@ class Capsense {
         void readTouch();
         void cookData();
         int getData(int data_index);
+        int newData = 0;
         int data[8];
         int touch[64]; // /raw/capsense, i..., 0--255, ... (1 int per 8 capacitive stripes -- 8 bits) - originaly RawData.touch
         uint8_t touchStripsSize;

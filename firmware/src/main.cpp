@@ -10,7 +10,7 @@
  */
 
 
-unsigned int firmware_version = 231031;
+unsigned int firmware_version = 240228;
 
 /*
 Include T-Stick properties
@@ -21,9 +21,6 @@ Include T-Stick properties
 #include "Arduino.h"
 // For JTAG monitor
 #include "USB.h"
-
-// For task scheduling
-#include "TaskScheduler.h"
 
 // For disabling power saving
 #include "esp_wifi.h"
@@ -340,16 +337,6 @@ uint32_t start = 0;
 uint32_t end = 0;
 uint32_t time_taken = 0;
 
-// Set default communication rate at half of the preset (125Hz)
-uint32_t LIBMAPPER_UPDATE_RATE = COMMS_UPDATE_RATE * 2;
-uint32_t OSC_UPDATE_RATE = COMMS_UPDATE_RATE * 2;
-
-/////////////////
-// Setup Tasks //
-/////////////////
-Scheduler runnerComms;
-Scheduler runnerSensors;
-
 // task callbacks
 // Comms tasks
 void updateLibmapper();
@@ -363,16 +350,6 @@ void readAnalog();
 void readBattery();
 void changeLED();
 void updateMIMU();
-
-// Setup sensor tasks (task rates defined in tstick-presets.h)
-Task updateTOUCH (TOUCH_UPDATE_RATE, TASK_FOREVER, &readTouch, &runnerSensors, false);
-Task updateANALOG (ANG_UPDATE_RATE, TASK_FOREVER, &readAnalog, &runnerSensors, false);
-Task updateIMU (IMU_UPDATE_RATE, TASK_FOREVER, &updateMIMU, &runnerSensors, false);
-Task updateBattery (BATTERY_UPDATE_RATE, TASK_FOREVER, &readBattery, &runnerSensors, false);
-
-// Setup comms tasks
-Task libmapperUpdate (LIBMAPPER_UPDATE_RATE, TASK_FOREVER, &updateLibmapper, &runnerComms, false);
-Task OSCupdate (OSC_UPDATE_RATE, TASK_FOREVER, &updateOSC, &runnerComms, false);
 
 // Define callbacks
 ///// Comms
@@ -423,45 +400,69 @@ void updateOSC() {
     }
 }
 
-void updateOSC_bundle(lo_bundle puara_bundle) {
+void updateOSC_bundle(lo_bundle bundle) {
     // Continuously send FSR data
-    osc_bundle_add_int(puara_bundle, "raw/fsr", sensors.fsr);
-    osc_bundle_add_float(puara_bundle, "instrument/squeeze", sensors.squeeze);
+    osc_bundle_add_int(bundle, "raw/fsr", sensors.fsr);
+    osc_bundle_add_float(bundle, "instrument/squeeze", sensors.squeeze);
 
     //Send touch data
-    osc_bundle_add_float(puara_bundle, "instrument/touch/all", gestures.touchAll);
-    osc_bundle_add_float(puara_bundle, "instrument/touch/top", gestures.touchTop);
-    osc_bundle_add_float(puara_bundle, "instrument/touch/middle", gestures.touchMiddle);
-    osc_bundle_add_float(puara_bundle, "instrument/touch/bottom", gestures.touchBottom);
-    osc_bundle_add_int_array(puara_bundle, "raw/capsense", TSTICK_SIZE, mergedtouch);
-    osc_bundle_add_int_array(puara_bundle, "instrument/touch/discrete", TSTICK_SIZE, mergeddiscretetouch);
+    osc_bundle_add_float(bundle, "instrument/touch/all", gestures.touchAll);
+    osc_bundle_add_float(bundle, "instrument/touch/top", gestures.touchTop);
+    osc_bundle_add_float(bundle, "instrument/touch/middle", gestures.touchMiddle);
+    osc_bundle_add_float(bundle, "instrument/touch/bottom", gestures.touchBottom);
+    osc_bundle_add_int_array(bundle, "raw/capsense", TSTICK_SIZE, mergedtouch);
+    osc_bundle_add_int_array(bundle, "instrument/touch/discrete", TSTICK_SIZE, mergeddiscretetouch);
     
     // Touch gestures
-    osc_bundle_add_float(puara_bundle, "instrument/brush", sensors.brush);
-    osc_bundle_add_float_array(puara_bundle, "instrument/multibrush", 4, sensors.multibrush);
-    osc_bundle_add_float(puara_bundle, "instrument/rub", sensors.rub);
-    osc_bundle_add_float_array(puara_bundle, "instrument/multirub", 4, sensors.multirub);
+    if (event.brush) {
+        osc_bundle_add_float(bundle, "instrument/brush", sensors.brush);
+        osc_bundle_add_float_array(bundle, "instrument/multibrush", 4, sensors.multibrush);
+    }
+    if (event.rub) {
+        osc_bundle_add_float(bundle, "instrument/rub", sensors.rub);
+        osc_bundle_add_float_array(bundle, "instrument/multirub", 4, sensors.multirub);
+    }
+
     
     // MIMU data
-    osc_bundle_add_float_array(puara_bundle, "raw/accl", 3, sensors.accl);
-    osc_bundle_add_float_array(puara_bundle, "raw/gyro", 3, sensors.gyro);
-    osc_bundle_add_float_array(puara_bundle, "raw/magn", 3, sensors.magn);
-    osc_bundle_add_float_array(puara_bundle, "orientation", 4, sensors.quat);
-    osc_bundle_add_float_array(puara_bundle, "ypr", 3, sensors.ypr); 
+    osc_bundle_add_float_array(bundle, "raw/accl", 3, sensors.accl);
+    osc_bundle_add_float_array(bundle, "raw/gyro", 3, sensors.gyro);
+    osc_bundle_add_float_array(bundle, "raw/magn", 3, sensors.magn);
+    osc_bundle_add_float_array(bundle, "orientation", 4, sensors.quat);
+    osc_bundle_add_float_array(bundle, "ypr", 3, sensors.ypr); 
 
     // Inertial gestures
-    osc_bundle_add_float_array(puara_bundle, "instrument/shakexyz", 3, sensors.shake);
-    osc_bundle_add_float_array(puara_bundle, "instrument/jabxyz", 3, sensors.jab);
+    if (event.shake) {
+        osc_bundle_add_float_array(bundle, "instrument/shakexyz", 3, sensors.shake);
+    }
+    if (event.jab) {
+        osc_bundle_add_float_array(bundle, "instrument/jabxyz", 3, sensors.jab);
+    }
     // Button Gestures
-    osc_bundle_add_int(puara_bundle, "instrument/button/count", sensors.count);
-    osc_bundle_add_int(puara_bundle, "instrument/button/tap", sensors.tap);
-    osc_bundle_add_int(puara_bundle, "instrument/button/dtap", sensors.dtap);
-    osc_bundle_add_int(puara_bundle, "instrument/button/ttap", sensors.ttap);
+    if (event.count) {
+        osc_bundle_add_int(bundle, "instrument/button/count", sensors.count);
+    }
+    if (event.tap) {
+        osc_bundle_add_int(bundle, "instrument/button/tap", sensors.tap);
+    }
+    if (event.dtap) {
+        osc_bundle_add_int(bundle, "instrument/button/dtap", sensors.dtap);
+    }
+    if (event.ttap) {
+        osc_bundle_add_int(bundle, "instrument/button/ttap", sensors.ttap);
+    }
+
     // Battery Data
-    osc_bundle_add_int(puara_bundle, "battery/percentage", battery.percentage);
-    osc_bundle_add_int(puara_bundle, "battery/current", battery.current);
-    osc_bundle_add_float(puara_bundle, "battery/tte", battery.TTE);
-    osc_bundle_add_float(puara_bundle, "battery/voltage", battery.voltage);  
+    if (event.battery) {
+        osc_bundle_add_int(bundle, "battery/percentage", battery.percentage);
+    }
+    if (event.current) {
+        osc_bundle_add_int(bundle, "battery/current", battery.current);
+        osc_bundle_add_float(bundle, "battery/tte", battery.TTE);
+    }
+    if (event.voltage) {
+        osc_bundle_add_float(bundle, "battery/voltage", battery.voltage);  
+    }
 }
 
 // Sensor callbacks
@@ -491,9 +492,6 @@ void readIMU() {
     sensors.magn[0] = gestures.getMagX();
     sensors.magn[1] = gestures.getMagY();
     sensors.magn[2] = gestures.getMagZ();
-
-    // set imu event true
-    event.mimu = true;
 }
 
 void readTouch() {
@@ -608,10 +606,10 @@ void readBattery() {
     if (sensors.current != battery.current) {sensors.current = battery.current; event.current = true; } else { event.current = false; }
     if (sensors.voltage != battery.voltage) {sensors.voltage = battery.voltage; event.voltage = true; } else { event.voltage = false; }
 
-    // Send battery data always (for debugging)
-    event.battery = true;
-    event.voltage = true;
-    event.current = true;
+    // // Send battery data always (for debugging)
+    // event.battery = true;
+    // event.voltage = true;
+    // event.current = true;
 }
 
 void changeLED() {
@@ -701,48 +699,6 @@ void updateMIMU() {
     } else { event.jab = false; }
 }
 
-// Set up multithreading
-#define COMMS_CPU 1
-#define SENSOR_CPU 0
-
-// ===== rtos task handles =========================
-TaskHandle_t tSensors;
-TaskHandle_t tMappings;
-
-// Mappings
-void tSensorTasks(void* parameters)  {
-  for(;;){
-    runnerSensors.execute();
-  }
-}
-
-void tMappingTasks(void* parameters) {
-  for(;;){
-    runnerComms.execute();
-  }
-}
-
-void createCoreTasks() {
-  xTaskCreatePinnedToCore(
-    tSensorTasks,
-    "sensors",
-    10000,
-    NULL,
-    10,
-    &tSensors,
-    SENSOR_CPU);
-
-  xTaskCreatePinnedToCore(
-    tMappingTasks,   /* Task function. */
-    "comms",     /* name of task. */
-    10000,       /* Stack size of task */
-    NULL,        /* parameter of the task */
-    5,           /* priority of the task */
-    &tMappings,  /* task handle */
-    COMMS_CPU);
-}
-
-
 ///////////
 // setup //
 ///////////
@@ -752,7 +708,7 @@ void setup() {
     setCpuFrequencyMhz(240);
 
     #ifdef ORANGE_LED
-        // Turn on orange LED to indicate setup (Enchanti Boards)
+        // Turn on orange LED to indicate setup (EnchantiS3 Boards)
         pinMode(ORANGE_LED, OUTPUT);
         digitalWrite(ORANGE_LED, HIGH);
     #endif
@@ -923,30 +879,12 @@ void setup() {
     // Setting Deep sleep wake button
     rtc_gpio_pullup_en(GPIO_NUM_9);
     esp_sleep_enable_ext0_wakeup(GPIO_NUM_9,0); // 1 = High, 0 = Low
-
-    // Enable tasks
-    // Update OSC task rate depending on if both ports are used
-    if ((puara.IP1_ready() == false) || (puara.IP2_ready() == false)) {
-        // If only one IP port is used double the libmapper and OSC rate
-        OSCupdate.setInterval(COMMS_UPDATE_RATE);
-        libmapperUpdate.setInterval(COMMS_UPDATE_RATE);
-    }
-    // Disable OSC task if neither port is used and set libmapper to 400Hz
-    if ((puara.IP1_ready() == false) && (puara.IP2_ready() == false)) {
-        OSCupdate.disable();
-        libmapperUpdate.setInterval(2500);
-    }
-    runnerComms.enableAll();
-    runnerSensors.enableAll();
     
     // Using Serial.print and delay to prevent interruptions
     delay(500);
     std::cout << puara.get_dmi_name().c_str() << std::endl;
     std::cout << "Edu Meneses\nMetalab - Société des Arts Technologiques (SAT)\nIDMIL - CIRMMT - McGill University" << std::endl;
     std::cout << "Firmware version: \n" << firmware_version<< "\n" << std::endl;
-
-    // Create tasks
-    createCoreTasks();
 }
 
 //////////
@@ -954,6 +892,24 @@ void setup() {
 //////////
 
 void loop() {
-    // Delete loop task
-    vTaskDelete(NULL);
+    // Read analog signals
+    readAnalog();
+
+    // Update Battery data
+    if (millis() - battery.interval > battery.timer) {
+      battery.timer = millis();
+      readBattery();
+    }
+
+    // Get touch data
+    readTouch();
+
+    // Update MIMU data
+    updateMIMU();
+
+    // Update Libmapper and OSC
+    updateLibmapper();
+
+    // Update OSC
+    updateOSC();
 }

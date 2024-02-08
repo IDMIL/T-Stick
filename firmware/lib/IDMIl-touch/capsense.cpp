@@ -161,8 +161,11 @@ void Capsense::readTouch() {
 void Capsense::cookData() {
     // process capsense data
     for (int i=0; i < touchStripsSize; ++i) {
+        int tmp = bitReadRightToLeft(data[i/8],(i%8));
+        if (tmp != touch[i]) {
+          newData = 1;
+        }
         touch[i] = bitReadRightToLeft(data[i/8],(i%8));
-        //data[i] = bitReadRightToLeft(touch[i/8],7-(i%8));
     }
 }
 
