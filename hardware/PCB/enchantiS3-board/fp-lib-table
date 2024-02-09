@@ -5,5 +5,5 @@
   (lib (name "ICM20948-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/ICM20948-kicad/ICM20948-footprints.pretty")(options "")(descr ""))
   (lib (name "pin-layout")(type "KiCad")(uri "${KIPRJMOD}/Libraries/board-layout/pin-layout.pretty")(options "")(descr ""))
   (lib (name "NCP167AMX330TBG-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/NCP167AMX330TBG/NCP167AMX330TBG-footprints.pretty")(options "")(descr ""))
-  (lib (name "neopixel-1515-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/neopixel-1515/neopixel-1515-footprints.pretty")(options "")(descr ""))
+  (lib (name "max17262-footprints")(type "KiCad")(uri "${KIPRJMOD}/Libraries/MAX17262REWL_T/max17262-footprints.pretty")(options "")(descr ""))
 )

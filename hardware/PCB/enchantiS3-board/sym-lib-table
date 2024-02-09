@@ -5,6 +5,6 @@
   (lib (name "ICM20948-symbols")(type "KiCad")(uri "${KIPRJMOD}/Libraries/ICM20948-kicad/ICM20948-symbols.kicad_sym")(options "")(descr ""))
   (lib (name "pin-layout")(type "KiCad")(uri "${KIPRJMOD}/Libraries/board-layout/pin-layout.kicad_sym")(options "")(descr ""))
   (lib (name "NCP167")(type "KiCad")(uri "${KIPRJMOD}/Libraries/NCP167AMX330TBG/NCP167AMX330TBG.kicad_sym")(options "")(descr ""))
-  (lib (name "neopixel-1515")(type "KiCad")(uri "${KIPRJMOD}/Libraries/neopixel-1515/neopixel-1515.kicad_sym")(options "")(descr ""))
   (lib (name "button-symbol")(type "KiCad")(uri "${KIPRJMOD}/Libraries/Buttons/B3U_1000P/button-symbol.kicad_sym")(options "")(descr ""))
+  (lib (name "max17262")(type "KiCad")(uri "${KIPRJMOD}/Libraries/MAX17262REWL_T/max17262.kicad_sym")(options "")(descr ""))
 )
