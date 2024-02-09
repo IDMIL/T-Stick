@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="E">
   <design>
-    <source>C:\Users\aniyo\Documents\GitHub\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb\tstick-5gw-pro-USB-V2-pcb.kicad_sch</source>
-    <date>12/7/2023 6:30:59 AM</date>
-    <tool>Eeschema 7.0.9</tool>
+    <source>D:\Documents\Github\T-Stick\hardware\PCB\enchantiS3-board\enchantiS3.kicad_sch</source>
+    <date>2024-02-09 12:15:55 PM</date>
+    <tool>Eeschema 7.0.6</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title>Custom T-Stick Board</title>
         <company>Albert Niyonsenga</company>
         <rev>0.0.2</rev>
         <date>2023-09</date>
-        <source>tstick-5gw-pro-USB-V2-pcb.kicad_sch</source>
+        <source>enchantiS3.kicad_sch</source>
         <comment number="1" value=""/>
         <comment number="2" value=""/>
         <comment number="3" value=""/>
@@ -40,7 +40,7 @@
       <property name="Manufacturer" value="JST Sales America Inc."/>
       <property name="mpn" value="BM02B-SRSS-TB"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <property name="ki_keywords" value="connector"/>
       <sheetpath names="/" tstamps="/"/>
@@ -62,7 +62,7 @@
       <property name="Manufacturer" value="JST Sales America Inc."/>
       <property name="mpn" value="BM02B-SRSS-TB"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <property name="ki_keywords" value="connector"/>
       <sheetpath names="/" tstamps="/"/>
@@ -84,7 +84,7 @@
       <property name="Manufacturer" value="JST Sales America Inc."/>
       <property name="mpn" value="B2B-PH-SM4-TBT"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <property name="ki_keywords" value="connector"/>
       <sheetpath names="/" tstamps="/"/>
@@ -106,7 +106,7 @@
       <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
       <property name="mpn" value="CL05B104KO5NNNC"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -128,7 +128,7 @@
       <property name="Manufacturer" value="Murata Electronics"/>
       <property name="mpn" value="GRT155R61C474KE01D"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -150,7 +150,7 @@
       <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
       <property name="mpn" value="CL10A475KO8NNNC"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -172,7 +172,7 @@
       <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
       <property name="mpn" value="CL05A105KO5NNNC"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -194,7 +194,7 @@
       <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
       <property name="mpn" value="CL05A105KO5NNNC"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -216,7 +216,7 @@
       <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
       <property name="mpn" value="CL05B104KO5NNNC"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -238,7 +238,7 @@
       <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
       <property name="mpn" value="CL05B104KO5NNNC"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -260,7 +260,7 @@
       <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
       <property name="mpn" value="CL10A475KO8NNNC"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -282,7 +282,7 @@
       <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
       <property name="mpn" value="CL05A105KO5NNNC"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -304,7 +304,7 @@
       <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
       <property name="mpn" value="CL05A105KO5NNNC"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -326,7 +326,7 @@
       <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
       <property name="mpn" value="CL05A105KO5NNNC"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -348,7 +348,7 @@
       <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
       <property name="mpn" value="CL05A105KO5NNNC"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -370,7 +370,7 @@
       <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
       <property name="mpn" value="CL10A105KO8NNNC"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -392,7 +392,7 @@
       <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
       <property name="mpn" value="CL10A105KO8NNNC"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -414,11 +414,55 @@
       <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
       <property name="mpn" value="CL05B104KO5NNNC"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>7a7ac201-0317-4a71-a778-0cd1bdac2537</tstamps>
+    </comp>
+    <comp ref="C16">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/41/CL03A105KQ3CSNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL05A105KO5NNNC</field>
+        <field name="mpn">CL05A105KO5NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="CL05A105KO5NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL05A105KO5NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>42f5d1a6-4cb6-44cf-982b-f97017306a3a</tstamps>
+    </comp>
+    <comp ref="C17">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/41/CL03A105KQ3CSNC_Spec.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Mfg Part #">CL05A105KO5NNNC</field>
+        <field name="mpn">CL05A105KO5NNNC</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Description Value Pkg" value="1 µF ±10% 16V Ceramic Capacitor X5R 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="CL05A105KO5NNNC"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="mpn" value="CL05A105KO5NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
+      <property name="ki_description" value="Unpolarized capacitor"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a5dc2831-4c70-4829-bac9-d7da5fe5e9ba</tstamps>
     </comp>
     <comp ref="C19">
       <value>0.1uF</value>
@@ -436,7 +480,7 @@
       <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
       <property name="mpn" value="CL05B104KO5NNNC"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Unpolarized capacitor"/>
       <property name="ki_keywords" value="cap capacitor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -458,7 +502,7 @@
       <property name="Manufacturer" value="Kingbright"/>
       <property name="mpn" value="APHHS1005SURCK"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Light emitting diode"/>
       <property name="ki_keywords" value="LED diode"/>
       <sheetpath names="/" tstamps="/"/>
@@ -480,7 +524,7 @@
       <property name="Manufacturer" value="Kingbright"/>
       <property name="mpn" value="APHHS1005SURCK"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Light emitting diode"/>
       <property name="ki_keywords" value="LED diode"/>
       <sheetpath names="/" tstamps="/"/>
@@ -502,32 +546,11 @@
       <property name="Manufacturer" value="Kingbright"/>
       <property name="mpn" value="APHHS1005SURCK"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Light emitting diode"/>
       <property name="ki_keywords" value="LED diode"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>6abc0548-f850-4d4a-a2fa-304147aba697</tstamps>
-    </comp>
-    <comp ref="FG1">
-      <value>MAX17055ETB+T</value>
-      <footprint>max17055-footprints:21-100013A_T102A2&amp;plus_1C_MXM</footprint>
-      <datasheet>https://www.analog.com/media/en/technical-documentation/data-sheets/max17055.pdf</datasheet>
-      <fields>
-        <field name="Description Value Pkg">Battery Battery Monitor IC Multi-Chemistry 10-TDFN (2.5x2)</field>
-        <field name="Manufacturer">Analog Devices Inc./Maxim Integrated</field>
-        <field name="Mfg Part #">MAX17055ETB+T</field>
-        <field name="mpn">MAX17055ETB+T</field>
-      </fields>
-      <libsource lib="max17055-symbol" part="MAX17055ETB+T" description=""/>
-      <property name="Description Value Pkg" value="Battery Battery Monitor IC Multi-Chemistry 10-TDFN (2.5x2)"/>
-      <property name="Mfg Part #" value="MAX17055ETB+T"/>
-      <property name="Manufacturer" value="Analog Devices Inc./Maxim Integrated"/>
-      <property name="mpn" value="MAX17055ETB+T"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
-      <property name="ki_keywords" value="MAX17055ETB+T"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>0794e91c-6ab2-4941-a0ad-62811dc492b3</tstamps>
     </comp>
     <comp ref="IMU1">
       <value>ICM-20948</value>
@@ -545,7 +568,7 @@
       <property name="Manufacturer" value="TDK InvenSense"/>
       <property name="mpn" value="ICM-20948"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="InvenSense 9-Axis Motion Sensor, Accelerometer, Gyroscope, Compass, I2C/SPI, QFN-24"/>
       <property name="ki_keywords" value="mems magnetometer"/>
       <sheetpath names="/" tstamps="/"/>
@@ -567,7 +590,7 @@
       <property name="Manufacturer" value="GCT"/>
       <property name="mpn" value="USB4105-GF-A"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="USB 2.0-only Type-C Receptacle connector"/>
       <property name="ki_keywords" value="usb universal serial bus type-C USB2.0"/>
       <sheetpath names="/" tstamps="/"/>
@@ -589,7 +612,7 @@
       <property name="Manufacturer" value="Espressif Systems"/>
       <property name="mpn" value="ESP32-S3-WROOM-2-N32R8V"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="2.4 GHz WiFi (802.11 b/g/n) and Bluetooth ® 5 (LE) module Built around ESP32S3 series of SoCs, Xtensa ® dualcore 32bit LX7 microprocessor Flash up to 16 MB, PSRAM up to 8 MB 36 GPIOs, rich set of peripherals Onboard PCB antenna"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>d31bca28-0078-4d81-bbe9-259b245b324b</tstamps>
@@ -610,7 +633,7 @@
       <property name="Manufacturer" value="ANBON SEMICONDUCTOR (INT'L) LIMITED"/>
       <property name="mpn" value="BSS138"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
       <property name="ki_keywords" value="N-Channel MOSFET"/>
       <sheetpath names="/" tstamps="/"/>
@@ -632,7 +655,7 @@
       <property name="Manufacturer" value="ANBON SEMICONDUCTOR (INT'L) LIMITED"/>
       <property name="mpn" value="BSS138"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
       <property name="ki_keywords" value="N-Channel MOSFET"/>
       <sheetpath names="/" tstamps="/"/>
@@ -654,7 +677,7 @@
       <property name="Manufacturer" value="ANBON SEMICONDUCTOR (INT'L) LIMITED"/>
       <property name="mpn" value="BSS138"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23"/>
       <property name="ki_keywords" value="N-Channel MOSFET"/>
       <sheetpath names="/" tstamps="/"/>
@@ -676,33 +699,11 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF1001X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>ecdf9af3-94ea-4e11-8862-e19a73339259</tstamps>
-    </comp>
-    <comp ref="R2">
-      <value>Ohmite_LVK12 10m</value>
-      <footprint>ul_LVK12R010CER-footprints:LVK12_OHM-L</footprint>
-      <datasheet>https://www.ohmite.com/assets/docs/res_lvk.pdf?r=false</datasheet>
-      <fields>
-        <field name="Description Value Pkg">10 mOhms ±0.25% 0.5W, 1/2W Chip Resistor 1206 (3216 Metric) Anti-Corrosive, Current Sense, Moisture Resistant Thick Film</field>
-        <field name="Manufacturer">Ohmite</field>
-        <field name="Mfg Part #">LVK12R010CER</field>
-        <field name="mpn">LVK12R010CER</field>
-      </fields>
-      <libsource lib="Device" part="R_Shunt_US" description="Shunt resistor, US symbol"/>
-      <property name="Description Value Pkg" value="10 mOhms ±0.25% 0.5W, 1/2W Chip Resistor 1206 (3216 Metric) Anti-Corrosive, Current Sense, Moisture Resistant Thick Film"/>
-      <property name="Mfg Part #" value="LVK12R010CER"/>
-      <property name="Manufacturer" value="Ohmite"/>
-      <property name="mpn" value="LVK12R010CER"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
-      <property name="ki_description" value="Shunt resistor, US symbol"/>
-      <property name="ki_keywords" value="R res shunt resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>e5844f53-5972-482c-8bea-04c285f7fa10</tstamps>
     </comp>
     <comp ref="R3">
       <value>1k</value>
@@ -720,7 +721,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF1001X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -742,7 +743,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF1103X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -764,7 +765,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF1002X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -786,7 +787,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF5101X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -808,7 +809,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF5101X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -830,7 +831,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF1001X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -852,7 +853,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF1002X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -874,33 +875,11 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF1001X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>3619649c-aca1-4cef-9ed7-3a61080da24c</tstamps>
-    </comp>
-    <comp ref="R12">
-      <value>10k</value>
-      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
-      <datasheet>https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf</datasheet>
-      <fields>
-        <field name="Description Value Pkg">10 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film</field>
-        <field name="Manufacturer">Panasonic Electronic Components</field>
-        <field name="Mfg Part #">ERJ-2RKF1002X</field>
-        <field name="mpn">ERJ-2RKF1002X</field>
-      </fields>
-      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
-      <property name="Description Value Pkg" value="10 kOhms ±1% 0.1W, 1/10W Chip Resistor 0402 (1005 Metric) Automotive AEC-Q200 Thick Film"/>
-      <property name="Mfg Part #" value="ERJ-2RKF1002X"/>
-      <property name="Manufacturer" value="Panasonic Electronic Components"/>
-      <property name="mpn" value="ERJ-2RKF1002X"/>
-      <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
-      <property name="ki_description" value="Resistor, US symbol"/>
-      <property name="ki_keywords" value="R res resistor"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamps>624a5867-250e-4844-aa82-115989134d19</tstamps>
     </comp>
     <comp ref="R14">
       <value>2k2</value>
@@ -918,7 +897,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF2201X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -940,7 +919,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF2201X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -962,7 +941,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF2201X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -984,7 +963,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF2492X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1006,7 +985,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF3303X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1028,7 +1007,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF2201X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1050,7 +1029,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF2001X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1072,7 +1051,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF2201X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1094,7 +1073,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF1001X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1116,7 +1095,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF2201X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1138,7 +1117,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERJ-2RKF1001X"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Resistor, US symbol"/>
       <property name="ki_keywords" value="R res resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1147,20 +1126,20 @@
     <comp ref="STATLED1">
       <value>WIFISTATUS</value>
       <footprint>LED_SMD:LED_0402_1005Metric</footprint>
-      <datasheet>https://www.kingbrightusa.com/images/catalog/SPEC/APHHS1005SURCK.pdf</datasheet>
+      <datasheet>https://www.inolux-corp.com/datasheet/SMDLED/Mono%20Color%20Top%20View/IN-S42BT%20Series_V1.0.pdf</datasheet>
       <fields>
-        <field name="Description Value Pkg">Blue 465nm LED Indication - Discrete 3.3V 0402 (1005 Metric)</field>
-        <field name="Manufacturer">Kingbright</field>
-        <field name="Mfg Part #">APHHS1005QBC/D</field>
+        <field name="Description Value Pkg">Blue 467nm LED Indication - Discrete 2.9V 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Inolux</field>
+        <field name="Mfg Part #">IN-S42BT5B</field>
         <field name="mpn">APHHS1005SURCK</field>
       </fields>
       <libsource lib="Device" part="LED" description="Light emitting diode"/>
-      <property name="Description Value Pkg" value="Blue 465nm LED Indication - Discrete 3.3V 0402 (1005 Metric)"/>
-      <property name="Mfg Part #" value="APHHS1005QBC/D"/>
-      <property name="Manufacturer" value="Kingbright"/>
+      <property name="Description Value Pkg" value="Blue 467nm LED Indication - Discrete 2.9V 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="IN-S42BT5B"/>
+      <property name="Manufacturer" value="Inolux"/>
       <property name="mpn" value="APHHS1005SURCK"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Light emitting diode"/>
       <property name="ki_keywords" value="LED diode"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1169,20 +1148,20 @@
     <comp ref="STATLED2">
       <value>GENERAL STATUS</value>
       <footprint>LED_SMD:LED_0402_1005Metric</footprint>
-      <datasheet>https://www.kingbrightusa.com/images/catalog/SPEC/APHHS1005SURCK.pdf</datasheet>
+      <datasheet>https://www.inolux-corp.com/datasheet/SMDLED/Mono%20Color%20Top%20View/IN-S42BT%20Series_V1.0.pdf</datasheet>
       <fields>
-        <field name="Description Value Pkg">Orange 601nm LED Indication - Discrete 2.1V 0402 (1005 Metric)</field>
-        <field name="Manufacturer">Kingbright</field>
-        <field name="Mfg Part #">APHHS1005SECK</field>
+        <field name="Description Value Pkg">Amber 605nm LED Indication - Discrete 2V 0402 (1005 Metric)</field>
+        <field name="Manufacturer">Inolux</field>
+        <field name="Mfg Part #">IN-S42BT5A</field>
         <field name="mpn">APHHS1005SURCK</field>
       </fields>
       <libsource lib="Device" part="LED" description="Light emitting diode"/>
-      <property name="Description Value Pkg" value="Orange 601nm LED Indication - Discrete 2.1V 0402 (1005 Metric)"/>
-      <property name="Mfg Part #" value="APHHS1005SECK"/>
-      <property name="Manufacturer" value="Kingbright"/>
+      <property name="Description Value Pkg" value="Amber 605nm LED Indication - Discrete 2V 0402 (1005 Metric)"/>
+      <property name="Mfg Part #" value="IN-S42BT5A"/>
+      <property name="Manufacturer" value="Inolux"/>
       <property name="mpn" value="APHHS1005SURCK"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Light emitting diode"/>
       <property name="ki_keywords" value="LED diode"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1204,7 +1183,7 @@
       <property name="Manufacturer" value="Omron Electronics Inc-EMC Div"/>
       <property name="mpn" value="PTS810 SJM 250 SMTR LFS"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Push button switch, generic, two pins"/>
       <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1226,7 +1205,7 @@
       <property name="Manufacturer" value="Omron Electronics Inc-EMC Div"/>
       <property name="mpn" value="PTS810 SJM 250 SMTR LFS"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Push button switch, generic, two pins"/>
       <property name="ki_keywords" value="switch normally-open pushbutton push-button"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1248,7 +1227,7 @@
       <property name="Manufacturer" value="Panasonic Electronic Components"/>
       <property name="mpn" value="ERT-JZEG103FA"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Temperature dependent resistor, negative temperature coefficient, US symbol"/>
       <property name="ki_keywords" value="thermistor NTC resistor sensor RTD"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1270,7 +1249,7 @@
       <property name="Manufacturer" value="JST Sales America Inc."/>
       <property name="mpn" value="BM04B-SRSS-TB"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <property name="ki_keywords" value="connector"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1292,7 +1271,7 @@
       <property name="Manufacturer" value="JST Sales America Inc."/>
       <property name="mpn" value="BM04B-SRSS-TB"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Generic connectable mounting pin connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <property name="ki_keywords" value="connector"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1314,7 +1293,7 @@
       <property name="Manufacturer" value="STMicroelectronics"/>
       <property name="mpn" value="USBLC6-2P6"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Very low capacitance ESD protection diode, 2 data-line, SOT-666"/>
       <property name="ki_keywords" value="usb ethernet video"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1336,7 +1315,7 @@
       <property name="Manufacturer" value="Microchip Technology"/>
       <property name="mpn" value="MCP73871-2CCI/ML"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_description" value="Single cell, Li-Ion/Li-Po charge management controller"/>
       <property name="ki_keywords" value="battery charger lithium"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1358,7 +1337,7 @@
       <property name="Manufacturer" value="onsemi"/>
       <property name="mpn" value="NCP167AMX330TBG"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_keywords" value="NCP167AMX330TBG"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>ff8bf9bb-3de4-4e6d-bae2-c1112089f5fb</tstamps>
@@ -1379,10 +1358,50 @@
       <property name="Manufacturer" value="onsemi"/>
       <property name="mpn" value="NCP167AMX180TBG"/>
       <property name="Sheetname" value=""/>
-      <property name="Sheetfile" value="tstick-5gw-pro-USB-V2-pcb.kicad_sch"/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
       <property name="ki_keywords" value="NCP167AMX330TBG"/>
       <sheetpath names="/" tstamps="/"/>
       <tstamps>b68b934a-852c-4735-a109-42914be35d94</tstamps>
+    </comp>
+    <comp ref="U5">
+      <value>NCP167AMX330TBG</value>
+      <footprint>XDFN4_1X1_711AJ_ONS</footprint>
+      <datasheet>https://www.onsemi.com/pdf/datasheet/ncp167-d.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Linear Voltage Regulator IC Positive Fixed 1 Output 700mA 4-XDFN (1x1), 3.3V</field>
+        <field name="Manufacturer">onsemi</field>
+        <field name="Mfg Part #">NCP167AMX330TBG</field>
+        <field name="mpn">NCP167AMX330TBG</field>
+      </fields>
+      <libsource lib="NCP167AMX330TBG" part="NCP167AMX330TBG" description=""/>
+      <property name="Description Value Pkg" value="Linear Voltage Regulator IC Positive Fixed 1 Output 700mA 4-XDFN (1x1), 3.3V"/>
+      <property name="Mfg Part #" value="NCP167AMX330TBG"/>
+      <property name="Manufacturer" value="onsemi"/>
+      <property name="mpn" value="NCP167AMX330TBG"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
+      <property name="ki_keywords" value="NCP167AMX330TBG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6581df60-2c15-46e2-9a3c-633ffd84eefb</tstamps>
+    </comp>
+    <comp ref="U6">
+      <value>MAX17262REWL+T</value>
+      <footprint>max17262-footprints:21-100221A_W91G1&amp;plus_3_MXM</footprint>
+      <datasheet>https://www.analog.com/media/en/technical-documentation/data-sheets/MAX17262.pdf</datasheet>
+      <fields>
+        <field name="Description Value Pkg">Battery Fuel Gauge IC LiFePO4/Li-ion 9-WLP (1.47x1.45)</field>
+        <field name="Manufacturer">Analog Devices Inc./Maxim Integrated</field>
+        <field name="Mfg Part #">MAX17262REWL+T</field>
+      </fields>
+      <libsource lib="max17262" part="MAX17262REWL+T" description=""/>
+      <property name="Description Value Pkg" value="Battery Fuel Gauge IC LiFePO4/Li-ion 9-WLP (1.47x1.45)"/>
+      <property name="Mfg Part #" value="MAX17262REWL+T"/>
+      <property name="Manufacturer" value="Analog Devices Inc./Maxim Integrated"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="enchantiS3.kicad_sch"/>
+      <property name="ki_keywords" value="MAX17262REWL+T"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9c5e778b-b29e-4854-988f-f07dd4597b56</tstamps>
     </comp>
   </components>
   <libparts>
@@ -1521,24 +1540,6 @@
       <pins>
         <pin num="1" name="K" type="passive"/>
         <pin num="2" name="A" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Device" part="R_Shunt_US">
-      <description>Shunt resistor, US symbol</description>
-      <docs>~</docs>
-      <footprints>
-        <fp>R_*Shunt*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">R</field>
-        <field name="Value">R_Shunt_US</field>
-        <field name="Datasheet">~</field>
-      </fields>
-      <pins>
-        <pin num="1" name="1" type="passive"/>
-        <pin num="2" name="2" type="passive"/>
-        <pin num="3" name="3" type="passive"/>
-        <pin num="4" name="4" type="passive"/>
       </pins>
     </libpart>
     <libpart lib="Device" part="R_US">
@@ -1772,31 +1773,27 @@
         <pin num="3" name="D" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="max17055-symbol" part="MAX17055ETB+T">
-      <docs>MAX17055ETB+T</docs>
+    <libpart lib="max17262" part="MAX17262REWL+T">
+      <docs>https://www.analog.com/media/en/technical-documentation/data-sheets/MAX17262.pdf</docs>
       <footprints>
-        <fp>21-100013A_T102A2+1C_MXM</fp>
-        <fp>21-100013A_T102A2+1C_MXM-M</fp>
-        <fp>21-100013A_T102A2+1C_MXM-L</fp>
+        <fp>21-100221A_W91G1+3_MXM</fp>
       </footprints>
       <fields>
         <field name="Reference">U</field>
-        <field name="Value">MAX17055ETB+T</field>
-        <field name="Footprint">21-100013A_T102A2+1C_MXM</field>
-        <field name="Datasheet">MAX17055ETB+T</field>
+        <field name="Value">MAX17262REWL+T</field>
+        <field name="Footprint">max17262-footprints:21-100221A_W91G1&amp;plus_3_MXM</field>
+        <field name="Datasheet">https://www.analog.com/media/en/technical-documentation/data-sheets/MAX17262.pdf</field>
       </fields>
       <pins>
-        <pin num="1" name="N.C." type="no_connect"/>
-        <pin num="2" name="AIN" type="unspecified"/>
-        <pin num="3" name="SCL" type="unspecified"/>
-        <pin num="4" name="SDA" type="unspecified"/>
-        <pin num="5" name="CSN" type="unspecified"/>
-        <pin num="6" name="CSP" type="unspecified"/>
-        <pin num="7" name="REG" type="unspecified"/>
-        <pin num="8" name="ALRT" type="unspecified"/>
-        <pin num="9" name="THRM" type="unspecified"/>
-        <pin num="10" name="BATT" type="unspecified"/>
-        <pin num="11" name="EPAD" type="unspecified"/>
+        <pin num="A1" name="TH" type="input"/>
+        <pin num="A2" name="BATT" type="unspecified"/>
+        <pin num="A3" name="NC" type="no_connect"/>
+        <pin num="B1" name="SCL" type="input"/>
+        <pin num="B2" name="ALRT" type="output"/>
+        <pin num="B3" name="SYS" type="unspecified"/>
+        <pin num="C1" name="SDA" type="bidirectional"/>
+        <pin num="C2" name="REG" type="output"/>
+        <pin num="C3" name="GND" type="power_in"/>
       </pins>
     </libpart>
     <libpart lib="pin-layout" part="board-layout">
@@ -1807,24 +1804,28 @@
         <field name="Footprint">pin-layout:board-layout</field>
       </fields>
       <pins>
-        <pin num="1" name="VBAT" type="power_in"/>
-        <pin num="2" name="BATGND" type="power_in"/>
-        <pin num="3" name="3v3" type="power_in"/>
-        <pin num="4" name="GND" type="power_in"/>
-        <pin num="5" name="SYS" type="power_in"/>
-        <pin num="6" name="EN" type="bidirectional"/>
-        <pin num="7" name="GND" type="power_in"/>
-        <pin num="8" name="IO01" type="bidirectional"/>
-        <pin num="9" name="IO02" type="bidirectional"/>
-        <pin num="10" name="IO08" type="bidirectional"/>
-        <pin num="11" name="COPI" type="bidirectional"/>
-        <pin num="12" name="SCK" type="bidirectional"/>
-        <pin num="13" name="CIPO" type="bidirectional"/>
-        <pin num="14" name="SDA" type="bidirectional"/>
-        <pin num="15" name="SCL" type="bidirectional"/>
-        <pin num="16" name="GND" type="power_in"/>
-        <pin num="17" name="3v3" type="power_in"/>
-        <pin num="18" name="5v" type="power_in"/>
+        <pin num="1.1" name="VBAT" type="power_in"/>
+        <pin num="1.2" name="BATGND" type="power_in"/>
+        <pin num="1.3" name="3v3" type="power_in"/>
+        <pin num="1.4" name="GND" type="power_in"/>
+        <pin num="1.5" name="A4" type="bidirectional"/>
+        <pin num="1.6" name="A5" type="bidirectional"/>
+        <pin num="1.7" name="A6" type="bidirectional"/>
+        <pin num="1.8" name="EN" type="bidirectional"/>
+        <pin num="2.1" name="CS" type="bidirectional"/>
+        <pin num="2.2" name="CIPO" type="bidirectional"/>
+        <pin num="2.3" name="SCLK" type="bidirectional"/>
+        <pin num="2.4" name="COPI" type="bidirectional"/>
+        <pin num="2.5" name="A1" type="bidirectional"/>
+        <pin num="2.6" name="A2" type="bidirectional"/>
+        <pin num="2.7" name="A3" type="bidirectional"/>
+        <pin num="2.8" name="GND" type="power_in"/>
+        <pin num="3.1" name="5v" type="power_in"/>
+        <pin num="3.2" name="SYS" type="power_in"/>
+        <pin num="3.3" name="3v3" type="power_in"/>
+        <pin num="3.4" name="GND" type="power_in"/>
+        <pin num="3.5" name="SCL" type="bidirectional"/>
+        <pin num="3.6" name="SDA" type="bidirectional"/>
       </pins>
     </libpart>
     <libpart lib="power-symbols" part="VSYS">
@@ -1854,10 +1855,10 @@
       <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Mechanical.kicad_sym</uri>
     </library>
     <library logical="NCP167">
-      <uri>C:\Users\aniyo\Documents\GitHub\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/NCP167AMX330TBG/NCP167AMX330TBG.kicad_sym</uri>
+      <uri>D:\Documents\Github\T-Stick\hardware\PCB\enchantiS3-board/Libraries/NCP167AMX330TBG/NCP167AMX330TBG.kicad_sym</uri>
     </library>
     <library logical="PCM_Espressif">
-      <uri>C:\Users\aniyo\Documents\KiCad\7.0\3rdparty/symbols/com_github_espressif_kicad-libraries/Espressif.kicad_sym</uri>
+      <uri>D:\Documents\KiCad\7.0\3rdparty/symbols/com_github_espressif_kicad-libraries/Espressif.kicad_sym</uri>
     </library>
     <library logical="Power_Protection">
       <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Power_Protection.kicad_sym</uri>
@@ -1871,14 +1872,14 @@
     <library logical="Transistor_FET">
       <uri>C:\Program Files\KiCad\7.0\share\kicad\symbols\/Transistor_FET.kicad_sym</uri>
     </library>
-    <library logical="max17055-symbol">
-      <uri>C:\Users\aniyo\Documents\GitHub\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/max17055-kicad/max17055-symbol.kicad_sym</uri>
+    <library logical="max17262">
+      <uri>D:\Documents\Github\T-Stick\hardware\PCB\enchantiS3-board/Libraries/MAX17262REWL_T/max17262.kicad_sym</uri>
     </library>
     <library logical="pin-layout">
-      <uri>C:\Users\aniyo\Documents\GitHub\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/board-layout/pin-layout.kicad_sym</uri>
+      <uri>D:\Documents\Github\T-Stick\hardware\PCB\enchantiS3-board/Libraries/board-layout/pin-layout.kicad_sym</uri>
     </library>
     <library logical="power-symbols">
-      <uri>C:\Users\aniyo\Documents\GitHub\T-Stick\hardware\PCB\tstick-5gw-pro-USB-V2-pcb/Libraries/CUSTOM_POWER.kicad_sym</uri>
+      <uri>D:\Documents\Github\T-Stick\hardware\PCB\enchantiS3-board/Libraries/CUSTOM_POWER.kicad_sym</uri>
     </library>
   </libraries>
   <nets>
@@ -1907,241 +1908,214 @@
       <node ref="R19" pin="2" pintype="passive"/>
       <node ref="R23" pin="2" pintype="passive"/>
       <node ref="R5" pin="2" pintype="passive"/>
-      <node ref="TOUCH1" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="U3" pin="1" pinfunction="OUT" pintype="output"/>
     </net>
     <net code="3" name="+BATT">
       <node ref="BT1" pin="1" pinfunction="Pin_1" pintype="passive"/>
       <node ref="C1" pin="1" pintype="passive"/>
       <node ref="C8" pin="1" pintype="passive"/>
-      <node ref="FG1" pin="10" pinfunction="BATT" pintype="unspecified"/>
       <node ref="U2" pin="14" pinfunction="V_{BAT}" pintype="power_out"/>
       <node ref="U2" pin="15" pinfunction="V_{BAT}" pintype="passive"/>
       <node ref="U2" pin="16" pinfunction="V_{BAT_SENSE}" pintype="input"/>
+      <node ref="U6" pin="A2" pinfunction="BATT" pintype="unspecified"/>
     </net>
-    <net code="4" name="-BATT">
-      <node ref="BT1" pin="2" pinfunction="Pin_2" pintype="passive"/>
-      <node ref="R2" pin="1" pinfunction="1" pintype="passive"/>
-      <node ref="TH1" pin="2" pintype="passive"/>
+    <net code="4" name="/CIPO">
+      <node ref="MCU1" pin="21" pinfunction="GPIO13/TOUCH13/ADC2_CH2/FSPIQ/FSPIIO7/SUBSPIQ" pintype="bidirectional"/>
+      <node ref="TOUCH2" pin="1" pinfunction="Pin_1" pintype="passive"/>
     </net>
-    <net code="5" name="/AIN">
-      <node ref="FG1" pin="2" pinfunction="AIN" pintype="unspecified"/>
-      <node ref="R12" pin="1" pintype="passive"/>
-      <node ref="TH1" pin="1" pintype="passive"/>
+    <net code="5" name="/COPI">
+      <node ref="MCU1" pin="19" pinfunction="GPIO11/TOUCH11/ADC2_CH0/FSPID/FSPIIO5/SUBSPID" pintype="bidirectional"/>
+      <node ref="TOUCH2" pin="3" pinfunction="Pin_3" pintype="passive"/>
     </net>
-    <net code="6" name="/CIPO">
-      <node ref="MCU1" pin="24" pinfunction="GPIO47/SPICLK_P/SUBSPICLK_P_DIFF" pintype="bidirectional"/>
+    <net code="6" name="/CS">
+      <node ref="MCU1" pin="18" pinfunction="GPIO10/TOUCH10/ADC1_CH9/FSPICS0/FSPIIO4/SUBSPICS0" pintype="bidirectional"/>
+      <node ref="TOUCH2" pin="4" pinfunction="Pin_4" pintype="passive"/>
     </net>
-    <net code="7" name="/COPI">
-      <node ref="MCU1" pin="31" pinfunction="GPIO38/FSPIWP/SUBSPIWP" pintype="bidirectional"/>
-    </net>
-    <net code="8" name="/D+">
+    <net code="7" name="/D+">
       <node ref="J1" pin="A6" pinfunction="D+" pintype="bidirectional"/>
       <node ref="J1" pin="B6" pinfunction="D+" pintype="bidirectional"/>
       <node ref="U1" pin="3" pinfunction="I/O2" pintype="passive"/>
     </net>
-    <net code="9" name="/D-">
+    <net code="8" name="/D-">
       <node ref="J1" pin="A7" pinfunction="D-" pintype="bidirectional"/>
       <node ref="J1" pin="B7" pinfunction="D-" pintype="bidirectional"/>
       <node ref="U1" pin="1" pinfunction="I/O1" pintype="passive"/>
     </net>
-    <net code="10" name="/EN">
+    <net code="9" name="/EN">
       <node ref="C9" pin="1" pintype="passive"/>
       <node ref="MCU1" pin="3" pinfunction="EN" pintype="input"/>
       <node ref="R5" pin="1" pintype="passive"/>
       <node ref="SW2" pin="1" pinfunction="1" pintype="passive"/>
     </net>
-    <net code="11" name="/FG_CSN">
-      <node ref="FG1" pin="5" pinfunction="CSN" pintype="unspecified"/>
-      <node ref="R2" pin="3" pinfunction="3" pintype="passive"/>
-    </net>
-    <net code="12" name="/IMU_INT">
+    <net code="10" name="/IMU_INT">
       <node ref="IMU1" pin="12" pinfunction="INT1" pintype="output"/>
       <node ref="Q3" pin="2" pinfunction="S" pintype="passive"/>
       <node ref="R21" pin="1" pintype="passive"/>
     </net>
-    <net code="13" name="/IO0">
+    <net code="11" name="/IO0">
       <node ref="MCU1" pin="27" pinfunction="GPIO0/BOOT" pintype="bidirectional"/>
       <node ref="SW1" pin="1" pinfunction="1" pintype="passive"/>
     </net>
-    <net code="14" name="/IO1">
+    <net code="12" name="/IO1">
       <node ref="MCU1" pin="39" pinfunction="GPIO1/TOUCH1/ADC1_CH0" pintype="bidirectional"/>
     </net>
-    <net code="15" name="/IO2">
+    <net code="13" name="/IO2">
       <node ref="MCU1" pin="38" pinfunction="GPIO2/TOUCH2/ADC1_CH1" pintype="bidirectional"/>
     </net>
-    <net code="16" name="/IO3">
-      <node ref="MCU1" pin="15" pinfunction="GPIO3/TOUCH3/ADC1_CH2" pintype="bidirectional"/>
-    </net>
-    <net code="17" name="/IO4">
+    <net code="14" name="/IO4">
       <node ref="MCU1" pin="4" pinfunction="GPIO4/TOUCH4/ADC1_CH3" pintype="bidirectional"/>
-      <node ref="TOUCH2" pin="1" pinfunction="Pin_1" pintype="passive"/>
     </net>
-    <net code="18" name="/IO5">
+    <net code="15" name="/IO5">
       <node ref="MCU1" pin="5" pinfunction="GPIO5/TOUCH5/ADC1_CH4" pintype="bidirectional"/>
-      <node ref="TOUCH2" pin="2" pinfunction="Pin_2" pintype="passive"/>
     </net>
-    <net code="19" name="/IO6">
+    <net code="16" name="/IO6">
       <node ref="MCU1" pin="6" pinfunction="GPIO6/TOUCH6/ADC1_CH5" pintype="bidirectional"/>
-      <node ref="TOUCH2" pin="3" pinfunction="Pin_3" pintype="passive"/>
     </net>
-    <net code="20" name="/IO7">
+    <net code="17" name="/IO7">
       <node ref="MCU1" pin="7" pinfunction="GPIO7/TOUCH7/ADC1_CH6" pintype="bidirectional"/>
-      <node ref="TOUCH2" pin="4" pinfunction="Pin_4" pintype="passive"/>
     </net>
-    <net code="21" name="/IO8">
+    <net code="18" name="/IO8">
       <node ref="ANG1" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="MCU1" pin="12" pinfunction="GPIO8/TOUCH8/ADC1_CH7/SUBSPICS1" pintype="bidirectional"/>
       <node ref="R1" pin="1" pintype="passive"/>
     </net>
-    <net code="22" name="/IO9">
+    <net code="19" name="/IO9">
       <node ref="ANG2" pin="1" pinfunction="Pin_1" pintype="passive"/>
       <node ref="MCU1" pin="17" pinfunction="GPIO9/TOUCH9/ADC1_CH8/FSPIHD/SUBSPIHD" pintype="bidirectional"/>
     </net>
-    <net code="23" name="/IO10">
-      <node ref="MCU1" pin="18" pinfunction="GPIO10/TOUCH10/ADC1_CH9/FSPICS0/FSPIIO4/SUBSPICS0" pintype="bidirectional"/>
-    </net>
-    <net code="24" name="/IO13">
-      <node ref="MCU1" pin="21" pinfunction="GPIO13/TOUCH13/ADC2_CH2/FSPIQ/FSPIIO7/SUBSPIQ" pintype="bidirectional"/>
-    </net>
-    <net code="25" name="/IO14">
-      <node ref="MCU1" pin="22" pinfunction="GPIO14/TOUCH14/ADC2_CH3/FSPIWP/FSPIDQS/SUBSPIWP" pintype="bidirectional"/>
-    </net>
-    <net code="26" name="/IO15">
+    <net code="20" name="/IO15">
       <node ref="MCU1" pin="8" pinfunction="GPIO15/U0RTS/ADC2_CH4/XTAL_32K_P" pintype="bidirectional"/>
       <node ref="R8" pin="1" pintype="passive"/>
     </net>
-    <net code="27" name="/IO16">
+    <net code="21" name="/IO16">
       <node ref="MCU1" pin="9" pinfunction="GPIO16/U0CTS/ADC2_CH5/XTAL_32K_N" pintype="bidirectional"/>
       <node ref="R10" pin="1" pintype="passive"/>
     </net>
-    <net code="28" name="/IO17">
-      <node ref="FG1" pin="8" pinfunction="ALRT" pintype="unspecified"/>
+    <net code="22" name="/IO17">
       <node ref="MCU1" pin="10" pinfunction="GPIO17/U1TXD/ADC2_CH6" pintype="bidirectional"/>
     </net>
-    <net code="29" name="/IO18">
+    <net code="23" name="/IO18">
       <node ref="MCU1" pin="11" pinfunction="GPIO18/U1RXD/ADC2_CH7/CLK_OUT3" pintype="bidirectional"/>
     </net>
-    <net code="30" name="/IO21">
-      <node ref="MCU1" pin="23" pinfunction="GPIO21" pintype="bidirectional"/>
+    <net code="24" name="/IO39">
+      <node ref="MCU1" pin="32" pinfunction="MTCK/GPIO39/CLK_OUT3/SUBSPICS1" pintype="bidirectional"/>
+      <node ref="U5" pin="3" pinfunction="EN" pintype="input"/>
+    </net>
+    <net code="25" name="/IO40">
+      <node ref="MCU1" pin="33" pinfunction="MTDO/GPIO40/CLK_OUT2" pintype="bidirectional"/>
+    </net>
+    <net code="26" name="/IO41">
+      <node ref="MCU1" pin="34" pinfunction="MTDI/GPIO41/CLK_OUT1" pintype="bidirectional"/>
+    </net>
+    <net code="27" name="/IO42">
+      <node ref="MCU1" pin="35" pinfunction="MTMS/GPIO42" pintype="bidirectional"/>
+    </net>
+    <net code="28" name="/IO48">
+      <node ref="MCU1" pin="25" pinfunction="GPIO48/SPICLK_N/SUBSPICLK_N_DIFF" pintype="bidirectional"/>
       <node ref="Q3" pin="3" pinfunction="D" pintype="passive"/>
       <node ref="R23" pin="1" pintype="passive"/>
     </net>
-    <net code="31" name="/IO39">
-      <node ref="MCU1" pin="32" pinfunction="MTCK/GPIO39/CLK_OUT3/SUBSPICS1" pintype="bidirectional"/>
-    </net>
-    <net code="32" name="/IO40">
-      <node ref="MCU1" pin="33" pinfunction="MTDO/GPIO40/CLK_OUT2" pintype="bidirectional"/>
-    </net>
-    <net code="33" name="/IO41">
-      <node ref="MCU1" pin="34" pinfunction="MTDI/GPIO41/CLK_OUT1" pintype="bidirectional"/>
-    </net>
-    <net code="34" name="/IO42">
-      <node ref="MCU1" pin="35" pinfunction="MTMS/GPIO42" pintype="bidirectional"/>
-    </net>
-    <net code="35" name="/IO45">
-      <node ref="MCU1" pin="26" pinfunction="GPIO45" pintype="bidirectional"/>
-    </net>
-    <net code="36" name="/IO46">
-      <node ref="MCU1" pin="16" pinfunction="GPIO46" pintype="bidirectional"/>
-    </net>
-    <net code="37" name="/LV_SCL">
+    <net code="29" name="/LV_SCL">
       <node ref="IMU1" pin="23" pinfunction="SCL/SCLK" pintype="input"/>
       <node ref="Q1" pin="2" pinfunction="S" pintype="passive"/>
       <node ref="R14" pin="1" pintype="passive"/>
     </net>
-    <net code="38" name="/LV_SDA">
+    <net code="30" name="/LV_SDA">
       <node ref="IMU1" pin="24" pinfunction="SDA/SDI" pintype="bidirectional"/>
       <node ref="Q2" pin="2" pinfunction="S" pintype="passive"/>
       <node ref="R15" pin="1" pintype="passive"/>
     </net>
-    <net code="39" name="/PG">
+    <net code="31" name="/PG">
       <node ref="R24" pin="2" pintype="passive"/>
       <node ref="U2" pin="6" pinfunction="~{PG}" pintype="open_collector"/>
     </net>
-    <net code="40" name="/PROG1">
+    <net code="32" name="/PROG1">
       <node ref="R20" pin="2" pintype="passive"/>
       <node ref="U2" pin="13" pinfunction="PROG1" pintype="bidirectional"/>
     </net>
-    <net code="41" name="/PROG3">
+    <net code="33" name="/PROG3">
       <node ref="R17" pin="2" pintype="passive"/>
       <node ref="U2" pin="12" pinfunction="PROG3" pintype="bidirectional"/>
     </net>
-    <net code="42" name="/REG">
+    <net code="34" name="/REG">
       <node ref="C2" pin="1" pintype="passive"/>
-      <node ref="FG1" pin="7" pinfunction="REG" pintype="unspecified"/>
+      <node ref="U6" pin="C2" pinfunction="REG" pintype="output"/>
     </net>
-    <net code="43" name="/RXD">
+    <net code="35" name="/RXD">
       <node ref="MCU1" pin="36" pinfunction="U0RXD/GPIO44/CLK_OUT2" pintype="bidirectional"/>
     </net>
-    <net code="44" name="/SCK">
-      <node ref="MCU1" pin="25" pinfunction="GPIO48/SPICLK_N/SUBSPICLK_N_DIFF" pintype="bidirectional"/>
-    </net>
-    <net code="45" name="/SCL">
-      <node ref="FG1" pin="3" pinfunction="SCL" pintype="unspecified"/>
-      <node ref="MCU1" pin="19" pinfunction="GPIO11/TOUCH11/ADC2_CH0/FSPID/FSPIIO5/SUBSPID" pintype="bidirectional"/>
+    <net code="36" name="/SCL">
+      <node ref="MCU1" pin="22" pinfunction="GPIO14/TOUCH14/ADC2_CH3/FSPIWP/FSPIDQS/SUBSPIWP" pintype="bidirectional"/>
       <node ref="Q1" pin="3" pinfunction="D" pintype="passive"/>
       <node ref="R19" pin="1" pintype="passive"/>
       <node ref="TOUCH1" pin="4" pinfunction="Pin_4" pintype="passive"/>
+      <node ref="U6" pin="B1" pinfunction="SCL" pintype="input"/>
     </net>
-    <net code="46" name="/SDA">
-      <node ref="FG1" pin="4" pinfunction="SDA" pintype="unspecified"/>
+    <net code="37" name="/SCLK">
       <node ref="MCU1" pin="20" pinfunction="GPIO12/TOUCH12/ADC2_CH1/FSPICLK/FSPIIO6/SUBSPICLK" pintype="bidirectional"/>
+      <node ref="TOUCH2" pin="2" pinfunction="Pin_2" pintype="passive"/>
+    </net>
+    <net code="38" name="/SDA">
+      <node ref="MCU1" pin="23" pinfunction="GPIO21" pintype="bidirectional"/>
       <node ref="Q2" pin="3" pinfunction="D" pintype="passive"/>
       <node ref="R16" pin="1" pintype="passive"/>
       <node ref="TOUCH1" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="U6" pin="C1" pinfunction="SDA" pintype="bidirectional"/>
     </net>
-    <net code="47" name="/STAT">
+    <net code="39" name="/STAT">
       <node ref="R3" pin="2" pintype="passive"/>
       <node ref="U2" pin="8" pinfunction="STAT1/~{LBO}" pintype="open_collector"/>
     </net>
-    <net code="48" name="/STAT2">
+    <net code="40" name="/STAT2">
       <node ref="R22" pin="2" pintype="passive"/>
       <node ref="U2" pin="7" pinfunction="STAT2" pintype="open_collector"/>
     </net>
-    <net code="49" name="/THERM">
+    <net code="41" name="/THERM">
       <node ref="R9" pin="2" pintype="passive"/>
       <node ref="U2" pin="5" pinfunction="THERM" pintype="bidirectional"/>
     </net>
-    <net code="50" name="/THRM">
-      <node ref="FG1" pin="9" pinfunction="THRM" pintype="unspecified"/>
-      <node ref="R12" pin="2" pintype="passive"/>
+    <net code="42" name="/THRM">
+      <node ref="TH1" pin="1" pintype="passive"/>
+      <node ref="U6" pin="A1" pinfunction="TH" pintype="input"/>
     </net>
-    <net code="51" name="/TXD">
+    <net code="43" name="/TXD">
       <node ref="MCU1" pin="37" pinfunction="U0TXD/GPIO43/CLK_OUT1" pintype="bidirectional"/>
     </net>
-    <net code="52" name="/USBD+">
+    <net code="44" name="/USBD+">
       <node ref="MCU1" pin="14" pinfunction="GPIO20/U1CTS/ADC2_CH9/CLK_OUT1/USB_D+" pintype="bidirectional"/>
       <node ref="U1" pin="4" pinfunction="I/O2" pintype="passive"/>
     </net>
-    <net code="53" name="/USBD-">
+    <net code="45" name="/USBD-">
       <node ref="MCU1" pin="13" pinfunction="GPIO19/U1RTS/ADC2_CH8/CLK_OUT2/USB_D-" pintype="bidirectional"/>
       <node ref="U1" pin="6" pinfunction="I/O1" pintype="passive"/>
     </net>
-    <net code="54" name="/VPCC">
+    <net code="46" name="/VPCC">
       <node ref="R18" pin="1" pintype="passive"/>
       <node ref="R4" pin="2" pintype="passive"/>
       <node ref="U2" pin="2" pinfunction="VPCC" pintype="input"/>
     </net>
-    <net code="55" name="CSP">
-      <node ref="C1" pin="2" pintype="passive"/>
-      <node ref="C2" pin="2" pintype="passive"/>
-      <node ref="FG1" pin="11" pinfunction="EPAD" pintype="unspecified"/>
-      <node ref="FG1" pin="6" pinfunction="CSP" pintype="unspecified"/>
-      <node ref="R2" pin="2" pinfunction="2" pintype="passive"/>
+    <net code="47" name="3V3_AUX">
+      <node ref="C16" pin="1" pintype="passive"/>
+      <node ref="TOUCH1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="U5" pin="1" pinfunction="OUT" pintype="output"/>
     </net>
-    <net code="56" name="GND">
+    <net code="48" name="GND">
       <node ref="ANG1" pin="MP" pinfunction="MountPin" pintype="passive"/>
       <node ref="ANG2" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="ANG2" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="BT1" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="BT1" pin="MP" pinfunction="MountPin" pintype="passive"/>
+      <node ref="C1" pin="2" pintype="passive"/>
       <node ref="C10" pin="2" pintype="passive"/>
       <node ref="C11" pin="2" pintype="passive"/>
       <node ref="C12" pin="2" pintype="passive"/>
       <node ref="C13" pin="2" pintype="passive"/>
       <node ref="C14" pin="2" pintype="passive"/>
       <node ref="C15" pin="2" pintype="passive"/>
+      <node ref="C16" pin="2" pintype="passive"/>
+      <node ref="C17" pin="2" pintype="passive"/>
       <node ref="C19" pin="2" pintype="passive"/>
+      <node ref="C2" pin="2" pintype="passive"/>
       <node ref="C3" pin="2" pintype="passive"/>
       <node ref="C4" pin="2" pintype="passive"/>
       <node ref="C5" pin="2" pintype="passive"/>
@@ -2163,7 +2137,6 @@
       <node ref="MCU1" pin="41" pinfunction="GND" pintype="passive"/>
       <node ref="R1" pin="2" pintype="passive"/>
       <node ref="R17" pin="1" pintype="passive"/>
-      <node ref="R2" pin="4" pinfunction="4" pintype="passive"/>
       <node ref="R20" pin="1" pintype="passive"/>
       <node ref="R4" pin="1" pintype="passive"/>
       <node ref="R6" pin="1" pintype="passive"/>
@@ -2173,6 +2146,7 @@
       <node ref="STATLED2" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="SW1" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="SW2" pin="2" pinfunction="2" pintype="passive"/>
+      <node ref="TH1" pin="2" pintype="passive"/>
       <node ref="TOUCH1" pin="1" pinfunction="Pin_1" pintype="passive"/>
       <node ref="TOUCH1" pin="MP" pinfunction="MountPin" pintype="passive"/>
       <node ref="TOUCH2" pin="MP" pinfunction="MountPin" pintype="passive"/>
@@ -2185,41 +2159,46 @@
       <node ref="U3" pin="5" pinfunction="GND" pintype="power_out"/>
       <node ref="U4" pin="2" pinfunction="GND" pintype="power_out"/>
       <node ref="U4" pin="5" pinfunction="GND" pintype="power_out"/>
+      <node ref="U5" pin="2" pinfunction="GND" pintype="power_out"/>
+      <node ref="U5" pin="5" pinfunction="GND" pintype="power_out"/>
+      <node ref="U6" pin="B2" pinfunction="ALRT" pintype="output"/>
+      <node ref="U6" pin="C3" pinfunction="GND" pintype="power_in"/>
     </net>
-    <net code="57" name="Net-(CHARGLED1-K)">
+    <net code="49" name="Net-(CHARGLED1-K)">
       <node ref="CHARGLED1" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R3" pin="1" pintype="passive"/>
     </net>
-    <net code="58" name="Net-(CHARGLED2-K)">
+    <net code="50" name="Net-(CHARGLED2-K)">
       <node ref="CHARGLED2" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R22" pin="1" pintype="passive"/>
     </net>
-    <net code="59" name="Net-(CHARGLED3-K)">
+    <net code="51" name="Net-(CHARGLED3-K)">
       <node ref="CHARGLED3" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="R24" pin="1" pintype="passive"/>
     </net>
-    <net code="60" name="Net-(IMU1-REGOUT)">
+    <net code="52" name="Net-(IMU1-REGOUT)">
       <node ref="C6" pin="1" pintype="passive"/>
       <node ref="IMU1" pin="10" pinfunction="REGOUT" pintype="passive"/>
     </net>
-    <net code="61" name="Net-(J1-CC1)">
+    <net code="53" name="Net-(J1-CC1)">
       <node ref="J1" pin="A5" pinfunction="CC1" pintype="bidirectional"/>
       <node ref="R7" pin="2" pintype="passive"/>
     </net>
-    <net code="62" name="Net-(J1-CC2)">
+    <net code="54" name="Net-(J1-CC2)">
       <node ref="J1" pin="B5" pinfunction="CC2" pintype="bidirectional"/>
       <node ref="R6" pin="2" pintype="passive"/>
     </net>
-    <net code="63" name="Net-(STATLED1-A)">
+    <net code="55" name="Net-(STATLED1-A)">
       <node ref="R8" pin="2" pintype="passive"/>
       <node ref="STATLED1" pin="2" pinfunction="A" pintype="passive"/>
     </net>
-    <net code="64" name="Net-(STATLED2-A)">
+    <net code="56" name="Net-(STATLED2-A)">
       <node ref="R10" pin="2" pintype="passive"/>
       <node ref="STATLED2" pin="2" pinfunction="A" pintype="passive"/>
     </net>
-    <net code="65" name="SYS">
+    <net code="57" name="SYS">
       <node ref="C11" pin="1" pintype="passive"/>
+      <node ref="C17" pin="1" pintype="passive"/>
       <node ref="C3" pin="1" pintype="passive"/>
       <node ref="C4" pin="1" pintype="passive"/>
       <node ref="U2" pin="1" pinfunction="OUT" pintype="power_out"/>
@@ -2228,8 +2207,10 @@
       <node ref="U3" pin="4" pinfunction="IN" pintype="power_in"/>
       <node ref="U4" pin="3" pinfunction="EN" pintype="input"/>
       <node ref="U4" pin="4" pinfunction="IN" pintype="power_in"/>
+      <node ref="U5" pin="4" pinfunction="IN" pintype="power_in"/>
+      <node ref="U6" pin="B3" pinfunction="SYS" pintype="unspecified"/>
     </net>
-    <net code="66" name="VUSB">
+    <net code="58" name="VUSB">
       <node ref="C14" pin="1" pintype="passive"/>
       <node ref="C15" pin="1" pintype="passive"/>
       <node ref="CHARGLED1" pin="2" pinfunction="A" pintype="passive"/>
@@ -2247,62 +2228,77 @@
       <node ref="U2" pin="3" pinfunction="SEL" pintype="input"/>
       <node ref="U2" pin="4" pinfunction="PROG2" pintype="input"/>
     </net>
-    <net code="67" name="unconnected-(FG1-N.C.-Pad1)">
-      <node ref="FG1" pin="1" pinfunction="N.C." pintype="no_connect"/>
-    </net>
-    <net code="68" name="unconnected-(IMU1-AUX_CL-Pad7)">
+    <net code="59" name="unconnected-(IMU1-AUX_CL-Pad7)">
       <node ref="IMU1" pin="7" pinfunction="AUX_CL" pintype="output+no_connect"/>
     </net>
-    <net code="69" name="unconnected-(IMU1-AUX_DA-Pad21)">
+    <net code="60" name="unconnected-(IMU1-AUX_DA-Pad21)">
       <node ref="IMU1" pin="21" pinfunction="AUX_DA" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="70" name="unconnected-(IMU1-NC-Pad1)">
+    <net code="61" name="unconnected-(IMU1-NC-Pad1)">
       <node ref="IMU1" pin="1" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="71" name="unconnected-(IMU1-NC-Pad2)">
+    <net code="62" name="unconnected-(IMU1-NC-Pad2)">
       <node ref="IMU1" pin="2" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="72" name="unconnected-(IMU1-NC-Pad3)">
+    <net code="63" name="unconnected-(IMU1-NC-Pad3)">
       <node ref="IMU1" pin="3" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="73" name="unconnected-(IMU1-NC-Pad4)">
+    <net code="64" name="unconnected-(IMU1-NC-Pad4)">
       <node ref="IMU1" pin="4" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="74" name="unconnected-(IMU1-NC-Pad5)">
+    <net code="65" name="unconnected-(IMU1-NC-Pad5)">
       <node ref="IMU1" pin="5" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="75" name="unconnected-(IMU1-NC-Pad6)">
+    <net code="66" name="unconnected-(IMU1-NC-Pad6)">
       <node ref="IMU1" pin="6" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="76" name="unconnected-(IMU1-NC-Pad14)">
+    <net code="67" name="unconnected-(IMU1-NC-Pad14)">
       <node ref="IMU1" pin="14" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="77" name="unconnected-(IMU1-NC-Pad15)">
+    <net code="68" name="unconnected-(IMU1-NC-Pad15)">
       <node ref="IMU1" pin="15" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="78" name="unconnected-(IMU1-NC-Pad16)">
+    <net code="69" name="unconnected-(IMU1-NC-Pad16)">
       <node ref="IMU1" pin="16" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="79" name="unconnected-(IMU1-NC-Pad17)">
+    <net code="70" name="unconnected-(IMU1-NC-Pad17)">
       <node ref="IMU1" pin="17" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="80" name="unconnected-(IMU1-RESV-Pad19)">
+    <net code="71" name="unconnected-(IMU1-RESV-Pad19)">
       <node ref="IMU1" pin="19" pinfunction="RESV" pintype="no_connect"/>
     </net>
-    <net code="81" name="unconnected-(J1-SBU1-PadA8)">
+    <net code="72" name="unconnected-(J1-SBU1-PadA8)">
       <node ref="J1" pin="A8" pinfunction="SBU1" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="82" name="unconnected-(J1-SBU2-PadB8)">
+    <net code="73" name="unconnected-(J1-SBU2-PadB8)">
       <node ref="J1" pin="B8" pinfunction="SBU2" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="83" name="unconnected-(MCU1-NC-Pad28)">
+    <net code="74" name="unconnected-(MCU1-GPIO3{slash}TOUCH3{slash}ADC1_CH2-Pad15)">
+      <node ref="MCU1" pin="15" pinfunction="GPIO3/TOUCH3/ADC1_CH2" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="75" name="unconnected-(MCU1-GPIO38{slash}FSPIWP{slash}SUBSPIWP-Pad31)">
+      <node ref="MCU1" pin="31" pinfunction="GPIO38/FSPIWP/SUBSPIWP" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="76" name="unconnected-(MCU1-GPIO45-Pad26)">
+      <node ref="MCU1" pin="26" pinfunction="GPIO45" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="77" name="unconnected-(MCU1-GPIO46-Pad16)">
+      <node ref="MCU1" pin="16" pinfunction="GPIO46" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="78" name="unconnected-(MCU1-GPIO47{slash}SPICLK_P{slash}SUBSPICLK_P_DIFF-Pad24)">
+      <node ref="MCU1" pin="24" pinfunction="GPIO47/SPICLK_P/SUBSPICLK_P_DIFF" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="79" name="unconnected-(MCU1-NC-Pad28)">
       <node ref="MCU1" pin="28" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="84" name="unconnected-(MCU1-NC-Pad29)">
+    <net code="80" name="unconnected-(MCU1-NC-Pad29)">
       <node ref="MCU1" pin="29" pinfunction="NC" pintype="no_connect"/>
     </net>
-    <net code="85" name="unconnected-(MCU1-NC-Pad30)">
+    <net code="81" name="unconnected-(MCU1-NC-Pad30)">
       <node ref="MCU1" pin="30" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="82" name="unconnected-(U6-NC-PadA3)">
+      <node ref="U6" pin="A3" pinfunction="NC" pintype="no_connect"/>
     </net>
   </nets>
 </export>

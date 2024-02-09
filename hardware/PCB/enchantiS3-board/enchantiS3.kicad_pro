@@ -169,7 +169,7 @@
       },
       "rules": {
         "max_error": 0.005,
-        "min_clearance": 0.12,
+        "min_clearance": 0.1016,
         "min_connection": 0.0,
         "min_copper_edge_clearance": 0.0,
         "min_hole_clearance": 0.16999999999999998,
@@ -181,7 +181,7 @@
         "min_text_height": 0.7999999999999999,
         "min_text_thickness": 0.08,
         "min_through_hole_diameter": 0.254,
-        "min_track_width": 0.15239999999999998,
+        "min_track_width": 0.1016,
         "min_via_annular_width": 0.127,
         "min_via_diameter": 0.508,
         "solder_mask_clearance": 0.0,
@@ -231,6 +231,7 @@
       ],
       "track_widths": [
         0.0,
+        0.1016,
         0.1524,
         0.254,
         0.508
@@ -474,7 +475,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "tstick-5gw-pro-USB-V2-pcb.kicad_pro",
+    "filename": "enchantiS3.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -498,7 +499,7 @@
       },
       {
         "bus_width": 12,
-        "clearance": 0.129,
+        "clearance": 0.1016,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
