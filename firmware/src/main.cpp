@@ -36,10 +36,15 @@ unsigned int firmware_version = 220929;
 #include <puara.h>
 #include <puara_gestures.h>
 #include <mapper.h>
+#include <charconv>
+#include <lo/lo.h>
+#include <lo/lo_lowlevel.h>
+#include <lo/lo_types.h>
 
 #include <deque>
 #include <cmath>
 #include <algorithm>
+
 
 // initializing libmapper, puara, puara-gestures, and liblo client
 mpr_dev lm_dev = 0;
@@ -183,6 +188,55 @@ int generic_handler(const char *path, const char *types, lo_arg ** argv,
     return 1;
 }
 
+void osc_bundle_add_int(lo_bundle puara_bundle,const char *path, int value) {
+    int ret = 0;
+    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), path);
+    lo_message tmp_osc = lo_message_new();
+    ret = lo_message_add_int32(tmp_osc, value);
+    if (ret < 0) {
+        lo_message_free(tmp_osc);
+        return;
+    }
+    ret = lo_bundle_add_message(puara_bundle, oscNamespace.c_str(), tmp_osc);
+    if(ret < 0) {
+        std::cout << "error adding message to bundle" << std::endl;
+    }
+}
+void osc_bundle_add_float(lo_bundle puara_bundle,const char *path, float value) {
+    int ret = 0;
+    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), path);
+    lo_message tmp_osc = lo_message_new();
+    ret = lo_message_add_float(tmp_osc, value);
+    if (ret < 0) {
+        lo_message_free(tmp_osc);
+        return;
+    }
+    ret = lo_bundle_add_message(puara_bundle, oscNamespace.c_str(), tmp_osc);
+    if(ret < 0) {
+        std::cout << "error adding message to bundle" << std::endl;
+    }
+}
+void osc_bundle_add_int_array(lo_bundle puara_bundle,const char *path, int size, int *value) {
+    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), path);
+    lo_message tmp_osc = lo_message_new();
+    for (int i = 0; i < size; i++) {
+        lo_message_add_int32(tmp_osc, value[i]);
+    }
+    lo_bundle_add_message(puara_bundle, oscNamespace.c_str(), tmp_osc);
+}
+
+void osc_bundle_add_float_array(lo_bundle puara_bundle,const char *path, int size,  float *value) {
+    oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), path);
+    lo_message tmp_osc = lo_message_new();
+    for (int i = 0; i < size; i++) {
+        lo_message_add_float(tmp_osc, value[i]);
+    }
+    lo_bundle_add_message(puara_bundle, oscNamespace.c_str(), tmp_osc);
+}
+
+void updateOSC();
+void updateOSC_bundle(lo_bundle puara_bundle);
+
 ////////////////////////////////
 // sensors and libmapper data //
 ////////////////////////////////
@@ -282,6 +336,10 @@ void setup() {
     #ifdef Arduino_h
         Serial.begin(115200);
     #endif
+
+    // Start Wire
+    Wire.begin();
+    Wire.setClock(400000);
 
     // Disable WiFi power save
     esp_wifi_set_ps(WIFI_PS_NONE);
@@ -531,170 +589,8 @@ void loop() {
     #endif
 
     // Sending continuous OSC messages
-    if (puara.IP1_ready()) {
-
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
-            #ifdef touch_TRILL
-                lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiii", touch.touch[0], touch.touch[1],touch.touch[2],
-                    touch.touch[3],touch.touch[4],touch.touch[5], touch.touch[6], touch.touch[7], touch.touch[8],
-                    touch.touch[9], touch.touch[10], touch.touch[11], touch.touch[12], touch.touch[13], touch.touch[14]
-            );
-            #endif
-            #ifdef touch_CAPSENSE
-                lo_send(osc1, oscNamespace.c_str(), "iiiiiiiiiiiiiiii", capsense.data[0], capsense.data[1],capsense.data[2],
-                    capsense.data[3],capsense.data[4],capsense.data[5], capsense.data[6], capsense.data[7], capsense.data[8],
-                    capsense.data[9], capsense.data[10], capsense.data[11], capsense.data[12], capsense.data[13], capsense.data[14],
-                    capsense.data[15]
-            );
-            #endif
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/fsr");
-            lo_send(osc1, oscNamespace.c_str(), "i", sensors.fsr);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/squeeze");
-            lo_send(osc1, oscNamespace.c_str(), "f", sensors.squeeze);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/all");
-            lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchAll);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/top");
-            lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchTop);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/middle");
-            lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchMiddle);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/bottom");
-            lo_send(osc1, oscNamespace.c_str(), "f", gestures.touchBottom);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/accl");
-            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.accl[0], sensors.accl[1], sensors.accl[2]);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/gyro");
-            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.gyro[0], sensors.gyro[1], sensors.gyro[2]);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/magn");
-            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.magn[0], sensors.magn[1], sensors.magn[2]);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "orientation");
-            lo_send(osc1, oscNamespace.c_str(), "ffff", sensors.quat[0], sensors.quat[1], sensors.quat[2], sensors.quat[3]);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "ypr");
-            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.ypr[0], sensors.ypr[1], sensors.ypr[2]);
-    }
-    if (puara.IP2_ready()) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/capsense");
-            #ifdef touch_TRILL
-                lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiii", touch.touch[0], touch.touch[1],touch.touch[2],
-                    touch.touch[3],touch.touch[4],touch.touch[5], touch.touch[6], touch.touch[7], touch.touch[8],
-                    touch.touch[9], touch.touch[10], touch.touch[11], touch.touch[12], touch.touch[13], touch.touch[14]
-            );
-            #endif
-            #ifdef touch_CAPSENSE
-                lo_send(osc2, oscNamespace.c_str(), "iiiiiiiiiiiiiiii", capsense.data[0], capsense.data[1],capsense.data[2],
-                    capsense.data[3],capsense.data[4],capsense.data[5], capsense.data[6], capsense.data[7], capsense.data[8],
-                    capsense.data[9], capsense.data[10], capsense.data[11], capsense.data[12], capsense.data[13], capsense.data[14],
-                    capsense.data[15]
-            );
-            #endif
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/fsr");
-            lo_send(osc2, oscNamespace.c_str(), "i", sensors.fsr);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/squeeze");
-            lo_send(osc2, oscNamespace.c_str(), "f", sensors.squeeze);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/all");
-            lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchAll);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/top");
-            lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchTop);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/middle");
-            lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchMiddle);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/touch/bottom");
-            lo_send(osc2, oscNamespace.c_str(), "f", gestures.touchBottom);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/accl");
-            lo_send(osc2, oscNamespace.c_str(), "fff", sensors.accl[0], sensors.accl[1], sensors.accl[2]);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/gyro");
-            lo_send(osc2, oscNamespace.c_str(), "fff", sensors.gyro[0], sensors.gyro[1], sensors.gyro[2]);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "raw/magn");
-            lo_send(osc2, oscNamespace.c_str(), "fff", sensors.magn[0], sensors.magn[1], sensors.magn[2]);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "orientation");
-            lo_send(osc2, oscNamespace.c_str(), "ffff", sensors.quat[0], sensors.quat[1], sensors.quat[2], sensors.quat[3]);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "ypr");
-            lo_send(osc2, oscNamespace.c_str(), "fff", sensors.ypr[0], sensors.ypr[1], sensors.ypr[2]);
-    }
-
-    // Sending discrete OSC messages
-    if (puara.IP1_ready()) {
-        if (event.brush) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/brush");
-            lo_send(osc1, oscNamespace.c_str(), "f", sensors.brush);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/multibrush");
-            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.multibrush[0], sensors.multibrush[1], sensors.multibrush[2]);
-        }
-        if (event.rub) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/rub");
-            lo_send(osc1, oscNamespace.c_str(), "f", sensors.rub);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/multirub");
-            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.multirub[0], sensors.multirub[1], sensors.multirub[2]);
-        }
-        if (event.shake) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/shakexyz");
-            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.shake[0], sensors.shake[1], sensors.shake[2]);
-        }
-        if (event.jab) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/jabxyz");
-            lo_send(osc1, oscNamespace.c_str(), "fff", sensors.jab[0], sensors.jab[1], sensors.jab[2]);
-        }
-        if (event.count) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/count");
-            lo_send(osc1, oscNamespace.c_str(), "i", sensors.count);
-        }
-        if (event.tap) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/tap");
-            lo_send(osc1, oscNamespace.c_str(), "i", sensors.tap);
-        }
-        if (event.dtap) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/dtap");
-            lo_send(osc1, oscNamespace.c_str(), "i", sensors.dtap);
-        }
-        if (event.ttap) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/ttap");
-            lo_send(osc1, oscNamespace.c_str(), "i", sensors.ttap);
-        }
-        if (event.battery) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery");
-            lo_send(osc1, oscNamespace.c_str(), "i", sensors.battery);
-        }
-    }
-    if (puara.IP2_ready()) {
-        if (event.brush) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/brush");
-            lo_send(osc2, oscNamespace.c_str(), "f", sensors.brush);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/multibrush");
-            lo_send(osc2, oscNamespace.c_str(), "fff", sensors.multibrush[0], sensors.multibrush[1], sensors.multibrush[2]);
-        }
-        if (event.rub) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/rub");
-            lo_send(osc2, oscNamespace.c_str(), "f", sensors.rub);
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/multirub");
-            lo_send(osc2, oscNamespace.c_str(), "fff", sensors.multirub[0], sensors.multirub[1], sensors.multirub[2]);
-        }
-        if (event.shake) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/shakexyz");
-            lo_send(osc2, oscNamespace.c_str(), "fff", sensors.shake[0], sensors.shake[1], sensors.shake[2]);
-        }
-        if (event.jab) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/jabxyz");
-            lo_send(osc2, oscNamespace.c_str(), "fff", sensors.jab[0], sensors.jab[1], sensors.jab[2]);
-        }
-        if (event.count) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/count");
-            lo_send(osc2, oscNamespace.c_str(), "i", sensors.count);
-        }
-        if (event.tap) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/tap");
-            lo_send(osc2, oscNamespace.c_str(), "i", sensors.tap);
-        }
-        if (event.dtap) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/dtap");
-            lo_send(osc2, oscNamespace.c_str(), "i", sensors.dtap);
-        }
-        if (event.ttap) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "instrument/button/ttap");
-            lo_send(osc2, oscNamespace.c_str(), "i", sensors.ttap);
-        }
-        if (event.battery) {
-            oscNamespace.replace(oscNamespace.begin()+baseNamespace.size(),oscNamespace.end(), "battery");
-            lo_send(osc2, oscNamespace.c_str(), "i", sensors.battery);
-        }
-    }
-
+    updateOSC();
+    
     // Set LED - connection status and battery level
     #ifdef ARDUINO_LOLIN_D32_PRO
         if (battery.percentage < 10) {        // low battery - flickering
@@ -846,4 +742,85 @@ void initIMU() {
     imu.settings.mag.operatingMode = 0; // Continuous mode
 
     imu.begin();
+}
+
+void updateOSC() {
+    // Create a bundle and send it to both IP addresses
+    if (puara.IP1_ready() || puara.IP2_ready()) {
+        lo_bundle bundle = lo_bundle_new(LO_TT_IMMEDIATE);
+        if (!bundle) {
+            return;
+        }
+        updateOSC_bundle(bundle);
+
+        if (puara.IP1_ready()) {
+            lo_send_bundle(osc1, bundle);
+        }
+        if (puara.IP2_ready()) {
+            lo_send_bundle(osc2, bundle);
+        }
+
+        // free memory from bundle
+        lo_bundle_free_recursive(bundle);
+    }
+}
+
+void updateOSC_bundle(lo_bundle puara_bundle) {
+    // Continuously send FSR data
+    osc_bundle_add_int(puara_bundle, "raw/fsr", sensors.fsr);
+    osc_bundle_add_float(puara_bundle, "instrument/squeeze", sensors.squeeze);
+
+    //Send touch data
+    osc_bundle_add_float(puara_bundle, "instrument/touch/all", gestures.touchAll);
+    osc_bundle_add_float(puara_bundle, "instrument/touch/top", gestures.touchTop);
+    osc_bundle_add_float(puara_bundle, "instrument/touch/middle", gestures.touchMiddle);
+    osc_bundle_add_float(puara_bundle, "instrument/touch/bottom", gestures.touchBottom);
+    #ifdef touch_TRILL
+    osc_bundle_add_int_array(puara_bundle, "raw/capsense", TSTICK_SIZE, touch.touch);
+    #endif
+    #ifdef touch_CAPSENSE
+    osc_bundle_add_int_array(puara_bundle, "raw/capsense", TSTICK_SIZE, capsense.data);
+    #endif
+    // Touch gestures
+    if (event.brush) {
+        osc_bundle_add_float(puara_bundle, "instrument/brush", sensors.brush);
+        osc_bundle_add_float_array(puara_bundle, "instrument/multibrush", 4, sensors.multibrush);
+    }
+    if (event.rub) {
+        osc_bundle_add_float(puara_bundle, "instrument/rub", sensors.rub);
+        osc_bundle_add_float_array(puara_bundle, "instrument/multirub", 4, sensors.multirub);
+    }
+
+    // MIMU data
+    osc_bundle_add_float_array(puara_bundle, "raw/accl", 3, sensors.accl);
+    osc_bundle_add_float_array(puara_bundle, "raw/gyro", 3, sensors.gyro);
+    osc_bundle_add_float_array(puara_bundle, "raw/magn", 3, sensors.magn);
+    osc_bundle_add_float_array(puara_bundle, "orientation", 4, sensors.quat);
+    osc_bundle_add_float_array(puara_bundle, "ypr", 3, sensors.ypr); 
+
+    // Inertial gestures
+    if (event.shake) {
+        osc_bundle_add_float_array(puara_bundle, "instrument/shakexyz", 3, sensors.shake);
+    }
+    if (event.jab) {
+        osc_bundle_add_float_array(puara_bundle, "instrument/jabxyz", 3, sensors.jab);
+    }
+    // Button Gestures
+    if (event.count) {
+        osc_bundle_add_int(puara_bundle, "instrument/button/count", sensors.count);
+    }
+    if (event.tap) {
+        osc_bundle_add_int(puara_bundle, "instrument/button/tap", sensors.tap);
+    }
+    if (event.dtap) {
+        osc_bundle_add_int(puara_bundle, "instrument/button/dtap", sensors.dtap);
+    }
+    if (event.ttap) {
+        osc_bundle_add_int(puara_bundle, "instrument/button/ttap", sensors.ttap);
+    }
+    
+    // Battery Data
+    if (event.battery) {
+        osc_bundle_add_int(puara_bundle, "battery", sensors.battery);
+    }
 }
