@@ -2326,6 +2326,52 @@
         )
       )
     )
+    (symbol "power-symbols:CHARGE+" (power) (in_bom no) (on_board no)
+      (property "Reference" "#PWR" (at 0 3.81 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Value" "CHARGE+" (at 0 3.81 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Footprint" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Datasheet" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (symbol "CHARGE+_0_1"
+        (polyline
+          (pts
+            (xy -0.762 1.27)
+            (xy 0 2.54)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0 0)
+            (xy 0 2.54)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0 2.54)
+            (xy 0.762 1.27)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+      )
+      (symbol "CHARGE+_1_1"
+        (pin power_in line (at 0 0 90) (length 0) hide
+          (name "CHRG+" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27))))
+        )
+      )
+    )
     (symbol "power-symbols:VSYS" (in_bom yes) (on_board yes)
       (property "Reference" "SYS" (at 0 6.35 0)
         (effects (font (size 1.27 1.27)) hide)
@@ -2790,7 +2836,7 @@
     (stroke (width 0) (type default))
     (uuid 15eb9564-a49a-4532-92d8-dd58d50481e5)
   )
-  (wire (pts (xy 204.47 135.89) (xy 204.47 143.51))
+  (wire (pts (xy 204.47 137.795) (xy 204.47 143.51))
     (stroke (width 0) (type default))
     (uuid 16f96097-0a90-4e9a-a383-1a405b37df89)
   )
@@ -2961,10 +3007,6 @@
   (wire (pts (xy 381 234.95) (xy 381 237.49))
     (stroke (width 0) (type default))
     (uuid 2fe0aa5d-9e82-4668-9897-053fdc0be80e)
-  )
-  (wire (pts (xy 177.165 152.4) (xy 177.165 140.97))
-    (stroke (width 0) (type default))
-    (uuid 318522c0-ff82-4b6e-9e2d-d55c399355d1)
   )
   (wire (pts (xy 379.73 146.05) (xy 387.35 146.05))
     (stroke (width 0) (type default))
@@ -3422,6 +3464,10 @@
   (wire (pts (xy 363.22 204.47) (xy 374.65 204.47))
     (stroke (width 0) (type default))
     (uuid 9613ff03-d0c4-49a6-94ce-7dcdf8802755)
+  )
+  (wire (pts (xy 177.165 140.97) (xy 177.165 152.4))
+    (stroke (width 0) (type default))
+    (uuid 962a0761-f3e9-4c4b-8dd8-8de50d21ee83)
   )
   (wire (pts (xy 121.92 31.75) (xy 121.92 35.56))
     (stroke (width 0) (type default))
@@ -4444,10 +4490,6 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid e6907c92-65f8-45c1-9505-069851c19e6b)
   )
-  (label "VBAT" (at 204.47 140.97 0) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid ea7fae4f-e779-42a7-9d2f-4d1b4bdf8b24)
-  )
   (label "IO8" (at 262.89 71.12 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid ecc5c909-b67a-4bf2-b301-c8e3183073cc)
@@ -4630,6 +4672,36 @@
       (project "tstick_pcb"
         (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
           (reference "C6") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:+BATT") (at 121.285 140.335 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 063d879a-bb72-47c0-8f6d-b67c5de2af67)
+    (property "Reference" "#PWR023" (at 121.285 144.145 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+BATT" (at 121.285 135.255 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 121.285 140.335 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 121.285 140.335 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid c77b079e-9027-4fb3-b056-f373c500afb3))
+    (instances
+      (project "enchantiS3"
+        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
+          (reference "#PWR023") (unit 1)
+        )
+      )
+      (project "tstick_pcb"
+        (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
+          (reference "#PWR036") (unit 1)
         )
       )
     )
@@ -6071,6 +6143,36 @@
     )
   )
 
+  (symbol (lib_id "power:+BATT") (at 204.47 137.795 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 38f1cb2c-ac93-4dd6-87b3-a0997c461f33)
+    (property "Reference" "#PWR064" (at 204.47 141.605 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+BATT" (at 204.47 132.715 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 204.47 137.795 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 204.47 137.795 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 56a17c67-838a-4f01-ad0a-a7f7fbd8c7cd))
+    (instances
+      (project "enchantiS3"
+        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
+          (reference "#PWR064") (unit 1)
+        )
+      )
+      (project "tstick_pcb"
+        (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
+          (reference "#PWR036") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:+BATT") (at 336.55 128.27 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 3ca3a0cc-1990-40cd-8125-db437065e0d3)
@@ -6200,36 +6302,6 @@
       (project "tstick_pcb"
         (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
           (reference "#PWR030") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "power:+BATT") (at 204.47 135.89 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid 425443da-e1fb-44f5-8105-28da68bce413)
-    (property "Reference" "#PWR036" (at 204.47 139.7 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+BATT" (at 204.47 130.81 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 204.47 135.89 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 204.47 135.89 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 34baf4cf-6d32-4041-a336-daf03f45b0e4))
-    (instances
-      (project "enchantiS3"
-        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
-          (reference "#PWR036") (unit 1)
-        )
-      )
-      (project "tstick_pcb"
-        (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
-          (reference "#PWR036") (unit 1)
         )
       )
     )
@@ -6926,6 +6998,36 @@
       (project "tstick_pcb"
         (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
           (reference "FGLED1") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:+BATT") (at 132.08 248.92 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 5d6baa48-078c-4480-9588-7499e94f3e06)
+    (property "Reference" "#PWR029" (at 132.08 252.73 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+BATT" (at 132.08 243.84 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 132.08 248.92 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 132.08 248.92 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 2ed4fe37-97ba-49a6-8734-1081251b1d72))
+    (instances
+      (project "enchantiS3"
+        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
+          (reference "#PWR029") (unit 1)
+        )
+      )
+      (project "tstick_pcb"
+        (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
+          (reference "#PWR036") (unit 1)
         )
       )
     )
@@ -7638,6 +7740,31 @@
     )
   )
 
+  (symbol (lib_id "power-symbols:CHARGE+") (at 177.165 140.97 0) (unit 1)
+    (in_bom no) (on_board no) (dnp no) (fields_autoplaced)
+    (uuid 760e6935-dc26-42f4-a2d3-300f550567c3)
+    (property "Reference" "#PWR036" (at 177.165 137.16 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "CHARGE+" (at 177.165 135.89 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 177.165 140.97 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 177.165 140.97 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid fbc5349b-1ed2-442c-a646-403d7b805dec))
+    (instances
+      (project "enchantiS3"
+        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
+          (reference "#PWR036") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_name "GND_2") (lib_id "power:GND") (at 180.34 214.63 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 76b9ff18-b392-4afa-b25e-c298e110174a)
@@ -7883,36 +8010,6 @@
     )
   )
 
-  (symbol (lib_id "power:+BATT") (at 90.17 39.37 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 85b3b152-d7dc-48d0-9059-e25923bdaf2d)
-    (property "Reference" "#PWR05" (at 90.17 43.18 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+BATT" (at 90.17 35.56 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 90.17 39.37 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 90.17 39.37 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 4ec2fd06-d349-4ad6-a99a-e6f11d7fc38c))
-    (instances
-      (project "enchantiS3"
-        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
-          (reference "#PWR05") (unit 1)
-        )
-      )
-      (project "tstick_pcb"
-        (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
-          (reference "#PWR033") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "power:+1V8") (at 309.88 29.21 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 871d81de-1282-4859-a48f-ee56bbd5c51c)
@@ -7981,6 +8078,31 @@
       (project "tstick_pcb"
         (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
           (reference "R10") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power-symbols:CHARGE+") (at 90.17 39.37 0) (unit 1)
+    (in_bom no) (on_board no) (dnp no) (fields_autoplaced)
+    (uuid 877f43c2-a533-4347-ba7d-a72d1a600ee0)
+    (property "Reference" "#PWR05" (at 90.17 35.56 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "CHARGE+" (at 90.17 34.29 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 90.17 39.37 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 90.17 39.37 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid a6e01804-f3bf-45bf-bdc2-171b28263b93))
+    (instances
+      (project "enchantiS3"
+        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
+          (reference "#PWR05") (unit 1)
         )
       )
     )
@@ -8231,43 +8353,6 @@
     )
   )
 
-  (symbol (lib_id "power-symbols:VSYS") (at 177.165 140.97 0) (unit 1)
-    (in_bom no) (on_board no) (dnp no)
-    (uuid 90421778-04e4-49df-b129-ca409d36f961)
-    (property "Reference" "SYS7" (at 177.165 134.62 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "SYS" (at 175.895 137.16 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "" (at 177.165 140.97 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 177.165 140.97 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Description Value Pkg" "" (at 177.165 140.97 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Mfg Part #" "" (at 177.165 140.97 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "mpn" "" (at 177.165 140.97 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Manufacturer" "" (at 177.165 140.97 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid acf34c53-0b9d-4a0d-96e4-efaae4f8a3d5))
-    (instances
-      (project "enchantiS3"
-        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
-          (reference "SYS7") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Battery_Management:MCP73871") (at 55.88 59.69 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 91099b62-3b6a-454b-a286-684d5a8e5195)
@@ -8501,36 +8586,6 @@
     )
   )
 
-  (symbol (lib_id "power:+BATT") (at 121.285 140.335 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid 9a24fad1-69d7-4401-b6d3-f79f5e003581)
-    (property "Reference" "#PWR023" (at 121.285 144.145 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+BATT" (at 121.285 135.255 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 121.285 140.335 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 121.285 140.335 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid eeca740c-7f19-4057-a035-6da8e7971e27))
-    (instances
-      (project "enchantiS3"
-        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
-          (reference "#PWR023") (unit 1)
-        )
-      )
-      (project "tstick_pcb"
-        (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
-          (reference "#PWR036") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_name "GND_2") (lib_id "power:GND") (at 80.645 274.955 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 9bd3fc2b-8759-4771-a2e5-dc4fa30f11dc)
@@ -8598,6 +8653,31 @@
       (project "enchantiS3"
         (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
           (reference "U6") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power-symbols:CHARGE+") (at 88.9 81.28 0) (unit 1)
+    (in_bom no) (on_board no) (dnp no) (fields_autoplaced)
+    (uuid a0026fb7-3ebb-4ee2-844a-ccf74294747b)
+    (property "Reference" "#PWR020" (at 88.9 77.47 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "CHARGE+" (at 88.9 76.2 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 88.9 81.28 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 88.9 81.28 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 2a39f61a-df8b-4e46-83f6-3de06cbb03be))
+    (instances
+      (project "enchantiS3"
+        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
+          (reference "#PWR020") (unit 1)
         )
       )
     )
@@ -9449,36 +9529,6 @@
       (project "tstick_pcb"
         (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
           (reference "H1") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "power:+BATT") (at 88.9 81.28 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid d0ebb77d-b1b7-46cc-9088-088d3a35c668)
-    (property "Reference" "#PWR020" (at 88.9 85.09 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+BATT" (at 88.9 77.47 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 88.9 81.28 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 88.9 81.28 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 57c189b8-da6c-432a-9e07-01b9882a147a))
-    (instances
-      (project "enchantiS3"
-        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
-          (reference "#PWR020") (unit 1)
-        )
-      )
-      (project "tstick_pcb"
-        (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
-          (reference "#PWR033") (unit 1)
         )
       )
     )
@@ -10462,36 +10512,6 @@
       (project "tstick-4gw-prosumer-pcb"
         (path "/862dba4e-7e1a-4a09-a4d1-a8449ad175cb"
           (reference "Q2") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "power:+BATT") (at 132.08 248.92 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid fa231564-ec20-4613-8965-5194e990d40f)
-    (property "Reference" "#PWR029" (at 132.08 252.73 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+BATT" (at 132.08 243.84 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 132.08 248.92 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 132.08 248.92 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid e38d9ae0-362f-4969-8e56-b06c75bbe996))
-    (instances
-      (project "enchantiS3"
-        (path "/1e57a4ff-0c95-4e2b-9e56-d9bf8e99c9a1"
-          (reference "#PWR029") (unit 1)
-        )
-      )
-      (project "tstick_pcb"
-        (path "/ecdbf224-0069-4dc3-a7df-492909ab59c7"
-          (reference "#PWR029") (unit 1)
         )
       )
     )
