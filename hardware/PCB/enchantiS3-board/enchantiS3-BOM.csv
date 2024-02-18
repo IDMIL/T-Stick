@@ -1,7 +1,7 @@
 Manufacturer,Mfg Part #,Qty,Reference(s),Description Value Pkg,Note
 Analog Devices Inc./Maxim Integrated,MAX17262REWL+T,1,U6,Battery Fuel Gauge IC LiFePO4/Li-ion 9-WLP (1.47x1.45),
 ANBON SEMICONDUCTOR (INT'L) LIMITED,BSS138,3,"Q1, Q2, Q3",N-Channel 50 V 220mA (Ta) 350mW (Ta) Surface Mount SOT-23,
-Espressif Systems,ESP32-S3-WROOM-2-N32R8V,1,MCU1,"Bluetooth, WiFi 802.11b/g/n, Bluetooth v5.0 Transceiver Module 2.4GHz PCB Trace Surface Mount","Alternatives: ESP32-S3-WROOM-1-N16R8V,  ESP32-S3-WROOM-2-N16R8V"
+Espressif Systems,ESP32-S3-WROOM-2-N32R8V,1,MCU1,"Bluetooth, WiFi 802.11b/g/n, Bluetooth v5.0 Transceiver Module 2.4GHz PCB Trace Surface Mount",Alternatives: ESP32-S3-WROOM-2-N16R8V
 GCT,USB4105-GF-A,1,J1,"USB-C (USB TYPE-C) USB 2.0 Receptacle Connector 24 (16+8 Dummy) Position Surface Mount, Right Angle; Through Hole",
 Inolux,IN-S42BT5B,1,STATLED1,Blue 467nm LED Indication - Discrete 2.9V 0402 (1005 Metric),
 Inolux,IN-S42BT5A,1,STATLED2,Amber 605nm LED Indication - Discrete 2V 0402 (1005 Metric),
