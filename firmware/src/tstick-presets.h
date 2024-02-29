@@ -27,7 +27,6 @@ General Properties for the T-Stick
 // Feedback sensors
 #define BATTERY_UPDATE_RATE 1000000 // us ( 1 Hz)
 
-
 // Specific Properties
 #ifdef tstick_4gw_lolin_capsense
     // Pin definitions
@@ -36,6 +35,7 @@ General Properties for the T-Stick
     #define FSR_PIN 33
     #define LED_PIN 5
     #define BUTTON_PIN 15
+    #define SLEEP_PIN GPIO_NUM_15
 
     // Boards + Sensors
     #define INDICATOR_LED
@@ -44,11 +44,25 @@ General Properties for the T-Stick
     #define fg_NONE
 
     // Initialise sensors
+    #include <driver/rtc_io.h> // needed for sleep
+    #include "button.h"
+
+    Button button;
+
     #include "capsense.h"
+    #define TOUCH_MAX 1
     Capsense touch;
+    touch_config tstick_touchconfig = {
+        default_config.touchdevice,
+        default_config.touchsize,
+        default_config.touch_threshold,
+        default_config.touch_mode,
+        default_config.comm_mode,
+    };
 
     #include "imu.h"
     IMU imu;
+    #define TSTICK_IMU MIMUBOARD::mimu_LSM9DS1
 
     #include "fsr.h"
     Fsr fsr;
@@ -65,6 +79,7 @@ General Properties for the T-Stick
     #define LED_PIN 5
     #define BATTERY_PIN 35 // read battery voltage
     #define BUTTON_PIN 15
+    #define SLEEP_PIN GPIO_NUM_15
 
     // Boards + Sensors
     #define INDICATOR_LED
@@ -73,11 +88,25 @@ General Properties for the T-Stick
     #define fg_NONE
 
     // Initialise sensors
+    #include <driver/rtc_io.h> // needed for sleep
+    #include "button.h"
+
+    Button button;
+
     #include "trill-touch.h"
+    #define TOUCH_MAX 511
     TrillTouch touch;
+    touch_config tstick_touchconfig = {
+        default_config.touchdevice,
+        default_config.touchsize,
+        default_config.touch_threshold,
+        default_config.touch_mode,
+        default_config.comm_mode,
+    };
 
     #include "imu.h"
     IMU imu;
+    #define TSTICK_IMU MIMUBOARD::mimu_LSM9DS1
 
     #include "fsr.h"
     Fsr fsr;
@@ -93,6 +122,7 @@ General Properties for the T-Stick
     #define FSR_PIN 33
     #define LED_PIN 5
     #define BUTTON_PIN 15
+    #define SLEEP_PIN GPIO_NUM_15
 
     // Boards + Sensors
     #define imu_LSM9DS1
@@ -100,14 +130,28 @@ General Properties for the T-Stick
     #define fg_NONE
 
     // Initialise sensors
+    #include <driver/rtc_io.h> // needed for sleep
+    #include "button.h"
+
+    Button button;
+
     #include "TinyPICO.h"
     TinyPICO tinypico = TinyPICO();
 
     #include "capsense.h"
+    #define TOUCH_MAX 1
     Capsense touch;
+    touch_config tstick_touchconfig = {
+        default_config.touchdevice,
+        default_config.touchsize,
+        default_config.touch_threshold,
+        default_config.touch_mode,
+        default_config.comm_mode,
+    };
 
     #include "imu.h"
     IMU imu;
+    #define TSTICK_IMU MIMUBOARD::mimu_LSM9DS1
 
     #include "fsr.h"
     Fsr fsr;
@@ -124,6 +168,7 @@ General Properties for the T-Stick
     #define LED_PIN 5
     #define BATTERY_PIN 35 // read battery voltage
     #define BUTTON_PIN 15
+    #define SLEEP_PIN GPIO_NUM_15
 
     // Boards + Sensors
     #define imu_LSM9DS1
@@ -131,14 +176,28 @@ General Properties for the T-Stick
     #define fg_NONE
 
     // Initialise sensors
+    #include <driver/rtc_io.h> // needed for sleep
+    #include "button.h"
+
+    Button button;
+
     #include "TinyPICO.h"
     TinyPICO tinypico = TinyPICO();
 
     #include "trill-touch.h"
+    #define TOUCH_MAX 511
     TrillTouch touch;
+    touch_config tstick_touchconfig = {
+        default_config.touchdevice,
+        default_config.touchsize,
+        default_config.touch_threshold,
+        default_config.touch_mode,
+        default_config.comm_mode,
+    };
 
     #include "imu.h"
     IMU imu;
+    #define TSTICK_IMU MIMUBOARD::mimu_LSM9DS1
 
     #include "fsr.h"
     Fsr fsr;
@@ -158,6 +217,7 @@ General Properties for the T-Stick
     #define NEOPIXEL_PIN 18
     #define IMU_INT_PIN 21
     #define FUELGAUE_INT_PIN 17
+    #define SLEEP_PIN GPIO_NUM_9
 
     // Boards + Sensors
     #define imu_ICM20948
@@ -165,8 +225,21 @@ General Properties for the T-Stick
     #define fg_MAX17055
 
     // Initialise sensors
+    #include <driver/rtc_io.h> // needed for sleep
+    #include "button.h"
+
+    Button button;
+
     #include "trill-touch.h"
+    #define TOUCH_MAX 511
     TrillTouch touch;
+    touch_config tstick_touchconfig = {
+        default_config.touchdevice,
+        default_config.touchsize,
+        default_config.touch_threshold,
+        default_config.touch_mode,
+        default_config.comm_mode,
+    };
 
     #include <batt.h>
     FUELGAUGE fuelgauge;
@@ -187,6 +260,7 @@ General Properties for the T-Stick
 
     #include "imu.h"
     IMU imu;
+    #define TSTICK_IMU MIMUBOARD::mimu_ICM20948
 
     #include "fsr.h"
     Fsr fsr;
@@ -205,6 +279,7 @@ General Properties for the T-Stick
     #define ORANGE_LED 16
     #define IMU_INT_PIN 48
     #define FUELGAUE_INT_PIN 17
+    #define SLEEP_PIN GPIO_NUM_9
 
     // Boards + Sensors
     #define INDICATOR_LED
@@ -214,8 +289,21 @@ General Properties for the T-Stick
     #define fg_MAX17055
 
     // Initialise sensors
+    #include <driver/rtc_io.h> // needed for sleep
+    #include "button.h"
+
+    Button button;
+
     #include "trill-touch.h"
+    #define TOUCH_MAX 511
     TrillTouch touch;
+    touch_config tstick_touchconfig = {
+        default_config.touchdevice,
+        default_config.touchsize,
+        default_config.touch_threshold,
+        default_config.touch_mode,
+        default_config.comm_mode,
+    };
 
     #include <batt.h>
     FUELGAUGE fuelgauge;
@@ -236,6 +324,7 @@ General Properties for the T-Stick
 
     #include "imu.h"
     IMU imu;
+    #define TSTICK_IMU MIMUBOARD::mimu_ICM20948
 
     #include "fsr.h"
     Fsr fsr;
@@ -253,6 +342,7 @@ General Properties for the T-Stick
     #define FUELGAUE_INT_PIN 17
     #define LED_PIN 15
     #define ORANGE_LED 16
+    #define SLEEP_PIN GPIO_NUM_9
 
     // Boards + Sensors
     #define INDICATOR_LED
@@ -262,16 +352,29 @@ General Properties for the T-Stick
     #define fg_MAX17055
 
     // Initialise sensors
+    #include <driver/rtc_io.h> // needed for sleep
+    #include "button.h"
+
+    Button button;
+
     #include "trill-touch.h"
+    #define TOUCH_MAX 511
     TrillTouch touch;
+    touch_config tstick_touchconfig = {
+        default_config.touchdevice,
+        default_config.touchsize,
+        default_config.touch_threshold,
+        default_config.touch_mode,
+        default_config.comm_mode,
+    };
 
     #include <batt.h>
     FUELGAUGE fuelgauge;
     fuelgauge_config fg_config = {
         0x36, //i2c_addr
-        2000, // capacity (mAh)
+        1100, // capacity (mAh)
         50, // End of charge Current (mA)
-        10, // rsense (mOhm)
+        7, // rsense (mOhm)
         3, // empty voltage (V)
         3.88, //recovery voltage (V)
         0, // soc
@@ -284,6 +387,7 @@ General Properties for the T-Stick
 
     #include "imu.h"
     IMU imu;
+    #define TSTICK_IMU MIMUBOARD::mimu_ICM20948
 
     #include "fsr.h"
     Fsr fsr;
@@ -301,6 +405,7 @@ General Properties for the T-Stick
     #define FUELGAUE_INT_PIN 17
     #define LED_PIN 15
     #define ORANGE_LED 16
+    #define SLEEP_PIN GPIO_NUM_9
 
     // Boards + Sensors
     #define INDICATOR_LED
@@ -310,8 +415,21 @@ General Properties for the T-Stick
     #define fg_MAX17055
 
     // Initialise sensors
+    #include <driver/rtc_io.h> // needed for sleep
+    #include "button.h"
+
+    Button button;
+
     #include "enchanti-touch.h"
+    #define TOUCH_MAX 4095
     EnchantiTouch touch;
+    touch_config tstick_touchconfig = {
+        default_config.touchdevice,
+        default_config.touchsize,
+        default_config.touch_threshold,
+        default_config.touch_mode,
+        default_config.comm_mode,
+    };
 
     #include <batt.h>
     FUELGAUGE fuelgauge;
@@ -332,6 +450,7 @@ General Properties for the T-Stick
 
     #include "imu.h"
     IMU imu;
+    #define TSTICK_IMU MIMUBOARD::mimu_ICM20948
 
     #include "fsr.h"
     Fsr fsr;
@@ -349,16 +468,29 @@ General Properties for the T-Stick
     #define FUELGAUE_INT_PIN 17
     #define LED_PIN 15
     #define ORANGE_LED 16
+    #define SLEEP_PIN GPIO_NUM_9
 
     // Boards + Sensors
     #define INDICATOR_LED
     #define board_ENCHANTI_rev2
-    #define imu_ICM20948
     #define touch_ENCHANTI
     #define fg_MAX17055
     // Initialise sensors
-    #include "Enchanti-touch/enchanti-touch.h"
+    #include <driver/rtc_io.h> // needed for sleep
+    #include "button.h"
+
+    Button button;
+
+    #include "enchanti-touch.h"
+    #define TOUCH_MAX 4095
     EnchantiTouch touch;
+    touch_config tstick_touchconfig = {
+        default_config.touchdevice,
+        default_config.touchsize,
+        default_config.touch_threshold,
+        default_config.touch_mode,
+        default_config.comm_mode,
+    };
 
     #include <batt.h>
     FUELGAUGE fuelgauge;
@@ -366,7 +498,7 @@ General Properties for the T-Stick
         0x36, //i2c_addr
         2000, // capacity (mAh)
         50, // End of charge Current (mA)
-        10, // rsense (mOhm)
+        7, // rsense (mOhm)
         3, // empty voltage (V)
         3.88, //recovery voltage (V)
         0, // soc
@@ -379,6 +511,7 @@ General Properties for the T-Stick
 
     #include "imu.h"
     IMU imu;
+    #define TSTICK_IMU MIMUBOARD::mimu_ICM20948
 
     #include "fsr.h"
     Fsr fsr;
@@ -388,6 +521,14 @@ General Properties for the T-Stick
 #endif
 
 #ifdef tstick_custom
+    // Basic libraries
+    #include "imu.h"
+    IMU imu;
+    #include "fsr.h"
+    Fsr fsr;
+    #include "led.h"
+    Led led;
+
     // Define pins
     // #define SDA_PIN 21
     // #define SCL_PIN 14
@@ -407,21 +548,13 @@ General Properties for the T-Stick
     //#define touch_ENCHANTI
     //#define touch_IDMIL
 
-    //#define imu_ICM20948
-    //#define imu_LSM9DS1
+    //#define TSTICK_IMU MIMUBOARD::mimu_ICM20948
+    //#define TSTICK_IMU MIMUBOARD::mimu_LSM9DS1
 
     //#define fg_MAX17055
     //#define fg_NONE
 
     // #define INDICATOR_LED // use with LED_PIN if using a discrete LED and LED PWM library
-
-    // Basic libraries
-    #include "imu.h"
-    IMU imu;
-    #include "fsr.h"
-    Fsr fsr;
-    #include "led.h"
-    Led led;
 
     // Include the other sensors
     #ifdef touch_IDMIL
@@ -438,6 +571,17 @@ General Properties for the T-Stick
         #include "enchanti-touch.h"
         EnchantiTouch touch;
     #endif
+
+    // Define the config for your touch board
+    #define TOUCH_MAX 4095 // define maximum touch value
+    touch_config tstick_touchconfig = {
+        -1, // default touch device
+        -1, // default touch size
+        -1, // noise threshold
+        -1, // touch processing mode
+        -1, // comm mode
+    };
+
 
     #ifdef fg_MAX17055
         #include <batt.h>

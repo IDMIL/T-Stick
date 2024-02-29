@@ -3,21 +3,31 @@
 #include "trill-touch.h"
 
 
-uint8_t TrillTouch::initTouch(float num, int threshold, int mode) {
+uint8_t TrillTouch::initTouch(touch_config trill_config) {
+    // Compute number of boards
+    float num = trill_config.touchsize / TRILL_BASETOUCHSIZE;
+
     // Clip number of touch boards to 4
     if (num > 4) {
         num = 4;
+        touchSize = 120;
     } else if (num < 0) {
         num = 1;
+        touchSize = TRILL_BASETOUCHSIZE;
+    } else {
+        touchSize = trill_config.touchsize;
+        num_boards = num;
     }
-
-    // Compute touch size
-    touchSize = floor(num * TRILL_BASETOUCHSIZE);
-    num_boards = num;
-
+    
     // Initialise Sensors
     for (int i=0; i < ceil(num_boards); i++) {
-        int ret = touchArray[i]->setup(Trill::TRILL_CRAFT, main_i2c_addr + i);
+        int ret = 1;
+        if (Trill::TRILL_CRAFT == trill_config.touchdevice) {
+            ret = touchArray[i]->setup(Trill::TRILL_CRAFT, craft_i2c_addr + i);
+        } else if (Trill::TRILL_FLEX == trill_config.touchdevice) {
+            ret = touchArray[i]->setup(Trill::TRILL_FLEX, flex_i2c_addr + i);
+        }
+
         if(ret != 0) {
             Serial.println("failed to initialise trillSensor1");
             Serial.print("Error code: ");
@@ -33,7 +43,7 @@ uint8_t TrillTouch::initTouch(float num, int threshold, int mode) {
         delay(10);
         touchArray[i]->setScanSettings(0,9);
         delay(10);
-        touchArray[i]->setNoiseThreshold(30);
+        touchArray[i]->setNoiseThreshold(trill_config.touch_threshold);
         delay(10);
         touchArray[i]->setMode(Trill::DIFF);
 

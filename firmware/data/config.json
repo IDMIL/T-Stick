@@ -1,15 +1,15 @@
 {
     "device": "TStick",
-    "id": 510,
-    "author": "Albert",
-    "institution": "SAT/IDMIL (2022)",
+    "id": 1,
+    "author": "T-Stick Builder",
+    "institution": "SAT/IDMIL (2024)",
     "APpasswd": "mappings",
     "wifiSSID": "t-stick_network",
     "wifiPSK": "mappings",
     "persistentAP": 1,
     "oscIP1": "192.168.137.1",
     "oscPORT1": 8000,
-    "oscIP2": "192.168.0.100",
+    "oscIP2": "0.0.0.0",
     "oscPORT2": 8001,
     "localPORT": 8000
 }

@@ -1,4 +1,5 @@
 // Include Bela Trill Libraries
+// Touch library for the trill craft board from Bela
 
 
 #ifndef TRILLTOUCH_H
@@ -7,17 +8,28 @@
 #include <Arduino.h>
 #include <Trill.h>
 #include <vector>
+#include <../touch-common.h>
 
 #define TRILL_BASETOUCHSIZE 30
 
+// Default config for trill
+static touch_config default_config = {
+    Trill::TRILL_CRAFT, // default use the trill craft device
+    TRILL_BASETOUCHSIZE, // default touch size
+    0, // noise threshold
+    -1, // touch processing mode (not used)
+    -1, // comm mode (not used)
+};
+
 class TrillTouch {
     public:
-        uint8_t initTouch(float num=1, int threshold=0, int mode=Trill::DIFF);
+        uint8_t initTouch(touch_config trill_config);
         void readTouch();
         int getData(int data_index);
         
         // trill board properties
-        uint8_t main_i2c_addr = 0x30;
+        uint8_t craft_i2c_addr = 0x30;
+        uint8_t flex_i2c_addr = 0x48;
         Trill trillSensor1;      // for Trill Craft
         Trill trillSensor2;      // for Trill Craft
         Trill trillSensor3;      // for Trill Craft

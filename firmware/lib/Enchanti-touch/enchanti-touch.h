@@ -5,6 +5,7 @@
 #include "Wire.h"
 #include <ESP32DMASPIMaster.h>
 #include <iostream>
+#include <../touch-common.h>
 
 #define ENCHANTI_BASETOUCHSIZE 60
 #define ENCHANTI_BUFFERSIZE 256
@@ -16,21 +17,30 @@
 #define MOSI 11
 #define CLK 12
 
+// Board modes
+enum Mode {
+    RAW = 1,
+    BASELINE = 2,
+    DIFF = 3
+};
+// Board modes
+enum COMMS {
+    SPI_MODE = 1,
+    I2C_MODE = 2
+};
+
+// Default config
+static touch_config default_config = {
+    -1, // default use the trill craft device
+    ENCHANTI_BASETOUCHSIZE, // default touch size
+    0, // noise threshold
+    Mode::DIFF, // touch processing mode
+    COMMS::I2C_MODE, // comm mode 
+};
+
 class EnchantiTouch
 {
     public:
-        // Board modes
-        enum Mode {
-			RAW = 1,
-			BASELINE = 2,
-			DIFF = 3
-		};
-        // Board modes
-        enum COMMS {
-			SPI_MODE = 1,
-			I2C_MODE = 2
-		};
-
         // Register addresses for touch data
         enum regAddr
         {
@@ -78,7 +88,7 @@ class EnchantiTouch
         bool running = true;
 
         // Methods
-		void initTouch(float num=1, int threshold=0, int mode=DIFF, int com_mode=SPI_MODE);
+		uint8_t initTouch(touch_config enchanti_config);
         void readTouch();
         void cookData();
 

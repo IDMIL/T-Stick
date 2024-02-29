@@ -88,7 +88,7 @@ void Capsense::initCapsense(uint8_t I2C_ADDR) {
     printf("%u %u\n",answer1, answer2);
 }
 
-void Capsense::initTouch() {
+uint8_t Capsense::initTouch(touch_config idmilTouch_config) {
   uint8_t I2C_ADDR;
   uint8_t FAMILY_ID = 0x8F; // Must be 154
   uint8_t address[8];
@@ -138,11 +138,14 @@ void Capsense::initTouch() {
   }
   if (nCapsenses == 0) {
     printf("\n\nOops ... unable to initialize IDMIL's Capsense. Check your wiring/board!\n\n\n");
+    return 0;
   }
   else {
     printf("Capsense OK\n\n");
+    return 1;
   }
   touchStripsSize = nCapsenses*16;
+  touchSize = idmilTouch_config.touchsize;
 }
 
 int Capsense::getData(int data_index) {

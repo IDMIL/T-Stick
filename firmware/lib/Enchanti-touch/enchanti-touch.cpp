@@ -1,22 +1,29 @@
 #include "enchanti-touch.h"
 
 // Initialise touch board, 
-void EnchantiTouch::initTouch(float num, int threshold, int mode, int com_mode) {
+uint8_t EnchantiTouch::initTouch(touch_config enchanti_config) {
+    float num = enchanti_config.touchsize / ENCHANTI_BASETOUCHSIZE;
     // Clip number of touch boards to 2
     if (num > 2) {
         num = 2;
+        touchSize = 2 * ENCHANTI_BASETOUCHSIZE;
     } else if (num < 0) {
         num = 1;
+        touchSize = ENCHANTI_BASETOUCHSIZE;
+    } else {
+        // set touchsize
+        num_boards = num;
+        touchSize = floor(num_boards * ENCHANTI_BASETOUCHSIZE);
     }
 
     // Save properties to class
     num_boards = num;
-    noise_threshold = threshold;
-    boardMode = mode;
-    comMode = com_mode;
+    noise_threshold = enchanti_config.touch_threshold;
+    boardMode = enchanti_config.touch_mode;
+    comMode = enchanti_config.comm_mode;
 
     // Setup SPI if spi mode selected
-    if (comMode == SPI_MODE) {
+    if (comMode == COMMS::SPI_MODE) {
         // to use DMA buffer, use these methods to allocate buffer
         spi_master_tx_buf = master.allocDMABuffer(ENCHANTI_BUFFERSIZE);
         spi_master_rx_buf = master.allocDMABuffer(ENCHANTI_BUFFERSIZE);
@@ -48,17 +55,15 @@ void EnchantiTouch::initTouch(float num, int threshold, int mode, int com_mode) 
     // Wire.write(TOUCHMODE_REG);
     // Wire.write(mode);
     // last_status = Wire.endTransmission();    
-
-    // set touchsize
-    touchSize = floor(num_boards * ENCHANTI_BASETOUCHSIZE);
     // enable sensor
     // TODO: send an I2C command back to sensor to start its initialisation process
     running = true;
+    return 1;
 }
 
 void EnchantiTouch::readTouch(){
     // Read data from all touch buttons
-    if (comMode == I2C_MODE) {
+    if (comMode == COMMS::I2C_MODE) {
         // Compute buffer length
         int length = 0;
         if (touchSize < ENCHANTI_BASETOUCHSIZE) {
@@ -77,7 +82,7 @@ void EnchantiTouch::readTouch(){
             readI2CBuffer(aux_i2c_addr, baseReg, length, ENCHANTI_BASETOUCHSIZE); // offset data index to not overwrite main touch board data
         }
     }
-    if (comMode == SPI_MODE) {
+    if (comMode == COMMS::SPI_MODE) {
         readSPIBuffer(ENCHANTI_BUFFERSIZE, 2);
     }
 }

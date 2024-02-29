@@ -10,7 +10,7 @@
  */
 
 
-unsigned int firmware_version = 240228;
+unsigned int firmware_version = 240401;
 
 /*
 Include T-Stick properties
@@ -103,6 +103,7 @@ struct Event {
     bool battery = false;
     bool current = false;
     bool voltage = false;
+    bool tte = false;
 } event;
 
 
@@ -154,11 +155,6 @@ void batteryFilter() {
 ///////////////////////////////////
 // Include button function files //
 ///////////////////////////////////
-#include <driver/rtc_io.h> // needed for sleep
-#include "button.h"
-
-Button button;
-
 void buttton_isr() {
     button.readButton();
 }
@@ -253,14 +249,14 @@ void osc_bundle_add_float_array(lo_bundle puara_bundle,const char *path, int siz
 // sensors and libmapper data //
 ////////////////////////////////
 
-struct Lm {
-    mpr_sig fsr = 0;
+struct Lm { 
+    mpr_sig fsr = 0;  // FSR signals
     int fsrMax = 4095;
     int fsrMin = 0;
     mpr_sig squeeze = 0;
     float squeezeMax = 1.0f;
     float squeezeMin = 0.0f;
-    mpr_sig accel = 0;
+    mpr_sig accel = 0; // IMU signals
     float accelMax[3] = {50, 50, 50};
     float accelMin[3] = {-50, -50, -50};
     mpr_sig gyro = 0;
@@ -281,6 +277,12 @@ struct Lm {
     mpr_sig jab = 0;
     float jabMax[3] = {50, 50, 50};
     float jabMin[3] = {-50, -50, -50};
+    mpr_sig touchAll = 0; // Touch signals
+    mpr_sig touchTop = 0;
+    mpr_sig touchMiddle = 0;
+    mpr_sig touchBottom = 0;
+    float touchgestureMax = 1.0f;
+    float touchgestureMin = 0.0f;
     mpr_sig brush = 0;
     mpr_sig multibrush = 0;
     float brushMax[4] = {50, 50, 50, 50};
@@ -290,10 +292,9 @@ struct Lm {
     float rubMax[4] = {5, 5, 5, 5};
     float rubMin[4] = {0, 0, 0, 0};
     mpr_sig rawtouch = 0;
-    mpr_sig disctouch = 0;
     int touchMax[TSTICK_SIZE]; // Initialized in setup()
     int touchMin[TSTICK_SIZE];
-    mpr_sig count = 0;
+    mpr_sig count = 0; // Button Signals
     int countMax = 100;
     int countMin = 0;
     mpr_sig tap = 0;
@@ -301,12 +302,18 @@ struct Lm {
     mpr_sig dtap = 0;
     int tapMax = 1;
     int tapMin = 0;
-    mpr_sig soc = 0;
+    mpr_sig soc = 0; // Battery signals
     int batSOCMax = 100;
     int batSOCMin = 0;
     mpr_sig batvolt = 0;
     float batVoltMax = 4.2f;
     float batVoltMin = 0.0f;
+    mpr_sig batcurr = 0;
+    float batCurrMax = 2.0f;
+    float batCurrMin = 0.0f;
+    mpr_sig battte = 0;
+    float battteMax = 24.0f;
+    float battteMin = 0.0f;
 } lm;
 
 struct Sensors {
@@ -330,6 +337,13 @@ struct Sensors {
     int battery;
     int current;
     float voltage;
+    float tte;
+    float touchAll;         
+    float touchTop;         
+    float touchMiddle;      
+    float touchBottom;      
+    int mergedtouch[TSTICK_SIZE];
+    int mergeddiscretetouch[TSTICK_SIZE];
 } sensors;
 
 // Timers
@@ -372,10 +386,15 @@ void updateLibmapper() {
     mpr_sig_set_value(lm.tap, 0, 1, MPR_INT32, &sensors.tap);
     mpr_sig_set_value(lm.ttap, 0, 1, MPR_INT32, &sensors.dtap);
     mpr_sig_set_value(lm.dtap, 0, 1, MPR_INT32, &sensors.ttap);
-    mpr_sig_set_value(lm.soc, 0, 1, MPR_FLT, &sensors.battery);
-    mpr_sig_set_value(lm.batvolt, 0, 1, MPR_FLT, &battery.value);
-    mpr_sig_set_value(lm.rawtouch, 0, TSTICK_SIZE, MPR_INT32, &mergedtouch);
-    mpr_sig_set_value(lm.disctouch, 0, TSTICK_SIZE, MPR_INT32, &mergeddiscretetouch);
+    mpr_sig_set_value(lm.soc, 0, 1, MPR_INT32, &sensors.battery);
+    mpr_sig_set_value(lm.batvolt, 0, 1, MPR_FLT, &sensors.voltage);
+    mpr_sig_set_value(lm.batcurr, 0, 1, MPR_FLT, &sensors.current);
+    mpr_sig_set_value(lm.battte, 0, 1, MPR_FLT, &sensors.tte);
+    mpr_sig_set_value(lm.rawtouch, 0, TSTICK_SIZE, MPR_INT32, &sensors.mergedtouch);
+    mpr_sig_set_value(lm.touchAll, 0, 1, MPR_FLT, &sensors.touchAll);
+    mpr_sig_set_value(lm.touchTop, 0, 1, MPR_FLT, &sensors.touchTop);
+    mpr_sig_set_value(lm.touchMiddle, 0, 1, MPR_FLT, &sensors.touchMiddle);
+    mpr_sig_set_value(lm.touchBottom, 0, 1, MPR_FLT, &sensors.touchBottom);
     mpr_dev_update_maps(lm_dev);
 }
 
@@ -406,12 +425,12 @@ void updateOSC_bundle(lo_bundle bundle) {
     osc_bundle_add_float(bundle, "instrument/squeeze", sensors.squeeze);
 
     //Send touch data
-    osc_bundle_add_float(bundle, "instrument/touch/all", gestures.touchAll);
-    osc_bundle_add_float(bundle, "instrument/touch/top", gestures.touchTop);
-    osc_bundle_add_float(bundle, "instrument/touch/middle", gestures.touchMiddle);
-    osc_bundle_add_float(bundle, "instrument/touch/bottom", gestures.touchBottom);
-    osc_bundle_add_int_array(bundle, "raw/capsense", TSTICK_SIZE, mergedtouch);
-    osc_bundle_add_int_array(bundle, "instrument/touch/discrete", TSTICK_SIZE, mergeddiscretetouch);
+    osc_bundle_add_float(bundle, "instrument/touch/all", sensors.touchAll);
+    osc_bundle_add_float(bundle, "instrument/touch/top", sensors.touchTop);
+    osc_bundle_add_float(bundle, "instrument/touch/middle", sensors.touchMiddle);
+    osc_bundle_add_float(bundle, "instrument/touch/bottom", sensors.touchBottom);
+    osc_bundle_add_int_array(bundle, "instrument/touch/discrete", TSTICK_SIZE, sensors.mergeddiscretetouch);
+    osc_bundle_add_int_array(bundle, "raw/capsense", TSTICK_SIZE, sensors.mergedtouch);
     
     // Touch gestures
     if (event.brush) {
@@ -454,14 +473,16 @@ void updateOSC_bundle(lo_bundle bundle) {
 
     // Battery Data
     if (event.battery) {
-        osc_bundle_add_int(bundle, "battery/percentage", battery.percentage);
+        osc_bundle_add_int(bundle, "battery/percentage", sensors.battery);
     }
     if (event.current) {
-        osc_bundle_add_int(bundle, "battery/current", battery.current);
-        osc_bundle_add_float(bundle, "battery/tte", battery.TTE);
+        osc_bundle_add_int(bundle, "battery/current", sensors.current);
+    }
+    if (event.tte) {
+        osc_bundle_add_float(bundle, "battery/tte", sensors.tte);
     }
     if (event.voltage) {
-        osc_bundle_add_float(bundle, "battery/voltage", battery.voltage);  
+        osc_bundle_add_float(bundle, "battery/voltage", sensors.voltage);  
     }
 }
 
@@ -501,13 +522,16 @@ void readTouch() {
 
     // Store in arrays for sensing
     for (int i = 0; i < TSTICK_SIZE; ++i) {
-        mergedtouch[i] = touch.touch[i];
-        mergeddiscretetouch[i] = touch.discreteTouch[i];
-        mergednormalisedtouch[i] = touch.normTouch[i];
+        sensors.mergedtouch[i] = touch.touch[i];
+        sensors.mergeddiscretetouch[i] = touch.discreteTouch[i];
     }
 
     // Update touch gestures
-    gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
+    gestures.updateTouchArray(sensors.mergeddiscretetouch,TSTICK_SIZE);
+    sensors.touchAll = gestures.touchAll;
+    sensors.touchTop = gestures.touchTop;
+    sensors.touchMiddle = gestures.touchMiddle;
+    sensors.touchBottom = gestures.touchBottom;
 
     // Update event structure
     if (sensors.brush != gestures.brush || sensors.multibrush[0] != gestures.multiBrush[0]) {
@@ -531,26 +555,6 @@ void readTouch() {
         event.touchReady = true;
         touch.newData = 0;
     }
-
-    // Update touch gestures
-    gestures.updateTouchArray(mergeddiscretetouch,TSTICK_SIZE);
-
-    if (sensors.brush != gestures.brush || sensors.multibrush[0] != gestures.multiBrush[0]) {
-        sensors.brush = gestures.brush;
-        sensors.multibrush[0] = gestures.multiBrush[0];
-        sensors.multibrush[1] = gestures.multiBrush[1];
-        sensors.multibrush[2] = gestures.multiBrush[2];
-        sensors.multibrush[3] = gestures.multiBrush[3];
-        event.brush = true;
-    } else { event.brush = false; }
-    if (sensors.rub != gestures.rub || sensors.multirub[0] != gestures.multiRub[0]) {
-        sensors.rub = gestures.rub;
-        sensors.multirub[0] = gestures.multiRub[0];
-        sensors.multirub[1] = gestures.multiRub[1];
-        sensors.multirub[2] = gestures.multiRub[2];
-        sensors.multirub[3] = gestures.multiRub[3];
-        event.rub = true;
-    } else { event.rub = false; }
 }
     
 
@@ -604,6 +608,7 @@ void readBattery() {
     // Save to sensors array
     if (sensors.battery != battery.percentage) {sensors.battery = battery.percentage; event.battery = true; } else { event.battery = false; }
     if (sensors.current != battery.current) {sensors.current = battery.current; event.current = true; } else { event.current = false; }
+    if (sensors.tte != battery.TTE) {sensors.tte = battery.TTE; event.tte = true; } else { event.tte = false; }
     if (sensors.voltage != battery.voltage) {sensors.voltage = battery.voltage; event.voltage = true; } else { event.voltage = false; }
 
     // // Send battery data always (for debugging)
@@ -746,140 +751,137 @@ void setup() {
     // Initialise Button Interrupt
     attachInterrupt(pin.button, buttton_isr, CHANGE);
 
-    std::cout << "    Initializing IMU... ";
-    #ifdef imu_ICM20948
-        imu.initIMU(MIMUBOARD::mimu_ICM20948);
-    #endif
-    #ifdef imu_LSM9DS1
-        imu.initIMU(MIMUBOARD::mimu_LSM9DS1);
-    #endif
-    readIMU(); // get some data and save it to avoid puara-gesture crashes due to empty buffer
-    std::cout << "done" << std::endl;
+    // Setting Deep sleep wake button
+    rtc_gpio_pullup_en(SLEEP_PIN);
+    esp_sleep_enable_ext0_wakeup(SLEEP_PIN,0); // 1 = High, 0 = Low
 
-    // Initialise Fuel Gauge
-    #ifdef fg_MAX17055
-    std::cout << "    Initializing Fuel Gauge configuration... ";
-    if (fuelgauge.init(fg_config)) {
+    // Only do rest of setup if the T-Stick is connected to WiFi
+    if (puara.get_StaIsConnected()) {
+        std::cout << "    Initializing IMU... ";
+        imu.initIMU(TSTICK_IMU);
+
+        readIMU(); // get some data and save it to avoid puara-gesture crashes due to empty buffer
         std::cout << "done" << std::endl;
-    } else {
-        std::cout << "initialization failed!" << std::endl;
-    }
-    std::cout << "done" << std::endl;
-    #endif
 
-    // Setup jabx,jaby and jabz thresholds
-    gestures.jabXThreshold = puara.getVarNumber("jabx_threshold");
-    gestures.jabYThreshold = puara.getVarNumber("jaby_threshold");
-    gestures.jabZThreshold = puara.getVarNumber("jabz_threshold");
-
-    // Calibrate IMU
-    // Set acceleration zero rate
-    imuParams.accel_zerog[0] = puara.getVarNumber("accel_zerog1");
-    imuParams.accel_zerog[1] = puara.getVarNumber("accel_zerog2");
-    imuParams.accel_zerog[2] = puara.getVarNumber("accel_zerog3");
-
-    // Set gyroscope zero rate
-    imuParams.gyro_zerorate[0] = puara.getVarNumber("gyro_zerorate1");
-    imuParams.gyro_zerorate[1] = puara.getVarNumber("gyro_zerorate2");
-    imuParams.gyro_zerorate[2] = puara.getVarNumber("gyro_zerorate3");
-
-    // Set Magnetometer hard offset
-    imuParams.h[0] = puara.getVarNumber("hard_offset1");
-    imuParams.h[1] = puara.getVarNumber("hard_offset2");
-    imuParams.h[2] = puara.getVarNumber("hard_offset3");
-
-    // Set magnetometer soft offset
-    imuParams.sx[0] = puara.getVarNumber("soft_offsetx1");
-    imuParams.sx[1] = puara.getVarNumber("soft_offsetx2");
-    imuParams.sx[2] = puara.getVarNumber("soft_offsetx3");
-
-    imuParams.sy[0] = puara.getVarNumber("soft_offsety1");
-    imuParams.sy[1] = puara.getVarNumber("soft_offsety2");
-    imuParams.sy[2] = puara.getVarNumber("soft_offsety3");
-
-    imuParams.sz[0] = puara.getVarNumber("soft_offsetz1");
-    imuParams.sz[1] = puara.getVarNumber("soft_offsetz2");
-    imuParams.sz[2] = puara.getVarNumber("soft_offsetz3");
-
-    // Set calibration parameters
-    gestures.setCalibrationParameters(imuParams);
-
-    std::cout << "    Initializing FSR... ";
-    if (fsr.initFsr(pin.fsr, std::round(puara.getVarNumber("fsr_offset")))) {
-        std::cout << "done (offset value: " << fsr.getOffset() << ")" << std::endl;
-    } else {
-        std::cout << "initialization failed!" << std::endl;
-    }
-
-    std::cout << "    Initializing touch sensor... ";
-    std::fill_n(lm.touchMin, TSTICK_SIZE, 0);
-    std::fill_n(lm.touchMax, TSTICK_SIZE, 1);
-
-    #ifdef touch_TRILL
-        // Compute number of boards from TSTICK_SIZE
-        float num_boards = TSTICK_SIZE / TRILL_BASETOUCHSIZE;
-        if (num_boards < 0) {
-            num_boards = 1;
-        } else if (num_boards > 4) {
-            num_boards = 4;
-        }
-        int touch_noise = puara.getVarNumber("touch_noise");
-        if (touch.initTouch(num_boards, touch_noise)) {
+        // Initialise Fuel Gauge
+        #ifdef fg_MAX17055
+        std::cout << "    Initializing Fuel Gauge configuration... ";
+        if (fuelgauge.init(fg_config)) {
             std::cout << "done" << std::endl;
         } else {
             std::cout << "initialization failed!" << std::endl;
         }
-    #endif
-    #ifdef touch_ENCHANTI
-        // Compute number of boards from TSTICK_SIZE
-        float num_boards = TSTICK_SIZE / ENCHANTI_BASETOUCHSIZE;
-        if (num_boards < 0) {
-            num_boards = 1;
-        } else if (num_boards > 2) {
-            num_boards = 2;
-        }
-        int touch_noise = puara.getVarNumber("touch_noise");
-        touch.initTouch(num_boards, touch_noise, 3, 2);
         std::cout << "done" << std::endl;
-    #endif
+        #endif
 
-    std::cout << "    Initializing Liblo server/client at " << puara.getLocalPORTStr() << " ... ";
-    osc1 = lo_address_new(puara.getIP1().c_str(), puara.getPORT1Str().c_str());
-    osc2 = lo_address_new(puara.getIP2().c_str(), puara.getPORT2Str().c_str());
-    osc_server = lo_server_thread_new(puara.getLocalPORTStr().c_str(), error);
-    lo_server_thread_add_method(osc_server, NULL, NULL, generic_handler, NULL);
-    lo_server_thread_start(osc_server);
-    std::cout << "done" << std::endl;
+        // Setup jabx,jaby and jabz thresholds
+        gestures.jabXThreshold = puara.getVarNumber("jabx_threshold");
+        gestures.jabYThreshold = puara.getVarNumber("jaby_threshold");
+        gestures.jabZThreshold = puara.getVarNumber("jabz_threshold");
 
-    std::cout << "    Initializing Libmapper device/signals... ";
-    lm_dev = mpr_dev_new(puara.get_dmi_name().c_str(), 0);
-    lm.fsr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/fsr", 1, MPR_INT32, "un", &lm.fsrMin, &lm.fsrMax, 0, 0, 0);
-    lm.accel = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/accel", 3, MPR_FLT, "m/s^2",  &lm.accelMin, &lm.accelMax, 0, 0, 0);
-    lm.gyro = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/gyro", 3, MPR_FLT, "rad/s", &lm.gyroMin, &lm.gyroMax, 0, 0, 0);
-    lm.magn = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/mag", 3, MPR_FLT, "uTesla", &lm.magnMin, &lm.magnMax, 0, 0, 0);
-    lm.quat = mpr_sig_new(lm_dev, MPR_DIR_OUT, "orientation", 4, MPR_FLT, "qt", lm.quatMin, lm.quatMax, 0, 0, 0);
-    lm.ypr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "ypr", 3, MPR_FLT, "fl", lm.yprMin, lm.yprMax, 0, 0, 0);
-    lm.squeeze = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/squeeze", 1, MPR_FLT, "fl", &lm.squeezeMin, &lm.squeezeMax, 0, 0, 0);
-    lm.shake = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/shake", 3, MPR_FLT, "fl", lm.shakeMin, lm.shakeMax, 0, 0, 0);
-    lm.jab = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/jab", 3, MPR_FLT, "fl", lm.jabMin, lm.jabMax, 0, 0, 0);
-    lm.brush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/brush", 1, MPR_FLT, "un", lm.brushMin, lm.brushMax, 0, 0, 0);
-    lm.rub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/rub", 1, MPR_FLT, "un", lm.rubMin, lm.rubMax, 0, 0, 0);
-    lm.multibrush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multibrush", 4, MPR_FLT, "un", lm.brushMin, lm.brushMax, 0, 0, 0);
-    lm.multirub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multirub", 4, MPR_FLT, "un", lm.rubMin, lm.rubMax, 0, 0, 0);
-    lm.rawtouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", TSTICK_SIZE, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
-    lm.disctouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/discretetouch", TSTICK_SIZE, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
-    lm.count = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/count", 1, MPR_INT32, "un", &lm.countMin, &lm.countMax, 0, 0, 0);
-    lm.tap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
-    lm.ttap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/triple tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
-    lm.dtap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/double tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
-    lm.soc = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/percentage", 1, MPR_FLT, "%", &lm.batSOCMin, &lm.batSOCMax, 0, 0, 0);
-    lm.batvolt = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/voltage", 1, MPR_FLT, "V", &lm.batVoltMin, &lm.batVoltMax, 0, 0, 0);
-    std::cout << "done" << std::endl;
+        // Calibrate IMU
+        // Set acceleration zero rate
+        imuParams.accel_zerog[0] = puara.getVarNumber("accel_zerog1");
+        imuParams.accel_zerog[1] = puara.getVarNumber("accel_zerog2");
+        imuParams.accel_zerog[2] = puara.getVarNumber("accel_zerog3");
 
-    // Setting Deep sleep wake button
-    rtc_gpio_pullup_en(GPIO_NUM_9);
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_9,0); // 1 = High, 0 = Low
-    
+        // Set gyroscope zero rate
+        imuParams.gyro_zerorate[0] = puara.getVarNumber("gyro_zerorate1");
+        imuParams.gyro_zerorate[1] = puara.getVarNumber("gyro_zerorate2");
+        imuParams.gyro_zerorate[2] = puara.getVarNumber("gyro_zerorate3");
+
+        // Set Magnetometer hard offset
+        imuParams.h[0] = puara.getVarNumber("hard_offset1");
+        imuParams.h[1] = puara.getVarNumber("hard_offset2");
+        imuParams.h[2] = puara.getVarNumber("hard_offset3");
+
+        // Set magnetometer soft offset
+        imuParams.sx[0] = puara.getVarNumber("soft_offsetx1");
+        imuParams.sx[1] = puara.getVarNumber("soft_offsetx2");
+        imuParams.sx[2] = puara.getVarNumber("soft_offsetx3");
+
+        imuParams.sy[0] = puara.getVarNumber("soft_offsety1");
+        imuParams.sy[1] = puara.getVarNumber("soft_offsety2");
+        imuParams.sy[2] = puara.getVarNumber("soft_offsety3");
+
+        imuParams.sz[0] = puara.getVarNumber("soft_offsetz1");
+        imuParams.sz[1] = puara.getVarNumber("soft_offsetz2");
+        imuParams.sz[2] = puara.getVarNumber("soft_offsetz3");
+
+        // Set calibration parameters
+        gestures.setCalibrationParameters(imuParams);
+
+        std::cout << "    Initializing FSR... ";
+        if (fsr.initFsr(pin.fsr, std::round(puara.getVarNumber("fsr_offset")))) {
+            std::cout << "done (offset value: " << fsr.getOffset() << ")" << std::endl;
+        } else {
+            std::cout << "initialization failed!" << std::endl;
+        }
+
+        std::cout << "    Initializing touch sensor... ";
+        std::fill_n(lm.touchMin, TSTICK_SIZE, 0);
+        std::fill_n(lm.touchMax, TSTICK_SIZE, TOUCH_MAX);
+
+        // update the touch noise threshold from puara variables
+        tstick_touchconfig.touch_threshold = puara.getVarNumber("touch_noise");
+        if (touch.initTouch(tstick_touchconfig)) {
+            std::cout << "done" << std::endl;
+        } else {
+            std::cout << "initialization failed!" << std::endl;
+        }
+
+        std::cout << "    Initializing Liblo server/client at " << puara.getLocalPORTStr() << " ... ";
+        if (puara.IP1_ready()) {
+            osc1 = lo_address_new(puara.getIP1().c_str(), puara.getPORT1Str().c_str());
+        }
+        if (puara.IP2_ready()) {
+            osc2 = lo_address_new(puara.getIP2().c_str(), puara.getPORT2Str().c_str());
+        }
+        osc_server = lo_server_thread_new(puara.getLocalPORTStr().c_str(), error);
+        lo_server_thread_add_method(osc_server, NULL, NULL, generic_handler, NULL);
+        lo_server_thread_start(osc_server);
+        std::cout << "done" << std::endl;
+
+        std::cout << "    Initializing Libmapper device/signals... ";
+        lm_dev = mpr_dev_new(puara.get_dmi_name().c_str(), 0);
+        // FSR Signals
+        lm.fsr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/fsr", 1, MPR_INT32, "un", &lm.fsrMin, &lm.fsrMax, 0, 0, 0);
+        lm.squeeze = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/squeeze", 1, MPR_FLT, "fl", &lm.squeezeMin, &lm.squeezeMax, 0, 0, 0);
+       
+        // IMU Signals
+        lm.accel = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/accel", 3, MPR_FLT, "m/s^2",  &lm.accelMin, &lm.accelMax, 0, 0, 0);
+        lm.gyro = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/gyro", 3, MPR_FLT, "rad/s", &lm.gyroMin, &lm.gyroMax, 0, 0, 0);
+        lm.magn = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/mag", 3, MPR_FLT, "uTesla", &lm.magnMin, &lm.magnMax, 0, 0, 0);
+        lm.quat = mpr_sig_new(lm_dev, MPR_DIR_OUT, "orientation", 4, MPR_FLT, "qt", &lm.quatMin, &lm.quatMax, 0, 0, 0);
+        lm.ypr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "ypr", 3, MPR_FLT, "fl", &lm.yprMin, &lm.yprMax, 0, 0, 0);
+        lm.shake = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/shake", 3, MPR_FLT, "fl", &lm.shakeMin, &lm.shakeMax, 0, 0, 0);
+        lm.jab = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/jab", 3, MPR_FLT, "fl", &lm.jabMin, &lm.jabMax, 0, 0, 0);
+        
+        // Touch signals
+        lm.touchAll = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/touch/all", 1, MPR_FLT, "un", &lm.touchgestureMin, &lm.touchgestureMax, 0, 0, 0);
+        lm.touchTop = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/touch/top", 1, MPR_FLT, "un", &lm.touchgestureMin, &lm.touchgestureMax, 0, 0, 0);
+        lm.touchMiddle = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/touch/middle", 1, MPR_FLT, "un", &lm.touchgestureMin, &lm.touchgestureMax, 0, 0, 0);
+        lm.touchBottom = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/touch/bottom", 1, MPR_FLT, "un", &lm.touchgestureMin, &lm.touchgestureMax, 0, 0, 0);
+        lm.brush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/brush", 1, MPR_FLT, "un", &lm.brushMin, &lm.brushMax, 0, 0, 0);
+        lm.rub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/rub", 1, MPR_FLT, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
+        lm.multibrush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multibrush", 4, MPR_FLT, "un", &lm.brushMin, &lm.brushMax, 0, 0, 0);
+        lm.multirub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multirub", 4, MPR_FLT, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
+        lm.rawtouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", TSTICK_SIZE, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
+        
+        // Button Signals
+        lm.count = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/count", 1, MPR_INT32, "un", &lm.countMin, &lm.countMax, 0, 0, 0);
+        lm.tap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
+        lm.ttap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/triple tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
+        lm.dtap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/double tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
+        
+        // Battery Signals
+        lm.soc = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/percentage", 1, MPR_INT32, "%", &lm.batSOCMin, &lm.batSOCMax, 0, 0, 0);
+        lm.batvolt = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/voltage", 1, MPR_FLT, "V", &lm.batVoltMin, &lm.batVoltMax, 0, 0, 0);
+        lm.batcurr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/current", 1, MPR_FLT, "mA", &lm.batCurrMin, &lm.batCurrMax, 0, 0, 0);
+        lm.battte = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/tte", 1, MPR_FLT, "h", &lm.battteMin, &lm.battteMax, 0, 0, 0);
+        std::cout << "done" << std::endl;
+    }
+
     // Using Serial.print and delay to prevent interruptions
     delay(500);
     std::cout << puara.get_dmi_name().c_str() << std::endl;
