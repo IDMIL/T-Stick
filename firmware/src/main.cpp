@@ -755,81 +755,81 @@ void setup() {
     rtc_gpio_pullup_en(SLEEP_PIN);
     esp_sleep_enable_ext0_wakeup(SLEEP_PIN,0); // 1 = High, 0 = Low
 
-    // Only do rest of setup if the T-Stick is connected to WiFi
+    std::cout << "    Initializing IMU... ";
+    imu.initIMU(TSTICK_IMU);
+
+    readIMU(); // get some data and save it to avoid puara-gesture crashes due to empty buffer
+    std::cout << "done" << std::endl;
+
+    // Initialise Fuel Gauge
+    #ifdef fg_MAX17055
+    std::cout << "    Initializing Fuel Gauge configuration... ";
+    if (fuelgauge.init(fg_config)) {
+        std::cout << "done" << std::endl;
+    } else {
+        std::cout << "initialization failed!" << std::endl;
+    }
+    std::cout << "done" << std::endl;
+    #endif
+
+    // Setup jabx,jaby and jabz thresholds
+    gestures.jabXThreshold = puara.getVarNumber("jabx_threshold");
+    gestures.jabYThreshold = puara.getVarNumber("jaby_threshold");
+    gestures.jabZThreshold = puara.getVarNumber("jabz_threshold");
+
+    // Calibrate IMU
+    // Set acceleration zero rate
+    imuParams.accel_zerog[0] = puara.getVarNumber("accel_zerog1");
+    imuParams.accel_zerog[1] = puara.getVarNumber("accel_zerog2");
+    imuParams.accel_zerog[2] = puara.getVarNumber("accel_zerog3");
+
+    // Set gyroscope zero rate
+    imuParams.gyro_zerorate[0] = puara.getVarNumber("gyro_zerorate1");
+    imuParams.gyro_zerorate[1] = puara.getVarNumber("gyro_zerorate2");
+    imuParams.gyro_zerorate[2] = puara.getVarNumber("gyro_zerorate3");
+
+    // Set Magnetometer hard offset
+    imuParams.h[0] = puara.getVarNumber("hard_offset1");
+    imuParams.h[1] = puara.getVarNumber("hard_offset2");
+    imuParams.h[2] = puara.getVarNumber("hard_offset3");
+
+    // Set magnetometer soft offset
+    imuParams.sx[0] = puara.getVarNumber("soft_offsetx1");
+    imuParams.sx[1] = puara.getVarNumber("soft_offsetx2");
+    imuParams.sx[2] = puara.getVarNumber("soft_offsetx3");
+
+    imuParams.sy[0] = puara.getVarNumber("soft_offsety1");
+    imuParams.sy[1] = puara.getVarNumber("soft_offsety2");
+    imuParams.sy[2] = puara.getVarNumber("soft_offsety3");
+
+    imuParams.sz[0] = puara.getVarNumber("soft_offsetz1");
+    imuParams.sz[1] = puara.getVarNumber("soft_offsetz2");
+    imuParams.sz[2] = puara.getVarNumber("soft_offsetz3");
+
+    // Set calibration parameters
+    gestures.setCalibrationParameters(imuParams);
+
+    std::cout << "    Initializing FSR... ";
+    if (fsr.initFsr(pin.fsr, std::round(puara.getVarNumber("fsr_offset")))) {
+        std::cout << "done (offset value: " << fsr.getOffset() << ")" << std::endl;
+    } else {
+        std::cout << "initialization failed!" << std::endl;
+    }
+
+    std::cout << "    Initializing touch sensor... ";
+    std::fill_n(lm.touchMin, TSTICK_SIZE, 0);
+    std::fill_n(lm.touchMax, TSTICK_SIZE, TOUCH_MAX);
+
+    // update the touch noise threshold from puara variables
+    tstick_touchconfig.touch_threshold = puara.getVarNumber("touch_noise");
+    if (touch.initTouch(tstick_touchconfig)) {
+        std::cout << "done" << std::endl;
+    } else {
+        std::cout << "initialization failed!" << std::endl;
+    }
+
     if (puara.get_StaIsConnected()) {
-        std::cout << "    Initializing IMU... ";
-        imu.initIMU(TSTICK_IMU);
-
-        readIMU(); // get some data and save it to avoid puara-gesture crashes due to empty buffer
-        std::cout << "done" << std::endl;
-
-        // Initialise Fuel Gauge
-        #ifdef fg_MAX17055
-        std::cout << "    Initializing Fuel Gauge configuration... ";
-        if (fuelgauge.init(fg_config)) {
-            std::cout << "done" << std::endl;
-        } else {
-            std::cout << "initialization failed!" << std::endl;
-        }
-        std::cout << "done" << std::endl;
-        #endif
-
-        // Setup jabx,jaby and jabz thresholds
-        gestures.jabXThreshold = puara.getVarNumber("jabx_threshold");
-        gestures.jabYThreshold = puara.getVarNumber("jaby_threshold");
-        gestures.jabZThreshold = puara.getVarNumber("jabz_threshold");
-
-        // Calibrate IMU
-        // Set acceleration zero rate
-        imuParams.accel_zerog[0] = puara.getVarNumber("accel_zerog1");
-        imuParams.accel_zerog[1] = puara.getVarNumber("accel_zerog2");
-        imuParams.accel_zerog[2] = puara.getVarNumber("accel_zerog3");
-
-        // Set gyroscope zero rate
-        imuParams.gyro_zerorate[0] = puara.getVarNumber("gyro_zerorate1");
-        imuParams.gyro_zerorate[1] = puara.getVarNumber("gyro_zerorate2");
-        imuParams.gyro_zerorate[2] = puara.getVarNumber("gyro_zerorate3");
-
-        // Set Magnetometer hard offset
-        imuParams.h[0] = puara.getVarNumber("hard_offset1");
-        imuParams.h[1] = puara.getVarNumber("hard_offset2");
-        imuParams.h[2] = puara.getVarNumber("hard_offset3");
-
-        // Set magnetometer soft offset
-        imuParams.sx[0] = puara.getVarNumber("soft_offsetx1");
-        imuParams.sx[1] = puara.getVarNumber("soft_offsetx2");
-        imuParams.sx[2] = puara.getVarNumber("soft_offsetx3");
-
-        imuParams.sy[0] = puara.getVarNumber("soft_offsety1");
-        imuParams.sy[1] = puara.getVarNumber("soft_offsety2");
-        imuParams.sy[2] = puara.getVarNumber("soft_offsety3");
-
-        imuParams.sz[0] = puara.getVarNumber("soft_offsetz1");
-        imuParams.sz[1] = puara.getVarNumber("soft_offsetz2");
-        imuParams.sz[2] = puara.getVarNumber("soft_offsetz3");
-
-        // Set calibration parameters
-        gestures.setCalibrationParameters(imuParams);
-
-        std::cout << "    Initializing FSR... ";
-        if (fsr.initFsr(pin.fsr, std::round(puara.getVarNumber("fsr_offset")))) {
-            std::cout << "done (offset value: " << fsr.getOffset() << ")" << std::endl;
-        } else {
-            std::cout << "initialization failed!" << std::endl;
-        }
-
-        std::cout << "    Initializing touch sensor... ";
-        std::fill_n(lm.touchMin, TSTICK_SIZE, 0);
-        std::fill_n(lm.touchMax, TSTICK_SIZE, TOUCH_MAX);
-
-        // update the touch noise threshold from puara variables
-        tstick_touchconfig.touch_threshold = puara.getVarNumber("touch_noise");
-        if (touch.initTouch(tstick_touchconfig)) {
-            std::cout << "done" << std::endl;
-        } else {
-            std::cout << "initialization failed!" << std::endl;
-        }
-
+        // Only do rest of setup if the T-Stick is connected to WiFi
         std::cout << "    Initializing Liblo server/client at " << puara.getLocalPORTStr() << " ... ";
         if (puara.IP1_ready()) {
             osc1 = lo_address_new(puara.getIP1().c_str(), puara.getPORT1Str().c_str());
