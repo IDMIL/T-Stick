@@ -909,9 +909,11 @@ void loop() {
     // Update MIMU data
     updateMIMU();
 
-    // Update Libmapper and OSC
-    updateLibmapper();
+    if (puara.get_StaIsConnected()) {
+        // Update Libmapper and OSC
+        updateLibmapper();
 
-    // Update OSC
-    updateOSC();
+        // Update OSC
+        updateOSC();
+    }
 }
