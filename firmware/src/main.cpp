@@ -309,10 +309,10 @@ struct Lm {
     float batVoltMax = 4.2f;
     float batVoltMin = 0.0f;
     mpr_sig batcurr = 0;
-    float batCurrMax = 2.0f;
-    float batCurrMin = 0.0f;
+    float batCurrMax = 2000.0f;
+    float batCurrMin = -2000.0f;
     mpr_sig battte = 0;
-    float battteMax = 24.0f;
+    float battteMax = 102.0f;
     float battteMin = 0.0f;
 } lm;
 
