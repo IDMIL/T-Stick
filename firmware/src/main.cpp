@@ -479,7 +479,7 @@ void updateOSC_bundle(lo_bundle bundle) {
         osc_bundle_add_int(bundle, "battery/current", sensors.current);
     }
     if (event.tte) {
-        osc_bundle_add_float(bundle, "battery/tte", sensors.tte);
+        osc_bundle_add_float(bundle, "battery/timetoempty", sensors.tte);
     }
     if (event.voltage) {
         osc_bundle_add_float(bundle, "battery/voltage", sensors.voltage);  
@@ -878,7 +878,7 @@ void setup() {
         lm.soc = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/percentage", 1, MPR_INT32, "%", &lm.batSOCMin, &lm.batSOCMax, 0, 0, 0);
         lm.batvolt = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/voltage", 1, MPR_FLT, "V", &lm.batVoltMin, &lm.batVoltMax, 0, 0, 0);
         lm.batcurr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/current", 1, MPR_FLT, "mA", &lm.batCurrMin, &lm.batCurrMax, 0, 0, 0);
-        lm.battte = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/tte", 1, MPR_FLT, "h", &lm.battteMin, &lm.battteMax, 0, 0, 0);
+        lm.battte = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/timetoempty", 1, MPR_FLT, "h", &lm.battteMin, &lm.battteMax, 0, 0, 0);
         std::cout << "done" << std::endl;
     }
 
