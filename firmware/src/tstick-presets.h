@@ -342,6 +342,7 @@ General Properties for the T-Stick
     #define FUELGAUE_INT_PIN 17
     #define LED_PIN 15
     #define ORANGE_LED 16
+    #define IMU_INT_PIN 48
     #define SLEEP_PIN GPIO_NUM_9
 
     // Boards + Sensors
@@ -403,6 +404,7 @@ General Properties for the T-Stick
     #define FSR_PIN 8
     #define BUTTON_PIN 9
     #define FUELGAUE_INT_PIN 17
+    #define IMU_INT_PIN 48
     #define LED_PIN 15
     #define ORANGE_LED 16
     #define SLEEP_PIN GPIO_NUM_9
@@ -468,6 +470,7 @@ General Properties for the T-Stick
     #define FUELGAUE_INT_PIN 17
     #define LED_PIN 15
     #define ORANGE_LED 16
+    #define IMU_INT_PIN 48
     #define SLEEP_PIN GPIO_NUM_9
 
     // Boards + Sensors

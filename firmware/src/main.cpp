@@ -11,7 +11,7 @@
 
 
 unsigned int firmware_version = 240401;
-
+#define DEBUG
 /*
 Include T-Stick properties
 - Go to tstick-presets.h to edit properties for your T-Stick
@@ -19,6 +19,7 @@ Include T-Stick properties
 #include "tstick-presets.h"
 
 #include "Arduino.h"
+#include "time.h"
 // For JTAG monitor
 #include "USB.h"
 
@@ -70,7 +71,6 @@ float sz[3];
 float h[3];
 
 calibrationParameters imuParams;
-
 
 /////////////////////
 // Pin definitions //
@@ -153,10 +153,14 @@ void batteryFilter() {
 }
 
 ///////////////////////////////////
-// Include button function files //
+// Custom Interrupt Routines     //
 ///////////////////////////////////
 void buttton_isr() {
     button.readButton();
+}
+
+void imu_isr() {
+    event.mimu = true;
 }
 
 //////////////////////////////////////////////
@@ -314,6 +318,13 @@ struct Lm {
     mpr_sig battte = 0;
     float battteMax = 102.0f;
     float battteMin = 0.0f;
+    mpr_sig counter = 0;
+    float counterMax = 80000;
+    float counterMin = 0;
+    mpr_sig looptime = 0;
+    mpr_sig localtime = 0;
+    int timeMax = 1000000;
+    int timeMin = 0;
 } lm;
 
 struct Sensors {
@@ -344,7 +355,23 @@ struct Sensors {
     float touchBottom;      
     int mergedtouch[TSTICK_SIZE];
     int mergeddiscretetouch[TSTICK_SIZE];
+    float counter;
+    int looptime;
+    int localtime;
 } sensors;
+
+// Debug code
+// Function that gets current epoch time
+unsigned long getTime() {
+  time_t now;
+  struct tm timeinfo;
+  if (!getLocalTime(&timeinfo)) {
+    //Serial.println("Failed to obtain time");
+    return(0);
+  }
+  time(&now);
+  return now;
+}
 
 // Timers
 uint32_t start = 0;
@@ -395,6 +422,9 @@ void updateLibmapper() {
     mpr_sig_set_value(lm.touchTop, 0, 1, MPR_FLT, &sensors.touchTop);
     mpr_sig_set_value(lm.touchMiddle, 0, 1, MPR_FLT, &sensors.touchMiddle);
     mpr_sig_set_value(lm.touchBottom, 0, 1, MPR_FLT, &sensors.touchBottom);
+    mpr_sig_set_value(lm.counter, 0, 1, MPR_FLT, &sensors.counter);
+    mpr_sig_set_value(lm.looptime, 0, 1, MPR_FLT, &sensors.looptime);
+    mpr_sig_set_value(lm.localtime, 0, 1, MPR_FLT, &sensors.localtime);
     mpr_dev_update_maps(lm_dev);
 }
 
@@ -484,6 +514,11 @@ void updateOSC_bundle(lo_bundle bundle) {
     if (event.voltage) {
         osc_bundle_add_float(bundle, "battery/voltage", sensors.voltage);  
     }
+
+    // Add counter
+    osc_bundle_add_float(bundle, "test/counter", sensors.counter);
+    osc_bundle_add_float(bundle, "test/looptime", sensors.looptime);
+    osc_bundle_add_float(bundle, "test/localtime", sensors.localtime);
 }
 
 // Sensor callbacks
@@ -674,7 +709,11 @@ void changeLED() {
 
 void updateMIMU() {
     // Get IMU data
-    readIMU();
+    if (event.mimu || TSTICK_IMU == MIMUBOARD::mimu_LSM9DS1) {
+        readIMU();
+        event.mimu = false;
+        imu.clearInterrupt();
+    }
     
     // Update inertial gestures
     gestures.updateInertialGestures();
@@ -757,6 +796,15 @@ void setup() {
 
     std::cout << "    Initializing IMU... ";
     imu.initIMU(TSTICK_IMU);
+
+    // If the IMU interrupt pin is specified, setup the interrupt
+    #ifdef IMU_INT_PIN
+    if ((TSTICK_IMU == MIMUBOARD::mimu_ICM20948)) {
+        // Setup interrupt
+        pinMode(IMU_INT_PIN, INPUT_PULLUP);
+        attachInterrupt(IMU_INT_PIN, imu_isr, CHANGE);
+    }
+    #endif
 
     readIMU(); // get some data and save it to avoid puara-gesture crashes due to empty buffer
     std::cout << "done" << std::endl;
@@ -879,6 +927,9 @@ void setup() {
         lm.batvolt = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/voltage", 1, MPR_FLT, "V", &lm.batVoltMin, &lm.batVoltMax, 0, 0, 0);
         lm.batcurr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/current", 1, MPR_FLT, "mA", &lm.batCurrMin, &lm.batCurrMax, 0, 0, 0);
         lm.battte = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/timetoempty", 1, MPR_FLT, "h", &lm.battteMin, &lm.battteMax, 0, 0, 0);
+
+        // Counter signal
+        lm.counter = mpr_sig_new(lm_dev, MPR_DIR_OUT, "test/counter", 1, MPR_FLT, "h", &lm.counterMin, &lm.counterMax, 0, 0, 0);
         std::cout << "done" << std::endl;
     }
 
@@ -894,6 +945,7 @@ void setup() {
 //////////
 
 void loop() {
+    start = micros();
     // Read analog signals
     readAnalog();
 
@@ -909,6 +961,13 @@ void loop() {
     // Update MIMU data
     updateMIMU();
 
+    // Add to counter
+    #ifdef DEBUG
+    sensors.counter = sensors.counter + 0.01f;
+    end = micros();
+    sensors.looptime = end - start;
+    sensors.localtime = getTime();
+    #endif
     if (puara.get_StaIsConnected()) {
         // Update Libmapper and OSC
         updateLibmapper();
