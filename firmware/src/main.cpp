@@ -928,8 +928,10 @@ void setup() {
         lm.batcurr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/current", 1, MPR_FLT, "mA", &lm.batCurrMin, &lm.batCurrMax, 0, 0, 0);
         lm.battte = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/timetoempty", 1, MPR_FLT, "h", &lm.battteMin, &lm.battteMax, 0, 0, 0);
 
-        // Counter signal
+        // Debug signals
         lm.counter = mpr_sig_new(lm_dev, MPR_DIR_OUT, "test/counter", 1, MPR_FLT, "h", &lm.counterMin, &lm.counterMax, 0, 0, 0);
+        lm.looptime = mpr_sig_new(lm_dev, MPR_DIR_OUT, "test/looptime", 1, MPR_INT32, "h", &lm.timeMin, &lm.timeMax, 0, 0, 0);
+        lm.localtime = mpr_sig_new(lm_dev, MPR_DIR_OUT, "test/localtime", 1, MPR_INT32, "h", &lm.timeMin, &lm.timeMax, 0, 0, 0);
         std::cout << "done" << std::endl;
     }
 
