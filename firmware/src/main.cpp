@@ -319,10 +319,9 @@ struct Lm {
     float battteMax = 102.0f;
     float battteMin = 0.0f;
     mpr_sig counter = 0;
-    float counterMax = 80000;
-    float counterMin = 0;
+    int counterMax = 80000;
+    int counterMin = 0;
     mpr_sig looptime = 0;
-    mpr_sig localtime = 0;
     int timeMax = 1000000;
     int timeMin = 0;
 } lm;
@@ -355,24 +354,11 @@ struct Sensors {
     float touchBottom;      
     int mergedtouch[TSTICK_SIZE];
     int mergeddiscretetouch[TSTICK_SIZE];
-    float counter;
+    int counter;
     int looptime;
-    int localtime;
 } sensors;
 
 // Debug code
-// Function that gets current epoch time
-unsigned long getTime() {
-  time_t now;
-  struct tm timeinfo;
-  if (!getLocalTime(&timeinfo)) {
-    //Serial.println("Failed to obtain time");
-    return(0);
-  }
-  time(&now);
-  return now;
-}
-
 // Timers
 uint32_t start = 0;
 uint32_t end = 0;
@@ -422,9 +408,8 @@ void updateLibmapper() {
     mpr_sig_set_value(lm.touchTop, 0, 1, MPR_FLT, &sensors.touchTop);
     mpr_sig_set_value(lm.touchMiddle, 0, 1, MPR_FLT, &sensors.touchMiddle);
     mpr_sig_set_value(lm.touchBottom, 0, 1, MPR_FLT, &sensors.touchBottom);
-    mpr_sig_set_value(lm.counter, 0, 1, MPR_FLT, &sensors.counter);
+    mpr_sig_set_value(lm.counter, 0, 1, MPR_INT32, &sensors.counter);
     mpr_sig_set_value(lm.looptime, 0, 1, MPR_FLT, &sensors.looptime);
-    mpr_sig_set_value(lm.localtime, 0, 1, MPR_FLT, &sensors.localtime);
     mpr_dev_update_maps(lm_dev);
 }
 
@@ -516,9 +501,8 @@ void updateOSC_bundle(lo_bundle bundle) {
     }
 
     // Add counter
-    osc_bundle_add_float(bundle, "test/counter", sensors.counter);
+    osc_bundle_add_int(bundle, "test/counter", sensors.counter);
     osc_bundle_add_float(bundle, "test/looptime", sensors.looptime);
-    osc_bundle_add_float(bundle, "test/localtime", sensors.localtime);
 }
 
 // Sensor callbacks
@@ -931,7 +915,6 @@ void setup() {
         // Debug signals
         lm.counter = mpr_sig_new(lm_dev, MPR_DIR_OUT, "test/counter", 1, MPR_FLT, "h", &lm.counterMin, &lm.counterMax, 0, 0, 0);
         lm.looptime = mpr_sig_new(lm_dev, MPR_DIR_OUT, "test/looptime", 1, MPR_INT32, "h", &lm.timeMin, &lm.timeMax, 0, 0, 0);
-        lm.localtime = mpr_sig_new(lm_dev, MPR_DIR_OUT, "test/localtime", 1, MPR_INT32, "h", &lm.timeMin, &lm.timeMax, 0, 0, 0);
         std::cout << "done" << std::endl;
     }
 
@@ -965,10 +948,9 @@ void loop() {
 
     // Add to counter
     #ifdef DEBUG
-    sensors.counter = sensors.counter + 0.01f;
+    sensors.counter = sensors.counter + 1;
     end = micros();
     sensors.looptime = end - start;
-    sensors.localtime = getTime();
     #endif
     if (puara.get_StaIsConnected()) {
         // Update Libmapper and OSC
