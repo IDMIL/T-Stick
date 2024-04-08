@@ -325,6 +325,7 @@ struct Lm {
     int timeMax = 1000000;
     int timeMin = 0;
 } lm;
+int use_libmapper = 0;
 
 struct Sensors {
     float accl [3];
@@ -409,7 +410,7 @@ void updateLibmapper() {
     mpr_sig_set_value(lm.touchMiddle, 0, 1, MPR_FLT, &sensors.touchMiddle);
     mpr_sig_set_value(lm.touchBottom, 0, 1, MPR_FLT, &sensors.touchBottom);
     mpr_sig_set_value(lm.counter, 0, 1, MPR_INT32, &sensors.counter);
-    mpr_sig_set_value(lm.looptime, 0, 1, MPR_FLT, &sensors.looptime);
+    mpr_sig_set_value(lm.looptime, 0, 1, MPR_INT32, &sensors.looptime);
     mpr_dev_update_maps(lm_dev);
 }
 
@@ -502,7 +503,7 @@ void updateOSC_bundle(lo_bundle bundle) {
 
     // Add counter
     osc_bundle_add_int(bundle, "test/counter", sensors.counter);
-    osc_bundle_add_float(bundle, "test/looptime", sensors.looptime);
+    osc_bundle_add_int(bundle, "test/looptime", sensors.looptime);
 }
 
 // Sensor callbacks
@@ -864,9 +865,11 @@ void setup() {
         // Only do rest of setup if the T-Stick is connected to WiFi
         std::cout << "    Initializing Liblo server/client at " << puara.getLocalPORTStr() << " ... ";
         if (puara.IP1_ready()) {
+            std::cout << "    Initialising IP1  ... ";
             osc1 = lo_address_new(puara.getIP1().c_str(), puara.getPORT1Str().c_str());
         }
         if (puara.IP2_ready()) {
+            std::cout << "    Initialising IP2  ... ";
             osc2 = lo_address_new(puara.getIP2().c_str(), puara.getPORT2Str().c_str());
         }
         osc_server = lo_server_thread_new(puara.getLocalPORTStr().c_str(), error);
@@ -874,48 +877,51 @@ void setup() {
         lo_server_thread_start(osc_server);
         std::cout << "done" << std::endl;
 
-        std::cout << "    Initializing Libmapper device/signals... ";
-        lm_dev = mpr_dev_new(puara.get_dmi_name().c_str(), 0);
-        // FSR Signals
-        lm.fsr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/fsr", 1, MPR_INT32, "un", &lm.fsrMin, &lm.fsrMax, 0, 0, 0);
-        lm.squeeze = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/squeeze", 1, MPR_FLT, "fl", &lm.squeezeMin, &lm.squeezeMax, 0, 0, 0);
-       
-        // IMU Signals
-        lm.accel = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/accel", 3, MPR_FLT, "m/s^2",  &lm.accelMin, &lm.accelMax, 0, 0, 0);
-        lm.gyro = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/gyro", 3, MPR_FLT, "rad/s", &lm.gyroMin, &lm.gyroMax, 0, 0, 0);
-        lm.magn = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/mag", 3, MPR_FLT, "uTesla", &lm.magnMin, &lm.magnMax, 0, 0, 0);
-        lm.quat = mpr_sig_new(lm_dev, MPR_DIR_OUT, "orientation", 4, MPR_FLT, "qt", &lm.quatMin, &lm.quatMax, 0, 0, 0);
-        lm.ypr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "ypr", 3, MPR_FLT, "fl", &lm.yprMin, &lm.yprMax, 0, 0, 0);
-        lm.shake = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/shake", 3, MPR_FLT, "fl", &lm.shakeMin, &lm.shakeMax, 0, 0, 0);
-        lm.jab = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/jab", 3, MPR_FLT, "fl", &lm.jabMin, &lm.jabMax, 0, 0, 0);
+        use_libmapper = puara.getVarNumber("enable_libmapper");
+        if (use_libmapper) {
+            std::cout << "    Initializing Libmapper device/signals... ";
+            lm_dev = mpr_dev_new(puara.get_dmi_name().c_str(), 0);
+            // FSR Signals
+            lm.fsr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/fsr", 1, MPR_INT32, "un", &lm.fsrMin, &lm.fsrMax, 0, 0, 0);
+            lm.squeeze = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/squeeze", 1, MPR_FLT, "fl", &lm.squeezeMin, &lm.squeezeMax, 0, 0, 0);
         
-        // Touch signals
-        lm.touchAll = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/touch/all", 1, MPR_FLT, "un", &lm.touchgestureMin, &lm.touchgestureMax, 0, 0, 0);
-        lm.touchTop = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/touch/top", 1, MPR_FLT, "un", &lm.touchgestureMin, &lm.touchgestureMax, 0, 0, 0);
-        lm.touchMiddle = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/touch/middle", 1, MPR_FLT, "un", &lm.touchgestureMin, &lm.touchgestureMax, 0, 0, 0);
-        lm.touchBottom = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/touch/bottom", 1, MPR_FLT, "un", &lm.touchgestureMin, &lm.touchgestureMax, 0, 0, 0);
-        lm.brush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/brush", 1, MPR_FLT, "un", &lm.brushMin, &lm.brushMax, 0, 0, 0);
-        lm.rub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/rub", 1, MPR_FLT, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
-        lm.multibrush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multibrush", 4, MPR_FLT, "un", &lm.brushMin, &lm.brushMax, 0, 0, 0);
-        lm.multirub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multirub", 4, MPR_FLT, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
-        lm.rawtouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", TSTICK_SIZE, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
-        
-        // Button Signals
-        lm.count = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/count", 1, MPR_INT32, "un", &lm.countMin, &lm.countMax, 0, 0, 0);
-        lm.tap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
-        lm.ttap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/triple tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
-        lm.dtap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/double tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
-        
-        // Battery Signals
-        lm.soc = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/percentage", 1, MPR_INT32, "%", &lm.batSOCMin, &lm.batSOCMax, 0, 0, 0);
-        lm.batvolt = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/voltage", 1, MPR_FLT, "V", &lm.batVoltMin, &lm.batVoltMax, 0, 0, 0);
-        lm.batcurr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/current", 1, MPR_FLT, "mA", &lm.batCurrMin, &lm.batCurrMax, 0, 0, 0);
-        lm.battte = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/timetoempty", 1, MPR_FLT, "h", &lm.battteMin, &lm.battteMax, 0, 0, 0);
+            // IMU Signals
+            lm.accel = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/accel", 3, MPR_FLT, "m/s^2",  &lm.accelMin, &lm.accelMax, 0, 0, 0);
+            lm.gyro = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/gyro", 3, MPR_FLT, "rad/s", &lm.gyroMin, &lm.gyroMax, 0, 0, 0);
+            lm.magn = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/mag", 3, MPR_FLT, "uTesla", &lm.magnMin, &lm.magnMax, 0, 0, 0);
+            lm.quat = mpr_sig_new(lm_dev, MPR_DIR_OUT, "orientation", 4, MPR_FLT, "qt", &lm.quatMin, &lm.quatMax, 0, 0, 0);
+            lm.ypr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "ypr", 3, MPR_FLT, "fl", &lm.yprMin, &lm.yprMax, 0, 0, 0);
+            lm.shake = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/shake", 3, MPR_FLT, "fl", &lm.shakeMin, &lm.shakeMax, 0, 0, 0);
+            lm.jab = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/jab", 3, MPR_FLT, "fl", &lm.jabMin, &lm.jabMax, 0, 0, 0);
+            
+            // Touch signals
+            lm.touchAll = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/touch/all", 1, MPR_FLT, "un", &lm.touchgestureMin, &lm.touchgestureMax, 0, 0, 0);
+            lm.touchTop = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/touch/top", 1, MPR_FLT, "un", &lm.touchgestureMin, &lm.touchgestureMax, 0, 0, 0);
+            lm.touchMiddle = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/touch/middle", 1, MPR_FLT, "un", &lm.touchgestureMin, &lm.touchgestureMax, 0, 0, 0);
+            lm.touchBottom = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/touch/bottom", 1, MPR_FLT, "un", &lm.touchgestureMin, &lm.touchgestureMax, 0, 0, 0);
+            lm.brush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/brush", 1, MPR_FLT, "un", &lm.brushMin, &lm.brushMax, 0, 0, 0);
+            lm.rub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/rub", 1, MPR_FLT, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
+            lm.multibrush = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multibrush", 4, MPR_FLT, "un", &lm.brushMin, &lm.brushMax, 0, 0, 0);
+            lm.multirub = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/multirub", 4, MPR_FLT, "un", &lm.rubMin, &lm.rubMax, 0, 0, 0);
+            lm.rawtouch = mpr_sig_new(lm_dev, MPR_DIR_OUT, "raw/capsense", TSTICK_SIZE, MPR_INT32, "un", &lm.touchMin, &lm.touchMax, 0, 0, 0);
+            
+            // Button Signals
+            lm.count = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/count", 1, MPR_INT32, "un", &lm.countMin, &lm.countMax, 0, 0, 0);
+            lm.tap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
+            lm.ttap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/triple tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
+            lm.dtap = mpr_sig_new(lm_dev, MPR_DIR_OUT, "instrument/double tap", 1, MPR_INT32, "un", &lm.tapMin, &lm.tapMax, 0, 0, 0);
+            
+            // Battery Signals
+            lm.soc = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/percentage", 1, MPR_INT32, "%", &lm.batSOCMin, &lm.batSOCMax, 0, 0, 0);
+            lm.batvolt = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/voltage", 1, MPR_FLT, "V", &lm.batVoltMin, &lm.batVoltMax, 0, 0, 0);
+            lm.batcurr = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/current", 1, MPR_FLT, "mA", &lm.batCurrMin, &lm.batCurrMax, 0, 0, 0);
+            lm.battte = mpr_sig_new(lm_dev, MPR_DIR_OUT, "battery/timetoempty", 1, MPR_FLT, "h", &lm.battteMin, &lm.battteMax, 0, 0, 0);
 
-        // Debug signals
-        lm.counter = mpr_sig_new(lm_dev, MPR_DIR_OUT, "test/counter", 1, MPR_FLT, "h", &lm.counterMin, &lm.counterMax, 0, 0, 0);
-        lm.looptime = mpr_sig_new(lm_dev, MPR_DIR_OUT, "test/looptime", 1, MPR_INT32, "h", &lm.timeMin, &lm.timeMax, 0, 0, 0);
-        std::cout << "done" << std::endl;
+            // Debug signals
+            lm.counter = mpr_sig_new(lm_dev, MPR_DIR_OUT, "test/counter", 1, MPR_INT32, "h", &lm.counterMin, &lm.counterMax, 0, 0, 0);
+            lm.looptime = mpr_sig_new(lm_dev, MPR_DIR_OUT, "test/looptime", 1, MPR_INT32, "h", &lm.timeMin, &lm.timeMax, 0, 0, 0);
+            std::cout << "done" << std::endl;
+        }
     }
 
     // Using Serial.print and delay to prevent interruptions
@@ -954,7 +960,9 @@ void loop() {
     #endif
     if (puara.get_StaIsConnected()) {
         // Update Libmapper and OSC
-        updateLibmapper();
+        if (use_libmapper) {
+            updateLibmapper();
+        }
 
         // Update OSC
         updateOSC();

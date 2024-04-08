@@ -1,6 +1,10 @@
 {
     "settings": [
         {
+            "name": "enable_libmapper",
+            "value": 0
+        },
+        {
             "name": "fsr_offset",
             "value": 2000
         },
