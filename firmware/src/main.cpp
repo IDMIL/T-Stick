@@ -46,6 +46,8 @@ lo_address osc1;
 lo_address osc2;
 std::string baseNamespace = "/";
 std::string oscNamespace;
+bool use_osc1 = false;
+bool use_osc2 = false;
 
 ///////////////////////////
 // Calibration Structure //
@@ -416,17 +418,17 @@ void updateLibmapper() {
 
 void updateOSC() {
     // Create a bundle and send it to both IP addresses
-    if (puara.IP1_ready() || puara.IP2_ready()) {
+    if (use_osc1 || use_osc2) {
         lo_bundle bundle = lo_bundle_new(LO_TT_IMMEDIATE);
         if (!bundle) {
             return;
         }
         updateOSC_bundle(bundle);
 
-        if (puara.IP1_ready()) {
+        if (use_osc1) {
             lo_send_bundle(osc1, bundle);
         }
-        if (puara.IP2_ready()) {
+        if (use_osc2) {
             lo_send_bundle(osc2, bundle);
         }
 
@@ -861,16 +863,19 @@ void setup() {
         std::cout << "initialization failed!" << std::endl;
     }
 
+    // Only do rest of setup if the T-Stick is connected to WiFi
     if (puara.get_StaIsConnected()) {
-        // Only do rest of setup if the T-Stick is connected to WiFi
+        // Only check at start up
         std::cout << "    Initializing Liblo server/client at " << puara.getLocalPORTStr() << " ... ";
         if (puara.IP1_ready()) {
             std::cout << "    Initialising IP1  ... ";
             osc1 = lo_address_new(puara.getIP1().c_str(), puara.getPORT1Str().c_str());
+            use_osc1 = true;
         }
         if (puara.IP2_ready()) {
             std::cout << "    Initialising IP2  ... ";
             osc2 = lo_address_new(puara.getIP2().c_str(), puara.getPORT2Str().c_str());
+            use_osc2 = true;
         }
         osc_server = lo_server_thread_new(puara.getLocalPORTStr().c_str(), error);
         lo_server_thread_add_method(osc_server, NULL, NULL, generic_handler, NULL);
