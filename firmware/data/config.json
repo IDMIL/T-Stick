@@ -4,7 +4,7 @@
     "author": "T-Stick Builder",
     "institution": "SAT/IDMIL (2024)",
     "APpasswd": "mappings",
-    "wifiSSID": "t-stick_network",
+    "wifiSSID": "tstick_network",
     "wifiPSK": "mappings",
     "persistentAP": 1,
     "oscIP1": "192.168.137.1",

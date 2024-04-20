@@ -10,91 +10,19 @@
         },
         {
             "name": "touch_noise",
-            "value": 0
+            "value": 50
         },
         {
-            "name": "jabx_threshold",
+            "name": "jab_threshold",
             "value": 5
         },
         {
-            "name": "jaby_threshold",
-            "value": 5
+            "name": "battery_size_mah",
+            "value": 1100
         },
         {
-            "name": "jabz_threshold",
-            "value": 5
-        },
-        {
-            "name": "soft_offsetx1",
-            "value": 1
-        },
-        {
-            "name": "soft_offsetx2",
-            "value": 0
-        },
-        {
-            "name": "soft_offsetx3",
-            "value": 0
-        },
-        {
-            "name": "soft_offsety1",
-            "value": 1
-        },
-        {
-            "name": "soft_offsety2",
-            "value": 0
-        },
-        {
-            "name": "soft_offsety3",
-            "value": 0
-        },
-        {
-            "name": "soft_offsetz1",
-            "value": 1
-        },
-        {
-            "name": "soft_offsetz2",
-            "value": 0
-        },
-        {
-            "name": "soft_offsetz3",
-            "value": 0
-        },
-        {
-            "name": "hard_offset1",
-            "value": 0
-        },
-        {
-            "name": "hard_offset2",
-            "value": 0
-        },
-        {
-            "name": "hard_offset3",
-            "value": 0
-        },
-        {
-            "name": "accel_zerog1",
-            "value": 0
-        },
-        {
-            "name": "accel_zerog2",
-            "value": 0
-        },
-        {
-            "name": "accel_zerog3",
-            "value": 0
-        },
-        {
-            "name": "gyro_zerorate1",
-            "value": 0
-        },
-        {
-            "name": "gyro_zerorate2",
-            "value": 0
-        },
-        {
-            "name": "gyro_zerorate3",
-            "value": 0
+            "name": "sense_resistor",
+            "value": 7
         }
     ]
 }

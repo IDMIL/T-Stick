@@ -588,6 +588,10 @@ void readAnalog() {
     if (gestures.getButtonDTap()){
         std::cout << "\nEntering deep sleep.\n\nGoodbye!\n" << std::endl;
         imu.sleep();
+
+        #ifdef LDO2
+            digitalWrite(LDO_PIN, LOW); // disable second LDO
+        #endif
         delay(1000);
         esp_deep_sleep_start();
     }
@@ -738,6 +742,12 @@ void setup() {
     // Set CPU Frequency to max
     setCpuFrequencyMhz(240);
 
+    // Enable LDO2
+    #ifdef LDO2
+        pinMode(LDO_PIN, OUTPUT);
+        digitalWrite(LDO_PIN, HIGH);
+    #endif
+
     #ifdef ORANGE_LED
         // Turn on orange LED to indicate setup (EnchantiS3 Boards)
         pinMode(ORANGE_LED, OUTPUT);
@@ -799,6 +809,9 @@ void setup() {
     // Initialise Fuel Gauge
     #ifdef fg_MAX17055
     std::cout << "    Initializing Fuel Gauge configuration... ";
+    // Get variables from settings
+    fg_config.designcap = puara.getVarNumber("battery_sze_mah");
+    fg_config.rsense = puara.getVarNumber("sense_resistor");
     if (fuelgauge.init(fg_config)) {
         std::cout << "done" << std::endl;
     } else {
@@ -808,38 +821,38 @@ void setup() {
     #endif
 
     // Setup jabx,jaby and jabz thresholds
-    gestures.jabXThreshold = puara.getVarNumber("jabx_threshold");
-    gestures.jabYThreshold = puara.getVarNumber("jaby_threshold");
-    gestures.jabZThreshold = puara.getVarNumber("jabz_threshold");
+    gestures.jabXThreshold = puara.getVarNumber("jab_threshold");
+    gestures.jabYThreshold = puara.getVarNumber("jab_threshold");
+    gestures.jabZThreshold = puara.getVarNumber("jab_threshold");
 
     // Calibrate IMU
     // Set acceleration zero rate
-    imuParams.accel_zerog[0] = puara.getVarNumber("accel_zerog1");
-    imuParams.accel_zerog[1] = puara.getVarNumber("accel_zerog2");
-    imuParams.accel_zerog[2] = puara.getVarNumber("accel_zerog3");
+    imuParams.accel_zerog[0] = ACCELZEROGX;
+    imuParams.accel_zerog[1] = ACCELZEROGY;
+    imuParams.accel_zerog[2] = ACCELZEROGZ;
 
     // Set gyroscope zero rate
-    imuParams.gyro_zerorate[0] = puara.getVarNumber("gyro_zerorate1");
-    imuParams.gyro_zerorate[1] = puara.getVarNumber("gyro_zerorate2");
-    imuParams.gyro_zerorate[2] = puara.getVarNumber("gyro_zerorate3");
+    imuParams.gyro_zerorate[0] = GYROZEROX;
+    imuParams.gyro_zerorate[1] = GYROZEROY;
+    imuParams.gyro_zerorate[2] = GYROZEROZ;
 
     // Set Magnetometer hard offset
-    imuParams.h[0] = puara.getVarNumber("hard_offset1");
-    imuParams.h[1] = puara.getVarNumber("hard_offset2");
-    imuParams.h[2] = puara.getVarNumber("hard_offset3");
+    imuParams.h[0] = HARDOFFSETX;
+    imuParams.h[1] = HARDOFFSETY;
+    imuParams.h[2] = HARDOFFSETZ;
 
     // Set magnetometer soft offset
-    imuParams.sx[0] = puara.getVarNumber("soft_offsetx1");
-    imuParams.sx[1] = puara.getVarNumber("soft_offsetx2");
-    imuParams.sx[2] = puara.getVarNumber("soft_offsetx3");
+    imuParams.sx[0] = SOFTOFFSETX1;
+    imuParams.sx[1] = SOFTOFFSETX2;
+    imuParams.sx[2] = SOFTOFFSETX3;
 
-    imuParams.sy[0] = puara.getVarNumber("soft_offsety1");
-    imuParams.sy[1] = puara.getVarNumber("soft_offsety2");
-    imuParams.sy[2] = puara.getVarNumber("soft_offsety3");
+    imuParams.sy[0] = SOFTOFFSETY1;
+    imuParams.sy[1] = SOFTOFFSETY2;
+    imuParams.sy[2] = SOFTOFFSETY3;
 
-    imuParams.sz[0] = puara.getVarNumber("soft_offsetz1");
-    imuParams.sz[1] = puara.getVarNumber("soft_offsetz2");
-    imuParams.sz[2] = puara.getVarNumber("soft_offsetz3");
+    imuParams.sz[0] = SOFTOFFSETZ1;
+    imuParams.sz[1] = SOFTOFFSETZ2;
+    imuParams.sz[2] = SOFTOFFSETZ3;
 
     // Set calibration parameters
     gestures.setCalibrationParameters(imuParams);
