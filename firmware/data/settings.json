@@ -18,11 +18,7 @@
         },
         {
             "name": "battery_size_mah",
-            "value": 1100
-        },
-        {
-            "name": "sense_resistor",
-            "value": 7
+            "value": 2000
         }
     ]
 }

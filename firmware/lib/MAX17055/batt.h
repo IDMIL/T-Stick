@@ -9,19 +9,19 @@
 struct fuelgauge_config {
     // Initialisation Elements
     uint8_t i2c_addr;
-    int designcap;
-    int ichg;
-    int rsense;
+    uint16_t designcap;
+    uint16_t ichg;
+    uint16_t rsense;
     float vempty;
     float recovery_voltage;
 
     // Learned Parameters
-    int soc;
-    int rcomp;
-    int tempco;
-    int fullcap;
-    int fullcapnorm;
-    int cycles;
+    uint16_t soc;
+    uint16_t rcomp;
+    uint16_t tempco;
+    uint16_t fullcap;
+    uint16_t fullcapnorm;
+    uint16_t cycles;
 };
 
 
@@ -53,15 +53,16 @@ class FUELGAUGE
         FULLCAP_REG     = 0x10, // Register for learned parameter full capacity
         CYCLES_REG      = 0x17, // Register for learned parameter charge cycles
         FULLCAPNORM_REG = 0x23, // Register for learned parameter full capacity (normalised)
+        CGAIN_REG       = 0x2E, // Register for ADC gain for current
         };
 
         // Battery Parameters
         // Initialisation Elements
-        int designcap = 2400;
-        int ichg = 50;
+        uint16_t designcap = 2400;
+        uint16_t ichg = 50;
         uint16_t reg_cap = designcap * 2;
         uint16_t reg_ichg = ichg * 6.4;
-        int rsense = 10;
+        uint16_t rsense = 10;
         float vempty = 3.3;
         float recovery_voltage = 3.88;
 
@@ -82,11 +83,11 @@ class FUELGAUGE
         float rep_avg_current = 0;          // Average Current (mA)
         float rep_inst_voltage = 0;         // Instaneous Voltage (V)
         float rep_avg_voltage = 0;          // Average Voltage (V)
-        int rep_capacity = 0;               // Report capacity (mAh)
-        int rep_soc = 0;                    // State of Charge (%)
-        int rep_age = 0;                    // Age of Battery (hours)
-        int rep_tte = 0;                    // Time till Empty (hours)
-        int rep_ttf = 0;                    // Time till Full (hours)
+        float rep_capacity = 0;               // Report capacity (mAh)
+        float rep_soc = 0;                    // State of Charge (%)
+        float rep_age = 0;                    // Age of Battery (hours)
+        float rep_tte = 0;                    // Time till Empty (hours)
+        float rep_ttf = 0;                    // Time till Full (hours)
         
         // Battery info variables
         bool bat_status = false;            // Boolean for if a battery is present in the system

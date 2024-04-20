@@ -113,14 +113,14 @@ struct Event {
 // Battery struct and functions //
 //////////////////////////////////
 struct BatteryData {
-    unsigned int percentage = 0;
+    float percentage = 0;
     float voltage = 0;
-    unsigned int current = 0;
+    float current = 0;
     float TTE = 0;
     bool status = false; // is there a battery
-    unsigned int rsense = 0;
-    unsigned int capacity = 0;
-    unsigned int designcap = 0;
+    uint16_t rsense = 0;
+    float capacity = 0;
+    uint16_t designcap = 0;
     float value;
     unsigned long timer = 0;
     int interval = 5000; // in ms (1/f)
@@ -347,8 +347,8 @@ struct Sensors {
     int ttap;
     int fsr;
     float squeeze;
-    int battery;
-    int current;
+    float battery;
+    float current;
     float voltage;
     float tte;
     float touchAll;         
@@ -491,10 +491,10 @@ void updateOSC_bundle(lo_bundle bundle) {
 
     // Battery Data
     if (event.battery) {
-        osc_bundle_add_int(bundle, "battery/percentage", sensors.battery);
+        osc_bundle_add_float(bundle, "battery/percentage", sensors.battery);
     }
     if (event.current) {
-        osc_bundle_add_int(bundle, "battery/current", sensors.current);
+        osc_bundle_add_float(bundle, "battery/current", sensors.current);
     }
     if (event.tte) {
         osc_bundle_add_float(bundle, "battery/timetoempty", sensors.tte);
@@ -638,9 +638,12 @@ void readBattery() {
     if (sensors.voltage != battery.voltage) {sensors.voltage = battery.voltage; event.voltage = true; } else { event.voltage = false; }
 
     // // Send battery data always (for debugging)
-    // event.battery = true;
-    // event.voltage = true;
-    // event.current = true;
+    #ifdef DEBUG
+        event.battery = true;
+        event.voltage = true;
+        event.current = true;
+        event.tte = true;
+    #endif
 }
 
 void changeLED() {
@@ -810,8 +813,7 @@ void setup() {
     #ifdef fg_MAX17055
     std::cout << "    Initializing Fuel Gauge configuration... ";
     // Get variables from settings
-    fg_config.designcap = puara.getVarNumber("battery_sze_mah");
-    fg_config.rsense = puara.getVarNumber("sense_resistor");
+    fg_config.designcap = puara.getVarNumber("battery_size_mah");
     if (fuelgauge.init(fg_config)) {
         std::cout << "done" << std::endl;
     } else {

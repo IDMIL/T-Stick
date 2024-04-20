@@ -45,11 +45,23 @@ bool FUELGAUGE::init(fuelgauge_config config, bool reset)
         uint16_t raw_design_cap = readReg16Bit(DESIGNCAP_REG);
         uint16_t raw_igchg = readReg16Bit(ICHTERM_REG);
 
+        // compute reg cap
+        reg_cap = (designcap * rsense) / base_capacity_multiplier_mAh;
+        reg_ichg = (ichg * rsense) / base_current_multiplier_mAh;
+
         // Compute raw cap and raw end of charge current 
         if ((reg_cap != raw_design_cap) || (reg_ichg != raw_igchg)) {
             reset = true;
         }
 
+        // Check if CGain register was somehow misconfigured
+        uint16_t CGAIN = readReg16Bit(0x2E);
+        if (CGAIN != 0x400) {
+            writeVerifyReg16Bit(0x2E, 0x400);
+            std::cout << "    Checking CGAIN" << "\n"
+                      << "    CGAIN read: " << CGAIN << "\n"
+                      << "    fixing CGAIN" << std::endl;
+        }
         // Reset the Fuel Gauge
         if (POR || reset)
         {

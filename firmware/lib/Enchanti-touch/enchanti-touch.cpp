@@ -103,8 +103,11 @@ void EnchantiTouch::cookData() {
 
     // Touch discretize and normalize
     for (int i=0; i < touchSize; i++) {
-        touch[i] = data[i] - noise_threshold;
-        if(touch[i] < 0) touch[i] = 0; // Make sure above 0
+        if (data[i] < noise_threshold) {
+            touch[i] = 0;
+        } else {
+            touch[i] = data[i] - noise_threshold;
+        }
 
         // Set other data vectors
         if (touch[i] != 0) {

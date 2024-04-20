@@ -67,7 +67,7 @@ class EnchantiTouch
 
         // Touch properties
         int noise_threshold = 0;
-        int maxTouchValue = 0;
+        int maxTouchValue = 1;
         int touchSize = 60;
         int touchStatus = 0;
 
