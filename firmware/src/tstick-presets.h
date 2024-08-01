@@ -21,7 +21,7 @@ Defines presets for the T-Stick
 General Properties for the T-Stick
 ********************************************************************/
 #include "imu-cal.h"
-#define TSTICK_SIZE 60
+//#define TSTICK_SIZE 60
 #define I2CUPDATE_FREQ 400000 // Note that the I2C frequency is capped by Wire at 1MHz
 
 // Feedback sensors
