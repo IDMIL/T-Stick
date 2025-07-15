@@ -1,6 +1,6 @@
 # How to order touch sensor from JLCPCB and PCBWAY
 
-This file contains instructions for ordering the touch-sensor from JLCPCB or PCBWAY. Both companies offer relatively cheap Flexible PCB options however JLCPCB is significantly cheaper for small runs but in my opinion worse customer support.
+This file contains instructions for ordering the touch-sensor from JLCPCB or PCBWAY. Both companies offer relatively cheap Flexible PCB options however JLCPCB is significantly cheaper for small runs.
 
 ## Ordering from JLCPCB
 1. Click the blue **Instant Quote** button.
