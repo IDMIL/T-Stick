@@ -29,9 +29,8 @@ As of October 2021, there are over 20 instruments built at [IDMIL](http://www.id
 
 ## Project info:
 
-Project webpage at IDMIL: http://www.idmil.org/project/the-t-stick/
-T-Stick Documentation: https://idmil.github.io/tstick-docs/
-
+Project webpage at IDMIL: http://www.idmil.org/project/the-t-stick/ \
+T-Stick Documentation: https://idmil.github.io/tstick-docs/ \
 Official repository: https://github.com/IDMIL/TStick
 
 IDMIL - Input Devices and Music Interaction Laboratory - http://www.idmil.org/ \
