@@ -27,6 +27,7 @@ Include T-Stick properties
 #include "esp_wifi.h"
 
 #include <puara.h>
+#include <imu_orientation.h>
 #include <puara_gestures.h>
 #include <mapper.h>
 #include <charconv>
