@@ -169,6 +169,7 @@ void Capsense::cookData() {
           newData = 1;
         }
         touch[i] = bitReadRightToLeft(data[i/8],(i%8));
+        discreteTouch[i] = touch[i];
     }
 }
 
