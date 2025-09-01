@@ -1,8 +1,24 @@
 {
     "settings": [
         {
+            "name": "enable_libmapper",
+            "value": 0
+        },
+        {
             "name": "fsr_offset",
-            "value": 1900
+            "value": 2000
+        },
+        {
+            "name": "touch_noise",
+            "value": 50
+        },
+        {
+            "name": "jab_threshold",
+            "value": 5
+        },
+        {
+            "name": "battery_size_mah",
+            "value": 2000
         }
     ]
 }

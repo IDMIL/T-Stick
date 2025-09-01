@@ -1,6 +1,6 @@
 # How to order touch sensor from JLCPCB and PCBWAY
 
-This file contains instructions for ordering the touch-sensor from JLCPCB or PCBWAY. Both companies offer relatively cheap Flexible PCB options however JLCPCB is significantly cheaper for small runs but in my opinion worse customer support.
+This file contains instructions for ordering the touch-sensor from JLCPCB or PCBWAY. Both companies offer relatively cheap Flexible PCB options however JLCPCB is significantly cheaper for small runs.
 
 ## Ordering from JLCPCB
 1. Click the blue **Instant Quote** button.
@@ -34,3 +34,4 @@ This file contains instructions for ordering the touch-sensor from JLCPCB or PCB
 6. Select the **touch-sensor-horizontal.kicad_pcb.zip** from this folder and upload it. 
 7. Make sure to check your inbox 24-72 hours after the purchase for PCBWAY to review the file and give the final quote.
 8. Once the paid the order will go into production.
+
