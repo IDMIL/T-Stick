@@ -39,6 +39,7 @@ Include T-Stick properties
 #include <cmath>
 #include <algorithm>
 #include <numeric>
+
 // initializing libmapper, puara, puara-gestures, and liblo client
 mpr_dev lm_dev = 0;
 Puara puara;
@@ -252,6 +253,7 @@ void osc_bundle_add_float_array(lo_bundle puara_bundle,const char *path, int siz
     }
     lo_bundle_add_message(puara_bundle, oscNamespace.c_str(), tmp_osc);
 }
+
 ////////////////////////////////
 // sensors and libmapper data //
 ////////////////////////////////
@@ -646,6 +648,7 @@ void readBattery() {
         event.tte = true;
     #endif
 }
+
 
 void changeLED() {
     // Set LED - connection status and battery level

@@ -1,0 +1,6 @@
+# hidden files
+.*
+!/.gitignore
+
+# Ignore Kicad backups
+/*backups
